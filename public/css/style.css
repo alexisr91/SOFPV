@@ -1,0 +1,142 @@
+/* GENERAL */
+@font-face {
+    font-family: 'airstrike';
+    src: url('fonts/airstrike.ttf') format('truetype');
+
+    font-weight: normal;
+    font-style: normal;
+
+}
+body, html {
+    margin: 0;
+}
+
+.container-fluid {
+    --bs-gutter-x: none;
+}
+
+.pt-20 {
+    padding-top: 10%;
+}
+
+/* KEYFRAMES */
+@keyframes neon {
+    0% {filter: drop-shadow(0 0 0.5rem #940b01)}
+    100% {filter: drop-shadow(0 0 1.5rem #940b01)};
+}
+
+/* NAV MENU */
+section#navbarMenu {
+    background-color: transparent !important;
+}
+
+section#navbarMenu a.navbar-brand {
+    font-family:'airstrike', sans-serif;
+    font-size: 2rem;
+}
+
+/* ACCUEIL : SECTION HOME */
+section#home {
+    height: 100vh;
+    width: 100vw;
+    background-image:url('../img/quadsLavoircCrop.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position:relative;
+}
+section#home::before {
+    height: 100vh;
+    width: 100vw;
+    content:"";
+    background:url('../img/noise2.png') repeat 0 0 rgba(0,0,0,0.5);
+    position: absolute;
+    top:0;
+   
+}
+#homeLogo {
+    position: absolute;
+    top:15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30em;
+    width: 100%;
+}
+
+#homeLogo img {
+    height:25em;
+    filter: drop-shadow(0 0 0.5rem #940a02);
+    animation: 2s linear 3s infinite alternate neon;
+    
+}
+/* ACCUEIL : SECTION #videos */
+
+section#videos {
+    height: 50em;
+    width: 100vw;
+    background-color: #fafafa;
+}
+
+/* ACCUEIL : SECTION #counter */
+section#counter {
+    width: 100vw;
+    height: 15em;
+    position: relative;
+    background:url('../img/redQuad.jpeg') no-repeat 0 0 rgba(0,0,0,0.5);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+section#counter::before {
+    height: 15em;
+    width: 100%;
+    content:"";
+    background:url('../img/noise2.png') repeat 0 0 rgba(0,0,0,0.5);
+    position: absolute;
+}
+
+section#counter p, section#counter h3 {
+    z-index:1;
+}
+
+/* ACCUEIL : SECTION #helper */
+
+section#helper {
+    height:35em;
+    width: 100vw;
+    background-color: #fafafa;
+}
+
+/* ACCUEIL : SECTION #newOnShop */
+
+section#newOnShop {
+    height:40em;
+    width: 100vw;
+    background-color: goldenrod;
+}
+
+/* ACCUEIL : SECTION #sessions */
+
+section#sessions {
+    height:40em;
+    width: 100vw;
+    background-color: #fafafa;
+}
+
+/* ACCUEIL : SECTION #crew */
+
+section#crew {
+    height:30em;
+    width: 100vw;
+    background-color: #ff7070;
+}
+
+/* ACCUEIL : SECTION #socialNetwork */
+section#socialNetwork{
+    height:20em;
+    width: 100vw;
+    background-color: #fafafa;
+}
+
+/* REGISTER FORM */
+
