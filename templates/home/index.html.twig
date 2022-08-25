@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+    {# Vue d'accueil + logo #}
+    <section id="home">
+            {% block navbarMenu %}
+                <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-8">
+                                {{include('partials/_navbarMenu.html.twig')}}
+                            </div>
+                        </div>
+                </div>
+            {% endblock %}
+            
+        <div id="homeLogo">
+            <img src="{{asset('/img/logo.png')}}" alt="Logo SO FPV" class="img-fluid">
+        </div>
+         
+
+    </section>
+    {# Dernières videos #}
+    <section id="videos">
+        <div>
+            <h3 class="m-3">Dernières videos</h3>
+        </div>
+        <div class="container-fluid text-center">
+             {# TODO: boucle pour les videos de la bdd #}
+            <div class="row">
+                <div class="col">
+                    <iframe width="800" height="600" src="https://www.youtube.com/embed/lTRiuFIWV54" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="col">
+                    <iframe width="800" height="600"  src="https://www.youtube.com/embed/lTRiuFIWV54" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="col">
+                    <iframe width="800" height="600"  src="https://www.youtube.com/embed/lTRiuFIWV54" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# compteur #}
+    <section id="counter">
+        <div>
+            <h3>Parallax avec compteur Lipo, bras, ESC burned</h3>
+        </div>
+    </section>
+
+    {# Dernières questions + commentaire les plus pertinents #}
+    <section id="helper">
+        <div>
+            <h3>Entraide Questions/Réponses</h3>
+        </div>
+    </section>
+
+    {# Items de la boutiques (notification New) #}
+    <section id="newOnShop">
+        <div> 
+            <h3>Nouveautés de la boutique - 3 ou 4 derniers </h3> 
+        </div>
+    </section>
+         
+    {# Carte avec prochaines sessions de vol #}
+    <section id="sessions">
+        <div> 
+            <h3>MAP avec spot dans les 2 prochaines semaines</h3> 
+        </div> 
+    </section>
+
+    {# Equipe #}
+    <section id="crew">
+         <div> 
+            <h3>Présentation des créateurs</h3> 
+        </div> 
+    </section>
+
+    {# Section réseaux sociaux #}
+    <section id="socialNetwork">
+        <div> 
+            <h3>socialNetworks</h3> 
+        </div> 
+    </section>
+    
+{% endblock %}
