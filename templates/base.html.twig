@@ -27,10 +27,10 @@
        </main>
     </body>
 
-    <footer class="fixed-bottom">
+    {% block footer %}
+    <footer>
         <div class="mx-auto">
-            <p><i class="fa fa-copyright" aria-hidden="true"></i> SO FPV 2022 - Tous droits réservés | Laura Gaupin</p>
-        
+            <p><i class="fa fa-copyright" aria-hidden="true"></i> SO FPV 2022 - Tous droits réservés | Laura Gaupin</p>       
         </div>
 
         <!-- jquery bundle -->
@@ -41,6 +41,7 @@
         <!-- Js perso -->
         <script src="{{asset('js/script.js')}}"></script>
     </footer>
+    {% endblock %}
     
 
 </html>
