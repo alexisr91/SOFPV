@@ -7,12 +7,30 @@
     font-style: normal;
 
 }
-body, html {
-    margin: 0;
+body, html, .container-fluid {
+    margin: 0 !important;
+    padding: 0;
+    scrollbar-width: none;
 }
 
-.container-fluid {
-    --bs-gutter-x: none;
+.title-banner {
+    /* kits de compatibilité pour le dégradé */
+    background: rgb(37,37,37);
+    background: -moz-linear-gradient(145deg, rgba(37,37,37,1) 0%, rgba(37,37,37,0.5) 15%, rgba(255,255,255,0) 35%);
+    background: -webkit-linear-gradient(145deg, rgba(37,37,37,1) 0%, rgba(37,37,37,0.5) 15%, rgba(255,255,255,0) 35%);
+    background: linear-gradient(145deg, rgba(37,37,37,1) 0%, rgba(37,37,37,0.5) 15%, rgba(255,255,255,0) 35%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#252525",endColorstr="#ffffff",GradientType=1); 
+    color:#fafafa;
+    font-family:'airstrike', sans-serif;
+    height:4em;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 1%;
+}
+
+h3 {
+    margin-left: 2em;
 }
 
 .pt-20 {
@@ -72,10 +90,12 @@ section#home::before {
 /* ACCUEIL : SECTION #videos */
 
 section#videos {
-    height: 50em;
+    height: 46em;
     width: 100vw;
     background-color: #fafafa;
 }
+
+
 
 /* ACCUEIL : SECTION #counter */
 section#counter {
@@ -85,6 +105,11 @@ section#counter {
     background:url('../img/redQuad.jpeg') no-repeat 0 0 rgba(0,0,0,0.5);
     background-size: cover;
     background-attachment: fixed;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
 section#counter::before {
@@ -94,9 +119,10 @@ section#counter::before {
     background:url('../img/noise2.png') repeat 0 0 rgba(0,0,0,0.5);
     position: absolute;
 }
-
-section#counter p, section#counter h3 {
-    z-index:1;
+section#counter div.counter-wrapper {
+    position: relative;
+    z-index: 2;
+    background-color: #fafafa;
 }
 
 /* ACCUEIL : SECTION #helper */
@@ -138,5 +164,59 @@ section#socialNetwork{
     background-color: #fafafa;
 }
 
-/* REGISTER FORM */
+/* LOGIN  */
+section#login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../img/NeonQuad.jpg');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    
+    
+}
 
+section#login::before {
+    height:100%;
+    width: 100%;
+    content:"";
+    background:url('../img/noise1.png') repeat 0 0 rgba(0,0,0,0.5);
+    position: absolute;
+}
+
+section#login h2 {
+    font-family: 'airstrike', 'sans-serif';
+    margin-bottom: 2%;
+    font-size: 3em;
+}
+
+section#login .formLogin {
+    background-color: #fafafa;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    float:inline-end;
+    z-index: 2;
+    position: relative;
+}
+
+section#login .formLogin img{
+    height: 8em;
+}
+
+/* REGISTER  */
+
+/* FOOTER */
+
+footer {
+    width: 100vw;
+    height:2%;
+    margin:0;
+    background-color: black;
+    color:#fafafa;
+}

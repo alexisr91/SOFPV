@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+    <section id="login">
+
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <div class="container-fluid">
+                <div class="col-3 formLogin">
+                    <img src="{{asset('/img/logo.png')}}" class="img-fluid mb-2" alt="logo so fpv">
+                    <h2>SO FPV</h2>
+                    <form action="{{ path('account_login') }}" method="post">
+                        <div class="input-group mb-4">
+                            <div class="input-group-text"><i class="fa-solid fa-at"></i></div>
+                            <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Email" class="form-control"/>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-text"><i class="fa-solid fa-unlock-keyhole"></i></div>
+                            <input type="password" id="password" name="_password" placeholder="Mot de passe" class="form-control"/>
+                        </div>
+                    
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-dark btn-block">Connexion</button>
+                        </div>
+                        
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
