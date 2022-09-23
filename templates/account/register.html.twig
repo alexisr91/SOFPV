@@ -2,12 +2,56 @@
 
 {% block title %}{{ parent() }} | {{ title }}{% endblock %}
 
-{% block body %}
-    {{include('partials/_navbarMenu.html.twig')}}
-    
-    {{form_start(form)}}
-        {{form_widget(form)}}
-        <button type='submit' class="btn btn-dark">S'inscrire</button>
-    {{form_end(form)}}
+  {% form_theme form _self %}
 
+{% block body %}
+ 
+    <section id="register">
+        {{include('partials/_navbarMenu.html.twig')}}
+
+        <div class="containerRegister my-auto row rounded">
+                    <div class="col p-0">
+                        <img src="{{asset('../img/HiMavic.jpg')}}" alt="drone qui salue" class="img-fluid rounded-start">
+                    </div>
+                    <div class="col rounded registerForm text-center">
+                    {{form_start(form)}}
+                            <div class="form-group">
+                                {{form_widget(form.email)}}
+                                <div class="form-error">
+                                    {{ form_errors(form.email) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                    {{form_widget(form.nickname)}}
+                                <div class="form-error">
+                                    {{ form_errors(form.nickname) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{form_widget(form.password)}}
+                                <div class="form-error">
+                                    {{ form_errors(form.password) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{form_widget(form.confirmPassword)}}
+                                <div class="form-error">
+                                    {{ form_errors(form.confirmPassword) }}
+                                </div>
+                            </div> 
+                            <div class="text-center mb-3 mt-3">
+                                <button type='submit' class="btn btn-dark btn-lg">S'inscrire</button>
+                            </div> 
+                            {{form_end(form)}}
+
+                        <p>Déjà inscrit ? Connectez-vous <a href="{{path('account_login')}}"><b>ici</b></a> !</p>
+                            
+                    </div>
+                   
+        </div>
+    
+    </section>
 {% endblock %}
+
+
+
