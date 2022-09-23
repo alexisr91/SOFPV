@@ -11,8 +11,8 @@
 
         <div class="container-fluid">
                 <div class="col-3 formLogin">
-                    <img src="{{asset('/img/logo.png')}}" class="img-fluid mb-2" alt="logo so fpv">
-                    <h2>SO FPV</h2>
+                        <a href="{{path('home')}}"><img src="{{asset('/img/logo.png')}}" class="img-fluid" alt="logo so fpv"></a>
+                        <h2>SO FPV</h2>
                     <form action="{{ path('account_login') }}" method="post">
                         <div class="input-group mb-4">
                             <div class="input-group-text"><i class="fa-solid fa-at"></i></div>
@@ -29,6 +29,12 @@
                         </div>
                         
                     </form>
+                    
+                    <p class="mt-2">Pas encore inscrit ? C'est par <a href="{{path('account_register')}}"><b>ici</b></a> !</p>
+                    <div class="w-100">
+                        <a href="{{path('home')}}" class="float-md-start returnIcon"><span><i class="fa-solid fa-reply"></i></span></a>
+                    </div>
+                    
                 </div>
                 
             </div>

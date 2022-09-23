@@ -2,15 +2,22 @@
 
 namespace App\Entity;
 
+use Assert\Length;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
+#[UniqueEntity(
+    fields:"email",
+    message:"Un autre utilisateur s'est déjà inscrit avec cette adresse mail."
+)]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -18,7 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
+    #[ORM\Column(length: 180, nullable:false)]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -34,27 +41,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[EqualTo(propertyPath:"password", message:"Les deux mots de passe ne correspondent pas.")]
     protected $confirmPassword;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $nickname = null;
+    #[ORM\Column(length: 255, nullable: false)]
+    private ?string $nickname;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $avatar = null;
+    private ?string $avatar;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $banner = null;
+    private ?string $banner;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable:true)]
-    private ?\DateTimeInterface $created_at = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable:false)]
+    private ?\DateTimeInterface $created_at;
 
 
     //mise en place de la date de création de l'utilisateur
-    #[ORM\PrePersist]
-    public function prePersist()
+    public function __construct()
     {
-        if(empty($this->created_at)){
-            $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
-        }
+        $this->created_at = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
     }
+    
 
     public function getId(): ?int
     {
