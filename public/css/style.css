@@ -362,7 +362,7 @@ section#register {
 
 .containerRegister img {
     object-fit: cover;
-    height:42em;
+    height:45em;
 }
 
 section#register .form-group input {

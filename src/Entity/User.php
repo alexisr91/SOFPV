@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints\Length as ConstraintsLength;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -26,20 +27,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, nullable:false)]
-    private ?string $email = null;
+    private ?string $email ;
 
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
-    #[ORM\Column]
-    private ?string $password = null;
-
-    //Pour s'assurer que l'utilisateur n'a pas fait de faute sur son mdp à l'inscription
-    #[EqualTo(propertyPath:"password", message:"Les deux mots de passe ne correspondent pas.")]
-    protected $confirmPassword;
+    #[ConstraintsLength(min:8, minMessage:"Le mot de passe doit contenir 8 caractères minimum.")]
+    #[ORM\Column(length: 255, nullable: false)]
+    private ?string $password;
 
     #[ORM\Column(length: 255, nullable: false)]
     private ?string $nickname;
