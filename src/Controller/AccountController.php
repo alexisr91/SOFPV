@@ -45,17 +45,17 @@ class AccountController extends AbstractController
         $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
 
-        //Si le formulaire est soumis réellement et si il est valide
+        //Si le formulaire est soumis réellement, et si il est valide
         if($form->isSubmitted() && $form->isValid()){
 
             //Hash du mot de passe avant l'envoi dans la base de données
             $hash = $hasher->hashPassword($user, $user->getPassword());
             $user->setPassword($hash);
 
-
             $manager->persist($user);
             $manager->flush();
-
+            
+            $this->addFlash('success', 'Votre compte a bien été créé !');
             return $this->redirectToRoute('account_login');
         }
 

@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class RegisterType extends AbstractType
 {
@@ -27,20 +28,13 @@ class RegisterType extends AbstractType
                     'placeholder'=>'Votre pseudo'
                    ]
             ])
-            ->add('password', PasswordType::class, [
-                'label' => 'Mot de passe',
-                'attr'=>[
-                    'placeholder'=>'Votre mot de passe'
-                   ]
-            ])
-            ->add('confirmPassword', PasswordType::class, [
-                'label' => 'Confirmez votre mot de passe',
-                'mapped'=>false,
-                'attr'=>[
-                    'placeholder'=>'Confirmez votre mot de passe'
-                   ]
-                
-                
+          
+            ->add('password', RepeatedType::class, [
+                'type'=> PasswordType::class,
+                'invalid_message'=>'Les mots de passe ne correspondent pas.',
+                'required'=>'true',
+                'first_options'=> ['attr'=>['placeholder'=>'Votre mot de passe', 'minlength'=>8], 'label'=>false],
+                'second_options'=>['attr'=>['placeholder'=>'Confirmez votre mot de passe'], 'label'=>false]     
             ])
         ;
     }
