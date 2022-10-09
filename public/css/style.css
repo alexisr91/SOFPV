@@ -331,6 +331,10 @@ section#login .returnIcon {
     font-size: 2em;
 }
 
+ section#login button {
+    box-shadow: 0 8px 9px -4px rgba(51,45,45,0.3), 0 4px 8px 0 rgba(51,45,45,0.2);
+ }
+
 /* REGISTER  */
 
 section#register {
@@ -375,6 +379,74 @@ section#register .form-group input {
     padding: 0.5em;
 }
 
+/* MYPROFILE - infos personnelles */
+    section#myProfile {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        height: 98vh;
+        width:100%;
+    }
+
+    section#myProfile .wrapper {
+    margin-top: 5em;
+    max-width:80%;
+    }
+
+    section#myProfile #myProfile-avatar {
+        background-color: #656565;
+        color:#fff;
+        margin-bottom: 2em;
+        padding:1em;
+        border-radius: 3px;
+    }
+
+    section#myProfile #myProfile-avatar img {
+        max-width:125px ;
+        max-height:125px;
+
+    }
+
+    section#myProfile #myProfile-drone {
+        background-color: #970707;
+        color:#fff;
+        padding:1em;
+        border-radius: 3px
+    }
+
+    section#myProfile .col-md-10 {
+        background-color: #fafafa;
+        height: 100%;
+        padding:0;
+        border-radius: 3px;
+        position: relative;
+        
+    }
+    section#myProfile .param {
+        background-color: #d8cdcd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1em;
+        border-radius: 3px;
+        position: absolute;
+        top:2em;
+    }
+  
+    section#myProfile .banner img {
+        height:15em;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    section#myProfile .myProfile-content {
+        
+        padding:1em;
+    }
+    section#myProfile .myProfile-content h2 {
+        font-size:3em;
+    }
 
 
 /* FOOTER */

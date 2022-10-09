@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ProfileType;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,4 +65,47 @@ class AccountController extends AbstractController
             'form'=>$form->createView()
         ]);
     }
+
+    //Profil personnel de l'utilisateur (modifications paramètres user, vue globale de son profil)
+    #[Route('/profile', name:'account_myprofile')]
+    public function myProfile()
+    {
+        $user = $this->getUser();
+
+        return $this->render('account/myprofile.html.twig', [
+            'title' => 'Mon compte ',
+            'user' => $user
+        ]);
+    }
+
+    //Edition des données personnelles du profil
+    #[Route('/profilr/edit', name:'account_edit')]
+    public function edit(EntityManagerInterface $manager, Request $request){
+
+        $user = $this->getUser();
+        $form = $this->createForm(ProfileType::class, $user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash('success', 'Votre profil a bien été mis à jour !');
+            return $this->redirectToRoute('account_myprofile');
+        }
+
+        return $this->render('account/edit.html.twig', [
+            'title' => 'Modifier le profil ',
+            'user' => $user,
+            'form'=>$form->createView()
+        ]);
+    }
+
+    //Profil utilisateur public (vidéos de l'user, badge helper, drone favori et sa configuration)
+    #[Route('/profile/{nickname}', name:'account_profile')]
+    public function profile()
+    {
+
+    }
+
 }

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="myProfile" class="bg-dark">
+        {{include('partials/_navbarMenu.html.twig')}}
+        <div class="container-fluid row wrapper bg-light">
+            {{form_start(form)}}
+            {{form_widget(form)}}
+                <button type="submit" class="btn btn-light">Enregister</button>
+                <a href="{{path('account_myprofile')}}">Retour</a>
+            {{form_end(form)}}
+        </div>
+        
+    </section>
+{% endblock %}

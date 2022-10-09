@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="myProfile" class="bg-dark">
+        {{include('partials/_navbarMenu.html.twig')}}
+        <div class="container-fluid row wrapper">
+            <div class="col-md-2">
+                {# colonne du coté gauche #}
+                {#div 1 : avatar, pseudo, email + parametrage #}
+                <aside id="myProfile-avatar">
+                        {% if user.avatar is not null %}
+                            {{user.avatar}}
+                        {% else %}
+                            <img src="{{asset('/img/avatar-1.png')}}" alt="avatar" class="img-fluid"/>
+                        {% endif %}   
+                        
+                </aside>
+                {#div 2 : drone en favori (image, config moteur, esc, frame, helices, cam) #}
+                {# autres drones en mini galerie ?#}
+                <aside id="myProfile-drone">
+                    <div>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Necessitatibus itaque et vero quaerat eos dignissimos iusto, exercitationem autem officiis ullam,
+                    adipisci maiores soluta rerum laboriosam ea aliquam corrupti? Ab, quasi!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Necessitatibus itaque et vero quaerat eos dignissimos iusto, exercitationem autem officiis ullam,
+                    adipisci maiores soluta rerum laboriosam ea aliquam corrupti? Ab, quasi!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Necessitatibus itaque et vero quaerat eos dignissimos iusto, exercitationem autem officiis ullam,
+                    adipisci maiores soluta rerum laboriosam ea aliquam corrupti? Ab, quasi!
+                    </div>
+                  
+                </aside>
+            </div>
+            
+            <div class="col-md-10">
+                {# banner #}
+                <div class="banner">
+                    <img src="{{asset('/img/NazgulFrame.jpg')}}" alt="banniere"/>
+                </div>
+                <div class="myProfile-content">
+                    {# onglet mes videos + ajout vidéo #}
+                    <div>
+                    <h2>{{user.nickname}}</h2>
+                    <div class="param">
+                            <a href="{{path('account_edit')}}"><i class="fa-solid fa-user-gear"></i> Modifier mon profil</a>
+                    </div>
+                    <h3>Mes informations</h3>
+                    <p>{{user.email}}</p>
+                    <p>{{user.firstname}}</p>
+                    <p>{{user.lastname}}</p>
+                    <p>{{user.address}}</p>
+                    <p>{{user.zip}}</p>
+                    <p>{{user.city}}</p>
+
+                     <h4>Mes videos</h4>
+                    </div>
+                    {# onglet mes questions + réponses #}
+                    <h4>Mes questions</h4>
+                    {# onglets inscription pour futurs sessions #}
+                    <h4>Mes sessions</h4>
+                    {# onglet mes commandes #}
+                    <h4>Mes commandes</h4>
+                </div>
+            </div>
+           
+        </div>
+           
+        
+    </section>
+{% endblock %}

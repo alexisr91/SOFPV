@@ -23,10 +23,16 @@ class AppFixtures extends Fixture
 
         //Création de l'admin pour les tests
         $admin = new User;
-        $admin->setEmail('Naerys@gmail.com')
+        $admin->setEmail('Naerys@test.com')
         ->setPassword($this->hasher->hashPassword($admin,'testtest'))
         ->setNickname('Naerys')
-        ->setRoles(['ROLE_ADMIN']);
+        ->setRoles(['ROLE_ADMIN'])
+        ->setFirstname('Laura')
+        ->setLastname('Admin')
+        ->setAddress("40 rue d'Aoste")
+        ->setZip('11100')
+        ->setCity('Narbonne')
+        ;
 
         $manager->persist($admin);
 
@@ -34,9 +40,22 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 8 ; $i++){
             $user = new User;
 
-            $user->setEmail($faker->safeEmail());
-            $user->setPassword($this->hasher->hashPassword($user,'testtest'));
-            $user->setNickname($faker->userName());
+            $user->setEmail($faker->safeEmail())
+            ->setPassword($this->hasher->hashPassword($user,'testtest'))
+            ->setNickname($faker->userName())
+            ->setFirstname($faker->firstName())
+            ->setLastname($faker->lastName())
+            ->setAddress($faker->address())
+            ->setZip($faker->postcode())
+            ->setCity($faker->city())
+            ;
+
+            //Pour mettre sur quelques utilisateurs un complément d'adresse
+            $rand = random_int(0,4);
+                if($rand >= 2 ){
+                    $user->setAddressComplement($faker->secondaryAddress());
+                }
+
 
             $users[] = $user;
             $manager->persist($user);

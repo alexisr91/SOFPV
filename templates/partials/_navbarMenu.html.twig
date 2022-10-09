@@ -28,7 +28,7 @@
                         </ul>
                         <ul class="navbar-nav connect">
                             {% if app.user %}
-                                <li><a class="nav-link" href="#"><i class="fa-solid fa-circle-user"></i> Mon compte</a></li>
+                                <li><a class="nav-link" href="{{path('account_myprofile')}}"><i class="fa-solid fa-circle-user"></i> Mon compte</a></li>
                                 <li><a class="nav-link " href="{{path('account_logout')}}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a></li>
                             {% else %}
                                 <li><a class="nav-link " href="{{path('account_login')}}"><i class="fa-solid fa-arrow-right-to-bracket"></i> Connexion</a></li>
