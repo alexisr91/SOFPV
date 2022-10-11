@@ -9,16 +9,7 @@
         <div class="container-fluid row wrapper">
             <div class="col-md-2">
                 {# colonne du coté gauche #}
-                {#div 1 : avatar, pseudo, email + parametrage #}
-                <aside id="myProfile-avatar">
-                        {% if user.avatar is not null %}
-                            {{user.avatar}}
-                        {% else %}
-                            <img src="{{asset('/img/avatar-1.png')}}" alt="avatar" class="img-fluid"/>
-                        {% endif %}   
-                        
-                </aside>
-                {#div 2 : drone en favori (image, config moteur, esc, frame, helices, cam) #}
+                {#div : drone en favori (image, config moteur, esc, frame, helices, cam) #}
                 {# autres drones en mini galerie ?#}
                 <aside id="myProfile-drone">
                     <div>
@@ -38,32 +29,47 @@
             
             <div class="col-md-10">
                 {# banner #}
+                {% if user.banner is not null %}
+                <div class="banner">
+                    <img src="{{asset('/uploads/banner/'~ user.banner)}}" alt="banniere"/>
+                </div>
+                {% else %}
                 <div class="banner">
                     <img src="{{asset('/img/NazgulFrame.jpg')}}" alt="banniere"/>
                 </div>
-                <div class="myProfile-content">
-                    {# onglet mes videos + ajout vidéo #}
-                    <div>
-                    <h2>{{user.nickname}}</h2>
-                    <div class="param">
-                            <a href="{{path('account_edit')}}"><i class="fa-solid fa-user-gear"></i> Modifier mon profil</a>
-                    </div>
-                    <h3>Mes informations</h3>
-                    <p>{{user.email}}</p>
-                    <p>{{user.firstname}}</p>
-                    <p>{{user.lastname}}</p>
-                    <p>{{user.address}}</p>
-                    <p>{{user.zip}}</p>
-                    <p>{{user.city}}</p>
+                {% endif %}
 
-                     <h4>Mes videos</h4>
-                    </div>
-                    {# onglet mes questions + réponses #}
-                    <h4>Mes questions</h4>
-                    {# onglets inscription pour futurs sessions #}
-                    <h4>Mes sessions</h4>
-                    {# onglet mes commandes #}
-                    <h4>Mes commandes</h4>
+                <div id="myProfile-avatar">
+                        {% if user.avatar is not null %}
+                            <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar" class="img-fluid"/>
+                        {% else %}
+                            <img src="{{asset('/img/avatar-1.png')}}" alt="avatar" class="img-fluid"/>
+                        {% endif %}            
+                </div>
+                
+                <div class="myProfile-content row">
+                    {# onglet mes videos + ajout vidéo #}
+                    <h2>{{user.nickname}}</h2>
+                               
+                    <div class="col-md-6">
+                        <div class="param">
+                            <a href="{{path('account_edit')}}" class="btn"><i class="fa-solid fa-user-gear"></i> Modifier mon profil</a>
+                        </div>
+                            <h3>Mes informations</h3>
+                            <p>{{user.email}}</p>
+                            <p>{{user.firstname}} {{user.lastname}}</p>
+                        
+                            <p>Adresse:<br> {{user.address}}
+                                {% if user.addressComplement %}
+                                    <br>{{user.addressComplement}}
+                                {% endif %}
+                                <br>{{user.zip}}, {{user.city}}
+                            </p>
+                   </div>
+                   <div class="col-md-6">
+                        <h3>Mon drone</h3>
+                        
+                   </div>
                 </div>
             </div>
            
