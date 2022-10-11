@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Assert\Length;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
@@ -66,11 +68,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $addressComplement = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Drone::class)]
+    private Collection $myDrone;
+
 
     //mise en place de la date de création de l'utilisateur
     public function __construct()
     {
         $this->created_at = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $this->myDrone = new ArrayCollection();
     }
     
 
@@ -260,6 +266,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAddressComplement(?string $addressComplement): self
     {
         $this->addressComplement = $addressComplement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Drone>
+     */
+    public function getMyDrone(): Collection
+    {
+        return $this->myDrone;
+    }
+
+    public function addMyDrone(Drone $myDrone): self
+    {
+        if (!$this->myDrone->contains($myDrone)) {
+            $this->myDrone->add($myDrone);
+            $myDrone->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMyDrone(Drone $myDrone): self
+    {
+        if ($this->myDrone->removeElement($myDrone)) {
+            // set the owning side to null (unless already changed)
+            if ($myDrone->getUser() === $this) {
+                $myDrone->setUser(null);
+            }
+        }
 
         return $this;
     }

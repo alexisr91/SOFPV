@@ -91,7 +91,7 @@ section#home {
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    background-image:url('../img/quadsLavoircCrop.png');
+    background-image:url('/img/quadsLavoirCrop.png');
     background-repeat: no-repeat;
     background-size: cover;
     position:relative;
@@ -390,22 +390,24 @@ section#register .form-group input {
     }
 
     section#myProfile .wrapper {
-    margin-top: 5em;
-    max-width:80%;
-    }
-
-    section#myProfile #myProfile-avatar {
-        background-color: #656565;
-        color:#fff;
-        margin-bottom: 2em;
-        padding:1em;
+        margin-top: 5em;
+        max-width:80%;
         border-radius: 3px;
     }
 
-    section#myProfile #myProfile-avatar img {
-        max-width:125px ;
-        max-height:125px;
+    section#myProfile #myProfile-avatar {
+        background-color:#fafafa;
+        border-radius: 50%;
+        max-height:140px;
+        max-width:140px;
+        border: 2px solid #fafafa;
+        position: absolute;
+        top: 10em;
+        left:2em;
+    }
 
+    section#myProfile #myProfile-avatar img {
+        border-radius: 50%;
     }
 
     section#myProfile #myProfile-drone {
@@ -421,6 +423,8 @@ section#register .form-group input {
         padding:0;
         border-radius: 3px;
         position: relative;
+        display: flex;
+        flex-direction: column;
         
     }
     section#myProfile .param {
@@ -441,12 +445,27 @@ section#register .form-group input {
     }
 
     section#myProfile .myProfile-content {
-        
+        margin-top:3em;
         padding:1em;
     }
     section#myProfile .myProfile-content h2 {
         font-size:3em;
     }
+
+/* MY PROFILE - edit */
+section#myProfile .wrapper {
+    background-color: #fafafa;
+    height: 80%;
+    padding: 3em;
+}
+section#myProfile .row {
+    justify-content: space-around;
+}
+section#myProfile .avatar {
+    max-width: 125px;
+    max-height:125px;
+}
+
 
 
 /* FOOTER */

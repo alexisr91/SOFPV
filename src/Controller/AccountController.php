@@ -10,8 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AccountController extends AbstractController
 {
@@ -79,14 +81,56 @@ class AccountController extends AbstractController
     }
 
     //Edition des données personnelles du profil
-    #[Route('/profilr/edit', name:'account_edit')]
-    public function edit(EntityManagerInterface $manager, Request $request){
+    #[Route('/profile/edit', name:'account_edit')]
+    public function edit(EntityManagerInterface $manager, Request $request, SluggerInterface $slugger){
 
         $user = $this->getUser();
         $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
+            //ajout d'avatar par l'user
+            $avatar = $form->get('avatar')->getData();
+            //on récupère le nom du fichier
+            if($avatar) {
+                $originalName = pathinfo($avatar->getClientOriginalName(), PATHINFO_FILENAME);
+                //on utilise un slug pour éviter les problèmes avec les noms fournis par les users
+                $sluggedName = $slugger->slug($originalName);
+                //on ajoute un uniqId pour chaque upload pour éviter les problèmes de doublons + on récupère l'extension du fichier
+                $newName = $sluggedName.'-'.uniqid().'.'.$avatar->guessExtension();
+
+                //on s'assure que le deplacement dans le dossier uploads est correctement effectué
+                try {
+                    $avatar->move($this->getParameter('upload_avatar'), $newName);
+                } catch(FileException $e) {
+                    dd($e->getMessage());
+                    
+                }
+
+                $user->setAvatar($newName);
+
+            }
+
+                //ajout d'une bannière par l'user
+                $banner = $form->get('banner')->getData();
+                //on récupère le nom du fichier
+                if($banner) {
+
+                    $originalName = pathinfo($banner->getClientOriginalName(), PATHINFO_FILENAME);
+                    $sluggedName = $slugger->slug($originalName);
+                    $newName = $sluggedName.'-'.uniqid().'.'.$banner->guessExtension();
+    
+                    try {
+                        $banner->move($this->getParameter('upload_banner'), $newName);
+                    } catch(FileException $e) {
+                        dd($e->getMessage());
+                    }
+    
+                    $user->setBanner($newName);
+    
+                }
+
             $manager->persist($user);
             $manager->flush();
 

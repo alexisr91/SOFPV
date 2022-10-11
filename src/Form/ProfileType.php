@@ -16,7 +16,8 @@ class ProfileType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'disabled'=>true
+                'disabled'=>true,
+                'label'=>'Votre Email'
             ])
             ->add('nickname', TextType::class, [
                 'label'=>'Votre pseudo'
@@ -27,25 +28,28 @@ class ProfileType extends AbstractType
             ->add('lastname', TextType::class, [
                 'label'=>'Votre nom'
             ]) 
-            ->add('avatar', FileType::class, [
-                'label'=>'Ajoutez un avatar',
-                'required'=>false
-            ]) 
-            ->add('banner', FileType::class, [
-                'label'=>'Ajoutez une bannière',
-                'required'=>false
-            ]) 
             ->add('address', TextType::class, [
                 'label'=>'Votre adresse postale'
             ]) 
             ->add('address_complement', TextType::class, [
-                'label'=>'Complément d\'adresse'
+                'label'=>'Complément d\'adresse',
+                'required'=>false
             ])
             ->add('zip', TextType::class, [
                 'label'=>'Votre code postal'
             ]) 
             ->add('city', TextType::class, [
                 'label'=>'Votre ville'
+            ])  
+            ->add('avatar', FileType::class, [
+                'label'=>'Ajoutez un avatar',
+                'required'=>false,
+                'mapped'=> false,
+            ]) 
+            ->add('banner', FileType::class, [
+                'label'=>'Ajoutez une bannière',
+                'required'=>false,
+                'mapped'=> false
             ]) 
         ;
     }

@@ -2,17 +2,59 @@
 
 {% block title %}{{ parent() }} | {{ title }}{% endblock %}
 
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
 {% block body %}
  
-    <section id="myProfile" class="bg-dark">
+    <section id="myProfile" class="bg-dark profileEdit">
         {{include('partials/_navbarMenu.html.twig')}}
-        <div class="container-fluid row wrapper bg-light">
-            {{form_start(form)}}
-            {{form_widget(form)}}
-                <button type="submit" class="btn btn-light">Enregister</button>
-                <a href="{{path('account_myprofile')}}">Retour</a>
-            {{form_end(form)}}
+
+        <div class="container-fluid wrapper"> 
+        <h2>Modifier mon profil</h2>
+            <div class="row p-1 mt-4">
+            
+                <div class="col-5">
+                    <h4>Mon profil public</h4>  
+                    {{form_start(form)}}
+                    <hr>
+                    <div class="banner mb-2">
+                        <img src="{{asset('/uploads/banner/'~ user.banner)}}" alt="banniere"/>
+                    </div>
+                        {{form_row(form.banner)}}
+                     
+                    <div>
+                        {% if user.avatar %}
+                            <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar du profil" class="avatar">
+                        {% else %}
+                            <img src="{{asset('img/avatar-1.png')}}" alt="avatar par défaut" class="avatar">
+                        {% endif %}
+                    </div> 
+                        {{form_row(form.avatar)}}  
+                        {{form_row(form.nickname)}}
+
+                </div>
+                <div class="col-4">
+                <h4>Mes informations personnelles</h4>
+                <hr>
+              
+                    {{form_row(form.email)}}
+                    {{form_row(form.firstname)}}
+                    {{form_row(form.lastname)}}
+                    {{form_row(form.address)}}
+                    {{form_row(form.address_complement)}}
+                    {{form_row(form.zip)}}
+                    {{form_row(form.city)}} 
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-dark btn-lg">Enregister</button>
+                    <a href="{{path('account_myprofile')}}" class="btn btn-light"><i class="fa-solid fa-arrow-rotate-left"></i> Retour</a>
+                    {{form_end(form)}}
+                </div> 
+                </div>
+                
+            </div>
+
         </div>
-        
+ 
     </section>
 {% endblock %}
