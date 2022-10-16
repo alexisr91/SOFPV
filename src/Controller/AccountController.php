@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\ProfileType;
 use App\Form\RegisterType;
+use App\Repository\DroneRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -70,13 +71,16 @@ class AccountController extends AbstractController
 
     //Profil personnel de l'utilisateur (modifications paramètres user, vue globale de son profil)
     #[Route('/profile', name:'account_myprofile')]
-    public function myProfile()
+    public function myProfile(DroneRepository $drone)
     {
         $user = $this->getUser();
+        //on récupère les drones de l'user
+        $drones = $drone->findBy(['user'=>$user]);
 
         return $this->render('account/myprofile.html.twig', [
             'title' => 'Mon compte ',
-            'user' => $user
+            'user' => $user,
+            'drones'=>$drones
         ]);
     }
 

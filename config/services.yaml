@@ -6,6 +6,7 @@
 parameters:
     upload_avatar: '%kernel.project_dir%/public/uploads/avatar'
     upload_banner: '%kernel.project_dir%/public/uploads/banner'
+    upload_drone: '%kernel.project_dir%/public/uploads/drone'
 
 services:
     # default configuration for services in *this* file
