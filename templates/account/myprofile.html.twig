@@ -6,75 +6,91 @@
  
     <section id="myProfile" class="bg-dark">
         {{include('partials/_navbarMenu.html.twig')}}
-        <div class="container-fluid row wrapper">
-            <div class="col-md-2">
-                {# colonne du coté gauche #}
-                {#div : drone en favori (image, config moteur, esc, frame, helices, cam) #}
-                {# autres drones en mini galerie ?#}
-                <aside id="myProfile-drone">
-                    <div>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Necessitatibus itaque et vero quaerat eos dignissimos iusto, exercitationem autem officiis ullam,
-                    adipisci maiores soluta rerum laboriosam ea aliquam corrupti? Ab, quasi!
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Necessitatibus itaque et vero quaerat eos dignissimos iusto, exercitationem autem officiis ullam,
-                    adipisci maiores soluta rerum laboriosam ea aliquam corrupti? Ab, quasi!
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Necessitatibus itaque et vero quaerat eos dignissimos iusto, exercitationem autem officiis ullam,
-                    adipisci maiores soluta rerum laboriosam ea aliquam corrupti? Ab, quasi!
-                    </div>
-                  
-                </aside>
-            </div>
-            
-            <div class="col-md-10">
-                {# banner #}
-                {% if user.banner is not null %}
-                <div class="banner">
-                    <img src="{{asset('/uploads/banner/'~ user.banner)}}" alt="banniere"/>
-                </div>
-                {% else %}
-                <div class="banner">
-                    <img src="{{asset('/img/NazgulFrame.jpg')}}" alt="banniere"/>
-                </div>
-                {% endif %}
+    
+        <div class="container-fluid ">
+        {# sidebar #}
+        {{include('partials/_sidebarMenuProfile.html.twig')}}
 
-                <div id="myProfile-avatar">
-                        {% if user.avatar is not null %}
-                            <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar" class="img-fluid"/>
-                        {% else %}
-                            <img src="{{asset('/img/avatar-1.png')}}" alt="avatar" class="img-fluid"/>
-                        {% endif %}            
+        <div class="wrap">   
+        {# banner #} 
+                <div class="banner">
+                {% if user.banner is not null %}       
+                    <img src="{{asset('/uploads/banner/'~ user.banner)}}" alt="banniere"/>       
+                {% else %}  
+                    <img src="{{asset('/img/NazgulFrame.jpg')}}" alt="banniere"/> 
+                {% endif %}
                 </div>
-                
-                <div class="myProfile-content row">
-                    {# onglet mes videos + ajout vidéo #}
-                    <h2>{{user.nickname}}</h2>
-                               
-                    <div class="col-md-6">
+               <div class="row">
+
+                <div class="col-4">
+
+                    <div class="user">
+                        <div id="myProfile-avatar">
+                            {% if user.avatar is not null %}
+                                <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar" class="img-fluid"/>
+                            {% else %}
+                                <img src="{{asset('/img/avatar-1.png')}}" alt="avatar" class="img-fluid"/>
+                            {% endif %}  
+                                             
+                        </div>
+                        <h2>{{user.nickname}}</h2> 
+                    </div>
+                    <div class="personnal-info">
+        
+                        <h3>Mes informations</h3>
+                        <hr>
+                        <b>Email: </b>{{user.email}}<br>
+                        <b>Nom: </b>{{user.firstname}} {{user.lastname}}<br>
+                                        
+                        <b>Adresse:</b><br> {{user.address}}
+                            {% if user.addressComplement %}
+                                <br>{{user.addressComplement}}
+                            {% endif %}
+                                <br>{{user.zip}}, {{user.city}}
+                        </p>
+                                
                         <div class="param">
                             <a href="{{path('account_edit')}}" class="btn"><i class="fa-solid fa-user-gear"></i> Modifier mon profil</a>
                         </div>
-                            <h3>Mes informations</h3>
-                            <p>{{user.email}}</p>
-                            <p>{{user.firstname}} {{user.lastname}}</p>
-                        
-                            <p>Adresse:<br> {{user.address}}
-                                {% if user.addressComplement %}
-                                    <br>{{user.addressComplement}}
-                                {% endif %}
-                                <br>{{user.zip}}, {{user.city}}
-                            </p>
-                   </div>
-                   <div class="col-md-6">
-                        <h3>Mon drone</h3>
-                        
-                   </div>
+                    </div>
+
+                    <div class="my-drone">
+                    <h3>Ma config</h3>
+                    <hr>
+                    {% for drone in drones %}
+                        <b>Frame: </b>{{drone.frame}}<br>
+                        <b>Moteurs: </b>{{drone.motors}}<br>
+                        <b>FC: </b>{{drone.fc}}<br>
+                        <b>ESC: </b>{{drone.esc}}<br>
+                        <b>CAM: </b>{{drone.cam}}<br>
+                        <b>Réception: </b>{{drone.reception}}<br>
+                        <b>Type de lipo: </b>{{drone.lipoCells}}S
+
+                        {% if drone.image is not null %}
+                                <img src="{{asset('/uploads/drone/'~ drone.image)}}" alt="drone" class="img-fluid"/>
+                            {% else %}
+                                <img src="{{asset('/img/avatar.png')}}" alt="drone" class="img-fluid"/>
+                        {% endif %} 
+                    {% endfor %}
+
+                    </div>
+               </div>
+                
+                <div class="col"> 
+                    <div class="dashboard">
+                        <h3>Tableau de bord</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, animi quo unde soluta magni repudiandae pariatur eveniet eaque. At accusamus quaerat odio architecto sint error incidunt provident eligendi rerum ea?Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, quos cupiditate, accusamus velit mollitia nulla voluptate dicta, asperiores molestias nihil beatae perspiciatis praesentium harum illum possimus laborum quia dolore vel!</p>
+                    </div>
                 </div>
             </div>
-           
+               
+               
+
         </div>
-           
+        
+                
+            
+        </div>
         
     </section>
 {% endblock %}
