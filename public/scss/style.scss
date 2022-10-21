@@ -1,0 +1,299 @@
+/* GENERAL */
+
+@import "setup";
+@import "global";
+@import "menu";
+@import "animation";
+
+/*HOMEPAGE */
+@import "homePage";
+
+/* LOGIN  */
+section#login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../img/NeonQuad.jpg');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;  
+
+    &:before {
+        height:100%;
+        width: 100%;
+        content:"";
+        background:url('../img/noise1.png') repeat 0 0 rgba(0,0,0,0.5);
+        position: absolute;
+    }
+    
+    h2 {
+    font-family: 'airstrike', 'sans-serif';
+    margin-bottom: 5%;
+    font-size: 3em;
+    }
+
+    .formLogin {
+        background-color: $white;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        float:inline-end;
+        z-index: 2;
+        position: relative;
+        padding-bottom:10% ;
+        
+        img{
+            height: 8em;
+        }
+    }
+
+    .returnIcon {
+        position: absolute;
+        bottom:5%;
+        left:5%;
+        font-size: 2em;
+    }
+
+    button {
+        box-shadow: 0 8px 9px -4px rgba(51,45,45,0.3), 0 4px 8px 0 rgba(51,45,45,0.2);
+    }
+}
+
+
+/* REGISTER  */
+
+section#register {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../img/forestView.jpg');
+    background-color: $base;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
+    
+    .form-group input {
+        border-top:transparent;
+        border-left:transparent;
+        border-right: transparent;
+        border-bottom: 1px solid $base;
+        min-width: 100%;
+        margin-bottom: 1em;
+        padding: 0.5em;
+    }
+}
+
+.containerRegister {
+    background-color: $white;
+    width: 50%;
+}
+
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10%;
+    
+}
+
+.containerRegister img {
+    object-fit: cover;
+    height:45em;
+}
+
+
+
+/* MYPROFILE - infos personnelles */
+section#myProfile {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    background-color: $base; 
+        
+    section#navbarMenu {
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
+    .wrap {
+        margin-top: 0.5em;
+        height:100%;
+        background-color: $base;
+        min-height: 90vh;
+        }
+
+    .sidebarMenu{
+        box-shadow: 1px 1px 1px $base;
+    }
+
+    .personnal-info, .my-drone, .dashboard{
+        background-color:$white;
+         margin:0 2em 2em 2em;
+        padding: 2em;
+        border-radius: 3px;
+    }
+    .param a, a.param {
+        background-color: $grey;
+        &:hover {
+            background-color: $base;
+            color:$white;
+        }
+        i {
+            padding:0.5em;
+        }
+    }
+    .personnal-info {
+        a{
+            background-color: $grey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1em;
+            border-radius: 3px;
+            &:hover {
+                border:none;
+            }       
+        }
+    }
+    .dashboard {
+        min-height: 90%;
+    }
+
+    .user{
+        background-color:$white;
+        margin:0 2em 2em 2em;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+
+        h2 {
+        margin: 0.5% 2% ;
+        font-size: 2.5em;
+        }
+    }
+
+    .my-drone {
+        position: relative;
+        .fav {
+            float:right;
+            max-width: 125px;
+            max-height: 125px;
+            object-fit: cover;
+            object-position: center;
+            overflow: hidden;
+            }
+        a {
+            background-color: $grey;
+            padding:0.5 1em;
+            border-radius: 3px;
+            position: absolute;
+            top:2em;
+            right: 3em;
+        }
+    }
+   
+    
+    .container-fluid {
+        display: grid;
+        grid-template-columns: 10% minmax(500px, 85%);
+        background-color: $base;
+    }
+
+    #myProfile-avatar {
+        max-height:125px;
+        max-width:125px;
+        img{
+            background-color:$white;
+            width: 100%;
+            height: 100%;
+        }
+    } 
+
+    
+    .banner{
+        margin:0 2em 2em  2em;
+        height:20em;
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+        
+}
+ 
+/* MY PROFILE - edit */
+section#myProfileEdit {
+    background-color: $base;
+
+    #navbarMenu {
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
+    h2{
+        margin:1em 2em 2em 2em;
+    }
+    .row {
+        justify-content: space-around;
+        align-items: center;
+    }
+    .banner{
+        height:20em;
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+    .wrapper {
+        padding: 4em;
+        background-color: $white;
+        width: 80%;
+        margin: 3em auto;
+        border-radius: 3px;
+    }
+    .avatar {
+        max-width: 125px;
+        max-height:125px;
+        overflow: hidden;
+        object-fit: cover;
+        object-position: center ;
+    }
+}
+
+/* DRONE EDIT */
+section#droneEdit {
+    .wrapper 
+    {background-color: $white;
+        padding:2em;
+        height: 90vh;
+    }
+    .avatar {
+        max-height:125px;
+        max-width:125px;
+        overflow: hidden;
+        object-fit: cover;
+        object-position: center ;
+    }
+}
+
+@import "sideMenuProfile";
+
+/* FOOTER */
+
+footer {
+    position: relative;
+    width: 100vw;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    background-color: $base;
+    color:$white;
+    background-color: $base;
+}

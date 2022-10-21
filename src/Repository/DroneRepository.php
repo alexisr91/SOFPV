@@ -39,6 +39,18 @@ class DroneRepository extends ServiceEntityRepository
         }
     }
 
+    
+    // public function findFavDroneByUser($value){
+    //     return $this->createQueryBuilder('d')
+    //                ->andWhere('d.user = :val')
+    //                ->andWhere('d.favorite = 1' )
+    //                ->setParameter('val', $value)
+    //                ->orderBy('d.id', 'ASC')
+    //                ->getQuery()
+    //                ->getOneOrNullResult()
+    //            ;
+    // }
+
 //    /**
 //     * @return Drone[] Returns an array of Drone objects
 //     */

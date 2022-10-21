@@ -2,17 +2,14 @@
 
 namespace App\Entity;
 
-use Assert\Length;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Drone;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
-use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Validator\Constraints\Length as ConstraintsLength;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -38,6 +35,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: false)]
     private ?string $password;
 
+    
     #[ORM\Column(length: 255, nullable: false)]
     private ?string $nickname;
 
@@ -68,15 +66,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $addressComplement = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Drone::class)]
-    private Collection $myDrone;
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Drone $drone = null;
 
 
     //mise en place de la date de création de l'utilisateur
     public function __construct()
     {
         $this->created_at = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
-        $this->myDrone = new ArrayCollection();
     }
     
 
@@ -270,33 +267,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Drone>
-     */
-    public function getMyDrone(): Collection
+    public function getDrone(): ?Drone
     {
-        return $this->myDrone;
+        return $this->drone;
     }
 
-    public function addMyDrone(Drone $myDrone): self
+    public function setDrone(?Drone $drone): self
     {
-        if (!$this->myDrone->contains($myDrone)) {
-            $this->myDrone->add($myDrone);
-            $myDrone->setUser($this);
-        }
+        $this->drone = $drone;
 
         return $this;
     }
 
-    public function removeMyDrone(Drone $myDrone): self
-    {
-        if ($this->myDrone->removeElement($myDrone)) {
-            // set the owning side to null (unless already changed)
-            if ($myDrone->getUser() === $this) {
-                $myDrone->setUser(null);
-            }
-        }
 
-        return $this;
-    }
+    
 }

@@ -23,73 +23,100 @@
                <div class="row">
 
                 <div class="col-4">
-
+                    {# avatar + pseudo #}
                     <div class="user">
                         <div id="myProfile-avatar">
                             {% if user.avatar is not null %}
                                 <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar" class="img-fluid"/>
                             {% else %}
                                 <img src="{{asset('/img/avatar-1.png')}}" alt="avatar" class="img-fluid"/>
-                            {% endif %}  
-                                             
+                            {% endif %}            
                         </div>
                         <h2>{{user.nickname}}</h2> 
                     </div>
+                    {# info personnelles #}
                     <div class="personnal-info">
-        
                         <h3>Mes informations</h3>
                         <hr>
-                        <b>Email: </b>{{user.email}}<br>
-                        <b>Nom: </b>{{user.firstname}} {{user.lastname}}<br>
+                        <b><i class="fa-solid fa-at"></i> Email: </b>{{user.email}}<br>
+                        <b><i class="fa-solid fa-address-card"></i> Nom: </b>{{user.firstname}} {{user.lastname}}<br>
                                         
-                        <b>Adresse:</b><br> {{user.address}}
+                        <b><i class="fa-solid fa-house"></i> Adresse:</b><br> {{user.address}}
                             {% if user.addressComplement %}
                                 <br>{{user.addressComplement}}
                             {% endif %}
                                 <br>{{user.zip}}, {{user.city}}
                         </p>
-                                
                         <div class="param">
-                            <a href="{{path('account_edit')}}" class="btn"><i class="fa-solid fa-user-gear"></i> Modifier mon profil</a>
+                            <a href="{{path('account_edit')}}"><i class="fa-solid fa-user-gear"></i> Modifier mon profil</a>
+                        </div>    
+                    </div>
+                    {# config de drone favorite #}
+                    <div class="my-drone">      
+                        <h3>Ma config</h3>
+                        <a href="{{path('account_drone_edit')}}" class="param"><i class="fa-solid fa-gear"></i></i></a>
+                    <hr/>
+                    <div class="fav">       
+                        {% if user.drone %}
+                       
+                            {% if user.drone.image is not null %}
+                                    <img src="{{asset('/uploads/drone/'~ user.drone.image)}}" alt="drone" class="img-fluid"/>
+                                {% else %}
+                                    <img src="{{asset('/img/drone.png')}}" alt="drone par défaut" class="img-fluid"/>
+                        
+                            {% endif %}
+                    </div> 
+                    <div>
+                        <b>Frame: </b>{{user.drone.frame}}<br>
+                        <b>Moteurs: </b>{{user.drone.motors}}<br>
+                        <b>FC: </b>{{user.drone.fc}}<br>
+                        <b>ESC: </b>{{user.drone.esc}}<br>
+                        <b>CAM: </b>{{user.drone.cam}}<br>
+                        <b>Réception: </b>{{user.drone.reception}}<br>
+                        <b>Type de lipo: </b>{{user.drone.lipoCells}}S
+                    </div>
+                        {% else %}
+                        <div class="alert alert-warning">Pas encore de configuration renseignée.</div>
+                        {% endif %}
                         </div>
                     </div>
-
-                    <div class="my-drone">
-                    <h3>Ma config</h3>
-                    <hr>
-                    {% for drone in drones %}
-                        <b>Frame: </b>{{drone.frame}}<br>
-                        <b>Moteurs: </b>{{drone.motors}}<br>
-                        <b>FC: </b>{{drone.fc}}<br>
-                        <b>ESC: </b>{{drone.esc}}<br>
-                        <b>CAM: </b>{{drone.cam}}<br>
-                        <b>Réception: </b>{{drone.reception}}<br>
-                        <b>Type de lipo: </b>{{drone.lipoCells}}S
-
-                        {% if drone.image is not null %}
-                                <img src="{{asset('/uploads/drone/'~ drone.image)}}" alt="drone" class="img-fluid"/>
-                            {% else %}
-                                <img src="{{asset('/img/avatar.png')}}" alt="drone" class="img-fluid"/>
-                        {% endif %} 
-                    {% endfor %}
-
-                    </div>
-               </div>
                 
                 <div class="col"> 
                     <div class="dashboard">
                         <h3>Tableau de bord</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, animi quo unde soluta magni repudiandae pariatur eveniet eaque. At accusamus quaerat odio architecto sint error incidunt provident eligendi rerum ea?Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, quos cupiditate, accusamus velit mollitia nulla voluptate dicta, asperiores molestias nihil beatae perspiciatis praesentium harum illum possimus laborum quia dolore vel!</p>
+                        <div class="row mx-auto">
+                            <div class="col-md-3">
+                                <h6>Mes articles</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <h6>Mes likes</h6> 
+                            </div>
+                            <div class="col-md-3">
+                                <h6>Mes vues</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <h6>Mes sessions</h6>
+                            </div>
+                        </div>
+                        <div class="row counter">
+                            <div class="col-md-4">
+                                LIPO HS<br>
+                                <button class="btn btn-dark"><i class="fa-solid fa-plus"></i> <b>1</b></button>
+                            </div>
+                            <div class="col-md-4">
+                                ESC BURNED<br>
+                                <button class="btn btn-dark"><i class="fa-solid fa-plus"></i> <b>1</b></button>
+                            </div>
+                            <div class="col-md-4">
+                                FRAME HS<br>
+                                <button class="btn btn-dark"><i class="fa-solid fa-plus"></i> <b>1</b></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-               
-               
+            </div>   
 
-        </div>
-        
-                
-            
+        </div>     
         </div>
         
     </section>

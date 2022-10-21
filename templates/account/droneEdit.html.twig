@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block body %}
+ 
+    <section id="droneEdit">
+        {{include('partials/_navbarMenu.html.twig')}}
+
+        <div class="container-fluid wrapper">
+        {% if user.drone %} 
+            <h2>Modifier mon drone</h2>
+        {% else %}
+            <h2>Ajouter un drone</h2>
+        {% endif %}
+            <div class="row"> 
+                <div class="col-md-6 mx-auto">
+                    <h4>Ma config favorite</h4>
+                    <hr>  
+                    {{form_start(form)}}
+                    {{form_widget(form)}}
+
+                    <div class="avatar">
+                        {# si un drone est enregistré #}
+                        {% if user.drone %}
+                            {# et si il y a une image #}
+                            {% if user.drone.image %}
+                                <img src="{{asset('/uploads/drone/'~ user.drone.image)}}" alt="drone favori" class="img-fluid">
+                            {% endif %}
+                        {# sinon image par défaut #} 
+                        {% else %}
+                                <img src="{{asset('/img/drone.png')}}" alt="drone par défaut" class="img-fluid"> 
+                        {% endif %}
+                    </div>
+                   
+                <div class="text-center">
+                    <button type="submit" class="btn btn-dark btn-lg">Enregister</button>
+                    <a href="{{path('account_myprofile')}}" class="btn btn-light"><i class="fa-solid fa-arrow-rotate-left"></i> Retour</a>
+                    {{form_end(form)}}
+                </div> 
+                
+            </div>
+
+        </div>
+ 
+    </section>
+{% endblock %}

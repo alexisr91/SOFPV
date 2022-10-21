@@ -1,0 +1,14 @@
+/* NAV MENU */
+section#navbarMenu {
+    background-color: transparent !important;
+    width:100vw;
+    height: fit-content;
+    z-index:1;
+    margin: 0 auto;
+    
+    a.navbar-brand {
+        font-family:'airstrike', sans-serif;
+        font-size: 2rem;
+    }
+}
+
