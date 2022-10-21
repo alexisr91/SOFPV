@@ -25,23 +25,19 @@
             {% block body %}        
             {% endblock %}
        </main>
-    </body>
-
     {% block footer %}
-    <footer>
-        <div class="mx-auto">
-            <p class="m-0"><i class="fa fa-copyright" aria-hidden="true"></i> SO FPV 2022 - Tous droits réservés | Laura Gaupin</p>       
-        </div>
-
-        <!-- jquery bundle -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <!-- Bootstrap bundle -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-        {% block javascripts %}{% endblock %}
-        <!-- Js perso -->
-        <script src="{{asset('js/script.js')}}"></script>
-    </footer>
+        <footer>
+            <p class="m-0"><i class="fa fa-copyright" aria-hidden="true"></i> SO FPV 2022 - Tous droits réservés | Laura Gaupin</p>  
+            <!-- jquery bundle -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+            <!-- Bootstrap bundle -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+            {% block javascripts %}{% endblock %}
+            <!-- Js perso -->
+            <script src="{{asset('js/script.js')}}"></script>
+        </footer>
     {% endblock %}
-    
+    </body>
+ 
 
 </html>

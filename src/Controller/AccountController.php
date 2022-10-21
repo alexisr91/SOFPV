@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Drone;
+use App\Form\DroneType;
 use App\Form\ProfileType;
 use App\Form\RegisterType;
 use App\Repository\DroneRepository;
@@ -10,11 +12,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AccountController extends AbstractController
 {
@@ -71,16 +73,13 @@ class AccountController extends AbstractController
 
     //Profil personnel de l'utilisateur (modifications paramètres user, vue globale de son profil)
     #[Route('/profile', name:'account_myprofile')]
-    public function myProfile(DroneRepository $drone)
+    public function myProfile()
     {
         $user = $this->getUser();
-        //on récupère les drones de l'user
-        $drones = $drone->findBy(['user'=>$user]);
-
+       
         return $this->render('account/myprofile.html.twig', [
             'title' => 'Mon compte ',
-            'user' => $user,
-            'drones'=>$drones
+            'user' => $user
         ]);
     }
 
@@ -147,6 +146,53 @@ class AccountController extends AbstractController
             'user' => $user,
             'form'=>$form->createView()
         ]);
+    }
+
+    //Edition de mon drone (ma configuration favorite, visible au public) + vue sur ses autres configs (raccourcis pour en changer) 
+    #[Route('/profile/edit/favorite', name:'account_drone_edit')]
+    public function droneEdit(EntityManagerInterface $manager, Request $request, SluggerInterface $slugger){
+
+        $user = $this->getUser();
+        $drone = $user->getDrone();
+       
+        $form = $this->createForm(DroneType::class, $drone);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()&& $form->isValid()){
+
+             //ajout d'image pour le drone
+             $image = $form->get('image')->getData();
+             
+             if($image) {
+                 $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                
+                 $sluggedName = $slugger->slug($originalName);
+    
+                 $newName = $sluggedName.'-'.uniqid().'.'.$image->guessExtension();
+ 
+                 try {
+                     $image->move($this->getParameter('upload_drone'), $newName);
+                 } catch(FileException $e) {
+                     dd($e->getMessage());
+                     
+                 }
+                 $drone->setImage($newName);
+             }
+ 
+
+            $manager->persist($drone);
+            $manager->flush();
+            return $this->redirectToRoute('account_myprofile');
+        }
+
+        return $this->render('account/droneEdit.html.twig', [
+            'title' => 'Ajouter / modifier mon drone ',
+            'user'=>$user,
+            'drone'=>$drone,
+            'form'=>$form->createView()
+        ]);
+
+        
     }
 
     //Profil utilisateur public (vidéos de l'user, badge helper, drone favori et sa configuration)

@@ -1,0 +1,209 @@
+/* ACCUEIL : SECTION#home (vue full screen à l'arrivée sur le site) */
+section#home {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-image:url('/img/quadsLavoirCrop.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position:relative;
+    
+        &:before {
+        height: 100vh;
+        width: 100vw;
+        content:"";
+        background:url('../img/noise2.png') repeat 0 0 rgba(0,0,0,0.5);
+        position: absolute;
+        top:0;}
+}
+
+#homeLogo {
+    position: absolute;
+    top:15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+        img {
+        height:25em;
+        filter: drop-shadow(0 0 0.5rem #940a02);
+        animation: 2s linear 3s infinite alternate neon;}
+}
+
+#swipeToBlog{
+    color: $white;
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    border: 3px solid $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3em; 
+    
+    a {
+        color: $white;
+
+        &:hover{
+                color: $white;
+        }
+    }
+}
+
+
+/* ACCUEIL : SECTION #blog  */
+
+section#blog {
+    width: 100vw;
+    height:70em;
+    background-color: $white;
+    padding-bottom: 2em;
+    
+    .video-frame h3{
+        font-size: 2em;
+    }
+}
+
+
+
+/* ACCUEIL : SECTION #counter */
+section#counter {
+    width: 100vw;
+    height: 18em;
+    position: relative;
+    background:url('../img/redQuad.jpeg') no-repeat 0 0 rgba(0,0,0,0.5);
+    background-size: cover;
+    background-attachment: fixed;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    &:before {
+        height: 18em;
+        width: 100%;
+        content:"";
+        background:url('../img/noise2.png') repeat 0 0 rgba(0,0,0,0.5);
+        position: absolute;
+    }
+
+    div.img-wrapper {
+        position: relative;
+        z-index: 2;
+        background-color: transparent;
+        width: 4em;
+        height: 4em;
+        border: 2px solid $white;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        transform: rotate(45deg);
+        
+        img {
+        transform: rotate(-45deg);
+        }
+    }
+
+    div.counter-wrapper {
+        z-index: 2;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    h4 {
+        font-size: 4em;
+        margin-left:-1em;
+    }
+    
+    h5 {
+        font-size: 2em;
+    }
+
+    h4, h5 {
+        color:$white;
+    }
+    
+    .lipoIcon{
+        margin-right: 0.5em;
+        margin-top: 0.4em;
+    }
+
+}
+
+
+/* ACCUEIL : SECTION #helper */
+
+section#helper {
+    width: 100vw;
+    height: 40em;
+    background-color: $white;
+}
+
+/* ACCUEIL : SECTION #newOnShop */
+
+section#newOnShop {
+    width: 100vw;
+    background-color: rgba(20, 20, 20, 0.95);
+    position: relative;
+    
+    .titleBadge {
+    position: absolute;
+    top:2%;
+    right:1em;
+    }
+
+    .row {
+    padding-bottom: 3em;
+    }
+}
+
+
+
+/* ACCUEIL : SECTION #sessions */
+
+section#sessions {
+    width: 100vw;
+    background-color: $white;
+    
+    .col{
+    height: 45em;
+    }
+}
+
+
+/* ACCUEIL : SECTION #socialNetwork */
+section#socialNetwork{
+    height:20em;
+    width: 100vw;
+    background-color: $grey;
+    padding-top: 3em;
+
+    .row {
+        padding-top: 3em;
+    }
+    .socialLinks {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+        a {
+        padding-left: 2em;
+        color:$white;
+
+        &:hover {color: $accent;}
+        }
+    }
+}
+     
+
+
+
+

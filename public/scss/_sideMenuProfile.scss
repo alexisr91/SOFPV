@@ -1,0 +1,34 @@
+/* MY PROFILE - _sidebarMenuProfile */
+
+aside.sidebarMenu{
+    height:100%;
+    z-index: 0;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: $white;
+    padding-top: 5em;
+    display: flex;
+    flex-direction: column;
+    a{
+        color:$base;
+        &:hover {
+            color:$base;
+        }
+    }
+
+    ul{
+        padding: 0;
+        margin: 0;
+    }
+    
+    li{
+        padding: 1em 2em;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+aside.sidebarMenu li:hover a,  aside.sidebarMenu li:hover {
+    background-color: $grey ; 
+}

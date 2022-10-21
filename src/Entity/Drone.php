@@ -37,7 +37,7 @@ class Drone
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\ManyToOne(inversedBy: 'myDrone')]
+    #[ORM\OneToOne(mappedBy: 'drone', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
     public function getId(): ?int
@@ -148,8 +148,20 @@ class Drone
 
     public function setUser(?User $user): self
     {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setDrone(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getDrone() !== $this) {
+            $user->setDrone($this);
+        }
+
         $this->user = $user;
 
         return $this;
     }
+
+
 }
