@@ -52,7 +52,7 @@ class Drone
 
     public function setFrame(string $frame): self
     {
-        $this->Frame = $frame;
+        $this->frame = $frame;
 
         return $this;
     }

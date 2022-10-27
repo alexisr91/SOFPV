@@ -8,6 +8,7 @@ use App\Form\DroneType;
 use App\Form\ProfileType;
 use App\Form\RegisterType;
 use App\Repository\DroneRepository;
+use App\Repository\VideoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AccountController extends AbstractController
 {
-
     //Connexion 
     #[Route('/login', name: 'account_login')]
     public function login(AuthenticationUtils $authenticationUtils):Response
@@ -73,13 +73,15 @@ class AccountController extends AbstractController
 
     //Profil personnel de l'utilisateur (modifications paramètres user, vue globale de son profil)
     #[Route('/profile', name:'account_myprofile')]
-    public function myProfile()
+    public function myProfile(VideoRepository $repo)
     {
         $user = $this->getUser();
+        $videos = $user->getVideos();
        
         return $this->render('account/myprofile.html.twig', [
             'title' => 'Mon compte ',
-            'user' => $user
+            'user' => $user,
+            'videos'=>$videos
         ]);
     }
 
@@ -112,7 +114,6 @@ class AccountController extends AbstractController
                 }
 
                 $user->setAvatar($newName);
-
             }
 
                 //ajout d'une bannière par l'user
@@ -153,6 +154,7 @@ class AccountController extends AbstractController
     public function droneEdit(EntityManagerInterface $manager, Request $request, SluggerInterface $slugger){
 
         $user = $this->getUser();
+        //on tente de récupérer le drone associé à l'user
         $drone = $user->getDrone();
        
         $form = $this->createForm(DroneType::class, $drone);
@@ -160,7 +162,35 @@ class AccountController extends AbstractController
 
         if($form->isSubmitted()&& $form->isValid()){
 
-             //ajout d'image pour le drone
+            //si il n'y a pas de drone enregistré pour l'user
+            if($drone == null){
+
+                //création d'un drone
+                $drone = new Drone();
+
+                //on récupère les données entrées par l'user
+                $frame = $form->get('frame')->getData();
+                $motors = $form->get('motors')->getData();
+                $fc = $form->get('fc')->getData();
+                $esc = $form->get('esc')->getData();
+                $cam = $form->get('cam')->getData();
+                $reception = $form->get('reception')->getData();
+                $lipo = $form->get('lipoCells')->getData();
+
+                //set des données sur le nouvel objet Drone et association avec l'user actuel
+                $drone->setFrame($frame)
+                    ->setMotors($motors)
+                    ->setFc($fc)
+                    ->setEsc($esc)
+                    ->setCam($cam)
+                    ->setReception($reception)
+                    ->setLipoCells($lipo)
+                    ->setUser($user);
+                
+                    $manager->persist($drone);
+            }
+
+             //ajout d'image pour le drone (pas obligatoire)
              $image = $form->get('image')->getData();
              
              if($image) {
@@ -177,16 +207,16 @@ class AccountController extends AbstractController
                      
                  }
                  $drone->setImage($newName);
-             }
+            }
  
-
             $manager->persist($drone);
+            //envoi en bdd du nouveau drone / de la modification du drone
             $manager->flush();
             return $this->redirectToRoute('account_myprofile');
         }
 
         return $this->render('account/droneEdit.html.twig', [
-            'title' => 'Ajouter / modifier mon drone ',
+            'title' => 'Ajouter ou modifier mon drone ',
             'user'=>$user,
             'drone'=>$drone,
             'form'=>$form->createView()
@@ -196,10 +226,10 @@ class AccountController extends AbstractController
     }
 
     //Profil utilisateur public (vidéos de l'user, badge helper, drone favori et sa configuration)
-    #[Route('/profile/{nickname}', name:'account_profile')]
-    public function profile()
-    {
+    // #[Route('/profile/{nickname}', name:'account_profile')]
+    // public function profile()
+    // {
 
-    }
+    // }
 
 }

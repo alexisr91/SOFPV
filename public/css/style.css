@@ -436,6 +436,22 @@ section#droneEdit .avatar {
   object-fit: cover;
   object-position: center; }
 
+/*Ajouter une video */
+section#addVideo {
+  height: 93vh; }
+  section#addVideo .d-flex {
+    width: 90%;
+    flex-direction: column; }
+  section#addVideo .container.wrapper {
+    background-color: #fafafa;
+    border-radius: 3px;
+    padding: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3em;
+    height: 50%; }
+
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu {
   height: 100%;

@@ -270,7 +270,7 @@ section#myProfileEdit {
 /* DRONE EDIT */
 section#droneEdit {
     .wrapper 
-    {background-color: $white;
+    {   background-color: $white;
         padding:2em;
         height: 90vh;
     }
@@ -279,7 +279,26 @@ section#droneEdit {
         max-width:125px;
         overflow: hidden;
         object-fit: cover;
-        object-position: center ;
+        object-position: center;
+    }
+}
+
+/*Ajouter une video */
+section#addVideo {
+    height:93vh;
+    .d-flex {
+        width: 90%;
+        flex-direction: column;
+    }
+    .container.wrapper {
+        background-color: $white;
+        border-radius: 3px;
+        padding: 2em;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        margin-top: 3em;
+        height:50%;
     }
 }
 
