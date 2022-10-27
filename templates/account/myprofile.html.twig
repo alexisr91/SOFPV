@@ -56,16 +56,16 @@
                         <h3>Ma config</h3>
                         <a href="{{path('account_drone_edit')}}" class="param"><i class="fa-solid fa-gear"></i></i></a>
                     <hr/>
+                    {% if user.drone is null %}
+                    <div class="alert alert-warning">Pas encore de configuration renseignée.</div>
+                    {% else %}
                     <div class="fav">       
-                        {% if user.drone %}
-                       
                             {% if user.drone.image is not null %}
                                     <img src="{{asset('/uploads/drone/'~ user.drone.image)}}" alt="drone" class="img-fluid"/>
-                                {% else %}
-                                    <img src="{{asset('/img/drone.png')}}" alt="drone par défaut" class="img-fluid"/>
-                        
-                            {% endif %}
-                    </div> 
+                            {% else %}
+                                    <img src="{{asset('/img/drone.png')}}" alt="drone par défaut" class="img-fluid"/> 
+                            {% endif %}             
+                    </div>
                     <div>
                         <b>Frame: </b>{{user.drone.frame}}<br>
                         <b>Moteurs: </b>{{user.drone.motors}}<br>
@@ -75,9 +75,9 @@
                         <b>Réception: </b>{{user.drone.reception}}<br>
                         <b>Type de lipo: </b>{{user.drone.lipoCells}}S
                     </div>
-                        {% else %}
-                        <div class="alert alert-warning">Pas encore de configuration renseignée.</div>
-                        {% endif %}
+                  
+                       {% endif %}
+                 
                         </div>
                     </div>
                 
@@ -85,20 +85,32 @@
                     <div class="dashboard">
                         <h3>Tableau de bord</h3>
                         <div class="row mx-auto">
-                            <div class="col-md-3">
-                                <h6>Mes articles</h6>
+                            <div class="col">
+                                <a href="{{path('profile_video_add')}}" class="btn param">Ajouter une video</a>
                             </div>
-                            <div class="col-md-3">
-                                <h6>Mes likes</h6> 
+                            <div class="row mt-2">
+                             {% if user.videos is not empty %}
+                                {% for video in videos %}
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="{{path('view_video', {'id':video.id})}}" class="stretched-link"></a>
+                                            <img src="{{asset('uploads/video/thumb/'~ video.thumbnail)}}" alt="" class="card-img-top">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{video.title}}</h5>   
+                                            </div>
+                                            <div class="card-footer d-flex justify-content-around align-items-center">
+                                                <small class="text-muted">
+                                                    <i class="fas fa-stopwatch"></i> {{video.duration}}
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
                             </div>
-                            <div class="col-md-3">
-                                <h6>Mes vues</h6>
-                            </div>
-                            <div class="col-md-3">
-                                <h6>Mes sessions</h6>
-                            </div>
+                           
                         </div>
-                        <div class="row counter">
+                        <div class="row counter mt-4">
                             <div class="col-md-4">
                                 LIPO HS<br>
                                 <button class="btn btn-dark"><i class="fa-solid fa-plus"></i> <b>1</b></button>

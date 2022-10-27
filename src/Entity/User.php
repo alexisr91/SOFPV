@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Entity\Drone;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
@@ -69,11 +71,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Drone $drone = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Video::class)]
+    private Collection $videos;
+
 
     //mise en place de la date de création de l'utilisateur
     public function __construct()
     {
         $this->created_at = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $this->videos = new ArrayCollection();
     }
     
 
@@ -275,6 +281,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDrone(?Drone $drone): self
     {
         $this->drone = $drone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Video>
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos->add($video);
+            $video->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->videos->removeElement($video)) {
+            // set the owning side to null (unless already changed)
+            if ($video->getUser() === $this) {
+                $video->setUser(null);
+            }
+        }
 
         return $this;
     }
