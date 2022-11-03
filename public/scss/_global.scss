@@ -1,3 +1,7 @@
+:root {
+    --plyr-color-main: $base;
+}
+
 body, html, .container-fluid {
     margin: 0;
     padding: 0;
@@ -37,6 +41,10 @@ ul {
     list-style-type: none;
 }
 
+.text-muted {
+    font-size: smaller;
+}
+
 .pt-20 {
     padding-top: 10%;
 }
@@ -62,3 +70,5 @@ input {
 .fa-reply {
    transform: rotateX(180deg) ;
 }
+
+    

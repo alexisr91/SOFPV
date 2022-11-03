@@ -63,7 +63,7 @@ class VideoController extends AbstractController
                 //géneration de la video via ffmpeg
                 $upVideo
                     ->filters()
-                    ->resize(new Dimension(640, 360), ResizeFilter::RESIZEMODE_INSET) //redimension de la vidéo
+                    ->resize(new Dimension(1920, 1080), ResizeFilter::RESIZEMODE_INSET) //redimension de la vidéo
                     ->synchronize(); 
               
                 $upVideo->frame(TimeCode::fromSeconds(5))
@@ -75,7 +75,7 @@ class VideoController extends AbstractController
                 $video->setDuration($duration);
 
                 //sauvegarde avec le codex X264
-                $upVideo->save(new X264('libmp3lame', 'libx264'), $this->getParameter('upload_video').'/'.$newName);
+                $upVideo->save(new X264('libmp3lame', 'libopenh264'), $this->getParameter('upload_video').'/'.$newName);
                   
                 $video->setSource($newName);
                 $video->setUser($this->getUser());

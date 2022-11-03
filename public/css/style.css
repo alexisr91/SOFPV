@@ -8,6 +8,9 @@
   src: url("fonts/airstrike.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
+:root {
+  --plyr-color-main: $base; }
+
 body, html, .container-fluid {
   margin: 0;
   padding: 0;
@@ -49,6 +52,9 @@ hr {
 ul {
   list-style-type: none; }
 
+.text-muted {
+  font-size: smaller; }
+
 .pt-20 {
   padding-top: 10%; }
 
@@ -69,7 +75,7 @@ input {
 
 /* NAV MENU */
 section#navbarMenu {
-  background-color: transparent !important;
+  background-color: #252525;
   width: 100vw;
   height: fit-content;
   z-index: 1;
@@ -102,6 +108,8 @@ section#home {
     background: url("../img/noise2.png") repeat 0 0 rgba(0, 0, 0, 0.5);
     position: absolute;
     top: 0; }
+  section#home #navbarMenu {
+    background-color: transparent !important; }
 
 #homeLogo {
   position: absolute;
@@ -198,7 +206,7 @@ section#helper {
 /* ACCUEIL : SECTION #newOnShop */
 section#newOnShop {
   width: 100vw;
-  background-color: rgba(20, 20, 20, 0.95);
+  background-color: #DADADA;
   position: relative; }
   section#newOnShop .titleBadge {
     position: absolute;
@@ -450,7 +458,62 @@ section#addVideo {
     justify-content: center;
     align-items: center;
     margin-top: 3em;
-    height: 50%; }
+    height: 70em; }
+
+section#showArticle .wrapper {
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+section#showArticle #wrapArticleContent {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; }
+section#showArticle #player {
+  width: 80%; }
+
+/*Ajouter un article */
+section#addArticle .sidebarMenu {
+  width: 10%;
+  margin-right: 2em; }
+section#addArticle .wrapper {
+  background-color: #fafafa;
+  border-radius: 3px;
+  padding: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3em;
+  height: 70em; }
+  section#addArticle .wrapper .row {
+    width: 90%; }
+
+section#blog hr {
+  margin: 0; }
+section#blog article {
+  display: flex; }
+  section#blog article .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 1em; }
+    section#blog article .content p {
+      color: #252525;
+      opacity: 0.7; }
+    section#blog article .content .profile {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between; }
+      section#blog article .content .profile div:first-of-type {
+        display: flex;
+        align-items: center; }
+  section#blog article .avatar {
+    max-height: 70px;
+    max-width: 70px;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: center;
+    margin-right: 1em; }
 
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu {

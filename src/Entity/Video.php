@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\VideoRepository;
-use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,10 +35,18 @@ class Video
     #[ORM\ManyToOne(inversedBy: 'videos')]
     private ?User $user = null;
 
+    #[ORM\Column]
+    private ?bool $active = null;
+
+    #[ORM\OneToOne(mappedBy: 'video', cascade: ['persist', 'remove'])]
+    private ?Article $article = null;
+
     public function __construct()
     {
         $this->views = 0;
+        $this->active = 1;
         $this->created_at = new \DateTime('now', new \DateTimeZone('Europe/Paris')); 
+
     }
 
     public function getId(): ?int
@@ -127,6 +134,40 @@ class Video
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($article === null && $this->article !== null) {
+            $this->article->setVideo(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($article !== null && $article->getVideo() !== $this) {
+            $article->setVideo($this);
+        }
+
+        $this->article = $article;
 
         return $this;
     }
