@@ -74,12 +74,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Video::class)]
     private Collection $videos;
 
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Article::class, orphanRemoval: true)]
+    private Collection $articles;
+
+    //En cas d'appel de l'utilisateur via les articles, on passera par le pseudo
+    public function __toString()
+    {
+        return $this->getNickname();
+    }
 
     //mise en place de la date de création de l'utilisateur
     public function __construct()
     {
         $this->created_at = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->videos = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
     
 
@@ -309,6 +318,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($video->getUser() === $this) {
                 $video->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getAuthor() === $this) {
+                $article->setAuthor(null);
             }
         }
 

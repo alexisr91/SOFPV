@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="blog">
+        {{include('partials/_navbarMenu.html.twig')}}
+        <div class="container-fluid wrapper">
+            <div class="row m-3">
+            <h2>Derniers articles</h2>
+
+                {% for article in articles %}
+                <article class="col-md-5">
+                    <div class="col-5">
+                        {% if article.video %}
+                            <img src="{{asset('/uploads/video/thumb/'~ article.video.thumbnail)}}" alt="Vignette de la vidéo de {{article.author}}" class="img-fluid" > 
+                        {% endif %}
+                    </div>
+                    <div class="content col-6">
+                        <div>
+                            <h4>{{article.title}}</h4>
+                            <p>{{article.content|u.truncate(100, '...', false )}}</p>
+                        </div>
+                        <hr>
+                        <div class="profile">
+                            <div>
+                                <div class="avatar"> 
+                                    <img src="{{asset('/uploads/avatar/'~ article.author.avatar)}}" alt="avatar de {{article.author}}" class="img-fluid"> 
+                                </div>
+                                <div>
+                                    <h5 class="m-0">{{article.author}}</h5> 
+                                    <span class="text-muted">{{article.createdAt|date('d-m-Y')}}</span>
+                                </div>
+                                
+                            </div>
+                            <div>
+                                <a href="#" class="btn btn-dark"> Voir <i class="fa-solid fa-plus"></i> </a>
+                            </div>
+                              
+                        </div>
+                    </div>
+           
+                </article>
+                {% endfor %}
+
+            </div>  
+        </div>
+    
+    </section>
+{% endblock %}

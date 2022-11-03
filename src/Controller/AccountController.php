@@ -7,7 +7,6 @@ use App\Entity\Drone;
 use App\Form\DroneType;
 use App\Form\ProfileType;
 use App\Form\RegisterType;
-use App\Repository\DroneRepository;
 use App\Repository\VideoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;

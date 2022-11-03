@@ -1,6 +1,6 @@
 /* NAV MENU */
 section#navbarMenu {
-    background-color: transparent !important;
+    background-color: $base;
     width:100vw;
     height: fit-content;
     z-index:1;
@@ -11,4 +11,6 @@ section#navbarMenu {
         font-size: 2rem;
     }
 }
+
+
 

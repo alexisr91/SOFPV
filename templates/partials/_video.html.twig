@@ -1,0 +1,34 @@
+
+{# <div class="card">
+    <video id="player" playsinline controls data-poster="{{asset('uploads/video/thumb/' ~ video.thumbnail )}}">
+        <source src="{{asset('uploads/video/' ~ video.source )}}" type="video/mp4" />
+    </video>
+    <div class="card-body p-0 ">
+        <div class="row">
+            <div class="col-md-8">
+                <h5 class="card-title ps-3 pt-3">{{video.title}}</h5>
+                <div class="card-text text-muted ps-3">
+                <small>{{video.views}}{% if video.views <= 1 %} vue {% else %} vues {% endif %} • {{video.createdAt|date('d/m/Y')}}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-1">
+    <div class="card-text row align-items-center justify-content-center mx-1 my-2">
+        <div class="col-md-1">
+            {% if video.user.avatar is null %}
+                <img src="{{asset('img/avatar/avatar-1.png')}}" alt="avatar par défaut" class="rounded-circle" width="60" height="60">
+            {% else %}
+                <img src="{{asset('uploads/avatar/'~ video.user.avatar)}}" alt="{{video.user.nickname}}" class="rounded-circle" width="60" height="60">
+            {% endif %}
+        </div>
+        <div class="col-md-11">
+            <p class="mb-1"><a href="#" class="text-bold">{{ video.user.nickname }}</a></p>
+        </div>
+    </div>
+</div> #}
+<div class="videoWrap">
+    <video id="player" playsinline controls data-poster="{{asset('uploads/video/thumb/' ~ video.thumbnail )}}">
+        <source src="{{asset('uploads/video/' ~ video.source )}}" type="video/mp4" />
+    </video>
+</div>

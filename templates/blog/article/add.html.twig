@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block body %}
+ 
+    <section id="addArticle">
+        {{include('partials/_navbarMenu.html.twig')}}
+      
+
+        <div class="container-fluid wrapper">   
+            {{include('partials/_sidebarMenuProfile.html.twig')}}
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <h5>Contenu de l'article</h5>
+                    {{form_start(form)}}
+                        {{form_row(form.title)}}
+                        {{form_row(form.content)}} 
+                        <button type="submit" class="btn btn-dark btn-lg">Publier</button>       
+                </div>
+               
+                <div class="col-md-6 col-sm-12">
+                    <h5>Ajouter une vidéo </h5>
+                        {{form_row(form.video.title)}}
+                        {{form_row(form.video.source)}}
+                         
+                    {{form_end(form)}}
+                </div>
+    
+            </div>
+                
+        </div>
+ 
+    </section>
+{% endblock %}

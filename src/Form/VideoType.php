@@ -19,7 +19,8 @@ class VideoType extends AbstractType
             ])
             ->add('source', FileType::class, [
                 'label'=>'Ajouter une vidéo',
-                'mapped'=>false
+                'mapped'=>false,
+                'required'=>false
             ])
         ;
     }
