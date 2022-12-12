@@ -39,6 +39,37 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+    // les 4 derniers articles publiés ( pour la page d'accueil )
+    public function findLastArticles(){
+        return $this->createQueryBuilder('a')
+           ->orderBy('a.createdAt', 'DESC')
+           ->setMaxResults(4)
+           ->getQuery()
+           ->getResult()
+       ;
+    }
+    //Tous les articles triés par date ( derniers publiés en premier )
+    //TODO : mettre une pagination en place
+    public function findAllArticlesByDate(){
+        return $this->createQueryBuilder('a')
+        ->orderBy('a.createdAt', 'DESC')
+        ->setMaxResults(30)
+        ->getQuery()
+        ->getResult();
+    }
+
+    public function findArticlesByAuthor($id){
+        return $this->createQueryBuilder('a')
+        ->andWhere('a.author = :id')
+        ->setParameter('id', $id)
+        ->orderBy('a.createdAt', 'DESC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getResult();
+    }
+
+
+    
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */

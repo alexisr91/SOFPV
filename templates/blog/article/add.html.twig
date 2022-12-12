@@ -2,8 +2,6 @@
 
 {% block title %}{{ parent() }} | {{ title }}{% endblock %}
 
-{% form_theme form 'bootstrap_5_layout.html.twig' %}
-
 {% block body %}
  
     <section id="addArticle">
@@ -14,24 +12,81 @@
             {{include('partials/_sidebarMenuProfile.html.twig')}}
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                    <h5>Contenu de l'article</h5>
+                    <h5><i class="fa-solid fa-pen"></i> Contenu de l'article</h5>
                     {{form_start(form)}}
                         {{form_row(form.title)}}
-                        {{form_row(form.content)}} 
-                        <button type="submit" class="btn btn-dark btn-lg">Publier</button>       
+                        {{form_row(form.content)}}   
                 </div>
                
                 <div class="col-md-6 col-sm-12">
-                    <h5>Ajouter une vidéo </h5>
+                    <h5><i class="fa-solid fa-film"></i> Ajouter une vidéo</h5>
                         {{form_row(form.video.title)}}
                         {{form_row(form.video.source)}}
-                         
-                    {{form_end(form)}}
+                                           
+                    <h5 class="mt-3"><i class="fa-solid fa-images"></i> Ajouter des images</h5>
+                       
+                    <div class="images"
+                        data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
+                        data-prototype="{{ form_row(form.images.vars.prototype)|e('html_attr') }}"> 
+
+                    {% for image in form.images %}
+                         {{form_row(image.source)}}
+                         {{form_row(image.caption)}}
+                    {% endfor %}
+                    </div> 
+                    
+                    <button type="submit" class="btn btn-dark">Publier</button>
                 </div>
-    
+                    {{form_end(form)}}
             </div>
                 
         </div>
  
     </section>
 {% endblock %}
+
+
+
+{% block javascripts %}
+    <script>
+
+        const addImgLink = document.createElement('button')
+            addImgLink.classList.add('add_image_list','btn','btn-dark','my-3')
+            addImgLink.innerText='Ajouter une image'
+            addImgLink.dataset.collectionHolderClass='images'
+    
+        
+            const collectionHolder = document.querySelector('div.images')
+            collectionHolder.appendChild(addImgLink)
+
+            const addFormToCollection = (e) => {
+                const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+                const item = document.createElement('div');
+                
+                const separator = document.createElement('hr');
+                separator.classList.add('my-4');
+
+
+                item.innerHTML = collectionHolder
+                    .dataset
+                    .prototype
+                    .replace(
+                    /__name__/g,
+                    collectionHolder.dataset.index
+                    );
+
+                collectionHolder.appendChild(item);
+                collectionHolder.appendChild(separator);
+
+                collectionHolder.dataset.index++;
+            }
+
+            addImgLink.addEventListener("click", addFormToCollection)
+
+        </script>
+{% endblock %}
+
+
+
+
