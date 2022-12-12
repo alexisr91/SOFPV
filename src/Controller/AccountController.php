@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Drone;
+use App\Entity\Article;
 use App\Form\DroneType;
 use App\Form\ProfileType;
 use App\Form\RegisterType;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -72,20 +74,23 @@ class AccountController extends AbstractController
 
     //Profil personnel de l'utilisateur (modifications paramètres user, vue globale de son profil)
     #[Route('/profile', name:'account_myprofile')]
+    #[IsGranted("ROLE_USER")]
     public function myProfile(VideoRepository $repo)
     {
         $user = $this->getUser();
-        $videos = $user->getVideos();
+        
+        // $videos = $user->getVideos();
        
         return $this->render('account/myprofile.html.twig', [
             'title' => 'Mon compte ',
             'user' => $user,
-            'videos'=>$videos
+            // 'videos'=>$videos
         ]);
     }
 
     //Edition des données personnelles du profil
     #[Route('/profile/edit', name:'account_edit')]
+    #[IsGranted("ROLE_USER")]
     public function edit(EntityManagerInterface $manager, Request $request, SluggerInterface $slugger){
 
         $user = $this->getUser();
@@ -150,6 +155,7 @@ class AccountController extends AbstractController
 
     //Edition de mon drone (ma configuration favorite, visible au public) + vue sur ses autres configs (raccourcis pour en changer) 
     #[Route('/profile/edit/favorite', name:'account_drone_edit')]
+    #[IsGranted("ROLE_USER")]
     public function droneEdit(EntityManagerInterface $manager, Request $request, SluggerInterface $slugger){
 
         $user = $this->getUser();

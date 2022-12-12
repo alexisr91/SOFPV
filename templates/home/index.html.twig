@@ -9,7 +9,6 @@
                
         <div id="homeLogo">
             <img src="{{asset('/img/logo.png')}}" alt="Logo SO FPV" class="img-fluid">
-            
             <div id="swipeToBlog">
                 <a href="#blog"><i class="fa-solid fa-angles-down fa-2x"></i></a>
             </div>
@@ -18,13 +17,47 @@
     </section>
 
     {# Derniers articles #} 
-    <section id="blog">  
+    <section id="blogHome">  
         {# <div class="title-banner mb-4">
         </div>  #}
-        <div class="container-fluid text-center pt-4">
+        <div class="container-fluid pt-4">
              {# TODO: boucle pour les articles de la bdd  + implementation de PLYR #}
-            <div class="row">
-                <div class="col video-frame">
+            <div class="row row-cols-2 row-cols-md-4 g-4 px-3">
+                {% for article in articles %}
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-thumb">
+                            {% if article.video %}
+                                 <img class="card-img-top img-fluid" src="{{asset('/uploads/article/video/thumb/'~ article.video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
+                            {% elseif article.images %}
+                                {# TODO : repo ->selectionner la premiere image ajoutée dans l'article comme vignette#}
+                                <img class="card-img-top img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >     
+                            {% else %}
+                                <img class="card-img-top img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+                            {% endif %} 
+                                <div class="author">
+                                        <div class="author-avatar">
+                                            <img class="img-fluid " src="{{asset('/uploads/avatar/'~ article.author.avatar )}}" alt="Avatar de {{article.author}}">
+                                        </div>
+                                        <div class="author-nickname">
+                                            <h4>{{article.author.nickname}}</h4>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{article.title}}</h5>
+                                <p class="card-text">{{article.content|u.truncate(100, '...', false )}}</p>
+
+                               
+                                
+                            </div>
+                            <div class="card-footer text-muted">1 <i class="fa-regular fa-thumbs-up"></i> • 1 <i class="fa-regular fa-comment"></i> • {{article.createdAt|date('d-m-Y')}}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+           
+                {# <div class="col video-frame">
                     <h3>LOFI GIRL</h3>
                     <iframe width="600" height="400" src="https://www.youtube.com/embed/lTRiuFIWV54" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
@@ -39,7 +72,7 @@
                 <div class="col video-frame">
                     <h3>Iron FPV</h3>
                     <iframe width="600" height="400" src="https://www.youtube-nocookie.com/embed/VQWvSFFYtyA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                </div> #}
             </div>
         </div>
     </section>

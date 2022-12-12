@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use FFMpeg\FFMpeg;
+use App\Entity\Image;
 use App\Entity\Video;
 use App\Entity\Article;
-use App\Form\VideoType;
 use App\Form\ArticleType;
 use FFMpeg\Format\Video\X264;
 use FFMpeg\Coordinate\TimeCode;
@@ -17,15 +17,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
 
 class BlogController extends AbstractController
 {
     //page principale du blog (liste des articles)
     #[Route('/blog', name: 'blog')]
-    public function index(ArticleRepository $articleRepo): Response
+    public function index(ArticleRepository $articleRepo)
     {
-        $articles = $articleRepo->findAll();
+        $articles = $articleRepo->findAllArticlesByDate();
 
         return $this->render('blog/index.html.twig', [
            'title'=>'Blog',
@@ -33,21 +36,63 @@ class BlogController extends AbstractController
         ]);
     }
     
-    //ajout d'un article (avec possibilité d'intégrer une vidéo)
+    //ajout d'un article (avec possibilité d'intégrer une vidéo et/ou des images)
     #[Route('/blog/add', name:'article_add')]
-    public function add(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger){
+    #[IsGranted("ROLE_USER")]
+    public function add(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response{
 
         $user = $this->getUser();
         $article = new Article();
         $video = new Video();
+     
+        $form = $this->createForm(ArticleType::class, $article);   
+        $form->handleRequest($request);  
+        
+        // $images = $form['images']->getData();
 
-        $form = $this->createForm(ArticleType::class, $article);
-        $form->handleRequest($request);
-
+        // if($images){
+        //     $addImages = $article->getImages()->add($images);
+        // }
 
         if($form->isSubmitted() && $form->isValid()){
+            
+            $article = $form->getData();
+            
+           //GESTION IMAGE
+            if($article->getImages()){
 
-            //on teste si l'user à voulu mettre une vidéo
+                $index = 0;
+                
+                 foreach($article->getImages() as $image){
+
+                    $caption = $form['images'][$index]['caption']->getData(); // indexage pour récupérer les données de chaque entrée
+                    $source = $form['images'][$index]['source']->getData(); 
+                   
+
+                    $originalName = pathinfo($source->getClientOriginalName(), PATHINFO_FILENAME);
+                    $sluggedName = $slugger->slug($originalName);
+                    $newName = $sluggedName.'-'.uniqid().'.'.$source->guessExtension();
+
+                        try {
+                            $source->move($this->getParameter('upload_image'), $newName); // ok
+
+                        } catch(FileException $e) {
+                            dd($e->getMessage());                    
+                        }
+                        $newImage = new Image();
+                        $image->setSource($newName)
+                             ->setCaption($caption)
+                             ->setArticle($article); 
+                        $article->addImage($newImage);
+
+                        $manager->persist($newImage);
+                        $index++;   
+                }       
+            }      
+
+            //GESTION VIDEO
+
+            //on teste si l'user à voulu mettre une vidéo :
             //récupération du champ source via le formulaire imbriqué VideoType
             $videoSource = $form->get('video')->get('source')->getData(); 
             $ffmpeg = $this->initFfmpeg();
@@ -57,15 +102,16 @@ class BlogController extends AbstractController
             if($videoSource){
                 $originalName = $videoSource->getClientOriginalName(); //récupère le nom  
                 $upVideo = $ffmpeg->open($videoSource->getRealPath()); //récupère le chemin pour traiter avec ffmpeg
+                $title = $form->get('video')->get('title')->getData();
 
                 $sluggedName = $slugger->slug($originalName);
                 $newName = $sluggedName.'-'.uniqId().'.mp4'; // nouveau nom + extension voulue
                 $thumbName = $sluggedName.'-'.uniqId().'.png';// même principe pour la vignette générée
 
-                //géneration de la video via ffmpeg, redimensionnement + synchro pour le son
+                //géneration de la video via ffmpeg, redimensionnement + synchro
                 $upVideo
                     ->filters()
-                    ->resize(new Dimension(1920, 1080), ResizeFilter::RESIZEMODE_INSET) //redimension de la vidéo
+                    ->resize(new Dimension(1920, 1080), ResizeFilter::RESIZEMODE_INSET)
                     ->synchronize(); 
               
                 $upVideo->frame(TimeCode::fromSeconds(5))
@@ -81,6 +127,7 @@ class BlogController extends AbstractController
                 $upVideo->save(new X264('libmp3lame', 'libx264'), $this->getParameter('upload_video').'/'.$newName);
                   
                 $video->setSource($newName);
+                $video->setTitle($title);
                 $video->setUser($user);
 
                 $manager->persist($video);
@@ -90,10 +137,13 @@ class BlogController extends AbstractController
                 
             }
 
+           
             $article->setAuthor($user);
-            
-            $manager->persist($article);
+            $manager->persist($article); 
+
             $manager->flush();
+
+            $this->addFlash('success', 'Article publié !');
 
             return $this->redirectToRoute('account_myprofile');
         }
@@ -101,11 +151,11 @@ class BlogController extends AbstractController
 
         return $this->render('blog/article/add.html.twig', [
             'title'=>'Publier un article',
-            'form'=>$form->createView(),
-            
+            'form'=>$form->createView()
 
-        ]);
-    }
+            ]);
+        }
+    
     //GESTION VIDEO 
     
       //Initialisation de FFMPEG pour l'intégration des vidéos
@@ -129,6 +179,22 @@ class BlogController extends AbstractController
         $duration = $hours.$mins.$secs;
         return $duration;
     }
-}
 
+    //Visualisation de l'article : TODO : Gérer les images et bannieres par defaut
+    #[Route('/blog/show/{slug}', name:'article_show')]
+    public function show(Article $article, ArticleRepository $articleRepo){
+
+        $author = $article->getAuthor();
+        $title = $article->getTitle();
+        $video = $article->getVideo();
+        $articles = $articleRepo->findArticlesByAuthor($author->getId());
+
+        return $this->render('blog/article/show.html.twig', [
+            'article'=>$article,
+            'articles'=>$articles,
+            'video'=> $video,
+            'title'=> $title.' - '.$author
+        ]);
+    }
+}
 

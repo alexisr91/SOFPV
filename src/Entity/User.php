@@ -37,7 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: false)]
     private ?string $password;
 
-    
+    #[ConstraintsLength(min:4, minMessage:"Votre pseudo doit contenir 4 caractères minimum.")]
     #[ORM\Column(length: 255, nullable: false)]
     private ?string $nickname;
 

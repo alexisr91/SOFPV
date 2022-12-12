@@ -84,33 +84,53 @@
                 <div class="col"> 
                     <div class="dashboard">
                         <h3>Tableau de bord</h3>
-                        <div class="row mx-auto">
-                            <div class="col">
-                                <a href="{{path('profile_video_add')}}" class="btn param">Ajouter une video</a>
+                        <div class="row mx-auto mt-3">
+                            <div class="col mb-3">
                                 <a href="{{path('article_add')}}" class="btn param">Ajouter un article</a>
                             </div>
-                            <div class="row mt-2">
-                             {% if user.videos is not empty %}
-                                {% for video in videos %}
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <a href="{{path('view_video', {'id':video.id})}}" class="stretched-link"></a>
-                                            <img src="{{asset('uploads/video/thumb/'~ video.thumbnail)}}" alt="" class="card-img-top">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{video.title}}</h5>   
+                            <div class="row row-col-3">
+                                <div class="col">
+                                    <div class="card text-bg-light mb-3">
+                                        <div class="card-header">Articles</div>
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title"><i class="fa-solid fa-photo-film fa-2x"></i></h5>
+                                                <h5>1</h5>
+                                           
                                             </div>
-                                            <div class="card-footer d-flex justify-content-around align-items-center">
-                                                <small class="text-muted">
-                                                    <i class="fas fa-stopwatch"></i> {{video.duration}}
-                                                </small>
-                                            </div>
-                                        </div>
                                     </div>
-                                {% endfor %}
-                            {% endif %}
+                                </div>
+                                <div class="col">
+                                    <div class="card text-bg-light mb-3">
+                                        <div class="card-header">Questions</div>
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title"><i class="fa-solid fa-question fa-2x"></i></h5>
+                                                <h5>1</h5>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card text-bg-light mb-3">
+                                        <div class="card-header">Sessions prévues</div>
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title"><i class="fa-solid fa-calendar-days fa-2x"></i></h5>
+                                                <h5>1</h5>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card text-bg-light mb-3">
+                                        <div class="card-header">Statut de commande</div>
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title"><i class="fa-solid fa-bag-shopping fa-2x"></i></h5>
+                                                <h5><span class="rounded bg-danger"></span>En cours</h5>
+                                            </div>
+                                    </div>
+                                </div>
+                                
                             </div>
                            
                         </div>
+                        {# bloc counter #}  
                         <div class="row counter mt-4">
                             <div class="col-md-4">
                                 LIPO HS<br>
@@ -125,6 +145,7 @@
                                 <button class="btn btn-dark"><i class="fa-solid fa-plus"></i> <b>1</b></button>
                             </div>
                         </div>
+                        {# fin du counter #}
                     </div>
                 </div>
             </div>   
