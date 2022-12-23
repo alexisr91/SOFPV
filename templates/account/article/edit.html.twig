@@ -4,13 +4,20 @@
 
 {% block body %}
  
-    <section id="addArticle">
-        {{include('partials/_navbarMenu.html.twig')}}
+    <section id="editArticle">
       
+            {{include('partials/_navbarMenu.html.twig')}}
 
-        <div class="container-fluid wrapper">   
-            {{include('partials/_sidebarMenuProfile.html.twig')}}
+       
+        <div class="container-fluid wrapper">
+            <div>
+                {{include('partials/_sidebarMenuProfile.html.twig')}}  
+            </div>
+            
             <div class="row">
+                <div class="mb-3"> 
+                    <h3>Modification de l'article <i>"{{article.title}}"</i> </h3>
+                </div>    
                 <div class="col-md-6 col-sm-12">
                     <h5><i class="fa-solid fa-pen"></i> Contenu de l'article</h5>
                     {{form_start(form)}}
@@ -19,32 +26,29 @@
                 </div>
                
                 <div class="col-md-6 col-sm-12">
-                    <h5><i class="fa-solid fa-film"></i> Ajouter une vidéo</h5>
+                    <h5><i class="fa-solid fa-film"></i> Ajouter ou modifier une vidéo</h5>
                         {{form_row(form.video.title)}}
                         {{form_row(form.video.source)}}
                                            
-                    <h5 class="mt-3"><i class="fa-solid fa-images"></i> Ajouter des images</h5>
-                    
-
+                    <h5 class="mt-3"><i class="fa-solid fa-images"></i> Ajouter ou supprimer des images</h5>
+                       
                     <div class="images"
                         data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
-                        data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
+                        data-prototype="{{ form_row(form.images.vars.prototype)|e('html_attr') }}"> 
 
-                       {% for images in form.images %}
-                            {{form_widget(images)}}
-                            {{form_errors(images)}}
-                       {% endfor %}
-                         
-                        {{form_rest(form)}}
-                        
+                    {% for image in form.images %}
+                         {{form_row(image.source)}}
+                         {{form_row(image.caption)}}
+                    {% endfor %}
                     </div> 
-                    <button type="button" id="add_images" class="btn btn-dark" data-collection-holder-class="images">Ajouter une image</button>
-
                     
-                </div>
+                   
+                </div> 
                     <div>
-                        <button type="submit" class="btn btn-dark">Publier</button>
+                        <a href="{{path('account_articles')}}" class="btn btn-dark btn-lg"><i class="fa-solid fa-chevron-left"></i> Retour</a>
+                        <button type="submit" class="btn btn-warning btn-lg m-3">Modifier</button>
                     </div>
+                    
                     {{form_end(form)}}
             </div>
                 
@@ -54,10 +58,19 @@
 {% endblock %}
 
 
+
 {% block javascripts %}
     <script>
-            const collectionHolder = document.querySelector("div.images");
-            
+
+        const addImgLink = document.createElement('button')
+            addImgLink.classList.add('add_image_list','btn','btn-dark','my-3')
+            addImgLink.innerText='Ajouter une image'
+            addImgLink.dataset.collectionHolderClass='images'
+    
+        
+            const collectionHolder = document.querySelector('div.images')
+            collectionHolder.appendChild(addImgLink)
+
             const addFormToCollection = (e) => {
                 const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
 
@@ -80,10 +93,10 @@
 
                 collectionHolder.dataset.index++;
             }
-            document.querySelectorAll('#add_images').forEach(btn=>{btn.addEventListener("click", addFormToCollection)});
-    
 
-    </script>
+            addImgLink.addEventListener("click", addFormToCollection)
+
+        </script>
 {% endblock %}
 
 

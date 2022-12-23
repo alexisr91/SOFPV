@@ -12,7 +12,11 @@
             <div class="row col-xs-12 col-md-10" id="wrapArticleContent">
                 
                     <div class="banner">
-                        <img src="{{asset('uploads/banner/' ~ user.banner)}}" alt="">
+                        {% if user.banner %}
+                            <img src="{{asset('uploads/banner/' ~ user.banner)}}" alt="Bannière de {{user.nickname}}">
+                        {% else %}
+                            <img src="{{asset('/img/bannerDefault.png')}}" alt="Bannière par défaut">
+                        {% endif %}
                         <div class="user">
                             <div class="avatar">
                                 {% if user.avatar is not null %}
@@ -35,33 +39,95 @@
                         {#TODO mettre image d'illustration si il y en a,  ou mettre une image par defaut #}
                         <img src="{{asset('/img/blogDefault.png')}}" alt="image d'illustration par défaut" class="img-fluid">
                     {% endif %}
+                    <div class="d-flex justify-content-between align-items-center px-1">
+                        {{article.views}}{{article.views <= 1 ? ' vue':' vues'}} • {{article.createdAt|date('d-m-Y')}}
+                        <div>
+                            <button type="button" class="btn btn-light" id="like-article" data-id='{{article.id}}'>
+                            {% set isLiked = false %}
+                                {# Si il y a des likes, on verifie dans ces likes si il y en a un qui a une correspondance avec l'user connecté #}
+                                    {% if article.likes %}
+                                        {% for like in article.likes %}
+                                            {% if like.user == app.user %}
+                                                {# si il y a une correspondance entre l'user connecté et le like dans la bdd, on met isLiked en true pour que le pouce soit activé #}
+                                                {% set isLiked = true %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+
+                                    {% if isLiked %} {# l'user aime déjà la vidéo #}
+                                          <i class="fa-solid fa-thumbs-up fa-2x"></i>
+                                    {% else %} {# l'user n'aime pas encore la vidéo #}
+                                          <i class="fa-regular fa-thumbs-up fa-2x"></i>
+                                    {% endif %}
+                                    <span id="like_count">
+                                        {{article.likes|length }}
+                                    </span>
+                            </button>
+                        </div>
+                    </div>
+                    <hr class="mt-0">
                     <div class="mt-3">
                         <h2>{{article.title}}</h2>  
                         <p class="pe-4">{{article.content|raw}}</p>
                     </div>
                     {# TODO:prevoir place pour images #}
-                    {# TODO:prevoir place pour commentaires/réponses #}
+                    
+                    <hr>
+                    {# Espace commentaire #}
+                    <div class="addCommentForm">
+                        {{form_start(form)}}
+                            {{form_widget(form)}}
+                            <button type="submit" class="btn">Valider</button>
+                        {{form_end(form)}}
+                    </div>
+                    <div>
+                    {# pour chaque commentaire, affichage du contenu + auteur + possibilité de supprimer ses propres commentaires #}
+                        {% for comment in article.comments %}
+                        <div class="commentWrap">
+                            <div class="commentAuthor">
+                                <div>
+                                    <a href="#">{{comment.author.nickname}}</a>
+                                    <span class="text-muted">
+                                        • {{comment.createdAt|date('d-m-Y H:i')}}
+                                    </span>
+                                </div>
+                                
+                                {# Si le commentaire appartient à l'auteur, il peut le supprimer #}
+                                {% if comment.author == app.user %}
+                                    <a href="{{path('comment_delete', {'id': comment.id})}}" class="btn btn-danger btn-sm">X Supprimer</a>
+                                {% endif %}
+                            </div>
+                                {{comment.content|raw}}
+                        </div>
+                        {% endfor %}
+                    </div>
 
                     
                 </div>
                 <div class="col-md-4">
                 {# articles du même auteur : TODO boucle pour les articles #}
                     <div class="row g-4" id="wrapSameAuthorArticle">
-                    {% for article in articles %}
-                            <div class="col-md-6">
-                                <div class="card">
-                                    {% if article.video %}
-                                        <img src="{{asset('uploads/article/video/thumb/'~ article.video.thumbnail)}}" class="card-img-top" alt="Vignette de l'article {{article.title}} de {{article.author}}">
-                                    {% else %}
-                                        <img src="{{asset('/img/BlogDefault.png')}}" class="card-img-top" alt="Vignette par défaut de l'article de {{article.author}}">
-                                    {% endif %}
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{article.title}}</h5>
-                                        <p class="card-text">{{article.content|u.truncate(60, '...')}}</p>
+                    {% if articles|length > 0 %}
+                        {% for article in articles %}
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        {% if article.video %}
+                                            <img src="{{asset('uploads/article/video/thumb/'~ article.video.thumbnail)}}" class="card-img-top" alt="Vignette de l'article {{article.title}} de {{article.author}}">
+                                        {% else %}
+                                            <img src="{{asset('/img/BlogDefault.png')}}" class="card-img-top" alt="Vignette par défaut de l'article de {{article.author}}">
+                                        {% endif %}
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{article.title}}</h5>
+                                            <p class="card-text">{{article.content|u.truncate(60, '...')}}</p>
+                                            <a href="{{path('article_show', {'slug':article.slug})}}" class="stretched-link"></a>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>  
-                    {% endfor %}
+                                </div>  
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert alert-warning text-center">{{article.author.nickname}} n'a pas encore posté de contenu supplémentaire.</div>
+
+                    {% endif %}
                     </div>
                 </div>
             </div>
@@ -84,4 +150,6 @@
         <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
 
     </script>
+
+    
 {% endblock %}

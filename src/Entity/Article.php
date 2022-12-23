@@ -49,10 +49,22 @@ class Article
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Image::class, cascade: ['persist', 'remove'], orphanRemoval:true)]
     protected ?Collection $images;
 
+    #[ORM\Column]
+    private ?int $views = null;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Likes::class, orphanRemoval: true)]
+    private Collection $likes;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
+    private Collection $comments;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->images = new ArrayCollection();
+        $this->views = 0;
+        $this->likes = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     //creation et update du slug à partir du titre de la video (avant la persistance)
@@ -148,13 +160,13 @@ class Article
         return $this->images;
     }
 
-    public function addImage(Image $image): self
+    public function addImage(Image $image)
     {       
-        if(!$this->images->contains($image)){
-             $this->images[] = $image;
-             $image->setArticle($this);   
+        if(!$this->images->contains($image)){ 
+            $image->setArticle($this);  
+            $this->images[] = $image;
+             
         }
-       
         return $this;
       
     }
@@ -165,6 +177,78 @@ class Article
             // set the owning side to null (unless already changed)
             if ($image->getArticle() === $this) {
                 $image->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getViews(): ?int
+    {
+        return $this->views;
+    }
+
+    public function setViews(int $views): self
+    {
+        $this->views = $views;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Likes>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Likes $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Likes $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getArticle() === $this) {
+                $like->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getArticle() === $this) {
+                $comment->setArticle(null);
             }
         }
 

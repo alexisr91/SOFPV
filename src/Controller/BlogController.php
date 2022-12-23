@@ -4,18 +4,25 @@ namespace App\Controller;
 
 use FFMpeg\FFMpeg;
 use App\Entity\Image;
+use App\Entity\Likes;
 use App\Entity\Video;
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
 use FFMpeg\Format\Video\X264;
+use Doctrine\ORM\EntityManager;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Coordinate\Dimension;
+use App\Repository\LikesRepository;
 use App\Repository\ArticleRepository;
 use FFMpeg\Filters\Video\ResizeFilter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,23 +54,21 @@ class BlogController extends AbstractController
      
         $form = $this->createForm(ArticleType::class, $article);   
         $form->handleRequest($request);  
-        
-        // $images = $form['images']->getData();
-
-        // if($images){
-        //     $addImages = $article->getImages()->add($images);
-        // }
-
+      
         if($form->isSubmitted() && $form->isValid()){
             
             $article = $form->getData();
+
+            //On garde la mise en place des sauts de ligne avec nl2br()
+            $articleContent = nl2br($article->getContent());
             
-           //GESTION IMAGE
+           //GESTION IMAGE 
+           $images = $form->get('images')->getData();
             if($article->getImages()){
 
                 $index = 0;
                 
-                 foreach($article->getImages() as $image){
+                 foreach($images as $image){
 
                     $caption = $form['images'][$index]['caption']->getData(); // indexage pour récupérer les données de chaque entrée
                     $source = $form['images'][$index]['source']->getData(); 
@@ -137,7 +142,9 @@ class BlogController extends AbstractController
                 
             }
 
-           
+            // dd($article);
+
+            $article->setContent($articleContent);
             $article->setAuthor($user);
             $manager->persist($article); 
 
@@ -146,8 +153,10 @@ class BlogController extends AbstractController
             $this->addFlash('success', 'Article publié !');
 
             return $this->redirectToRoute('account_myprofile');
+            
         }
 
+        
 
         return $this->render('blog/article/add.html.twig', [
             'title'=>'Publier un article',
@@ -155,8 +164,9 @@ class BlogController extends AbstractController
 
             ]);
         }
-    
-    //GESTION VIDEO 
+  
+
+    //GESTION VIDEO - Initialisation + calcul de la durée
     
       //Initialisation de FFMPEG pour l'intégration des vidéos
       private function initFfmpeg(){
@@ -167,6 +177,7 @@ class BlogController extends AbstractController
             'ffmpeg.threads' => 12
         ));
     }
+    
     //Gestion de la durée + gestion de l'affichage de la vidéo
     private function transformTime($second){
         $hours = floor($second/36000);
@@ -180,21 +191,96 @@ class BlogController extends AbstractController
         return $duration;
     }
 
-    //Visualisation de l'article : TODO : Gérer les images et bannieres par defaut
+
+    //Visualisation de l'article + autres articles du même auteur en excluant l'article actuel (Utilisateur connecté uniquement : comparaison avec l'auteur pour ajout ou non d'une vue + possible ajout de commentaire)
     #[Route('/blog/show/{slug}', name:'article_show')]
-    public function show(Article $article, ArticleRepository $articleRepo){
+    #[IsGranted('ROLE_USER')]
+    public function show(Article $article, ArticleRepository $articleRepo, EntityManagerInterface $manager, Request $request){
 
         $author = $article->getAuthor();
         $title = $article->getTitle();
         $video = $article->getVideo();
-        $articles = $articleRepo->findArticlesByAuthor($author->getId());
+
+        //gestion des commentaires
+        $comment = new Comment();
+        $formComment = $this->createForm(CommentType::class, $comment);
+        $formComment->handleRequest($request);
+
+
+        if($formComment->isSubmitted() && $formComment->isValid()){
+            //On récupère le commentaire et on applique la méthode php nl2br() pour conserver les sauts de ligne
+            $nlbrContent = nl2br($comment->getContent());
+
+            $comment->setAuthor($this->getUser())
+                    ->setArticle($article)
+                    ->setContent($nlbrContent);
+
+            $manager->persist($comment);
+            $manager->flush();
+
+            return $this->redirectToRoute('article_show', ['slug'=>$article->getSlug()]);
+        }
+        
+
+        //on ajoute une vue à l'article si le viewer n'est pas l'auteur de l'article
+        if($this->getUser()!= $author){
+            $article->setViews($article->getViews() + 1 );
+            $manager->persist($article);
+            $manager->flush();
+        }
+
+        //articles associés à l'auteur
+        $articles = $articleRepo->findOtherArticlesByAuthor($author->getId(), $article);
 
         return $this->render('blog/article/show.html.twig', [
             'article'=>$article,
             'articles'=>$articles,
             'video'=> $video,
-            'title'=> $title.' - '.$author
+            'title'=> $title.' - '.$author,
+            'form'=>$formComment->createView()
         ]);
+    }
+
+
+    #[Route('/blog/{id}/like', options: ['expose' => true] , name:'article_like')]
+    public function like(Article $article, EntityManagerInterface $manager, LikesRepository $likesRepository){
+
+        //si on récupère un user connecté
+        if($this->getUser()){
+
+            $user = $this->getUser();
+
+            if($user != $article->getAuthor()){
+            $isLiked = $likesRepository->getLikeByUserAndArticle($user, $article);
+
+            //si c'est déjà liké et qu'on rappuie sur "like", on enlève le like
+            if($isLiked){
+                $manager->remove($isLiked);
+            //sinon on créé un nouveau Like qui va s'associer à l'user et à l'article    
+            } else {
+                $like = new Likes();
+                $like->setUser($user)
+                    ->setArticle($article);
+                $manager->persist($like);
+            }
+
+            $manager->flush();
+            return new JsonResponse('success', 200);
+
+        } else {
+            return new JsonResponse(['erreur', 'Vous ne pouvez pas liker vos articles.']);
+        }
+        //si l'user tente de like sans être connecté, on retourne une réponse en JSON    
+        } else {
+            return new JsonResponse(['erreur', 'Attention, vous devez être connecté pour pouvoir liker un article.']);
+        }
+
+            return $this->render('blog/index.html.twig', [
+                'title'=>'Blog',
+             ]);
+         
+           
+
     }
 }
 

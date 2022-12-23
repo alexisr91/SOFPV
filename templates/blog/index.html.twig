@@ -8,15 +8,14 @@
         {{include('partials/_navbarMenu.html.twig')}}
         <div class="container-fluid pt-4">
              {# TODO: boucle pour les articles de la bdd  + implementation de PLYR #}
-            <div class="row row-cols-2 row-cols-md-4 g-4 px-3">
+            <div class="row row-cols-md-1 g-4 px-3">
                 {% for article in articles %}
-                   
-                    <div class="col">
-                        <div class="card p-relative">  
+                    <article class="col">
+                        <div class="article">  
                         <a href="{{path('article_show', {'slug': article.slug})}}" class="stretched-link"></a>
-                            <div class="card-thumb"> 
+                            <div class="article-thumb"> 
                             {% if article.video %}
-                                <img class="card-img-top img-fluid" src="{{asset('/uploads/article/video/thumb/'~ article.video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
+                                <img class="img-fluid" src="{{asset('/uploads/article/video/thumb/'~ article.video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
                             {% elseif article.images %}
                                 {# TODO : repo ->selectionner la premiere image ajoutée dans l'article comme vignette#}
                                 <img class="card-img-top img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >     
@@ -25,25 +24,33 @@
                             {% endif %}
                                 <div class="author">
                                         <div class="author-avatar">
-                                            <img class="img-fluid " src="{{asset('/uploads/avatar/'~ article.author.avatar )}}" alt="Avatar de {{article.author}}">
+                                            {% if article.author.avatar %}
+                                                <img class="img-fluid " src="{{asset('/uploads/avatar/'~ article.author.avatar )}}" alt="Avatar de {{article.author}}">
+                                            {% else %}
+                                                <img class="img-fluid " src="{{asset('/img/avatarDefault.jpg')}}" alt="Avatar par défaut">
+                                            {% endif %}
                                         </div>
                                         <div class="author-nickname">
                                             <h4>{{article.author.nickname}}</h4>
                                         </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{article.title}}</h5>
-                                <p class="card-text">{{article.content|u.truncate(100, '...', false )}}</p>
+                            <div class="article-body">
+                                <div>
+                                    <h5>{{article.title}}</h5>
+                                    {% set articleContent = article.content|u.truncate(400, '...', false) %}
+                                    <p class="article-content">{{articleContent|raw}}</p>
+                                </div>
+                                <div class="article-footer text-muted">
+                                {{article.views}} <i class="fa-solid fa-eye"></i>
+                                • {{article.likes|length}} <i class="fa-regular fa-thumbs-up"></i>
+                                • {{article.comments|length}} <i class="fa-regular fa-comment"></i>
+                                • {{article.createdAt|date('d-m-Y')}}
+                                </div>
                             </div>
-                            <div class="card-footer text-muted">
-                            1 <i class="fa-solid fa-eye"></i>
-                            • 1 <i class="fa-regular fa-thumbs-up"></i>
-                            • 1 <i class="fa-regular fa-comment"></i>
-                            • {{article.createdAt|date('d-m-Y')}}
-                            </div>
+                            
                         </div>
-                    </div>
+                    </article>
                 {% endfor %}
             </div>
     
