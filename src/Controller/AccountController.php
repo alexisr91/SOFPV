@@ -6,11 +6,14 @@ use App\Entity\User;
 use App\Entity\Drone;
 use App\Entity\Article;
 use App\Form\DroneType;
+use App\Form\ArticleType;
 use App\Form\ProfileType;
 use App\Form\RegisterType;
 use App\Repository\VideoRepository;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -229,6 +232,81 @@ class AccountController extends AbstractController
 
         
     }
+
+    //Visualisation des articles de l'utilisateur connecté sur sa page profil
+    #[Route('/profile/articles', name:"account_articles")]
+    #[IsGranted("ROLE_USER")]
+    public function myArticles(ArticleRepository $articleRepository){
+
+        $user = $this->getUser();
+        //Récupération des articles de l'user connecté par date de publication la plus récente
+        $articles = $articleRepository->findBy(['author'=> $user], ['createdAt'=>'DESC']);
+    
+
+        return $this->render('account/article/index.html.twig', [
+            'title'=> 'Mes articles ',
+            'user'=>$user,
+            'articles'=>$articles
+            
+        ]);
+    }
+
+    //Edition d'un article
+    #[Route('/profile/articles/edit/{id}', name:"account_article_edit")]
+    #[IsGranted("ROLE_USER")]
+    public function editArticle(Article $article, EntityManagerInterface $manager, Request $request){
+        
+        $user = $this->getUser();
+        
+        if($user == $article->getAuthor()){
+            $form = $this->createForm(ArticleType::class, $article);
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()){
+
+                $manager->persist($article);
+                $manager->flush();
+
+                $this->addFlash("success", "Votre article a bien été modifié !");
+
+                return $this->redirectToRoute('account_articles');
+            }
+
+
+        } else {
+            return $this->redirectToRoute('home');
+        }
+
+        //TODO : modifier pour la fonctionnalité d'images 
+        return $this->render('account/article/edit.html.twig',[
+            'title'=> 'Edition de l\'article',
+            'article'=>$article,
+            'form'=>$form->createView()
+        ]);
+
+    }
+
+        //Suppression d'un article
+        #[Route('/profile/articles/delete/{id}', name:"account_article_delete")]
+        #[Security("is_granted('ROLE_USER') and user == article.getAuthor()", message:"Vous n'avez pas le droit d'accéder à cette page.")]
+        public function deleteArticle(Article $article, EntityManagerInterface $manager){
+            
+            $user = $this->getUser();
+            
+            if($user == $article->getAuthor()){
+    
+                    $manager->remove($article);
+                    $manager->flush();
+    
+                    $this->addFlash("success", "Votre article a bien été supprimé !");
+    
+                    return $this->redirectToRoute('account_articles');
+                } else {
+
+                return $this->redirectToRoute('home');
+            }
+    
+        }
 
     //Profil utilisateur public (vidéos de l'user, badge helper, drone favori et sa configuration)
     // #[Route('/profile/{nickname}', name:'account_profile')]

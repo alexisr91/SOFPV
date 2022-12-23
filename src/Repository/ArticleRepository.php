@@ -58,10 +58,13 @@ class ArticleRepository extends ServiceEntityRepository
         ->getResult();
     }
 
-    public function findArticlesByAuthor($id){
+    //Les 10 derniers articles du même auteur excluant l'article actuel (suggestions)
+    public function findOtherArticlesByAuthor($id, $article){
         return $this->createQueryBuilder('a')
         ->andWhere('a.author = :id')
         ->setParameter('id', $id)
+        ->andWhere('a.id != :article')
+        ->setParameter('article', $article->getId())
         ->orderBy('a.createdAt', 'DESC')
         ->setMaxResults(10)
         ->getQuery()

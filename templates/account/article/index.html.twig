@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="myArticles">
+    
+        {{include('partials/_navbarMenu.html.twig')}}
+
+        <div class="container-fluid">
+        <div class="sidebar">
+            {{include('partials/_sidebarMenuProfile.html.twig')}}
+        </div>
+            <div class="row row-cols-md-1 g-4 px-3 pt-4">
+                {% for article in articles %}
+                    <article class="col">
+                        <div class="article">  
+                            <div class="article-thumb"> 
+                            {% if article.video %}
+                                <img class="img-fluid" src="{{asset('/uploads/article/video/thumb/'~ article.video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
+                            {% elseif article.images %}
+                                {# TODO : repo ->selectionner la premiere image ajoutée dans l'article comme vignette#}
+                                <img class="card-img-top img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >     
+                            {% else %}
+                                <img class="card-img-top img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+                            {% endif %}
+                            </div>
+                            <div class="article-body">
+                                <div>
+                                    <h5>{{article.title}}</h5>
+                                    {# Pour afficher une partie du contenu et utiliser les 2 filtres de twig pour tronquer + afficher avec les sauts de ligne #}
+                                    {% set articleContent = article.content|u.truncate(500, '...', false) %}
+                                    <p class="article-content">{{articleContent|raw}}</p>
+                                </div>
+                                <div class="article-footer">
+                                    <div class="stats">
+                                        <div class="views row">
+                                            <div class="col">
+                                                {{article.views}}
+                                            </div>
+                                           <div class="col icon">
+                                                <i class="fa-solid fa-eye"></i>
+                                           </div>
+                                        </div>
+                                        <div class="likes row">
+                                            <div class="col">
+                                                {{article.likes|length}}
+                                            </div>
+                                            <div class="col icon">
+                                                <i class="fa-regular fa-thumbs-up"></i>
+                                            </div>
+                                        </div>
+                                        <div class="comments row">
+                                            <div class="col">
+                                                {{article.comments|length}}
+                                            </div>
+                                            <div class="col icon">
+                                                <i class="fa-regular fa-comment"></i>
+                                            </div>
+                                        </div>
+                                        <div class="date">
+                                            {{article.createdAt|date('d-m-Y H:i')}}
+                                        </div>
+                                        
+                                    </div>
+                                  
+
+                                    <div class="settings">
+                                        <a href="{{path('article_show', {'slug': article.slug })}}" class="btn btn-dark" target="_blank"><i class="fa-solid fa-eye"></i> Voir l'article</a>
+                                        <a href="{{path('account_article_edit', {'id': article.id })}}" class="btn btn-warning"><i class="fa-solid fa-file-pen"></i></a>
+                                        <a href="{{path('account_article_delete', {'id':article.id })}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+    
+    </section>
+{% endblock %}
+

@@ -9,7 +9,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -29,12 +28,11 @@ class ArticleType extends AbstractType
             ->add('video', VideoType::class, ['required'=>false])
             ->add('images', CollectionType::class, [
                 'entry_type'=>ImageType::class,
-                'entry_options'=>['label'=>false],
-                'by_reference'=>false,
                 'allow_add'=>true,
                 'allow_delete'=>true,
                 'label'=>false,
                 'prototype'=>true,
+                'by_reference'=>false,
                 'required'=>false
             ]);
       
@@ -47,7 +45,8 @@ class ArticleType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Article::class,
             'allow_extra_fields'=>true,
-            'allow_file_upload'=>true
+            'allow_file_upload'=>true,
+            'sanitize_html' => true,
         ]);
     }
 }
