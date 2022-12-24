@@ -52,7 +52,7 @@
                                 <h5 class="card-title">{{article.title}}</h5>
                                 {% set articleContent = article.content|u.truncate(120, '...', false) %}
                                 <p class="card-text">{{articleContent|raw}}</p>
-                                
+                                <a href="{{path('article_show', {'slug': article.slug})}}" class="stretched-link"></a>
                             </div>
                             <div class="card-footer text-muted">{{article.views}} <i class="fa-regular fa-eye"></i> •{{article.likes|length}} <i class="fa-regular fa-thumbs-up"></i> • {{article.comments|length}} <i class="fa-regular fa-comment"></i> • {{article.createdAt|date('d-m-Y')}}</div>
                         </div>

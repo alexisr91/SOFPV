@@ -67,11 +67,11 @@ class Article
         $this->comments = new ArrayCollection();
     }
 
-    //creation et update du slug à partir du titre de la video (avant la persistance)
+    //creation du slug et update si le titre est modifié par l'auteur
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
     public function initSlug(){
-        if(empty($this->slug)){
+        if(empty($this->slug || $this->slug != $this->title)){
             $slugger = new Slugify();
             $this->slug = $slugger->slugify($this->title);
         }
