@@ -71,7 +71,7 @@ class Article
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
     public function initSlug(){
-        if(empty($this->slug || $this->slug != $this->title)){
+        if(empty($this->slug) || $this->slug != $this->title){
             $slugger = new Slugify();
             $this->slug = $slugger->slugify($this->title);
         }
