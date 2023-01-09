@@ -71,6 +71,20 @@ class ArticleRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    //STATS : TO DO => à mettre dans un service
+    // compte les nombre d'article par auteur
+
+    public function countMyArticles($user){
+        return $this->createQueryBuilder('a')
+        ->select('count(a)')
+        ->andWhere('a.author = :user')
+        ->setParameter('user', $user)
+        ->orderBy('a.createdAt', 'DESC')
+        ->getQuery()
+        ->getSingleScalarResult();
+    }
+
+
 
     
 //    /**

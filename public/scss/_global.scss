@@ -83,4 +83,35 @@ input {
     }
 }
 
+.category-badge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    padding: 0.5em 1em;
+
+    &.session{
+        background-color: $accent;
+    }
+    &.crash{
+        background-color: #FF5A08;
+    }
+    &.question{
+        background-color: #540493;
+    }
+    &.review{
+        background-color:#015E6C;
+    }
+    &.inclassable{
+        background-color: $base;
+    }
+    &.build{
+        background-color: $grey;
+        color:$base;
+    }
+}
+
+
     

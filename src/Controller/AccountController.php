@@ -78,16 +78,17 @@ class AccountController extends AbstractController
     //Profil personnel de l'utilisateur (modifications paramètres user, vue globale de son profil)
     #[Route('/profile', name:'account_myprofile')]
     #[IsGranted("ROLE_USER")]
-    public function myProfile(VideoRepository $repo)
+    public function myProfile(ArticleRepository $articleRepo)
     {
         $user = $this->getUser();
+        $articleCount = $articleRepo->countMyArticles($user); 
         
-        // $videos = $user->getVideos();
        
         return $this->render('account/myprofile.html.twig', [
             'title' => 'Mon compte ',
             'user' => $user,
-            // 'videos'=>$videos
+            'articleCount'=>$articleCount
+           
         ]);
     }
 
@@ -264,6 +265,11 @@ class AccountController extends AbstractController
 
             if($form->isSubmitted() && $form->isValid()){
 
+                //On garde la mise en place des sauts de ligne avec nl2br()
+                $articleContent = nl2br($article->getContent());
+                //On set le contenu modifié avec nl2br avant le persist et l'envoi en bdd
+                $article->setContent($articleContent);
+                
                 $manager->persist($article);
                 $manager->flush();
 

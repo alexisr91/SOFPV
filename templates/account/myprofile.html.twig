@@ -95,7 +95,7 @@
                                         <div class="card-header">Articles</div>
                                             <div class="card-body text-center">
                                                 <h5 class="card-title"><i class="fa-solid fa-photo-film fa-2x"></i></h5>
-                                                <h5>1</h5>
+                                                <h5>{{articleCount}}</h5>
                                             </div>
                                     </div>
                                 </div>
@@ -131,18 +131,18 @@
                            
                         </div>
                         {# bloc counter #}  
-                        <div class="row counter mt-4">
-                            <div class="col-md-4">
-                                LIPO HS<br>
-                                <button class="btn btn-dark"><i class="fa-solid fa-plus"></i> <b>1</b></button>
+                        <div class="row counters mt-4">
+                            <div class="col-md-4 counter">
+                                <img src="{{asset('/img/battery.png')}}" alt="icone représentant une lipo">
+                                <button class="btn btn-dark btn-lg" type="button" id="lipoCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></button>
                             </div>
-                            <div class="col-md-4">
-                                ESC BURNED<br>
-                                <button class="btn btn-dark"><i class="fa-solid fa-plus"></i> <b>1</b></button>
+                            <div class="col-md-4 counter">
+                                <img src="{{asset('/img/circuit-board.png')}}" alt="icone représentant un ESC">
+                                <button class="btn btn-dark btn-lg" type="button" id="escCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></button>
                             </div>
-                            <div class="col-md-4">
-                                FRAME HS<br>
-                                <button class="btn btn-dark"><i class="fa-solid fa-plus"></i> <b>1</b></button>
+                            <div class="col-md-4 counter">
+                                <img src="{{asset('/img/broken.png')}}" alt="icone représentant une frame brisée">
+                                <button class="btn btn-dark btn-lg" type="button" id="frameCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></button>
                             </div>
                         </div>
                         {# fin du counter #}
@@ -155,3 +155,4 @@
         
     </section>
 {% endblock %}
+
