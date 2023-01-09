@@ -13,7 +13,10 @@
                     <article class="col">
                         <div class="article">  
                         <a href="{{path('article_show', {'slug': article.slug})}}" class="stretched-link"></a>
-                            <div class="article-thumb"> 
+                            <div class="article-thumb">
+                             <div class="category-badge badge {{article.category}}">
+                                    {{article.category|capitalize}}
+                                </div> 
                             {% if article.video %}
                                 <img class="img-fluid" src="{{asset('/uploads/article/video/thumb/'~ article.video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
                             {% elseif article.images %}
@@ -42,10 +45,14 @@
                                     <p class="article-content">{{articleContent|raw}}</p>
                                 </div>
                                 <div class="article-footer text-muted">
-                                {{article.views}} <i class="fa-solid fa-eye"></i>
-                                • {{article.likes|length}} <i class="fa-regular fa-thumbs-up"></i>
-                                • {{article.comments|length}} <i class="fa-regular fa-comment"></i>
-                                • {{article.createdAt|date('d-m-Y')}}
+                                    <div>
+                                        {{article.views}} <i class="fa-solid fa-eye"></i>
+                                        • {{article.likes|length}} <i class="fa-regular fa-thumbs-up"></i>
+                                        • {{article.comments|length}} <i class="fa-regular fa-comment"></i>
+                                    </div>
+                                
+                                    <div>{{article.createdAt|date('d-m-Y')}}</div>
+                                
                                 </div>
                             </div>
                             

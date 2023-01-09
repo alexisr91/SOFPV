@@ -21,6 +21,10 @@ class ArticleType extends AbstractType
                 'label'=>'Titre de l\'article',
                 'required'=>true
             ])
+            ->add('category', CategoryType::class, [
+                'label'=>'Catégorie',
+                'required'=>true
+            ])
             ->add('content', TextareaType::class, [
                 'label'=> 'Contenu de l\'article',
                 'attr'=> ['placeholder'=>'Ajoutez un texte à votre article', 'rows'=>7, 'cols'=>7 ]
@@ -33,10 +37,10 @@ class ArticleType extends AbstractType
                 'label'=>false,
                 'prototype'=>true,
                 'by_reference'=>false,
-                'required'=>false
-            ]);
-      
-        
+                'required'=>false,
+                'mapped'=>false
+            ])
+            ;
     }    
     
 

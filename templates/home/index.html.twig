@@ -27,6 +27,10 @@
                     <div class="col">
                         <div class="card h-100">
                             <div class="card-thumb">
+                            {# utilisation du nom de catégorie comme classe pour personnaliser le badge#}
+                                <div class="category-badge badge {{article.category}}">
+                                    {{article.category|capitalize}}
+                                </div>
                             {% if article.video %}
                                  <img class="card-img-top img-fluid" src="{{asset('/uploads/article/video/thumb/'~ article.video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
                             {% elseif article.images %}
@@ -54,7 +58,12 @@
                                 <p class="card-text">{{articleContent|raw}}</p>
                                 <a href="{{path('article_show', {'slug': article.slug})}}" class="stretched-link"></a>
                             </div>
-                            <div class="card-footer text-muted">{{article.views}} <i class="fa-regular fa-eye"></i> •{{article.likes|length}} <i class="fa-regular fa-thumbs-up"></i> • {{article.comments|length}} <i class="fa-regular fa-comment"></i> • {{article.createdAt|date('d-m-Y')}}</div>
+                            <div class="card-footer article-footer text-muted justify-content-between">
+                                <div>
+                                    {{article.views}} <i class="fa-regular fa-eye"></i> • {{article.likes|length}} <i class="fa-regular fa-thumbs-up"></i> • {{article.comments|length}} <i class="fa-regular fa-comment"></i> 
+                                </div>
+                                <div> {{article.createdAt|date('d-m-Y')}}</div>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}

@@ -53,10 +53,13 @@ class Article
     private ?int $views = null;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Likes::class, orphanRemoval: true)]
-    private Collection $likes;
+    private ?Collection $likes = null;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
-    private Collection $comments;
+    private ?Collection $comments = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles', cascade:['persist'])]
+    private ?Category $category = null;
 
     public function __construct()
     {
@@ -251,6 +254,18 @@ class Article
                 $comment->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

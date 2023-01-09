@@ -161,9 +161,26 @@ section#myProfile {
     }
     .dashboard {
         min-height: 90%;
+        position: relative;
     }
 
-   
+    .counters {
+        position: absolute;
+        width: 100%;
+        bottom:0;
+        margin-bottom: 2em;
+        .counter{
+            text-align: center;
+            margin: 0;
+            img {
+            height:4em;
+            margin: 0 1em;
+        }
+
+        }
+        
+    }
+    
 
     .my-drone {
         position: relative;
@@ -366,7 +383,7 @@ section#showArticle {
             margin: 1em auto;
             padding: 1em;
             border-radius: 3px;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
             .commentAuthor{
                 color:$base;
                 font-weight: bold;
@@ -476,7 +493,7 @@ section#addArticle {
     }
 
 }
-
+// SECTION BLOG - INDEX
 section#blog {
     background-image: url('/img/Bando.jpg');
 }
@@ -497,6 +514,11 @@ section#blog, section#myArticles {
     }
     .article-thumb {
         max-width: 30%;
+        display: flex;
+        align-items: center;
+        background-color: rgba($grey,0.4);
+        position: relative;
+
     }
     .article {
         display: flex;
@@ -508,6 +530,14 @@ section#blog, section#myArticles {
         flex-direction: column;
         justify-content: space-between;
         padding: 1em;
+    }
+    .article-content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 7; 
+                line-clamp: 7;
+        -webkit-box-orient: vertical;
     }
 }
 

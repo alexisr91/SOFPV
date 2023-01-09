@@ -22,7 +22,8 @@
                     <h5><i class="fa-solid fa-pen"></i> Contenu de l'article</h5>
                     {{form_start(form)}}
                         {{form_row(form.title)}}
-                        {{form_row(form.content)}}   
+                        {{form_row(form.category)}}   
+                        {{form_row(form.content)}}
                 </div>
                
                 <div class="col-md-6 col-sm-12">
@@ -42,7 +43,6 @@
                     {% endfor %}
                     </div> 
                     
-                   
                 </div> 
                     <div>
                         <a href="{{path('account_articles')}}" class="btn btn-dark btn-lg"><i class="fa-solid fa-chevron-left"></i> Retour</a>

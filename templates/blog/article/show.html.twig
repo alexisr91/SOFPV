@@ -105,7 +105,7 @@
                     
                 </div>
                 <div class="col-md-4">
-                {# articles du même auteur : TODO boucle pour les articles #}
+                {# articles du même auteur #}
                     <div class="row g-4" id="wrapSameAuthorArticle">
                     {% if articles|length > 0 %}
                         {% for article in articles %}
@@ -118,7 +118,8 @@
                                         {% endif %}
                                         <div class="card-body">
                                             <h5 class="card-title">{{article.title}}</h5>
-                                            <p class="card-text">{{article.content|u.truncate(60, '...')}}</p>
+                                            {% set articleContent = article.content|u.truncate(90, '...', false) %}
+                                            <p class="card-text">{{articleContent|raw}}</p>
                                             <a href="{{path('article_show', {'slug':article.slug})}}" class="stretched-link"></a>
                                         </div>
                                     </div>
@@ -126,7 +127,6 @@
                         {% endfor %}
                     {% else %}
                         <div class="alert alert-warning text-center">{{article.author.nickname}} n'a pas encore posté de contenu supplémentaire.</div>
-
                     {% endif %}
                     </div>
                 </div>

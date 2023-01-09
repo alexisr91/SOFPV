@@ -83,6 +83,28 @@ input {
     object-fit: cover;
     object-position: center; }
 
+.category-badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  padding: 0.5em 1em; }
+  .category-badge.session {
+    background-color: #B30B00; }
+  .category-badge.crash {
+    background-color: #FF5A08; }
+  .category-badge.question {
+    background-color: #540493; }
+  .category-badge.review {
+    background-color: #015E6C; }
+  .category-badge.inclassable {
+    background-color: #252525; }
+  .category-badge.build {
+    background-color: #DADADA;
+    color: #252525; }
+
 /* NAV MENU */
 section#navbarMenu {
   background-color: #252525;
@@ -162,20 +184,25 @@ section#blog, section#blogHome {
   section#blog .author, section#blogHome .author {
     display: flex;
     align-items: center;
-    border-radius: 3px;
+    border-radius: 2px;
     background-color: rgba(250, 250, 250, 0.5);
     position: absolute;
-    bottom: 0; }
+    bottom: 0;
+    height: 3em;
+    padding-right: 1em; }
     section#blog .author .author-avatar, section#blogHome .author .author-avatar {
-      max-height: 70px;
-      max-width: 70px; }
+      width: 100%;
+      height: 100%; }
       section#blog .author .author-avatar img, section#blogHome .author .author-avatar img {
         background-color: #fafafa;
         width: 100%;
         height: 100%; }
     section#blog .author .author-nickname, section#blogHome .author .author-nickname {
-      padding: 0 1em;
-      font-size: 1.5em; }
+      padding: 0 1em; }
+      section#blog .author .author-nickname h4, section#blogHome .author .author-nickname h4 {
+        margin: 0; }
+  section#blog .article-footer, section#blogHome .article-footer {
+    display: flex; }
 
 section#blogHome hr {
   margin: 0; }
@@ -424,7 +451,19 @@ section#myProfile {
     section#myProfile .personnal-info a:hover {
       border: none; }
   section#myProfile .dashboard {
-    min-height: 90%; }
+    min-height: 90%;
+    position: relative; }
+  section#myProfile .counters {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    margin-bottom: 2em; }
+    section#myProfile .counters .counter {
+      text-align: center;
+      margin: 0; }
+      section#myProfile .counters .counter img {
+        height: 4em;
+        margin: 0 1em; }
   section#myProfile .my-drone {
     position: relative; }
     section#myProfile .my-drone .fav {
@@ -575,7 +614,7 @@ section#showArticle .commentWrap {
   margin: 1em auto;
   padding: 1em;
   border-radius: 3px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; }
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px; }
   section#showArticle .commentWrap .commentAuthor {
     color: #252525;
     font-weight: bold;
@@ -663,7 +702,11 @@ section#blog, section#myArticles {
     width: 70%;
     padding-bottom: 1em; }
   section#blog .article-thumb, section#myArticles .article-thumb {
-    max-width: 30%; }
+    max-width: 30%;
+    display: flex;
+    align-items: center;
+    background-color: rgba(218, 218, 218, 0.4);
+    position: relative; }
   section#blog .article, section#myArticles .article {
     display: flex;
     position: relative; }
@@ -672,6 +715,13 @@ section#blog, section#myArticles {
     flex-direction: column;
     justify-content: space-between;
     padding: 1em; }
+  section#blog .article-content, section#myArticles .article-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    line-clamp: 7;
+    -webkit-box-orient: vertical; }
 
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu {
