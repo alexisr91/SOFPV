@@ -723,6 +723,97 @@ section#blog, section#myArticles {
     line-clamp: 7;
     -webkit-box-orient: vertical; }
 
+section#profile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #252525; }
+  section#profile .wrap {
+    margin-top: 0.5em;
+    height: 100%;
+    background-color: #252525;
+    min-height: 90vh;
+    width: 100vw; }
+  section#profile .my-drone {
+    background-color: #fafafa;
+    margin: 0 2em 2em 2em;
+    padding: 2em;
+    border-radius: 3px; }
+  section#profile .user-content {
+    position: relative;
+    background-color: #fafafa;
+    margin-right: 2em;
+    padding: 2em 1em;
+    border-radius: 3px; }
+  section#profile .my-drone {
+    position: relative; }
+    section#profile .my-drone .fav {
+      float: right;
+      max-width: 125px;
+      max-height: 125px;
+      object-fit: cover;
+      object-position: center;
+      overflow: hidden; }
+    section#profile .my-drone a {
+      background-color: #DADADA;
+      padding: 0.5 1em;
+      border-radius: 3px;
+      position: absolute;
+      top: 2em;
+      right: 3em; }
+  section#profile .container-fluid {
+    display: grid;
+    grid-template-columns: 10% minmax(500px, 85%);
+    background-color: #252525; }
+  section#profile #profile-avatar, section#profile .show-article-avatar {
+    max-height: 125px;
+    max-width: 125px; }
+    section#profile #profile-avatar img, section#profile .show-article-avatar img {
+      background-color: #fafafa;
+      width: 100%;
+      height: 100%; }
+  section#profile .user {
+    background-color: #fafafa;
+    margin: 0 2em 2em 2em;
+    border-radius: 3px;
+    display: flex;
+    align-items: center; }
+    section#profile .user h2 {
+      margin: 0.5% 2%;
+      font-size: 2.5em; }
+  section#profile .sessions {
+    background-color: #fafafa;
+    margin: 0 2em 2em 2em;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 10em; }
+    section#profile .sessions span {
+      margin: 0 1em;
+      width: 100%; }
+  section#profile .article-thumb {
+    max-width: 30%;
+    display: flex;
+    align-items: center;
+    background-color: rgba(218, 218, 218, 0.4);
+    position: relative; }
+  section#profile .article {
+    display: flex;
+    position: relative; }
+  section#profile .article-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em; }
+  section#profile .article-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    line-clamp: 7;
+    -webkit-box-orient: vertical; }
+
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu {
   height: 100%;

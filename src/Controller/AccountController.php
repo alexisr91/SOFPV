@@ -234,6 +234,8 @@ class AccountController extends AbstractController
         
     }
 
+    //GESTION DES ARTICLES PROPRES A L'UTILISATEUR
+
     //Visualisation des articles de l'utilisateur connecté sur sa page profil
     #[Route('/profile/articles', name:"account_articles")]
     #[IsGranted("ROLE_USER")]
@@ -285,7 +287,7 @@ class AccountController extends AbstractController
 
         //TODO : modifier pour la fonctionnalité d'images 
         return $this->render('account/article/edit.html.twig',[
-            'title'=> 'Edition de l\'article',
+            'title'=> 'Edition de l\'article ',
             'article'=>$article,
             'form'=>$form->createView()
         ]);
@@ -314,11 +316,20 @@ class AccountController extends AbstractController
     
         }
 
-    //Profil utilisateur public (vidéos de l'user, badge helper, drone favori et sa configuration)
-    // #[Route('/profile/{nickname}', name:'account_profile')]
-    // public function profile()
-    // {
+    //Profil utilisateur public (articles de l'user, badge , drone favori, sessions de l'user)
+    #[Route('/profile/{nickname}', name:'account_profile')]
+     public function profile(User $user, ArticleRepository $articleRepo)
+    {
+        $nickname = $user->getNickname();
+        $articles = $articleRepo->findBy(['author'=>$user],['createdAt'=>'DESC']);
+        $drone = $user->getDrone();
 
-    // }
+        return $this->render('/account/publicProfile.html.twig', [
+            'title'=> 'Profil de '.$nickname.' ',
+            'user'=>$user,
+            'articles'=>$articles,
+            'drone'=>$drone
+        ]);
+    }
 
 }
