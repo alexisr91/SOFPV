@@ -9,7 +9,8 @@
         <div class="container-fluid pt-4">
              {# TODO: boucle pour les articles de la bdd  + implementation de PLYR #}
             <div class="row row-cols-md-1 g-4 px-3">
-                {% for article in articles %}
+            {% for article in pagination.data %} 
+               
                     <article class="col">
                         <div class="article">  
                         <a href="{{path('article_show', {'slug': article.slug})}}" class="stretched-link"></a>
@@ -45,7 +46,7 @@
                                     <p class="article-content">{{articleContent|raw}}</p>
                                 </div>
                                 <div class="article-footer text-muted">
-                                    <div>
+                                    <div class="me-2">
                                         {{article.views}} <i class="fa-solid fa-eye"></i>
                                         • {{article.likes|length}} <i class="fa-regular fa-thumbs-up"></i>
                                         • {{article.comments|length}} <i class="fa-regular fa-comment"></i>
@@ -59,6 +60,8 @@
                         </div>
                     </article>
                 {% endfor %}
+
+                {{pagination.display()}}
             </div>
     
     </section>

@@ -10,8 +10,8 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\ArticleType;
 use App\Form\CommentType;
+use App\Service\Pagination;
 use FFMpeg\Format\Video\X264;
-use Doctrine\ORM\EntityManager;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Coordinate\Dimension;
 use App\Repository\LikesRepository;
@@ -21,7 +21,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -32,14 +31,21 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class BlogController extends AbstractController
 {
     //page principale du blog (liste des articles)
-    #[Route('/blog', name: 'blog')]
-    public function index(ArticleRepository $articleRepo)
+    #[Route('/blog/{page<\d+>?1}', name: 'blog')]
+    public function index(Pagination $paginationService, $page)
     {
-        $articles = $articleRepo->findAllArticlesByDate();
+        // $articles = $articleRepo->findAllArticlesByDate();
+
+        $paginationService->setEntityClass(Article::class)
+                        ->setPage($page)
+                        ->setLimit(10)
+                        ->setOrder('DESC')
+                        
+        ;
 
         return $this->render('blog/index.html.twig', [
            'title'=>'Blog',
-           'articles'=>$articles
+           'pagination'=>$paginationService
         ]);
     }
     

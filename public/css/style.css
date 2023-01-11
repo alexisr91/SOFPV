@@ -53,6 +53,15 @@ hr {
 ul {
   list-style-type: none; }
 
+.page-item.active .page-link {
+  color: #fafafa !important;
+  background-color: #252525 !important;
+  border-color: #252525 !important; }
+
+.page-link {
+  color: #252525 !important;
+  background-color: #fafafa !important; }
+
 .text-muted {
   font-size: smaller; }
 
@@ -627,7 +636,8 @@ section#myArticles {
   background-image: url("/img/forestView.jpg");
   min-height: 90vh; }
   section#myArticles .container-fluid {
-    display: flex; }
+    display: flex;
+    min-height: 90vh; }
     section#myArticles .container-fluid .sidebar {
       width: 10%; }
     section#myArticles .container-fluid .article-body {

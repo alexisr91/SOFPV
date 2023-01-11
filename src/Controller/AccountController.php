@@ -9,6 +9,7 @@ use App\Form\DroneType;
 use App\Form\ArticleType;
 use App\Form\ProfileType;
 use App\Form\RegisterType;
+use App\Service\Pagination;
 use App\Repository\VideoRepository;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -237,19 +238,26 @@ class AccountController extends AbstractController
     //GESTION DES ARTICLES PROPRES A L'UTILISATEUR
 
     //Visualisation des articles de l'utilisateur connecté sur sa page profil
-    #[Route('/profile/articles', name:"account_articles")]
+    #[Route('/profile/articles/{page<\d+>?1}', name:"account_articles")]
     #[IsGranted("ROLE_USER")]
-    public function myArticles(ArticleRepository $articleRepository){
+    public function myArticles(Pagination $paginationService, $page){
 
         $user = $this->getUser();
         //Récupération des articles de l'user connecté par date de publication la plus récente
-        $articles = $articleRepository->findBy(['author'=> $user], ['createdAt'=>'DESC']);
+        // $articles = $articleRepository->findBy(['author'=> $user], ['createdAt'=>'DESC']);
+        $paginationService->setEntityClass(Article::class)
+                         ->setPage($page)
+                         ->setLimit(5)
+                         ->setOrder('DESC')
+                         ->setProperty('author')
+                         ->setValue($user)
+                        ;
     
 
         return $this->render('account/article/index.html.twig', [
             'title'=> 'Mes articles ',
             'user'=>$user,
-            'articles'=>$articles
+            'pagination'=>$paginationService
             
         ]);
     }
