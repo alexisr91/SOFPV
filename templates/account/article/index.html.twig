@@ -13,7 +13,7 @@
             {{include('partials/_sidebarMenuProfile.html.twig')}}
         </div>
             <div class="row row-cols-md-1 g-4 px-3 pt-4">
-                {% for article in articles %}
+                {% for article in pagination.data %}
                     <article class="col">
                         <div class="article">  
                             <div class="article-thumb">
@@ -80,6 +80,7 @@
                         </div>
                     </article>
                 {% endfor %}
+                {{pagination.display()}}
             </div>
     
     </section>

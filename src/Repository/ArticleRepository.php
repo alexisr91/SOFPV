@@ -49,14 +49,13 @@ class ArticleRepository extends ServiceEntityRepository
        ;
     }
     //Tous les articles triés par date ( derniers publiés en premier )
-    //TODO : mettre une pagination en place
-    public function findAllArticlesByDate(){
-        return $this->createQueryBuilder('a')
-        ->orderBy('a.createdAt', 'DESC')
-        ->setMaxResults(30)
-        ->getQuery()
-        ->getResult();
-    }
+    // public function findAllArticlesByDate(){
+    //     return $this->createQueryBuilder('a')
+    //     ->orderBy('a.createdAt', 'DESC')
+    //     ->setMaxResults(30)
+    //     ->getQuery()
+    //     ->getResult();
+    // }
 
     //Les 10 derniers articles du même auteur excluant l'article actuel (suggestions)
     public function findOtherArticlesByAuthor($id, $article){
