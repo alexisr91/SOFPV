@@ -541,7 +541,133 @@ section#blog, section#myArticles {
     }
 }
 
+//profil public 
 
+section#profile {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    background-color: $base; 
+        
+    .wrap {
+        margin-top: 0.5em;
+        height:100%;
+        background-color: $base;
+        min-height: 90vh;
+        width: 100vw;
+        }
+
+
+    .my-drone{
+        background-color:$white;
+        margin:0 2em 2em 2em;
+        padding: 2em;
+        border-radius: 3px;
+    }
+    
+    .user-content {
+        position: relative;
+        background-color: $white;
+        margin-right: 2em;
+        padding: 2em 1em;
+        border-radius: 3px;
+    }
+
+
+    .my-drone {
+        position: relative;
+        .fav {
+            float:right;
+            max-width: 125px;
+            max-height: 125px;
+            object-fit: cover;
+            object-position: center;
+            overflow: hidden;
+            }
+        a {
+            background-color: $grey;
+            padding:0.5 1em;
+            border-radius: 3px;
+            position: absolute;
+            top:2em;
+            right: 3em;
+        }
+    }
+   
+    
+    .container-fluid {
+        display: grid;
+        grid-template-columns: 10% minmax(500px, 85%);
+        background-color: $base;
+    }
+
+    #profile-avatar, .show-article-avatar {
+        max-height:125px;
+        max-width:125px;
+        img{
+            background-color:$white;
+            width: 100%;
+            height: 100%;
+        }
+    } 
+    .user{
+        background-color:$white;
+        margin:0 2em 2em 2em;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+    
+        h2 {
+        margin: 0.5% 2% ;
+        font-size: 2.5em;
+        }
+    }
+
+    .sessions {
+        background-color:$white;
+        margin:0 2em 2em 2em;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 10em;
+
+        span {
+            margin: 0 1em;
+            width: 100%;
+        }
+    }
+
+    .article-thumb {
+        max-width: 30%;
+        display: flex;
+        align-items: center;
+        background-color: rgba($grey,0.4);
+        position: relative;
+
+    }
+    .article {
+        display: flex;
+        position: relative;
+    }
+
+    .article-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1em;
+    }
+    .article-content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 7; 
+                line-clamp: 7;
+        -webkit-box-orient: vertical;
+    }
+
+
+}
 
 
 @import "sideMenuProfile";

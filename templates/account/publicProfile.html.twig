@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="profile" class="bg-dark">
+        {{include('partials/_navbarMenu.html.twig')}}
+    
+        <div class="container-fluid ">
+
+        <div class="wrap">   
+        {# banner #} 
+                <div class="banner">
+                {% if user.banner is not null %}       
+                    <img src="{{asset('/uploads/banner/'~ user.banner)}}" alt="banniere"/>       
+                {% else %}  
+                    <img src="{{asset('/img/NazgulFrame.jpg')}}" alt="banniere"/> 
+                {% endif %}
+                </div>
+               <div class="row">
+
+                {# partie infos de l'user #}
+                <div class="col-3">
+                    <div class="user">
+                        <div id="profile-avatar">
+                            {% if user.avatar is not null %}
+                                <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar" class="img-fluid"/>
+                            {% else %}
+                                <img src="{{asset('/img/avatar-1.png')}}" alt="avatar" class="img-fluid"/>
+                            {% endif %}            
+                        </div>
+                        <h2>{{user.nickname}}</h2> 
+                    </div>
+                    <div class="my-drone">      
+                        <h3>Config</h3>
+                    <hr/>
+                        {% if user.drone is null %}
+                        <div class="alert alert-warning">Pas encore de configuration renseignée.</div>
+                        {% else %}
+                        <div class="fav">       
+                                {% if user.drone.image is not null %}
+                                        <img src="{{asset('/uploads/drone/'~ user.drone.image)}}" alt="drone" class="img-fluid"/>
+                                {% else %}
+                                        <img src="{{asset('/img/drone.png')}}" alt="drone par défaut" class="img-fluid"/> 
+                                {% endif %}             
+                        </div>
+                        <div>
+                            <b>Frame: </b>{{user.drone.frame}}<br>
+                            <b>Moteurs: </b>{{user.drone.motors}}<br>
+                            <b>FC: </b>{{user.drone.fc}}<br>
+                            <b>ESC: </b>{{user.drone.esc}}<br>
+                            <b>CAM: </b>{{user.drone.cam}}<br>
+                            <b>Réception: </b>{{user.drone.reception}}<br>
+                            <b>Type de lipo: </b>{{user.drone.lipoCells}}S
+                        </div>
+                    
+                        {% endif %}
+                        </div>
+                        {# TODO: mettre les prochaines sessions de l'user + lien pour rejoindre la session #}
+                        <div class="sessions">
+                            <span class="alert alert-warning">Pas de sessions prévues</span>
+                        </div>
+                    </div>
+
+                {# partie contenu de l'user #}
+                <div class="col">
+                    <div class="user-content">
+                        {% if articles is not null %}
+                        <div class="row row-cols-md-1 g-4 px-3">
+                            {% for article in articles %}
+                            <article class="col">
+                            <div class="article">  
+                            <a href="{{path('article_show', {'slug': article.slug})}}" class="stretched-link"></a>
+                                <div class="article-thumb">
+                                <div class="category-badge badge {{article.category}}">
+                                        {{article.category|capitalize}}
+                                    </div> 
+                                {% if article.video %}
+                                    <img class="img-fluid" src="{{asset('/uploads/article/video/thumb/'~ article.video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
+                                {% elseif article.images %}
+                                    {# TODO : repo ->selectionner la premiere image ajoutée dans l'article comme vignette#}
+                                    <img class="card-img-top img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >     
+                                {% else %}
+                                    <img class="card-img-top img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+                                {% endif %}
+                                   
+                                </div>
+                                <div class="article-body">
+                                    <div>
+                                        <h5>{{article.title}}</h5>
+                                        {% set articleContent = article.content|u.truncate(400, '...', false) %}
+                                        <p class="article-content">{{articleContent|raw}}</p>
+                                    </div>
+                                    <div class="article-footer text-muted">
+                                        <div>
+                                            {{article.views}} <i class="fa-solid fa-eye"></i>
+                                            • {{article.likes|length}} <i class="fa-regular fa-thumbs-up"></i>
+                                            • {{article.comments|length}} <i class="fa-regular fa-comment"></i>
+                                        </div>
+                                    
+                                        <div>{{article.createdAt|date('d-m-Y')}}</div>
+                                    
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </article>
+                            {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+         
+                </div>
+
+                
+        
+    </section>
+{% endblock %}
+
