@@ -14,9 +14,7 @@ class Pagination {
     private $currentPage = 1;
     private $manager;
 
-    //permet de selectionner l'ordre de tri par date ( DESC ou ASC )
     private $order;
-    //permet de selectionner la propriété recherchée par le findBy si il y a besoin
     private $property;
     private $value;
 
@@ -49,7 +47,8 @@ class Pagination {
     }
 
 
-    //  pagination à partir de n'importe quelle entité => création d'un getter et setter
+    //pagination à partir de n'importe quelle entité 
+    // setter et getter pour chaqeu "option" du findby
     public function setEntityClass($entityClass){
         $this->entityClass = $entityClass;
         return $this;
@@ -60,7 +59,6 @@ class Pagination {
     }
 
     // Limite des pages
-
     public function getLimit(){
         return $this->limit;
     }
@@ -71,7 +69,6 @@ class Pagination {
     }
 
     // Page actuelle
-
     public function getPage(){
         return $this->currentPage;
     }
@@ -107,7 +104,7 @@ class Pagination {
     }
     
 
-    //si la propriété ou la valeur est nulle, on retourne false
+    //Est ce qu'on a indiqué une propriété et une valeur pour le critère du findBy ?
     private function isThereAProperty(){
         if($this->property == null || $this->value == null){
             return false;
