@@ -7,10 +7,10 @@
     <section id="addArticle">
         {{include('partials/_navbarMenu.html.twig')}}
       
-
         <div class="container-fluid wrapper">   
             {{include('partials/_sidebarMenuProfile.html.twig')}}
             <div class="row">
+            <h2>Publier un article</h2>
                 <div class="col-md-6 col-sm-12">
                     <h5><i class="fa-solid fa-pen"></i> Contenu de l'article</h5>
                     {{form_start(form)}}
@@ -45,7 +45,7 @@
                     
                 </div>
                     <div>
-                        <button type="submit" class="btn btn-dark">Publier</button>
+                        <button type="submit" class="btn btn-dark btn-lg">Publier</button>
                     </div>
                     {{form_end(form)}}
             </div>

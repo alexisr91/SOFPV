@@ -65,7 +65,7 @@ class ArticleRepository extends ServiceEntityRepository
         ->andWhere('a.id != :article')
         ->setParameter('article', $article->getId())
         ->orderBy('a.createdAt', 'DESC')
-        ->setMaxResults(10)
+        ->setMaxResults(8)
         ->getQuery()
         ->getResult();
     }

@@ -69,7 +69,7 @@ class BlogController extends AbstractController
             $articleContent = nl2br($article->getContent());
             
            //GESTION IMAGE 
-           $images = $form->get('images')->getData();
+           $images = $form['images']->getData();
             if($article->getImages()){
 
                 $index = 0;
@@ -148,11 +148,13 @@ class BlogController extends AbstractController
                 
             }
 
-            // dd($article);
+            
 
             $article->setContent($articleContent);
             $article->setAuthor($user);
             $manager->persist($article); 
+            
+            // dd($article);
 
             $manager->flush();
 
@@ -161,8 +163,6 @@ class BlogController extends AbstractController
             return $this->redirectToRoute('account_myprofile');
             
         }
-
-        
 
         return $this->render('blog/article/add.html.twig', [
             'title'=>'Publier un article',

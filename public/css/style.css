@@ -436,8 +436,6 @@ section#myProfile {
     height: 100%;
     background-color: #252525;
     min-height: 90vh; }
-  section#myProfile .sidebarMenu {
-    box-shadow: 1px 1px 1px #252525; }
   section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
     background-color: #fafafa;
     margin: 0 2em 2em 2em;
@@ -586,6 +584,14 @@ section#showArticle #wrapArticleContent {
   padding: 3em;
   border-radius: 3px;
   margin: 1em auto; }
+section#showArticle .article-content-show {
+  background-color: white;
+  border: 1px solid #DADADA;
+  border-radius: 3px;
+  padding: 1em; }
+section#showArticle #like-article {
+  background-color: #DADADA;
+  margin: 0.5em 0; }
 section#showArticle .banner {
   position: relative;
   padding: 0; }
@@ -594,16 +600,15 @@ section#showArticle #player {
 section#showArticle .col-md-8 {
   padding-left: 0; }
 section#showArticle .user {
-  position: absolute;
-  bottom: 0;
   display: flex;
-  width: 100%;
+  padding-right: 2em;
+  border-radius: 3px;
   justify-content: start;
   align-items: center;
-  background-image: linear-gradient(to right, rgba(250, 250, 250, 0.9), transparent 30%); }
+  margin-top: 1em; }
   section#showArticle .user .avatar {
-    max-height: 125px;
-    max-width: 125px;
+    max-height: 75px;
+    max-width: 75px;
     margin-right: 1em; }
     section#showArticle .user .avatar img {
       background-color: #fafafa;
@@ -623,13 +628,17 @@ section#showArticle .commentWrap {
   margin: 1em auto;
   padding: 1em;
   border-radius: 3px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px; }
+  box-shadow: rgba(0, 0, 0, 0.15) -0.5px 1px 1px 1px; }
   section#showArticle .commentWrap .commentAuthor {
     color: #252525;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
-    align-items: center; }
+    align-items: center;
+    margin-bottom: 1em; }
+    section#showArticle .commentWrap .commentAuthor img {
+      max-height: 35px;
+      max-width: 35px; }
 
 /*Mes articles */
 section#myArticles {
@@ -665,34 +674,29 @@ section#myArticles {
         border-bottom-right-radius: 3px; }
 
 /*Modifier un article */
-section#editArticle .container-fluid {
-  display: flex;
-  width: 100%;
-  background-color: #fafafa;
-  min-height: 90vh; }
-  section#editArticle .container-fluid .row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    padding: 1em; }
-
 /*Ajouter un article */
-section#addArticle .sidebarMenu {
-  width: 10%;
-  margin-right: 2em; }
-section#addArticle .wrapper {
+section#addArticle .sidebarMenu, section#editArticle .sidebarMenu {
+  width: 10%; }
+section#addArticle .wrapper, section#editArticle .wrapper {
   background-color: #fafafa;
   border-radius: 3px;
-  padding: 2em;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 3em;
-  height: 70em; }
-  section#addArticle .wrapper .row {
-    width: 100%; }
-    section#addArticle .wrapper .row div.images div.mb-3 {
+  height: 90vh;
+  background-image: url("/img/raceTrack.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #252525;
+  background-blend-mode: multiply; }
+  section#addArticle .wrapper .row, section#editArticle .wrapper .row {
+    width: 90%;
+    height: 80%;
+    margin: 0 2em;
+    padding: 3em;
+    border-radius: 3px;
+    background-color: #fafafa; }
+    section#addArticle .wrapper .row div.images div.mb-3, section#editArticle .wrapper .row div.images div.mb-3 {
       width: 50% !important;
       margin-bottom: 0 !important; }
 
