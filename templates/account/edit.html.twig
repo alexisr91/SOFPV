@@ -9,38 +9,39 @@
     <section id="myProfileEdit">
         {{include('partials/_navbarMenu.html.twig')}}
 
-        <div class="container-fluid wrapper"> 
+        <div class="container-fluid"> 
+          {{include('partials/_sidebarMenuProfile.html.twig')}}
         
-            <div class="row">
-            <h2>Modifier mon profil</h2>
-                <div class="col-md-6">
-                    <h4>Mon profil public</h4>  
-                    {{form_start(form)}}
-                    <hr>
-                    <div class="banner mb-2">
+            <div class="row wrapper">
+                    <div class="banner m-0">
                         {% if user.banner %}
                             <img src="{{asset('/uploads/banner/'~ user.banner)}}" alt="banniere"/>
                         {% else %}
                             <img src="{{asset('/img/NazgulFrame.jpg')}}" alt="banniere"/>
                         {% endif %}
                     </div>
+                    <h2>Modifier mon profil</h2>
+                <div class="col-md-6">
+                    <h4>Mon profil public</h4>  
+                    {{form_start(form)}}
+                    <hr>
+                    
                         {{form_row(form.banner)}}
-                     
+                     {{form_row(form.nickname)}} 
                     <div>
                         {% if user.avatar %}
                             <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar du profil" class="avatar">
                         {% else %}
                             <img src="{{asset('img/avatar-1.png')}}" alt="avatar par défaut" class="avatar">
                         {% endif %}
-                    </div> 
+                    </div>
                         {{form_row(form.avatar)}}  
-                        {{form_row(form.nickname)}}
+                        
 
                 </div>
                 <div class="col-md-5">
                 <h4>Mes informations personnelles</h4>
                 <hr>
-              
                     {{form_row(form.email)}}
                     {{form_row(form.firstname)}}
                     {{form_row(form.lastname)}}

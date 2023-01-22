@@ -1,25 +1,51 @@
-/* ACCUEIL : SECTION#home (vue full screen à l'arrivée sur le site) */
+
+/* ACCUEIL : SECTION#home (logo + image d'accueil) */
+#scrollBackToTop {
+    height: 50px;
+        width: 50px;
+        z-index: 2;
+        background-color: rgba($base, 0.5);
+        border-radius:50%;  
+        position: fixed;
+        bottom:4em;
+        right: 2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    a {
+        color:$white;
+      
+        
+   }
+}
+
+section.homeWrap{
+    width: 100vw;
+    height: 100%;
+    position: relative;
+    #navbarMenu{
+    height:0;
+    position: absolute;
+    top:0;}
+}
 section#home {
     display: flex;
     justify-content: center;
-    height: 100vh;
-    width: 100vw;
-    background-image:url('/img/quadsLavoirCrop.png');
+    position: relative;
+    background-image:url('/img/quadsLavoir.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
-    position:relative;
-    
-        &:before {
+    background-attachment: fixed;
+    height: 100vh; 
+    top:0;
+    &:before {
         height: 100vh;
         width: 100vw;
         content:"";
         background:url('../img/noise2.png') repeat 0 0 rgba(0,0,0,0.5);
-        position: absolute;
-        top:0;}
-
-    #navbarMenu {
-        background-color: transparent !important;
-    }
+        position: inherit;
+        }
 }
 
 #homeLogo {
@@ -38,24 +64,64 @@ section#home {
        
 }
 
-#swipeToBlog{
-    color: $white;
-    width: 4em;
-    height: 4em;
-    border-radius: 50%;
-    border: 3px solid $white;
+/* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
+section#counter {
+    height: 15em;
+    width: 100vw;
+    position: absolute;
+    bottom:1em;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    margin-top: 3em; 
-    
-    a {
-        color: $white;
+    color:$white;
+    background-color: transparent;
 
-        &:hover{
-                color: $white;
+
+    div.img-wrapper {
+        position: relative;
+        z-index: 2;
+        background-color: transparent;
+        width: 4em;
+        height: 4em;
+        border: 2px solid $white;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        transform: rotate(45deg);
+        
+        img {
+        transform: rotate(-45deg);
         }
     }
+
+    div.counter-wrapper {
+        z-index: 0;
+        text-align: center;
+        width: 33%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    h4 {
+        font-size: 4em;
+        margin-left:-0.3em;
+    }
+    
+    h5 {
+        font-size: 2em;
+    }
+
+    h4, h5 {
+        color:$white;
+    }
+    
+    .lipoIcon{
+        margin-right: 0.5em;
+        margin-top: 0.4em;
+    }
+
 }
 
 
@@ -73,30 +139,6 @@ section#blog, section#blogHome {
         position: relative;
         min-height: 10em;
     }
-    .author {
-        display: flex;
-        align-items: center;
-        border-radius: 2px;
-        background-color: rgba($white, 0.5);
-        position: absolute;
-        bottom:0;
-        height: 3em;
-        padding-right: 1em;
-
-        .author-avatar {
-        width: 100%;
-        height: 100%;
-            img{
-                background-color:$white;
-                width: 100%;
-                height: 100%;
-            }
-        }
-        .author-nickname {
-            padding:0 1em;
-            h4{margin:0}
-        } 
-    }
 
     .article-footer{
         display: flex;
@@ -104,12 +146,84 @@ section#blog, section#blogHome {
     
 }
 
+/* ACCUEIL : SECTION #adminNews */
+
+section#adminNews {
+    width: 100vw;
+    background-color: $white;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .adminNews-wrapper {
+        border-radius: 3px;
+        background-color: $white;
+        width: 100%;
+        z-index: 0;
+        padding: 5% 0;
+
+        .figure {
+            margin-bottom: 0;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            img {
+                max-width: 75%;
+                height: auto;
+            }     
+        }
+        .col-7 {
+            padding:0 10% 0 0;
+        }
+      
+        .row{
+            padding: 2em;
+            
+    
+        }
+        h3 {margin-bottom: 1.5em;}
+    }
+}
+
+// ACTUALITES HOMEPAGE
 section#blogHome 
 {
+    background-image:url('/img/raceTrack.jpeg');
+    background-size: cover;
+    background-color: $white;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+    height:170vh;
+    width: 100vw;
+
+    &:before {
+        height: 170vh;
+        width: 100vw;
+        content:"";
+        background-color: rgba($white,0.9);
+        position: absolute;
+        top:0;}
+    
     hr { margin:0 }
+  
     article{
         display: flex;
-        
+        position: relative;
+        margin: 3em auto;
+        padding: 2em;
+        max-width: 60%;
+        color:$base;
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+
         .content{
             display: flex;
             flex-direction: column;
@@ -141,6 +255,31 @@ section#blogHome
                 justify-content: flex-end;
             }    
         }
+        .author {
+            display: flex;
+            align-items: center;
+            border-radius: 2px;
+            background-color: rgba($white, 0.5);
+            position: absolute;
+            bottom:1.5em;
+            height: 3em;
+            padding-right: 1em;
+    
+            .author-avatar {
+            width: 100%;
+            height: 100%;
+                img{
+                    background-color:$white;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .author-nickname {
+                padding:0 1em;
+                h4{margin:0}
+            } 
+        }
+
         .avatar {
             max-height:70px;
             max-width:70px;
@@ -157,101 +296,42 @@ section#blogHome
 
 
 
-/* ACCUEIL : SECTION #counter */
-section#counter {
-    width: 100vw;
-    height: 18em;
-    position: relative;
-    background:url('../img/redQuad.jpeg') no-repeat 0 0 rgba(0,0,0,0.5);
-    background-size: cover;
-    background-attachment: fixed;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-
-    &:before {
-        height: 18em;
-        width: 100%;
-        content:"";
-        background:url('../img/noise2.png') repeat 0 0 rgba(0,0,0,0.5);
-        position: absolute;
-    }
-
-    div.img-wrapper {
-        position: relative;
-        z-index: 2;
-        background-color: transparent;
-        width: 4em;
-        height: 4em;
-        border: 2px solid $white;
-        display: flex;
-        justify-content:center;
-        align-items: center;
-        transform: rotate(45deg);
-        
-        img {
-        transform: rotate(-45deg);
-        }
-    }
-
-    div.counter-wrapper {
-        z-index: 2;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    h4 {
-        font-size: 4em;
-        margin-left:-0.3em;
-    }
-    
-    h5 {
-        font-size: 2em;
-    }
-
-    h4, h5 {
-        color:$white;
-    }
-    
-    .lipoIcon{
-        margin-right: 0.5em;
-        margin-top: 0.4em;
-    }
-
-}
-
-
-/* ACCUEIL : SECTION #helper */
-
-section#helper {
-    width: 100vw;
-    height: 40em;
-    background-color: $white;
-}
 
 /* ACCUEIL : SECTION #newOnShop */
 
 section#newOnShop {
     width: 100vw;
+    height: 50em;
     background-image: url('/img/NazgulFrame.jpg');
     background-color: $base;
     background-position:center;
     background-size: cover;
     position: relative;
-    
+    &:before {
+        height: 50em;
+        width: 100vw;
+        content:"";
+        background:url('../img/noise2.png') repeat 0 0 rgba(0,0,0,0.5);
+        position: absolute;
+        bottom: 0;}
+
+    .title-banner{
+        z-index: 2;
+        position: relative;
+    }
     .titleBadge {
     position: absolute;
     top:2%;
     right:1em;
     }
-
+    .container-fluid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .row {
-    padding-bottom: 3em;
+        width: 60%;
     }
     div.card {
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -267,7 +347,7 @@ section#sessions {
     background-color: $white;
     
     .col{
-    height: 45em;
+    height: 60em;
     }
 }
 
@@ -276,8 +356,10 @@ section#sessions {
 section#socialNetwork{
     height:20em;
     width: 100vw;
-    background-color: $grey;
+    background-color: $base;
     padding-top: 3em;
+
+    h3{color:$white;}
 
     .row {
         padding-top: 3em;

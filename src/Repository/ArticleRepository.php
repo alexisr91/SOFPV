@@ -39,9 +39,10 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
-    // les 4 derniers articles publiés ( pour la page d'accueil )
+    // les 4 derniers articles publiés ( pour la page d'accueil ) qui ne sont pas l'article à la une (adminNews)
     public function findLastArticles(){
         return $this->createQueryBuilder('a')
+           ->andWhere('a.adminNews = false')
            ->orderBy('a.createdAt', 'DESC')
            ->setMaxResults(4)
            ->getQuery()
@@ -69,6 +70,17 @@ class ArticleRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
     }
+
+    //Le dernier article qu'à posté l'admin en cochant l'option adminNews (qui permet de mettre cet article "à la Une" de la page d'accueil)
+    public function findAdminNewsArticle(){
+        return $this->createQueryBuilder('a')
+        ->andWhere('a.adminNews = true')
+        ->orderBy('a.createdAt', 'DESC')
+        ->setMaxResults(8)
+        ->getQuery()
+        ->getResult();
+    }
+
 
     //STATS : TO DO => à mettre dans un service
     // compte les nombre d'article par auteur

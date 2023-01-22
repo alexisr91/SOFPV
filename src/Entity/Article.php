@@ -61,6 +61,9 @@ class Article
     #[ORM\ManyToOne(inversedBy: 'articles', cascade:['persist'])]
     private ?Category $category = null;
 
+    #[ORM\Column]
+    private ?bool $adminNews = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
@@ -68,6 +71,7 @@ class Article
         $this->views = 0;
         $this->likes = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->adminNews = 0;
     }
 
     //creation du slug et update si le titre est modifié par l'auteur
@@ -167,10 +171,9 @@ class Article
     {       
         if(!$this->images->contains($image)){ 
             $image->setArticle($this);  
-            $this->images[] = $image;
+            $this->images->add($image);
              
         }
-        return $this;
       
     }
 
@@ -266,6 +269,18 @@ class Article
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function isAdminNews(): ?bool
+    {
+        return $this->adminNews;
+    }
+
+    public function setAdminNews(bool $adminNews): self
+    {
+        $this->adminNews = $adminNews;
 
         return $this;
     }

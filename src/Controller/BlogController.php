@@ -8,6 +8,7 @@ use App\Entity\Likes;
 use App\Entity\Video;
 use App\Entity\Article;
 use App\Entity\Comment;
+use App\Form\AdminArticleType;
 use App\Form\ArticleType;
 use App\Form\CommentType;
 use App\Service\Pagination;
@@ -44,7 +45,7 @@ class BlogController extends AbstractController
         ;
 
         return $this->render('blog/index.html.twig', [
-           'title'=>'Blog',
+           'title'=>'Actualités ',
            'pagination'=>$paginationService
         ]);
     }
@@ -57,8 +58,18 @@ class BlogController extends AbstractController
         $user = $this->getUser();
         $article = new Article();
         $video = new Video();
-     
-        $form = $this->createForm(ArticleType::class, $article);   
+
+        //vérification de l'accès de l'user connecté
+        $adminAccess = $this->isGranted('ROLE_ADMIN');
+        
+        //si l'user est un admin: on lui présente le formulaire avec l'option permettant de mettre son article "à la une" de la page d'accueil
+        if($adminAccess){ 
+            $form = $this->createForm(AdminArticleType::class, $article);
+        } else {
+            //sinon l'user aura le formulaire classique, son article apparaîtra avec les autres dans la sections blog (actualités)
+            $form = $this->createForm(ArticleType::class, $article); 
+        }
+         
         $form->handleRequest($request);  
       
         if($form->isSubmitted() && $form->isValid()){
@@ -147,8 +158,6 @@ class BlogController extends AbstractController
                 $article->setVideo($video);
                 
             }
-
-            
 
             $article->setContent($articleContent);
             $article->setAuthor($user);

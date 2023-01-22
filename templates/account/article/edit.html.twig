@@ -20,6 +20,9 @@
                         {{form_row(form.title)}}
                         {{form_row(form.category)}}   
                         {{form_row(form.content)}}
+                         {% if is_granted("ROLE_ADMIN") %}
+                            {{form_row(form.adminNews)}}
+                        {% endif %}
                 </div>
                
                 <div class="col-md-6 col-sm-12">
@@ -29,16 +32,21 @@
                                            
                     <h5 class="mt-3"><i class="fa-solid fa-images"></i> Ajouter ou supprimer des images</h5>
                        
-                    <div class="images"
-                        data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
-                        data-prototype="{{ form_row(form.images.vars.prototype)|e('html_attr') }}"> 
+                  <div id="images"
+                        data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
+                        data-widget-tags="{{ '<div"></div>'|e }}"
+                        data-widget-counter="{{ form.images|length }}">
 
-                    {% for image in form.images %}
-                         {{form_row(image.source)}}
-                         {{form_row(image.caption)}}
-                    {% endfor %}
-                    </div> 
-                    
+                        {% for imageField in form.images %}
+                            <div>
+                                {{ form_errors(imageField) }}
+                                {{ form_widget(imageField) }} 
+                            </div>
+                          
+                        {% endfor %}
+
+                    </div>
+                     <button type="button" id="add_images" class="btn btn-dark" data-list-selector="#images">Ajouter une image</button>
                 </div> 
                     <div>
                         <a href="{{path('account_articles')}}" class="btn btn-dark btn-lg"><i class="fa-solid fa-chevron-left"></i> Retour</a>
@@ -55,45 +63,6 @@
 
 
 
-{% block javascripts %}
-    <script>
-
-        const addImgLink = document.createElement('button')
-            addImgLink.classList.add('add_image_list','btn','btn-dark','my-3')
-            addImgLink.innerText='Ajouter une image'
-            addImgLink.dataset.collectionHolderClass='images'
-    
-        
-            const collectionHolder = document.querySelector('div.images')
-            collectionHolder.appendChild(addImgLink)
-
-            const addFormToCollection = (e) => {
-                const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
-
-                const item = document.createElement('div');
-                
-                const separator = document.createElement('hr');
-                separator.classList.add('my-4');
-
-
-                item.innerHTML = collectionHolder
-                    .dataset
-                    .prototype
-                    .replace(
-                    /__name__/g,
-                    collectionHolder.dataset.index
-                    );
-
-                collectionHolder.appendChild(item);
-                collectionHolder.appendChild(separator);
-
-                collectionHolder.dataset.index++;
-            }
-
-            addImgLink.addEventListener("click", addFormToCollection)
-
-        </script>
-{% endblock %}
 
 
 

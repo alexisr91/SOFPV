@@ -3,255 +3,170 @@
 {% block title %}{{ parent() }} | {{ title }}{% endblock %}
 
 {% block body %}
-    {# Vue d'accueil + logo #}
-    <section id="home">         
-            {{include('partials/_navbarMenu.html.twig')}}
-               
-        <div id="homeLogo">
-            <img src="{{asset('/img/logo.png')}}" alt="Logo SO FPV" class="img-fluid">
-            <div id="swipeToBlog">
-                <a href="#blogHome"><i class="fa-solid fa-angles-down fa-2x"></i></a>
+    <section class="homeWrap">
+        {# Vue d'accueil + logo #}
+        {{include('partials/_navbarMenu.html.twig')}}
+        <section id="home">      
+            <div id="homeLogo">
+                <img src="{{asset('/img/logo.png')}}" alt="Logo SO FPV" class="img-fluid">
             </div>
-        </div>
-
-    </section>
-
-    {# Derniers articles #} 
-    <section id="blogHome">  
-        {# <div class="title-banner mb-4">
-        </div>  #}
-        <div class="container-fluid pt-4">
-             {# TODO: boucle pour les articles de la bdd  + implementation de PLYR #}
-            <div class="row row-cols-2 row-cols-md-4 g-4 px-3">
-                {% for article in articles %}
-                    <div class="col">
-                        <div class="card h-100">
-                            <div class="card-thumb">
-                            {# utilisation du nom de catégorie comme classe pour personnaliser le badge#}
-                                <div class="category-badge badge {{article.category}}">
-                                    {{article.category|capitalize}}
-                                </div>
-                            {% if article.video %}
-                                 <img class="card-img-top img-fluid" src="{{asset('/uploads/article/video/thumb/'~ article.video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
-                            {% elseif article.images %}
-                                {# TODO : repo ->selectionner la premiere image ajoutée dans l'article comme vignette#}
-                                <img class="card-img-top img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >     
-                            {% else %}
-                                <img class="card-img-top img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
-                            {% endif %} 
-                                <div class="author">
-                                        <div class="author-avatar">
-                                        {% if article.author.avatar %}
-                                            <img class="img-fluid " src="{{asset('/uploads/avatar/'~ article.author.avatar )}}" alt="Avatar de {{article.author}}">
-                                        {% else %}
-                                            <img class="img-fluid " src="{{asset('/img/avatarDefault.jpg')}}" alt="Avatar par défaut">
-                                        {% endif %}
-                                        </div>
-                                        <div class="author-nickname">
-                                            <h4>{{article.author.nickname}}</h4>
-                                        </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{article.title}}</h5>
-                                {% set articleContent = article.content|u.truncate(120, '...', false) %}
-                                <p class="card-text">{{articleContent|raw}}</p>
-                                <a href="{{path('article_show', {'slug': article.slug})}}" class="stretched-link"></a>
-                            </div>
-                            <div class="card-footer article-footer text-muted justify-content-between">
-                                <div>
-                                    {{article.views}} <i class="fa-regular fa-eye"></i> • {{article.likes|length}} <i class="fa-regular fa-thumbs-up"></i> • {{article.comments|length}} <i class="fa-regular fa-comment"></i> 
-                                </div>
-                                <div> {{article.createdAt|date('d-m-Y')}}</div>
-                            </div>
-                        </div>
+            
+            {# compteur lipo, bras, esc burned #}
+            <section id="counter">
+                <div class="counter-wrapper">
+                    <div class="img-wrapper">
+                        <img src="{{asset('../img/battery.png')}}" alt="icone de battery" class="img-fluid lipoIcon">
                     </div>
-                {% endfor %}
-            </div>
-           
-            </div>
-        </div>
-    </section>
-
-    {# compteur lipo, bras, esc burned + parallax #}
-    <section id="counter">
-        <div class="counter-wrapper">
-            <div class="img-wrapper">
-                <img src="{{asset('../img/battery.png')}}" alt="icone de battery" class="img-fluid lipoIcon">
-            </div>
-            <h4>15</h4>
-            <h5>LIPO HS</h5>
-        </div>
-        <div class="counter-wrapper">
-            <div class="img-wrapper">
-                <img src="{{asset('../img/circuit-board.png')}}" alt="icone de drone cassé" class="img-fluid">
-            </div>
-            <h4>5</h4>
-            <h5>BURNED ESC</h5>
-        </div>
-        <div class="counter-wrapper">
-            <div class="img-wrapper">
-                <img src="{{asset('../img/broken.png')}}" alt="icone de drone cassé" class="img-fluid">
-            </div>
-            <h4>40</h4>
-            <h5>BROKEN FRAMES</h5>
-        </div>
-    </section>
-
-    {# Dernières questions + commentaire les plus pertinents #}
-    <section id="helper">
-        <div class="title-banner mb-4">
-            <h3>Entraide Questions/Réponses</h3>
-        </div>
-            <div class="container mb-3">
-            {#TODO: boucle pour les 3 dernières questions + badge pour le nombre de réponses sur le sujet #}
-                <div class="list-group w-100">
-                    <a href="#collapseAnswer1" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseAnswers" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h6>Sujet : Version courte de la question <h6>
-                            <span class="badge bg-danger rounded-pill">14</span>
-                        </div>
-                        <p class="mb-1">
-                            Donec ornare enim eget efficitur blandit. In maximus eu mi a volutpat.
-                            {#TODO: limit de caractères => ...Voir plus #}
-                        </p>
-                    </a>
-                    {# partie collapsée #}
-                    <div class="collapse" id="collapseAnswer1">
-                        {#TODO: boucle avec les 3 dernières réponses  #}
-                        Donec ornare enim eget efficitur blandit. In maximus eu mi a volutpat. Etiam placerat quam at neque hendrerit, quis scelerisque risus aliquam.
-                        Quisque convallis mattis enim, id malesuada enim sodales quis. Quisque euismod malesuada vestibulum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec viverra ut metus vitae tincidunt.
-                        <a href="#">Voir plus</a>
+                    <h4>15</h4>
+                    <h5>LIPO HS</h5>
+                </div>
+                <div class="counter-wrapper">
+                    <div class="img-wrapper">
+                        <img src="{{asset('../img/circuit-board.png')}}" alt="icone de drone cassé" class="img-fluid">
                     </div>
+                    <h4>5</h4>
+                    <h5>BURNED ESC</h5>
                 </div>
-
-                <div class="list-group w-100">
-                    <a href="#collapseAnswer2" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseAnswers" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h6>Sujet : Version courte de la question <h6>
-                            <span class="badge bg-danger rounded-pill">14</span>
-                        </div>
-                        <p class="mb-1">
-                            Donec ornare enim eget efficitur blandit. In maximus eu mi a volutpat ...Voir plus
-                            {#TODO: limit de caractères => ...Voir plus #}
-                        </p>
-                    </a>
-                    {# partie collapsée #}
-                    <div class="collapse" id="collapseAnswer2">
-                        {#TODO: boucle avec les 3 dernières réponses  #}
-                        Donec ornare enim eget efficitur blandit. In maximus eu mi a volutpat. Etiam placerat quam at neque hendrerit, quis scelerisque risus aliquam.
-                        Quisque convallis mattis enim, id malesuada enim sodales quis. Quisque euismod malesuada vestibulum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec viverra ut metus vitae tincidunt.
-                        <a href="#">Voir plus</a> 
-                    </div>
+                <div class="counter-wrapper">
+                <div class="img-wrapper">
+                    <img src="{{asset('../img/broken.png')}}" alt="icone de drone cassé" class="img-fluid">
                 </div>
-
-                <div class="list-group w-100">
-                    <a href="#collapseAnswer3" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseAnswers" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h6>Sujet : Version courte de la question <h6>
-                            <span class="badge bg-danger rounded-pill">14</span>
-                        </div>
-                        <p class="mb-1">
-                            Donec ornare enim eget efficitur blandit. In maximus eu mi a volutpat.
-                            {#TODO: limit de caractères => ...Voir plus #}
-                        </p>
-                    </a>
-                    {# partie collapsée #}
-                    <div class="collapse" id="collapseAnswer3">
-                        {#TODO: boucle avec les 3 dernières réponses  #}
-                        Donec ornare enim eget efficitur blandit. In maximus eu mi a volutpat. Etiam placerat quam at neque hendrerit, quis scelerisque risus aliquam.
-                        Quisque convallis mattis enim, id malesuada enim sodales quis. Quisque euismod malesuada vestibulum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec viverra ut metus vitae tincidunt.
-                        <a href="#">Voir plus</a>
-                    </div>
+                <h4>40</h4>
+                <h5>BROKEN FRAMES</h5>
                 </div>
-            </div>
-        
-    </section>
-
-    {# Items de la boutiques (notification New) #}
-    <section id="newOnShop">
-        <div class="title-banner mb-4">
-            <h3>Boutique</h3> 
-        </div>
-        <div class="container">
-        {#TODO: boucle avec les derniers produits ajoutés (badge new pour moins de 2 semaines)#}
-            <div class="row">
-                <div class="col">
-                        <div class="card">
-                            {#TODO: a mettre si le produit est sorti au cours des 2 semaines #}
-                            <span class="badge bg-danger titleBadge">New</span> 
-                            <img src="{{asset('../img/product-1.jpg')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Nom du produit</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <p class="card-text price"><b>599 €</b></p>
-                                <a href="#" class="btn btn-dark stretched-link">Voir le produit</a>
-                            </div>
-                        </div>
-                </div>
-                <div class="col">
-                        <div class="card">
-                            <img src="{{asset('../img/product-2.jpg')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Nom du produit</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <p class="card-text price"><b>10 €</b></p>
-                                <a href="#" class="btn btn-dark stretched-link">Voir le produit</a>
-                            </div>
-                        </div>
-                </div>
-                <div class="col">
-                        <div class="card">
-                            <img src="{{asset('../img/product-3.jpg')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Nom du produit</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <p class="card-text price"><b>5 €</b></p>
-                                <a href="#" class="btn btn-dark stretched-link">Voir le produit</a>
-                            </div>
-                        </div>
-                </div>
-                <div class="col">
-                        <div class="card">
-                            <img src="{{asset('../img/product-1.jpg')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Nom du produit</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <p class="card-text price"><b>599 €</b></p>
-                                <a href="#" class="btn btn-dark stretched-link">Voir le produit</a>
-                            </div>
-                        </div>
-                </div>
-            </div>
-        </div>
-    </section>
-         
-    {# Carte avec prochaines sessions de vol #}
-    <section id="sessions">
-        {# <div class="title-banner">
-            <h3>Prochaines sessions</h3>    
-        </div> #}
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-9">
-                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2885.9244592865352!2d1.3824213161915828!3d43.67054085932608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfc88398ed0d02a7e!2zNDPCsDQwJzEzLjkiTiAxwrAyMycwNC42IkU!5e0!3m2!1sfr!2sfr!4v1663612151377!5m2!1sfr!2sfr" style="border:0;" class="w-100 h-100 mt-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-                <div class="col">
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia impedit quae quos sunt culpa quibusdam dolorem optio, eos rerum sapiente dolor minima modi. Doloremque natus quaerat libero repudiandae itaque eligendi!</p>     
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {# Section réseaux sociaux #}
-    <section id="socialNetwork">
-            <h3 class="text-center">Retrouvez nous sur les réseaux</h3>   
-        <div class="socialLinks">
-                <a href="#"><i class="fa-brands fa-facebook fa-3x"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram fa-3x"></i></a>
-                <a href="#"><i class="fa-brands fa-tiktok fa-3x"></i></a>
-                <a href="#"><i class="fa-brands fa-youtube fa-3x"></i></a> 
-        </div>
-    </section>
+            </section>
+        </section>
     
+        {# Actu de l'admin "A la Une" - article selectionné par l'admin #}
+        <section id="adminNews">
+            <div class="adminNews-wrapper">
+                <article class="row">
+                {% if adminNews %}
+                    <figure class="col-5 figure">
+                        <img src="{{asset('/img/DWS.jpg')}}" alt="image de l'article" class="figure-img rounded">
+                    </figure>
+                    <div class="col-7"> 
+                        <h3>{{adminNews.title}}</h3>
+                        <p class="card-text">{{adminNews.content|raw}}</p>
+                        <span class="text-muted">Publié le {{adminNews.createdAt|date('d-m-Y')}} par {{adminNews.author.nickname}}</span>
+                    </div>
+                {% else %}
+                    <p>Pas d'actualités</p>
+                {% endif %}
+                </article>
+        
+            </div>
+        </section>
+        
+        {# Derniers articles #} 
+        <section id="blogHome">  
+            <div class="container-fluid pt-4">
+                <div class="row px-3 mx-3">
+                    {% for article in articles %}
+                    {# alternance de l'affichage des articles suivant leur index dans le tableau #}
+                        {% if loop.index is divisible by(2) %}
+                            <div class="wrapper-left">
+                                {{include('partials/_articleRight.html.twig')}}
+                            </div>
+                        {% else %}
+                            <div class="wrapper-right">
+                                {{include('partials/_articleLeft.html.twig')}}
+                            </div>           
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+
+        {# Items de la boutiques (notification New) #}
+        <section id="newOnShop">
+            <div class="title-banner mb-4">
+                <h3>Boutique</h3> 
+            </div>
+            <div class="container-fluid">
+            {#TODO: boucle avec les derniers produits ajoutés (badge new pour moins de 2 semaines)#}
+                <div class="row">
+                    <div class="col">
+                            <div class="card">
+                                {#TODO: a mettre si le produit est sorti au cours des 2 semaines #}
+                                <span class="badge bg-danger titleBadge">New</span> 
+                                <img src="{{asset('../img/product-1.jpg')}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nom du produit</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                    <p class="card-text price"><b>599 €</b></p>
+                                    <a href="#" class="btn btn-dark stretched-link">Voir le produit</a>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col">
+                            <div class="card">
+                                <img src="{{asset('../img/product-2.jpg')}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nom du produit</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                    <p class="card-text price"><b>10 €</b></p>
+                                    <a href="#" class="btn btn-dark stretched-link">Voir le produit</a>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col">
+                            <div class="card">
+                                <img src="{{asset('../img/product-3.jpg')}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nom du produit</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                    <p class="card-text price"><b>5 €</b></p>
+                                    <a href="#" class="btn btn-dark stretched-link">Voir le produit</a>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col">
+                            <div class="card">
+                                <img src="{{asset('../img/product-1.jpg')}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nom du produit</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                    <p class="card-text price"><b>599 €</b></p>
+                                    <a href="#" class="btn btn-dark stretched-link">Voir le produit</a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+            
+        {# Carte avec prochaines sessions de vol #}
+        <section id="sessions">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-9">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2885.9244592865352!2d1.3824213161915828!3d43.67054085932608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfc88398ed0d02a7e!2zNDPCsDQwJzEzLjkiTiAxwrAyMycwNC42IkU!5e0!3m2!1sfr!2sfr!4v1663612151377!5m2!1sfr!2sfr" style="border:0;" class="w-100 h-100 mt-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="col">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia impedit quae quos sunt culpa quibusdam dolorem optio, eos rerum sapiente dolor minima modi. Doloremque natus quaerat libero repudiandae itaque eligendi!</p>     
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {# Section réseaux sociaux #}
+        <section id="socialNetwork">
+                <h3 class="text-center">Retrouvez nous sur les réseaux</h3>   
+            <div class="socialLinks">
+                    <a href="#" target="_blank"><i class="fa-brands fa-facebook fa-3x"></i></a>
+                    <a href="#" target="_blank"><i class="fa-brands fa-instagram fa-3x"></i></a>
+                    <a href="#" target="_blank"><i class="fa-brands fa-tiktok fa-3x"></i></a>
+                    <a href="#" target="_blank"><i class="fa-brands fa-youtube fa-3x"></i></a> 
+            </div> 
+        <div id="scrollBackToTop">
+            <a href="#"><i class="fa-solid fa-angles-up fa-2x"></i></a>
+        </div>
+        </section>
+       
+    </section> 
 {% endblock %}
+
+
+
