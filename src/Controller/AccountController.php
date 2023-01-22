@@ -10,6 +10,7 @@ use App\Form\ArticleType;
 use App\Form\ProfileType;
 use App\Form\RegisterType;
 use App\Service\Pagination;
+use App\Form\AdminArticleType;
 use App\Repository\VideoRepository;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -247,7 +248,7 @@ class AccountController extends AbstractController
         // $articles = $articleRepository->findBy(['author'=> $user], ['createdAt'=>'DESC']);
         $paginationService->setEntityClass(Article::class)
                          ->setPage($page)
-                         ->setLimit(5)
+                         ->setLimit(6)
                          ->setOrder('DESC')
                          ->setProperty('author')
                          ->setValue($user)
@@ -270,7 +271,18 @@ class AccountController extends AbstractController
         $user = $this->getUser();
         
         if($user == $article->getAuthor()){
-            $form = $this->createForm(ArticleType::class, $article);
+            
+        //vérification de l'accès de l'user connecté
+        $adminAccess = $this->isGranted('ROLE_ADMIN');
+        
+        //si l'user est un admin: on lui présente le formulaire avec l'option permettant de mettre son article "à la une" de la page d'accueil
+        if($adminAccess){ 
+            $form = $this->createForm(AdminArticleType::class, $article);
+        } else {
+            //sinon l'user aura le formulaire classique, son article apparaîtra avec les autres dans la sections blog (actualités)
+            $form = $this->createForm(ArticleType::class, $article); 
+        }
+
             $form->handleRequest($request);
 
             if($form->isSubmitted() && $form->isValid()){

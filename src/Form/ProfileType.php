@@ -42,12 +42,12 @@ class ProfileType extends AbstractType
                 'label'=>'Votre ville'
             ])  
             ->add('avatar', FileType::class, [
-                'label'=>'Ajoutez un avatar',
+                'label'=>'Modifiez votre avatar',
                 'required'=>false,
                 'mapped'=> false,
             ]) 
             ->add('banner', FileType::class, [
-                'label'=>'Ajoutez une bannière',
+                'label'=>'Modifiez votre bannière',
                 'required'=>false,
                 'mapped'=> false
             ]) 

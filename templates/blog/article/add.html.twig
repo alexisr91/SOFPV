@@ -17,6 +17,9 @@
                         {{form_row(form.title)}}
                         {{form_row(form.category)}}   
                         {{form_row(form.content)}}
+                        {% if is_granted("ROLE_ADMIN") %}
+                            {{form_row(form.adminNews)}}
+                        {% endif %}
                        
                 </div>
                
@@ -24,69 +27,42 @@
                     <h5><i class="fa-solid fa-film"></i> Ajouter une vidéo</h5>
                         {{form_row(form.video.title)}}
                         {{form_row(form.video.source)}}
+
+
+
                                            
                     <h5 class="mt-3"><i class="fa-solid fa-images"></i> Ajouter des images</h5>
-                    
+                    <div id="images"
+                        data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
+                        data-widget-tags="{{ '<div"></div>'|e }}"
+                        data-widget-counter="{{ form.images|length }}">
 
-                    <div class="images"
-                        data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
-                        data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
+                        {% for imageField in form.images %}
+                            <div>
+                                {{ form_errors(imageField) }}
+                                {{ form_widget(imageField) }} 
+                            </div>
+                          
+                        {% endfor %}
 
-                       {% for images in form.images %}
-                            {{form_widget(images)}}
-                            {{form_errors(images)}}
-                       {% endfor %}
-                         
-                        {{form_rest(form)}}
-                        
-                    </div> 
-                    <button type="button" id="add_images" class="btn btn-dark" data-collection-holder-class="images">Ajouter une image</button>
+                    </div>
+
+                    <button type="button" id="add_images" class="btn btn-dark" data-list-selector="#images">Ajouter une image</button>
 
                     
                 </div>
                     <div>
                         <button type="submit" class="btn btn-dark btn-lg">Publier</button>
                     </div>
-                    {{form_end(form)}}
+                    
             </div>
-                
+              {{form_end(form)}}  
         </div>
  
     </section>
 {% endblock %}
 
 
-{% block javascripts %}
-    <script>
-            const collectionHolder = document.querySelector("div.images");
-            
-            const addFormToCollection = (e) => {
-                const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
-
-                const item = document.createElement('div');
-                
-                const separator = document.createElement('hr');
-                separator.classList.add('my-4');
-
-
-                item.innerHTML = collectionHolder
-                    .dataset
-                    .prototype
-                    .replace(
-                    /__name__/g,
-                    collectionHolder.dataset.index
-                    );
-
-                collectionHolder.appendChild(item);
-                collectionHolder.appendChild(separator);
-
-                collectionHolder.dataset.index++;
-            }
-            document.querySelectorAll('#add_images').forEach(btn=>{btn.addEventListener("click", addFormToCollection)});
-    
-
-    </script>
-{% endblock %}
 
 
 

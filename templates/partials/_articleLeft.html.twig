@@ -1,0 +1,52 @@
+<article>
+    <div class="row g-0">
+        <div class="col-md-7">
+                <div class="card-body">
+                    <div class="pe-2">
+                        <h5 class="card-title">{{article.title|capitalize}}</h5>
+                            {% set articleContent = article.content|u.truncate(400, '...', false) %}
+                            <p class="card-text">{{articleContent|raw}}</p>
+                            <a href="{{path('article_show', {'slug': article.slug})}}" class="stretched-link"></a>
+                    </div>
+                    <div class="article-footer text-muted justify-content-between">
+                        <div>
+                            {{article.views}} <i class="fa-regular fa-eye"></i> • {{article.likes|length}} <i class="fa-regular fa-thumbs-up"></i> • {{article.comments|length}} <i class="fa-regular fa-comment"></i> 
+                        </div>
+                        <div> {{article.createdAt|date('d-m-Y')}}</div>
+                    </div>
+                </div>
+                                    
+            </div>
+        <div class="col-md-5">
+            <div class="card-thumb">
+                {# utilisation du nom de catégorie comme classe pour personnaliser le badge#}
+                <div class="category-badge badge {{article.category}}">
+                    {{article.category|capitalize}}
+                </div>
+                <figure class="figure">
+                    {% if article.video %}
+                        <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/video/thumb/'~ article.video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
+                    {% elseif article.images %}
+                    {# TODO : repo ->selectionner la premiere image ajoutée dans l'article comme vignette#}
+                        <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >     
+                    {% else %}
+                        <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+                    {% endif %}
+                </figure> 
+                <div class="author">
+                    <div class="author-avatar">
+                        {% if article.author.avatar %}
+                            <img class="img-fluid " src="{{asset('/uploads/avatar/'~ article.author.avatar )}}" alt="Avatar de {{article.author}}">
+                        {% else %}
+                            <img class="img-fluid " src="{{asset('/img/avatarDefault.jpg')}}" alt="Avatar par défaut">
+                        {% endif %}
+                    </div>
+                    <div class="author-nickname">
+                        <h4>{{article.author.nickname}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</article>

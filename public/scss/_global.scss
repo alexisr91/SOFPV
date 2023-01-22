@@ -8,10 +8,13 @@ body, html, .container-fluid {
     scrollbar-width: none;
 }
 
+
 html,body {
     background-color: $base;
     font-family: 'Play', sans-serif;
 }
+body {position: relative; min-height: 100%;}
+
 
 .title-banner {
     /* kits de compatibilité pour le dégradé */

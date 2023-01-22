@@ -20,6 +20,10 @@ html, body {
   background-color: #252525;
   font-family: 'Play', sans-serif; }
 
+body {
+  position: relative;
+  min-height: 100%; }
+
 .title-banner {
   /* kits de compatibilité pour le dégradé */
   background: #252525;
@@ -118,12 +122,17 @@ input {
 section#navbarMenu {
   background-color: #252525;
   width: 100vw;
-  height: fit-content;
   z-index: 1;
-  margin: 0 auto; }
+  margin: 0 auto;
+  z-index: 3;
+  background-color: transparent !important; }
   section#navbarMenu a.navbar-brand {
     font-family: 'airstrike', sans-serif;
     font-size: 2rem; }
+
+section#navbarMenu.sticky-top {
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  background-color: #252525 !important; }
 
 /* KEYFRAMES */
 @keyframes neon {
@@ -132,25 +141,47 @@ section#navbarMenu {
   100% {
     filter: drop-shadow(0 0 1.5rem #940b01); } }
 /*HOMEPAGE */
-/* ACCUEIL : SECTION#home (vue full screen à l'arrivée sur le site) */
+/* ACCUEIL : SECTION#home (logo + image d'accueil) */
+#scrollBackToTop {
+  height: 50px;
+  width: 50px;
+  z-index: 2;
+  background-color: rgba(37, 37, 37, 0.5);
+  border-radius: 50%;
+  position: fixed;
+  bottom: 4em;
+  right: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  #scrollBackToTop a {
+    color: #fafafa; }
+
+section.homeWrap {
+  width: 100vw;
+  height: 100%;
+  position: relative; }
+  section.homeWrap #navbarMenu {
+    height: 0;
+    position: absolute;
+    top: 0; }
+
 section#home {
   display: flex;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  background-image: url("/img/quadsLavoirCrop.png");
+  position: relative;
+  background-image: url("/img/quadsLavoir.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
-  position: relative; }
+  background-attachment: fixed;
+  height: 100vh;
+  top: 0; }
   section#home:before {
     height: 100vh;
     width: 100vw;
     content: "";
     background: url("../img/noise2.png") repeat 0 0 rgba(0, 0, 0, 0.5);
-    position: absolute;
-    top: 0; }
-  section#home #navbarMenu {
-    background-color: transparent !important; }
+    position: inherit; }
 
 #homeLogo {
   position: absolute;
@@ -165,106 +196,17 @@ section#home {
     filter: drop-shadow(0 0 0.5rem #940a02);
     animation: 2s linear 3s infinite alternate neon; }
 
-#swipeToBlog {
-  color: #fafafa;
-  width: 4em;
-  height: 4em;
-  border-radius: 50%;
-  border: 3px solid #fafafa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 3em; }
-  #swipeToBlog a {
-    color: #fafafa; }
-    #swipeToBlog a:hover {
-      color: #fafafa; }
-
-/* ACCUEIL : SECTION #blog  */
-section#blog, section#blogHome {
-  width: 100vw;
-  background-color: #fafafa;
-  padding-bottom: 2em; }
-  section#blog .video-frame h3, section#blogHome .video-frame h3 {
-    font-size: 2em; }
-  section#blog .card-thumb, section#blogHome .card-thumb {
-    position: relative;
-    min-height: 10em; }
-  section#blog .author, section#blogHome .author {
-    display: flex;
-    align-items: center;
-    border-radius: 2px;
-    background-color: rgba(250, 250, 250, 0.5);
-    position: absolute;
-    bottom: 0;
-    height: 3em;
-    padding-right: 1em; }
-    section#blog .author .author-avatar, section#blogHome .author .author-avatar {
-      width: 100%;
-      height: 100%; }
-      section#blog .author .author-avatar img, section#blogHome .author .author-avatar img {
-        background-color: #fafafa;
-        width: 100%;
-        height: 100%; }
-    section#blog .author .author-nickname, section#blogHome .author .author-nickname {
-      padding: 0 1em; }
-      section#blog .author .author-nickname h4, section#blogHome .author .author-nickname h4 {
-        margin: 0; }
-  section#blog .article-footer, section#blogHome .article-footer {
-    display: flex; }
-
-section#blogHome hr {
-  margin: 0; }
-section#blogHome article {
-  display: flex; }
-  section#blogHome article .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-left: 1em; }
-    section#blogHome article .content p {
-      color: #252525;
-      opacity: 0.7;
-      font-size: 1.1em; }
-    section#blogHome article .content h5 {
-      font-weight: bolder; }
-    section#blogHome article .content .profile {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between; }
-      section#blogHome article .content .profile div:first-of-type {
-        display: flex;
-        align-items: center; }
-    section#blogHome article .content .voirPlus {
-      display: flex;
-      justify-content: flex-end; }
-  section#blogHome article .avatar {
-    max-height: 70px;
-    max-width: 70px;
-    overflow: hidden;
-    object-fit: cover;
-    object-position: center;
-    margin-right: 1em;
-    border-radius: 3px; }
-
-/* ACCUEIL : SECTION #counter */
+/* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
+  height: 15em;
   width: 100vw;
-  height: 18em;
-  position: relative;
-  background: url("../img/redQuad.jpeg") no-repeat 0 0 rgba(0, 0, 0, 0.5);
-  background-size: cover;
-  background-attachment: fixed;
+  position: absolute;
+  bottom: 1em;
   display: flex;
-  flex-direction: row;
   justify-content: space-around;
-  align-items: center; }
-  section#counter:before {
-    height: 18em;
-    width: 100%;
-    content: "";
-    background: url("../img/noise2.png") repeat 0 0 rgba(0, 0, 0, 0.5);
-    position: absolute; }
+  align-items: center;
+  color: #fafafa;
+  background-color: transparent; }
   section#counter div.img-wrapper {
     position: relative;
     z-index: 2;
@@ -279,8 +221,9 @@ section#counter {
     section#counter div.img-wrapper img {
       transform: rotate(-45deg); }
   section#counter div.counter-wrapper {
-    z-index: 2;
+    z-index: 0;
     text-align: center;
+    width: 33%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -296,26 +239,157 @@ section#counter {
     margin-right: 0.5em;
     margin-top: 0.4em; }
 
-/* ACCUEIL : SECTION #helper */
-section#helper {
+/* ACCUEIL : SECTION #blog  */
+section#blog, section#blogHome {
   width: 100vw;
-  height: 40em;
-  background-color: #fafafa; }
+  background-color: #fafafa;
+  padding-bottom: 2em; }
+  section#blog .video-frame h3, section#blogHome .video-frame h3 {
+    font-size: 2em; }
+  section#blog .card-thumb, section#blogHome .card-thumb {
+    position: relative;
+    min-height: 10em; }
+  section#blog .article-footer, section#blogHome .article-footer {
+    display: flex; }
+
+/* ACCUEIL : SECTION #adminNews */
+section#adminNews {
+  width: 100vw;
+  background-color: #fafafa;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  section#adminNews .adminNews-wrapper {
+    border-radius: 3px;
+    background-color: #fafafa;
+    width: 100%;
+    z-index: 0;
+    padding: 5% 0; }
+    section#adminNews .adminNews-wrapper .figure {
+      margin-bottom: 0;
+      justify-content: center;
+      align-items: center;
+      display: flex; }
+      section#adminNews .adminNews-wrapper .figure img {
+        max-width: 75%;
+        height: auto; }
+    section#adminNews .adminNews-wrapper .col-7 {
+      padding: 0 10% 0 0; }
+    section#adminNews .adminNews-wrapper .row {
+      padding: 2em; }
+    section#adminNews .adminNews-wrapper h3 {
+      margin-bottom: 1.5em; }
+
+section#blogHome {
+  background-image: url("/img/raceTrack.jpeg");
+  background-size: cover;
+  background-color: #fafafa;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 170vh;
+  width: 100vw; }
+  section#blogHome:before {
+    height: 170vh;
+    width: 100vw;
+    content: "";
+    background-color: rgba(250, 250, 250, 0.9);
+    position: absolute;
+    top: 0; }
+  section#blogHome hr {
+    margin: 0; }
+  section#blogHome article {
+    display: flex;
+    position: relative;
+    margin: 3em auto;
+    padding: 2em;
+    max-width: 60%;
+    color: #252525; }
+    section#blogHome article .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%; }
+    section#blogHome article .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: 1em; }
+      section#blogHome article .content p {
+        color: #252525;
+        opacity: 0.7;
+        font-size: 1.1em; }
+      section#blogHome article .content h5 {
+        font-weight: bolder; }
+      section#blogHome article .content .profile {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between; }
+        section#blogHome article .content .profile div:first-of-type {
+          display: flex;
+          align-items: center; }
+      section#blogHome article .content .voirPlus {
+        display: flex;
+        justify-content: flex-end; }
+    section#blogHome article .author {
+      display: flex;
+      align-items: center;
+      border-radius: 2px;
+      background-color: rgba(250, 250, 250, 0.5);
+      position: absolute;
+      bottom: 1.5em;
+      height: 3em;
+      padding-right: 1em; }
+      section#blogHome article .author .author-avatar {
+        width: 100%;
+        height: 100%; }
+        section#blogHome article .author .author-avatar img {
+          background-color: #fafafa;
+          width: 100%;
+          height: 100%; }
+      section#blogHome article .author .author-nickname {
+        padding: 0 1em; }
+        section#blogHome article .author .author-nickname h4 {
+          margin: 0; }
+    section#blogHome article .avatar {
+      max-height: 70px;
+      max-width: 70px;
+      overflow: hidden;
+      object-fit: cover;
+      object-position: center;
+      margin-right: 1em;
+      border-radius: 3px; }
 
 /* ACCUEIL : SECTION #newOnShop */
 section#newOnShop {
   width: 100vw;
+  height: 50em;
   background-image: url("/img/NazgulFrame.jpg");
   background-color: #252525;
   background-position: center;
   background-size: cover;
   position: relative; }
+  section#newOnShop:before {
+    height: 50em;
+    width: 100vw;
+    content: "";
+    background: url("../img/noise2.png") repeat 0 0 rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 0; }
+  section#newOnShop .title-banner {
+    z-index: 2;
+    position: relative; }
   section#newOnShop .titleBadge {
     position: absolute;
     top: 2%;
     right: 1em; }
+  section#newOnShop .container-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
   section#newOnShop .row {
-    padding-bottom: 3em; }
+    width: 60%; }
   section#newOnShop div.card {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; }
 
@@ -324,14 +398,16 @@ section#sessions {
   width: 100vw;
   background-color: #fafafa; }
   section#sessions .col {
-    height: 45em; }
+    height: 60em; }
 
 /* ACCUEIL : SECTION #socialNetwork */
 section#socialNetwork {
   height: 20em;
   width: 100vw;
-  background-color: #DADADA;
+  background-color: #252525;
   padding-top: 3em; }
+  section#socialNetwork h3 {
+    color: #fafafa; }
   section#socialNetwork .row {
     padding-top: 3em; }
   section#socialNetwork .socialLinks {
@@ -429,10 +505,7 @@ section#myProfile {
   flex-direction: column;
   width: 100%;
   background-color: #252525; }
-  section#myProfile section#navbarMenu {
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; }
   section#myProfile .wrap {
-    margin-top: 0.5em;
     height: 100%;
     background-color: #252525;
     min-height: 90vh; }
@@ -509,29 +582,34 @@ section#myProfile {
       font-size: 2.5em; }
 
 /* MY PROFILE - edit */
-section#myProfileEdit {
-  background-color: #252525; }
-  section#myProfileEdit #navbarMenu {
+section#myProfileEdit, section#droneEdit {
+  background-image: url("../img/quadsLavoir.jpeg");
+  background-color: #252525;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-blend-mode: multiply;
+  min-height: 90vh; }
+  section#myProfileEdit .container-fluid, section#droneEdit .container-fluid {
+    display: flex; }
+    section#myProfileEdit .container-fluid aside.sidebarMenu, section#droneEdit .container-fluid aside.sidebarMenu {
+      height: 97vh; }
+  section#myProfileEdit #navbarMenu, section#droneEdit #navbarMenu {
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; }
-  section#myProfileEdit h2 {
-    margin: 1em 2em 2em 2em; }
-  section#myProfileEdit .row {
-    justify-content: space-around;
-    align-items: center; }
-  section#myProfileEdit .banner {
-    height: 20em; }
-    section#myProfileEdit .banner img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-      object-position: center; }
-  section#myProfileEdit .wrapper {
-    padding: 4em;
+  section#myProfileEdit .row, section#droneEdit .row {
+    justify-content: space-between; }
+  section#myProfileEdit .banner img, section#droneEdit .banner img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center; }
+  section#myProfileEdit .wrapper, section#droneEdit .wrapper {
+    padding: 3em;
     background-color: #fafafa;
     width: 80%;
-    margin: 3em auto;
+    margin: 0 auto;
     border-radius: 3px; }
-  section#myProfileEdit .avatar {
+  section#myProfileEdit .avatar, section#droneEdit .avatar {
     max-width: 125px;
     max-height: 125px;
     overflow: hidden;
@@ -642,11 +720,12 @@ section#showArticle .commentWrap {
 
 /*Mes articles */
 section#myArticles {
-  background-image: url("/img/forestView.jpg");
-  min-height: 90vh; }
+  background-image: url("/img/forestView.jpg"); }
   section#myArticles .container-fluid {
     display: flex;
-    min-height: 90vh; }
+    min-height: 100vh; }
+    section#myArticles .container-fluid .row-cols-md-1 {
+      margin-bottom: 3em; }
     section#myArticles .container-fluid .sidebar {
       width: 10%; }
     section#myArticles .container-fluid .article-body {
@@ -701,7 +780,27 @@ section#addArticle .wrapper, section#editArticle .wrapper {
       margin-bottom: 0 !important; }
 
 section#blog {
-  background-image: url("/img/Bando.jpg"); }
+  background-image: url("/img/bando2.jpg"); }
+  section#blog .author {
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+    background-color: rgba(250, 250, 250, 0.5);
+    position: absolute;
+    bottom: 0;
+    height: 3em;
+    padding-right: 1em; }
+    section#blog .author .author-avatar {
+      width: 100%;
+      height: 100%; }
+      section#blog .author .author-avatar img {
+        background-color: #fafafa;
+        width: 100%;
+        height: 100%; }
+    section#blog .author .author-nickname {
+      padding: 0 1em; }
+      section#blog .author .author-nickname h4 {
+        margin: 0; }
 
 section#blog, section#myArticles {
   background-repeat: no-repeat;
@@ -715,6 +814,8 @@ section#blog, section#myArticles {
     background-color: #fafafa;
     width: 70%;
     padding-bottom: 1em; }
+  section#blog .row-cols-md-1, section#myArticles .row-cols-md-1 {
+    margin-bottom: 3em; }
   section#blog .article-thumb, section#myArticles .article-thumb {
     max-width: 30%;
     display: flex;
@@ -830,14 +931,16 @@ section#profile {
 
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu {
-  height: 100%;
   z-index: 0;
-  width: 100%;
   overflow-x: hidden;
   background-color: #fafafa;
-  padding-top: 5em;
   display: flex;
-  flex-direction: column; }
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100%;
+  width: 10vw; }
+  aside.sidebarMenu nav {
+    margin-top: 5em; }
   aside.sidebarMenu a {
     color: #252525; }
     aside.sidebarMenu a:hover {
@@ -853,15 +956,23 @@ aside.sidebarMenu {
 aside.sidebarMenu li:hover a, aside.sidebarMenu li:hover {
   background-color: #DADADA; }
 
+section#myArticles aside.sidebarMenu {
+  position: fixed;
+  top: 0;
+  padding-top: 4.7em; }
+  section#myArticles aside.sidebarMenu nav {
+    margin-top: 5em; }
+
 /* FOOTER */
 footer {
-  position: relative;
   width: 100vw;
+  height: 3em;
   padding: 1em;
   display: flex;
   align-items: center;
   background-color: #252525;
   color: #fafafa;
-  background-color: #252525; }
+  z-index: 3;
+  position: relative; }
 
 /*# sourceMappingURL=style.css.map */
