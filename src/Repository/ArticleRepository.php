@@ -81,6 +81,19 @@ class ArticleRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    //Les 3 dernières questions de l'user connecté (raccourcis dans le dashboard pour avoir les réponses d'aide de manière plus accessible)
+    public function findMylastQuestions($user){
+        return $this->createQueryBuilder('a')
+        ->join('a.category' , 'c')
+        ->andWhere('a.author = :user')
+        ->setParameter('user', $user)
+        ->andWhere('c.name = :question')
+        ->setParameter('question', 'question')
+        ->orderBy('a.createdAt', 'DESC')
+        ->setMaxResults(3)
+        ->getQuery()
+        ->getResult();
+    }
 
     //STATS : TO DO => à mettre dans un service
     // compte les nombre d'article par auteur
@@ -94,7 +107,6 @@ class ArticleRepository extends ServiceEntityRepository
         ->getQuery()
         ->getSingleScalarResult();
     }
-
 
 
     

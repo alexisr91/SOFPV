@@ -97,6 +97,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->articles = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        //mise en place d'un avatar et une bannière par défaut à la création de l'user
+        $this->banner = 'bannerDefault.png';
+        $this->avatar = 'avatarDefault.jpg';
     }
     
 

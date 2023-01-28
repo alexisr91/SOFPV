@@ -39,6 +39,19 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
+
+    //Retourne le nombre de commentaires
+    public function findNewComments($id){
+        return $this->createQueryBuilder('c')
+           ->select('count(c)')
+           ->andWhere('c.article = :id')
+           ->setParameter('id', $id)
+           ->getQuery()
+           ->getSingleScalarResult();
+    }
+
+
+
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
 //     */

@@ -66,7 +66,7 @@ class BlogController extends AbstractController
         if($adminAccess){ 
             $form = $this->createForm(AdminArticleType::class, $article);
         } else {
-            //sinon l'user aura le formulaire classique, son article apparaîtra avec les autres dans la sections blog (actualités)
+            //sinon l'user aura le formulaire classique, son article apparaîtra avec les autres dans les articles de la page d'accueil
             $form = $this->createForm(ArticleType::class, $article); 
         }
          

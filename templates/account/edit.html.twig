@@ -14,34 +14,17 @@
         
             <div class="row wrapper">
                     <div class="banner m-0">
-                        {% if user.banner %}
-                            <img src="{{asset('/uploads/banner/'~ user.banner)}}" alt="banniere"/>
-                        {% else %}
-                            <img src="{{asset('/img/NazgulFrame.jpg')}}" alt="banniere"/>
-                        {% endif %}
+                        <img src="{{asset('/uploads/banner/'~ user.banner)}}" alt="banniere"/>
                     </div>
                     <h2>Modifier mon profil</h2>
-                <div class="col-md-6">
-                    <h4>Mon profil public</h4>  
-                    {{form_start(form)}}
-                    <hr>
-                    
-                        {{form_row(form.banner)}}
-                     {{form_row(form.nickname)}} 
-                    <div>
-                        {% if user.avatar %}
-                            <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar du profil" class="avatar">
-                        {% else %}
-                            <img src="{{asset('img/avatar-1.png')}}" alt="avatar par défaut" class="avatar">
-                        {% endif %}
-                    </div>
-                        {{form_row(form.avatar)}}  
-                        
-
-                </div>
-                <div class="col-md-5">
-                <h4>Mes informations personnelles</h4>
+               
+                <div class="col-md-6 px-3">
+                    <div class="d-flex justify-content-between align-items-baseline">
+                        <h4>Mes informations personnelles</h4>
+                        <a href="{{path('account_pwd_edit')}}" class="btn param"><i class="fa-solid fa-key"></i> Modifier mon mot de passe</a>
+                    </div>    
                 <hr>
+                {{form_start(form)}}
                     {{form_row(form.email)}}
                     {{form_row(form.firstname)}}
                     {{form_row(form.lastname)}}
@@ -49,14 +32,25 @@
                     {{form_row(form.address_complement)}}
                     {{form_row(form.zip)}}
                     {{form_row(form.city)}} 
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-dark btn-lg">Enregister</button>
-                    <a href="{{path('account_myprofile')}}" class="btn btn-light"><i class="fa-solid fa-arrow-rotate-left"></i> Retour</a>
-                    {{form_end(form)}}
-                </div> 
+                    
                 </div>
-                
+                 <div class="col-md-6 px-3">
+                    <h4>Mon profil public</h4>  
+                    <hr>
+                        {{form_row(form.banner)}}
+                        {{form_row(form.nickname)}} 
+                    <div class="my-2">
+                        <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar du profil" class="avatar">
+                    </div>
+                        {{form_row(form.avatar)}}  
+                      
+                <div class="my-4">
+                    <button type="submit" class="btn btn-dark btn-lg">Enregister</button>
+                    <a href="{{path('account_myprofile')}}" class="btn btn-light"><i class="fa-solid fa-arrow-rotate-left"></i> Retour</a> 
+                    {{form_end(form)}}           
+                </div>   
+               
+                </div>
             </div>
 
         </div>

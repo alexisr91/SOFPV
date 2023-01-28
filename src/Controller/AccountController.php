@@ -10,9 +10,11 @@ use App\Form\ArticleType;
 use App\Form\ProfileType;
 use App\Form\RegisterType;
 use App\Service\Pagination;
+use App\Entity\PasswordUpdate;
 use App\Form\AdminArticleType;
-use App\Repository\VideoRepository;
+use App\Form\PasswordUpdateType;
 use App\Repository\ArticleRepository;
+use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -24,6 +26,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class AccountController extends AbstractController
 {
@@ -83,14 +86,19 @@ class AccountController extends AbstractController
     public function myProfile(ArticleRepository $articleRepo)
     {
         $user = $this->getUser();
-        $articleCount = $articleRepo->countMyArticles($user); 
-        
-       
+  
+        //nombre d'articles de l'user
+        $articleCount = $articleRepo->countMyArticles($user);
+
+        //3 dernières questions de l'user pour accès rapides aux réponses 
+        $myQuestions = $articleRepo->findMylastQuestions($user);
+   
         return $this->render('account/myprofile.html.twig', [
             'title' => 'Mon compte ',
             'user' => $user,
-            'articleCount'=>$articleCount
-           
+            'articleCount'=>$articleCount,
+            'questions'=>$myQuestions,
+
         ]);
     }
 
@@ -159,7 +167,50 @@ class AccountController extends AbstractController
         ]);
     }
 
-    //Edition de mon drone (ma configuration favorite, visible au public) + vue sur ses autres configs (raccourcis pour en changer) 
+    //Modification du mot de passe de l'utilisateur
+    #[Route('/profile/edit/password-update', name:'account_pwd_edit')]
+    #[isGranted("ROLE_USER")]
+    public function passwordEdit(Request $request, EntityManagerInterface $manager,  UserPasswordHasherInterface $hasher){
+
+        $user = $this->getUser();
+        $passwordUpdate = new PasswordUpdate();
+        
+        $form = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            //le mot de passe actuel n'est pas bon
+            if(!password_verify($passwordUpdate->getOldPassword(), $user->getPassword())){
+
+                $form->get('oldPassword')->addError(new FormError("Le mot de passe que vous avez entré n'est pas votre mot de passe actuel."));
+            } else {
+                //récupération du nouveau mdp
+                $newPassword = $passwordUpdate->getNewPassword();
+
+                //hash du nouveau mdp
+                $hash = $hasher->hashPassword($user, $newPassword);
+
+                //on set le nouveau mdp
+                $user->setPassword($hash);
+
+                //ok donc on envoie à la bdd
+                $manager->persist($user);
+                $manager->flush();
+
+                $this->addFlash('success', "Votre nouveau mot de passe a bien été enregistré.");
+                return $this->redirectToRoute('account_edit');
+
+            }
+
+        }
+
+        return $this->render("account/passwordUpdate.html.twig", ["title"=>" Modification de votre mot de passe", 'form'=>$form->createView()]);
+
+    }
+
+
+    //Edition de mon drone (ma configuration favorite, visible au public)
     #[Route('/profile/edit/favorite', name:'account_drone_edit')]
     #[IsGranted("ROLE_USER")]
     public function droneEdit(EntityManagerInterface $manager, Request $request, SluggerInterface $slugger){
