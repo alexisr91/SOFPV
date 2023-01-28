@@ -35,11 +35,7 @@
                 </figure> 
                 <div class="author">
                     <div class="author-avatar">
-                        {% if article.author.avatar %}
-                            <img class="img-fluid " src="{{asset('/uploads/avatar/'~ article.author.avatar )}}" alt="Avatar de {{article.author}}">
-                        {% else %}
-                            <img class="img-fluid " src="{{asset('/img/avatarDefault.jpg')}}" alt="Avatar par défaut">
-                        {% endif %}
+                        <img class="img-fluid " src="{{asset('/uploads/avatar/'~ article.author.avatar )}}" alt="Avatar de {{article.author}}">
                     </div>
                     <div class="author-nickname">
                         <h4>{{article.author.nickname}}</h4>

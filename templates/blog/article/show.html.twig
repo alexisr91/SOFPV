@@ -11,16 +11,10 @@
         <div class="container-fluid wrapper">
             <div class="row col-xs-12 col-md-10" id="wrapArticleContent">
                 
-                    <div class="banner">
-                        {% if user.banner %}
+                    <div class="banner">    
                             <img src="{{asset('uploads/banner/' ~ user.banner)}}" alt="Bannière de {{user.nickname}}">
-                        {% else %}
-                            <img src="{{asset('/img/bannerDefault.png')}}" alt="Bannière par défaut">
-                        {% endif %}
-                        
                     </div>
                     
-           
                 <div class="col-md-8">
                     {% if article.video %}
                         {# video affichée #}
@@ -33,11 +27,7 @@
                     <div class="d-flex justify-content-between align-items-center px-1">
                         <div class="user">
                             <div class="avatar">
-                                {% if user.avatar is not null %}
-                                    <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar" class="img-fluid"/>
-                                {% else %}
-                                    <img src="{{asset('/img/avatar-1.png')}}" alt="avatar" class="img-fluid"/>
-                                {% endif %}            
+                                    <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar de {{user.nickname}}" class="img-fluid"/>
                             </div>
                                 <h2><a href="{{path('account_profile', {'nickname': user.nickname })}}">{{user.nickname}}</a> </h2>
                         </div>
@@ -88,7 +78,7 @@
                         <div class="commentWrap">
                             <div class="commentAuthor">
                                 <div>
-                                    <img src="{{asset('/img/avatar-1.png')}}" alt="avatar de {{comment.author.nickname}}">
+                                    <img src="{{asset('uploads/avatar/'~ comment.author.avatar)}}" alt="avatar de {{comment.author.nickname}}">
                                     <a href="{{path('account_profile', {'nickname': comment.author.nickname })}}">{{comment.author.nickname}}</a>
                                     <span class="text-muted">
                                         • {{comment.createdAt|date('d-m-Y H:i')}}

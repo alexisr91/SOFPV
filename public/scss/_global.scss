@@ -45,6 +45,7 @@ ul {
     list-style-type: none;
 }
 
+
 .page-item.active .page-link {
     color: $white !important;
     background-color: $base !important;
@@ -83,6 +84,17 @@ input {
 
 .fa-reply {
    transform: rotateX(180deg) ;
+}
+
+.param a, a.param {
+    background-color: $grey;
+    &:hover {
+        background-color: $base !important;
+        color:$white;
+    }
+    i {
+        padding:0.5em;
+    }
 }
 
 .banner{

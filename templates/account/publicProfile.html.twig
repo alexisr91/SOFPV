@@ -11,12 +11,8 @@
 
         <div class="wrap">   
         {# banner #} 
-                <div class="banner">
-                {% if user.banner is not null %}       
+                <div class="banner">     
                     <img src="{{asset('/uploads/banner/'~ user.banner)}}" alt="banniere"/>       
-                {% else %}  
-                    <img src="{{asset('/img/NazgulFrame.jpg')}}" alt="banniere"/> 
-                {% endif %}
                 </div>
                <div class="row">
 
@@ -24,11 +20,7 @@
                 <div class="col-3">
                     <div class="user">
                         <div id="profile-avatar">
-                            {% if user.avatar is not null %}
-                                <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar" class="img-fluid"/>
-                            {% else %}
-                                <img src="{{asset('/img/avatar-1.png')}}" alt="avatar" class="img-fluid"/>
-                            {% endif %}            
+                            <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar" class="img-fluid"/>
                         </div>
                         <h2>{{user.nickname}}</h2> 
                     </div>

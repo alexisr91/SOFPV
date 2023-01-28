@@ -114,7 +114,9 @@ section#myProfile {
     display: flex;
     flex-direction: column;
     width:100%;
-    background-color: $base; 
+    background-image: url('../img/bg-carbon-starline-freepik.jpg');
+    background-color: $base;
+    background-size: cover;
     .wrap {
         height:100%;
         background-color: $base;
@@ -127,16 +129,7 @@ section#myProfile {
         padding: 2em;
         border-radius: 3px;
     }
-    .param a, a.param {
-        background-color: $grey;
-        &:hover {
-            background-color: $base;
-            color:$white;
-        }
-        i {
-            padding:0.5em;
-        }
-    }
+    
     .personnal-info {
         a{
             background-color: $grey;
@@ -151,14 +144,41 @@ section#myProfile {
         }
     }
     .dashboard {
-        min-height: 90%;
         position: relative;
+
+        .spanWrap {
+            margin: 1em 0.7em;
+        }
+        .notification{
+            z-index: 5;
+            position: absolute;
+            bottom: 0.5em;
+            right: 5em;
+        }
+        .accordion-item {
+            .accordion-header {position: relative;}
+            .accordion-button:not(.collapsed){
+                color:$base ;
+                background-color: $grey;
+            }
+            .accordion-button{
+                color:$base;
+            }
+        }
+        .accordion-body{
+            position: relative;
+
+            .show-article {
+            position: absolute;
+            top:1em;
+            right: 1em;
+            }
+        }
+       
     }
 
     .counters {
-        position: absolute;
         width: 100%;
-        bottom:0;
         margin-bottom: 2em;
         .counter{
             text-align: center;
@@ -222,23 +242,48 @@ section#myProfile {
         }
     }
 
-
-        
 }
- 
+
+/* MY PROFILE - password edit*/
+section#myPwdEdit {
+    background-image: url('../img/redQuad.jpeg');
+    background-size: cover;
+    background-color: $base; 
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    .container-fluid{ 
+        display: flex; 
+        height: 90.5vh;
+        align-items: center;
+       
+    }
+    .wrapper{
+        background-color: $white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 50%;
+        margin: 0 auto;
+         border-radius: 3px;
+    }
+} 
+
 /* MY PROFILE - edit */
 section#myProfileEdit, section#droneEdit {
     background-image: url('../img/quadsLavoir.jpeg');
-    background-color: $base;
+    background-color: $base; 
+    background-blend-mode: multiply;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-blend-mode: multiply;
+   
     min-height: 90vh;
     .container-fluid {
         display: flex;
         aside.sidebarMenu {
-            height: 97vh;
+            height: 93vh;
         }
     }
     #navbarMenu {
@@ -270,15 +315,21 @@ section#myProfileEdit, section#droneEdit {
         object-fit: cover;
         object-position: center ;
     }
+    
 }
 
 /* DRONE EDIT */
 section#droneEdit {
+    .container-fluid {
+        display: flex;
+    }
 
     .wrapper 
     {   background-color: $white;
-        padding:2em;
-        height: 90vh;
+        padding:3em;
+        margin: 3em auto;
+        height: 85vh;
+        width: 70%;
     }
     .avatar {
         max-height:125px;
@@ -471,9 +522,6 @@ section#myArticles{
 /*Ajouter un article */
 
 section#addArticle, section#editArticle {
-    .sidebarMenu {
-        width:10%;
-    }
     .wrapper {
         background-color: $white;
         border-radius: 3px;

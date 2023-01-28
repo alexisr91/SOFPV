@@ -7,6 +7,7 @@ use App\Form\ImageType;
 use App\Form\VideoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -21,7 +22,8 @@ class ArticleType extends AbstractType
                 'label'=>'Titre de l\'article',
                 'required'=>true
             ])
-            ->add('category', CategoryType::class, [
+            ->add('category', EntityType::class, [
+                'class'=> Category::class,
                 'label'=>'Catégorie',
                 'required'=>true
             ])

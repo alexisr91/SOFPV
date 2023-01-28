@@ -17,6 +17,7 @@
                         {{form_row(form.title)}}
                         {{form_row(form.category)}}   
                         {{form_row(form.content)}}
+                        {# si l'user est admin, le formulaire affiché sera spécifique et il aura accès à la selection de l'article à la une #}
                         {% if is_granted("ROLE_ADMIN") %}
                             {{form_row(form.adminNews)}}
                         {% endif %}
@@ -27,8 +28,6 @@
                     <h5><i class="fa-solid fa-film"></i> Ajouter une vidéo</h5>
                         {{form_row(form.video.title)}}
                         {{form_row(form.video.source)}}
-
-
 
                                            
                     <h5 class="mt-3"><i class="fa-solid fa-images"></i> Ajouter des images</h5>

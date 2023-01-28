@@ -3,9 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Form\ImageType;
 use App\Form\VideoType;
-use App\Form\CategoryType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,7 +24,8 @@ class AdminArticleType extends AbstractType
             'label'=>'Titre de l\'article',
             'required'=>true
         ])
-        ->add('category', CategoryType::class, [
+        ->add('category', EntityType::class, [
+            'class'=> Category::class,
             'label'=>'Catégorie',
             'required'=>true
         ])
@@ -43,7 +45,8 @@ class AdminArticleType extends AbstractType
             'mapped'=>false
         ])
         ->add('adminNews', CheckboxType::class, [
-            'label'=>'Souhaitez-vous que cet article soit l\'actualité "à la une" de la page d\'accueil ?'
+            'label'=>'Souhaitez-vous que cet article soit l\'actualité "à la une" de la page d\'accueil ?',
+            'required'=>false
         ])
         ;
     }

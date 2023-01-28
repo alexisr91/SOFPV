@@ -14,11 +14,7 @@
         <div class="wrap">   
         {# banner #} 
                 <div class="banner">
-                {% if user.banner is not null %}       
                     <img src="{{asset('/uploads/banner/'~ user.banner)}}" alt="banniere"/>       
-                {% else %}  
-                    <img src="{{asset('/img/NazgulFrame.jpg')}}" alt="banniere"/> 
-                {% endif %}
                 </div>
                <div class="row">
 
@@ -26,11 +22,7 @@
                     {# avatar + pseudo #}
                     <div class="user">
                         <div id="myProfile-avatar">
-                            {% if user.avatar is not null %}
-                                <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar" class="img-fluid"/>
-                            {% else %}
-                                <img src="{{asset('/img/avatar-1.png')}}" alt="avatar" class="img-fluid"/>
-                            {% endif %}            
+                            <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar" class="img-fluid"/>       
                         </div>
                         <h2>{{user.nickname}}</h2> 
                     </div>
@@ -75,7 +67,6 @@
                         <b>Réception: </b>{{user.drone.reception}}<br>
                         <b>Type de lipo: </b>{{user.drone.lipoCells}}S
                     </div>
-                  
                        {% endif %}
                  
                         </div>
@@ -86,9 +77,9 @@
                         <h3>Tableau de bord</h3>
                         <div class="row mx-auto mt-3">
                             <div class="col mb-3">
-                                <a href="{{path('article_add')}}" class="btn param">Ajouter un article</a>
+                                <a href="{{path('article_add')}}" class="btn param"><i class="fa-solid fa-pen-to-square"></i> Ajouter un article</a>
                             </div>
-                            <div class="row row-col-3">
+                            <div class="row row-cols-3">
                                 <div class="col">
                                 {# TODO : mettre en place les compteurs de stats #}
                                     <div class="card text-bg-light mb-3">
@@ -99,7 +90,7 @@
                                             </div>
                                     </div>
                                 </div>
-                                <div class="col">
+                                {# <div class="col">
                                     <div class="card text-bg-light mb-3">
                                         <div class="card-header">Questions</div>
                                             <div class="card-body text-center">
@@ -107,7 +98,7 @@
                                                 <h5>1</h5>
                                             </div>
                                     </div>
-                                </div>
+                                </div> #}
                                 <div class="col">
                                     <div class="card text-bg-light mb-3">
                                         <div class="card-header">Sessions prévues</div>
@@ -128,8 +119,49 @@
                                 </div>
                                 
                             </div>
-                           
                         </div>
+                        {# bloc questions + notif commentaires  #}
+                        {% if questions %}
+                        <div class="accordion" id="accordionQuestion">
+                            {% for question in questions %}
+                            <div class="accordion-item">
+                                    <div class="accordion-header" id="heading{{loop.index}}">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{loop.index}}" aria-expanded="true" aria-controls="collapse{{loop.index}}">
+                                            <h5>{{question.title}}</h5>
+                                            <span class="text-muted ms-3">Publié le {{question.createdAt|date("d-m-Y")}}</span>
+                                        </button>
+                                        <div class="notification">
+                                            <i class="fa-solid fa-comment fa-2x"></i>
+                                            {# si il y a des commentaires sur l'article de la catégorie "question", on affiche le nombre de commentaires #}
+                                            {% if question.comments|length is not same as 0 %}
+                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                {{question.comments|length }}
+                                                <span class="visually-hidden">unread messages</span>
+                                            </span>
+                                            {% endif %}
+                                        </div>      
+                                    </div>
+                                <div id="collapse{{loop.index}}" class="accordion-collapse collapse" aria-labelledby="heading{{loop.index}}" data-bs-parent="#accordionQuestion">
+                                    <div class="accordion-body">
+                                        <div class="show-article">
+                                            <a href="{{path('article_show', {'slug': question.slug })}}" class="btn param" target="_blank"><i class="fa-solid fa-eye"></i>
+                                                <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger rounded-circle">
+                                                    <span class="visually-hidden">New alerts</span>
+                                                </span> </a>
+                                        </div>
+                                        {% set questionContent = question.content|u.truncate(300, '...', false) %}
+                                        {{questionContent|raw}}
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="spanWrap">
+                            <span class="alert alert-success">Vous n'avez pas encore publié de questions.</span>
+                        </div>
+                        {% endif %}
                         {# bloc counter #}  
                         <div class="row counters mt-4">
                             <div class="col-md-4 counter">
