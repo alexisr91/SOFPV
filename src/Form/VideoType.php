@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class VideoType extends AbstractType
 {
@@ -16,13 +17,20 @@ class VideoType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label'=>'Titre de la vidéo',
-                'required'=>false
+                'required'=>false,
+                'attr'=> ['placeholder'=>"Optionnel"]
             ])
             ->add('source', FileType::class, [
-                'label'=>'Ajouter une vidéo',
+                'label'=>'Téléversez une vidéo',
                 'mapped'=>false,
                 'required'=>false
             ])
+            ->add('link', UrlType::class, [
+                'label' => 'Insérez une URL',
+                'mapped'=> false,
+                'trim'=>true,
+                'attr'=>['placeholder'=>'Ex: https://www.youtube.com/watch?v=xxxxxxxxxxxx ...']
+            ])    
         ;
     }
 
@@ -30,6 +38,7 @@ class VideoType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Video::class,
+            'allow_extra_fields'=>true
         ]);
     }
 }

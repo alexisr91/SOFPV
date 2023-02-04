@@ -108,22 +108,22 @@ class VideoController extends AbstractController
         return $duration;
     }
 
-    //visionne la vidéo
-    #[Route('/show/{id}/view', name:'view_video')]
-    public function show(Video $video, EntityManagerInterface $manager){
-        //incrémentation des views si le viewer n'est pas l'éditeur
-        $author = $video->getUser()->getNickname();
-        $title = $video->getTitle();
+    // //visionne la vidéo
+    // #[Route('/show/{id}/view', name:'view_video')]
+    // public function show(Video $video, EntityManagerInterface $manager){
+    //     //incrémentation des views si le viewer n'est pas l'éditeur
+    //     $author = $video->getUser()->getNickname();
+    //     $title = $video->getTitle();
 
-        if($this->getUser()!= $video->getUser()){
-            $video->setViews($video->getViews() + 1 );
-            $manager->persist($video);
-            $manager->flush();
-        }
-        return $this->render('article/video/show.html.twig', [
-            'video'=>$video,
-            'title'=> $title.' - '.$author
-        ]);
-    }
+    //     if($this->getUser()!= $video->getUser()){
+    //         $video->setViews($video->getViews() + 1 );
+    //         $manager->persist($video);
+    //         $manager->flush();
+    //     }
+    //     return $this->render('article/video/show.html.twig', [
+    //         'video'=>$video,
+    //         'title'=> $title.' - '.$author
+    //     ]);
+    // }
 
 }

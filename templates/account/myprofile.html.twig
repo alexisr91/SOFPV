@@ -136,7 +136,7 @@
                                             {% if question.comments|length is not same as 0 %}
                                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                                 {{question.comments|length }}
-                                                <span class="visually-hidden">unread messages</span>
+                                                <span class="visually-hidden">Commentaires de l'article</span>
                                             </span>
                                             {% endif %}
                                         </div>      
@@ -144,9 +144,9 @@
                                 <div id="collapse{{loop.index}}" class="accordion-collapse collapse" aria-labelledby="heading{{loop.index}}" data-bs-parent="#accordionQuestion">
                                     <div class="accordion-body">
                                         <div class="show-article">
-                                            <a href="{{path('article_show', {'slug': question.slug })}}" class="btn param" target="_blank"><i class="fa-solid fa-eye"></i>
+                                            <a href="{{path('article_show', {'slug': question.slug })}}" class="btn param p-0" target="_blank"><i class="fa-solid fa-eye"></i>
                                                 <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger rounded-circle">
-                                                    <span class="visually-hidden">New alerts</span>
+                                                    <span class="visually-hidden">Nouvelle alerte</span>
                                                 </span> </a>
                                         </div>
                                         {% set questionContent = question.content|u.truncate(300, '...', false) %}

@@ -39,6 +39,16 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+    //recherche par nom
+    public function findByName($q){
+        $qb = $this->createQueryBuilder('c');
+        $qb->leftJoin('c.articles', 'a')
+        ->leftJoin('a.author', 'u')
+        ->where('c.name like :q')
+        ->setParameter('q', '%'.$q.'%');
+
+        return $qb->getQuery()->getResult();
+    }
 //    /**
 //     * @return Category[] Returns an array of Category objects
 //     */

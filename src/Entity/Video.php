@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\VideoRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\VideoRepository;
+
 
 #[ORM\Entity(repositoryClass: VideoRepository::class)]
 class Video
@@ -41,12 +42,26 @@ class Video
     #[ORM\OneToOne(mappedBy: 'video', cascade: ['persist', 'remove'])]
     private ?Article $article = null;
 
+    #[ORM\Column]
+    private ?bool $isUploaded = null;
+
     public function __construct()
     {
         $this->views = 0;
         $this->active = 1;
-        $this->created_at = new \DateTime('now', new \DateTimeZone('Europe/Paris')); 
+        $this->created_at = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $this->thumbnail = 'blogDefault.png';
+        $this->duration = '00:00';
 
+    }
+
+    //Conversion de l'URL fourni par l'user en URL lisible avec Youtube (embed)
+    public function convertYT($videoURL){
+            // "https://www.youtube.com/watch?v=Ojs5cERnQqg"
+            // 'https://www.youtube.com/embed/Ojs5cERnQqg';
+            // Difference entre  watch?v= et embed/ 
+        $convertedURL = str_replace("watch?v=","embed/",$videoURL);
+        return $convertedURL;
     }
 
     public function getId(): ?int
@@ -168,6 +183,18 @@ class Video
         }
 
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function isIsUploaded(): ?bool
+    {
+        return $this->isUploaded;
+    }
+
+    public function setIsUploaded(bool $isUploaded): self
+    {
+        $this->isUploaded = $isUploaded;
 
         return $this;
     }

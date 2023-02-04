@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Résultats de votre recherche {% endblock %}
+
+{% block body %}
+ 
+    <section id="search">
+        {{include('partials/_navbarMenu.html.twig')}}
+        <div class="container-fluid pt-4">
+            <div class="col-xs-12 col-md-8">
+                <h1 class="mb-3">Résultats de votre recherche</h1>
+                {# Résultats d'articles #}
+                {% if articles is not empty %}
+                    <h3 class="my-4">Voici nos résultats d'articles pour la requête : 
+                    <i>"{{request}}"</i></h3>
+                    <div class="row">
+                        {% for article in articles %}
+                        <div class="col-md-12">
+                            {{include('/partials/_articleRight.html.twig')}}
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {# Résultats d'users #}
+                {% if users is not empty %}
+                    <h3 class="my-4">Voici nos résultats d'utilisateurs pour la requête : 
+                    <i>"{{request}}"</i></h3>
+                    <div class="row user">
+                        {% for user in users %}
+                        <div class="col-md-12 my-2">
+                            <div class="author">
+                                <div class="author-avatar">
+                                    <img class="img-fluid " src="{{asset('/uploads/avatar/'~ user.avatar )}}" alt="Avatar de {{user.nickname}}">
+                                </div>
+                                <div class="author-nickname">
+                                    <h4><a href="{{path('account_profile', {'nickname':user.nickname})}}">{{user.nickname}}</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {# Résultats de catégories #}
+                 {% if category is not empty %}
+                    <h3 class="my-4">Voici nos résultats de catégories pour la requête : 
+                    <i>"{{request}}"</i></h3>
+                    <div class="row">
+                    {% for category in category %}
+                        {% for article in category.articles %}
+                        <div class="article col-md-12">
+                            {{include('/partials/_articleRight.html.twig')}}
+                        </div>
+                        {% endfor %}
+                    {% endfor %}
+                    </div>    
+                {% endif %}
+                {# si il n'y a aucun résultat entre les users, les articles ou les catégories #}
+                {% if (articles is empty) and (users is empty) and (category is empty) %}
+                <div class="my-5">
+                    <span class="alert alert-warning">Aucun résultat ne correspond à la recherche : <i>"{{request}}"</i></span>
+                </div>
+                {% endif %}
+            </div>
+    
+    </section>
+{% endblock %}

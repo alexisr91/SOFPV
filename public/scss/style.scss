@@ -420,6 +420,7 @@ section#showArticle {
                 background-color:$white;
                 width: 100%;
                 height: 100%;
+                border-radius: 3px;
             }
         }
     }
@@ -456,6 +457,7 @@ section#showArticle {
                 img{
                     max-height: 35px;
                     max-width: 35px;
+                    border-radius: 3px;
                 }
             }
        }
@@ -464,15 +466,26 @@ section#showArticle {
 /*Mes articles */
 section#myArticles{
     background-image: url('/img/forestView.jpg');
+    article {position: relative;}
     
     .container-fluid{
         display: flex;
         min-height: 100vh;
 
+        .article-thumb {
+            width: 40%;
+            display: flex;
+            align-items: center;
+            background-color: rgba($grey,0.4);
+            position: relative;
+        }
+
         .row-cols-md-1{
             margin-bottom: 3em;
         }
-        
+        .card-title {
+            margin-left: 0.5em;
+        }
         .sidebar{
             width:10%;
         }
@@ -557,23 +570,26 @@ section#addArticle, section#editArticle {
 // SECTION BLOG - INDEX
 section#blog {
     background-image: url('/img/bando2.jpg');
+}
+
+section#blog, section#blogHome, section#search
+{
+    .row.g-0{width: 100%;}
     .author {
         display: flex;
         align-items: center;
         border-radius: 2px;
-        background-color: rgba($white, 0.5);
-        position: absolute;
-        bottom:0;
         height: 3em;
+        margin-bottom:1em;
         padding-right: 1em;
 
         .author-avatar {
-        width: 100%;
         height: 100%;
             img{
                 background-color:$white;
                 width: 100%;
                 height: 100%;
+                border-radius: 3px;
             }
         }
         .author-nickname {
@@ -598,14 +614,7 @@ section#blog, section#myArticles {
         padding-bottom: 1em; 
     }
     .row-cols-md-1 {margin-bottom: 3em;}
-    .article-thumb {
-        max-width: 30%;
-        display: flex;
-        align-items: center;
-        background-color: rgba($grey,0.4);
-        position: relative;
-
-    }
+    
     .article {
         display: flex;
         position: relative;
@@ -626,7 +635,15 @@ section#blog, section#myArticles {
         -webkit-box-orient: vertical;
     }
 }
-
+section#blog, section#myArticles, section#blogHome, section#search{
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        padding: 0 2rem 0.5rem 2rem;
+    }
+}
 //profil public 
 
 section#profile {
@@ -634,7 +651,7 @@ section#profile {
     flex-direction: column;
     width:100%;
     background-color: $base; 
-        
+    .author {display: none;}
     .wrap {
         margin-top: 0.5em;
         height:100%;
@@ -657,6 +674,7 @@ section#profile {
         margin-right: 2em;
         padding: 2em 1em;
         border-radius: 3px;
+        min-height: 60vh;
     }
 
 
@@ -752,8 +770,40 @@ section#profile {
         -webkit-box-orient: vertical;
     }
 
-
 }
+
+/**SEARCH PAGE ***/
+section#search {
+    
+    h3 {
+        font-family: 'Play', sans-serif;
+        font-weight: bolder;
+    }
+    .container-fluid {
+        background-image: url('/img/forestView.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-blend-mode: multiply;
+        background-attachment: fixed;
+        background-color: $base;
+        display: flex;
+        justify-content: center;
+
+        .col-xs-12 {
+            background-color: $white;
+            padding: 2em;
+            border-radius: 3px;
+            min-height:89vh;
+        }
+
+        .article {
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+    }
+}
+
 
 
 @import "sideMenuProfile";

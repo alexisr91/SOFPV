@@ -17,11 +17,13 @@
                     <article class="col">
                         <div class="article">  
                             <div class="article-thumb">
-                                <div class="category-badge badge {{article.category}}">
-                                    {{article.category|capitalize}}
-                                </div> 
                             {% if article.video %}
-                                <img class="img-fluid" src="{{asset('/uploads/article/video/thumb/'~ article.video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
+                                {% set video = article.video %}
+                                {% if video.isUploaded %}
+                                    <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/video/thumb/'~ video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
+                                {% else %}
+                                    {% include('/partials/_video.html.twig') %} 
+                                {% endif %}
                             {% elseif article.images %}
                                 {# TODO : repo ->selectionner la premiere image ajoutée dans l'article comme vignette#}
                                 <img class="card-img-top img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >     
@@ -31,7 +33,12 @@
                             </div>
                             <div class="article-body">
                                 <div>
-                                    <h5>{{article.title}}</h5>
+                                    <div class="d-flex mb-2">            
+                                      <div class="category-badge badge {{article.category}}">
+                                          {{article.category|capitalize}}
+                                      </div>
+                                          <h5 class="card-title">{{article.title|capitalize}}</h5>
+                                    </div> 
                                     {# Pour afficher une partie du contenu et utiliser les 2 filtres de twig pour tronquer + afficher avec les sauts de ligne #}
                                     {% set articleContent = article.content|u.truncate(300, '...', false) %}
                                     <p class="article-content">{{articleContent|raw}}</p>

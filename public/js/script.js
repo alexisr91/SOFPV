@@ -51,3 +51,18 @@
             newElem.appendTo(list);
         });
     });
+
+    //FILTRE PAR CATEGORIE (BLOG ACTUALITES)
+
+    $('#cat').on('change', function(){
+        let cat = $(this).val() //on select le nom de la catégorie dès qu'un choix se fait sur le menu deroulant
+        
+        if(cat === 'all') {
+            $('.category').parent().parent().fadeIn('fast')
+        
+        } else {
+            $('.category').parent().parent().fadeOut('fast')
+            $('.'+ cat).parent().parent().fadeIn('slow') // on fait apparaitre le container grand parent ( col-md-3 ) dont la categorie correspond au choix du menu
+        }
+    
+    })

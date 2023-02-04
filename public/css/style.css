@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* GENERAL */
 /* SETUP VARIABLES SASS */
 /* colors */
@@ -23,21 +22,6 @@ html, body {
 body {
   position: relative;
   min-height: 100%; }
-
-.title-banner {
-  /* kits de compatibilité pour le dégradé */
-  background: #252525;
-  background: -moz-linear-gradient(145deg, #252525 0%, rgba(37, 37, 37, 0.5) 15%, rgba(255, 255, 255, 0) 35%);
-  background: -webkit-linear-gradient(145deg, #252525 0%, rgba(37, 37, 37, 0.5) 15%, rgba(255, 255, 255, 0) 35%);
-  background: linear-gradient(145deg, #252525 0%, rgba(37, 37, 37, 0.5) 15%, rgba(255, 255, 255, 0) 35%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="$base",endColorstr="#ffffff",GradientType=1);
-  color: #fafafa;
-  height: 4em;
-  display: flex;
-  justify-content: start;
-  align-items: center; }
-  .title-banner h3 {
-    margin-left: 2em; }
 
 a {
   text-decoration: none;
@@ -108,23 +92,37 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 1em;
-  right: 1em;
+  z-index: 3;
   padding: 0.5em 1em; }
-  .category-badge.session {
+  .category-badge.Session {
     background-color: #B30B00; }
-  .category-badge.crash {
+  .category-badge.Crash {
     background-color: #FF5A08; }
-  .category-badge.question {
+  .category-badge.Question {
     background-color: #540493; }
-  .category-badge.review {
+  .category-badge.Review {
     background-color: #015E6C; }
-  .category-badge.inclassable {
+  .category-badge.Inclassable {
     background-color: #252525; }
-  .category-badge.build {
+  .category-badge.Build {
     background-color: #DADADA;
     color: #252525; }
+
+.ytPlayer {
+  position: relative;
+  width: 100%; }
+  .ytPlayer iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0; }
+
+.ytPlayer::after {
+  content: "";
+  display: block;
+  width: 100%;
+  padding-bottom: calc(315/560*100%); }
 
 /* NAV MENU */
 section#navbarMenu {
@@ -314,11 +312,6 @@ section#blogHome {
     padding: 2em;
     max-width: 60%;
     color: #252525; }
-    section#blogHome article .card-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 100%; }
     section#blogHome article .content {
       display: flex;
       flex-direction: column;
@@ -340,26 +333,6 @@ section#blogHome {
       section#blogHome article .content .voirPlus {
         display: flex;
         justify-content: flex-end; }
-    section#blogHome article .author {
-      display: flex;
-      align-items: center;
-      border-radius: 2px;
-      background-color: rgba(250, 250, 250, 0.5);
-      position: absolute;
-      bottom: 1.5em;
-      height: 3em;
-      padding-right: 1em; }
-      section#blogHome article .author .author-avatar {
-        width: 100%;
-        height: 100%; }
-        section#blogHome article .author .author-avatar img {
-          background-color: #fafafa;
-          width: 100%;
-          height: 100%; }
-      section#blogHome article .author .author-nickname {
-        padding: 0 1em; }
-        section#blogHome article .author .author-nickname h4 {
-          margin: 0; }
     section#blogHome article .avatar {
       max-height: 70px;
       max-width: 70px;
@@ -737,7 +710,8 @@ section#showArticle .user {
     section#showArticle .user .avatar img {
       background-color: #fafafa;
       width: 100%;
-      height: 100%; }
+      height: 100%;
+      border-radius: 3px; }
 section#showArticle .addCommentForm form {
   display: flex;
   align-items: center; }
@@ -762,16 +736,27 @@ section#showArticle .commentWrap {
     margin-bottom: 1em; }
     section#showArticle .commentWrap .commentAuthor img {
       max-height: 35px;
-      max-width: 35px; }
+      max-width: 35px;
+      border-radius: 3px; }
 
 /*Mes articles */
 section#myArticles {
   background-image: url("/img/forestView.jpg"); }
+  section#myArticles article {
+    position: relative; }
   section#myArticles .container-fluid {
     display: flex;
     min-height: 100vh; }
+    section#myArticles .container-fluid .article-thumb {
+      width: 40%;
+      display: flex;
+      align-items: center;
+      background-color: rgba(218, 218, 218, 0.4);
+      position: relative; }
     section#myArticles .container-fluid .row-cols-md-1 {
       margin-bottom: 3em; }
+    section#myArticles .container-fluid .card-title {
+      margin-left: 0.5em; }
     section#myArticles .container-fluid .sidebar {
       width: 10%; }
     section#myArticles .container-fluid .article-body {
@@ -825,26 +810,27 @@ section#addArticle .wrapper, section#editArticle .wrapper {
 
 section#blog {
   background-image: url("/img/bando2.jpg"); }
-  section#blog .author {
-    display: flex;
-    align-items: center;
-    border-radius: 2px;
-    background-color: rgba(250, 250, 250, 0.5);
-    position: absolute;
-    bottom: 0;
-    height: 3em;
-    padding-right: 1em; }
-    section#blog .author .author-avatar {
+
+section#blog .row.g-0, section#blogHome .row.g-0, section#search .row.g-0 {
+  width: 100%; }
+section#blog .author, section#blogHome .author, section#search .author {
+  display: flex;
+  align-items: center;
+  border-radius: 2px;
+  height: 3em;
+  margin-bottom: 1em;
+  padding-right: 1em; }
+  section#blog .author .author-avatar, section#blogHome .author .author-avatar, section#search .author .author-avatar {
+    height: 100%; }
+    section#blog .author .author-avatar img, section#blogHome .author .author-avatar img, section#search .author .author-avatar img {
+      background-color: #fafafa;
       width: 100%;
-      height: 100%; }
-      section#blog .author .author-avatar img {
-        background-color: #fafafa;
-        width: 100%;
-        height: 100%; }
-    section#blog .author .author-nickname {
-      padding: 0 1em; }
-      section#blog .author .author-nickname h4 {
-        margin: 0; }
+      height: 100%;
+      border-radius: 3px; }
+  section#blog .author .author-nickname, section#blogHome .author .author-nickname, section#search .author .author-nickname {
+    padding: 0 1em; }
+    section#blog .author .author-nickname h4, section#blogHome .author .author-nickname h4, section#search .author .author-nickname h4 {
+      margin: 0; }
 
 section#blog, section#myArticles {
   background-repeat: no-repeat;
@@ -860,12 +846,6 @@ section#blog, section#myArticles {
     padding-bottom: 1em; }
   section#blog .row-cols-md-1, section#myArticles .row-cols-md-1 {
     margin-bottom: 3em; }
-  section#blog .article-thumb, section#myArticles .article-thumb {
-    max-width: 30%;
-    display: flex;
-    align-items: center;
-    background-color: rgba(218, 218, 218, 0.4);
-    position: relative; }
   section#blog .article, section#myArticles .article {
     display: flex;
     position: relative; }
@@ -882,11 +862,20 @@ section#blog, section#myArticles {
     line-clamp: 7;
     -webkit-box-orient: vertical; }
 
+section#blog .card-body, section#myArticles .card-body, section#blogHome .card-body, section#search .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 2rem 0.5rem 2rem; }
+
 section#profile {
   display: flex;
   flex-direction: column;
   width: 100%;
   background-color: #252525; }
+  section#profile .author {
+    display: none; }
   section#profile .wrap {
     margin-top: 0.5em;
     height: 100%;
@@ -903,7 +892,8 @@ section#profile {
     background-color: #fafafa;
     margin-right: 2em;
     padding: 2em 1em;
-    border-radius: 3px; }
+    border-radius: 3px;
+    min-height: 60vh; }
   section#profile .my-drone {
     position: relative; }
     section#profile .my-drone .fav {
@@ -972,6 +962,29 @@ section#profile {
     -webkit-line-clamp: 7;
     line-clamp: 7;
     -webkit-box-orient: vertical; }
+
+/**SEARCH PAGE ***/
+section#search h3 {
+  font-family: 'Play', sans-serif;
+  font-weight: bolder; }
+section#search .container-fluid {
+  background-image: url("/img/forestView.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
+  background-attachment: fixed;
+  background-color: #252525;
+  display: flex;
+  justify-content: center; }
+  section#search .container-fluid .col-xs-12 {
+    background-color: #fafafa;
+    padding: 2em;
+    border-radius: 3px;
+    min-height: 89vh; }
+  section#search .container-fluid .article {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
 
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu {

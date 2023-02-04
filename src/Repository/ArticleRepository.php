@@ -88,7 +88,7 @@ class ArticleRepository extends ServiceEntityRepository
         ->andWhere('a.author = :user')
         ->setParameter('user', $user)
         ->andWhere('c.name = :question')
-        ->setParameter('question', 'question')
+        ->setParameter('question', 'Question')
         ->orderBy('a.createdAt', 'DESC')
         ->setMaxResults(3)
         ->getQuery()
@@ -106,6 +106,36 @@ class ArticleRepository extends ServiceEntityRepository
         ->orderBy('a.createdAt', 'DESC')
         ->getQuery()
         ->getSingleScalarResult();
+    }
+
+    //recherche des articles par critère
+    public function searchByCriteria($q){
+        $qb = $this->createQueryBuilder('a');
+        $qb
+        ->addSelect('c')
+        ->addSelect('u')
+        ->leftJoin('a.category', 'c')
+        ->leftJoin('a.author', 'u')
+        ->where( 
+            $qb->expr()->orX(
+                        $qb->expr()->like('a.title', ':q'),
+                        $qb->expr()->like('u.nickname', ':q'), 
+                        $qb->expr()->like('c.name', ':q')
+            ))
+        ->setParameter('q', '%'.$q.'%'); //retourne les resultats qui contiennent n'importe où le mot tapé ($q). Ex: cine => FPV cinematique trouvé
+
+            return $qb->getQuery()->getResult();
+    }
+
+    //recherche des article par titre
+    public function findByTitle($q){
+        $qb = $this->createQueryBuilder('a');
+        $qb->leftJoin('a.category', 'c')
+        ->leftJoin('a.author', 'u')
+        ->where('a.title like :q')
+        ->setParameter('q', '%'.$q.'%');
+
+        return $qb->getQuery()->getResult();
     }
 
 

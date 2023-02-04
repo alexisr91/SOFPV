@@ -20,8 +20,6 @@ class HomeController extends AbstractController
         $adminNews = $articleRepo->findAdminNewsArticle();
 
         return $this->render('home/index.html.twig', [
-      
-
             'title' => 'Bienvenue sur SO FPV !',
             'articles'=>$articles,
             'adminNews'=>$adminNews[0]

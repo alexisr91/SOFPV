@@ -56,6 +56,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->add($user, true);
     }
 
+    //recherche de de l'user par pseudo
+    public function findByPseudo($q){
+        $qb = $this->createQueryBuilder('u');
+        $qb->leftJoin('u.articles', 'a')
+        ->leftJoin('a.category', 'c')
+        ->where('u.nickname like :q')
+        ->setParameter('q', '%'.$q.'%');
+
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
