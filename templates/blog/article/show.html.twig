@@ -18,6 +18,8 @@
                 <div class="col-md-8">
                     {% if article.video %}
                         {# video affichée #}
+                        {% set height = '720' %}
+                        {% set width = '1280' %}
                         {% include "/partials/_video.html.twig" %}
                     {% else %}
                         {#TODO mettre image d'illustration si il y en a,  ou mettre une image par defaut #}

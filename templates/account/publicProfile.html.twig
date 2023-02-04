@@ -58,48 +58,14 @@
                 {# partie contenu de l'user #}
                 <div class="col">
                     <div class="user-content">
-                        {% if articles is not null %}
+                        {% if articles is not empty %}
                         <div class="row row-cols-md-1 g-4 px-3">
                             {% for article in articles %}
-                            <article class="col">
-                            <div class="article">  
-                            <a href="{{path('article_show', {'slug': article.slug})}}" class="stretched-link"></a>
-                                <div class="article-thumb">
-                                <div class="category-badge badge {{article.category}}">
-                                        {{article.category|capitalize}}
-                                    </div> 
-                                {% if article.video %}
-                                    <img class="img-fluid" src="{{asset('/uploads/article/video/thumb/'~ article.video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
-                                {% elseif article.images %}
-                                    {# TODO : repo ->selectionner la premiere image ajoutée dans l'article comme vignette#}
-                                    <img class="card-img-top img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >     
-                                {% else %}
-                                    <img class="card-img-top img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
-                                {% endif %}
-                                   
-                                </div>
-                                <div class="article-body">
-                                    <div>
-                                        <h5>{{article.title}}</h5>
-                                        {% set articleContent = article.content|u.truncate(400, '...', false) %}
-                                        <p class="article-content">{{articleContent|raw}}</p>
-                                    </div>
-                                    <div class="article-footer text-muted">
-                                        <div>
-                                            {{article.views}} <i class="fa-solid fa-eye"></i>
-                                            • {{article.likes|length}} <i class="fa-regular fa-thumbs-up"></i>
-                                            • {{article.comments|length}} <i class="fa-regular fa-comment"></i>
-                                        </div>
-                                    
-                                        <div>{{article.createdAt|date('d-m-Y')}}</div>
-                                    
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </article>
+                                {{include('/partials/_articleRight.html.twig')}}
                             {% endfor %}
-                            </div>
+                        </div>
+                        {% else %}
+                            <span class="alert alert-warning d-block mx-3">Cet utilisateur n'a pas encore publié de contenu.</span>
                         {% endif %}
                     </div>
                 </div>

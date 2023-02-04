@@ -8,15 +8,18 @@ use App\Entity\Likes;
 use App\Entity\Video;
 use App\Entity\Article;
 use App\Entity\Comment;
-use App\Form\AdminArticleType;
+use App\Entity\Category;
 use App\Form\ArticleType;
 use App\Form\CommentType;
 use App\Service\Pagination;
 use FFMpeg\Format\Video\X264;
+use App\Form\AdminArticleType;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Coordinate\Dimension;
 use App\Repository\LikesRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
+use Symfony\Component\Form\FormError;
 use FFMpeg\Filters\Video\ResizeFilter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,18 +27,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-
 
 class BlogController extends AbstractController
 {
     //page principale du blog (liste des articles)
     #[Route('/blog/{page<\d+>?1}', name: 'blog')]
-    public function index(Pagination $paginationService, $page)
+    public function index(CategoryRepository $categoryRepo,Pagination $paginationService, $page)
     {
         // $articles = $articleRepo->findAllArticlesByDate();
+        
 
         $paginationService->setEntityClass(Article::class)
                         ->setPage($page)
@@ -43,10 +47,13 @@ class BlogController extends AbstractController
                         ->setOrder('DESC')
                         
         ;
+        //pour récupérer les différents nom de catégories (pour le filtre par catégorie)
+        $category = $categoryRepo->findAll();
 
         return $this->render('blog/index.html.twig', [
            'title'=>'Actualités ',
-           'pagination'=>$paginationService
+           'pagination'=>$paginationService,
+           'categories'=>$category
         ]);
     }
     
@@ -70,7 +77,18 @@ class BlogController extends AbstractController
             $form = $this->createForm(ArticleType::class, $article); 
         }
          
-        $form->handleRequest($request);  
+        $form->handleRequest($request);
+
+        //Récupération du champ source pour la vidéo
+          $videoSource = $form->get('video')->get('source')->getData();
+
+        //Récupération du lien Youtube ou Vimeo 
+          $videoLink = $form->get('video')->get('link')->getData();
+
+        //Si les 2 inputs concernant l'ajout d'une vidéo sont remplis, on renvoie une erreur 
+        if(isset($videoLink) && isset($videoSource)){
+            $form->get('video')->get('link')->addError(new FormError('Vous ne pouvez pas ajouter plusieurs vidéos à votre article : choisissez le téléversement OU l\'ajout de lien.'));
+        }
       
         if($form->isSubmitted() && $form->isValid()){
             
@@ -115,13 +133,13 @@ class BlogController extends AbstractController
             //GESTION VIDEO
 
             //on teste si l'user à voulu mettre une vidéo :
-            //récupération du champ source via le formulaire imbriqué VideoType
-            $videoSource = $form->get('video')->get('source')->getData(); 
-            $ffmpeg = $this->initFfmpeg();
+          
+            // Si il y a une vidéo, est-elle un fichier uploadé ?...
+            if(isset($videoSource) && !isset($videoLink)){  
+                //si il y a une vidéo en téléversement on la traite avec FFmpeg
+                $ffmpeg = $this->initFfmpeg();
+                dd('upload');
 
-
-            //si il y a une vidéo on la traite avec FFmpeg
-            if($videoSource){
                 $originalName = $videoSource->getClientOriginalName(); //récupère le nom  
                 $upVideo = $ffmpeg->open($videoSource->getRealPath()); //récupère le chemin pour traiter avec ffmpeg
                 $title = $form->get('video')->get('title')->getData();
@@ -151,20 +169,32 @@ class BlogController extends AbstractController
                 $video->setSource($newName);
                 $video->setTitle($title);
                 $video->setUser($user);
+                $video->setIsUploaded(true);
 
                 $manager->persist($video);
 
                 //association de la vidéo avec l'article qui le possède
                 $article->setVideo($video);
-                
+              
+            //...Ou est-ce que la vidéo est un lien vers Youtube ou Vimeo ?   
+            } elseif(isset($videoLink) && !isset($videoSource)){
+
+                //On convertit l'URL YT fourni par l'user et on le convertit en URL "embed" 
+                $convertedURL = $video->convertYT($videoLink);
+                $video->setSource($convertedURL);
+
+                $video->setUser($user);
+                $video->setIsUploaded(false);
+
+                $manager->persist($video);
+
+                $article->setVideo($video);
             }
+
 
             $article->setContent($articleContent);
             $article->setAuthor($user);
             $manager->persist($article); 
-            
-            // dd($article);
-
             $manager->flush();
 
             $this->addFlash('success', 'Article publié !');
