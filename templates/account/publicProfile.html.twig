@@ -61,8 +61,10 @@
                         {% if articles is not empty %}
                         <div class="row row-cols-md-1 g-4 px-3">
                             {% for article in articles %}
-                                {{include('/partials/_articleRight.html.twig')}}
+                            {% set articleContent = article.content|u.truncate(300, '...', false) %}
+                                {{include('/partials/_articleRight.html.twig')}} 
                             {% endfor %}
+                            
                         </div>
                         {% else %}
                             <span class="alert alert-warning d-block mx-3">Cet utilisateur n'a pas encore publié de contenu.</span>

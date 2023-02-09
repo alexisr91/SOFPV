@@ -138,7 +138,7 @@ class BlogController extends AbstractController
             if(isset($videoSource) && !isset($videoLink)){  
                 //si il y a une vidéo en téléversement on la traite avec FFmpeg
                 $ffmpeg = $this->initFfmpeg();
-                dd('upload');
+                // dd('upload');
 
                 $originalName = $videoSource->getClientOriginalName(); //récupère le nom  
                 $upVideo = $ffmpeg->open($videoSource->getRealPath()); //récupère le chemin pour traiter avec ffmpeg
@@ -167,7 +167,10 @@ class BlogController extends AbstractController
                 $upVideo->save(new X264('libmp3lame', 'libx264'), $this->getParameter('upload_video').'/'.$newName);
                   
                 $video->setSource($newName);
-                $video->setTitle($title);
+                //si il y a un titre
+                if($title){
+                    $video->setTitle($title);
+                }
                 $video->setUser($user);
                 $video->setIsUploaded(true);
 
@@ -176,7 +179,7 @@ class BlogController extends AbstractController
                 //association de la vidéo avec l'article qui le possède
                 $article->setVideo($video);
               
-            //...Ou est-ce que la vidéo est un lien vers Youtube ou Vimeo ?   
+            //...Ou est-ce que la vidéo est un lien vers Youtube ?   
             } elseif(isset($videoLink) && !isset($videoSource)){
 
                 //On convertit l'URL YT fourni par l'user et on le convertit en URL "embed" 
