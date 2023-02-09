@@ -17,6 +17,7 @@
                     </select>
                 </div>
             {% for article in pagination.data %}
+                {% set articleContent = article.content|u.truncate(300, '...', false) %}
                 {{include('partials/_articleRight.html.twig')}}
             {% endfor %}
 

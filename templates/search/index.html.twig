@@ -9,19 +9,20 @@
         <div class="container-fluid pt-4">
             <div class="col-xs-12 col-md-8">
                 <h1 class="mb-3">Résultats de votre recherche</h1>
-                {# Résultats d'articles #}
+                {# Résultats d'articles (recherche dans les titres) #}
                 {% if articles is not empty %}
                     <h3 class="my-4">Voici nos résultats d'articles pour la requête : 
                     <i>"{{request}}"</i></h3>
                     <div class="row">
                         {% for article in articles %}
-                        <div class="col-md-12">
+                        <div class="col-md-12 m-2">
+                            {% set articleContent = article.content|u.truncate(300, '...', false) %}
                             {{include('/partials/_articleRight.html.twig')}}
                         </div>
                         {% endfor %}
                     </div>
                 {% endif %}
-                {# Résultats d'users #}
+                {# Résultats d'users (recherche dans les pseudos ) #}
                 {% if users is not empty %}
                     <h3 class="my-4">Voici nos résultats d'utilisateurs pour la requête : 
                     <i>"{{request}}"</i></h3>
@@ -40,7 +41,7 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                {# Résultats de catégories #}
+                {# Résultats de catégories ( recherche dans les noms de catégories) #}
                  {% if category is not empty %}
                     <h3 class="my-4">Voici nos résultats de catégories pour la requête : 
                     <i>"{{request}}"</i></h3>

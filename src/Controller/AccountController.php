@@ -299,7 +299,7 @@ class AccountController extends AbstractController
         // $articles = $articleRepository->findBy(['author'=> $user], ['createdAt'=>'DESC']);
         $paginationService->setEntityClass(Article::class)
                          ->setPage($page)
-                         ->setLimit(6)
+                         ->setLimit(5)
                          ->setOrder('DESC')
                          ->setProperty('author')
                          ->setValue($user)

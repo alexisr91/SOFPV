@@ -67,6 +67,8 @@
                     {# alternance de l'affichage des articles suivant leur index dans le tableau #}
                         {% if loop.index is divisible by(2) %}
                             <div class="wrapper-left">
+                                {# personnalisation du nombre de caractères à tronquer pour eviter les problemes de css #}
+                                {% set articleContent = article.content|u.truncate(300, '...', false) %}
                                 {{include('partials/_articleRight.html.twig')}}
                             </div>
                         {% else %}

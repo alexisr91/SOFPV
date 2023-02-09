@@ -23,7 +23,6 @@ class Pagination {
 
     private $templatePath;
 
-
     public function __construct(EntityManagerInterface $manager, Environment $twig, RequestStack $request, $templatePath){
 
         $this->route = $request->getCurrentRequest()->attributes->get('_route');
@@ -117,7 +116,6 @@ class Pagination {
     //On récupère les données de chaque entité (toutes les données accessibles par les getters ) tout en contraignant l'affichage par page
     public function getData(){
        
-
         //en cas d'oubli de choix de l'entité sur laquelle appliquer la pagination, on renvoie une exception
         if(empty($this->entityClass)){
             throw new \Exception("setEntityClass n'a pas été renseigné dans le controller correspondant.");
@@ -146,8 +144,17 @@ class Pagination {
     public function getPages(){
 
         $repo = $this->manager->getRepository($this->entityClass);
-        
-        $total = count($repo->findAll());
+
+        //si il n'y a pas de propriété indiquée, on récupère tout le repository d'articles (pour les parties Actualités/Blog publiques par exemple)
+        if(!$this->isThereAProperty() ){
+            $total = count($repo->findAll());
+            //dd($total,'property false');
+        } else { 
+         //si une propriété a été indiquée, on se base sur elle pour compter le nombre total de pages (pour la partie mon profil : mes articles par exemple, où on ne compte que les articles de l'user)
+           $total = count($repo->findBy([$this->property => $this->value]));
+           //dd($total,'property true');
+        }
+
         $pages = ceil($total / $this->limit);
 
         return $pages;
