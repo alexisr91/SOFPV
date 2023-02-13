@@ -20,8 +20,6 @@
                                 {{article.category|capitalize}}
                             </div>
                         </div>
-                        
-                            {% set articleContent = article.content|u.truncate(400, '...', false) %}
                             <p class="card-text">{{articleContent|raw}}</p>
                             <a href="{{path('article_show', {'slug': article.slug})}}" class="stretched-link"></a>
                     </div>

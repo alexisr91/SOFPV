@@ -8,11 +8,11 @@
         {{include('partials/_navbarMenu.html.twig')}}
         <div class="container-fluid pt-4">
             <div class="row row-cols-md-1 g-4 px-3">
-                <div class="d-flex">
+                <div class="d-flex mb-4 filter">
                     <select name="cat" id="cat" class="p-2">
                         <option value="all">Toutes les catégories</option>
                         {% for category in categories %}
-                        <option value="{{category.name}}">{{category.name|capitalize()}}</option>
+                        <option value="{{category.name}}">{{category.name}}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -20,7 +20,6 @@
                 {% set articleContent = article.content|u.truncate(300, '...', false) %}
                 {{include('partials/_articleRight.html.twig')}}
             {% endfor %}
-
                 {{pagination.display()}}
             </div>
     

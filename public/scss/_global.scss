@@ -35,6 +35,8 @@ body {position: relative; min-height: 100%;}
 // }
 
 a { text-decoration: none; color:$base;}
+a:hover { color: $accent;}
+
 
 h1,h2,h3,h4{font-family:'airstrike', sans-serif;}
 h5,h6 { font-weight: bold;}
@@ -157,4 +159,46 @@ input {
         // pour garder le ratio video
         padding-bottom: calc(315/560*100%);
     }
-    
+
+.overlayLoading{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba($white,0.9);
+    z-index: 5;
+} 
+
+.loader {
+    position: absolute;
+    top:40%;
+    left: 48%;
+    width: 150px;
+    height: 150px;
+
+        p {
+            position: absolute;
+            bottom:-3em;
+            left:-1.5em;
+            font-size: 2em;
+            width: max-content;
+        }
+    }
+      
+    .loader:before , .loader:after{
+        content: '';
+        border-radius: 50%;
+        position: absolute;
+        inset: 0;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3) inset;
+      }
+      .loader:after {
+        box-shadow: 0 2px 0 $accent inset;
+        animation: rotate 2s linear infinite;
+      }
+      
+      @keyframes rotate {
+        0% {  transform: rotate(0)}
+        100% { transform: rotate(360deg)}
+      }
+
+

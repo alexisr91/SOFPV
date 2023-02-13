@@ -167,6 +167,7 @@ section#myProfile {
         }
         .accordion-body{
             position: relative;
+            padding-right: 15%;
 
             .show-article {
             position: absolute;
@@ -570,6 +571,14 @@ section#addArticle, section#editArticle {
 // SECTION BLOG - INDEX
 section#blog {
     background-image: url('/img/bando2.jpg');
+
+    .row-cols-md-1 {min-height: 83vh;
+        .filter {max-height: 2.5em;}
+    }
+
+    article {
+        margin-top: 0 !important;
+    }
 }
 
 section#blog, section#blogHome, section#search

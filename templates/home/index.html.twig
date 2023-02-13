@@ -73,6 +73,7 @@
                             </div>
                         {% else %}
                             <div class="wrapper-right">
+                                {% set articleContent = article.content|u.truncate(300, '...', false) %}
                                 {{include('partials/_articleLeft.html.twig')}}
                             </div>           
                         {% endif %}
