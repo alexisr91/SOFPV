@@ -4,13 +4,19 @@
 
 {% block body %}
  
-    <section id="addArticle">
+    <section id="addArticle" class=" position-relative">
+        {# spinner pour l'attente du téléversement video #} 
+        <div class="overlayLoading typewriter-effect" id="overlayLoading"><span class="loader"></span></div>
+
         {{include('partials/_navbarMenu.html.twig')}}
-      
-        <div class="container-fluid wrapper">   
+
+        <div class="container-fluid wrapper"> 
+        
             {{include('partials/_sidebarMenuProfile.html.twig')}}
             <div class="row">
             <h2>Publier un article</h2>
+           
+           
                 <div class="col-md-6 col-sm-12">
                     <h5><i class="fa-solid fa-pen"></i> Contenu de l'article</h5>
                     {{form_start(form)}}
@@ -53,7 +59,7 @@
                     
                 </div>
                     <div>
-                        <button type="submit" class="btn btn-dark btn-lg">Publier</button>
+                        <button type="submit" id="submitArticle" class="btn btn-dark btn-lg">Publier</button>
                     </div>
                     
             </div>
@@ -61,6 +67,27 @@
         </div>
  
     </section>
+
+    <script>
+    // loader le temps que l'upload se fasse , avant la redirection
+    const button = document.getElementById("submitArticle");
+    const loader = document.getElementById("overlayLoading");
+        
+    loader.classList.add('d-none');
+
+    button.addEventListener('click', function(e){
+        loader.classList.remove('d-none');
+        loader.classList.add('d-block');
+    });
+    
+    const typeWriter = document.getElementById('typewriter-text');
+    const text = 'Veuillez patienter...';
+
+    typeWriter.innerHTML = text;
+    typeWriter.style.setProperty('--characters', text.length);
+        
+   
+    </script>
 {% endblock %}
 
 

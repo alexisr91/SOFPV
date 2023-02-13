@@ -27,6 +27,9 @@ a {
   text-decoration: none;
   color: #252525; }
 
+a:hover {
+  color: #B30B00; }
+
 h1, h2, h3, h4 {
   font-family: 'airstrike', sans-serif; }
 
@@ -124,6 +127,42 @@ input {
   width: 100%;
   padding-bottom: calc(315/560*100%); }
 
+.overlayLoading {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(250, 250, 250, 0.9);
+  z-index: 5; }
+
+.loader {
+  position: absolute;
+  top: 40%;
+  left: 48%;
+  width: 150px;
+  height: 150px; }
+  .loader p {
+    position: absolute;
+    bottom: -3em;
+    left: -1.5em;
+    font-size: 2em;
+    width: max-content; }
+
+.loader:before, .loader:after {
+  content: '';
+  border-radius: 50%;
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3) inset; }
+
+.loader:after {
+  box-shadow: 0 2px 0 #B30B00 inset;
+  animation: rotate 2s linear infinite; }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0); }
+  100% {
+    transform: rotate(360deg); } }
 /* NAV MENU */
 section#navbarMenu {
   background-color: #252525;
@@ -523,7 +562,8 @@ section#myProfile {
     section#myProfile .dashboard .accordion-item .accordion-button {
       color: #252525; }
     section#myProfile .dashboard .accordion-body {
-      position: relative; }
+      position: relative;
+      padding-right: 15%; }
       section#myProfile .dashboard .accordion-body .show-article {
         position: absolute;
         top: 1em;
@@ -810,6 +850,12 @@ section#addArticle .wrapper, section#editArticle .wrapper {
 
 section#blog {
   background-image: url("/img/bando2.jpg"); }
+  section#blog .row-cols-md-1 {
+    min-height: 83vh; }
+    section#blog .row-cols-md-1 .filter {
+      max-height: 2.5em; }
+  section#blog article {
+    margin-top: 0 !important; }
 
 section#blog .row.g-0, section#blogHome .row.g-0, section#search .row.g-0 {
   width: 100%; }

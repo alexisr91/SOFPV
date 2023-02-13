@@ -8,7 +8,6 @@ use App\Entity\Likes;
 use App\Entity\Video;
 use App\Entity\Article;
 use App\Entity\Comment;
-use App\Entity\Category;
 use App\Form\ArticleType;
 use App\Form\CommentType;
 use App\Service\Pagination;
@@ -43,7 +42,7 @@ class BlogController extends AbstractController
 
         $paginationService->setEntityClass(Article::class)
                         ->setPage($page)
-                        ->setLimit(10)
+                        ->setLimit(8)
                         ->setOrder('DESC')
                         
         ;
@@ -182,7 +181,7 @@ class BlogController extends AbstractController
             //...Ou est-ce que la vidéo est un lien vers Youtube ?   
             } elseif(isset($videoLink) && !isset($videoSource)){
 
-                //On convertit l'URL YT fourni par l'user et on le convertit en URL "embed" 
+                //On convertit l'URL YT fourni par l'user et on le convertit en URL "embed"
                 $convertedURL = $video->convertYT($videoLink);
                 $video->setSource($convertedURL);
 
@@ -198,6 +197,7 @@ class BlogController extends AbstractController
             $article->setContent($articleContent);
             $article->setAuthor($user);
             $manager->persist($article); 
+            // dd($article);
             $manager->flush();
 
             $this->addFlash('success', 'Article publié !');
