@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ArticleRepository;
+use App\Repository\CounterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(ArticleRepository $articleRepo): Response
+    public function index(ArticleRepository $articleRepo, CounterRepository $counterRepo): Response
     {
 
         //4 derniers articles SAUF l'article à la une
@@ -19,10 +20,19 @@ class HomeController extends AbstractController
         //le dernier article à la une coché par l'admin
         $adminNews = $articleRepo->findAdminNewsArticle();
 
+        //le compte de lipo, d'esc et de frames brisés pour l'animation de la page d'accueil
+        $counterLipo = $counterRepo->countLipo();
+        $counterESC = $counterRepo->countESC();
+        $counterFrame = $counterRepo->countFrame();
+
+
         return $this->render('home/index.html.twig', [
             'title' => 'Bienvenue sur SO FPV !',
             'articles'=>$articles,
-            'adminNews'=>$adminNews[0]
+            'adminNews'=>$adminNews[0],
+            'counterLipo'=>$counterLipo,
+            'counterESC'=>$counterESC,
+            'counterFrame'=>$counterFrame,
         ]);
     }
 }

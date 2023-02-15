@@ -8,6 +8,7 @@ use App\Entity\Drone;
 use App\Entity\Article;
 use App\Entity\Comment;
 use App\Entity\Category;
+use App\Entity\Counter;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -92,6 +93,18 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush($category);
+
+        //Mise en place des counters
+        $counters = [];
+        $countersName = array('Lipo','ESC','Frame');
+
+        foreach($countersName as $value){
+            $counter = new Counter();
+            $counter->setName($value);
+            $counters[] = $counter;
+            $manager->persist($counter);
+        }
+
 
         //Création d'un jeu de fausses données pour les articles
         $articles = [];

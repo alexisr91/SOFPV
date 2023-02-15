@@ -17,21 +17,21 @@
                     <div class="img-wrapper">
                         <img src="{{asset('../img/battery.png')}}" alt="icone de battery" class="img-fluid lipoIcon">
                     </div>
-                    <h4>15</h4>
+                    <h4 class="value" data="{{counterLipo}}">0</h4>
                     <h5>LIPO HS</h5>
                 </div>
                 <div class="counter-wrapper">
                     <div class="img-wrapper">
                         <img src="{{asset('../img/circuit-board.png')}}" alt="icone de drone cassé" class="img-fluid">
                     </div>
-                    <h4>5</h4>
+                    <h4 class="value" data="{{counterESC}}">0</h4>
                     <h5>BURNED ESC</h5>
                 </div>
                 <div class="counter-wrapper">
                 <div class="img-wrapper">
                     <img src="{{asset('../img/broken.png')}}" alt="icone de drone cassé" class="img-fluid">
                 </div>
-                <h4>40</h4>
+                <h4 class="value" data="{{counterFrame}}">0</h4>
                 <h5>BROKEN FRAMES</h5>
                 </div>
             </section>
@@ -169,7 +169,32 @@
         </div>
         </section>
        
-    </section> 
+    </section>
+
+    {# animation du counter #}
+    <script>
+        window.onload = function () {
+        let counters = document.querySelectorAll('.value');
+        const speed = 800;
+
+        counters.forEach( counter => {
+            const animate = () => {
+                const value =+ counter.getAttribute('data');
+                const data =+ counter.innerText;
+
+                const time = value / speed;
+                if(data < value){
+                    counter.innerText = Math.ceil(data + time);
+                    setTimeout(animate, 1);
+                } else {
+                    counter.innerText = value;
+                }
+            }
+             animate();
+        });
+
+        };
+   </script>
 {% endblock %}
 
 
