@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Drone;
 use App\Entity\Article;
+use App\Entity\Counter;
 use App\Form\DroneType;
 use App\Form\ArticleType;
 use App\Form\ProfileType;
@@ -14,6 +15,7 @@ use App\Entity\PasswordUpdate;
 use App\Form\AdminArticleType;
 use App\Form\PasswordUpdateType;
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -96,9 +98,25 @@ class AccountController extends AbstractController
             'title' => 'Mon compte ',
             'user' => $user,
             'articleCount'=>$articleCount,
-            'questions'=>$myQuestions,
-
+            'questions'=>$myQuestions
         ]);
+    }
+
+    //Compteur de lipo, esc et frame mis à jour sur l'accueil
+    #[Route('/profile/counter/{name}', name:'account_add_to_counter')]
+    #[IsGranted("ROLE_USER")]
+    public function addToCounter(Counter $counter, EntityManagerInterface $manager){
+
+        $user = $this->getUser();
+        $count = $counter->getCount();
+        $counter->setCount($count+1)
+                ->addUser($user);
+
+        $manager->persist($counter);
+        $manager->flush();
+        
+        $this->addFlash('success', '+ 1 !');
+        return $this->redirectToRoute('account_myprofile');
     }
 
     //Edition des données personnelles du profil

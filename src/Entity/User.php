@@ -83,6 +83,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
+    #[ORM\ManyToMany(targetEntity: Counter::class, mappedBy: 'user')]
+    private Collection $counters;
+
     //En cas d'appel de l'utilisateur via les articles, on passera par le pseudo
     public function __toString()
     {
@@ -100,6 +103,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         //mise en place d'un avatar et une bannière par défaut à la création de l'user
         $this->banner = 'bannerDefault.png';
         $this->avatar = 'avatarDefault.jpg';
+        $this->counters = new ArrayCollection();
     }
     
 
@@ -420,6 +424,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             if ($comment->getAuthor() === $this) {
                 $comment->setAuthor(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Counter>
+     */
+    public function getCounters(): Collection
+    {
+        return $this->counters;
+    }
+
+    public function addCounter(Counter $counter): self
+    {
+        if (!$this->counters->contains($counter)) {
+            $this->counters->add($counter);
+            $counter->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCounter(Counter $counter): self
+    {
+        if ($this->counters->removeElement($counter)) {
+            $counter->removeUser($this);
         }
 
         return $this;
