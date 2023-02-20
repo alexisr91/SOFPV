@@ -2,20 +2,24 @@
 
 namespace App\Form;
 
+
 use App\Entity\Article;
-use App\Entity\Category;
-use App\Form\ImageType;
 use App\Form\VideoType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\Sequentially;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Validator\Constraints\Image as ConstraintsImage;
 
-class AdminArticleType extends AbstractType
+class AdminArticleType extends ArticleType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -34,15 +38,36 @@ class AdminArticleType extends AbstractType
             'attr'=> ['placeholder'=>'Ajoutez un texte à votre article', 'rows'=>7, 'cols'=>7 ]
         ])
         ->add('video', VideoType::class, ['required'=>false])
-        ->add('images', CollectionType::class, [
-            'entry_type'=>ImageType::class,
-            'allow_add'=>true,
-            'allow_delete'=>true,
+        ->add('images', FileType::class, [
             'label'=>false,
-            'prototype'=>true,
-            'by_reference'=>false,
+            'multiple'=>true,
+            'mapped'=>false,
             'required'=>false,
-            'mapped'=>false
+            //contraintes pour les images
+            'constraints'=> [
+                new All([
+                    'constraints'=> [
+                        //vérification séquentielle pour valider les différentes contraintes liées au fichier ET à l'image
+                        new Sequentially([
+                            new File([                               
+                                'mimeTypes' => 'image/*',
+                                'mimeTypesMessage' => 'Format invalide: Veuillez sélectionner un fichier image.',
+                                'maxSize' => '5000k',
+                                'maxSizeMessage'=> 'Fichier trop volumineux : le maximum autorisé est {{ limit }}k.',
+                            ]),
+                            new ConstraintsImage([
+                                'allowSquare'=>true,
+                                'minHeight'=>400,
+                                'minWidth'=>600,
+                                'maxHeight'=>1080,
+                                'maxWidth'=>1920
+                                
+                            ])
+                        ])
+                    ]
+                ])
+                
+            ]
         ])
         ->add('adminNews', CheckboxType::class, [
             'label'=>'Souhaitez-vous que cet article soit l\'actualité "à la une" de la page d\'accueil ?',

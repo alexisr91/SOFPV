@@ -16,8 +16,6 @@ class Image
     #[ORM\Column(type: 'string', length: 255)]
     private $source;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $caption;
 
     #[ORM\ManyToOne(inversedBy:'images', targetEntity:Article::class, cascade:['persist', 'remove'])]
     private $article;
@@ -35,18 +33,6 @@ class Image
     public function setSource(string $source): self
     {
         $this->source = $source;
-
-        return $this;
-    }
-
-    public function getCaption(): ?string
-    {
-        return $this->caption;
-    }
-
-    public function setCaption(string $caption): self
-    {
-        $this->caption = $caption;
 
         return $this;
     }

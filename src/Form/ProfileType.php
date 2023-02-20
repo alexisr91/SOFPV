@@ -5,10 +5,13 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Validator\Constraints\Sequentially;
 
 class ProfileType extends AbstractType
 {
@@ -45,11 +48,47 @@ class ProfileType extends AbstractType
                 'label'=>'Modifiez votre avatar',
                 'required'=>false,
                 'mapped'=> false,
+                'constraints'=> [
+                    new Sequentially([
+                        new File([                               
+                            'mimeTypes' => 'image/*',
+                            'mimeTypesMessage' => 'Format invalide: Veuillez sélectionner un fichier image.',
+                            'maxSize' => '5000k',
+                            'maxSizeMessage'=> 'Fichier trop volumineux : le maximum autorisé est {{ limit }}k.',
+                        ]),
+                        new Image([
+                            'allowSquare'=>true,
+                            'minHeight'=>120,
+                            'minWidth'=>120,
+                            'maxHeight'=>1080,
+                            'maxWidth'=>1920
+                            
+                        ])
+                    ])
+                ]
             ]) 
             ->add('banner', FileType::class, [
                 'label'=>'Modifiez votre bannière',
                 'required'=>false,
-                'mapped'=> false
+                'mapped'=> false,
+                'constraints'=> [
+                    new Sequentially([
+                        new File([                               
+                            'mimeTypes' => 'image/*',
+                            'mimeTypesMessage' => 'Format invalide: Veuillez sélectionner un fichier image.',
+                            'maxSize' => '5000k',
+                            'maxSizeMessage'=> 'Fichier trop volumineux : le maximum autorisé est {{ limit }}k.',
+                        ]),
+                        new Image([
+                            'allowSquare'=>false,
+                            'allowPortrait'=>false,
+                            'minHeight'=>300,
+                            'minWidth'=>720,
+                            'maxHeight'=>500,
+                            'maxWidth'=>1920
+                        ])
+                    ])
+                ]
             ]) 
         ;
     }

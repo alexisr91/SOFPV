@@ -97,35 +97,30 @@ class BlogController extends AbstractController
             $articleContent = nl2br($article->getContent());
             
            //GESTION IMAGE 
-           $images = $form['images']->getData();
-            if($article->getImages()){
+           $images = $form->get('images')->getData();
 
-                $index = 0;
+            // dd($images);
+            //si il y a des images, on les traite pour l'upload 
+            if($images){
                 
                  foreach($images as $image){
 
-                    $caption = $form['images'][$index]['caption']->getData(); // indexage pour récupérer les données de chaque entrée
-                    $source = $form['images'][$index]['source']->getData(); 
-                   
-
-                    $originalName = pathinfo($source->getClientOriginalName(), PATHINFO_FILENAME);
+                    $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
                     $sluggedName = $slugger->slug($originalName);
-                    $newName = $sluggedName.'-'.uniqid().'.'.$source->guessExtension();
+                    $newName = $sluggedName.'-'.uniqid().'.'.$image->guessExtension();
 
                         try {
-                            $source->move($this->getParameter('upload_image'), $newName); // ok
+                            $image->move($this->getParameter('upload_image'), $newName); // ok
 
                         } catch(FileException $e) {
                             dd($e->getMessage());                    
                         }
                         $newImage = new Image();
-                        $image->setSource($newName)
-                             ->setCaption($caption)
-                             ->setArticle($article); 
+                        $newImage->setSource($newName)
+                                 ->setArticle($article); 
                         $article->addImage($newImage);
 
-                        $manager->persist($newImage);
-                        $index++;   
+                        $manager->persist($newImage);  
                 }       
             }      
 
@@ -196,12 +191,13 @@ class BlogController extends AbstractController
 
             $article->setContent($articleContent);
             $article->setAuthor($user);
-            $manager->persist($article); 
-            // dd($article);
+            $manager->persist($article);
+
+            dd($article);
+
             $manager->flush();
 
             $this->addFlash('success', 'Article publié !');
-
             return $this->redirectToRoute('account_myprofile');
             
         }

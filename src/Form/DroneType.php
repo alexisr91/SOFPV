@@ -4,11 +4,15 @@ namespace App\Form;
 
 use App\Entity\Drone;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Sequentially;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class DroneType extends AbstractType
 {
@@ -53,9 +57,29 @@ class DroneType extends AbstractType
             ])
             ->add('image', FileType::class, [
                 'required'=>false,
-                'mapped'=>false
-            ])
-        ;
+                'mapped'=>false,
+                'constraints'=> [
+                //vérification séquentielle pour valider les différentes contraintes liées au fichier ET à l'image
+                    new Sequentially([
+                        new File([                               
+                            'mimeTypes' => 'image/*',
+                            'mimeTypesMessage' => 'Format invalide: Veuillez sélectionner un fichier image.',
+                            'maxSize' => '5000k',
+                            'maxSizeMessage'=> 'Fichier trop volumineux : le maximum autorisé est {{ limit }}k.',
+                        ]),
+                        new Image([
+                            'allowSquare'=>true,
+                            'minHeight'=>50,
+                            'minWidth'=>50,
+                            'maxHeight'=>1080,
+                            'maxWidth'=>1920
+                                    
+                        ])
+                    ])
+                ]   
+                
+            ]);
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void
