@@ -131,7 +131,7 @@ section#blog, section#blogHome {
     width: 100vw;
     background-color: $white;
     padding-bottom: 2em;
-    
+
     .video-frame h3{
         font-size: 2em;
     }
@@ -139,9 +139,16 @@ section#blog, section#blogHome {
         position: relative;
         min-height: 10em;
     }
-
     .article-footer{
         display: flex;
+    }
+
+    .thumb-wrap {
+        img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
     }
     
 }

@@ -193,7 +193,7 @@ class BlogController extends AbstractController
             $article->setAuthor($user);
             $manager->persist($article);
 
-            dd($article);
+            // dd($article);
 
             $manager->flush();
 

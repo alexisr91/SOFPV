@@ -297,6 +297,10 @@ section#blog, section#blogHome {
     min-height: 10em; }
   section#blog .article-footer, section#blogHome .article-footer {
     display: flex; }
+  section#blog .thumb-wrap img, section#blogHome .thumb-wrap img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; }
 
 /* ACCUEIL : SECTION #adminNews */
 section#adminNews {

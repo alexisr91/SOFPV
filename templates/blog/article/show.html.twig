@@ -21,9 +21,15 @@
                         {% set height = '720' %}
                         {% set width = '1280' %}
                         {% include "/partials/_video.html.twig" %}
+                    {% elseif article.images is not empty %}
+                        {% for image in article.images %}
+                            {% if loop.first %}
+                                <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                            {% endif %}
+                        {% endfor %}
+                        
                     {% else %}
-                        {#TODO mettre image d'illustration si il y en a,  ou mettre une image par defaut #}
-                        <img src="{{asset('/img/blogDefault.png')}}" alt="image d'illustration par défaut" class="img-fluid">
+                        <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
                     {% endif %}
                    
                     <div class="d-flex justify-content-between align-items-center px-1">
@@ -108,9 +114,16 @@
                                     <div class="card">
                                         {% if article.video %}
                                             <img src="{{asset('uploads/article/video/thumb/'~ article.video.thumbnail)}}" class="card-img-top" alt="Vignette de l'article {{article.title}} de {{article.author}}">
-                                        {% else %}
-                                            <img src="{{asset('/img/BlogDefault.png')}}" class="card-img-top" alt="Vignette par défaut de l'article de {{article.author}}">
-                                        {% endif %}
+                                        {% elseif article.images is not empty %}
+                                            {% for image in article.images %}
+                                                {% if loop.first %}
+                                                    <img class="figure-img rounded" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                                                {% endif %}
+                                        {% endfor %}
+                        
+                    {% else %}
+                        <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+                    {% endif %}
                                         <div class="card-body">
                                             <h5 class="card-title">{{article.title}}</h5>
                                             {% set articleContent = article.content|u.truncate(90, '...', false) %}
