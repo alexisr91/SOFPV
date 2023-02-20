@@ -5,7 +5,7 @@
                     <div class="pe-2">
                         <div class="author">
                             <div class="author-avatar">
-                                <img class="img-fluid " src="{{asset('/uploads/avatar/'~ article.author.avatar )}}" alt="Avatar de {{article.author}}">
+                                <img src="{{asset('/uploads/avatar/'~ article.author.avatar )}}" alt="Avatar de {{article.author}}">
                             </div>
                             <div class="author-nickname">
                                 <h4>{{article.author.nickname}}</h4>
@@ -34,7 +34,7 @@
             </div>
         <div class="col-md-5">
             <div class="card-thumb">
-                <div>
+                <div class="thumb-wrap">
                     {% if article.video %}
                     {% set video = article.video %}
                         {% if video.isUploaded %}
@@ -42,9 +42,12 @@
                         {% else %}
                             {% include('/partials/_video.html.twig') %} 
                         {% endif %}
-                    {% elseif article.images %}
-                    {# TODO : repo ->selectionner la premiere image ajoutée dans l'article comme vignette#}
-                        <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >     
+                    {% elseif article.images is not empty %}
+                        {% for image in article.images %}
+                            {% if loop.first %}
+                                <img class="figure-img rounded" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article'{{article.title}}'" >
+                            {% endif %}
+                        {% endfor %}
                     {% else %}
                         <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
                     {% endif %}
