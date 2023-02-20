@@ -40,23 +40,9 @@
                         {{form_row(form.video.link)}}
                                            
                     <h5 class="mt-3"><i class="fa-solid fa-images"></i> Ajouter des images</h5>
-                    <div id="images"
-                        data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
-                        data-widget-tags="{{ '<div"></div>'|e }}"
-                        data-widget-counter="{{ form.images|length }}">
 
-                        {% for imageField in form.images %}
-                            <div>
-                                {{ form_errors(imageField) }}
-                                {{ form_widget(imageField) }} 
-                            </div>
-                          
-                        {% endfor %}
-
-                    </div>
-
-                    <button type="button" id="add_images" class="btn btn-dark" data-list-selector="#images">Ajouter une image</button>
-                    
+                        {{ form_row(form.images) }}
+                     
                 </div>
                     <div>
                         <button type="submit" id="submitArticle" class="btn btn-dark btn-lg">Publier</button>
