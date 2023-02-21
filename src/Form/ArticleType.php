@@ -32,7 +32,8 @@ class ArticleType extends AbstractType
             ])
             ->add('content', TextareaType::class, [
                 'label'=> 'Contenu de l\'article',
-                'attr'=> ['placeholder'=>'Ajoutez un texte à votre article', 'rows'=>7, 'cols'=>7 ]
+                'attr'=> ['placeholder'=>'Ajoutez un texte à votre article', 'rows'=>7, 'cols'=>7 ],
+                'required'=>true
             ])
             ->add('video', VideoType::class, ['required'=>false])
             ->add('images', FileType::class, [
@@ -53,11 +54,11 @@ class ArticleType extends AbstractType
                                     'maxSizeMessage'=> 'Fichier trop volumineux : le maximum autorisé est {{ limit }}k.',
                                 ]),
                                 new Image([
-                                    'allowPortrait'=>false,
+                                    'allowSquare'=>true,
                                     'minHeight'=>400,
                                     'minWidth'=>600,
-                                    'maxHeight'=>1080,
-                                    'maxWidth'=>1920
+                                    'maxHeight'=>2000,
+                                    'maxWidth'=>2000
                                     
                                 ])
                             ])

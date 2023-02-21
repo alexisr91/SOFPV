@@ -35,7 +35,8 @@ class AdminArticleType extends ArticleType
         ])
         ->add('content', TextareaType::class, [
             'label'=> 'Contenu de l\'article',
-            'attr'=> ['placeholder'=>'Ajoutez un texte à votre article', 'rows'=>7, 'cols'=>7 ]
+            'attr'=> ['placeholder'=>'Ajoutez un texte à votre article', 'rows'=>7, 'cols'=>7 ],
+            'required'=>true
         ])
         ->add('video', VideoType::class, ['required'=>false])
         ->add('images', FileType::class, [
@@ -59,8 +60,8 @@ class AdminArticleType extends ArticleType
                                 'allowSquare'=>true,
                                 'minHeight'=>400,
                                 'minWidth'=>600,
-                                'maxHeight'=>1080,
-                                'maxWidth'=>1920
+                                'maxHeight'=>2000,
+                                'maxWidth'=>2000
                                 
                             ])
                         ])

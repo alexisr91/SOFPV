@@ -142,16 +142,15 @@ section#blog, section#blogHome {
     .article-footer{
         display: flex;
     }
-
-    .thumb-wrap {
-        img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
+    .thumb-wrap {  
+        height: 25em;
+        width: 100%;
     }
+
     
 }
+
+
 
 /* ACCUEIL : SECTION #adminNews */
 
