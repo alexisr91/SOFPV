@@ -11,10 +11,11 @@
         <div class="container-fluid wrapper">
             <div class="row col-xs-12 col-md-10" id="wrapArticleContent">
                 
-                    <div class="banner">    
+                    {# <div class="banner">    
                             <img src="{{asset('uploads/banner/' ~ user.banner)}}" alt="Bannière de {{user.nickname}}">
                     </div>
-                    
+                     #}
+                    <h2>{{article.title}}</h2>  
                 <div class="col-md-8">
                     {% if article.video %}
                         {# video affichée #}
@@ -24,7 +25,9 @@
                     {% elseif article.images is not empty %}
                         {% for image in article.images %}
                             {% if loop.first %}
+                            <div class="main-image-wrap">
                                 <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                            </div>
                             {% endif %}
                         {% endfor %}
                         
@@ -68,10 +71,19 @@
                         </div>
                     </div>
                     <div class="my-3 article-content-show">
-                        <h2>{{article.title}}</h2>  
-                        <p class="pe-4">{{article.content|raw}}</p>
+                    <p class="pe-4">{{article.content|raw}}</p>
+                        <div class="row">
+                        {% for image in article.images %}
+                            {% if not loop.first %}
+                                <div class="col-md-3">
+                                    <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                        
+                        
                     </div>
-                    {# TODO:prevoir place pour images #}
                     
                     {# Espace commentaire #}
                     <div class="addCommentForm">
@@ -110,23 +122,24 @@
                     <div class="row g-4" id="wrapSameAuthorArticle">
                     {% if articles|length > 0 %}
                         {% for article in articles %}
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        {% if article.video %}
-                                            <img src="{{asset('uploads/article/video/thumb/'~ article.video.thumbnail)}}" class="card-img-top" alt="Vignette de l'article {{article.title}} de {{article.author}}">
-                                        {% elseif article.images is not empty %}
+                             <div class="col-md-6">
+                                <div class="card">
+                                <div class="thumb-wrap">
+                                    {% if article.video %}
+                                        <img src="{{asset('uploads/article/video/thumb/'~ article.video.thumbnail)}}" class="card-img-top" alt="Vignette de l'article {{article.title}} de {{article.author}}">
+                                    {% elseif article.images is not empty %}
                                             {% for image in article.images %}
                                                 {% if loop.first %}
-                                                    <img class="figure-img rounded" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                                                    <img class="figure-img rounded " src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
                                                 {% endif %}
-                                        {% endfor %}
-                        
-                    {% else %}
-                        <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
-                    {% endif %}
+                                            {% endfor %}
+                                    {% else %}
+                                            <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+                                    {% endif %}
+                                </div>
                                         <div class="card-body">
                                             <h5 class="card-title">{{article.title}}</h5>
-                                            {% set articleContent = article.content|u.truncate(90, '...', false) %}
+                                            {% set articleContent = article.content|u.truncate(30, '...', false) %}
                                             <p class="card-text">{{articleContent|raw}}</p>
                                             <a href="{{path('article_show', {'slug':article.slug})}}" class="stretched-link"></a>
                                         </div>

@@ -114,9 +114,7 @@ section#myProfile {
     display: flex;
     flex-direction: column;
     width:100%;
-    background-image: url('../img/bg-carbon-starline-freepik.jpg');
     background-color: $base;
-    background-size: cover;
     .wrap {
         height:100%;
         background-color: $base;
@@ -359,7 +357,7 @@ section#addVideo {
         height:70em;
     }
 }
-/* VISUALISATION DE L'article */
+/* SHOW article */
 section#showArticle {
     .wrapper {
         background-image: url('/img/raceTrack.jpeg');
@@ -382,10 +380,14 @@ section#showArticle {
         
     }
     .article-content-show {
-        background-color: white;
-        border: 1px solid $grey;
+        background-color: rgba($grey, 0.5);
         border-radius: 3px;
         padding: 1em;
+        // box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
+    }
+
+    textarea {
+        border:none;
     }
 
     #like-article {
@@ -429,7 +431,6 @@ section#showArticle {
     .addCommentForm form{
         display: flex;
         align-items:center;
-
         .btn {
             background-color: $grey;
             margin-left: 1em;
@@ -462,6 +463,27 @@ section#showArticle {
                 }
             }
        }
+       .thumb-wrap {  
+        height: 13em;
+        width: 100%;
+     img {
+        object-fit: cover;
+        width:100%;
+        height: 100%;       
+        }
+    }
+
+    .card { box-shadow: none;}
+
+    .main-image-wrap {
+        height:45em;
+        width: 100%;
+        img {
+            object-fit: cover;
+            width:100%;
+            height: 100%;       
+        }
+    }
 } 
 
 /*Mes articles */
@@ -526,6 +548,16 @@ section#myArticles{
         }
        
     }
+
+    .thumb-wrap {  
+        height: 17em;
+        width: 100%;
+     img {
+        object-fit: cover;
+        width:100%;
+        height: 100%;       
+     }
+    }
     
 }
 
@@ -575,15 +607,22 @@ section#blog {
     .row-cols-md-1 {min-height: 83vh;
         .filter {max-height: 2.5em;}
     }
-
     article {
         margin-top: 0 !important;
     }
+    
 }
 
 section#blog, section#blogHome, section#search
 {
     .row.g-0{width: 100%;}
+   
+     img {
+        object-fit: cover;
+        width:100%;
+        height: 100%;       
+        }
+    
     .author {
         display: flex;
         align-items: center;
@@ -643,6 +682,7 @@ section#blog, section#myArticles {
                 line-clamp: 7;
         -webkit-box-orient: vertical;
     }
+
 }
 section#blog, section#myArticles, section#blogHome, section#search{
     .card-body {

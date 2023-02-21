@@ -26,27 +26,17 @@
                 </div>
                
                 <div class="col-md-6 col-sm-12">
-                    <h5><i class="fa-solid fa-film"></i> Ajouter ou modifier une vidéo</h5>
+                    <h5><i class="fa-solid fa-film"></i> Ajouter ou modifier une vidéo...</h5>
                         {{form_row(form.video.title)}}
                         {{form_row(form.video.source)}}
+                        
+                        <h5><i class="fa-brands fa-youtube"></i></i> ...Ou insérez un lien Youtube</h5>
+                        {{form_row(form.video.link)}}
                                            
                     <h5 class="mt-3"><i class="fa-solid fa-images"></i> Ajouter ou supprimer des images</h5>
                        
-                  <div id="images"
-                        data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
-                        data-widget-tags="{{ '<div"></div>'|e }}"
-                        data-widget-counter="{{ form.images|length }}">
+                        {{ form_row(form.images) }} 
 
-                        {% for imageField in form.images %}
-                            <div>
-                                {{ form_errors(imageField) }}
-                                {{ form_widget(imageField) }} 
-                            </div>
-                          
-                        {% endfor %}
-
-                    </div>
-                     <button type="button" id="add_images" class="btn btn-dark" data-list-selector="#images">Ajouter une image</button>
                 </div> 
                     <div>
                         <a href="{{path('account_articles')}}" class="btn btn-dark btn-lg"><i class="fa-solid fa-chevron-left"></i> Retour</a>
@@ -59,7 +49,29 @@
         </div>
  
     </section>
+
+     <script>
+    // loader le temps que l'upload se fasse , avant la redirection
+    const button = document.getElementById("submitArticle");
+    const loader = document.getElementById("overlayLoading");
+        
+    loader.classList.add('d-none');
+
+    button.addEventListener('click', function(e){
+        loader.classList.remove('d-none');
+        loader.classList.add('d-block');
+    });
+    
+    const typeWriter = document.getElementById('typewriter-text');
+    const text = 'Veuillez patienter...';
+
+    typeWriter.innerHTML = text;
+    typeWriter.style.setProperty('--characters', text.length);
+        
+   
+    </script>
 {% endblock %}
+
 
 
 

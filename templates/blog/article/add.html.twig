@@ -6,7 +6,7 @@
  
     <section id="addArticle" class=" position-relative">
         {# spinner pour l'attente du téléversement video #} 
-        <div class="overlayLoading typewriter-effect" id="overlayLoading"><span class="loader"></span></div>
+        <div class="overlayLoading" id="overlayLoading"><span class="loader"><p>Chargement en cours...</p></span></div>
 
         {{include('partials/_navbarMenu.html.twig')}}
 
@@ -45,6 +45,7 @@
                      
                 </div>
                     <div>
+                        <a href="{{path('account_articles')}}" class="btn btn-dark btn-lg"><i class="fa-solid fa-chevron-left"></i> Retour</a>
                         <button type="submit" id="submitArticle" class="btn btn-dark btn-lg">Publier</button>
                     </div>
                     
@@ -66,11 +67,6 @@
         loader.classList.add('d-block');
     });
     
-    const typeWriter = document.getElementById('typewriter-text');
-    const text = 'Veuillez patienter...';
-
-    typeWriter.innerHTML = text;
-    typeWriter.style.setProperty('--characters', text.length);
         
    
     </script>

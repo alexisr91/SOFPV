@@ -31,14 +31,15 @@
                     </div>
                 </div>
                                     
-            </div>
+            
+        </div>
         <div class="col-md-5">
             <div class="card-thumb">
                 <div class="thumb-wrap">
                     {% if article.video %}
                     {% set video = article.video %}
                         {% if video.isUploaded %}
-                            <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/video/thumb/'~ video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
+                            <img class="figure-img rounded" src="{{asset('/uploads/article/video/thumb/'~ video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
                         {% else %}
                             {% include('/partials/_video.html.twig') %} 
                         {% endif %}
@@ -49,7 +50,7 @@
                             {% endif %}
                         {% endfor %}
                     {% else %}
-                        <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+                        <img class="figure-img rounded" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
                     {% endif %}
                 </div> 
                 

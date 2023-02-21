@@ -31,8 +31,7 @@ class VideoType extends AbstractType
                     new File([                               
                         'mimeTypes' => 'video/*',
                         'mimeTypesMessage' => 'Format invalide: Veuillez sélectionner un fichier vidéo.',
-                        'maxSize' => '5M',
-                        'maxSizeMessage'=> 'Fichier trop volumineux : le maximum autorisé est {{ limit }}M.',
+                        'maxSize' => '30M'                 
                     ])
                                
                 ]
@@ -41,6 +40,7 @@ class VideoType extends AbstractType
                 'label' => 'Insérez une URL',
                 'mapped'=> false,
                 'trim'=>true,
+                'required'=>false,
                 'attr'=>['placeholder'=>'Ex: https://www.youtube.com/watch?v=xxxxxxxxxxxx ...']
             ])    
         ;

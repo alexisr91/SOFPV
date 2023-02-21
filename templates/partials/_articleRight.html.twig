@@ -14,7 +14,7 @@
                     {% elseif article.images is not empty %}
                         {% for image in article.images %}
                             {% if loop.first %}
-                                <img class="figure-img rounded" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                                <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
                             {% endif %}
                         {% endfor %}
                         

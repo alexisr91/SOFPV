@@ -98,8 +98,7 @@ class BlogController extends AbstractController
             
            //GESTION IMAGE 
            $images = $form->get('images')->getData();
-
-            // dd($images);
+           
             //si il y a des images, on les traite pour l'upload 
             if($images){
                 
@@ -120,7 +119,7 @@ class BlogController extends AbstractController
                                  ->setArticle($article); 
                         $article->addImage($newImage);
 
-                        $manager->persist($newImage);  
+                        $manager->persist($newImage); 
                 }       
             }      
 
@@ -129,7 +128,7 @@ class BlogController extends AbstractController
             //on teste si l'user à voulu mettre une vidéo :
           
             // Si il y a une vidéo, est-elle un fichier uploadé ?...
-            if(isset($videoSource) && !isset($videoLink)){  
+            if($videoSource){  
                 //si il y a une vidéo en téléversement on la traite avec FFmpeg
                 $ffmpeg = $this->initFfmpeg();
                 // dd('upload');
@@ -172,9 +171,8 @@ class BlogController extends AbstractController
 
                 //association de la vidéo avec l'article qui le possède
                 $article->setVideo($video);
-              
             //...Ou est-ce que la vidéo est un lien vers Youtube ?   
-            } elseif(isset($videoLink) && !isset($videoSource)){
+            } elseif($videoLink){
 
                 //On convertit l'URL YT fourni par l'user et on le convertit en URL "embed"
                 $convertedURL = $video->convertYT($videoLink);
@@ -188,12 +186,9 @@ class BlogController extends AbstractController
                 $article->setVideo($video);
             }
 
-
             $article->setContent($articleContent);
             $article->setAuthor($user);
             $manager->persist($article);
-
-            // dd($article);
 
             $manager->flush();
 
