@@ -824,6 +824,8 @@ section#myArticles {
       width: 10%; }
     section#myArticles .container-fluid .article-body {
       width: 100%; }
+    section#myArticles .container-fluid .article-content {
+      padding-right: 1em; }
     section#myArticles .container-fluid .article-footer {
       display: flex;
       justify-content: space-between; }

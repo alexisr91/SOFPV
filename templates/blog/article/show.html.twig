@@ -17,24 +17,43 @@
                      #}
                     <h2>{{article.title}}</h2>  
                 <div class="col-md-8">
-                    {% if article.video %}
-                        {# video affichée #}
-                        {% set height = '720' %}
-                        {% set width = '1280' %}
-                        {% include "/partials/_video.html.twig" %}
-                    {% elseif article.images is not empty %}
-                        {% for image in article.images %}
-                            {% if loop.first %}
-                            <div class="main-image-wrap">
-                                <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                    <div class="row">
+                    {% if article.video  %}
+                        <div class="col-md-12">
+                            {# video affichée #}
+                            {% include "/partials/_video.html.twig" %} 
+                        </div>
+                    {% elseif article.images %}
+                        <div id="carouselImages" class="carousel slide col-md-12" data-bs-ride="true">
+                            <div class="carousel-indicators">
+                                {% for image in article.images %}
+                                <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="{{ loop.index0 }}" {% if loop.index0 == 0 %} class="active" {% endif %} aria-current="true" aria-label="Slide {{loop.index}}"></button>
+                                {% endfor %}
                             </div>
-                            {% endif %}
-                        {% endfor %}
+                            <div class="carousel-inner ratio ratio-16x9">
+                                {% for image in article.images %}
+                                <div  {% if loop.index0 == 0 %} class="carousel-item active"  {% else %} class="carousel-item" {% endif %} >
+                                    <img class="d-block w-100 h-auto" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Précédent</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Suivant</span>
+                            </button>
+                        </div>
+                    {% else %} 
+                        <div class="col-md-12">
+                            <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" > 
+                        </div>
                         
-                    {% else %}
-                        <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+                       </div> 
                     {% endif %}
-                   
+                    </div>
                     <div class="d-flex justify-content-between align-items-center px-1">
                         <div class="user">
                             <div class="avatar">
@@ -71,18 +90,7 @@
                         </div>
                     </div>
                     <div class="my-3 article-content-show">
-                    <p class="pe-4">{{article.content|raw}}</p>
-                        <div class="row">
-                        {% for image in article.images %}
-                            {% if not loop.first %}
-                                <div class="col-md-3">
-                                    <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                        </div>
-                        
-                        
+                        <p class="pe-4">{{article.content|raw}}</p>    
                     </div>
                     
                     {# Espace commentaire #}
@@ -169,8 +177,7 @@
         const player = new Plyr('#player');
 
         <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
-
-    </script>
-
     
+
+  </script>  
 {% endblock %}

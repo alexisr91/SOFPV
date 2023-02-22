@@ -427,7 +427,6 @@ section#showArticle {
             }
         }
     }
-    
     .addCommentForm form{
         display: flex;
         align-items:center;
@@ -514,6 +513,9 @@ section#myArticles{
         }
         .article-body {
             width:100%;
+        }
+        .article-content {
+            padding-right: 1em;
         }
         .article-footer{
             display: flex;

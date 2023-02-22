@@ -96,32 +96,6 @@ class BlogController extends AbstractController
             //On garde la mise en place des sauts de ligne avec nl2br()
             $articleContent = nl2br($article->getContent());
             
-           //GESTION IMAGE 
-           $images = $form->get('images')->getData();
-           
-            //si il y a des images, on les traite pour l'upload 
-            if($images){
-                
-                 foreach($images as $image){
-
-                    $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                    $sluggedName = $slugger->slug($originalName);
-                    $newName = $sluggedName.'-'.uniqid().'.'.$image->guessExtension();
-
-                        try {
-                            $image->move($this->getParameter('upload_image'), $newName); // ok
-
-                        } catch(FileException $e) {
-                            dd($e->getMessage());                    
-                        }
-                        $newImage = new Image();
-                        $newImage->setSource($newName)
-                                 ->setArticle($article); 
-                        $article->addImage($newImage);
-
-                        $manager->persist($newImage); 
-                }       
-            }      
 
             //GESTION VIDEO
 
@@ -185,6 +159,38 @@ class BlogController extends AbstractController
 
                 $article->setVideo($video);
             }
+
+            //GESTION IMAGE 
+           $images = $form->get('images')->getData();
+           
+           //si il y a des images, on les traite pour l'upload 
+           if($images){
+               
+                foreach($images as $image){
+
+                   $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                   $sluggedName = $slugger->slug($originalName);
+                   $newName = $sluggedName.'-'.uniqid().'.'.$image->guessExtension();
+
+                       try {
+                           $image->move($this->getParameter('upload_image'), $newName); // ok
+
+                       } catch(FileException $e) {
+                           dd($e->getMessage());                    
+                       }
+
+                   
+                           $newImage = new Image();
+                           $newImage->setSource($newName)
+                                ->setArticle($article); 
+                           $article->addImage($newImage);
+
+                           $manager->persist($newImage); 
+                     
+                        }      
+            }
+                      
+                 
 
             $article->setContent($articleContent);
             $article->setAuthor($user);
