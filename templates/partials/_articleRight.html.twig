@@ -3,25 +3,29 @@
         <div class="col-md-5">
         <div class="category {{article.category.name}}"></div>
             <div class="card-thumb">
-                <div class="thumb-wrap">
                     {% if article.video %}
                         {% set video = article.video %}
                         {% if video.isUploaded %}
-                            <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/video/thumb/'~ video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
+                            <div class="ratio ratio-16x9">
+                                <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/video/thumb/'~ video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
+                            </div> 
                         {% else %}
                             {% include('/partials/_video.html.twig') %} 
                         {% endif %}
                     {% elseif article.images is not empty %}
                         {% for image in article.images %}
                             {% if loop.first %}
-                                <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                                <div class="ratio ratio-16x9">
+                                    <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                                </div>
                             {% endif %}
                         {% endfor %}
                         
                     {% else %}
-                        <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+                        <div class="ratio ratio-16x9">
+                            <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+                        </div>
                     {% endif %}
-                </div> 
             </div>
         </div>
         <div class="col-md-7">

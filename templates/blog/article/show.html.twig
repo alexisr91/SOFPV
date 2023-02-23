@@ -23,8 +23,8 @@
                             {# video affichée #}
                             {% include "/partials/_video.html.twig" %} 
                         </div>
-                    {% elseif article.images %}
-                        <div id="carouselImages" class="carousel slide col-md-12" data-bs-ride="true">
+                    {% elseif article.images is not empty %}
+                        <div id="carouselImages" class="carousel slide " data-bs-ride="true">
                             <div class="carousel-indicators">
                                 {% for image in article.images %}
                                 <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="{{ loop.index0 }}" {% if loop.index0 == 0 %} class="active" {% endif %} aria-current="true" aria-label="Slide {{loop.index}}"></button>
@@ -47,11 +47,10 @@
                             </button>
                         </div>
                     {% else %} 
-                        <div class="col-md-12">
+                        <div>
                             <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" > 
                         </div>
                         
-                       </div> 
                     {% endif %}
                     </div>
                     <div class="d-flex justify-content-between align-items-center px-1">

@@ -35,25 +35,26 @@
         </div>
         <div class="col-md-5">
             <div class="card-thumb">
-                <div class="thumb-wrap">
                     {% if article.video %}
                     {% set video = article.video %}
                         {% if video.isUploaded %}
+                        <div class="ratio ratio-16x9">
                             <img class="figure-img rounded" src="{{asset('/uploads/article/video/thumb/'~ video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
+                        </div>
                         {% else %}
                             {% include('/partials/_video.html.twig') %} 
                         {% endif %}
                     {% elseif article.images is not empty %}
                         {% for image in article.images %}
                             {% if loop.first %}
+                            <div class="ratio ratio-16x9">
                                 <img class="figure-img rounded" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article'{{article.title}}'" >
+                            </div>
                             {% endif %}
                         {% endfor %}
                     {% else %}
                         <img class="figure-img rounded" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
                     {% endif %}
-                </div> 
-                
             </div>
         </div>
         

@@ -9,6 +9,7 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use App\Entity\Category;
 use App\Entity\Counter;
+use App\Entity\Image;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -144,12 +145,15 @@ class AppFixtures extends Fixture
 
         //Création d'un article à la Une
         $adminArticle = new Article();
+        $adminNewsImage = new Image();
+        $adminNewsImage->setSource('DWS.jpg')->setArticle($adminArticle);
 
         $adminArticle->setAuthor($admin)
                     ->setTitle("Évènement - Drone Winter Session : 1ère Edition")
-                    ->setContent("En partenariat avec l'association EASY'CAP, SO FPV propose à ses membres une session de vol indoor: <br/><br/> - Dimanche 15 Janvier 2023 de 9h à 15h00 <br/> - Gymnase OYSTERMEYER 26 Route de Portet 31270 VILLENEUVE TOLOSANE <br/> - Droit d'entrée 4 euros (espèces ou Paypal) couvrant frais de chauffage, electricité et assurance <br/>- Tout type de drones jusqu'à 5 pouces, failsafe obligatoire (contrôle en début de session)<br/>- 20 participants maximum <br/><br/> Ouvert à tous niveaux, pas de compétition, juste du fun et de la bonne humeur. <br/> Me contacter par Facebook en MP pour inscription.")
+                    ->setContent("En partenariat avec l'association EASY'CAP, SO FPV propose à ses membres une session de vol indoor: <br/><br/> - Dimanche 15 Janvier 2023 de 9h à 15h00 <br/> - Gymnase OYSTERMEYER 26 Route de Portet 31270 VILLENEUVE TOLOSANE <br/> - Droit d'entrée 4 euros (espèces ou Paypal) couvrant frais de chauffage, electricité et assurance <br/>- Tout type de drones jusqu'à 5 pouces, failsafe obligatoire (contrôle en début de session)<br/>- 20 participants maximum <br/><br/> Ouvert à tous niveaux, pas de compétition, juste du fun et de la bonne humeur. <br/> Me contacter par Facebook en MP pour inscription ou en commentaire ci-dessous.")
                     ->setCategory($categories[1])
                     ->setAdminNews(1)
+                    ->addImage($adminNewsImage)
                     ;
         $manager->persist($adminArticle);
 
