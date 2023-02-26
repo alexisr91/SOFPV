@@ -122,11 +122,30 @@ input {
     top: 0;
     left: 0; }
 
+#player {
+  width: inherit; }
+
+#articleTabs {
+  padding: 0; }
+
 .ytPlayer::after {
   content: "";
   display: block;
   width: 100%;
   padding-bottom: calc(315/560*100%); }
+
+.carousel-item {
+  background-color: rgba(218, 218, 218, 0.2); }
+  .carousel-item img.portrait {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: auto; }
+  .carousel-item img.landscape {
+    width: 100%;
+    height: auto;
+    object-fit: cover; }
 
 .overlayLoading {
   position: fixed;
@@ -158,6 +177,9 @@ input {
 .loader:after {
   box-shadow: 0 2px 0 #B30B00 inset;
   animation: rotate 2s linear infinite; }
+
+#myTab .nav-link {
+  color: #252525; }
 
 .card {
   border: none;
@@ -796,18 +818,6 @@ section#showArticle .thumb-wrap {
     height: 100%; }
 section#showArticle .card {
   box-shadow: none; }
-section#showArticle .carousel-item {
-  background-color: rgba(218, 218, 218, 0.2); }
-  section#showArticle .carousel-item img.portrait {
-    height: 100%;
-    width: auto;
-    object-fit: contain;
-    display: block;
-    margin: auto; }
-  section#showArticle .carousel-item img.landscape {
-    width: 100%;
-    height: auto;
-    object-fit: cover; }
 
 /*Mes articles */
 section#myArticles {

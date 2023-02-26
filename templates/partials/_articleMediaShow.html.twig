@@ -1,0 +1,98 @@
+{# Show du "container à onglets" : video et/ou images
+Video: si il y a une vidéo elle apparait en onglet actif, elle est prioritaire sur les images
+Images : carousel qui adapte le format landscape ou portrait des images  #}
+
+{% if article.video or article.images is not empty %}
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        {% if article.video %}
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="video-tab" data-bs-toggle="tab" data-bs-target="#videoTab" type="button" role="tab" aria-controls="video-tab" aria-selected="true"><i class="fa-solid fa-film"></i> Vidéo</button>
+        </li>
+        {% endif %}
+
+        {% if article.images is not empty %}
+        <li class="nav-item" role="presentation">
+            <button {% if article.video %} class="nav-link" {% else %} class="nav-link active" {% endif %} id="profile-tab" data-bs-toggle="tab" data-bs-target="#imagesTab" type="button" role="tab" aria-controls="images-tab" aria-selected="false"><i class="fa-sharp fa-solid fa-images"></i> Images</button>
+        </li>
+        {% endif %}
+    </ul>
+{% endif %}
+                        
+    <div class="tab-content" id="articleTabs">
+        {# onglet video si il y en a #}
+        {% if article.video %}
+            <div class="tab-pane fade show active" id="videoTab" role="tabpanel" aria-labelledby="video-tab">
+                <div class="col-md-12">
+                    {% include "/partials/_video.html.twig" %} 
+                </div>
+            </div>
+        {% endif %}
+
+        {# onglet carousel images si il y en a #}
+        {% if article.images is not empty %}
+
+        <div {% if not article.video %} class="tab-pane fade show active" {% else %} class="tab-pane fade show" {% endif %} id="imagesTab" role="tabpanel" aria-labelledby="images-tab">
+            <div id="carouselImages" class="carousel slide " data-bs-ride="true">
+                <div class="carousel-indicators">
+                {% for image in article.images %}
+                    <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="{{ loop.index0 }}" {% if loop.index0 == 0 %} class="active" {% endif %} aria-current="true" aria-label="Slide {{loop.index}}"></button>
+                {% endfor %}
+                </div>
+
+                <div class="carousel-inner ratio ratio-16x9">
+                    {% for image in article.images %}
+                        <div  {% if loop.index0 == 0 %} class="carousel-item active"  {% else %} class="carousel-item" {% endif %} >
+                            <img src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Précédent</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Suivant</span>
+                </button>
+            </div>
+                            
+        </div>
+        {% endif %}
+    </div>
+                       
+    <div class="row">
+        {# si il n'y a ni video, ni images : image par defaut #}
+        {% if not article.video and article.images is empty %}
+            <div>
+                <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" > 
+            </div>    
+        {% endif %}
+</div>
+
+<script>
+      {# detection format image #}
+        let imgs = document.querySelectorAll("img");
+        let img;
+
+        // on attends le load de chaque image sur la page avant de vérifier son format
+        for (i = 0 ; i < imgs.length; i++){
+            img = imgs[i];
+            if(img.complete){
+                checkImage(img);
+            } else {
+                img.addEventListener("load", function(){
+                    checkImage(this);
+                })
+            }
+
+            // vérification du format paysage ou portrait pour appliquer le css voulu ( format carré => portrait pour eviter le crop )
+            function checkImage(image){
+                if(image.naturalHeight >= image.naturalWidth){
+                    image.classList.add("portrait");
+                } else {
+                    image.classList.add("landscape");
+                }
+            }
+        }
+    </script>
