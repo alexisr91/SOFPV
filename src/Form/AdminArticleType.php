@@ -44,6 +44,7 @@ class AdminArticleType extends ArticleType
             'multiple'=>true,
             'mapped'=>false,
             'required'=>false,
+            'help'=> 'Vous pouvez transférer un maximum de 5 images. Format maximum: 2000x2000px.',
             //contraintes pour les images
             'constraints'=> [
                 new All([

@@ -153,6 +153,10 @@ input {
         left:0;
     }
 }
+#player {
+    width: inherit;
+}
+#articleTabs {padding: 0;}
 
 .ytPlayer::after{
         content:"";
@@ -160,6 +164,24 @@ input {
         width: 100%;
         // pour garder le ratio video
         padding-bottom: calc(315/560*100%);
+    }
+
+    .carousel-item {
+        background-color: rgba($grey,0.2);
+        
+        img.portrait {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            display: block;
+            margin: auto;
+        }
+
+        img.landscape {
+            width: 100%;
+            height: auto;
+            object-fit:cover;
+        }
     }
 
 .overlayLoading{
@@ -197,9 +219,10 @@ input {
         box-shadow: 0 2px 0 $accent inset;
         animation: rotate 2s linear infinite;
       }
-
-    
-      
+        
+    #myTab .nav-link {color:$base;}
+       
+  
  
 .card {
     border: none;

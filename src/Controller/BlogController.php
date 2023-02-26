@@ -30,6 +30,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Validator\Constraints\Length;
 
 class BlogController extends AbstractController
 {
@@ -65,6 +66,9 @@ class BlogController extends AbstractController
         $article = new Article();
         $video = new Video();
 
+        $imgLimit = 5;
+        
+
         //vérification de l'accès de l'user connecté
         $adminAccess = $this->isGranted('ROLE_ADMIN');
         
@@ -74,8 +78,8 @@ class BlogController extends AbstractController
         } else {
             //sinon l'user aura le formulaire classique, son article apparaîtra avec les autres dans les articles de la page d'accueil
             $form = $this->createForm(ArticleType::class, $article); 
-        }
-         
+        } 
+
         $form->handleRequest($request);
 
         //Récupération du champ source pour la vidéo
@@ -88,6 +92,17 @@ class BlogController extends AbstractController
         if(isset($videoLink) && isset($videoSource)){
             $form->get('video')->get('link')->addError(new FormError('Vous ne pouvez pas ajouter plusieurs vidéos à votre article : choisissez le téléversement OU l\'ajout de lien.'));
         }
+
+
+        $images = $form->get('images')->getData(); 
+
+        if($images){
+            //on limite le nombre d'images transférées par article
+            if(count($images) > $imgLimit ){
+                $form->get('images')->addError(new FormError('Le nombre d\'images est trop important : la limite est de 5 par article.'));
+            }
+        }
+     
       
         if($form->isSubmitted() && $form->isValid()){
             
@@ -161,11 +176,11 @@ class BlogController extends AbstractController
             }
 
             //GESTION IMAGE 
-           $images = $form->get('images')->getData();
-           
+
+            // dd($images);
            //si il y a des images, on les traite pour l'upload 
            if($images){
-               
+     
                 foreach($images as $image){
 
                    $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
@@ -189,8 +204,7 @@ class BlogController extends AbstractController
                      
                         }      
             }
-                      
-                 
+                            
 
             $article->setContent($articleContent);
             $article->setAuthor($user);
