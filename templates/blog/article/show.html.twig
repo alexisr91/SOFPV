@@ -52,7 +52,7 @@
                                     <div class="carousel-inner ratio ratio-16x9">
                                         {% for image in article.images %}
                                         <div  {% if loop.index0 == 0 %} class="carousel-item active"  {% else %} class="carousel-item" {% endif %} >
-                                            <img class="d-block w-100 h-auto" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                                            <img src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
                                         </div>
                                         {% endfor %}
                                     </div>
@@ -162,7 +162,7 @@
                                     {% elseif article.images is not empty %}
                                             {% for image in article.images %}
                                                 {% if loop.first %}
-                                                    <img class="figure-img rounded " src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                                                    <img class="figure-img rounded" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
                                                 {% endif %}
                                             {% endfor %}
                                     {% else %}
@@ -187,6 +187,32 @@
         </div>
 
     </section>
+    <script>
+      {# detection format image #}
+        let imgs = document.querySelectorAll("img");
+        let img;
+
+        for (i = 0 ; i < imgs.length; i++){
+            img = imgs[i];
+            if(img.complete){
+                checkImage(img);
+            } else {
+                img.addEventListener("load", function(){
+                    checkImage(this);
+                })
+            }
+
+            function checkImage(image){
+                if(image.naturalHeight > image.naturalWidth){
+                    image.classList.add("portrait");
+                     console.log('portrait');
+                } else {
+                    image.classList.add("landscape");
+                     console.log('paysage');
+                }
+            }
+        }
+    </script>
 {% endblock %}
 
 {# PLYR #}
@@ -201,7 +227,7 @@
         const player = new Plyr('#player');
 
         <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
-    
 
+    
   </script>  
 {% endblock %}
