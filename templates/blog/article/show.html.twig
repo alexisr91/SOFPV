@@ -10,47 +10,72 @@
     
         <div class="container-fluid wrapper">
             <div class="row col-xs-12 col-md-10" id="wrapArticleContent">
-                
-                    {# <div class="banner">    
-                            <img src="{{asset('uploads/banner/' ~ user.banner)}}" alt="Bannière de {{user.nickname}}">
-                    </div>
-                     #}
                     <h2>{{article.title}}</h2>  
                 <div class="col-md-8">
-                    <div class="row">
-                    {% if article.video  %}
-                        <div class="col-md-12">
-                            {# video affichée #}
-                            {% include "/partials/_video.html.twig" %} 
-                        </div>
-                    {% elseif article.images is not empty %}
-                        <div id="carouselImages" class="carousel slide " data-bs-ride="true">
-                            <div class="carousel-indicators">
-                                {% for image in article.images %}
-                                <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="{{ loop.index0 }}" {% if loop.index0 == 0 %} class="active" {% endif %} aria-current="true" aria-label="Slide {{loop.index}}"></button>
-                                {% endfor %}
-                            </div>
-                            <div class="carousel-inner ratio ratio-16x9">
-                                {% for image in article.images %}
-                                <div  {% if loop.index0 == 0 %} class="carousel-item active"  {% else %} class="carousel-item" {% endif %} >
-                                    <img class="d-block w-100 h-auto" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                {# on verifie si il y a des images et/ou des videos pour les affichages des onglets #}
+                {% if article.video or article.images is not empty %}
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        {% if article.video %}
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="video-tab" data-bs-toggle="tab" data-bs-target="#videoTab" type="button" role="tab" aria-controls="video-tab" aria-selected="true"><i class="fa-solid fa-film"></i> Vidéo</button>
+                        </li>
+                        {% endif %}
+                        {% if article.images is not empty %}
+                        <li class="nav-item" role="presentation">
+                            <button {% if article.video %} class="nav-link" {% else %} class="nav-link active" {% endif %} id="profile-tab" data-bs-toggle="tab" data-bs-target="#imagesTab" type="button" role="tab" aria-controls="images-tab" aria-selected="false"><i class="fa-sharp fa-solid fa-images"></i> Images</button>
+                        </li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+                        
+                        <div class="tab-content" id="articleTabs">
+                            {# onglet video si il y en a #}
+                            {% if article.video %}
+                            <div class="tab-pane fade show active" id="videoTab" role="tabpanel" aria-labelledby="video-tab">
+                                <div class="col-md-12">
+                                    {# video affichée #}
+                                    {% include "/partials/_video.html.twig" %} 
                                 </div>
-                                {% endfor %}
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Précédent</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Suivant</span>
-                            </button>
+                            {% endif %}
+
+                             {# onglet carousel images si il y en a #}
+                            {% if article.images is not empty %}
+
+                            <div {% if not article.video %} class="tab-pane fade show active" {% else %} class="tab-pane fade show" {% endif %} id="imagesTab" role="tabpanel" aria-labelledby="images-tab">
+                                <div id="carouselImages" class="carousel slide " data-bs-ride="true">
+                                    <div class="carousel-indicators">
+                                        {% for image in article.images %}
+                                        <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="{{ loop.index0 }}" {% if loop.index0 == 0 %} class="active" {% endif %} aria-current="true" aria-label="Slide {{loop.index}}"></button>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="carousel-inner ratio ratio-16x9">
+                                        {% for image in article.images %}
+                                        <div  {% if loop.index0 == 0 %} class="carousel-item active"  {% else %} class="carousel-item" {% endif %} >
+                                            <img class="d-block w-100 h-auto" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Précédent</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Suivant</span>
+                                    </button>
+                                </div>
+                            
+                            </div>
+                            {% endif %}
                         </div>
-                    {% else %} 
+                       
+                    <div class="row">
+                    {# si il n'y a ni video, ni images : image par defaut #}
+                    {% if not article.video and article.images is empty %}
                         <div>
                             <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" > 
-                        </div>
-                        
+                        </div>    
                     {% endif %}
                     </div>
                     <div class="d-flex justify-content-between align-items-center px-1">
