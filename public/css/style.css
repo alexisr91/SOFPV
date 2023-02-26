@@ -801,6 +801,8 @@ section#showArticle .main-image-wrap {
     object-fit: cover;
     width: 100%;
     height: 100%; }
+section#showArticle .nav-link {
+  color: #252525; }
 
 /*Mes articles */
 section#myArticles {
