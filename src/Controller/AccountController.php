@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Drone;
+use App\Entity\Image;
 use App\Entity\Article;
 use App\Entity\Counter;
 use App\Form\DroneType;
@@ -15,7 +16,7 @@ use App\Entity\PasswordUpdate;
 use App\Form\AdminArticleType;
 use App\Form\PasswordUpdateType;
 use App\Repository\ArticleRepository;
-use Doctrine\ORM\EntityManager;
+use App\Repository\ImageRepository;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -334,7 +335,7 @@ class AccountController extends AbstractController
     //Edition d'un article
     #[Route('/profile/articles/edit/{id}', name:"account_article_edit")]
     #[IsGranted("ROLE_USER")]
-    public function editArticle(Article $article, EntityManagerInterface $manager, Request $request){
+    public function editArticle(Article $article, ImageRepository $imgRepo, EntityManagerInterface $manager, Request $request, SluggerInterface $slugger){
         
         $user = $this->getUser();
         
@@ -353,12 +354,70 @@ class AccountController extends AbstractController
 
             $form->handleRequest($request);
 
+           //Récupération du champ source pour la vidéo
+           $videoSource = $form->get('video')->get('source')->getData();
+
+           //Récupération du lien Youtube ou Vimeo 
+            $videoLink = $form->get('video')->get('link')->getData();
+  
+          //Si les 2 inputs concernant l'ajout d'une vidéo sont remplis, on renvoie une erreur 
+          if(isset($videoLink) && isset($videoSource)){
+              $form->get('video')->get('link')->addError(new FormError('Vous ne pouvez pas ajouter plusieurs vidéos à votre article : choisissez le téléversement OU l\'ajout de lien.'));
+          }
+  
+          //limite d'images imposée par article
+          $imgLimit = 10;
+
+          //images envoyées lors du formulaire d'edition
+          $images = $form->get('images')->getData();
+
+          //images déjà présentes sur l'article 
+          $stockedImg = $imgRepo->findBy(['article'=> $article->getId()]);
+          //dd($stockedImg);
+
+          if($images){ 
+            //vérification du nombre d'images en prenant compte celles dejà présentes
+            $countImgByArticle = count($stockedImg) + count($images);
+
+              //on limite le nombre d'images transférées par article
+              if($countImgByArticle > $imgLimit){
+                  $form->get('images')->addError(new FormError('Le nombre d\'images est trop important : la limite est de '.$imgLimit.' par article.'));
+              }
+          }
+
             if($form->isSubmitted() && $form->isValid()){
 
                 //On garde la mise en place des sauts de ligne avec nl2br()
                 $articleContent = nl2br($article->getContent());
                 //On set le contenu modifié avec nl2br avant le persist et l'envoi en bdd
                 $article->setContent($articleContent);
+
+                //on verifie si il y a des nouvelles images
+                $newImages = $form->get('images')->getData();
+
+                if(!empty($newImages)){
+                    foreach($newImages as $image){
+
+                        $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                        $sluggedName = $slugger->slug($originalName);
+                        $newName = $sluggedName.'-'.uniqid().'.'.$image->guessExtension();
+     
+                            try {
+                                $image->move($this->getParameter('upload_image'), $newName); // ok
+     
+                            } catch(FileException $e) {
+                                dd($e->getMessage());                    
+                            }
+     
+                                $newImage = new Image();
+                                $newImage->setSource($newName)
+                                     ->setArticle($article); 
+                                $article->addImage($newImage);
+     
+                                $manager->persist($newImage); 
+                          
+                            }      
+                }  
                 
                 $manager->persist($article);
                 $manager->flush();
