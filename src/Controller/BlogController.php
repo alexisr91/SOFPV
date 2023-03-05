@@ -30,7 +30,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\Validator\Constraints\Length;
+
 
 class BlogController extends AbstractController
 {
@@ -66,7 +66,7 @@ class BlogController extends AbstractController
         $article = new Article();
         $video = new Video();
 
-        $imgLimit = 5;
+      
         
 
         //vérification de l'accès de l'user connecté
@@ -93,13 +93,13 @@ class BlogController extends AbstractController
             $form->get('video')->get('link')->addError(new FormError('Vous ne pouvez pas ajouter plusieurs vidéos à votre article : choisissez le téléversement OU l\'ajout de lien.'));
         }
 
-
+        $imgLimit = 10;
         $images = $form->get('images')->getData(); 
 
         if($images){
             //on limite le nombre d'images transférées par article
             if(count($images) > $imgLimit ){
-                $form->get('images')->addError(new FormError('Le nombre d\'images est trop important : la limite est de 5 par article.'));
+                $form->get('images')->addError(new FormError('Le nombre d\'images est trop important : la limite est de '.$imgLimit.' par article.'));
             }
         }
      
@@ -223,6 +223,35 @@ class BlogController extends AbstractController
 
             ]);
         }
+
+    //GESTION IMAGES / SUPPRESSION
+    #[Route('/blog/delete/image/{id}', name:'article_image_delete')]
+    #[IsGranted("ROLE_USER")]
+    public function deleteImage(Image $image, EntityManagerInterface $manager, Request $request){
+        $user = $this->getUser();
+        $author = $image->getArticle()->getAuthor();
+        $article = $image->getArticle();
+
+        $data = json_decode($request->getContent(), true);
+
+        if ($user == $author){
+
+            try {
+                $name = $image->getSource();
+                $article->removeImage($image);
+                unlink($this->getParameter('upload_image').$name);
+                $manager->flush();
+
+                return new JsonResponse(['success'=> 200]);
+
+            } catch(FileException $e) {
+                //dd($e->getMessage());  
+                return new JsonResponse(['error'=>'Erreur de suppression'], 400);                  
+            }
+          
+        }   
+
+    }
   
 
     //GESTION VIDEO - Initialisation + calcul de la durée

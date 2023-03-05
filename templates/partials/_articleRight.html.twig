@@ -1,3 +1,5 @@
+{# Disposition d'article avec contenu écrit à droite #}
+
 <article>
     <div class="row g-0 position-relative">
         <div class="col-md-5">
@@ -16,7 +18,7 @@
                         {% for image in article.images %}
                             {% if loop.first %}
                                 <div class="ratio ratio-16x9">
-                                    <img class="figure-img rounded img-fluid" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                                    <img class="figure-img rounded" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
                                 </div>
                             {% endif %}
                         {% endfor %}
@@ -33,7 +35,7 @@
                 <div class="pe-2">
                     <div class="author">
                         <div class="author-avatar">
-                            <img class="img-fluid " src="{{asset('/uploads/avatar/'~ article.author.avatar )}}" alt="Avatar de {{article.author}}">
+                            <img class="img-fluid" src="{{asset('/uploads/avatar/'~ article.author.avatar )}}" alt="Avatar de {{article.author}}">
                         </div>
                         <div class="author-nickname">
                             <h4>{{article.author.nickname}}</h4>
@@ -62,3 +64,4 @@
         </div>
     </div>
 </article>
+

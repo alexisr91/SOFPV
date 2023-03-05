@@ -86,7 +86,7 @@ Images : carousel qui adapte le format landscape ou portrait des images  #}
                 })
             }
 
-            // vérification du format paysage ou portrait pour appliquer le css voulu ( format carré => portrait pour eviter le crop )
+            // vérification du format paysage ou portrait pour appliquer le css voulu ( format carré => portrait )
             function checkImage(image){
                 if(image.naturalHeight >= image.naturalWidth){
                     image.classList.add("portrait");

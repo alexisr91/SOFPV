@@ -393,7 +393,7 @@ section#showArticle {
     }
 
     #like-article {
-        background-color: $grey;
+        background-color: rgba($grey, 0.2);
         margin: 0.5em 0;
     }
 
@@ -558,7 +558,19 @@ section#myArticles{
 }
 
 /*Modifier un article */
+section#editArticle, section#addArticle {
+    .thumbnail-edit{
+        width: 150px;
+        height:auto;
+        position: relative;
 
+    }
+    a.btn-danger, button.btn-danger{
+        position: absolute;
+        top:5px;
+        right:5px;
+    }
+}
 
 
 /*Ajouter un article */
@@ -580,7 +592,6 @@ section#addArticle, section#editArticle {
 
         .row{
             width:90%;
-            height: 80%;
             margin: 0 2em;
             padding: 3em;
             border-radius: 3px;
@@ -591,7 +602,6 @@ section#addArticle, section#editArticle {
             
                 }
         }
-
         
     }
 
@@ -609,7 +619,7 @@ section#blog {
     
 }
 
-section#blog, section#blogHome, section#search
+section#blog, section#blogHome, section#search, section#profile
 {
     .row.g-0{width: 100%;}
    
@@ -680,7 +690,7 @@ section#blog, section#myArticles {
     }
 
 }
-section#blog, section#myArticles, section#blogHome, section#search{
+section#blog, section#myArticles, section#blogHome, section#search, section#profile{
     .card-body {
         display: flex;
         flex-direction: column;
@@ -785,15 +795,6 @@ section#profile {
             margin: 0 1em;
             width: 100%;
         }
-    }
-
-    .article-thumb {
-        max-width: 30%;
-        display: flex;
-        align-items: center;
-        background-color: rgba($grey,0.4);
-        position: relative;
-
     }
     .article {
         display: flex;

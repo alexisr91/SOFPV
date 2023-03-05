@@ -16,7 +16,6 @@ class Image
     #[ORM\Column(type: 'string', length: 255)]
     private $source;
 
-
     #[ORM\ManyToOne(inversedBy:'images', targetEntity:Article::class, cascade:['persist', 'remove'])]
     private $article;
     

@@ -31,13 +31,18 @@
                         <h3>Mes informations</h3>
                         <hr>
                         <b><i class="fa-solid fa-at"></i> Email: </b>{{user.email}}<br>
-                        <b><i class="fa-solid fa-address-card"></i> Nom: </b>{{user.firstname}} {{user.lastname}}<br>
+                        <b><i class="fa-solid fa-address-card"></i> Nom:</b> {% if user.firstname or user.lastname %}{{user.firstname}} {{user.lastname}} {% else %} <i>Non renseigné</i> {% endif %} <br>
                                         
-                        <b><i class="fa-solid fa-house"></i> Adresse:</b><br> {{user.address}}
+                        <b><i class="fa-solid fa-house"></i> Adresse:</b><br>  {% if user.address %} {{user.address}}
+                            {% else %}
+                            <i>Non renseigné</i>
+                            {% endif %}
+                            
                             {% if user.addressComplement %}
                                 <br>{{user.addressComplement}}
+                                <br>{{user.zip}}, {{user.city}} 
                             {% endif %}
-                                <br>{{user.zip}}, {{user.city}}
+                            
                         </p>
                         <div class="param">
                             <a href="{{path('account_edit')}}"><i class="fa-solid fa-user-gear"></i> Modifier mon profil</a>

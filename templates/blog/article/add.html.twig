@@ -42,6 +42,12 @@
                     <h5 class="mt-3"><i class="fa-solid fa-images"></i> Ajouter des images</h5>
 
                         {{ form_row(form.images) }}
+
+                    {% if form.images.vars.value is not null %}
+                        <div class="d-flex flex-row flex-wrap" id="imgWrap" >
+                        
+                       </div>
+                    {% endif %}
                      
                 </div>
                     <div>
@@ -67,8 +73,52 @@
         loader.classList.add('d-block');
     });
     
+
+   window.onload = () => {
+    
+        let inputFiles = document.querySelector("[multiple]");
+        const imgWrap = document.querySelector("#imgWrap");
         
-   
+        let imgArray = []; 
+        
+        inputFiles.addEventListener("change", () => {
+            const file = inputFiles.files
+            console.log(file, file.length);
+            for(i = 0; i <= file.length; i++){
+                 imgArray.push(file[i])
+                previewImg()
+            }
+           
+        
+        })
+        
+        let buttonDelete = document.querySelectorAll("[data-index]");
+        const file = inputFiles.files
+        for(j = 0; j <= buttonDelete.length ; j++){
+            buttonDelete[j].addEventListener("click", () => {
+            let index = this.dataset.index;
+            imgArray.splice(index,1);
+            previewImg();
+            })
+        }
+        
+
+        function previewImg(){
+            let images = ""
+            Array.prototype.forEach.call(imgArray, (image, index)=>{
+                images += `<div class="position-relative"><img src="${URL.createObjectURL(image)}" alt="prévisualisation d'image" class="thumbnail-edit">
+                <button type="button" class="btn btn-danger" data-index=${index}>X</button></div>
+                `
+            })
+            imgWrap.innerHTML = images;
+        }
+
+        
+
+        
+        
+    }
+    
     </script>
 {% endblock %}
 

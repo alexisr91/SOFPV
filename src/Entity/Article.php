@@ -55,7 +55,7 @@ class Article
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Likes::class, orphanRemoval: true)]
     private ?Collection $likes = null;
 
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class, orphanRemoval:true)]
     private ?Collection $comments = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles', cascade:['persist'])]
