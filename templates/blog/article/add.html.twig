@@ -45,7 +45,6 @@
 
                     {% if form.images.vars.value is not null %}
                         <div class="d-flex flex-row flex-wrap" id="imgWrap" >
-                        
                        </div>
                     {% endif %}
                      
@@ -58,7 +57,7 @@
             </div>
               {{form_end(form)}}  
         </div>
- 
+        
     </section>
 
     <script>
@@ -76,46 +75,68 @@
 
    window.onload = () => {
     
-        let inputFiles = document.querySelector("[multiple]");
+        //input concernant les images
+        let imgInput = document.querySelector("[multiple]");
+        //div qui englobe les prévisualisation des images
         const imgWrap = document.querySelector("#imgWrap");
+
+        //on clone la FileList pour avoir son controle
+        let list = new DataTransfer(); 
         
-        let imgArray = []; 
-        
-        inputFiles.addEventListener("change", () => {
-            const file = inputFiles.files
-            console.log(file, file.length);
-            for(i = 0; i <= file.length; i++){
-                 imgArray.push(file[i])
+        //on écoute le changement de l'input image
+        imgInput.addEventListener("change", () => {
+          
+
+            //pour chaque fichier dans l'input
+            for(const file of imgInput.files){
+                //on créé chaque fichier..
+                let listFile = new File([file], file.name);
+                //..qu'on ajoute à la FileList nouvellement créée
+                list.items.add(file);
+                //on init la prévisualisation
                 previewImg()
+                
             }
            
-        
+          
+           //on selectionne les boutons delete
+            let deleteBtn = document.querySelectorAll(".delete");
+            //pour chaque bouton
+            for(let i = 0; i < deleteBtn.length ; i++){
+                let file = imgInput.files[i]
+                //on ecoute le click
+                deleteBtn[i].addEventListener('click', () => {
+                    //on enlève la div pour supprimer visuellement l'image
+                    deleteBtn[i].parentElement.remove();
+                    
+                    let dataList = list.items; 
+
+                    //on enlève le fichier de la liste
+                    dataList.remove(i)
+                   
+                    //on synchro l'input avec la datalist clonée
+                    imgInput.files = list.files
+                })
+            }
+           
         })
-        
-        let buttonDelete = document.querySelectorAll("[data-index]");
-        const file = inputFiles.files
-        for(j = 0; j <= buttonDelete.length ; j++){
-            buttonDelete[j].addEventListener("click", () => {
-            let index = this.dataset.index;
-            imgArray.splice(index,1);
-            previewImg();
-            })
-        }
-        
-
+       
         function previewImg(){
-            let images = ""
-            Array.prototype.forEach.call(imgArray, (image, index)=>{
-                images += `<div class="position-relative"><img src="${URL.createObjectURL(image)}" alt="prévisualisation d'image" class="thumbnail-edit">
-                <button type="button" class="btn btn-danger" data-index=${index}>X</button></div>
-                `
+            let images = "" 
+            //on transforme l'objet en array
+            let inputFilesToArray = Object.values(imgInput.files);
+
+            Array.prototype.forEach.call(inputFilesToArray, (image, index)=>{
+
+                images += `<div class="position-relative thumbnail-edit"><img src="${URL.createObjectURL(image)}" alt="prévisualisation d'image" class="img-thumbnail img-fluid">
+                    <button type="button" class="btn btn-danger btn-sm delete">X</button></div>`
+
+                    imgWrap.innerHTML = images;
+     
             })
-            imgWrap.innerHTML = images;
+        
         }
 
-        
-
-        
         
     }
     

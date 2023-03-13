@@ -176,8 +176,6 @@ class BlogController extends AbstractController
             }
 
             //GESTION IMAGE 
-
-            // dd($images);
            //si il y a des images, on les traite pour l'upload 
            if($images){
      
