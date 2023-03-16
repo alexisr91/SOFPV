@@ -25,6 +25,8 @@
                             {{article.views}}{{article.views <= 1 ? ' vue':' vues'}} • {{article.createdAt|date('d-m-Y')}}
                             </span>
 
+                            <button type="button" class="btn btn-light text-danger" data-bs-toggle="modal" data-bs-target="#articleAlert"><i class="fa-solid fa-triangle-exclamation fa-2x"></i></button>
+                          
                             <button type="button" class="btn" id="like-article" data-id='{{article.id}}'>
                             {% set isLiked = false %}
                                 {# Si il y a des likes, on verifie dans ces likes si il y en a un qui a une correspondance avec l'user connecté #}
@@ -75,7 +77,20 @@
                                 {# Si le commentaire appartient à l'auteur, il peut le supprimer #}
                                 {% if comment.author == app.user %}
                                     <a href="{{path('comment_delete', {'id': comment.id})}}" class="btn btn-danger btn-sm">X Supprimer</a>
+                                {% else %}
+                                    {% set isAlreadyAlerted = false %}
+                                    {% for alertComment in comment.alertComments %}
+                                        {% if alertComment.user == app.user %}
+                                            {% set isAlreadyAlerted = true %} 
+                                        {% endif %}
+                                    {% endfor %}
                                 {% endif %}
+                                {% if isAlreadyAlerted %}
+                                    <a href="{{path('comment_alert', {'id': comment.id})}}" class="btn text-danger alertMessage" data-alert="alert-{{comment.id}}"><i class="fa-solid fa-triangle-exclamation"></i> <span class="px-1 text-danger">Commentaire signalé !</span></a>  
+                                {% else %}
+                                    <a href="{{path('comment_alert', {'id': comment.id})}}" class="btn text-danger" data-alert="alert-{{comment.id}}"><i class="fa-solid fa-triangle-exclamation"><span></span></i></a>
+                                {% endif %}
+                                
                             </div>
                                 {{comment.content|raw}}
                         </div>
@@ -122,6 +137,64 @@
         </div>
 
     </section>
+
+<!-- Modal signalement article -->
+<div class="modal fade" id="articleAlert" tabindex="-1" aria-labelledby="articleAlert" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Voulez-vous signaler cet article ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{form_start(formAlert)}}
+            {{form_widget(formAlert)}}
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-triangle-exclamation"></i> Signaler</button>
+        {{form_end(formAlert)}}
+      </div>
+    </div>
+  </div>
+</div>
+    <script>
+        window.onload = () => {
+        // Gestion des boutons de signalement
+        let links = document.querySelectorAll("[data-alert]");
+       
+        
+        // On boucle sur liens
+        for(let link of links){ 
+           
+            link.addEventListener("click", function(e){
+            
+                e.preventDefault();
+                 
+                    // On envoie une requête Ajax 
+                    fetch(this.getAttribute("href"), {
+                        method: "POST",
+                        headers: {
+                            "X-Requested-With": "XMLHttpRequest",
+                            "Content-Type": "application/json"
+                        }
+                    }).then(
+                        // On récupère la réponse en JSON
+                        response => response.json()
+                    ).then(data => {
+                        if(data.success){
+                            //on switch le message d'alerte pour avoir la confirmation visuelle du signalement ou de l'enlèvement du signalemement
+                            link.classList.toggle('alertMessage');
+                            link.innerHTML = link.classList.contains('alertMessage') ? `<i class="fa-solid fa-triangle-exclamation"></i><span class="px-1 text-danger"> Commentaire signalé !</span>` : `<i class="fa-solid fa-triangle-exclamation"></i>`
+                        } else
+                        alert(data.error)
+                    })
+            })
+        }
+    }
+</script>
+
    {% endblock %}
 
 {# PLYR #}

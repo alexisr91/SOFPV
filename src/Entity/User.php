@@ -90,6 +90,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Counter::class, mappedBy: 'user')]
     private Collection $counters;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: AlertComment::class)]
+    private Collection $alertComments;
+
     //En cas d'appel de l'utilisateur via les articles, on passera par le pseudo
     public function __toString()
     {
@@ -108,6 +111,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->banner = 'bannerDefault.png';
         $this->avatar = 'avatarDefault.jpg';
         $this->counters = new ArrayCollection();
+        $this->alertComments = new ArrayCollection();
     }
     
 
@@ -455,6 +459,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->counters->removeElement($counter)) {
             $counter->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AlertComment>
+     */
+    public function getAlertComments(): Collection
+    {
+        return $this->alertComments;
+    }
+
+    public function addAlertComment(AlertComment $alertComment): self
+    {
+        if (!$this->alertComments->contains($alertComment)) {
+            $this->alertComments->add($alertComment);
+            $alertComment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlertComment(AlertComment $alertComment): self
+    {
+        if ($this->alertComments->removeElement($alertComment)) {
+            // set the owning side to null (unless already changed)
+            if ($alertComment->getUser() === $this) {
+                $alertComment->setUser(null);
+            }
         }
 
         return $this;

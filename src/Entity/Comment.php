@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CommentRepository;
@@ -29,8 +31,13 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
+    #[ORM\OneToMany(mappedBy: 'comment', targetEntity: AlertComment::class)]
+    private Collection $alertComments;
+
+
     public function __construct(){
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $this->alertComments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,4 +92,36 @@ class Comment
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, AlertComment>
+     */
+    public function getAlertComments(): Collection
+    {
+        return $this->alertComments;
+    }
+
+    public function addAlertComment(AlertComment $alertComment): self
+    {
+        if (!$this->alertComments->contains($alertComment)) {
+            $this->alertComments->add($alertComment);
+            $alertComment->setComment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlertComment(AlertComment $alertComment): self
+    {
+        if ($this->alertComments->removeElement($alertComment)) {
+            // set the owning side to null (unless already changed)
+            if ($alertComment->getComment() === $this) {
+                $alertComment->setComment(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }
