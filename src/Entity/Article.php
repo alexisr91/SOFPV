@@ -64,6 +64,12 @@ class Article
     #[ORM\Column]
     private ?bool $adminNews = null;
 
+    #[ORM\Column]
+    private ?bool $active = null;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Alert::class)]
+    private Collection $alerts;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
@@ -72,6 +78,8 @@ class Article
         $this->likes = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->adminNews = 0;
+        $this->active = 1;
+        $this->alerts = new ArrayCollection();
     }
 
     //creation du slug et update si le titre est modifié par l'auteur
@@ -281,6 +289,48 @@ class Article
     public function setAdminNews(bool $adminNews): self
     {
         $this->adminNews = $adminNews;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Alert>
+     */
+    public function getAlerts(): Collection
+    {
+        return $this->alerts;
+    }
+
+    public function addAlert(Alert $alert): self
+    {
+        if (!$this->alerts->contains($alert)) {
+            $this->alerts->add($alert);
+            $alert->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlert(Alert $alert): self
+    {
+        if ($this->alerts->removeElement($alert)) {
+            // set the owning side to null (unless already changed)
+            if ($alert->getArticle() === $this) {
+                $alert->setArticle(null);
+            }
+        }
 
         return $this;
     }

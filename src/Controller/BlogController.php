@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use FFMpeg\FFMpeg;
+use App\Entity\Alert;
+use App\Entity\AlertComment;
 use App\Entity\Image;
 use App\Entity\Likes;
 use App\Entity\Video;
@@ -13,12 +15,15 @@ use App\Form\CommentType;
 use App\Service\Pagination;
 use FFMpeg\Format\Video\X264;
 use App\Form\AdminArticleType;
+use App\Form\AlertArticleType;
+use App\Repository\AlertCommentRepository;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Coordinate\Dimension;
 use App\Repository\LikesRepository;
 use App\Repository\ArticleRepository;
-use App\Repository\CategoryRepository;
 use Symfony\Component\Form\FormError;
+use App\Repository\CategoryRepository;
+use App\Repository\CommentRepository;
 use FFMpeg\Filters\Video\ResizeFilter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +31,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -280,19 +284,38 @@ class BlogController extends AbstractController
 
     //Visualisation de l'article + autres articles du même auteur en excluant l'article actuel (Utilisateur connecté uniquement : comparaison avec l'auteur pour ajout ou non d'une vue + possible ajout de commentaire)
     #[Route('/blog/show/{slug}', name:'article_show')]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted("ROLE_USER")]
     public function show(Article $article, ArticleRepository $articleRepo, EntityManagerInterface $manager, Request $request){
 
         $author = $article->getAuthor();
         $title = $article->getTitle();
         $video = $article->getVideo();
 
+        //gestion des signalements de l'article
+        $alert = new Alert();
+        $formAlertArticle = $this->createForm(AlertArticleType::class, $alert);
+        $formAlertArticle->handleRequest($request);
+
+
+
         //gestion des commentaires
         $comment = new Comment();
         $formComment = $this->createForm(CommentType::class, $comment);
         $formComment->handleRequest($request);
 
+        //signalement
+        if($formAlertArticle->isSubmitted() && $formAlertArticle->isValid()){
 
+            $nblrAlert = nl2br($alert->getDescription());
+            $alert->setArticle($article)
+                  ->setDescription($nblrAlert);
+            $manager->persist($alert);
+            $manager->flush($alert);
+            $this->addFlash('success','Votre signalement a bien été pris en compte.');
+            return $this->redirectToRoute('article_show', ['slug'=>$article->getSlug()]);
+        }
+
+        //commentaire
         if($formComment->isSubmitted() && $formComment->isValid()){
             //On récupère le commentaire et on applique la méthode php nl2br() pour conserver les sauts de ligne
             $nlbrContent = nl2br($comment->getContent());
@@ -302,7 +325,7 @@ class BlogController extends AbstractController
                     ->setContent($nlbrContent);
 
             $manager->persist($comment);
-            $manager->flush();
+            $manager->flush($comment);
 
             return $this->redirectToRoute('article_show', ['slug'=>$article->getSlug()]);
         }
@@ -322,7 +345,9 @@ class BlogController extends AbstractController
             'article'=>$article,
             'articles'=>$articles,
             'video'=> $video,
+            'alert'=>$alert,
             'title'=> $title.' - '.$author,
+            'formAlert'=>$formAlertArticle->createView(),
             'form'=>$formComment->createView()
         ]);
     }
@@ -346,26 +371,55 @@ class BlogController extends AbstractController
             } else {
                 $like = new Likes();
                 $like->setUser($user)
-                    ->setArticle($article);
+                     ->setArticle($article);
                 $manager->persist($like);
             }
 
             $manager->flush();
-            return new JsonResponse('success', 200);
+            return new JsonResponse(['success'=> 200]);
 
         } else {
-            return new JsonResponse(['erreur', 'Vous ne pouvez pas liker vos articles.']);
+            return new JsonResponse(['erreur'=> 'Vous ne pouvez pas liker vos articles.']);
         }
         //si l'user tente de like sans être connecté, on retourne une réponse en JSON    
         } else {
-            return new JsonResponse(['erreur', 'Attention, vous devez être connecté pour pouvoir liker un article.']);
+            return new JsonResponse(['erreur'=> 'Attention, vous devez être connecté pour pouvoir liker un article.']);
         }
 
             return $this->render('blog/index.html.twig', [
-                'title'=>'Blog',
+                'title'=>'Actualités',
              ]);
          
+
+    }
+
+    #[Route('/blog/comment/{id}/alert', options: ['expose' => true], name:'comment_alert')]
+    public function AlertComment(Comment $comment, AlertCommentRepository $alertCommentRepo, EntityManagerInterface $manager, Request $request){
+
+        $data = json_decode($request->getContent(), true);
+
+        if($this->getUser()){
+            $user = $this->getUser();
+
+            $isAlreadyAlerted = $alertCommentRepo->getAlertByUserAndComment($user, $comment);
+            
+                if($isAlreadyAlerted){
+                    $manager->remove($isAlreadyAlerted);
+                } else {
+                    $alertComment = new AlertComment();
+                    $alertComment->setUser($user)
+                            ->setComment($comment);
+                    $manager->persist($alertComment);
+
+                }
+
+                $manager->flush();
+                return new JsonResponse(['success' => 200]);     
            
+        } else {
+            return new JsonResponse(['erreur', 'Attention, vous devez être connecté pour pouvoir signaler un commentaire.']);
+        }
+       
 
     }
 
