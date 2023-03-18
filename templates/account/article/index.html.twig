@@ -13,6 +13,11 @@
             {{include('partials/_sidebarMenuProfile.html.twig')}}
         </div>
             <div class="row row-cols-md-1 g-4 px-3 pt-4">
+              {% if pagination.data is empty %}
+              <div class="w-100">
+                <span class="alert alert-warning d-block">Vous n'avez pas encore publié d'articles.</span>
+              </div>
+              {% else %}
                 {% for article in pagination.data %}
                     <article class="col">
                         <div class="article">  
@@ -93,6 +98,7 @@
                     </article>
                 {% endfor %}
                 {{pagination.display()}}
+                {% endif %}
             </div>
     
     </section>
