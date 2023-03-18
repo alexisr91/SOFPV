@@ -376,14 +376,14 @@ class BlogController extends AbstractController
             }
 
             $manager->flush();
-            return new JsonResponse(['success'=> 200]);
+            return new JsonResponse(["success"=> 200]);
 
         } else {
-            return new JsonResponse(['erreur'=> 'Vous ne pouvez pas liker vos articles.']);
+            return new JsonResponse(["error"=> "Vous ne pouvez pas liker vos articles."]);
         }
         //si l'user tente de like sans être connecté, on retourne une réponse en JSON    
         } else {
-            return new JsonResponse(['erreur'=> 'Attention, vous devez être connecté pour pouvoir liker un article.']);
+            return new JsonResponse(["error"=> "Attention, vous devez être connecté pour pouvoir liker un article."]);
         }
 
             return $this->render('blog/index.html.twig', [
@@ -414,10 +414,10 @@ class BlogController extends AbstractController
                 }
 
                 $manager->flush();
-                return new JsonResponse(['success' => 200]);     
+                return new JsonResponse(["success" => 200]);     
            
         } else {
-            return new JsonResponse(['erreur', 'Attention, vous devez être connecté pour pouvoir signaler un commentaire.']);
+            return new JsonResponse(["error", "Attention, vous devez être connecté pour pouvoir signaler un commentaire."]);
         }
        
 

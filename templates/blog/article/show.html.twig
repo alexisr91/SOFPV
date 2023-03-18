@@ -27,7 +27,7 @@
 
                             <button type="button" class="btn btn-light text-danger" data-bs-toggle="modal" data-bs-target="#articleAlert"><i class="fa-solid fa-triangle-exclamation fa-2x"></i></button>
                           
-                            <button type="button" class="btn" id="like-article" data-id='{{article.id}}'>
+                            
                             {% set isLiked = false %}
                                 {# Si il y a des likes, on verifie dans ces likes si il y en a un qui a une correspondance avec l'user connecté #}
                                     {% if article.likes %}
@@ -40,14 +40,14 @@
                                     {% endif %}
 
                                     {% if isLiked %} {# l'user aime déjà la vidéo #}
-                                          <i class="fa-solid fa-thumbs-up fa-2x"></i>
+                                        <a href="{{path('article_like', {'id':article.id})}}" class="btn liked" id="like-article" data-id='{{article.id}}'>
+                                        <i class="fa-solid fa-thumbs-up fa-2x"></i> <span id="like-count">{{article.likes|length }}</span>
                                     {% else %} {# l'user n'aime pas encore la vidéo #}
-                                          <i class="fa-regular fa-thumbs-up fa-2x"></i>
+                                        <a href="{{path('article_like', {'id':article.id})}}" class="btn" id="like-article" data-id='{{article.id}}'>
+                                        <i class="fa-regular fa-thumbs-up fa-2x"></i> <span id="like-count">{{article.likes|length }}</span>
                                     {% endif %}
-                                    <span id="like_count">
-                                        {{article.likes|length }}
-                                    </span>
-                            </button>
+                            </a>
+                            
                         </div>
                     </div>
                     <div class="my-3 article-content-show">
@@ -163,35 +163,63 @@
         window.onload = () => {
         // Gestion des boutons de signalement
         let links = document.querySelectorAll("[data-alert]");
-       
-        
+
+        //gestion like
+        const like = document.querySelector("#like-article");
+        let countLike = document.querySelector("#like-count").firstChild.data;
+  
+        //signalement des commentaires
         // On boucle sur liens
         for(let link of links){ 
-           
-            link.addEventListener("click", function(e){
             
+            link.addEventListener("click", function(e){
+                
                 e.preventDefault();
-                 
-                    // On envoie une requête Ajax 
-                    fetch(this.getAttribute("href"), {
-                        method: "POST",
-                        headers: {
-                            "X-Requested-With": "XMLHttpRequest",
-                            "Content-Type": "application/json"
-                        }
-                    }).then(
-                        // On récupère la réponse en JSON
-                        response => response.json()
-                    ).then(data => {
-                        if(data.success){
-                            //on switch le message d'alerte pour avoir la confirmation visuelle du signalement ou de l'enlèvement du signalemement
-                            link.classList.toggle('alertMessage');
-                            link.innerHTML = link.classList.contains('alertMessage') ? `<i class="fa-solid fa-triangle-exclamation"></i><span class="px-1 text-danger"> Commentaire signalé !</span>` : `<i class="fa-solid fa-triangle-exclamation"></i>`
-                        } else
+                    
+                // On envoie une requête Ajax 
+                fetch(this.getAttribute("href"), {
+                    method: "POST",
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest",
+                        "Content-Type": "application/json"
+                    }
+                }).then(
+                    // On récupère la réponse en JSON
+                    response => response.json()
+                ).then(data => {
+                    if(data.success){
+                        //on switch le message d'alerte pour avoir la confirmation visuelle du signalement ou de l'enlèvement du signalemement
+                        link.classList.toggle('alertMessage');
+                        link.innerHTML = link.classList.contains('alertMessage') ? `<i class="fa-solid fa-triangle-exclamation"></i><span class="px-1 text-danger"> Commentaire signalé !</span>` : `<i class="fa-solid fa-triangle-exclamation"></i>`
+                    } else
                         alert(data.error)
-                    })
+                })
             })
         }
+        
+        like.addEventListener("click", function(e){
+            e.preventDefault();
+
+            fetch(this.getAttribute("href"), {
+                method: "POST",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Content-Type": "application/json"
+                }
+            }).then(
+                response =>response.json()
+            ).then(data => {
+                if(data.success){
+                    like.classList.toggle('liked');
+                    
+                    like.innerHTML = like.classList.contains('liked') ? `<i class="fa-solid fa-thumbs-up fa-2x"></i> <span id="like-count">${parseInt(countLike)+1}</span>`
+                                    : `<i class="fa-regular fa-thumbs-up fa-2x"></i> <span id="like-count">${parseInt(countLike)}</span>`
+                } else 
+                    alert(data.error)
+                
+            })
+
+        })
     }
 </script>
 
