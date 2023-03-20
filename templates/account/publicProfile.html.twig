@@ -24,9 +24,18 @@
                         </div>
                         <h2>{{user.nickname}}</h2> 
                     </div>
+                    {# bloc réseaux sociaux #}
+                    {% if user.facebook or user.tiktok or user.instagram %}
+                    <div class="social">
+                        {% if user.instagram %}<div><i class="fa-brands fa-instagram fa-2x"></i> <b>{{user.instagram}}</b></div> {% endif %}
+                         {% if user.tiktok %}<div><i class="fa-brands fa-tiktok fa-2x"></i> <b>{{user.tiktok}}</b></div> {% endif %}
+                         {% if user.facebook %}<div><i class="fa-brands fa-facebook fa-2x"></i> <b>{{user.facebook}}</b></div> {% endif %}
+                    </div>
+                    {% endif %}
+                    {# bloc ma config de drone #}
                     <div class="my-drone">      
                         <h3>Config</h3>
-                    <hr/>
+                        <hr/>
                         {% if user.drone is null %}
                         <div class="alert alert-warning">Pas encore de configuration renseignée.</div>
                         {% else %}
@@ -48,14 +57,16 @@
                         </div>
                     
                         {% endif %}
-                        </div>
+                    </div>
                         {# TODO: mettre les prochaines sessions de l'user + lien pour rejoindre la session #}
-                        <div class="sessions">
-                            <span class="alert alert-warning">Pas de sessions prévues</span>
-                        </div>
+                    <div class="sessions">
+                        <span class="alert alert-warning">Pas de sessions prévues</span>
                     </div>
 
-                {# partie contenu de l'user #}
+                    
+                </div>
+
+                {# partie articles de l'user #}
                 <div class="col">
                     <div class="user-content">
                         {% if articles is not empty %}
@@ -72,9 +83,11 @@
                     </div>
                 </div>
          
-                </div>
-
-                
+        </div>
+            {# retour en haut #}
+            <div id="scrollBackToTop">
+                <a href="#"><i class="fa-solid fa-angles-up fa-2x"></i></a>
+            </div>
         
     </section>
 {% endblock %}

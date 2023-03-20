@@ -93,6 +93,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: AlertComment::class)]
     private Collection $alertComments;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $facebook = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $instagram = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $tiktok = null;
+
     //En cas d'appel de l'utilisateur via les articles, on passera par le pseudo
     public function __toString()
     {
@@ -490,6 +499,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $alertComment->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(?string $facebook): self
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    public function getInstagram(): ?string
+    {
+        return $this->instagram;
+    }
+
+    public function setInstagram(?string $instagram): self
+    {
+        $this->instagram = $instagram;
+
+        return $this;
+    }
+
+    public function getTiktok(): ?string
+    {
+        return $this->tiktok;
+    }
+
+    public function setTiktok(?string $tiktok): self
+    {
+        $this->tiktok = $tiktok;
 
         return $this;
     }

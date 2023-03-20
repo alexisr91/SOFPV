@@ -30,20 +30,30 @@
                     <div class="personnal-info">
                         <h3>Mes informations</h3>
                         <hr>
-                        <b><i class="fa-solid fa-at"></i> Email: </b>{{user.email}}<br>
-                        <b><i class="fa-solid fa-address-card"></i> Nom:</b> {% if user.firstname or user.lastname %}{{user.firstname}} {{user.lastname}} {% else %} <i>Non renseigné</i> {% endif %} <br>
-                                        
-                        <b><i class="fa-solid fa-house"></i> Adresse:</b><br>  {% if user.address %} {{user.address}}
-                            {% else %}
-                            <i>Non renseigné</i>
+                        <div class="row">
+                            <div class="col">
+                                <b><i class="fa-solid fa-at"></i> </b>{{user.email}}<br>
+                                <b><i class="fa-solid fa-address-card"></i> </b> {% if user.firstname or user.lastname %}{{user.firstname}} {{user.lastname}} {% else %} <i>Non renseigné</i> {% endif %} <br>
+                                                
+                                <b><i class="fa-solid fa-house"></i> </b>  {% if user.address %} {{user.address}}
+                                {% else %}
+                                <i>Non renseigné</i>
+                                {% endif %}
+                                
+                                {% if user.addressComplement %}
+                                    <br>{{user.addressComplement}}
+                                
+                                {% endif %}
+                                <br> {{user.zip}}, {{user.city}} <br>
+                            </div>
+                            {% if user.facebook or user.tiktok or user.instagram %}
+                            <div class="col">
+                                <i class="fa-brands fa-instagram"></i> {% if user.instagram %} {{user.instagram}} {% else %} <i>Non renseigné</i> {% endif %} <br>
+                                <i class="fa-brands fa-tiktok"></i> {% if user.tiktok %} {{user.tiktok}} {% else %} <i>Non renseigné</i> {% endif %} <br>
+                                <i class="fa-brands fa-facebook"></i> {% if user.facebook %} {{user.facebook}} {% else %} <i>Non renseigné</i> {% endif %} <br>
+                            </div>
                             {% endif %}
-                            
-                            {% if user.addressComplement %}
-                                <br>{{user.addressComplement}}
-                                <br>{{user.zip}}, {{user.city}} 
-                            {% endif %}
-                            
-                        </p>
+                        </div>   
                         <div class="param">
                             <a href="{{path('account_edit')}}"><i class="fa-solid fa-user-gear"></i> Modifier mon profil</a>
                         </div>    
@@ -95,15 +105,6 @@
                                             </div>
                                     </div>
                                 </div>
-                                {# <div class="col">
-                                    <div class="card text-bg-light mb-3">
-                                        <div class="card-header">Questions</div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title"><i class="fa-solid fa-question fa-2x"></i></h5>
-                                                <h5>1</h5>
-                                            </div>
-                                    </div>
-                                </div> #}
                                 <div class="col">
                                     <div class="card text-bg-light mb-3">
                                         <div class="card-header">Sessions prévues</div>
@@ -139,7 +140,7 @@
                                             <i class="fa-solid fa-comment fa-2x"></i>
                                             {# si il y a des commentaires sur l'article de la catégorie "question", on affiche le nombre de commentaires #}
                                             {% if question.comments|length is not same as 0 %}
-                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark">
                                                 {{question.comments|length }}
                                                 <span class="visually-hidden">Commentaires de l'article</span>
                                             </span>
