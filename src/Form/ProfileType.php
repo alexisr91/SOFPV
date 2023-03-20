@@ -23,6 +23,7 @@ class ProfileType extends AbstractType
                 'label'=>'Votre Email'
             ])
             ->add('nickname', TextType::class, [
+                'disabled'=>true,
                 'label'=>'Votre pseudo'
             ]) 
             ->add('firstname', TextType::class, [
@@ -43,6 +44,18 @@ class ProfileType extends AbstractType
             ]) 
             ->add('city', TextType::class, [
                 'label'=>'Votre ville'
+            ])
+            ->add('instagram', TextType::class, [
+                'label'=>false,
+                'attr'=> ['placeholder'=>'Votre tag sur Instagram']
+            ])  
+            ->add('tiktok', TextType::class, [
+                'label'=>false,
+                'attr'=> ['placeholder'=>'Votre tag sur TikTok']
+            ])  
+            ->add('facebook', TextType::class, [
+                'label'=>false,
+                'attr'=> ['placeholder'=>'Votre nom sur Facebook']
             ])  
             ->add('avatar', FileType::class, [
                 'label'=>'Modifiez votre avatar',

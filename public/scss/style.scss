@@ -176,6 +176,10 @@ section#myProfile {
        
     }
 
+    .param {
+        margin-top: 1em;
+    }
+
     .counters {
         width: 100%;
         margin-bottom: 2em;
@@ -266,6 +270,7 @@ section#myPwdEdit {
         height: 50%;
         margin: 0 auto;
          border-radius: 3px;
+
     }
 } 
 
@@ -277,6 +282,10 @@ section#myProfileEdit, section#droneEdit {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+
+    .mb-3 {
+        margin:0 !important;
+    }
    
     min-height: 90vh;
     .container-fluid {
@@ -306,6 +315,15 @@ section#myProfileEdit, section#droneEdit {
         width: 80%;
         margin: 0 auto;
         border-radius: 3px;
+
+        .input-group {
+            margin-bottom: 1em; 
+            
+            input {
+
+            }
+        }
+       
     }
     .avatar {
         max-width: 125px;
@@ -707,6 +725,13 @@ section#profile {
     flex-direction: column;
     width:100%;
     background-color: $base; 
+
+    #scrollBackToTop {
+        left: 2em;
+        bottom:1em;
+        right: 0;
+    }
+   
     .author {display: none;}
     .wrap {
         margin-top: 0.5em;
@@ -717,11 +742,25 @@ section#profile {
         }
 
 
-    .my-drone{
+    .my-drone, .social{
         background-color:$white;
         margin:0 2em 2em 2em;
         padding: 2em;
         border-radius: 3px;
+    }
+
+    .social {
+        display: flex;
+        justify-content: space-around;
+        div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i  {
+                margin: 0 0.5em 0 0;
+            }
+        }
+       
     }
     
     .user-content {

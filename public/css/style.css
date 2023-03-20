@@ -596,6 +596,8 @@ section#myProfile {
         position: absolute;
         top: 1em;
         right: 1em; }
+  section#myProfile .param {
+    margin-top: 1em; }
   section#myProfile .counters {
     width: 100%;
     margin-bottom: 2em; }
@@ -673,6 +675,8 @@ section#myProfileEdit, section#droneEdit {
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-height: 90vh; }
+  section#myProfileEdit .mb-3, section#droneEdit .mb-3 {
+    margin: 0 !important; }
   section#myProfileEdit .container-fluid, section#droneEdit .container-fluid {
     display: flex; }
     section#myProfileEdit .container-fluid aside.sidebarMenu, section#droneEdit .container-fluid aside.sidebarMenu {
@@ -692,6 +696,8 @@ section#myProfileEdit, section#droneEdit {
     width: 80%;
     margin: 0 auto;
     border-radius: 3px; }
+    section#myProfileEdit .wrapper .input-group, section#droneEdit .wrapper .input-group {
+      margin-bottom: 1em; }
   section#myProfileEdit .avatar, section#droneEdit .avatar {
     max-width: 125px;
     max-height: 125px;
@@ -981,6 +987,10 @@ section#profile {
   flex-direction: column;
   width: 100%;
   background-color: #252525; }
+  section#profile #scrollBackToTop {
+    left: 2em;
+    bottom: 1em;
+    right: 0; }
   section#profile .author {
     display: none; }
   section#profile .wrap {
@@ -989,11 +999,20 @@ section#profile {
     background-color: #252525;
     min-height: 90vh;
     width: 100vw; }
-  section#profile .my-drone {
+  section#profile .my-drone, section#profile .social {
     background-color: #fafafa;
     margin: 0 2em 2em 2em;
     padding: 2em;
     border-radius: 3px; }
+  section#profile .social {
+    display: flex;
+    justify-content: space-around; }
+    section#profile .social div {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      section#profile .social div i {
+        margin: 0 0.5em 0 0; }
   section#profile .user-content {
     position: relative;
     background-color: #fafafa;

@@ -38,7 +38,27 @@
                     <h4>Mon profil public</h4>  
                     <hr>
                         {{form_row(form.banner)}}
-                        {{form_row(form.nickname)}} 
+                        {{form_row(form.nickname)}}
+                        <div class="input-group mt-3">
+                            <div class="input-group-text">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                            {{form_row(form.instagram)}} 
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <i class="fa-brands fa-tiktok"></i>
+                            </div>
+                            {{form_row(form.tiktok)}} 
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <i class="fa-brands fa-facebook"></i>
+                            </div>
+                            {{form_row(form.facebook)}} 
+                        </div>
+                        
+                        
                     <div class="my-2">
                         <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar du profil" class="avatar">
                     </div>
