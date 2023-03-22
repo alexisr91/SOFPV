@@ -621,7 +621,7 @@ section#myProfile {
       padding: 0.5 1em;
       border-radius: 3px;
       position: absolute;
-      top: 2em;
+      top: 1em;
       right: 3em; }
   section#myProfile .container-fluid {
     display: grid;

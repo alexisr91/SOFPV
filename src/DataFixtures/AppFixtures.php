@@ -5,11 +5,12 @@ namespace App\DataFixtures;
 use Faker\Factory;
 use App\Entity\User;
 use App\Entity\Drone;
+use App\Entity\Image;
 use App\Entity\Article;
 use App\Entity\Comment;
-use App\Entity\Category;
 use App\Entity\Counter;
-use App\Entity\Image;
+use App\Entity\Product;
+use App\Entity\Category;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -81,6 +82,7 @@ class AppFixtures extends Fixture
             $manager->persist($user);
             
         }
+
 
         //Mise en place des Catégories d'articles de base
         $categories = [];
@@ -155,9 +157,25 @@ class AppFixtures extends Fixture
                     ->setAdminNews(1)
                     ->addImage($adminNewsImage)
                     ;
-        $manager->persist($adminArticle);
+        $manager->persist($adminArticle); 
+        
+        //creation d'un jeu de produits pour la boutique
+        $products = [];
+        for($p = 0 ; $p < 10 ; $p++){
+            $product = new Product();
+            $product->setName($faker->words(5, true))
+                    ->setPrice($faker->randomFloat(2, 5, 30))
+                    ->setDescription($faker->paragraph(2))
+                    ->setImage("https://placehold.co/600x600?text=Produit")
+                    ;
+            $products[] = $product;
+            $manager->persist($product);
+
+        }
 
 
         $manager->flush();
     }
+
+   
 }
