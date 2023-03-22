@@ -1106,6 +1106,26 @@ section#search .container-fluid {
     justify-content: center;
     align-items: center; }
 
+/** SHOP **/
+section#shop {
+  min-height: 96vh; }
+  section#shop .container-fluid {
+    background-color: #fafafa;
+    min-height: 90vh;
+    padding-bottom: 2em;
+    border-radius: 3px; }
+    section#shop .container-fluid .row {
+      width: 70%;
+      margin: 0 auto; }
+    section#shop .container-fluid .card .price {
+      font-size: 1.3em; }
+    section#shop .container-fluid .card .card-footer {
+      border: none;
+      background-color: #fff;
+      padding-bottom: 1em;
+      display: flex;
+      justify-content: space-betwee; }
+
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu {
   z-index: 0;
