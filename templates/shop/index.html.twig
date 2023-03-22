@@ -7,13 +7,22 @@
     <section id="shop">
         {{include('partials/_navbarMenu.html.twig')}}
         <div class="container-fluid pt-4">
-            <div class="row row-cols-md-1 g-4 px-3">
-               
+            <div class="row row-cols-md-4 g-4 px-3">
             {% for product in products %}
                 <div class="col">
-                    {{product.name}}<br>
-                    {{product.price}}<br>
-                    {{product.description}}<br>
+                    <div class="card h-100">
+                        <img src="{{product.image}}" class="card-img-top img-fluid" alt="{{product.name}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{product.name}}</h5>
+                                <p class="card-text">{{product.description}}</p>
+                               
+                                
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-dark stretched-link">Voir le produit</a> 
+                            <p class="card-text price"><b>{{product.price}} &euro;</b></p>
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
               
