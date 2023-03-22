@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="shop">
+        {{include('partials/_navbarMenu.html.twig')}}
+        <div class="container-fluid pt-4">
+            <div class="row row-cols-md-1 g-4 px-3">
+               
+            {% for product in products %}
+                <div class="col">
+                    {{product.name}}<br>
+                    {{product.price}}<br>
+                    {{product.description}}<br>
+                </div>
+            {% endfor %}
+              
+            </div>
+    
+    </section>
+
+{% endblock %}

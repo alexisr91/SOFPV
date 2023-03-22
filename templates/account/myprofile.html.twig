@@ -45,14 +45,12 @@
                                 
                                 {% endif %}
                                 <br> {{user.zip}}, {{user.city}} <br>
-                            </div>
-                            {% if user.facebook or user.tiktok or user.instagram %}
+                            </div>   
                             <div class="col">
                                 <i class="fa-brands fa-instagram"></i> {% if user.instagram %} {{user.instagram}} {% else %} <i>Non renseigné</i> {% endif %} <br>
                                 <i class="fa-brands fa-tiktok"></i> {% if user.tiktok %} {{user.tiktok}} {% else %} <i>Non renseigné</i> {% endif %} <br>
                                 <i class="fa-brands fa-facebook"></i> {% if user.facebook %} {{user.facebook}} {% else %} <i>Non renseigné</i> {% endif %} <br>
                             </div>
-                            {% endif %}
                         </div>   
                         <div class="param">
                             <a href="{{path('account_edit')}}"><i class="fa-solid fa-user-gear"></i> Modifier mon profil</a>
