@@ -102,6 +102,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $tiktok = null;
 
+    #[ORM\OneToMany(mappedBy: 'customer', targetEntity: Cart::class)]
+    private Collection $carts;
+
     //En cas d'appel de l'utilisateur via les articles, on passera par le pseudo
     public function __toString()
     {
@@ -121,6 +124,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->avatar = 'avatarDefault.jpg';
         $this->counters = new ArrayCollection();
         $this->alertComments = new ArrayCollection();
+        $this->carts = new ArrayCollection();
     }
     
 
@@ -535,6 +539,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTiktok(?string $tiktok): self
     {
         $this->tiktok = $tiktok;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cart>
+     */
+    public function getCarts(): Collection
+    {
+        return $this->carts;
+    }
+
+    public function addCart(Cart $cart): self
+    {
+        if (!$this->carts->contains($cart)) {
+            $this->carts->add($cart);
+            $cart->setCustomer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): self
+    {
+        if ($this->carts->removeElement($cart)) {
+            // set the owning side to null (unless already changed)
+            if ($cart->getCustomer() === $this) {
+                $cart->setCustomer(null);
+            }
+        }
 
         return $this;
     }

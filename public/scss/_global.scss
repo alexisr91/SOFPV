@@ -228,3 +228,12 @@ input {
     border: none;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
+
+.stock {
+    span {
+        display: flex;
+        align-items: baseline;
+    }
+    i {margin:0 1em 0 0;}
+    
+}

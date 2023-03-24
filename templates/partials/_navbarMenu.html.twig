@@ -38,8 +38,14 @@
                                         </div> 
                                     </form>
                             </li>
-                            {% if app.user %}
+                            {% if app.user %} 
+                                <li><a class="nav-link mx-3 position-relative" href="{{path('cart')}}"><i class="fa-solid fa-cart-shopping"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill">
+                                        9
+                                    <span class="visually-hidden">Produits dans le panier</span></a>
+                                </li>
                                 <li><a class="nav-link" href="{{path('account_myprofile')}}"><i class="fa-solid fa-circle-user"></i> Mon compte</a></li>
+                                
                                 <li><a class="nav-link " href="{{path('account_logout')}}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a></li>
                             {% else %}
                                 <li><a class="nav-link " href="{{path('account_login')}}"><i class="fa-solid fa-arrow-right-to-bracket"></i> Connexion</a></li>

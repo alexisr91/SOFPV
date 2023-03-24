@@ -164,7 +164,7 @@ class AppFixtures extends Fixture
         for($p = 0 ; $p < 10 ; $p++){
             $product = new Product();
             $product->setName($faker->words(5, true))
-                    ->setPrice($faker->randomFloat(2, 5, 30))
+                    ->setPriceHT($faker->randomFloat(2, 5, 30))
                     ->setDescription($faker->paragraph(2))
                     ->setImage("https://placehold.co/600x600?text=Produit")
                     ;

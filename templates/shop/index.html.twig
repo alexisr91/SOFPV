@@ -13,14 +13,22 @@
                     <div class="card h-100">
                         <img src="{{product.image}}" class="card-img-top img-fluid" alt="{{product.name}}">
                         <div class="card-body">
-                            <h5 class="card-title">{{product.name}}</h5>
-                                <p class="card-text">{{product.description}}</p>
-                               
-                                
+                            <div class="pb-3">
+                                <h5 class="card-title">{{product.name|capitalize}}</h5>
+                                <p class="card-text">{{product.description|raw}}</p>
+                            </div>
+                            
+                            <div class="stock">
+                                {% if product.stock == 0 %}
+                                    <span class="text-danger"><i class="fa-solid fa-circle"></i>Hors stock</span>
+                                {% else %}
+                                    <span class="text-success"><i class="fa-solid fa-circle"></i>En stock</span>
+                                {% endif %}
+                            </div>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="btn btn-dark stretched-link">Voir le produit</a> 
-                            <p class="card-text price"><b>{{product.price}} &euro;</b></p>
+                            <a href="{{path('shop_show_product', {'slug':product.slug})}}" class="btn btn-dark stretched-link">Voir le produit</a> 
+                            <p class="card-text price"><b>{{product.priceTTC}} &euro;</b></p>
                         </div>
                     </div>
                 </div>

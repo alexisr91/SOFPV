@@ -11,6 +11,10 @@ section#navbarMenu {
         font-family:'airstrike', sans-serif;
         font-size: 2rem;
     }
+    a.position-relative span{
+        background-color: $grey;
+        color: $base;
+    }
 }
 
 section#navbarMenu.sticky-top {

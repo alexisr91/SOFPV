@@ -905,20 +905,69 @@ section#shop {
             margin: 0 auto;
         }
 
+
         .card {
             .price {
                 font-size: 1.3em;
+            }
+            .card-body {
+                display: flex ;
+                flex-direction: column;
+                justify-content: space-between;
+                padding-bottom: 0.2em;
             }
             .card-footer{
                 border: none;
                 background-color: #fff;
                 padding-bottom:1em;
                 display: flex;
-                justify-content: space-betwee; 
+                justify-content: space-between; 
             }
         }
     }
 
+}
+
+section#showProduct {
+    .container-fluid {
+        width: 70%;
+        background-color: $white;
+        margin: 0 auto;
+        min-height: 90vh; 
+
+        .col{ margin:3em auto 2em auto;}
+
+        .stock {
+            padding: 1em 0;
+        }
+
+        h4.price {
+            font-family: 'Play', sans-serif;
+            font-weight: bold;
+        }
+        .addToCartWrapper{
+            padding-top: 1em;
+            input {border-radius: 3px; border: 1px solid $grey; padding: 0.5em;}
+            a {
+                padding: 0.5em 2em;
+                margin-left: 1em;
+            }
+            a.outOfStock {
+                background-color: rgba($grey, 0.3);
+                border-radius: 3px
+            }
+        }
+
+    }
+}
+
+section#cart {
+    .container-fluid {
+        width: 70%;
+        background-color: $white;
+        margin: 0 auto;
+        min-height: 90vh; 
+    }
 }
 
 
