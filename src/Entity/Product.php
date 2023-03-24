@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductRepository;
+use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProductRepository;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Product
 {
     #[ORM\Id]
@@ -18,7 +22,7 @@ class Product
     private ?string $name = null;
 
     #[ORM\Column]
-    private ?float $price = null;
+    private ?float $price_TTC = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
@@ -32,10 +36,40 @@ class Product
     #[ORM\Column]
     private ?int $stock = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
+    #[ORM\Column]
+    private ?float $price_HT = null;
+
+    public $tva = 20/100;
+
+    #[ORM\ManyToMany(targetEntity: Cart::class, mappedBy: 'product')]
+    private Collection $carts;
+
     public function __construct()
-    {
+    {   
+
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->stock = 0;
+        $this->price_TTC = number_format($this->price_HT+($this->price_HT*$this->tva), 2);
+        $this->carts = new ArrayCollection();
+    }
+
+    //creation du slug et update si le nom du produit est modifié par l'admin
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function initSlug(){
+        if(empty($this->slug) || $this->slug != $this->name){
+            $slugger = new Slugify();
+            $this->slug = $slugger->slugify($this->name);
+        }
+    }
+    //modification du prix et du prix TTC
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function priceUpdate(){
+        $this->price_TTC = number_format($this->price_HT+($this->price_HT*$this->tva), 2); 
     }
 
     public function getId(): ?int
@@ -55,14 +89,14 @@ class Product
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPriceTTC(): ?float
     {
-        return $this->price;
+        return $this->price_TTC;
     }
 
-    public function setPrice(float $price): self
+    public function setPriceTTC(float $price_TTC): self
     {
-        $this->price = $price;
+        $this->price_TTC = number_format($price_TTC,2);
 
         return $this;
     }
@@ -111,6 +145,57 @@ class Product
     public function setStock(int $stock): self
     {
         $this->stock = $stock;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getPriceHT(): ?float
+    {
+        return $this->price_HT;
+    }
+
+    public function setPriceHT(float $price_HT): self
+    {
+        $this->price_HT = number_format($price_HT, 2);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cart>
+     */
+    public function getCarts(): Collection
+    {
+        return $this->carts;
+    }
+
+    public function addCart(Cart $cart): self
+    {
+        if (!$this->carts->contains($cart)) {
+            $this->carts->add($cart);
+            $cart->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): self
+    {
+        if ($this->carts->removeElement($cart)) {
+            $cart->removeProduct($this);
+        }
 
         return $this;
     }

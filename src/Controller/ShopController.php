@@ -25,6 +25,16 @@ class ShopController extends AbstractController
 
       
     }
+    //Visualisation du produit
+    #[Route('/shop/product/{slug}', name:'shop_show_product')]
+    public function showProduct(Product $product)
+    {
+        return $this->render('shop/showProduct.html.twig', [
+            'title' => 'Voir le produit',
+            'product'=>$product
+            
+        ]);
+    }
         
     
 }

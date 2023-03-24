@@ -185,6 +185,12 @@ input {
   border: none;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
 
+.stock span {
+  display: flex;
+  align-items: baseline; }
+.stock i {
+  margin: 0 1em 0 0; }
+
 /* NAV MENU */
 section#navbarMenu {
   background-color: #252525;
@@ -196,6 +202,9 @@ section#navbarMenu {
   section#navbarMenu a.navbar-brand {
     font-family: 'airstrike', sans-serif;
     font-size: 2rem; }
+  section#navbarMenu a.position-relative span {
+    background-color: #DADADA;
+    color: #252525; }
 
 section#navbarMenu.sticky-top {
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -1119,12 +1128,48 @@ section#shop {
       margin: 0 auto; }
     section#shop .container-fluid .card .price {
       font-size: 1.3em; }
+    section#shop .container-fluid .card .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-bottom: 0.2em; }
     section#shop .container-fluid .card .card-footer {
       border: none;
       background-color: #fff;
       padding-bottom: 1em;
       display: flex;
-      justify-content: space-betwee; }
+      justify-content: space-between; }
+
+section#showProduct .container-fluid {
+  width: 70%;
+  background-color: #fafafa;
+  margin: 0 auto;
+  min-height: 90vh; }
+  section#showProduct .container-fluid .col {
+    margin: 3em auto 2em auto; }
+  section#showProduct .container-fluid .stock {
+    padding: 1em 0; }
+  section#showProduct .container-fluid h4.price {
+    font-family: 'Play', sans-serif;
+    font-weight: bold; }
+  section#showProduct .container-fluid .addToCartWrapper {
+    padding-top: 1em; }
+    section#showProduct .container-fluid .addToCartWrapper input {
+      border-radius: 3px;
+      border: 1px solid #DADADA;
+      padding: 0.5em; }
+    section#showProduct .container-fluid .addToCartWrapper a {
+      padding: 0.5em 2em;
+      margin-left: 1em; }
+    section#showProduct .container-fluid .addToCartWrapper a.outOfStock {
+      background-color: rgba(218, 218, 218, 0.3);
+      border-radius: 3px; }
+
+section#cart .container-fluid {
+  width: 70%;
+  background-color: #fafafa;
+  margin: 0 auto;
+  min-height: 90vh; }
 
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu {

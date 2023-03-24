@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="showProduct">
+        {{include('partials/_navbarMenu.html.twig')}}
+        <div class="container-fluid pt-4">
+            <div class="row g-4 px-5">
+                <div class="col">
+                    <img src="{{product.image}}" class="img-fluid" alt="{{product.name}}">
+                </div>
+                <div class="col">
+                    <h2>{{product.name|capitalize}}</h2>
+                    <p>{{product.description|raw}}<p>
+                    <div class="stock">
+                        {% if product.stock == 0 %}
+                            <span class="text-danger"><i class="fa-solid fa-circle"></i>Hors stock</span>
+                        {% else %}
+                            <span class="text-success"><i class="fa-solid fa-circle"></i>En stock</span>
+                        {% endif %}
+                    </div>
+                    <hr>
+                    <h4 class="price">{{product.priceTTC}} &euro;</h4>
+                    <div class="addToCartWrapper">
+                        <form method="post" accept-charset="UTF-8" >
+                            <div class="d-flex">
+                                <input id="quantity" type="number" name="quantity" {{product.stock == 0 ? " value='0' disabled" : ""}}>
+                                <a href="{{path('cart_add', {'id':product.id})}}" {{product.stock == 0 ? "class='btn outOfStock disabled' " : "class='btn btn-success'"}}>Ajouter au panier</a>
+                            </div>
+                           
+                        </form> 
+                       
+                    </div>
+                </div>          
+            </div>
+    
+    </section>
+
+{% endblock %}
