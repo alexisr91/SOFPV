@@ -4,14 +4,16 @@ namespace App\Controller;
 
 use App\Repository\ArticleRepository;
 use App\Repository\CounterRepository;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(ArticleRepository $articleRepo, CounterRepository $counterRepo): Response
+    public function index(ArticleRepository $articleRepo, CounterRepository $counterRepo, SessionInterface $session): Response
     {
 
         //4 derniers articles SAUF l'article à la une
@@ -24,7 +26,6 @@ class HomeController extends AbstractController
         $counterLipo = $counterRepo->countLipo();
         $counterESC = $counterRepo->countESC();
         $counterFrame = $counterRepo->countFrame();
-
 
         return $this->render('home/index.html.twig', [
             'title' => 'Bienvenue sur SO FPV !',

@@ -7,16 +7,16 @@
     <section id="cart">
         {{include('partials/_navbarMenu.html.twig')}}
         <div class="container-fluid pt-4">
-            <div class="p-3 ms-2">
+            <div class="p-3 ms-2 wrapper">
                 <h2>Votre panier</h2>
-                <table class="table table-hover">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Produit</th>
                             <th>Prix</th>
-                            <th>Quantité</th>
+                            <th class="text-center">Quantité</th>
                             <th>Total</th>
-                            <th>Actions</th>                     
+                            <th></th>                     
                         </tr>
                     </thead>
                     <tbody>
@@ -25,12 +25,16 @@
                         <tr>
                             <td>{{ data.product.name|capitalize }}</td>
                             <td>{{ data.product.priceTTC }} &euro;</td>
-                            <td>{{ data.quantity }}</td>
+                            <td class="text-center"> 
+                                <a href="{{path('cart_remove', {'id': data.product.id })}}" class="btn btn param"><i class="fa-solid fa-minus"></i></a>
+                                   {{ data.quantity }} 
+                                <a href="{{path('cart_add', {'id': data.product.id , 'quantity':data.quantity})}}" class="btn btn param"><i class="fa-solid fa-plus"></i></a>
+                            </td>
                             <td>{{ data.quantity * data.product.priceTTC }} &euro;</td>
                             <td>
-                                <a href="{{path('cart_add', {'id': data.product.id })}}" class="btn btn-light"><i class="fa-solid fa-plus"></i></a>
-                                {# <a href="{{path('cart_remove', {'id': data.product.id })}}" class="btn btn-light"><i class="fa-solid fa-minus"></i></a>
-                                <a href="{{path('cart_remove_all', {'id': data.product.id })}}" class="btn btn-light"><i class="fa-solid fa-trash"></i></a> #}
+                               
+                              
+                                <a href="{{path('cart_delete', {'id': data.product.id })}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a> 
                             </td>
                         </tr>
                     {% else %}
@@ -41,11 +45,20 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3">Total</td>
-                            <td>{{total}} &euro;</td>
+                            <td colspan="3"><b>Total</b></td>
+                            <td><strong>{{total|number_format(2)}} &euro;</strong></td>
+                            <td>
+                                {% if cardData is not empty %}
+                                <a href="{{path('cart_delete_all')}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Vider le panier</a> 
+                                {% endif %}
+                            </td>
                         </tr>
                     </tfoot>
                 </table>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{{path('shop')}}" class="btn param"><i class="fa-solid fa-angle-left"></i> Continuer mes achats <i class="fa-solid fa-basket-shopping"></i></a>
+                    <a href="#" class="btn param btn-lg">Valider ma commande</a>
+                </div>
             </div>
            
         </div>
