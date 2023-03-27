@@ -947,12 +947,13 @@ section#showProduct {
         }
         .addToCartWrapper{
             padding-top: 1em;
+            .mb-3 { margin-bottom: 0 !important; margin-right:1em;}
             input {border-radius: 3px; border: 1px solid $grey; padding: 0.5em;}
             a {
                 padding: 0.5em 2em;
                 margin-left: 1em;
             }
-            a.outOfStock {
+            .outOfStock {
                 background-color: rgba($grey, 0.3);
                 border-radius: 3px
             }
@@ -967,6 +968,12 @@ section#cart {
         background-color: $white;
         margin: 0 auto;
         min-height: 90vh; 
+
+        table {
+            td {padding: 1em; vertical-align: middle;}
+            a {margin: 0 1em}
+            .param {padding: 0.5em}
+        }
     }
 }
 
