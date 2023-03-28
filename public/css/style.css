@@ -1154,6 +1154,8 @@ section#showProduct .container-fluid {
     font-weight: bold; }
   section#showProduct .container-fluid .addToCartWrapper {
     padding-top: 1em; }
+    section#showProduct .container-fluid .addToCartWrapper .d-flex {
+      max-height: 2.5em; }
     section#showProduct .container-fluid .addToCartWrapper .mb-3 {
       margin-bottom: 0 !important;
       margin-right: 1em; }

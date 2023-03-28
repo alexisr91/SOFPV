@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Form\ProductQuantityType;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ShopController extends AbstractController
 {
@@ -26,26 +28,39 @@ class ShopController extends AbstractController
 
       
     }
-    //Visualisation du produit
+    //Visualisation du produit + ajout d'un nombre de produit voulu dans le panier
     #[Route('/shop/product/{slug}', name:'shop_show_product')]
-    public function showProduct(Product $product, Request $request)
+    public function showProduct(Product $product, SessionInterface $session, Request $request)
     {
 
         $id= $product->getId();
-        $form = $this->createFormBuilder()
-        ->add('quantity', IntegerType::class, [
-            'label'=> false, 
-            'data'=> 1
-        ])
-        ->getForm();
+
+        $form = $this->createForm(ProductQuantityType::class);
 
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()){
-            
-            //on récupère la quantité souhaitée par l'utilisateur
-            $quantity = $form->get('quantity')->getData();
-            //on la passe en paramètre pour mettre à jour le panier
-            return $this->redirectToRoute('cart_add', ['id'=>$id,'quantity'=>$quantity]);
+             //on récupère la quantité souhaitée par l'utilisateur
+            $quantity = (int)$form->get('quantity')->getData();
+
+            //récupération du panier actuel
+            //On récupère les données de session du panier, la valeur par défaut sera un array vide
+            $cart = $session->get("cart", []); 
+        
+            //si le panier est vide on met la quantité récupérée par le form
+            if(empty($cart[$id])){
+                $cart[$id] = $quantity;     
+                //si il est déjà présent on l'incrémente à la quantité dejà présente   
+            } else {
+                $cart[$id]+= $quantity ;
+            }
+
+    
+            //Sauvegarde dans la session
+            $session->set('cart', $cart);
+            //on redirige vers le shop 
+            return $this->redirectToRoute('cart');
+          
         }
 
         return $this->render('shop/showProduct.html.twig', [
