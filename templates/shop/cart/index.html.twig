@@ -28,7 +28,7 @@
                             <td class="text-center"> 
                                 <a href="{{path('cart_remove', {'id': data.product.id })}}" class="btn btn param"><i class="fa-solid fa-minus"></i></a>
                                    {{ data.quantity }} 
-                                <a href="{{path('cart_add', {'id': data.product.id , 'quantity':data.quantity})}}" class="btn btn param"><i class="fa-solid fa-plus"></i></a>
+                                <a href="{{path('cart_add', {'id': data.product.id} )}}" class="btn btn param"><i class="fa-solid fa-plus"></i></a>
                             </td>
                             <td>{{ data.quantity * data.product.priceTTC }} &euro;</td>
                             <td>

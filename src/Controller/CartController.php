@@ -16,10 +16,10 @@ class CartController extends AbstractController
     #[Route('/cart', name: 'cart')]
     public function index(ProductRepository $productRepo, SessionInterface $session): Response
     {
-        //on récupère les données de session
+        //on récupère les données de session concernant le panier
         $cart = $session->get('cart', []);
 
-        //on récupère les données des produits
+        //on va stocker les données dans un tableau
         $cartData = [];
         $total = 0;
 
@@ -43,25 +43,24 @@ class CartController extends AbstractController
         ]);
     }
 
-    //Ajout d'un produit dans le panier
-    #[Route('/cart/add/{id}/{quantity}', name: 'cart_add' )]
-    public function add(Product $product, SessionInterface $session, Request $request ){
+    //Ajout d'un produit dans le panier dans la page récapitulative
+    #[Route('/cart/add/{id}', name: 'cart_add' )]
+    public function add(Product $product, SessionInterface $session ){
 
         $id = $product->getId();
-        //on récupère la valeur de quantité recupérée dans l'url
-        $quantity = (int)$request->attributes->get('quantity');
+       
 
         //récupération du panier actuel
         //On récupère les données de session du panier, la valeur par défaut sera un array vide
         $cart = $session->get("cart", []); 
         
 
-        //si le panier est vide on met la quantité récupérée
+        //si le panier est vide on met la quantité à 1
         if(empty($cart[$id])){
-            $cart[$id] = $quantity;     
-        //si il est déjà présent on l'incrémente à la quantité dejà présente   
+            $cart[$id] = 1;     
+        //si il est déjà présent on l'incrémente de 1    
         } else {
-           $cart[$id]+= $quantity ;
+           $cart[$id]++ ;
         }
 
     
@@ -72,7 +71,7 @@ class CartController extends AbstractController
       return $this->redirectToRoute('cart');
       
     }
-    //Suppression d'un produit dans le panier
+    //Suppression d'un produit dans le panier dans la page récapitulative
     #[Route('/cart/remove/{id}', name: 'cart_remove')]
     public function remove(Product $product, SessionInterface $session){
 
@@ -83,9 +82,9 @@ class CartController extends AbstractController
       
         //si le panier n'est pas vide
         if(!empty($cart[$id])){
-            //il reste plus d'un produit du même id dans le panier ?
+            //il reste + d'un produit du même id dans le panier ?
             if($cart[$id] > 1){
-                //on reduit de 1 le nombre
+                //on reduit de 1 la valeur
                  $cart[$id]--;
             } else {
                 //si on tombe a 0 on supprime la ligne du panier 

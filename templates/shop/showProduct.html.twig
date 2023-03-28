@@ -30,11 +30,6 @@
                                     {{ form_widget(form) }} 
                                     <button type="submit"{{product.stock == 0 ? "class='btn outOfStock disabled' " : "class='btn btn-success'"}}>Ajouter au panier</button>
                                 {{ form_end(form) }}
-                                
-
-                                {# <input id="quantity" type="number" name="quantity" {{product.stock == 0 ? " value='0' disabled" : "value='1'"}}> #}
-                               
-                                {# <a href="{{path('cart_add', {'id':product.id })}}" {{product.stock == 0 ? "class='btn outOfStock disabled' " : "class='btn btn-success'"}}>Ajouter au panier</a> #}
                             </div>
                         </form> 
                        
