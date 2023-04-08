@@ -2,19 +2,26 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
-use Symfony\Component\HttpFoundation\Request;
+use App\Services\CartService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 class CartController extends AbstractController
 {
+
+    private $reference;
+
     //Page de récapitulatif du panier
     #[Route('/cart', name: 'cart')]
-    public function index(ProductRepository $productRepo, SessionInterface $session): Response
+    public function index(SessionInterface $session, ProductRepository $productRepo): Response
     {
         //on récupère les données de session concernant le panier
         $cart = $session->get('cart', []);
@@ -35,6 +42,7 @@ class CartController extends AbstractController
             //pour le total on multiplie le prix par la quantité
             $total += $product->getPriceTTC()*$quantity;
         }
+    
 
         return $this->render('shop/cart/index.html.twig', [
             'title' => 'Votre panier',
@@ -49,11 +57,9 @@ class CartController extends AbstractController
 
         $id = $product->getId();
        
-
         //récupération du panier actuel
         //On récupère les données de session du panier, la valeur par défaut sera un array vide
         $cart = $session->get("cart", []); 
-        
 
         //si le panier est vide on met la quantité à 1
         if(empty($cart[$id])){
@@ -71,6 +77,49 @@ class CartController extends AbstractController
       return $this->redirectToRoute('cart');
       
     }
+
+    #[Route('/cart/validate', name:"cart_validate")]
+    #[IsGranted("ROLE_USER")]
+    public function validate(SessionInterface $session, ProductRepository $productRepo, EntityManagerInterface $manager){
+
+        $sessionCart = $session->get('cart');
+        $cartData = [];
+        $total = 0;
+        $user = $this->getUser();
+
+        $carts = [];
+        //on assigne une référence qui sera propre à chaque commande (chaque reférence correspond à des entité Cart qui sont des lots de produits)
+        $referenceForOrder = uniqid('', false);
+        
+        //pour chaque entrée de session concernant le cart (panier)
+        foreach($sessionCart as $id => $quantity){
+            //on trouve le produit qui correspond à l'id (pas possible d'ajouter un produit qui n'existe pas)
+            $product = $productRepo->find($id);
+            //on y associe le int qui correspond à la quantité (nombre de fois où on a ajouté au panier le même produit)
+            $cartData[] = [
+                "product"=>$product,
+                "quantity"=>$quantity
+            ];
+            //pour le total on multiplie le prix par la quantité
+            $total += $product->getPriceTTC()*$quantity;
+
+            //nouveau "panier" pour chaque produit dans lequel est stocké le produit, sa quantité, son montant total et une référence commune
+            $cart = new Cart();
+            $cart->setProduct($product)
+                ->setQuantity($quantity)
+                ->setAmount($product, $quantity)
+                ->setUser($user)
+                ->setReference($referenceForOrder);
+            
+            $carts[] = $cart;
+            $manager->persist($cart);
+            $manager->flush();
+
+        }
+        
+        return $this->redirectToRoute('order_prepare', ['reference'=>$referenceForOrder]);
+    }
+
     //Suppression d'un produit dans le panier dans la page récapitulative
     #[Route('/cart/remove/{id}', name: 'cart_remove')]
     public function remove(Product $product, SessionInterface $session){
@@ -130,4 +179,6 @@ class CartController extends AbstractController
      
         return $this->redirectToRoute('cart');     
     }
+
+
 }

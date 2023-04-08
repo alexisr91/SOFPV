@@ -39,6 +39,13 @@ class CartRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByCartsReference($reference){
+        return $this->createQueryBuilder('c')
+                    ->andWhere('c.reference = :reference')
+                    ->setParameter('reference', $reference)
+                    ->getQuery()
+                    ->getResult();
+    }
 //    /**
 //     * @return Cart[] Returns an array of Cart objects
 //     */

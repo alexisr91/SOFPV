@@ -30,7 +30,8 @@
                                    {{ data.quantity }} 
                                 <a href="{{path('cart_add', {'id': data.product.id} )}}" class="btn btn param"><i class="fa-solid fa-plus"></i></a>
                             </td>
-                            <td>{{ data.quantity * data.product.priceTTC }} &euro;</td>
+                            {% set totalTTCForeachTypeOfProduct =  data.quantity * data.product.priceTTC %}
+                            <td>{{ totalTTCForeachTypeOfProduct|number_format(2)}} &euro;</td>
                             <td>
                                
                               
@@ -57,7 +58,7 @@
                 </table>
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="{{path('shop')}}" class="btn param"><i class="fa-solid fa-angle-left"></i> Continuer mes achats <i class="fa-solid fa-basket-shopping"></i></a>
-                    <a href="#" class="btn param btn-lg">Valider ma commande</a>
+                    <a href="{{path('cart_validate')}}" class="btn param btn-lg">Valider mon panier</a>
                 </div>
             </div>
            

@@ -11,7 +11,7 @@ use App\Form\DroneType;
 use App\Form\ArticleType;
 use App\Form\ProfileType;
 use App\Form\RegisterType;
-use App\Service\Pagination;
+use App\Services\Pagination;
 use App\Entity\PasswordUpdate;
 use App\Form\AdminArticleType;
 use App\Form\PasswordUpdateType;

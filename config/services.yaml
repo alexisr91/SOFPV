@@ -10,6 +10,8 @@ parameters:
     upload_image: '%kernel.project_dir%/public/uploads/article/image/'
     upload_video: '%kernel.project_dir%/public/uploads/article/video/'
     upload_thumb: '%kernel.project_dir%/public/uploads/article/video/thumb/'
+    router.request_context.scheme: 'https'
+    asset.request_context.secure: true
     
 
 services:
@@ -31,6 +33,6 @@ services:
     # please note that last definitions always *replace* previous ones
 
     #Ajout du service pagination pour la gestion d'affichage des articles dans les différentes sections du blog
-    App\Service\Pagination:
+    App\Services\Pagination:
       arguments:
         $templatePath: 'partials/_pagination.html.twig'

@@ -38,9 +38,8 @@
                                         </div> 
                                     </form>
                             </li>
-                            {% if app.user %} 
-                                <li>
-                                    <a class="nav-link mx-3 position-relative" href="{{path('cart')}}"><i class="fa-solid fa-cart-shopping"></i> 
+                            <li>
+                                <a class="nav-link mx-3 position-relative" href="{{path('cart')}}"><i class="fa-solid fa-cart-shopping"></i> 
                                 {% if app.session.get('cart') %}
                                     {% set cart = app.session.get('cart') %}
 
@@ -49,12 +48,14 @@
                                     {{cart|reduce((carry,v)=> carry + v )}}
                                     <span class="visually-hidden">Produits dans le panier</span>
                                 {% endif %}
-                                    </a>
-                                </li>
-                                <li><a class="nav-link" href="{{path('account_myprofile')}}"><i class="fa-solid fa-circle-user"></i> Mon compte</a></li>
+                                </a>
+                            </li>
+                            {% if app.user %} 
                                 
+                                <li><a class="nav-link" href="{{path('account_myprofile')}}"><i class="fa-solid fa-circle-user"></i> Mon compte</a></li>
                                 <li><a class="nav-link " href="{{path('account_logout')}}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a></li>
                             {% else %}
+                            
                                 <li><a class="nav-link " href="{{path('account_login')}}"><i class="fa-solid fa-arrow-right-to-bracket"></i> Connexion</a></li>
                                 <li><a class="nav-link" href="{{path('account_register')}}"> S'inscrire</a></li>
                             {% endif %}
