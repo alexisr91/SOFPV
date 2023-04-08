@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="prepareOrder">
+        {{include('partials/_navbarMenu.html.twig')}}
+        <div class="container-fluid pt-4">
+            <div class="p-3 ms-2 wrapper row">
+                <h3>Création de la commande</h3>
+                {# Selection de l'adresse de livraison #}
+                <div class="col delivery">
+                    {{form_start(form)}}
+                    <legend><i class="fa-solid fa-location-dot"></i> Adresse de livraison</legend>
+
+                    {% for deliveryAddress in form.deliveryAddress %}
+                        {{form_widget(deliveryAddress)}}
+                        {% if deliveryAddress.vars.value is same as "user_address" %}
+                            {% if user.fullAddress is null %}
+                                <span class="alert alert-warning">Vous n'avez pas encore renseigné d'adresse.</span>
+                            {% else %}
+                                <p>{{user.fullAddress|raw}}</p>
+                            {% endif %}
+                        {% endif %}
+                       
+                    {% endfor %}
+
+                    <div class="my-3">{{form_widget(form.address)}}</div>
+                    <div class="mb-3">{{form_widget(form.addressComplement)}}</div>
+                    <div class="row">
+                        <div class="col">{{form_widget(form.zip)}}</div>
+                        <div class="col">{{form_widget(form.city)}}</div>
+                    </div>
+       
+                </div>
+                
+                {# Tableau récapitulatif du panier validé : prix par produits, quantité, prix total par produit, prix du transporteur + prix global à régler #}
+                <div class="col recap">
+                    <legend><i class="fa-solid fa-basket-shopping"></i> Récapitulatif de la commande <span class="text-muted"><small>({{totalQuantity}} produit(s))</small></span></legend>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Produit</th>
+                                    <th>Prix</th>
+                                    <th class="text-center">Quantité</th>
+                                    <th>Total</th>              
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for cart in carts %}
+                                <tr>
+                                    <td>{{cart.product.name|capitalize}}<br></td>
+                                    <td>{{ cart.product.priceTTC }} &euro;</td>
+                                    <td class="text-center"> 
+                                        {{ cart.quantity }} 
+                                    </td>
+                                    <td>{{ cart.amount|number_format(2)}} &euro;</td>
+                                </tr> 
+                            {% endfor %}
+                            </tbody>           
+                            <tfoot>
+                                <tr>
+                                    <th>Frais de port</th>
+                                    <th>+ {{transporters[0].price}} &euro; </th>
+                                    <th></th>
+                                    <th> {{total|number_format(2)}} &euro;</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Total</b></td>
+                                    {% set totalWithTransporterPrice = total + transporters[0].price %}
+                                    <td><strong>{{totalWithTransporterPrice|number_format(2)}} &euro;</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                </div>
+                {# Selection du transporteur #}
+                <div class="row">
+                    <div class="col transporter">
+                        <legend class="h4"><i class="fa-solid fa-truck-fast"></i> Choix du transporteur</legend>
+                        {% for transporterChoice in form.transporter %}
+                          <div class="p-3">
+                          {% set index = loop.index0 %}  
+                          {{form_widget(transporterChoice)}}
+                                <p class="ps-3 mb-0 description">{{transporters[index].description|raw}}</p>
+                                <p class="ps-3"><strong>{{transporters[index].price}}&euro;</strong></p> 
+                            </div>
+                        {% endfor %}  
+                        
+                    </div>
+                    <div class="col payment">
+                        <button type="submit" class="btn btn-success">Paiement</button>
+                    </div>
+                </div>
+                
+                 {{form_end(form)}}
+                
+            </div>
+           
+        </div>
+    
+    </section>
+
+    <script>
+    
+    </script>
+
+{% endblock %}
+
+

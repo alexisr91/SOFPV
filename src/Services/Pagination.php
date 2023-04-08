@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Services;
 
 use Twig\Environment;
 use Doctrine\ORM\EntityManagerInterface;

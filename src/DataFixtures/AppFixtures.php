@@ -11,6 +11,7 @@ use App\Entity\Comment;
 use App\Entity\Counter;
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Entity\Transporter;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -97,6 +98,22 @@ class AppFixtures extends Fixture
 
         $manager->flush($category);
 
+        //Mise en place des Transporteurs disponibles pour le shop
+        $transporterColissimo = new Transporter();
+        $transporterColissimo->setName('Colissimo')
+                             ->setDescription('Livraison en 2 à 3 jours en France Métropolitaine')
+                             ->setPrice(8);
+                             
+        $manager->persist($transporterColissimo);
+
+        $transporterChronopost = new Transporter();
+        $transporterChronopost->setName('Chronopost')
+                             ->setDescription('Livraison en moins de 24h en France Métropolitaine')
+                             ->setPrice(12);
+
+        $manager->persist($transporterChronopost);
+
+
         //Mise en place des counters
         $counters = [];
         $countersName = array('Lipo','ESC','Frame');
@@ -167,6 +184,7 @@ class AppFixtures extends Fixture
                     ->setPriceHT($faker->randomFloat(2, 5, 30))
                     ->setDescription($faker->paragraph(2))
                     ->setImage("https://placehold.co/600x600?text=Produit")
+                    ->setStock($faker->numberBetween(0,50))
                     ;
             $products[] = $product;
             $manager->persist($product);

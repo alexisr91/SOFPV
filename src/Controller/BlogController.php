@@ -12,7 +12,7 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\ArticleType;
 use App\Form\CommentType;
-use App\Service\Pagination;
+use App\Services\Pagination;
 use FFMpeg\Format\Video\X264;
 use App\Form\AdminArticleType;
 use App\Form\AlertArticleType;
@@ -69,8 +69,6 @@ class BlogController extends AbstractController
         $user = $this->getUser();
         $article = new Article();
         $video = new Video();
-
-      
         
 
         //vérification de l'accès de l'user connecté

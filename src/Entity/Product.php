@@ -44,8 +44,9 @@ class Product
 
     public $tva = 20/100;
 
-    #[ORM\ManyToMany(targetEntity: Cart::class, mappedBy: 'product')]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Cart::class)]
     private Collection $carts;
+
 
     public function __construct()
     {   
@@ -185,7 +186,7 @@ class Product
     {
         if (!$this->carts->contains($cart)) {
             $this->carts->add($cart);
-            $cart->addProduct($this);
+            $cart->setProduct($this);
         }
 
         return $this;
@@ -194,9 +195,13 @@ class Product
     public function removeCart(Cart $cart): self
     {
         if ($this->carts->removeElement($cart)) {
-            $cart->removeProduct($this);
+            // set the owning side to null (unless already changed)
+            if ($cart->getProduct() === $this) {
+                $cart->setProduct(null);
+            }
         }
 
         return $this;
     }
+
 }

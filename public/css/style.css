@@ -1183,6 +1183,26 @@ section#cart .container-fluid {
   section#cart .container-fluid table .param {
     padding: 0.5em; }
 
+/* ORDER */
+section#prepareOrder .container-fluid {
+  background-color: #fafafa;
+  min-height: 90vh;
+  width: 80%;
+  margin: 0 auto;
+  padding: 2em; }
+  section#prepareOrder .container-fluid h3 {
+    margin-bottom: 1em; }
+  section#prepareOrder .container-fluid .delivery, section#prepareOrder .container-fluid .recap, section#prepareOrder .container-fluid .transporter {
+    padding: 2em;
+    margin: 2em; }
+  section#prepareOrder .container-fluid .table td, section#prepareOrder .container-fluid .table th {
+    padding: 1em;
+    vertical-align: middle; }
+  section#prepareOrder .container-fluid div.transporter label {
+    font-weight: bold; }
+  section#prepareOrder .container-fluid div.transporter .description {
+    color: rgba(37, 37, 37, 0.7); }
+
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu {
   z-index: 0;

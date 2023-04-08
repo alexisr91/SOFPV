@@ -978,6 +978,36 @@ section#cart {
     }
 }
 
+/* ORDER */
+section#prepareOrder {
+    .container-fluid {
+        background-color: $white;
+        min-height: 90vh;
+        width:80%;
+        margin: 0 auto;
+        padding: 2em;
+
+        h3 {margin-bottom: 1em;}
+
+        .delivery, .recap, .transporter{
+            padding: 2em;
+            margin:2em;    
+        }
+      
+        .table {
+            td, th {padding: 1em; vertical-align: middle;}
+            
+        }
+
+        div.transporter {
+            label {font-weight:bold;}
+            .description {color:rgba($base, 0.7);}
+        }
+    
+        
+    } 
+}
+
 
 @import "sideMenuProfile";
 
