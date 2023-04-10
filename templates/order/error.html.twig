@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="errorPayment">
+        {{include('partials/_navbarMenu.html.twig')}}
+        <div class="container-fluid pt-4">
+            <div class="p-3 ms-2 wrapper row bg-white">
+                <h3>Erreur lors de la transaction</h3>
+                <a href="{{path('')}}"></a>
+               
+            </div>  
+           
+        </div>
+    
+    </section>
+
+{% endblock %}
+
+

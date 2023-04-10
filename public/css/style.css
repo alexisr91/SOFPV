@@ -221,6 +221,11 @@ section#navbarMenu.sticky-top {
     transform: rotate(0); }
   100% {
     transform: rotate(360deg); } }
+@keyframes flyingDelivery {
+  0% {
+    transform: translateY(10px); }
+  100% {
+    transform: translateY(-10px); } }
 /*HOMEPAGE */
 /* ACCUEIL : SECTION#home (logo + image d'accueil) */
 #scrollBackToTop {
@@ -1202,6 +1207,38 @@ section#prepareOrder .container-fluid {
     font-weight: bold; }
   section#prepareOrder .container-fluid div.transporter .description {
     color: rgba(37, 37, 37, 0.7); }
+  section#prepareOrder .container-fluid div.payment .btn {
+    margin: 1em 0; }
+  section#prepareOrder .container-fluid div.payment .stripeLogo {
+    display: flex;
+    align-items: center; }
+    section#prepareOrder .container-fluid div.payment .stripeLogo p {
+      margin-bottom: 0; }
+    section#prepareOrder .container-fluid div.payment .stripeLogo span {
+      margin-left: 0.5em; }
+  section#prepareOrder .container-fluid .selected {
+    border: 1px solid #DADADA;
+    border-radius: 5px; }
+
+section#successPayment .container-fluid {
+  background-color: #fafafa;
+  width: 70%;
+  margin: 0 auto;
+  min-height: 90vh; }
+  section#successPayment .container-fluid .deliveryImage {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    animation: 2s linear 1s infinite alternate flyingDelivery; }
+  section#successPayment .container-fluid .recap {
+    width: 50%;
+    padding: 2em;
+    border-radius: 3px;
+    background-color: #fff; }
+    section#successPayment .container-fluid .recap .products {
+      display: flex; }
+      section#successPayment .container-fluid .recap .products div {
+        margin: 0.5em 1em; }
 
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu {
