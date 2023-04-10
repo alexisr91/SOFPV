@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="successPayment">
+        {{include('partials/_navbarMenu.html.twig')}}
+        <div class="container-fluid pt-4">
+            <div class="p-3 ms-2 wrapper row">
+               
+               
+                <div class="recap">  
+                <h3>Merci pour votre commande !</h3>
+                    <div class="d-flex align-items-center">
+                        <h6>Votre commande sera traitée dans les meilleurs délais par notre équipe.</h6> 
+                        <div class="deliveryImage">
+                            <img src="{{asset('/img/deliveryDroneByFreepik.png')}}" class="img-fluid" alt="drone livreur par Freepik">
+                        </div> 
+                    </div>
+                    <p><b>Numéro de commande: </b>{{order.reference}}</p>
+                    <p><b>Transporteur:</b> {{order.transporter.name}}</p>
+                    
+                    <p><b>Détail de votre commande:</b><p>
+                    {% for cart in carts %}
+                    <hr>
+                    <div class="products">
+                        <div><strong>x{{cart.quantity}}</strong></div>
+                        <div>{{cart.product.name|capitalize}}</div>
+                        <div>{{cart.product.priceTTC}} &euro;</div>
+                      </div> 
+                      {% if loop.last %}
+                      <hr>
+                      {% endif %}
+                    {% endfor %}
+                    <p><b>Prix total TTC: </b> {{order.price}} &euro;</p>
+                    <p><b>Adresse de livraison:</b><br> {{order.deliveryAddress|raw}}</p>
+                    
+                </div>
+                <div class="my-3">
+                    <a href="{{path('account_myprofile')}}" class="btn btn-lg">Retour</a>
+                </div>
+                
+            </div>  
+           
+        </div>
+    
+    </section>
+
+{% endblock %}
+
+
+
+

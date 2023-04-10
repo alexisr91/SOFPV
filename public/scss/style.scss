@@ -1003,9 +1003,56 @@ section#prepareOrder {
             label {font-weight:bold;}
             .description {color:rgba($base, 0.7);}
         }
+
+        div.payment {
+            .btn {margin:1em 0;}
+            .stripeLogo {
+                display: flex;
+                align-items: center;
+                p {margin-bottom: 0;}
+                span {margin-left: 0.5em}
+            }
+        }
+
+        .selected {
+            border:1px solid $grey;
+            border-radius: 5px;
+        }
     
         
     } 
+}
+
+section#successPayment {
+    .container-fluid {
+        background-color: $white;
+        width:70%;
+        margin: 0 auto;
+        min-height:90vh;
+
+        .deliveryImage {
+            width:80px;
+            height: 80px;
+            margin: 0 auto;
+            animation: 2s linear 1s infinite alternate flyingDelivery;
+        }
+
+        .recap {
+            width: 50%;
+            padding: 2em;
+            border-radius: 3px;
+            background-color: #fff;
+
+            .products {
+                display: flex;   
+                div {margin:0.5em 1em;}
+        
+            }
+        }
+        
+        
+    }
+    
 }
 
 

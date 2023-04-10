@@ -2,14 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Order;
 use App\Entity\Product;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -60,15 +63,17 @@ class StripeController extends AbstractController {
                 'currency'=> 'eur',
                 'unit_amount'=> $transporterPrice*100,
                 'product_data'=> [
-                    'name'=> $transporter->getName()
+                    'name'=> $transporter->getName(),
+                    'description'=>$transporter->getDescription()
                 ]
             ],
             'quantity'=> 1
         ];
 
-        // dd($productStripe);        
-       
-        $ordeReference = $order->getReference();
+        // dd($productStripe);    
+
+       // on récupère la référence de la commande (pas celle qui est commune aux paniers)
+        $orderReference = $order->getOrdering()->getReference();
 
         Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY_TEST']);
 
@@ -80,8 +85,8 @@ class StripeController extends AbstractController {
             $productStripe
         ]],
         'mode' => 'payment',
-        'success_url' => $this->generateUrl('payment_success', ['reference'=>$ordeReference], UrlGenerator::ABSOLUTE_URL),
-        'cancel_url' => $this->generateUrl('payment_error', ['reference'=>$ordeReference], UrlGenerator::ABSOLUTE_URL),
+        'success_url' => $this->generateUrl('payment_success', ['reference'=>$orderReference], UrlGenerator::ABSOLUTE_URL),
+        'cancel_url' => $this->generateUrl('payment_error', ['reference'=>$orderReference], UrlGenerator::ABSOLUTE_URL),
         ]);
 
 
@@ -90,16 +95,38 @@ class StripeController extends AbstractController {
     }
 
 
+    
     #[Route('/order/stripe/success/{reference}', name:'payment_success')]
-    public function stripeSuccess($reference){
+    #[IsGranted("ROLE_USER")]
+    public function stripeSuccess($reference, SessionInterface $session, OrderRepository $orderRepo, ){
 
-        return $this->render('order/success.html.twig');
+        //si la commande est validée, on supprime les données de session des paniers
+        $session->set('cart', []);
+
+        $order = $orderRepo->findOneBy(['reference'=>$reference]);
+        $carts = $order->getCarts()->getValues();
+
+        //Pas d'accès à une autre personne que celle qui a validé la commande
+        if($this->getUser()!= $order->getUser()){
+            return $this->redirectToRoute('home');
+        }
+
+
+        return $this->render('order/success.html.twig', [
+            'title'=>'Merci pour votre commande !',
+            'order'=> $order,
+            'carts'=>$carts
+        ]);
     }
 
     #[Route('/order/stripe/error/{reference}', name:'payment_error')]
+    #[IsGranted("ROLE_USER")]
     public function stripeError($reference){
 
-        return $this->render('order/error.html.twig');
+        return $this->render('order/error.html.twig', [
+            'title'=>'Erreur lors de la transaction',
+            'reference'=>$reference
+        ]);
     }
 
 

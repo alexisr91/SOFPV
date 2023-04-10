@@ -20,7 +20,7 @@
                             {% if user.fullAddress is null %}
                                 <span class="alert alert-warning">Vous n'avez pas encore renseigné d'adresse.</span>
                             {% else %}
-                                <p>{{user.fullAddress|raw}}</p>
+                                <p class="mt-2">{{user.fullAddress|raw}}</p>
                             {% endif %}
                         {% endif %}
                        
@@ -62,14 +62,13 @@
                             <tfoot>
                                 <tr>
                                     <th>Frais de port</th>
-                                    <th>+ {{transporters[0].price}} &euro; </th>
+                                    <th class='transporterPrice'></th>
                                     <th></th>
-                                    <th> {{total|number_format(2)}} &euro;</th>
+                                    <th class='basePrice'>{{total|number_format(2)}} &euro; </th>
                                 </tr>
                                 <tr>
                                     <td colspan="3"><b>Total</b></td>
-                                    {% set totalWithTransporterPrice = total + transporters[0].price %}
-                                    <td><strong>{{totalWithTransporterPrice|number_format(2)}} &euro;</strong></td>
+                                    <td class="totalPrice"></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -80,8 +79,10 @@
                         <legend class="h4"><i class="fa-solid fa-truck-fast"></i> Choix du transporteur</legend>
                         {% for transporterChoice in form.transporter %}
                           <div class="p-3">
-                          {% set index = loop.index0 %}  
-                          {{form_widget(transporterChoice)}}
+                          {% set index = loop.index0 %}
+                          {% set price = transporters[index].price %} 
+
+                          {{form_widget(transporterChoice, { 'attr' : { 'class': 'transporterChoice', 'data-price': price }})}}
                                 <p class="ps-3 mb-0 description">{{transporters[index].description|raw}}</p>
                                 <p class="ps-3"><strong>{{transporters[index].price}}&euro;</strong></p> 
                             </div>
@@ -89,7 +90,12 @@
                         
                     </div>
                     <div class="col payment">
-                        <button type="submit" class="btn btn-success">Paiement</button>
+                        <button type="submit" class="btn btn-success btn-lg">Paiement</button>
+                        <div class="stripeLogo">
+                            <p class="text-muted">Powered by </p>
+                           <span class="text-muted"><i class="fa-brands fa-stripe fa-3x"></i></span>
+                        </div>
+                        <p class="text-muted"><i class="fa-solid fa-lock"></i>  Vous allez être redirigé sur une page de paiement sécurisé.</p>
                     </div>
                 </div>
                 
@@ -98,12 +104,78 @@
             </div>
            
         </div>
+
+        <script>
+        //les inputs du formulaire concernant les transporteurs  
+        let transporters = document.querySelectorAll('.transporterChoice');
+
+        //l'element de la table dans laquelle le prix du transporteur doit apparaître
+        let transporterPrice = document.querySelector('.transporterPrice');
+
+        //prix sur lequel on se base (total du prix des produits avec leur quantité)
+        let basePrice = document.querySelector('.basePrice').innerHTML;
+   
+        //élément de la table contenant le prix total avec transporteur
+        let totalPrice = document.querySelector('.totalPrice');
+
+       
+        
+            //pour chaque transporteur, on écoute le changement sur l'input
+            transporters.forEach(function(transporter){
+
+                if(transporter.checked){
+                    let price = transporter.dataset.price;
+                    transporterPrice.innerHTML = `+ ${price} \u20AC`;
+                    transporterCheckedPrice = price;
+                     //Affichage du prix avec les valeurs selectionnées par défaut
+                    let sumPriceOnload = parseFloat(transporterCheckedPrice)+ parseFloat(basePrice);
+                    totalPrice.innerHTML = `${sumPriceOnload} \u20AC`;
+
+                }
+
+                transporter.addEventListener('change',()=>{
+
+                //récupération de la valeur du data selon le transporteur selectionné
+                let price = transporter.dataset.price;
+                //on le met dans le tableau pour l'affichage
+                transporterPrice.innerHTML = `${price} \u20AC`;
+
+                //calcul du prix de base + le transporteur selectionné
+                let priceWithTransporter = parseFloat(price) + parseFloat(basePrice);
+
+                //affichage dans la table
+                totalPrice.innerHTML = `${priceWithTransporter} \u20AC`;
+               
+
+                });
+            });
+
+        
+        
+        
+
+        
+
+
+        
+        
+                        
+                
+                   
+              
+              
+                
+        
+           
+            
+          
+            
+            
+        
+        </script>
     
     </section>
 
-    <script>
-    
-    </script>
 
 {% endblock %}
 
