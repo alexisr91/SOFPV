@@ -11,11 +11,16 @@
             {% for product in products %}
                 <div class="col">
                     <div class="card h-100">
-                        <img src="{{product.image}}" class="card-img-top img-fluid" alt="{{product.name}}">
+                        {# si le produit est sorti il y a moins de 15 jours : badge new #}
+                        {% if product.isNewProduct() %}
+                            <span class="badge bg-danger badgeNewOnShop">New</span> 
+                        {% endif %}
+                        <img src="{{asset('../img/products/'~ product.image)}}" class="card-img-top img-fluid" alt="{{product.name}}">
                         <div class="card-body">
                             <div class="pb-3">
-                                <h5 class="card-title">{{product.name|capitalize}}</h5>
-                                <p class="card-text">{{product.description|raw}}</p>
+                                <h5 class="card-title">{{product.name}}</h5>
+                                 {% set descriptionTruncated = product.description|u.truncate(200,'...', false) %}
+                                <p class="card-text">{{descriptionTruncated|raw}}</p>
                             </div>
                             
                             <div class="stock">
@@ -28,7 +33,7 @@
                         </div>
                         <div class="card-footer">
                             <a href="{{path('shop_show_product', {'slug':product.slug})}}" class="btn btn-dark stretched-link">Voir le produit</a> 
-                            <p class="card-text price"><b>{{product.priceTTC}} &euro;</b></p>
+                            <p class="card-text price"><b>{{product.priceTTC|number_format(2)}} &euro;</b></p>
                         </div>
                     </div>
                 </div>

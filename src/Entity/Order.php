@@ -63,6 +63,9 @@ class Order
     #[ORM\JoinColumn(nullable: false)]
     private ?Transporter $transporter = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $delivery_status = null;
+
     public function __construct()
     {
         $this->carts = new ArrayCollection();
@@ -81,6 +84,10 @@ class Order
            }
            //on utilise updatedAt pour avoir une référence de temps entre la création et une modification potentielle de la commande
            $this->updatedAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));    
+
+           if(empty($this->delivery_status)){
+                $this->delivery_status = 0;
+           }
     }
 
 
@@ -260,6 +267,18 @@ class Order
     public function setTransporter(?Transporter $transporter): self
     {
         $this->transporter = $transporter;
+
+        return $this;
+    }
+
+    public function getDeliveryStatus(): ?string
+    {
+        return $this->delivery_status;
+    }
+
+    public function setDeliveryStatus(string $delivery_status): self
+    {
+        $this->delivery_status = $delivery_status;
 
         return $this;
     }

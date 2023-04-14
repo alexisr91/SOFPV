@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Drone;
 use App\Entity\Image;
+use App\Entity\Order;
 use App\Entity\Article;
 use App\Entity\Counter;
 use App\Form\DroneType;
@@ -15,8 +16,9 @@ use App\Services\Pagination;
 use App\Entity\PasswordUpdate;
 use App\Form\AdminArticleType;
 use App\Form\PasswordUpdateType;
-use App\Repository\ArticleRepository;
 use App\Repository\ImageRepository;
+use App\Repository\ArticleRepository;
+use App\Repository\OrderRepository;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -462,6 +464,22 @@ class AccountController extends AbstractController
             }
     
         }
+
+    //Commandes passées par l'utilisateur
+    #[IsGranted("ROLE_USER")]
+    #[Route('/profile/orders', name:'account_myOrders')]
+    public function myOrders(OrderRepository $orderRepository){
+
+        $user = $this->getUser();
+        $orders = $orderRepository->findBy(['user'=>$user]);
+
+        return $this->render('/account/order/index.html.twig', [
+            'title'=> 'Mes commandes',
+            'user'=>$user,
+            'orders'=>$orders
+            
+        ]);
+    }
 
     //Profil utilisateur public (articles de l'user, badge , drone favori, sessions de l'user)
     #[Route('/profile/{nickname}', name:'account_profile')]

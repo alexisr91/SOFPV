@@ -1,0 +1,325 @@
+/* MYPROFILE - infos personnelles */
+section#myProfile {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    background-color: $base;
+    .wrap {
+        height:100%;
+        background-color: $base;
+        min-height: 90vh;
+        }
+
+    .personnal-info, .my-drone, .dashboard{
+        background-color:$white;
+         margin:0 2em 2em 2em;
+        padding: 2em;
+        border-radius: 3px;
+    }
+    
+    .personnal-info {
+        a{
+            background-color: $grey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1em;
+            border-radius: 3px;
+            &:hover {
+                border:none;
+            }       
+        }
+    }
+    .dashboard {
+        position: relative;
+
+        .spanWrap {
+            margin: 1em;
+        }
+        .notification{
+            z-index: 5;
+            position: absolute;
+            bottom: 0.5em;
+            right: 5em;
+        }
+        .accordion-item {
+            .accordion-header {position: relative;}
+            .accordion-button:not(.collapsed){
+                color:$base ;
+                background-color: $grey;
+            }
+            .accordion-button{
+                color:$base;
+            }
+        }
+        .accordion-body{
+            position: relative;
+            padding-right: 15%;
+
+            .show-article {
+            position: absolute;
+            top:1em;
+            right: 1em;
+            }
+        }
+       
+    }
+
+    .param {
+        margin-top: 1em;
+    }
+
+    .counters {
+        width: 100%;
+        margin-bottom: 2em;
+        .counter{
+            text-align: center;
+            margin: 0;
+            img {
+            height:4em;
+            margin: 0 1em;
+        }
+
+        }
+        
+    }
+    
+
+    .my-drone {
+        position: relative;
+        .fav {
+            float:right;
+            max-width: 125px;
+            max-height: 125px;
+            object-fit: cover;
+            object-position: center;
+            overflow: hidden;
+            }
+        a {
+            background-color: $grey;
+            padding:0.5 1em;
+            border-radius: 3px;
+            position: absolute;
+            top:1em;
+            right: 3em;
+        }
+    }
+   
+    
+    .container-fluid {
+        display: grid;
+        grid-template-columns: 10% minmax(500px, 85%);
+        background-color: $base;
+    }
+
+    #myProfile-avatar, .show-article-avatar {
+        max-height:125px;
+        max-width:125px;
+        img{
+            background-color:$white;
+            width: 100%;
+            height: 100%;
+        }
+    } 
+    .user{
+        background-color:$white;
+        margin:0 2em 2em 2em;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+    
+        h2 {
+        margin: 0.5% 2% ;
+        font-size: 2.5em;
+        }
+    }
+
+}
+
+/* MY PROFILE - password edit*/
+section#myPwdEdit {
+    background-image: url('../img/redQuad.jpeg');
+    background-size: cover;
+    background-color: $base; 
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    .container-fluid{ 
+        display: flex; 
+        height: 90.5vh;
+        align-items: center;
+       
+    }
+    .wrapper{
+        background-color: $white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 50%;
+        margin: 0 auto;
+         border-radius: 3px;
+
+    }
+} 
+
+/* MY PROFILE - edit */
+section#myProfileEdit, section#droneEdit {
+    background-image: url('../img/quadsLavoir.jpeg');
+    background-color: $base; 
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    .mb-3 {
+        margin:0 !important;
+    }
+   
+    min-height: 90vh;
+    .container-fluid {
+        display: flex;
+        aside.sidebarMenu {
+            height: 93vh;
+        }
+    }
+    #navbarMenu {
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
+
+    .row {
+        justify-content: space-between;
+    }
+    .banner{
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+    .wrapper {
+        padding: 3em;
+        background-color: $white;
+        width: 80%;
+        margin: 0 auto;
+        border-radius: 3px;
+
+        .input-group {
+            margin-bottom: 1em; 
+            
+            input {
+
+            }
+        }
+       
+    }
+    .avatar {
+        max-width: 125px;
+        max-height:125px;
+        overflow: hidden;
+        object-fit: cover;
+        object-position: center ;
+    }
+    
+}
+
+/* DRONE EDIT */
+section#droneEdit {
+    .container-fluid {
+        display: flex;
+    }
+
+    .wrapper 
+    {   background-color: $white;
+        padding:3em;
+        margin: 3em auto;
+        height: 85vh;
+        width: 70%;
+    }
+    .avatar {
+        max-height:125px;
+        max-width:125px;
+        overflow: hidden;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+/*Mes articles */
+section#myArticles{
+    background-image: url('/img/forestView.jpg');
+    article {position: relative;}
+    
+    .container-fluid{
+        display: flex;
+        min-height: 100vh;
+
+        .article-thumb {
+            width: 40%;
+            display: flex;
+            align-items: center;
+            background-color: rgba($grey,0.4);
+            position: relative;
+        }
+
+        .row-cols-md-1{
+            margin-bottom: 3em;
+        }
+        .card-title {
+            margin-left: 0.5em;
+        }
+        .sidebar{
+            width:10%;
+        }
+        .article-body {
+            width:100%;
+        }
+        .article-content {
+            padding-right: 1em;
+        }
+        .article-footer{
+            display: flex;
+            justify-content: space-between;
+        }
+        .settings a{
+            margin: 0 1em;
+        }
+
+        .stats {
+            display: flex;
+            max-height: 3em;
+            .col {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .row {
+                padding: 0;
+                margin-right: 1em;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+                flex-grow: 0;
+            }
+            .icon{
+                background-color: $grey;
+                border-top-right-radius: 3px;
+                border-bottom-right-radius: 3px;
+            }
+          
+           
+        }
+       
+    }
+
+    .thumb-wrap {  
+        height: 17em;
+        width: 100%;
+     img {
+        object-fit: cover;
+        width:100%;
+        height: 100%;       
+     }
+    }
+    
+}

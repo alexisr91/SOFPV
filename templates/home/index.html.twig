@@ -92,58 +92,27 @@
 
         {# Items de la boutiques (notification New) #}
         <section id="newOnShop">
-            <div class="title-banner mb-4">
-                <h3>Boutique</h3> 
-            </div>
             <div class="container-fluid">
-            {#TODO: boucle avec les derniers produits ajoutés (badge new pour moins de 2 semaines)#}
-                <div class="row">
+                <div class="row mt-4">
+                {% for product in products %}
                     <div class="col">
                             <div class="card">
-                                {#TODO: a mettre si le produit est sorti au cours des 2 semaines #}
-                                <span class="badge bg-danger titleBadge">New</span> 
-                                <img src="{{asset('../img/product-1.jpg')}}" class="card-img-top" alt="...">
+                               {# si le produit est sorti il y a moins de 15 jours : badge new #}
+                                {% if product.isNewProduct() %}
+                                <span class="badge bg-danger badgeNewOnShop">New</span> 
+                                {% endif %}
+
+                                <img src="{{asset('../img/products/'~ product.image)}}" class="card-img-top img-fluid" alt="{{product.name}}">
                                 <div class="card-body">
-                                    <h5 class="card-title">Nom du produit</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                    <p class="card-text price"><b>599 €</b></p>
-                                    <a href="#" class="btn btn-dark stretched-link">Voir le produit</a>
+                                    <h5 class="card-title">{{product.name}}</h5>
+                                    {% set descriptionTruncated = product.description|u.truncate(200,'...', false) %}
+                                    <p class="card-text">{{descriptionTruncated|raw}}</p>
+                                    <p class="card-text price"><b>{{product.priceTTC|number_format(2)}} &euro;</b></p>
+                                    <a href="{{path('shop_show_product', {'slug' : product.slug})}}" class="btn btn-dark stretched-link">Voir le produit</a>
                                 </div>
                             </div>
                     </div>
-                    <div class="col">
-                            <div class="card">
-                                <img src="{{asset('../img/product-2.jpg')}}" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nom du produit</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                    <p class="card-text price"><b>10 €</b></p>
-                                    <a href="#" class="btn btn-dark stretched-link">Voir le produit</a>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="col">
-                            <div class="card">
-                                <img src="{{asset('../img/product-3.jpg')}}" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nom du produit</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                    <p class="card-text price"><b>5 €</b></p>
-                                    <a href="#" class="btn btn-dark stretched-link">Voir le produit</a>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="col">
-                            <div class="card">
-                                <img src="{{asset('../img/product-1.jpg')}}" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nom du produit</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                    <p class="card-text price"><b>599 €</b></p>
-                                    <a href="#" class="btn btn-dark stretched-link">Voir le produit</a>
-                                </div>
-                            </div>
-                    </div>
+                {% endfor %}
                 </div>
             </div>
         </section>

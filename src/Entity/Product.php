@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProductRepository;
+use DateInterval;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -47,14 +49,30 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Cart::class)]
     private Collection $carts;
 
-
     public function __construct()
     {   
-
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->stock = 0;
         $this->price_TTC = number_format($this->price_HT+($this->price_HT*$this->tva), 2);
         $this->carts = new ArrayCollection();
+    }
+
+    //vérification de la date de sortie du produit pour déterminer sa "nouveauté" par rapport aux autres produits (ajout de badge css)
+    public function isNewProduct():bool{
+        //date de creation du produit
+        $createdProductDate = $this->createdAt;
+        //date actuelle FR 
+        $now = new DateTime("now", new \DateTimeZone('Europe/Paris'));
+        //date de creation + 15 jours comme limite pour déterminer un produit "nouveau"
+        $limit = date_add($createdProductDate, date_interval_create_from_date_string("+15 days"));
+        
+       //si la limite est dépassée, on retourne false  
+       if($now > $limit ){
+        return false;
+       } else {
+        return true;
+       }
+        
     }
 
     //creation du slug et update si le nom du produit est modifié par l'admin

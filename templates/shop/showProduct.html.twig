@@ -9,10 +9,10 @@
         <div class="container-fluid pt-4">
             <div class="row g-4 px-5">
                 <div class="col">
-                    <img src="{{product.image}}" class="img-fluid" alt="{{product.name}}">
+                    <img src="{{asset('../img/products/'~ product.image)}}" class="img-fluid" alt="{{product.name}}">
                 </div>
                 <div class="col">
-                    <h2>{{product.name|capitalize}}</h2>
+                    <h2>{{product.name}}</h2>
                     <p>{{product.description|raw}}<p>
                     <div class="stock">
                         {% if product.stock == 0 %}
@@ -22,7 +22,7 @@
                         {% endif %}
                     </div>
                     <hr>
-                    <h4 class="price">{{product.priceTTC}} &euro;</h4>
+                    <h4 class="price">{{product.priceTTC|number_format(2)}} &euro;</h4>
                     <div class="addToCartWrapper">
                         <form method="post" accept-charset="UTF-8" >
                             <div class="d-flex">
