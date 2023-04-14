@@ -102,14 +102,14 @@ class AppFixtures extends Fixture
         $transporterColissimo = new Transporter();
         $transporterColissimo->setName('Colissimo')
                              ->setDescription('Livraison en 2 à 3 jours en France Métropolitaine')
-                             ->setPrice(8);
+                             ->setPrice(5);
                              
         $manager->persist($transporterColissimo);
 
         $transporterChronopost = new Transporter();
         $transporterChronopost->setName('Chronopost')
                              ->setDescription('Livraison en moins de 24h en France Métropolitaine')
-                             ->setPrice(12);
+                             ->setPrice(9);
 
         $manager->persist($transporterChronopost);
 
@@ -178,12 +178,81 @@ class AppFixtures extends Fixture
         
         //creation d'un jeu de produits pour la boutique
         $products = [];
-        for($p = 0 ; $p < 10 ; $p++){
+
+        $product1 = new Product();
+        $product1->setName("Casque DJI FPV V2")
+        ->setPriceHT(569,99)
+        ->setDescription("
+        ● Résolution 1440 x 810 par écran </br>
+        ● Enregistrement Vidéos MP4 à 720p/60im/s </br>
+        ● Alimentation Batterie externe entre 7,4 et 17,6V (recommandé 4S)  XT60 </br>
+        ● Dimensions 184 x 122 x 110 mm (sans antennes) 202 x 126 x 110 mm (avec antennes) </br>
+        ● Poids 415 g (bandeau et antennes inclus) </br>
+        ● Ecran Deux écrans de 2\" </br>
+        ● Fréquence de rafraîchissement de l'écran 120 Hz </br>
+        ● Fréquence de communication 5,725 à 5,850 GHz </br>
+        ● Puissance de l'émetteur (EIRP) FCC/MIC : </br>
+        ● Mode Vue en direct Mode Faible latence (720p/120 ips) Mode Haute qualité (720p/60 ips) </br>
+        ● Encodage vidéo MP4, H.264 </br> 
+        ● Formats de lecture vidéo compatibles MP4, MOV, MKV (Encodage vidéo : H264 ; Encodage audio : AAC-LC, AAC-HE, AC-3, DTS, MP3) </br>
+        ● Température de fonctionnement 0 à 40 °C (32 à 104 °F) </br>
+        ● Puissance d'entrée 7,4 à 17,6 V </br>
+        ● FOV Réglable de 30° à 54°. Taille d’image réglable de 50 % à 100 % </br>
+        ● Écart pupillaire 58 à 70 mm </br>
+        ● Batterie Batterie externe 6,6 à 21,75 V ; consommation totale d’énergie de 7 W </br>
+        ● Cartes mémoire compatibles Cartes microSD d’une capacité allant jusqu’à 128 Go </br>
+        ")
+        ->setImage("product-1.jpg")
+        ->setStock(10)
+        ;
+        $products[] = $product1;
+        $manager->persist($product1);
+
+        $product2 = new Product();
+        $product2->setName("Case GoPro Session 5")
+        ->setPriceHT(9,90)
+        ->setDescription("Impression 3D en filament TPU pour case GoPro Session 5. 
+        ")
+        ->setImage("product-2.jpg")
+        ->setStock(10)
+        ;
+
+        $products[] = $product2;
+        $manager->persist($product2);
+
+        $product3 = new Product();
+        $product3->setName("Support Immortal T pour frame APEX")
+        ->setPriceHT(3)
+        ->setDescription("Impression 3D en filament TPU de support Immortal T </br>
+        ● Frame APEX 
+        ")
+        ->setImage("product-3.jpg")
+        ->setStock(10)
+        ;
+        $products[] = $product3;
+        $manager->persist($product3);
+
+
+        $product4 = new Product();
+        $product4->setName("T-shirt SO FPV")
+        ->setPriceHT(15,90)
+        ->setDescription("
+        ● T-Shirt floqué du logo SO FPV </br>
+        ● 100 % coton.
+        ")
+        ->setImage("product-4.png")
+        ->setStock(10)
+        ;
+
+        $products[] = $product4;
+        $manager->persist($product4);
+
+        for($p = 0 ; $p < 5 ; $p++){
             $product = new Product();
             $product->setName($faker->words(5, true))
                     ->setPriceHT($faker->randomFloat(2, 5, 30))
                     ->setDescription($faker->paragraph(2))
-                    ->setImage("https://placehold.co/600x600?text=Produit")
+                    ->setImage("product-default.jpg")
                     ->setStock($faker->numberBetween(0,50))
                     ;
             $products[] = $product;

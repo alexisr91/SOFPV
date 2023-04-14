@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="myOrders">
+    
+        {{include('partials/_navbarMenu.html.twig')}}
+
+        <div class="container-fluid">
+        <div class="sidebar">
+            {{include('partials/_sidebarMenuProfile.html.twig')}}
+        </div>
+            <div class="row">
+              {% for order in orders %}
+              <div class="col-md-3">
+                {{order.reference}}<br>
+                {{order.deliveryStatus}}<br>
+              
+              </div>
+              {% endfor %}
+            </div>
+    
+    </section>
+
+
+{% endblock %}
+

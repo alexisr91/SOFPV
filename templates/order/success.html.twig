@@ -9,7 +9,6 @@
         <div class="container-fluid pt-4">
             <div class="p-3 ms-2 wrapper row">
                
-               
                 <div class="recap">  
                 <h3>Merci pour votre commande !</h3>
                     <div class="d-flex align-items-center">
@@ -18,7 +17,7 @@
                             <img src="{{asset('/img/deliveryDroneByFreepik.png')}}" class="img-fluid" alt="drone livreur par Freepik">
                         </div> 
                     </div>
-                    <p><b>Numéro de commande: </b>{{order.reference}}</p>
+                    <p class="mt-0"><b>Numéro de commande: </b>{{order.reference}}</p>
                     <p><b>Transporteur:</b> {{order.transporter.name}}</p>
                     
                     <p><b>Détail de votre commande:</b><p>
@@ -27,7 +26,7 @@
                     <div class="products">
                         <div><strong>x{{cart.quantity}}</strong></div>
                         <div>{{cart.product.name|capitalize}}</div>
-                        <div>{{cart.product.priceTTC}} &euro;</div>
+                        <div>{{cart.product.priceTTC}} &euro;/unité</div>
                       </div> 
                       {% if loop.last %}
                       <hr>
@@ -35,11 +34,11 @@
                     {% endfor %}
                     <p><b>Prix total TTC: </b> {{order.price}} &euro;</p>
                     <p><b>Adresse de livraison:</b><br> {{order.deliveryAddress|raw}}</p>
-                    
+                    <div class="back">
+                        <a href="{{path('account_myprofile')}}" class="btn btn-dark btn-lg">Retour</a>
+                    </div>
                 </div>
-                <div class="my-3">
-                    <a href="{{path('account_myprofile')}}" class="btn btn-lg">Retour</a>
-                </div>
+                
                 
             </div>  
            

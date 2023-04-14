@@ -22,17 +22,17 @@ class StripeController extends AbstractController {
     public function stripeCheckout($reference, EntityManagerInterface $manager, OrderRepository $orderRepo){
 
         //on cherche la commande qui correspond à la référence
-        $order = $orderRepo->findOneBy(['reference'=> $reference]);
+        $ordering = $orderRepo->findOneBy(['reference'=> $reference]);
         
         //si elle n'existe pas, on redirige
-        if(!$order){
+        if(!$ordering){
             return $this->redirectToRoute('cart');
         }
 
         $productStripe = [];
 
         //On récupère les details de la commande
-        $orderValues = $order->getCarts()->getValues();
+        $orderValues = $ordering->getCarts()->getValues();
         
         //On boucle pour chaque élément de la commande
         foreach($orderValues as $order){
@@ -89,7 +89,10 @@ class StripeController extends AbstractController {
         'cancel_url' => $this->generateUrl('payment_error', ['reference'=>$orderReference], UrlGenerator::ABSOLUTE_URL),
         ]);
 
-
+        $ordering->setIdChargeStripe($checkout_session->id);
+        $manager->persist($ordering);
+        $manager->flush();
+        
 
         return new RedirectResponse($checkout_session->url);
     }
