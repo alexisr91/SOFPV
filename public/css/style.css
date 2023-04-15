@@ -853,6 +853,11 @@ section#cart .container-fluid {
   section#cart .container-fluid table td {
     padding: 1em;
     vertical-align: middle; }
+  section#cart .container-fluid table td.img {
+    width: 100px;
+    height: auto; }
+  section#cart .container-fluid table td.delete-all {
+    text-align: end; }
   section#cart .container-fluid table a {
     margin: 0 1em; }
   section#cart .container-fluid table .param {

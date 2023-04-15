@@ -80,6 +80,13 @@ section#cart {
 
         table {
             td {padding: 1em; vertical-align: middle;}
+            td.img {
+                width:100px;
+                height: auto;
+            }
+            td.delete-all {
+                text-align: end;
+            }
             a {margin: 0 1em}
             .param {padding: 0.5em}
         }

@@ -12,6 +12,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Produit</th>
                             <th>Prix</th>
                             <th class="text-center">Quantité</th>
@@ -23,8 +24,9 @@
                     {# {{dump(cardData, total)}} #}
                     {% for data in cardData %}
                         <tr>
+                            <td class="img"><img src="{{asset('img/products/'~ data.product.image)}}" alt="" class="img-fluid"></td>
                             <td>{{ data.product.name|capitalize }}</td>
-                            <td>{{ data.product.priceTTC }} &euro;</td>
+                            <td>{{ data.product.priceTTC|number_format(2) }} &euro;</td>
                             <td class="text-center"> 
                                 <a href="{{path('cart_remove', {'id': data.product.id })}}" class="btn btn param"><i class="fa-solid fa-minus"></i></a>
                                    {{ data.quantity }} 
@@ -33,8 +35,6 @@
                             {% set totalTTCForeachTypeOfProduct =  data.quantity * data.product.priceTTC %}
                             <td>{{ totalTTCForeachTypeOfProduct|number_format(2)}} &euro;</td>
                             <td>
-                               
-                              
                                 <a href="{{path('cart_delete', {'id': data.product.id })}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a> 
                             </td>
                         </tr>
@@ -46,9 +46,9 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3"><b>Total</b></td>
+                            <td colspan="2"><b>Total</b></td>
                             <td><strong>{{total|number_format(2)}} &euro;</strong></td>
-                            <td>
+                            <td colspan="3" class="delete-all">
                                 {% if cardData is not empty %}
                                 <a href="{{path('cart_delete_all')}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Vider le panier</a> 
                                 {% endif %}
@@ -56,9 +56,9 @@
                         </tr>
                     </tfoot>
                 </table>
-                <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center p-3">
                     <a href="{{path('shop')}}" class="btn param"><i class="fa-solid fa-angle-left"></i> Continuer mes achats <i class="fa-solid fa-basket-shopping"></i></a>
-                    <a href="{{path('cart_validate')}}" class="btn param btn-lg">Valider mon panier</a>
+                    <a href="{{path('cart_validate')}}" class="btn param btn-lg validate">Valider mon panier</a>
                 </div>
             </div>
            
