@@ -51,7 +51,7 @@
                             {% for cart in carts %}
                                 <tr>
                                     <td>{{cart.product.name|capitalize}}<br></td>
-                                    <td>{{ cart.product.priceTTC }} &euro;</td>
+                                    <td>{{ cart.product.priceTTC|number_format(2) }} &euro;</td>
                                     <td class="text-center"> 
                                         {{ cart.quantity }} 
                                     </td>

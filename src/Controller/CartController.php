@@ -111,12 +111,14 @@ class CartController extends AbstractController
                 ->setUser($user)
                 ->setReference($referenceForOrder);
             
+            
             $carts[] = $cart;
             $manager->persist($cart);
-            $manager->flush();
-
+            
         }
-        
+    
+        $manager->flush();
+
         return $this->redirectToRoute('order_prepare', ['reference'=>$referenceForOrder]);
     }
 

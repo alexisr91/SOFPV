@@ -35,23 +35,10 @@ class Order
     private ?string $deliveryAddress = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $stripe_token = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $brand_stripe = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $last4_stripe = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $id_charge_stripe = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $status_stripe = null;
 
     #[ORM\Column(length: 255)]
     private ?string $reference = null;
-
 
     #[ORM\Column]
     private ?float $price = null;
@@ -65,6 +52,12 @@ class Order
 
     #[ORM\Column(length: 255)]
     private ?string $delivery_status = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $stripe_customer_id = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $stripe_payment_intent = null;
 
     public function __construct()
     {
@@ -140,54 +133,6 @@ class Order
     public function setDeliveryAddress(string $deliveryAddress): self
     {
         $this->deliveryAddress = $deliveryAddress;
-
-        return $this;
-    }
-
-    public function getStripeToken(): ?string
-    {
-        return $this->stripe_token;
-    }
-
-    public function setStripeToken(?string $stripe_token): self
-    {
-        $this->stripe_token = $stripe_token;
-
-        return $this;
-    }
-
-    public function getBrandStripe(): ?string
-    {
-        return $this->brand_stripe;
-    }
-
-    public function setBrandStripe(?string $brand_stripe): self
-    {
-        $this->brand_stripe = $brand_stripe;
-
-        return $this;
-    }
-
-    public function getLast4Stripe(): ?string
-    {
-        return $this->last4_stripe;
-    }
-
-    public function setLast4Stripe(?string $last4_stripe): self
-    {
-        $this->last4_stripe = $last4_stripe;
-
-        return $this;
-    }
-
-    public function getIdChargeStripe(): ?string
-    {
-        return $this->id_charge_stripe;
-    }
-
-    public function setIdChargeStripe(?string $id_charge_stripe): self
-    {
-        $this->id_charge_stripe = $id_charge_stripe;
 
         return $this;
     }
@@ -279,6 +224,30 @@ class Order
     public function setDeliveryStatus(string $delivery_status): self
     {
         $this->delivery_status = $delivery_status;
+
+        return $this;
+    }
+
+    public function getStripeCustomerId(): ?string
+    {
+        return $this->stripe_customer_id;
+    }
+
+    public function setStripeCustomerId(?string $stripe_customer_id): self
+    {
+        $this->stripe_customer_id = $stripe_customer_id;
+
+        return $this;
+    }
+
+    public function getStripePaymentIntent(): ?string
+    {
+        return $this->stripe_payment_intent;
+    }
+
+    public function setStripePaymentIntent(?string $stripe_payment_intent): self
+    {
+        $this->stripe_payment_intent = $stripe_payment_intent;
 
         return $this;
     }
