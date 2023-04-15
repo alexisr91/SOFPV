@@ -119,7 +119,7 @@ class StripeController extends AbstractController {
                 $status = $session->payment_intent->status;
                 $paymentIntent = $session->payment_intent->id;
 
-                //on met à jour les données de la commande "order" associée avec de quoi retracer le paiment sur le site STRIPE (customer id et payment intent id)
+                //on met à jour les données de la commande "order" associée, avec de quoi retracer le paiement sur le site STRIPE (customer id et payment intent id)
                 $order->setStatusStripe($status)
                       ->setStripePaymentIntent($paymentIntent)
                       ->setStripeCustomerId($customer->id);
@@ -135,8 +135,16 @@ class StripeController extends AbstractController {
                     $quantity = $cart->getQuantity();
                     $stock = $product->getStock();
 
-                    $product->setStock($stock - $quantity);
-                    $manager->persist($product);
+                    $newStock = (int)$stock-$quantity;
+
+                    if($newStock < 0){
+                        http_response_code(500);
+                        
+                    } else {
+                        $product->setStock($stock - $quantity);
+                        $manager->persist($product); 
+                    }
+
                 }
                 //envoie de la maj en bdd
                 $manager->flush();

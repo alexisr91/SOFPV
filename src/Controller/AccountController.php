@@ -471,7 +471,7 @@ class AccountController extends AbstractController
     public function myOrders(OrderRepository $orderRepository){
 
         $user = $this->getUser();
-        $orders = $orderRepository->findBy(['user'=>$user]);
+        $orders = $orderRepository->findOrderSucceededByUser($user);
 
         return $this->render('/account/order/index.html.twig', [
             'title'=> 'Mes commandes',
