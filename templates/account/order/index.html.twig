@@ -5,23 +5,34 @@
 {% block body %}
  
     <section id="myOrders">
-    
+        
         {{include('partials/_navbarMenu.html.twig')}}
 
         <div class="container-fluid">
         <div class="sidebar">
             {{include('partials/_sidebarMenuProfile.html.twig')}}
         </div>
-            <div class="row">
+            <div class="row row-cols-md-1 g-4 px-3 pt-4">
               {% for order in orders %}
-              <div class="col-md-3">
-                {{order.reference}}<br>
-                {{order.deliveryStatus}}<br>
-              
-              </div>
+                <div class="col">
+                {{order.reference}} <br>
+                le {{order.createdAt|date('d-m-Y à H:i')}} <br>
+                {{order.deliveryAddress|raw}} <br>
+                {{order.transporter.name}} <br>
+                {{order.transporter.price}} &euro;<br>
+                {% for cart in order.carts %}
+                {{cart.product.name}} <br>
+                x{{cart.quantity}}
+                {% endfor %}
+                
+                </div>
+                
               {% endfor %}
+               
+               
+            
             </div>
-    
+        
     </section>
 
 
