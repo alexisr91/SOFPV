@@ -13,24 +13,25 @@
                 <div class="col delivery">
                     {{form_start(form)}}
                     <legend><i class="fa-solid fa-location-dot"></i> Adresse de livraison</legend>
-
+                    
                     {% for deliveryAddress in form.deliveryAddress %}
-                        {{form_widget(deliveryAddress)}}
-                        {% if deliveryAddress.vars.value is same as "user_address" %}
-                            {% if user.fullAddress is null %}
-                                <span class="alert alert-warning">Vous n'avez pas encore renseigné d'adresse.</span>
+                        {{ form_widget(deliveryAddress)}}
+                        {% if loop.index == 1 %}
+                            {% if user.address is null %}
+                                <div class="alert alert-warning">Vous n'avez pas encore renseigné d'adresse sur votre profil.</div>
                             {% else %}
                                 <p class="mt-2">{{user.fullAddress|raw}}</p>
                             {% endif %}
-                        {% endif %}
-                       
+                        {% endif %}  
+                        
                     {% endfor %}
-
-                    <div class="my-3">{{form_widget(form.address)}}</div>
-                    <div class="mb-3">{{form_widget(form.addressComplement)}}</div>
+                    {{form_errors(form.deliveryAddress)}}   
+                    
+                    <div class="my-3">{{form_row(form.address)}}</div>
+                    <div class="mb-3">{{form_row(form.addressComplement)}}</div>
                     <div class="row">
-                        <div class="col">{{form_widget(form.zip)}}</div>
-                        <div class="col">{{form_widget(form.city)}}</div>
+                        <div class="col">{{form_row(form.zip)}}</div>
+                        <div class="col">{{form_row(form.city)}}</div>
                     </div>
        
                 </div>

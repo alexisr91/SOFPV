@@ -35,7 +35,7 @@
                                 <b><i class="fa-solid fa-at"></i> </b>{{user.email}}<br>
                                 <b><i class="fa-solid fa-address-card"></i> </b> {% if user.firstname or user.lastname %}{{user.firstname}} {{user.lastname}} {% else %} <i>Non renseigné</i> {% endif %} <br>
                                                 
-                                <b><i class="fa-solid fa-house"></i> </b>  {% if user.address %} {{user.address}}
+                                <b><i class="fa-solid fa-house"></i> </b>  {% if user.address %} {{user.address}}<br> {{user.zip}}, {{user.city}} <br>
                                 {% else %}
                                 <i>Non renseigné</i>
                                 {% endif %}
@@ -44,7 +44,7 @@
                                     <br>{{user.addressComplement}}
                                 
                                 {% endif %}
-                                <br> {{user.zip}}, {{user.city}} <br>
+                                
                             </div>   
                             <div class="col">
                                 <i class="fa-brands fa-instagram"></i> {% if user.instagram %} {{user.instagram}} {% else %} <i>Non renseigné</i> {% endif %} <br>

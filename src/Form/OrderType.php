@@ -28,7 +28,7 @@ class OrderType extends AbstractType
                 'expanded'=>true,
                 'mapped'=>false,
                 'label'=>false,
-                'empty_data'=>'user_address'
+                'empty_data'=>"other_address"
             ])
             ->add('address', TextType::class, [
                 'attr'=> [

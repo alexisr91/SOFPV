@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class OrderController extends AbstractController
@@ -33,6 +34,7 @@ class OrderController extends AbstractController
 
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
+
 
         //récupération de l'ensemble des paniers dont la référence est la même
         $carts = $cartRepository->findByCartsReference($reference);
@@ -66,9 +68,16 @@ class OrderController extends AbstractController
             $total += $amount;
 
             $totalOfProducts += $quantity;
-        }
+        } 
+
+        $deliveryChoice = $form->get('deliveryAddress')->getData();
+
+        if($deliveryChoice == "user_address" && ($user->getAddress() == null || $user->getZip() == null || $user->getCity() == null ) ){
+            $form->get('deliveryAddress')->addError(new FormError('Vous n\'avez pas indiqué d\'adresse : veuillez sélectionner l\'option "Livrer à une autre adresse" et remplir les champs nécessaires.'));
+        } 
 
         if($form->isSubmitted() && $form->isValid()){
+       
             foreach($carts as $cart){
                 $order->addCart($cart);
             }
@@ -81,8 +90,7 @@ class OrderController extends AbstractController
             //prix + prix du transpoteur (en s'assurant que ça soit un float )
             $totalAmountForOrder = floatval($total + $transporterPrice);
 
-            //choix du lieu de livraison
-            $deliveryChoice = $form->get('deliveryAddress')->getData();
+
             //si c'est l'adresse de l'user
             if($deliveryChoice == 'user_address'){
 
@@ -91,9 +99,9 @@ class OrderController extends AbstractController
                
                 //on assigne la commande à l'adresse de cet user
                 $order->setDeliveryAddress($userAddress);
-
+            
             //si c'est une autre adresse de livraison    
-            } elseif ($deliveryChoice == 'other_address'){
+             } elseif ($deliveryChoice == 'other_address'){
 
                 //on récupère les données
                 $address = $form->get('address')->getData();

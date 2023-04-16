@@ -792,6 +792,40 @@ section#myOrders .container-fluid {
   background-color: #fafafa;
   display: flex;
   min-height: 90vh; }
+  section#myOrders .container-fluid .wrapper {
+    width: 100%;
+    padding: 0 2em; }
+    section#myOrders .container-fluid .wrapper span.alert {
+      width: 50%;
+      margin: 0 auto; }
+    section#myOrders .container-fluid .wrapper .order {
+      border-radius: 5px;
+      padding: 2em 2em 1em 2em;
+      background-color: #fff; }
+      section#myOrders .container-fluid .wrapper .order .orderRef {
+        font-weight: bold;
+        font-size: 1.2em; }
+      section#myOrders .container-fluid .wrapper .order .orderStatus {
+        padding: 1em; }
+        section#myOrders .container-fluid .wrapper .order .orderStatus i {
+          margin-right: 0.5em; }
+        section#myOrders .container-fluid .wrapper .order .orderStatus span.prepare {
+          color: orange; }
+        section#myOrders .container-fluid .wrapper .order .orderStatus span.transport {
+          color: yellow; }
+        section#myOrders .container-fluid .wrapper .order .orderStatus span.delivery {
+          color: yellowgreen; }
+        section#myOrders .container-fluid .wrapper .order .orderStatus span.delivered {
+          color: green; }
+      section#myOrders .container-fluid .wrapper .order .transporter, section#myOrders .container-fluid .wrapper .order .deliveryAddress {
+        margin-bottom: 1em; }
+      section#myOrders .container-fluid .wrapper .order .price span.bg-grey {
+        padding: 0.8em 1em;
+        font-size: 1em;
+        background-color: rgba(37, 37, 37, 0.9); }
+  section#myOrders .container-fluid h3 {
+    margin: 2em 0;
+    height: 2em; }
 
 /*SHOP */
 /** SHOP **/
