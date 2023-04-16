@@ -9,29 +9,67 @@
         {{include('partials/_navbarMenu.html.twig')}}
 
         <div class="container-fluid">
-        <div class="sidebar">
-            {{include('partials/_sidebarMenuProfile.html.twig')}}
-        </div>
-            <div class="row row-cols-md-1 g-4 px-3 pt-4">
-              {% for order in orders %}
-                <div class="col">
-                {{order.reference}} <br>
-                le {{order.createdAt|date('d-m-Y à H:i')}} <br>
-                {{order.deliveryAddress|raw}} <br>
-                {{order.transporter.name}} <br>
-                {{order.transporter.price}} &euro;<br>
-                {% for cart in order.carts %}
-                {{cart.product.name}} <br>
-                x{{cart.quantity}}
-                {% endfor %}
-                
-                </div>
-                
-              {% endfor %}
-               
-               
-            
+          <div class="sidebar">
+              {{include('partials/_sidebarMenuProfile.html.twig')}}
+          </div>
+          <div class="wrapper">
+            <h3>Mes commandes</h3>
+            <div class="row">
+            {% if not orders %}
+              <span class="alert alert-success">Vous n'avez pas encore de commande.</span>
+            {% else %}
+            {% for order in orders %}
+                <div class="order col-md-3">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <div class="orderRef">
+                              # {{order.reference}}
+                          </div>
+                          <p class="text-muted">{{order.createdAt|date('d-m-Y - H:i')}} </p>
+                      </div>
+                      <div class="price">
+                        <span class="badge bg-grey">{{order.price}} &euro;</span>
+                      </div>
+                  </div>       
+                      <div class="deliveryAddress">
+                        <b>Adresse de livraison:</b></br> 
+                        <div>{{order.deliveryAddress|raw}}</div>
+                      </div>
+
+                      <div class="transporter">
+                          <b>Transporteur: </b>{{order.transporter.name}}  </br>
+                      </div>
+                      
+                      <b>Produits:</b>
+                      <ul>
+                      {% for cart in order.carts %}
+                      <li>
+                          {{cart.product.name}} 
+                          x{{cart.quantity}}
+                      </li>
+                      {% endfor %}
+                      </ul>  
+                      <hr>
+                       <div class="orderStatus">
+                        {% if order.deliveryStatus == 0 %}
+                          <span class="prepare"><i class="fa-solid fa-circle"></i></span><strong>En cours de préparation</strong>
+                        {% elseif order.deliveryStatus == 1 %}
+                          <span class="transport"><i class="fa-solid fa-circle"></i> </span><strong>Remis au transporteur</strong>
+                        {% elseif order.deliveryStatus == 2 %}
+                          <span class="delivery"><i class="fa-solid fa-circle"></i></span><strong>En cours de livraison</strong>
+                        {% elseif order.deliveryStatus == 3 %}
+                          <span class="delivered"><i class="fa-solid fa-circle"></i></span><strong>Livré</strong>
+                        {% endif %}
+                      </div>
+                  </div> 
+                  {% endfor %}
             </div>
+            {% endif %}
+                  
+                  
+          </div>      
+        </div>
+       
         
     </section>
 
