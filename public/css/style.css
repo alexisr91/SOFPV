@@ -884,6 +884,10 @@ section#showProduct .container-fluid {
     section#showProduct .container-fluid .addToCartWrapper .outOfStock {
       background-color: rgba(218, 218, 218, 0.3);
       border-radius: 3px; }
+  section#showProduct .container-fluid .backToShop {
+    position: absolute;
+    bottom: 1em;
+    left: 1em; }
 
 section#cart .container-fluid {
   width: 70%;
@@ -1065,6 +1069,8 @@ section#showArticle .thumb-wrap {
     height: 100%; }
 section#showArticle .card {
   box-shadow: none; }
+section#showArticle .alert.alert-warning {
+  margin-top: 4em; }
 
 /*Modifier un article */
 section#editArticle .thumbnail-edit, section#addArticle .thumbnail-edit {
