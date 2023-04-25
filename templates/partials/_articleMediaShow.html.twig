@@ -2,7 +2,7 @@
 Video: si il y a une vidéo elle apparait en onglet actif, elle est prioritaire sur les images
 Images : carousel qui adapte le format landscape ou portrait des images  #}
 
-{% if article.video or article.images is not empty %}
+{% if article.video and article.images is not empty %}
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         {% if article.video %}
         <li class="nav-item" role="presentation">
