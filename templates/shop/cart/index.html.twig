@@ -21,7 +21,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {# {{dump(cardData, total)}} #}
                     {% for data in cardData %}
                         <tr>
                             <td class="img"><img src="{{asset('img/products/'~ data.product.image)}}" alt="" class="img-fluid"></td>
@@ -61,7 +60,9 @@
                     <a href="{{path('cart_validate')}}" class="btn param btn-lg validate">Valider mon panier</a>
                 </div>
             </div>
-           
+           {# {{dump(app.session.get('tempStock'), 'stock restant')}}
+           {{dump(app.session.get('cart'), 'panier')}} #}
+
         </div>
     
     </section>

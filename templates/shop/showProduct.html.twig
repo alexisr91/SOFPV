@@ -11,7 +11,7 @@
                 <div class="col">
                     <img src="{{asset('../img/products/'~ product.image)}}" class="img-fluid" alt="{{product.name}}">
                 </div>
-                <div class="col">
+                <div class="col position-relative">
                     <h2>{{product.name}}</h2>
                     <p>{{product.description|raw}}<p>
                     <div class="stock">
@@ -27,14 +27,15 @@
                         <form method="post" accept-charset="UTF-8" >
                             <div class="d-flex">
                                 {{ form_start(form) }}
-                                    {{ form_widget(form) }} 
+                                    {{ form_row(form.quantity, {'label':false,'attr': {'min':1, 'max':stock }}) }}
                                     <button type="submit"{{product.stock == 0 ? "class='btn outOfStock disabled' " : "class='btn btn-success'"}}>Ajouter au panier</button>
                                 {{ form_end(form) }}
                             </div>
                         </form> 
                        
                     </div>
-                </div>          
+                </div>    
+                   
             </div>
 
     

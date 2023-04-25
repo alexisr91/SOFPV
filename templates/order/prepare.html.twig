@@ -142,7 +142,8 @@
                 transporterPrice.innerHTML = `${price} \u20AC`;
 
                 //calcul du prix de base + le transporteur selectionné
-                let priceWithTransporter = parseFloat(price) + parseFloat(basePrice);
+                let priceWithTransporter = (parseFloat(price) + parseFloat(basePrice)).toFixed(2);
+                
 
                 //affichage dans la table
                 totalPrice.innerHTML = `${priceWithTransporter} \u20AC`;

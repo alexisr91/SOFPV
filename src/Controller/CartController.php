@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
-use App\Services\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,8 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CartController extends AbstractController
 {
-
-    private $reference;
 
     //Page de récapitulatif du panier
     #[Route('/cart', name: 'cart')]
@@ -41,9 +38,9 @@ class CartController extends AbstractController
             ];
             //pour le total on multiplie le prix par la quantité
             $total += $product->getPriceTTC()*$quantity;
-        }
-    
 
+        }
+        
         return $this->render('shop/cart/index.html.twig', [
             'title' => 'Votre panier',
             'cardData'=>$cartData,
@@ -51,33 +48,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    //Ajout d'un produit dans le panier dans la page récapitulative
-    #[Route('/cart/add/{id}', name: 'cart_add' )]
-    public function add(Product $product, SessionInterface $session ){
-
-        $id = $product->getId();
-       
-        //récupération du panier actuel
-        //On récupère les données de session du panier, la valeur par défaut sera un array vide
-        $cart = $session->get("cart", []); 
-
-        //si le panier est vide on met la quantité à 1
-        if(empty($cart[$id])){
-            $cart[$id] = 1;     
-        //si il est déjà présent on l'incrémente de 1    
-        } else {
-           $cart[$id]++ ;
-        }
-
     
-      //Sauvegarde dans la session
-      $session->set('cart', $cart);
-
-    
-      return $this->redirectToRoute('cart');
-      
-    }
-
     #[Route('/cart/validate', name:"cart_validate")]
     #[IsGranted("ROLE_USER")]
     public function validate(SessionInterface $session, ProductRepository $productRepo, EntityManagerInterface $manager){
@@ -122,6 +93,66 @@ class CartController extends AbstractController
         return $this->redirectToRoute('order_prepare', ['reference'=>$referenceForOrder]);
     }
 
+    //Ajout d'un produit dans le panier dans la page récapitulative
+    #[Route('/cart/add/{id}', name: 'cart_add' )]
+    public function add(Product $product, SessionInterface $session){
+
+        $id = $product->getId();
+        
+       
+        //récupération du panier actuel
+        //On récupère les données de session du panier, la valeur par défaut sera un array vide
+        $cart = $session->get("cart", []); 
+
+        //données de session du stock
+        $tempStock = $session->get("tempStock", []);
+
+        $stock = $product->getStock();
+
+        foreach($tempStock as $id => $stockLeft){
+            $stockData = [
+                'product' => $id,
+                'stockLeft' => $stockLeft
+            ];
+
+        }
+        
+        //vérification de la possibilité d'ajouter un produit ou pas selon le stock général et le stock conservé par la session
+            //si le produit n'est pas encore dans la session et que le stock du produit est supérieur à 1
+            if(empty($tempStock[$id]) && $tempStock[$id] >= 1){  
+
+                $tempStock[$id] = $stock - 1;
+
+            //si le produit est déja présent dans la session (dans l'utilisation théorique, il l'est) et que le stock est égal ou supérieur à 1
+            } elseif (!empty($tempStock[$id]  && $tempStock[$id] >= 1 )) {
+                
+                //sinon on déduit 1 produit au stock
+                $tempStock[$id] -=  1;
+
+            } else if ($tempStock[$id] == 0 || $stock == 0) {
+
+                //si le stock atteint 0 , on ne permet pas de rajouter de produit
+                $this->addFlash('error','Vous avez atteint la limite de stock pour ce produit.');
+                return $this->redirectToRoute('cart');
+            }
+
+        //si le panier est vide on met la quantité à 1 (impossible par l'interface => route accessible sur le récap du panier avec les produits déja présents uniquement. Accès par l'url => ajout de condition)
+        if(empty($cart[$id]) && $product->getStock() >= 1 && $tempStock[$id] >= 1){
+            $cart[$id] = 1;     
+        } else if (!empty($cart[$id]) && $product->getStock() >= 1 && $tempStock[$id] >= 1) {
+            $cart[$id] ++;
+        } 
+
+    
+      //Sauvegarde dans la session
+      $session->set('cart', $cart);
+      $session->set('tempStock', $tempStock);
+
+    
+      return $this->redirectToRoute('cart');
+      
+    }
+
     //Suppression d'un produit dans le panier dans la page récapitulative
     #[Route('/cart/remove/{id}', name: 'cart_remove')]
     public function remove(Product $product, SessionInterface $session){
@@ -130,6 +161,9 @@ class CartController extends AbstractController
 
         //récupération du panier actuel
         $cart = $session->get("cart", []);  
+
+        $tempStock = $session->get("tempStock", []);
+
       
         //si le panier n'est pas vide
         if(!empty($cart[$id])){
@@ -137,15 +171,18 @@ class CartController extends AbstractController
             if($cart[$id] > 1){
                 //on reduit de 1 la valeur
                  $cart[$id]--;
+                 $tempStock[$id] ++;
             } else {
                 //si on tombe a 0 on supprime la ligne du panier 
                 unset($cart[$id]);
+                unset($tempStock[$id]);
             }
            
         }
 
       //Sauvegarde dans la session
       $session->set('cart', $cart);
+      $session->set('tempStock', $tempStock);
 
     
       return $this->redirectToRoute('cart');
@@ -158,16 +195,18 @@ class CartController extends AbstractController
         $id = $product->getId();
 
         $cart = $session->get('cart', []);  
+        $tempStock = $session->get('tempStock', []);
       
         //si le panier n'est pas vide (concernant le produit voulu )
         if(!empty($cart[$id])){
-        
             //on supprime la ligne
-            unset($cart[$id]);        
+            unset($cart[$id]);
+            unset($tempStock[$id]);
         }
-
+        
       //Sauvegarde dans la session
       $session->set('cart', $cart);
+      $session->set('tempStock', $tempStock);
 
     
       return $this->redirectToRoute('cart');     
@@ -177,7 +216,8 @@ class CartController extends AbstractController
     #[Route('/cart/delete', name: 'cart_delete_all')]
     public function deleteAll(SessionInterface $session){
   
-        $session->remove('cart');  
+        $session->remove('cart'); 
+        $session->remove('tempStock');
      
         return $this->redirectToRoute('cart');     
     }
