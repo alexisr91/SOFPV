@@ -132,8 +132,8 @@ class CartController extends AbstractController
             } else if ($tempStock[$id] == 0 || $stock == 0) {
 
                 //si le stock atteint 0 , on ne permet pas de rajouter de produit
-                $this->addFlash('error','Vous avez atteint la limite de stock pour ce produit.');
-                return $this->redirectToRoute('cart');
+                $this->addFlash('warning','Vous avez atteint la limite de stock pour ce produit.');
+                // return $this->redirectToRoute('cart');
             }
 
         //si le panier est vide on met la quantité à 1 (impossible par l'interface => route accessible sur le récap du panier avec les produits déja présents uniquement. Accès par l'url => ajout de condition)

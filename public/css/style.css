@@ -196,6 +196,12 @@ input {
   top: 2%;
   right: 1em; }
 
+.toast {
+  z-index: 10;
+  position: fixed;
+  right: 0;
+  background-color: #fafafa; }
+
 /* NAV MENU */
 section#navbarMenu {
   background-color: #252525;
@@ -966,6 +972,21 @@ section#successPayment .container-fluid {
       bottom: 2em;
       right: 2em; }
 
+section#errorPayment .container-fluid {
+  background-color: #fafafa;
+  margin: 0 auto;
+  min-height: 90vh; }
+section#errorPayment .recap {
+  width: 40%;
+  position: relative;
+  margin: 5% auto;
+  padding: 2em;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
+  section#errorPayment .recap p {
+    margin-bottom: 3em; }
+
 /*Ajouter une video */
 section#addVideo {
   height: 93vh; }
@@ -1097,6 +1118,7 @@ section#addArticle .wrapper, section#editArticle .wrapper {
   background-blend-mode: multiply; }
   section#addArticle .wrapper .row, section#editArticle .wrapper .row {
     width: 90%;
+    height: 80%;
     margin: 0 2em;
     padding: 3em;
     border-radius: 3px;

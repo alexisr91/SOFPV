@@ -1,3 +1,29 @@
-{% for message in app.flashes %}
-  <p class="alert alert-{{name}}">{{ message }}</p>
+<div class="toast-container">
+{% for name, messages in app.flashes %}
+  {% for message in messages %}
+    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" >
+      <div class="toast-header text-white bg-{{name}}">
+        {{ name == 'success' ? "<i class='fa-regular fa-circle-check'></i>" : "<i class='fa-regular fa-circle-exclamation fa-2x'></i>" }}
+        <strong class="me-auto ms-2">SO FPV</strong>
+        <small class="text-muted">just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        {{ message }}
+      </div>
+    </div>
+    {% endfor %}
 {% endfor %}
+</div>
+
+<script>
+    let toast = document.querySelector('.toast');
+    if(toast){
+        setTimeout(function(){
+          toast.classList.add('hide');
+          toast.classList.remove('show')
+      }, 5000); 
+    }
+        
+    
+</script>

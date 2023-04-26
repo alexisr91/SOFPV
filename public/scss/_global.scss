@@ -243,3 +243,10 @@ input {
     top:2%;
     right:1em;
     }
+
+.toast {
+    z-index: 10;
+    position: fixed;
+    right: 0;
+    background-color: $white;
+}
