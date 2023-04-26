@@ -86,7 +86,7 @@ class StripeController extends AbstractController {
         ]],
         'mode' => 'payment',
         'success_url' => $this->generateUrl('payment_success',['reference'=>$orderReference], UrlGenerator::ABSOLUTE_URL).'?session_id={CHECKOUT_SESSION_ID}',
-        'cancel_url' => $this->generateUrl('payment_error',[], UrlGenerator::ABSOLUTE_URL),
+        'cancel_url' => $this->generateUrl('payment_error',['reference'=>$orderReference], UrlGenerator::ABSOLUTE_URL),
         ]);
         // dd($checkout_session->id);
       
@@ -112,6 +112,7 @@ class StripeController extends AbstractController {
             if($session->payment_intent->status == 'succeeded' && $session->payment_status == 'paid'){
                 //si la commande est validée, on supprime les données de session des paniers
                 $sessionCart->set('cart', []);
+                $sessionCart->set('tempStock', []);
 
                 //on récupère la commande
                 $order = $orderRepo->findOneBy(['reference'=>$reference]);
@@ -166,7 +167,7 @@ class StripeController extends AbstractController {
         ]);
     }
 
-    #[Route('/order/stripe/error', name:'payment_error')]
+    #[Route('/order/stripe/error/{reference}', name:'payment_error')]
     #[IsGranted("ROLE_USER")]
     public function stripeError($reference){
 

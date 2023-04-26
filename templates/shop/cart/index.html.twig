@@ -29,7 +29,7 @@
                             <td class="text-center"> 
                                 <a href="{{path('cart_remove', {'id': data.product.id })}}" class="btn btn param"><i class="fa-solid fa-minus"></i></a>
                                    {{ data.quantity }} 
-                                <a href="{{path('cart_add', {'id': data.product.id} )}}" class="btn btn param"><i class="fa-solid fa-plus"></i></a>
+                                <a href="{{path('cart_add', {'id': data.product.id} )}}" class="btn param" {% if data.product.stock == 1 %}disabled{% endif %}><i class="fa-solid fa-plus"></i></a>
                             </td>
                             {% set totalTTCForeachTypeOfProduct =  data.quantity * data.product.priceTTC %}
                             <td>{{ totalTTCForeachTypeOfProduct|number_format(2)}} &euro;</td>

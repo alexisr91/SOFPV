@@ -68,7 +68,18 @@ class OrderController extends AbstractController
             $total += $amount;
 
             $totalOfProducts += $quantity;
+
+            //vérification du stock
+            $stockAvailable = $cart->getProduct()->getStock();
+
+            //si le stock n'est pas suffisant, on redirige vers le panier
+            if($quantity > $stockAvailable){
+                $this->addFlash('error','Attention, un des produits que vous avez sélectionné n\'est plus disponible en quantité suffisante. Merci de vérifier votre panier.');
+                return $this->redirectToRoute('cart');
+            }
         } 
+
+        
 
         $deliveryChoice = $form->get('deliveryAddress')->getData();
 
@@ -125,6 +136,7 @@ class OrderController extends AbstractController
                 //On set l'adresse entière pour la commande
                 $order->setDeliveryAddress($fullAddress);
             }
+            
 
             $order->setTransporter($transporter)
                 ->setPrice($totalAmountForOrder)

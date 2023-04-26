@@ -177,3 +177,24 @@ section#successPayment {
     }
     
 }
+section#errorPayment {
+    .container-fluid {
+        background-color: $white;
+        margin: 0 auto;
+        min-height:90vh;
+    }
+
+
+    .recap{
+        width: 40%;
+        position: relative;
+        margin: 5% auto;
+         padding: 2em;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+        p{margin-bottom: 3em;}
+    }
+    
+}
