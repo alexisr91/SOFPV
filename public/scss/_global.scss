@@ -247,6 +247,22 @@ input {
 .toast {
     z-index: 10;
     position: fixed;
-    right: 0;
+    right: -25em;
+    margin-top: 1em;
     background-color: $white;
 }
+
+.toast.fade-in {
+    animation-duration: 0.2s; 
+    animation-timing-function:ease-in;  
+    animation-name: fadeIn;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+.toast.fade-out {
+    animation-duration: 1s; 
+    animation-timing-function:ease-in;  
+    animation-name: fadeOut;
+    animation-iteration-count: 1;
+}
+
