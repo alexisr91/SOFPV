@@ -309,6 +309,7 @@ class BlogController extends AbstractController
                   ->setDescription($nblrAlert);
             $manager->persist($alert);
             $manager->flush($alert);
+
             $this->addFlash('success','Votre signalement a bien été pris en compte.');
             return $this->redirectToRoute('article_show', ['slug'=>$article->getSlug()]);
         }
@@ -325,6 +326,7 @@ class BlogController extends AbstractController
             $manager->persist($comment);
             $manager->flush($comment);
 
+            $this->addFlash('success','Commentaire ajouté avec succès.');
             return $this->redirectToRoute('article_show', ['slug'=>$article->getSlug()]);
         }
         

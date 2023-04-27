@@ -294,6 +294,7 @@ class AccountController extends AbstractController
             $manager->persist($drone);
             //envoi en bdd du nouveau drone / de la modification du drone
             $manager->flush();
+            $this->addFlash('success', 'Votre drone a été mis à jour !');
             return $this->redirectToRoute('account_myprofile');
         }
 

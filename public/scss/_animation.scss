@@ -12,3 +12,13 @@
     0% {  transform:translateY(10px) }
     100% { transform:translateY(-10px) }
 }
+
+@keyframes fadeIn {
+  0% {right:-25em}
+  100% {right: 1em}
+}
+
+@keyframes fadeOut {
+  0% {right: 1em;}
+  100% {right: -25em}
+}
