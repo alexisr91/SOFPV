@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+   
+    <section id="sessionAdd">
+        {{include('partials/_navbarMenu.html.twig')}}
+        <div class="container-fluid pt-4">
+            <div class="p-3 ms-2 wrapper row">
+               <div class="formSession"> 
+               <h3>{{mapSpot.name}}</h3>
+               <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{mapSpot.authorization}}</p>
+               <p class="text-muted"><i class="fa-solid fa-map-pin"></i> {{mapSpot.address}}</p>
+               <h5>Ajout d'une session</h5>
+                {{form_start(form)}}
+                    {{form_row(form.date)}}
+                    {{form_row(form.timesheet)}}
+                <button type="submit" class="btn btn-success">Ajouter une session</button>
+                {{form_end(form)}}  
+                
+                {% if mapSpot.authorization is not same as "Public" %}
+                    <p class="text-muted mt-3"><i class="fa-solid fa-circle-info"></i> Ce spot est soumis à des restrictions et demande des autorisations spécifiques aux télépilotes pro (S1, S2 ou S3).</p>
+               {% endif %}
+               </div>
+             
+            </div>
+        </div>       
+    
+    </section>
+
+    <script>
+   
+ 
+        $(document).ready(function() {
+        // you may need to change this code if you are not using Bootstrap Datepicker
+        $('.js-datepicker').datepicker({
+            format: 'dd-mm-yyyy'
+        });
+    });
+
+    </script>
+
+
+
+{% endblock %}
+
+
+
+

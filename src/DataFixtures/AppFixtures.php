@@ -11,9 +11,9 @@ use App\Entity\Comment;
 use App\Entity\Counter;
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Entity\MapSpot;
 use App\Entity\Transporter;
 use Doctrine\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -121,6 +121,7 @@ class AppFixtures extends Fixture
         foreach($countersName as $value){
             $counter = new Counter();
             $counter->setName($value);
+            $counter->setCount($faker->randomNumber(2, false));
             $counters[] = $counter;
             $manager->persist($counter);
         }
@@ -260,6 +261,57 @@ class AppFixtures extends Fixture
 
         }
 
+        //ajout de quelques "spots" rééls de drone pour y ajouter des sessions
+        $spots = [];
+
+        //Sabla (pro)
+        $spot1 = new MapSpot();
+        $spot1->setName("La Sabla")
+              ->setAuthorization("Télépilotes Pro")
+              ->setAddress("5 rue Gilbert Affre, 31830 Plaisance-du-Touch")
+              ->setLatitude("43.556387")
+              ->setLongitude("1.301499")
+              ->setAdminMapSpot(false);
+              
+        $spot[] = $spot1;
+        $manager->persist($spot1);
+
+
+        //karting (public)
+        $spot2 = new MapSpot();
+        $spot2->setName("Karting")
+        ->setAuthorization("Public")
+        ->setAddress("Rue de la Plage, 31150 Fenouillet")
+        ->setLatitude("43.670626")
+        ->setLongitude("1.384679")
+        ->setAdminMapSpot(false);
+
+        $spot[] = $spot2;
+        $manager->persist($spot2);
+        
+        //lavoir (public)
+        $spot3 = new MapSpot();
+        $spot3->setName("Lavoir à charbon")
+        ->setAuthorization("Public")
+        ->setAddress("81400 Blaye-les-Mines")
+        ->setLatitude("44.039917")
+        ->setLongitude("2.142730")
+        ->setAdminMapSpot(false);
+
+        $spot[] = $spot3;
+        $manager->persist($spot3);
+
+        //DWS vol indoor avec association (public)
+        $spot4 = new MapSpot();
+        $spot4->setName("DWS Gymnase")
+        ->setAuthorization("Public")
+        ->setAddress("26 route de Portet, 31270 Villeneuve-Tolosane")
+        ->setLatitude("43.522812")
+        ->setLongitude("1.355887")
+        ->setAdminMapSpot(true);
+
+        $spot[] = $spot4;
+        $manager->persist($spot4);
 
         $manager->flush();
     }

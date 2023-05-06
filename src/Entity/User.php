@@ -108,6 +108,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Cart::class)]
     private Collection $carts;
 
+    #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'users')]
+    private Collection $sessions;
+
 
     //En cas d'appel de l'utilisateur via les articles, on passera par le pseudo
     public function __toString()
@@ -130,6 +133,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->alertComments = new ArrayCollection();
         $this->orders = new ArrayCollection();
         $this->carts = new ArrayCollection();
+        $this->sessions = new ArrayCollection();
     }
     
     //adresse complète de l'user avec ou sans complément d'adresse
@@ -616,5 +620,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Session>
+     */
+    public function getSessions(): Collection
+    {
+        return $this->sessions;
+    }
+
+    public function addSession(Session $session): self
+    {
+        if (!$this->sessions->contains($session)) {
+            $this->sessions->add($session);
+            $session->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSession(Session $session): self
+    {
+        if ($this->sessions->removeElement($session)) {
+            $session->removeUser($this);
+        }
+
+        return $this;
+    }
+
 
 }

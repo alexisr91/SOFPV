@@ -309,13 +309,45 @@ section#newOnShop {
 
 /* ACCUEIL : SECTION #sessions */
 
-section#sessions {
+section#sessions, section#session {
     width: 100vw;
     background-color: $white;
-    
-    .col{
-    height: 60em;
+
+    h5 {margin: 1em;}
+    p {line-height: 0.5em;}
+    p.asterisque {line-height: normal; padding-bottom: 1em;}
+
+
+    .spotWrapper {
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1em;
+        padding: 1em;
+        box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        max-height: fit-content;
+        .iconWrap {
+            padding: 1em 2em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+        }
     }
+}
+
+section#sessions {
+    .container-fluid{
+        .row.main{
+            min-height:60vh;
+            margin-right:1em;
+        }
+        .text-muted {line-height: normal;}
+        
+    }
+    
 }
 
 

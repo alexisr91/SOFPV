@@ -486,11 +486,38 @@ section#newOnShop {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; }
 
 /* ACCUEIL : SECTION #sessions */
-section#sessions {
+section#sessions, section#session {
   width: 100vw;
   background-color: #fafafa; }
-  section#sessions .col {
-    height: 60em; }
+  section#sessions h5, section#session h5 {
+    margin: 1em; }
+  section#sessions p, section#session p {
+    line-height: 0.5em; }
+  section#sessions p.asterisque, section#session p.asterisque {
+    line-height: normal;
+    padding-bottom: 1em; }
+  section#sessions .spotWrapper, section#session .spotWrapper {
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+    padding: 1em;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    max-height: fit-content; }
+    section#sessions .spotWrapper .iconWrap, section#session .spotWrapper .iconWrap {
+      padding: 1em 2em;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 4px; }
+
+section#sessions .container-fluid .row.main {
+  min-height: 60vh;
+  margin-right: 1em; }
+section#sessions .container-fluid .text-muted {
+  line-height: normal; }
 
 /* ACCUEIL : SECTION #socialNetwork */
 section#socialNetwork {
@@ -1345,6 +1372,44 @@ section#search .container-fluid {
     display: flex;
     justify-content: center;
     align-items: center; }
+
+section#session .container-fluid {
+  background-color: #fafafa;
+  min-height: 90vh;
+  max-width: 100vw; }
+  section#session .container-fluid #mapid {
+    height: 90vh; }
+  section#session .container-fluid .ad-restriction {
+    position: absolute;
+    bottom: 1em; }
+  section#session .container-fluid .spotAddress, section#session .container-fluid .adminMsg {
+    line-height: normal; }
+  section#session .container-fluid .modal-footer {
+    display: flex;
+    justify-content: space-between; }
+  section#session .container-fluid .wrapSession {
+    margin: 1em auto;
+    padding: 1em 0;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
+    section#session .container-fluid .wrapSession .text-muted {
+      margin: 0.5em;
+      line-height: normal; }
+
+section#sessionAdd .container-fluid {
+  background-color: #fafafa;
+  min-height: 90vh;
+  max-width: 100vw; }
+section#sessionAdd .formSession {
+  width: 40%;
+  position: relative;
+  margin: 5% auto;
+  padding: 2em;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
 
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu {

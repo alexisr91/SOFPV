@@ -67,6 +67,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $qb->getQuery()->getResult();
     }
 
+    //sort la liste des users présents à la session
+    public function findIfAlreadyRegisteredOnSession($session){
+    {
+        return $this->createQueryBuilder('u')
+                    ->innerJoin('u.sessions','s')
+                    ->andWhere('s.id = :session')
+                    ->setParameter('session', $session)
+                    ->getQuery()
+                    ->getResult()
+            ;
+        }
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

@@ -120,15 +120,49 @@
         {# Carte avec prochaines sessions de vol #}
         <section id="sessions">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-9">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2885.9244592865352!2d1.3824213161915828!3d43.67054085932608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfc88398ed0d02a7e!2zNDPCsDQwJzEzLjkiTiAxwrAyMycwNC42IkU!5e0!3m2!1sfr!2sfr!4v1663612151377!5m2!1sfr!2sfr" style="border:0;" class="w-100 h-100 mt-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="row main">
+                    <div class="col-md-9" id="mapid">
                     </div>
-                    <div class="col">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia impedit quae quos sunt culpa quibusdam dolorem optio, eos rerum sapiente dolor minima modi. Doloremque natus quaerat libero repudiandae itaque eligendi!</p>     
-                    </div>
+                    <div class="col"> 
+                    <h5>Prochaines sessions</h5>
+                    {% if sessions is empty %}
+                        <div class="alert alert-warning">Il n'y a pas encore de sessions prévues.</div>
+                    {% else %}
+                        {% for session in sessions %}
+                        <div class="spotWrapper row">
+                                <div class="col-sm-2">
+                                    <div class="iconWrap">
+                                        <i class="fa-solid fa-location-dot fa-2x"></i>
+                                    </div>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p>{{session.mapSpot.name}}</p>
+                                            <p class="text-muted"><i class="fa-solid fa-calendar-day"></i> {{session.date|date('d-m-Y')}}</p>
+                                            <p class="text-muted"><i class="fa-solid fa-clock"></i> {{session.timesheet|capitalize}}</p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{session.mapSpot.authorization}}{{session.mapSpot.authorization == "Public" ? "": " * " }}</p>
+                                            <p class="text-muted"><i class="fa-solid fa-users"></i> {% for user in session.users %}{{user.nickname}}{{ loop.last ? "" : " , "}}{% endfor %}</p>
+                                            <p class="text-muted"><i class="fa-solid fa-map-pin"></i> {{session.mapSpot.address|raw}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                       <div>
+                            <p class="text-muted asterisque">
+                                <small>*  Diverses autorisations sont nécessaires pour voler dans cette zone (S1, S2 ou S3). Se réferer à la réglementation sur <a href="https://www.geoportail.gouv.fr/donnees/restrictions-uas-categorie-ouverte-et-aeromodelisme">Géoportail</a> et le site de la <a href="https://www.ecologie.gouv.fr/direction-generale-laviation-civile-dgac"> DGAC</a>.</small>
+                            </p>
+                       </div>
+                       
+                    </div> 
+                    
                 </div>
             </div>
+           
         </section>
 
         {# Section réseaux sociaux #}
@@ -168,6 +202,12 @@
             }
              animate();
         });
+
+        //map
+        
+        var mymap = L.map('mapid').setView([43.59818000000044, 1.4364900000002763], 10);
+        L.tileLayer('https://tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=Q9ah9vp2jsb80zff6WPhCh04KN53KZBOKSw417PFGIttmq5x0w5gYZMgItqFW2Kl', {}).addTo(mymap);
+        mymap.attributionControl.addAttribution("<a href=\"https://www.jawg.io\" target=\"_blank\">&copy; Jawg</a> - <a href=\"https://www.openstreetmap.org\" target=\"_blank\">&copy; OpenStreetMap</a>&nbsp;contributors")
 
         };
    </script>

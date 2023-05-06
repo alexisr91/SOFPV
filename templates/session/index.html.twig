@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+
+    <section id="session">
+        {{include('partials/_navbarMenu.html.twig')}}
+        <div class="container-fluid">
+            <div class="row">
+                {# côté carte #}
+                <div class="col-md-9" id="mapid">
+                </div>
+                {# côté sessions #}
+                <div class="col-md-3 position-relative">
+                {% for spot in spots %}
+                <div class="spotWrapper row">
+                    <div class="col-sm-2">
+                        <div class="iconWrap">
+                            <button type="button" class="btn"><i class="fa-solid fa-location-dot fa-2x"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col">
+                                <p>{{spot.name}}</p>
+                                <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{spot.authorization}} {{ spot.authorization == "Public" ? "" : "*" }}</p>
+                                <p class="text-muted spotAddress"><i class="fa-solid fa-map-pin"></i> {{spot.address|raw}}</p>
+                            </div>
+                            <div class="col d-flex justify-content-center">
+                               <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#spotModal-{{spot.id}}" data-bs-spotView="{{spot.id}}">Sessions <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {# modal #}
+                    <div class="modal fade" id="spotModal-{{spot.id}}" tabindex="-1" aria-labelledby="spotModal" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" tabindex="-1">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"><i class="fa-solid fa-location-dot"></i> {{spot.name}}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            {% if spot.sessions is not empty %}
+                                {% for session in spot.sessions %}
+                                <div class="wrapSession row">
+                                    <div class="col-md-10">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p class="text-muted"><i class="fa-solid fa-calendar-day"></i>  {{session.date|date('d-m-Y')}}</p>
+                                                <p class="text-muted"><i class="fa-solid fa-clock"></i> {{session.timesheet|capitalize}}</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p class="text-muted"><i class="fa-solid fa-circle-info"></i>{{session.mapSpot.authorization}}{{session.mapSpot.authorization == "Public" ? "": " * " }}</p>
+                                                <p class="text-muted"><i class="fa-solid fa-users"></i> {% for user in session.users %}{{user.nickname}}{{ loop.last ? "" : " , "}}{% endfor %}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">      
+                                        <a href="{{path('session_entry', {'id':session.id})}}"><i class="fa-solid fa-user-plus fa-2x"></i></a>
+                                    </div>
+                                </div> 
+                                {% endfor %}
+                            {% else %}
+                            <div class="alert alert-warning">Il n'y a pas encore de session prévue sur ce spot.</div>
+                            {% endif %}
+                            </div>
+                            <div class="modal-footer"> 
+                                {% if spot.adminMapSpot == false and not app.user %}
+                                    <p class="text-muted p-2">Vous devez vous<a href="{{path('account_login')}}"> <strong>connecter</strong></a> pour ajouter ou vous inscrire à une session.</p>
+                                {% endif %}
+
+                                {% if (is_granted("ROLE_USER") and spot.adminMapSpot == false) or (is_granted("ROLE_ADMIN") and spot.adminMapSpot == true) %}
+                                    <a href="{{path('session_add', {'id': spot.id })}}" class="btn btn-success">Ajouter une session</a>
+                                {% elseif spot.adminMapSpot == true %}
+                                    <p class="text-muted adminMsg">Les sessions de ce spot sont exclusivement organisées par l'admin de SO FPV. Veuillez vous inscrire à une session existante.</p>
+                                {% endif %}
+                               
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                {# fin du modal #}
+          
+                {% endfor %}
+                <div class="ad-restrictions">
+                    <p class="text-muted asterisque">
+                        <small>*  Diverses autorisations sont nécessaires pour voler dans cette zone (S1, S2 ou S3). Se réferer à la réglementation sur <a href="https://www.geoportail.gouv.fr/donnees/restrictions-uas-categorie-ouverte-et-aeromodelisme">Géoportail</a> et le site de la <a href="https://www.ecologie.gouv.fr/direction-generale-laviation-civile-dgac"> DGAC</a>.</small>
+                    </p>
+                </div>
+                
+                </div>
+             
+            </div>
+
+    
+</section>
+   
+    
+
+
+
+    <script>
+
+        var mymap = L.map('mapid').setView([43.59818000000044, 1.4364900000002763], 10);
+        L.tileLayer('https://tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=Q9ah9vp2jsb80zff6WPhCh04KN53KZBOKSw417PFGIttmq5x0w5gYZMgItqFW2Kl', {}).addTo(mymap);
+        mymap.attributionControl.addAttribution("<a href=\"https://www.jawg.io\" target=\"_blank\">&copy; Jawg</a> - <a href=\"https://www.openstreetmap.org\" target=\"_blank\">&copy; OpenStreetMap</a>&nbsp;contributors")
+
+    </script>
+{% endblock %}
