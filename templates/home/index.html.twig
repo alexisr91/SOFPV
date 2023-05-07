@@ -121,7 +121,7 @@
         <section id="sessions">
             <div class="container-fluid">
                 <div class="row main">
-                    <div class="col-md-9" id="mapid">
+                    <div class="col-md-9" id="map">
                     </div>
                     <div class="col"> 
                     <h5>Prochaines sessions</h5>
@@ -205,9 +205,11 @@
 
         //map
         
-        var mymap = L.map('mapid').setView([43.59818000000044, 1.4364900000002763], 10);
-        L.tileLayer('https://tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=Q9ah9vp2jsb80zff6WPhCh04KN53KZBOKSw417PFGIttmq5x0w5gYZMgItqFW2Kl', {}).addTo(mymap);
-        mymap.attributionControl.addAttribution("<a href=\"https://www.jawg.io\" target=\"_blank\">&copy; Jawg</a> - <a href=\"https://www.openstreetmap.org\" target=\"_blank\">&copy; OpenStreetMap</a>&nbsp;contributors")
+        var map = L.map('map').setView([43.59818000000044, 1.4364900000002763], 10);
+        L.tileLayer('https://tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=Q9ah9vp2jsb80zff6WPhCh04KN53KZBOKSw417PFGIttmq5x0w5gYZMgItqFW2Kl', {}).addTo(map);
+        map.attributionControl.addAttribution("<a href=\"https://www.jawg.io\" target=\"_blank\">&copy; Jawg</a> - <a href=\"https://www.openstreetmap.org\" target=\"_blank\">&copy; OpenStreetMap</a>&nbsp;contributors")
+
+        
 
         };
    </script>

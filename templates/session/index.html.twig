@@ -9,29 +9,26 @@
         <div class="container-fluid">
             <div class="row">
                 {# côté carte #}
-                <div class="col-md-9" id="mapid">
+                <div class="col-md-9" id="map">
                 </div>
                 {# côté sessions #}
                 <div class="col-md-3 position-relative">
                 {% for spot in spots %}
                 <div class="spotWrapper row">
-                    <div class="col-sm-2">
-                        <div class="iconWrap">
-                            <button type="button" class="btn"><i class="fa-solid fa-location-dot fa-2x"></i></button>
+                        <div class="iconWrap col-1">
+                            <button type="button" class="btn spotMapChange"><span class="locationDot"><i class="fa-solid fa-location-dot fa-2x"></i></span></button>
                         </div>
-                    </div>
-                    <div class="col-sm-10">
-                        <div class="row">
-                            <div class="col">
-                                <p>{{spot.name}}</p>
-                                <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{spot.authorization}} {{ spot.authorization == "Public" ? "" : "*" }}</p>
-                                <p class="text-muted spotAddress"><i class="fa-solid fa-map-pin"></i> {{spot.address|raw}}</p>
-                            </div>
-                            <div class="col d-flex justify-content-center">
-                               <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#spotModal-{{spot.id}}" data-bs-spotView="{{spot.id}}">Sessions <i class="fa-solid fa-chevron-right"></i></button>
-                            </div>
+                        <div class="col">
+                            <p class="spotName">{{spot.name}}</p>
+                            <p class="geolocalisation" hidden>{{spot.latitude}},{{spot.longitude}}</p>
+                            <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{spot.authorization}} {{ spot.authorization == "Public" ? "" : "*" }}</p>
+                            <p class="text-muted spotAddress"><i class="fa-solid fa-map-pin"></i> {{spot.address|raw}}</p>
                         </div>
-                    </div>
+                        <div class="col d-flex justify-content-center">
+                            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#spotModal-{{spot.id}}" data-bs-spotView="{{spot.id}}">Sessions <i class="fa-solid fa-chevron-right"></i></button>
+                               
+                        </div>
+                     
                 </div>
                 {# modal #}
                     <div class="modal fade" id="spotModal-{{spot.id}}" tabindex="-1" aria-labelledby="spotModal" aria-hidden="true">
@@ -48,11 +45,11 @@
                                     <div class="col-md-10">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <p class="text-muted"><i class="fa-solid fa-calendar-day"></i>  {{session.date|date('d-m-Y')}}</p>
+                                                <p class="text-muted"><i class="fa-solid fa-calendar-day"></i> {{session.date|date('d-m-Y')}}</p>
                                                 <p class="text-muted"><i class="fa-solid fa-clock"></i> {{session.timesheet|capitalize}}</p>
                                             </div>
                                             <div class="col-md-8">
-                                                <p class="text-muted"><i class="fa-solid fa-circle-info"></i>{{session.mapSpot.authorization}}{{session.mapSpot.authorization == "Public" ? "": " * " }}</p>
+                                                <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{session.mapSpot.authorization}}{{session.mapSpot.authorization == "Public" ? "": " * " }}</p>
                                                 <p class="text-muted"><i class="fa-solid fa-users"></i> {% for user in session.users %}{{user.nickname}}{{ loop.last ? "" : " , "}}{% endfor %}</p>
                                             </div>
                                         </div>
@@ -98,15 +95,74 @@
     
 </section>
    
-    
-
-
 
     <script>
 
-        var mymap = L.map('mapid').setView([43.59818000000044, 1.4364900000002763], 10);
-        L.tileLayer('https://tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=Q9ah9vp2jsb80zff6WPhCh04KN53KZBOKSw417PFGIttmq5x0w5gYZMgItqFW2Kl', {}).addTo(mymap);
-        mymap.attributionControl.addAttribution("<a href=\"https://www.jawg.io\" target=\"_blank\">&copy; Jawg</a> - <a href=\"https://www.openstreetmap.org\" target=\"_blank\">&copy; OpenStreetMap</a>&nbsp;contributors")
+        //mise en place de la map avec Jawg et mapLibre
+        const accessToken = 'Q9ah9vp2jsb80zff6WPhCh04KN53KZBOKSw417PFGIttmq5x0w5gYZMgItqFW2Kl';
+        const map = new maplibregl.Map({
+           container: 'map',
+           style: `https://api.jawg.io/styles/jawg-sunny.json?access-token=${accessToken}`,
+           zoom: 9,
+           center: [1.4364900000002763, 43.59818000000044],
+        }).addControl(new maplibregl.NavigationControl(), 'top-right');
+    
+        //récupération des spots
+        let spotsGeolocalisation = document.querySelectorAll('.geolocalisation');
+
+        //on boucle sur chaque spot
+        spotsGeolocalisation.forEach(function(item){
+
+            //on récupère le html qui correspond à "lat, long"
+            let spotGeolocalisation = item.innerHTML;
+            //on split les data pour les mettre dans la fonction de placement de marker sur la carte
+            let recoverLatLong = spotGeolocalisation.split(',');
+
+            //element précédent les données de géolocalisation(<p> placé juste avant qui contient le nom de chaque spot)
+            //on récupère le firstChild qui est le #text, puis le contenu du #text qui est un string
+            let spotName = item.previousElementSibling.firstChild.textContent;
+
+            const markerPopup = new maplibregl.Popup({
+                    closeOnClick: true,
+                    focusAfterOpen : false,
+                    className : 'popupMap'
+
+            }).setHTML(`${spotName}`);
+
+            new maplibregl.Marker({color:'#B30B00', scale:1.2}).setLngLat([recoverLatLong[0], recoverLatLong[1]]).setPopup(markerPopup).addTo(map);
+        })
+
+        //récupération des boutons pour modifier la vue de la carte suivant le spot selectionné
+        let spotsMapChange = document.querySelectorAll('.spotMapChange');
+
+        //pour chaque bouton
+        spotsMapChange.forEach(function(item){
+            //on écoute le click
+            item.addEventListener('click', ()=>{
+
+                //on récupère le container qui regroupe les info du point
+                let parent = item.parentNode.parentNode;
+                //on cible la div qui contient les données
+                let spotData = parent.querySelector('div:nth-child(2)');
+                //on cible plus précisément le texte qui contient la latitude et la longitude
+                let latLongData = spotData.querySelector('p:nth-child(2)').innerHTML;
+                //on sépare les données pour les passer à la carte
+                let recoverLatLong = latLongData.split(',');
+
+                //animation qui "redirige" avec animation + zoom vers le point demandé par l'user
+                map.flyTo({
+                    center: [recoverLatLong[0],recoverLatLong[1]],
+                    essential: true, 
+                    zoom:15
+
+                })
+
+
+            })
+          
+        })
+        
+         
 
     </script>
 {% endblock %}
