@@ -335,7 +335,32 @@ section#sessions, section#session {
             align-items: center;
             border-radius: 4px;
         }
+         
+        p.spotName {
+            font-size: 1.1em;
+            margin-bottom: 0;
+            padding: 0.5em 0;
+        }
     }
+    .spotMapChange {
+        background-color: $white;
+        border: none;
+        &:hover {
+            i {
+                color:$accent,
+            }
+        }
+
+        p.spotName {
+            padding: 1em 1em 1em 0;}
+    }
+    .locationDot {
+        color:$accent;
+    }
+    .popupMap {
+        font-weight: bold;
+    }
+  
 }
 
 section#sessions {
@@ -345,7 +370,14 @@ section#sessions {
             margin-right:1em;
         }
         .text-muted {line-height: normal;}
-        
+        .infoSpot {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .spotMapChange p.spotName {
+            padding: 0 0 1em 0;
+        }
     }
     
 }

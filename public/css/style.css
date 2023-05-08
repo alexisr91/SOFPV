@@ -216,6 +216,38 @@ input {
   animation-name: fadeOut;
   animation-iteration-count: 1; }
 
+.animated-border-button {
+  background-color: transparent;
+  border: none;
+  color: #252525;
+  outline: none;
+  position: relative;
+  margin: 1em auto;
+  padding: 0.5em; }
+
+.animated-border-button::before,
+.animated-border-button::after {
+  border: 0 solid transparent;
+  transition: all 0.3s;
+  content: '';
+  height: 0;
+  position: absolute;
+  width: 24px; }
+
+.animated-border-button::before {
+  border-top: 2px solid #DADADA;
+  right: 0;
+  top: -4px; }
+
+.animated-border-button::after {
+  border-bottom: 2px solid #DADADA;
+  bottom: -4px;
+  left: 0; }
+
+.animated-border-button:hover::before,
+.animated-border-button:hover::after {
+  width: 100%; }
+
 /* NAV MENU */
 section#navbarMenu {
   background-color: #252525;
@@ -512,12 +544,33 @@ section#sessions, section#session {
       justify-content: center;
       align-items: center;
       border-radius: 4px; }
+    section#sessions .spotWrapper p.spotName, section#session .spotWrapper p.spotName {
+      font-size: 1.1em;
+      margin-bottom: 0;
+      padding: 0.5em 0; }
+  section#sessions .spotMapChange, section#session .spotMapChange {
+    background-color: #fafafa;
+    border: none; }
+    section#sessions .spotMapChange:hover i, section#session .spotMapChange:hover i {
+      color: #B30B00; }
+    section#sessions .spotMapChange p.spotName, section#session .spotMapChange p.spotName {
+      padding: 1em 1em 1em 0; }
+  section#sessions .locationDot, section#session .locationDot {
+    color: #B30B00; }
+  section#sessions .popupMap, section#session .popupMap {
+    font-weight: bold; }
 
 section#sessions .container-fluid .row.main {
   min-height: 60vh;
   margin-right: 1em; }
 section#sessions .container-fluid .text-muted {
   line-height: normal; }
+section#sessions .container-fluid .infoSpot {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+section#sessions .container-fluid .spotMapChange p.spotName {
+  padding: 0 0 1em 0; }
 
 /* ACCUEIL : SECTION #socialNetwork */
 section#socialNetwork {
@@ -1401,6 +1454,8 @@ section#session .container-fluid {
     color: #B30B00; }
   section#session .container-fluid .popupMap {
     font-weight: bold; }
+  section#session .container-fluid .spotMapChange {
+    padding: 0; }
 
 section#sessionAdd .container-fluid {
   background-color: #fafafa;

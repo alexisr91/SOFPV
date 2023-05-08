@@ -261,7 +261,7 @@ class AppFixtures extends Fixture
 
         }
 
-        //ajout de quelques "spots" rééls de drone pour y ajouter des sessions
+        //Ajout de quelques lieux rééls de drone pour y ajouter des sessions
         $spots = [];
 
         //Sabla (pro)
@@ -291,7 +291,7 @@ class AppFixtures extends Fixture
         
         //lavoir (public)
         $spot3 = new MapSpot();
-        $spot3->setName("Lavoir à charbon")
+        $spot3->setName("Lavoir")
         ->setAuthorization("Public")
         ->setAddress("81400 Blaye-les-Mines")
         ->setLatitude("44.039917")
@@ -312,9 +312,33 @@ class AppFixtures extends Fixture
 
         $spot[] = $spot4;
         $manager->persist($spot4);
+    
+        //Château de Bram ( public)
+        $spot5 = new MapSpot();
+        $spot5->setName("Château de Bram")
+        ->setAuthorization("Public")
+        ->setAddress("Valgros, 11150 Bram")
+        ->setLatitude("2.1309218539356394")
+        ->setLongitude("43.23772214383479")
+        ->setAdminMapSpot(false);
+
+        $spot[] = $spot5;
+        $manager->persist($spot5);
+
+        //Parc des quinze Sols ( public)
+        $spot6 = new MapSpot();
+        $spot6->setName("Parc des Quinze Sols")
+        ->setAuthorization("Public")
+        ->setAddress("Chemin du Tiers État, 31700 Blagnac")
+        ->setLatitude("1.390432")
+        ->setLongitude("43.664566")
+        ->setAdminMapSpot(false);
+
+        $spot[] = $spot6;
+        $manager->persist($spot6);
 
         $manager->flush();
-    }
+    
 
-   
+   }
 }
