@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\ArticleRepository;
 use App\Repository\CounterRepository;
+use App\Repository\MapSpotRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SessionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(ArticleRepository $articleRepo, CounterRepository $counterRepo, ProductRepository $productRepo, SessionRepository $sessionRepository): Response
+    public function index(ArticleRepository $articleRepo, MapSpotRepository $mapSpotRepository, CounterRepository $counterRepo, ProductRepository $productRepo, SessionRepository $sessionRepository): Response
     {
 
         //4 derniers articles SAUF l'article à la une
@@ -33,6 +34,9 @@ class HomeController extends AbstractController
         //les 5 dernières sessions ajoutées
         $sessions = $sessionRepository->findLastSessions();
 
+        //les spots(points) ajoutés par l'admin sur lesquels des sessions peuvent etre ajoutées
+        $mapSpots = $mapSpotRepository->findAll();
+
         return $this->render('home/index.html.twig', [
             'title' => 'Bienvenue sur SO FPV !',
             'articles'=>$articles,
@@ -41,7 +45,8 @@ class HomeController extends AbstractController
             'counterESC'=>$counterESC,
             'counterFrame'=>$counterFrame,
             'products'=>$products,
-            'sessions'=>$sessions
+            'sessions'=>$sessions,
+            'mapSpots'=>$mapSpots
         ]);
     }
     

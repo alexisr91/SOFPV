@@ -266,3 +266,39 @@ input {
     animation-iteration-count: 1;
 }
 
+.animated-border-button {
+    background-color: transparent;
+    border: none;
+    color: $base;
+    outline: none;
+    position: relative;
+    margin: 1em auto;
+    padding: 0.5em ;
+  }
+  
+  .animated-border-button::before,
+  .animated-border-button::after {
+    border: 0 solid transparent;
+    transition: all 0.3s;
+    content: '';
+    height: 0;
+    position: absolute;
+    width: 24px;
+  }
+  
+  .animated-border-button::before {
+    border-top: 2px solid $grey;
+    right: 0;
+    top: -4px;
+  }
+  
+  .animated-border-button::after {
+    border-bottom: 2px solid $grey;
+    bottom: -4px;
+    left: 0;
+  }
+  
+  .animated-border-button:hover::before,
+  .animated-border-button:hover::after {
+    width: 100%;
+  }
