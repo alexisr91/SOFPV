@@ -39,14 +39,56 @@ class SessionRepository extends ServiceEntityRepository
         }
     }
 
+    //verifie la corrélation entre une session dejà existante pour éviter les doublons
+    public function isSessionAlreadyExist($id, $date, $timeSheet){
+        return $this->createQueryBuilder('s')
+        ->join('s.mapSpot', 'm')
+        ->where('m.id = :id')
+        ->setParameter('id', $id)
+        ->andWhere('s.date = :date')
+        ->setParameter('date', $date)
+        ->andWhere('s.timesheet = :timesheet')
+        ->setParameter('timesheet', $timeSheet)
+        ->getQuery()
+        ->getOneOrNullResult()
+        ;
+
+    }
+
     //retourne les 5 dernieres sessions ajoutées
     public function findLastSessions(){
         return $this->createQueryBuilder('s')
-        ->orderBy('s.created_at', 'DESC')
+        ->where('s.past = false')
+        ->orderBy('s.date', 'ASC')
         ->setMaxResults(5)
         ->getQuery()
         ->getResult()
         ;
+    }
+
+    //retourne les 4 prochaines sessions de l'user concerné (profil public)
+    public function findSessionsForUser($user){
+        return $this->createQueryBuilder('s')
+        ->join('s.users', 'u')
+        ->where('s.past = false')
+        ->andWhere('u = :user')
+        ->setParameter('user', $user)
+        ->orderBy('s.date', 'ASC')
+        ->setMaxResults(4)
+        ->getQuery()
+        ->getResult();
+
+    }
+    //retourne les 4 prochaines sessions de l'user concerné (profil public)
+    public function findAllSessionsForUser($user){
+        return $this->createQueryBuilder('s')
+        ->join('s.users', 'u')
+        ->where('s.past = false')
+        ->andWhere('u = :user')
+        ->setParameter('user', $user)
+        ->orderBy('s.date', 'ASC')
+        ->getQuery()
+        ->getResult();
     }
 
 

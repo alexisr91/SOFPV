@@ -7,37 +7,34 @@ use App\Form\SessionType;
 use App\Repository\UserRepository;
 use App\Repository\MapSpotRepository;
 use App\Repository\SessionRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints\Timezone;
 
 class SessionController extends AbstractController
 {
     //carte des points de vol
     #[Route('/session/map', name: 'session_map')]
-    public function index(MapSpotRepository $mapSpotRepository, SessionRepository $sessionRepository): Response
+    public function index(MapSpotRepository $mapSpotRepository): Response
     {
-        $sessions = [];
-
         $spots = $mapSpotRepository->findAll();
-        foreach($spots as $spot){
-            $session = $sessionRepository->find($spot->getId());
-            $sessions[] = $session;
-        }
 
         return $this->render('session/index.html.twig', [
             'title'=>'Carte des sessions',
-            'spots'=>$spots,
+            'spots'=>$spots
         ]);
+
     }
 
     //ajout d'une session
     #[IsGranted('ROLE_USER')]
     #[Route('/session/add/{id}', name:'session_add')]
-    public function addSession(MapSpotRepository $mapSpotRepository, EntityManagerInterface $manager, Request $request, $id){
+    public function addSession(MapSpotRepository $mapSpotRepository, SessionRepository $sessionRepository, EntityManagerInterface $manager, Request $request, $id){
 
         $user = $this->getUser();
 
@@ -50,7 +47,22 @@ class SessionController extends AbstractController
 
         if($form->isSubmitted()&& $form->isValid()){
     
+            //si le point existe bien
             if($mapSpot){
+
+                $date = $form->get('date')->getData();
+                $timeSheet = $form->get('timesheet')->getData();
+
+                //on vérifie si il existe déjà une session sur ce MapSpot, avec la même heure et le même créneau horaire
+                $sameSessionOnDb = $sessionRepository->isSessionAlreadyExist($id, $date, $timeSheet);
+
+                //si il y en a une, on redirige vers la page des sessions avec un flash
+                if($sameSessionOnDb !== null ){
+                    $this->addFlash('danger','Cette session existe déjà : veuillez-vous inscrire sur la session existante !');
+                    return $this->redirectToRoute('session_map');
+                }
+
+                //sinon on ajoute la session
                 $session->addUser($user)
                         ->setMapSpot($mapSpot);
                 $manager->persist($session);
@@ -70,6 +82,10 @@ class SessionController extends AbstractController
             'form'=>$form->createView(),
             'mapSpot'=>$mapSpot
         ]);
+
+    }
+
+    public function isSessionAlreadyExist($session){
 
     }
 

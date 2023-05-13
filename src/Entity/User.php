@@ -52,7 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $banner;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable:false)]
-    private ?\DateTimeInterface $created_at;
+    private ?\DateTimeInterface $createdAt;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $firstname = null;
@@ -121,7 +121,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     //mise en place de la date de création de l'utilisateur
     public function __construct()
     {
-        $this->created_at = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->videos = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->likes = new ArrayCollection();
@@ -253,12 +253,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }

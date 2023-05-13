@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="mySessions">
+    
+        {{include('partials/_navbarMenu.html.twig')}}
+
+        <div class="container-fluid">
+            <div class="sidebar">
+                {{include('partials/_sidebarMenuProfile.html.twig')}}
+            </div>
+            <div class="wrapper"> 
+                <h2>Mes sessions</h2>
+                <a href="{{path('session_map')}}" class="btn animated-border-button my-4" target="_blank"><i class="fa-solid fa-map-location-dot"></i> Voir la carte</a>
+                {% if sessions is empty %}
+                    <div class="alert alert-warning">Vous ne vous êtes pas encore inscrit à une session.</div>
+                {% else %}
+                    {% for session in sessions %}
+                    {% set spot = session.mapSpot %}
+                        <div class="wrapSession row">
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <h5 class="spotName"><i class="fa-solid fa-location-dot"></i> {{spot.name}}</h5>
+                                        <p class="text-muted spotAddress"><i class="fa-solid fa-map-pin"></i> {{spot.address|raw}}</p>
+                                        <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{spot.authorization}}{{spot.authorization == "Public" ? "": " * " }}</p>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <p class="text-muted"><i class="fa-solid fa-calendar-day"></i> {{session.date|format_datetime('full', 'none', locale='fr')}}</p>
+                                        <p class="text-muted"><i class="fa-solid fa-clock"></i> {{session.timesheet|capitalize}}</p>
+                                        <p class="text-muted"><i class="fa-solid fa-users"></i> {% for user in session.users %}{{user.nickname}}{{ loop.last ? "" : " , "}}{% endfor %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="{{path('account_session_delete', {'id':session.id, 'username': app.user.nickname})}}" class="btn btn-danger"> Se désinscrire</a>
+                            </div>
+                        </div> 
+                    {% endfor %}
+                    <span class="text-muted">*  Diverses autorisations sont nécessaires pour voler dans cette zone (S1, S2 ou S3). Se réferer à la réglementation sur <a href="https://www.geoportail.gouv.fr/donnees/restrictions-uas-categorie-ouverte-et-aeromodelisme"><strong>Géoportail</strong></a> et le site de la <a href="https://www.ecologie.gouv.fr/direction-generale-laviation-civile-dgac"><strong> DGAC</strong></a>.</span>
+                {% endif %}
+                </div>
+                 
+            </div> 
+        </div>
+    
+    </section>
+
+{% endblock %}

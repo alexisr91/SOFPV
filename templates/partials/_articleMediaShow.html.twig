@@ -27,7 +27,7 @@ Images : carousel qui adapte le format landscape ou portrait des images  #}
                 </div>
             </div>
         {% endif %}
-
+    </div>
         {# onglet carousel images si il y en a #}
         {% if article.images is not empty %}
 
@@ -59,17 +59,18 @@ Images : carousel qui adapte le format landscape ou portrait des images  #}
                             
         </div>
         {% endif %}
-    </div>
-                       
+    
+    {% if not article.video and article.images is empty %}                   
     <div class="row">
         {# si il n'y a ni video, ni images : image par defaut #}
-        {% if not article.video and article.images is empty %}
+       
             <div>
                 <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" > 
             </div>    
-        {% endif %}
-</div>
-
+        
+    </div>
+    {% endif %}
+    
 <script>
       {# detection format image #}
         let imgs = document.querySelectorAll("img");

@@ -16,7 +16,7 @@
                 {% for spot in spots %}
                 <div class="spotWrapper row">
                         <div class="col">
-                            <button type="button" class="spotMapChange"><p class="spotName"><strong><i class="fa-solid fa-location-dot"></i> {{spot.name}}</strong></p></button>
+                            <button type="button" class="spotMapChange"><p class="spotName"><i class="fa-solid fa-location-dot"></i>  {{spot.name}}</p></button>
                             <p class="geolocalisation" hidden>{{spot.latitude}},{{spot.longitude}}</p>
                             <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{spot.authorization}} {{ spot.authorization == "Public" ? "" : "*" }}</p>
                             <p class="text-muted spotAddress"><i class="fa-solid fa-map-pin"></i> {{spot.address|raw}}</p>
@@ -34,28 +34,36 @@
                                 <h5 class="modal-title"><i class="fa-solid fa-location-dot"></i> {{spot.name}}</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body">        
+                            {# si il y a une session sur un des points #}
                             {% if spot.sessions is not empty %}
+                                {# pour chaque session #}
                                 {% for session in spot.sessions %}
-                                <div class="wrapSession row">
-                                    <div class="col-md-10">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p class="text-muted"><i class="fa-solid fa-calendar-day"></i> {{session.date|date('d-m-Y')}}</p>
-                                                <p class="text-muted"><i class="fa-solid fa-clock"></i> {{session.timesheet|capitalize}}</p>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{session.mapSpot.authorization}}{{session.mapSpot.authorization == "Public" ? "": " * " }}</p>
-                                                <p class="text-muted"><i class="fa-solid fa-users"></i> {% for user in session.users %}{{user.nickname}}{{ loop.last ? "" : " , "}}{% endfor %}</p>
+                                    {% if session.past == false %}
+                                    <div class="wrapSession row">
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <p class="text-muted"><i class="fa-solid fa-calendar-day"></i> {{session.date|format_datetime('full', 'none', locale='fr')}}</p>
+                                                    <p class="text-muted"><i class="fa-solid fa-clock"></i> {{session.timesheet|capitalize}}</p>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{session.mapSpot.authorization}}{{session.mapSpot.authorization == "Public" ? "": " * " }}</p>
+                                                    <p class="text-muted"><i class="fa-solid fa-users"></i>{% if session.users|length == 0 %}<i> Pas d'inscrit(s)</i>{% else %}{% for user in session.users %}{{user.nickname}}{{ loop.last ? "" : " , "}}{% endfor %}{% endif %}</p>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-2">
+                                            {% if app.user and app.user in session.users %}      
+                                                <span class="text-success"><i class="fa-solid fa-user-check fa-2x"></i><span>
+                                            {% else %}
+                                                <a href="{{path('session_entry', {'id':session.id})}}"><i class="fa-solid fa-user-plus fa-2x"></i></a>
+                                            {% endif %}
+                                        </div>
                                     </div>
-                                    <div class="col-md-2">      
-                                        <a href="{{path('session_entry', {'id':session.id})}}"><i class="fa-solid fa-user-plus fa-2x"></i></a>
-                                    </div>
-                                </div> 
+                                    {% endif %}
                                 {% endfor %}
-                            {% else %}
+                            {% else  %}
                             <div class="alert alert-warning">Il n'y a pas encore de session prévue sur ce spot.</div>
                             {% endif %}
                             </div>
@@ -89,74 +97,6 @@
             </div>
 
 </section>
-   
-    <script>
-
-        //mise en place de la map avec Jawg et mapLibre
-        const accessToken = 'Q9ah9vp2jsb80zff6WPhCh04KN53KZBOKSw417PFGIttmq5x0w5gYZMgItqFW2Kl';
-        const map = new maplibregl.Map({
-           container: 'map',
-           style: `https://api.jawg.io/styles/jawg-sunny.json?access-token=${accessToken}`,
-           zoom: 9,
-           center: [1.4364900000002763, 43.59818000000044],
-        }).addControl(new maplibregl.NavigationControl(), 'top-right');
-    
-        //récupération des spots
-        let spotsGeolocalisation = document.querySelectorAll('.geolocalisation');
-
-        //on boucle sur chaque spot
-        spotsGeolocalisation.forEach(function(item){
-
-            //on récupère le html qui correspond à "lat, long"
-            let spotGeolocalisation = item.innerHTML;
-            //on split les data pour les mettre dans la fonction de placement de marker sur la carte
-            let recoverLatLong = spotGeolocalisation.split(',');
-
-            //element précédent les données de géolocalisation(<p> placé juste avant qui contient le nom de chaque spot)
-            //on récupère le firstChild qui est le #text, puis le contenu du #text qui est un string
-            let spotName = item.previousElementSibling.firstChild.textContent;
-
-            const markerPopup = new maplibregl.Popup({
-                    closeOnClick: true,
-                    focusAfterOpen : false,
-                    className : 'popupMap'
-
-            }).setHTML(`${spotName}`);
-
-            new maplibregl.Marker({color:'#B30B00', scale:1.2}).setLngLat([recoverLatLong[0], recoverLatLong[1]]).setPopup(markerPopup).addTo(map);
-        })
-
-        //récupération des boutons pour modifier la vue de la carte suivant le spot selectionné
-        let spotsMapChange = document.querySelectorAll('.spotMapChange');
-
-        //pour chaque bouton
-        spotsMapChange.forEach(function(item){
-            //on écoute le click
-            item.addEventListener('click', ()=>{
-
-                //on récupère le container qui regroupe les info du point
-                let parent = item.parentNode;
-
-                //on cible les données texte dans le p associé a la geolocalisation
-                let spotData = parent.querySelector('p:nth-child(2)').innerHTML;
-
-                //on sépare les données pour les passer à la carte
-                let latLongData = spotData.split(',');
-
-                //animation qui "redirige" avec animation + zoom vers le point demandé par l'user
-                map.flyTo({
-                    center: [latLongData[0],latLongData[1]],
-                    essential: true, 
-                    zoom:15
-
-                })
-
-
-            })
-          
-        })
-        
-         
-
-    </script>
+    {# map #}
+    <script src="{{ asset('js/map.js')}}"></script>
 {% endblock %}

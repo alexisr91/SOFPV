@@ -22,7 +22,7 @@ class Video
     private ?string $duration = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $created_at = null;
+    private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column]
     private ?int $views = null;
@@ -49,7 +49,7 @@ class Video
     {
         $this->views = 0;
         $this->active = 1;
-        $this->created_at = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->thumbnail = 'blogDefault.png';
         $this->duration = '00:00';
 
@@ -98,12 +98,12 @@ class Video
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }

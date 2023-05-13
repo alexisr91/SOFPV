@@ -71,15 +71,20 @@ section#myProfile {
 
     .counters {
         width: 100%;
-        margin-bottom: 2em;
+        margin:2em auto;
+        padding: 1em;
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
         .counter{
+            p {
+                margin-top: 1em;
+                background-color: rgba($grey, 0.3);
+                padding: 0.5em 1em;
+                border-radius: 4px;
+            }
             text-align: center;
             margin: 0;
-            img {
-            height:4em;
-            margin: 0 1em;
-        }
-
         }
         
     }
@@ -377,6 +382,38 @@ section#myOrders {
         }
 
         h3{ margin: 2em 0; height:2em}
+
+    }
+}
+
+/** MES SESSIONS **/
+section#mySessions{
+    .container-fluid{
+        background-color: $white;
+        height:90vh;
+        display: flex;
+        .wrapper{
+            width:80%;
+            padding-top:3em;
+            margin: 0 auto;
+
+            h5{margin: 0.5em;}
+
+            .wrapSession {
+                margin: 1em auto;
+                padding: 1em 0;
+                display: flex;
+                align-items: center;
+                border-radius: 4px;
+                box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+                .text-muted {margin: 0.5em; line-height: normal;font-size: 1em;}
+            }
+        }
+
+       
+
+
+
 
     }
 }

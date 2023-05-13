@@ -422,6 +422,8 @@ section#adminNews {
     width: 100%;
     z-index: 0;
     padding: 5% 0; }
+    section#adminNews .adminNews-wrapper article {
+      display: flex; }
     section#adminNews .adminNews-wrapper .figure {
       margin-bottom: 0;
       justify-content: center;
@@ -430,8 +432,17 @@ section#adminNews {
       section#adminNews .adminNews-wrapper .figure img {
         max-width: 75%;
         height: auto; }
-    section#adminNews .adminNews-wrapper .col-7 {
-      padding: 0 10% 0 0; }
+    section#adminNews .adminNews-wrapper .content {
+      border-left: 5px solid #DADADA;
+      padding: 2em;
+      background-color: #fafafa;
+      display: flex;
+      flex-direction: column;
+      width: max-content;
+      height: fit-content;
+      margin: auto; }
+    section#adminNews .adminNews-wrapper .image {
+      width: 50%; }
     section#adminNews .adminNews-wrapper .row {
       padding: 2em; }
     section#adminNews .adminNews-wrapper h3 {
@@ -723,13 +734,19 @@ section#myProfile {
     margin-top: 1em; }
   section#myProfile .counters {
     width: 100%;
-    margin-bottom: 2em; }
+    margin: 2em auto;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
     section#myProfile .counters .counter {
       text-align: center;
       margin: 0; }
-      section#myProfile .counters .counter img {
-        height: 4em;
-        margin: 0 1em; }
+      section#myProfile .counters .counter p {
+        margin-top: 1em;
+        background-color: rgba(218, 218, 218, 0.3);
+        padding: 0.5em 1em;
+        border-radius: 4px; }
   section#myProfile .my-drone {
     position: relative; }
     section#myProfile .my-drone .fav {
@@ -936,6 +953,29 @@ section#myOrders .container-fluid {
   section#myOrders .container-fluid h3 {
     margin: 2em 0;
     height: 2em; }
+
+/** MES SESSIONS **/
+section#mySessions .container-fluid {
+  background-color: #fafafa;
+  height: 90vh;
+  display: flex; }
+  section#mySessions .container-fluid .wrapper {
+    width: 80%;
+    padding-top: 3em;
+    margin: 0 auto; }
+    section#mySessions .container-fluid .wrapper h5 {
+      margin: 0.5em; }
+    section#mySessions .container-fluid .wrapper .wrapSession {
+      margin: 1em auto;
+      padding: 1em 0;
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
+      section#mySessions .container-fluid .wrapper .wrapSession .text-muted {
+        margin: 0.5em;
+        line-height: normal;
+        font-size: 1em; }
 
 /*SHOP */
 /** SHOP **/
@@ -1339,7 +1379,7 @@ section#profile {
     margin-right: 2em;
     padding: 2em 1em;
     border-radius: 3px;
-    min-height: 60vh; }
+    min-height: 30vh; }
   section#profile .my-drone {
     position: relative; }
     section#profile .my-drone .fav {
@@ -1381,12 +1421,36 @@ section#profile {
     margin: 0 2em 2em 2em;
     border-radius: 3px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 10em; }
     section#profile .sessions span {
       margin: 0 1em;
       width: 100%; }
+    section#profile .sessions .spotWrapper {
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1em;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      width: 100%;
+      max-height: fit-content; }
+      section#profile .sessions .spotWrapper .infoSpot {
+        margin: auto; }
+      section#profile .sessions .spotWrapper .iconWrap {
+        padding: 1em 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px; }
+      section#profile .sessions .spotWrapper p.spotName {
+        font-size: 1.1em;
+        margin-bottom: 0; }
+      section#profile .sessions .spotWrapper p.text-muted {
+        margin-bottom: 0; }
   section#profile .article {
     display: flex;
     position: relative; }
