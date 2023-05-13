@@ -8,6 +8,7 @@ use App\Entity\Image;
 use App\Entity\Order;
 use App\Entity\Article;
 use App\Entity\Counter;
+use App\Entity\Session;
 use App\Form\DroneType;
 use App\Form\ArticleType;
 use App\Form\ProfileType;
@@ -17,8 +18,11 @@ use App\Entity\PasswordUpdate;
 use App\Form\AdminArticleType;
 use App\Form\PasswordUpdateType;
 use App\Repository\ImageRepository;
-use App\Repository\ArticleRepository;
 use App\Repository\OrderRepository;
+use App\Repository\ArticleRepository;
+use App\Repository\CounterRepository;
+use App\Repository\SessionRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -87,7 +91,7 @@ class AccountController extends AbstractController
     //Profil personnel de l'utilisateur (modifications paramètres user, vue globale de son profil)
     #[Route('/profile', name:'account_myprofile')]
     #[IsGranted("ROLE_USER")]
-    public function myProfile(ArticleRepository $articleRepo)
+    public function myProfile(ArticleRepository $articleRepo, CounterRepository $counterRepository)
     {
         $user = $this->getUser();
   
@@ -96,6 +100,7 @@ class AccountController extends AbstractController
 
         //3 dernières questions de l'user pour accès rapides aux réponses 
         $myQuestions = $articleRepo->findMylastQuestions($user);
+
    
         return $this->render('account/myprofile.html.twig', [
             'title' => 'Mon compte ',
@@ -416,7 +421,6 @@ class AccountController extends AbstractController
                                 $newImage->setSource($newName)
                                      ->setArticle($article); 
                                 $article->addImage($newImage);
-     
                                 $manager->persist($newImage); 
                           
                             }      
@@ -478,23 +482,63 @@ class AccountController extends AbstractController
             'title'=> 'Mes commandes',
             'user'=>$user,
             'orders'=>$orders
+        ]);
+    }
+
+    //Liste des sessions dans lequel l'user est inscrit
+    #[IsGranted("ROLE_USER")]
+    #[Route('/profile/sessions', name:'account_mySessions')]
+    public function mySessions(SessionRepository $sessionRepository){
+
+        $user = $this->getUser();
+        
+        $sessions = $sessionRepository->findAllSessionsForUser($user);
+
+        return $this->render('/account/mySessions.html.twig', [
+            'title'=> 'Mes sessions',
+            'user'=>$user,
+            'sessions'=>$sessions
             
         ]);
     }
 
+    #[IsGranted("ROLE_USER")]
+    #[Route('/profile/session/delete/{id}/{username}', name:"account_session_delete")]   
+    public function deleteSession(SessionRepository $sessionRepository, EntityManagerInterface $manager, $id, $username){
+        $user = $this->getUser();
+        $session = $sessionRepository->find($id);
+ 
+        if($user == $username && $session){
+
+            $session->removeUser($user);
+            $manager->persist($session);
+            $manager->flush();
+
+            $this->addFlash('success','Vous êtes bien désinscrit de la session.');
+            return $this->redirectToRoute('account_mySessions');
+        }
+        else {
+            $this->addFlash('danger','Vous n\'êtes pas autorisé à accéder à cette page.');
+            return $this->redirectToRoute('home');
+        }
+
+    }
+
     //Profil utilisateur public (articles de l'user, badge , drone favori, sessions de l'user)
     #[Route('/profile/{nickname}', name:'account_profile')]
-     public function profile(User $user, ArticleRepository $articleRepo)
+     public function profile(User $user, ArticleRepository $articleRepo, SessionRepository $sessionRepository)
     {
         $nickname = $user->getNickname();
         $articles = $articleRepo->findBy(['author'=>$user],['createdAt'=>'DESC']);
         $drone = $user->getDrone();
+        $sessions = $sessionRepository->findSessionsForUser($user);
 
         return $this->render('/account/publicProfile.html.twig', [
             'title'=> 'Profil de '.$nickname.' ',
             'user'=>$user,
             'articles'=>$articles,
-            'drone'=>$drone
+            'drone'=>$drone,
+            'sessions'=> $sessions
         ]);
     }
 

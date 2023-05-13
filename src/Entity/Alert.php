@@ -15,7 +15,7 @@ class Alert
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $created_at = null;
+    private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'alerts')]
     private ?Article $article = null;
@@ -25,7 +25,7 @@ class Alert
 
     public function __construct()
     {
-        $this->created_at = new \Datetime('now', new \DateTimeZone('Europe/Paris'));
+        $this->createdAt = new \Datetime('now', new \DateTimeZone('Europe/Paris'));
     }
 
     public function getId(): ?int
@@ -35,12 +35,12 @@ class Alert
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }

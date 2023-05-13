@@ -124,7 +124,7 @@
                                 
                             </div>
                         </div>
-                        {# bloc questions + notif commentaires  #}
+                        {# bloc questions +  count commentaires  #}
                         {% if questions %}
                         <div class="accordion" id="accordionQuestion">
                             {% for question in questions %}
@@ -159,23 +159,26 @@
                             {% endfor %}
                         </div>
                         {% else %}
-                        <div class="spanWrap">
-                            <span class="alert alert-success">Vous n'avez pas encore publié de questions.</span>
+                        <div class="alert alert-success">
+                            Vous n'avez pas encore publié de questions.   
                         </div>
                         {% endif %}
                         {# bloc counter #}  
-                        <div class="row counters mt-4">
-                            <div class="col-md-4 counter">
-                                <img src="{{asset('/img/battery.png')}}" alt="icone représentant une lipo">
-                                <a class="btn btn-dark btn-lg" href="{{path('account_add_to_counter', {'name': 'Lipo'})}}" id="lipoCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></a>
-                            </div>
-                            <div class="col-md-4 counter">
-                                <img src="{{asset('/img/circuit-board.png')}}" alt="icone représentant un ESC">
-                                <a class="btn btn-dark btn-lg" href="{{path('account_add_to_counter', {'name': 'ESC'})}}" id="escCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></a>
-                            </div>
-                            <div class="col-md-4 counter">
-                                <img src="{{asset('/img/broken.png')}}" alt="icone représentant une frame brisée">
-                                <a class="btn btn-dark btn-lg" href="{{path('account_add_to_counter', {'name': 'Frame'})}}"  id="frameCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></a>
+                        <div class="counters">
+                            <h5>Crash board</h5>
+                            <div class="row">
+                                <div class="col-md-4 counter">
+                                    <p>Lipo HS</p>
+                                    <a class="btn " href="{{path('account_add_to_counter', {'name': 'Lipo'})}}" id="lipoCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></a>
+                                </div>
+                                <div class="col-md-4 counter">
+                                    <p>ESC brûlé</p>
+                                    <a class="btn" href="{{path('account_add_to_counter', {'name': 'ESC'})}}" id="escCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></a>
+                                </div>
+                                <div class="col-md-4 counter">
+                                    <p>Frame brisée</p>
+                                    <a class="btn" href="{{path('account_add_to_counter', {'name': 'Frame'})}}"  id="frameCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></a>
+                                </div>
                             </div>
                         </div>
                         {# fin du counter #}

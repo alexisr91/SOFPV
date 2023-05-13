@@ -417,7 +417,7 @@ section#profile {
         bottom:1em;
         right: 0;
     }
-   
+    
     .author {display: none;}
     .wrap {
         margin-top: 0.5em;
@@ -455,7 +455,7 @@ section#profile {
         margin-right: 2em;
         padding: 2em 1em;
         border-radius: 3px;
-        min-height: 60vh;
+        min-height: 30vh;
     }
 
 
@@ -513,6 +513,7 @@ section#profile {
         margin:0 2em 2em 2em;
         border-radius: 3px;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         min-height: 10em;
@@ -520,6 +521,33 @@ section#profile {
         span {
             margin: 0 1em;
             width: 100%;
+        }
+        .spotWrapper {
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1em;
+            box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            width: 100%;
+            max-height: fit-content;
+            .infoSpot {
+                margin: auto;
+            }
+            .iconWrap {
+                padding: 1em 2em;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-radius: 4px;
+            }
+             
+            p.spotName {
+                font-size: 1.1em;
+                margin-bottom: 0;
+            }
+            p.text-muted {margin-bottom: 0;}
         }
     }
     .article {

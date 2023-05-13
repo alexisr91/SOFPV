@@ -13,6 +13,7 @@ class SessionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
         $builder
             ->add('date', DateType::class, [
                 'label'=>'Date de la session',

@@ -58,9 +58,32 @@
                     
                         {% endif %}
                     </div>
-                        {# TODO: mettre les prochaines sessions de l'user + lien pour rejoindre la session #}
                     <div class="sessions">
+                    {% if user.sessions is empty %}
                         <span class="alert alert-warning">Pas de sessions prévues</span>
+                    {% else %}
+                        {% for session in sessions %}
+                        {% set spot = session.mapSpot %}
+                        <div class="spotWrapper row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <p class="spotName"><strong><i class="fa-solid fa-location-dot"></i> {{spot.name}}</strong></p>
+                                            <p class="geolocalisation" hidden>{{spot.latitude}},{{spot.longitude}}</p>
+                                            <p class="text-muted"><i class="fa-solid fa-calendar-day"></i> {{session.date|format_datetime('full', 'none', locale='fr')}}</p>
+                                            <p class="text-muted"><i class="fa-solid fa-clock"></i> {{session.timesheet|capitalize}}</p>
+                                        </div>
+                                        <div class="col-lg-6 infoSpot">
+                                            <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{spot.authorization}}{{spot.authorization == "Public" ? "": " * " }}</p>
+                                            <p class="text-muted"><i class="fa-solid fa-users"></i> {% for user in session.users %}{{user.nickname}}{{ loop.last ? "" : " , "}}{% endfor %}</p>
+                                            <p class="text-muted"><i class="fa-solid fa-map-pin"></i> {{spot.address|raw}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        {% endfor %}
+                  
+                    {% endif %}
                     </div>
 
                     

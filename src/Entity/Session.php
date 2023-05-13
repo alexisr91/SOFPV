@@ -2,13 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\SessionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\PreUpdate;
+use Doctrine\ORM\Mapping\PrePersist;
+use App\Repository\SessionRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\PostUpdate;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: SessionRepository::class)]
+#[HasLifecycleCallbacks] 
 class Session
 {
     #[ORM\Id]
@@ -19,7 +28,8 @@ class Session
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     private ?MapSpot $mapSpot = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\GreaterThanOrEqual('today', message:"Attention: Vous ne pouvez pas ajouter de session à une date antérieure à aujourd'hui.")]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]    
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255)]
@@ -29,12 +39,32 @@ class Session
     private Collection $users;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $created_at = null;
+    private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\Column]
+    private ?bool $past = null;
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
-        $this->created_at = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+    }
+
+    #[Prepersist]
+    #[PreUpdate]
+    public function isAlreadyPast():bool{
+        //date de la session
+        $sessionDate = $this->date;
+        //date actuelle FR 
+        $now = new DateTime("now", new \DateTimeZone('Europe/Paris'));
+    
+       //si la date est déjà passée, on retourne false  
+       if($now > $sessionDate){
+           return $this->past = true;
+       } else {
+          return $this->past = false;
+       }
+        
     }
 
     public function getId(): ?int
@@ -104,12 +134,24 @@ class Session
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isPast(): ?bool
+    {
+        return $this->past;
+    }
+
+    public function setPast(bool $past): self
+    {
+        $this->past = $past;
 
         return $this;
     }

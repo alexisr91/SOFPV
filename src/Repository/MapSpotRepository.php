@@ -39,6 +39,7 @@ class MapSpotRepository extends ServiceEntityRepository
         }
     }
 
+
 //    /**
 //     * @return MapSpot[] Returns an array of MapSpot objects
 //     */
