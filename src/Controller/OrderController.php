@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Order;
+use App\Entity\OrderStatus;
 use App\Form\OrderType;
 use App\Manager\StripeManager;
 use App\Repository\CartRepository;
 use App\Repository\OrderRepository;
+use App\Repository\OrderStatusRepository;
 use App\Repository\TransporterRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -79,7 +81,6 @@ class OrderController extends AbstractController
             }
         } 
 
-        
 
         $deliveryChoice = $form->get('deliveryAddress')->getData();
 

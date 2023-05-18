@@ -91,22 +91,31 @@ class AccountController extends AbstractController
     //Profil personnel de l'utilisateur (modifications paramètres user, vue globale de son profil)
     #[Route('/profile', name:'account_myprofile')]
     #[IsGranted("ROLE_USER")]
-    public function myProfile(ArticleRepository $articleRepo, CounterRepository $counterRepository)
+    public function myProfile(ArticleRepository $articleRepo, SessionRepository $sessionRepository, OrderRepository $orderRepository)
     {
         $user = $this->getUser();
   
         //nombre d'articles de l'user
         $articleCount = $articleRepo->countMyArticles($user);
 
+        //nombre de sessions actives de l'user
+        $sessionCount = $sessionRepository->countMySessions($user);
+
         //3 dernières questions de l'user pour accès rapides aux réponses 
         $myQuestions = $articleRepo->findMylastQuestions($user);
+
+        //status de la dernière commande en cours (pas annulée) 
+        $lastOrderStatus = $orderRepository->findLastOrder($user);
+
 
    
         return $this->render('account/myprofile.html.twig', [
             'title' => 'Mon compte ',
             'user' => $user,
             'articleCount'=>$articleCount,
-            'questions'=>$myQuestions
+            'sessionCount'=>$sessionCount,
+            'questions'=>$myQuestions,
+            'lastOrderStatus'=>$lastOrderStatus
         ]);
     }
 
@@ -123,7 +132,6 @@ class AccountController extends AbstractController
         $manager->persist($counter);
         $manager->flush();
         
-        $this->addFlash('success', '+ 1 !');
         return $this->redirectToRoute('account_myprofile');
     }
 

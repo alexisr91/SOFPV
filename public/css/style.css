@@ -838,12 +838,12 @@ section#myProfileEdit, section#droneEdit {
     border-radius: 3px; }
     section#myProfileEdit .wrapper .input-group, section#droneEdit .wrapper .input-group {
       margin-bottom: 1em; }
-  section#myProfileEdit .avatar, section#droneEdit .avatar {
-    max-width: 125px;
-    max-height: 125px;
-    overflow: hidden;
-    object-fit: cover;
-    object-position: center; }
+    section#myProfileEdit .wrapper .avatar, section#droneEdit .wrapper .avatar {
+      max-width: 125px;
+      max-height: 125px;
+      overflow: hidden;
+      object-fit: cover;
+      object-position: center; }
 
 /* DRONE EDIT */
 section#droneEdit .container-fluid {
@@ -1086,35 +1086,49 @@ section#prepareOrder .container-fluid {
     section#prepareOrder .container-fluid div.payment .stripeLogo span {
       margin-left: 0.5em; }
 
-section#successPayment .container-fluid {
+section#successPayment {
+  width: 100vw;
+  height: 96vh;
   background-color: #fafafa;
-  margin: 0 auto;
-  min-height: 90vh; }
-  section#successPayment .container-fluid h6 {
-    color: rgba(37, 37, 37, 0.6); }
-  section#successPayment .container-fluid p {
-    margin: 2em auto; }
-  section#successPayment .container-fluid .deliveryImage {
-    width: 80px;
-    height: 80px;
+  background-position: center;
+  background-size: cover;
+  position: relative; }
+  section#successPayment:before {
+    height: 96vh;
+    width: 100vw;
+    content: "";
+    background: url("../img/noise1.png") repeat 0 0 rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 0; }
+  section#successPayment .container-fluid {
+    background-color: #fafafa;
     margin: 0 auto;
-    animation: 2s linear 1s infinite alternate flyingDelivery; }
-  section#successPayment .container-fluid .recap {
-    width: 40%;
-    position: relative;
-    margin: 5% auto;
-    padding: 2em;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-    section#successPayment .container-fluid .recap .products {
-      display: flex; }
-      section#successPayment .container-fluid .recap .products div {
-        margin: 0.5em 1em; }
-    section#successPayment .container-fluid .recap .back {
-      position: absolute;
-      bottom: 2em;
-      right: 2em; }
+    height: 90vh; }
+    section#successPayment .container-fluid h6 {
+      color: rgba(37, 37, 37, 0.6); }
+    section#successPayment .container-fluid p {
+      margin: 2em auto; }
+    section#successPayment .container-fluid .deliveryImage {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+      animation: 2s linear 1s infinite alternate flyingDelivery; }
+    section#successPayment .container-fluid .recap {
+      width: 40%;
+      position: relative;
+      margin: 5% auto;
+      padding: 2em;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
+      section#successPayment .container-fluid .recap .products {
+        display: flex; }
+        section#successPayment .container-fluid .recap .products div {
+          margin: 0.5em 1em; }
+      section#successPayment .container-fluid .recap .back {
+        position: absolute;
+        bottom: 2em;
+        right: 2em; }
 
 section#errorPayment .container-fluid {
   background-color: #fafafa;
@@ -1521,18 +1535,33 @@ section#session .container-fluid {
   section#session .container-fluid .spotMapChange {
     padding: 0; }
 
-section#sessionAdd .container-fluid {
-  background-color: #fafafa;
-  min-height: 90vh;
-  max-width: 100vw; }
-section#sessionAdd .formSession {
-  width: 40%;
+section#sessionAdd {
   position: relative;
-  margin: 5% auto;
-  padding: 2em;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
+  background-image: url("/img/setup2-yusuf-miah.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: rgba(37, 37, 37, 0.7);
+  background-blend-mode: multiply;
+  top: 0;
+  height: 96vh;
+  width: 100vw; }
+  section#sessionAdd:before {
+    height: 96vh;
+    width: 100vw;
+    content: "";
+    background: url("/img/noise1.png") repeat 0 0 rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0; }
+  section#sessionAdd .container-fluid {
+    height: 90vh; }
+  section#sessionAdd .formSession {
+    width: 30%;
+    position: relative;
+    margin: 10% auto;
+    padding: 3em 4em;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
 
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu {

@@ -12,6 +12,7 @@ use App\Entity\Counter;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Entity\MapSpot;
+use App\Entity\OrderStatus;
 use App\Entity\Transporter;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -97,6 +98,19 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush($category);
+
+        //Mise en place des statuts de commande 
+        $deliveryStatusArray = [];
+        $deliveryStatusDescription = array('En cours de préparation','Remis au transporteur', 'En cours de livraison', 'Livré', 'Commande annulée');
+
+        foreach($deliveryStatusDescription as $index=>$value){
+            $deliveryStatus = new OrderStatus();
+            $deliveryStatus->setStatus($index)
+                            ->setStatusDescription($value);
+            $deliveryStatusArray[] = $deliveryStatus;
+            $manager->persist($deliveryStatus); 
+        }
+        $manager->flush($deliveryStatus);
 
         //Mise en place des Transporteurs disponibles pour le shop
         $transporterColissimo = new Transporter();

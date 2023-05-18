@@ -3,24 +3,29 @@
 namespace App\Form;
 
 use App\Entity\Session;
+use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 class SessionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-
         $builder
             ->add('date', DateType::class, [
                 'label'=>'Date de la session',
-                'widget'=>'choice',
-                'attr' => ['id' => 'datepicker'],
-                'format' => 'ddMMyyyy',
-                'years'=> range(date('Y'), date('Y')+1 )
+                'widget'=>'single_text',
+                'html5' => false,
+                'attr' => ['class' => 'js-datepicker'],
+                'label'=>false,
+                'format'=>'dd-MM-yyyy',
+                'constraints'=>[
+                    new GreaterThanOrEqual((new DateTime('now'))->format('d-M-y'), message:"Vous ne pouvez pas créer de sessions à une date antérieure à aujourd'hui.")
+                ]
                 
             ] )
             ->add('timesheet', ChoiceType::class, [

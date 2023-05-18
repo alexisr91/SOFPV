@@ -79,7 +79,7 @@ class SessionRepository extends ServiceEntityRepository
         ->getResult();
 
     }
-    //retourne les 4 prochaines sessions de l'user concerné (profil public)
+    //retourne toutes les sessions de l'user concerné (profil public)
     public function findAllSessionsForUser($user){
         return $this->createQueryBuilder('s')
         ->join('s.users', 'u')
@@ -89,6 +89,19 @@ class SessionRepository extends ServiceEntityRepository
         ->orderBy('s.date', 'ASC')
         ->getQuery()
         ->getResult();
+    }
+
+
+    //compte le nombre de sessions actives de l'user (dashboard)
+    public function countMySessions($user){
+        return $this->createQueryBuilder('s')
+        ->join('s.users', 'u')
+        ->select('count(s)')
+        ->where('u = :user')
+        ->setParameter('user', $user)
+        ->andWhere('s.past = false')
+        ->getQuery()
+        ->getSingleScalarResult();
     }
 
 

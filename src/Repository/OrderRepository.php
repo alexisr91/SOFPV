@@ -39,7 +39,7 @@ class OrderRepository extends ServiceEntityRepository
         }
     }
 
-  
+    //commandes finalisées et payées par user
    public function findOrderSucceededByUser($user): array
    {
        return $this->createQueryBuilder('o')
@@ -52,6 +52,18 @@ class OrderRepository extends ServiceEntityRepository
            ->getQuery()
            ->getResult()
        ;
+   }
+
+   //trouve le status de la dernière commande de l'user (mon profil)
+   public function findLastOrder($user){
+        return $this->createQueryBuilder('o')
+        ->join('o.delivery_status', 's')
+        ->where('o.user = :user')
+        ->setParameter('user', $user)
+        ->andWhere('s.status != 4')
+        ->orderBy('o.createdAt', 'DESC')
+        ->getQuery()
+        ->getOneOrNullResult();
    }
 
 //    public function findOneBySomeField($value): ?Order
