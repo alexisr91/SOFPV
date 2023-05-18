@@ -4,10 +4,10 @@ namespace App\Controller;
 
 use Error;
 use Stripe\Stripe;
-use App\Entity\Product;
 use Stripe\Checkout\Session;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\OrderStatusRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGenerator;
@@ -98,9 +98,10 @@ class StripeController extends AbstractController {
     
     #[Route('/order/stripe/success/{reference}', name:'payment_success')]
     #[IsGranted("ROLE_USER")]
-    public function stripeSuccess($reference, SessionInterface $sessionCart, OrderRepository $orderRepo,Request $request, EntityManagerInterface $manager ){
+    public function stripeSuccess($reference, SessionInterface $sessionCart, OrderRepository $orderRepo, OrderStatusRepository $orderStatusRepository,Request $request, EntityManagerInterface $manager ){
 
         $stripe = new \Stripe\StripeClient($_ENV['STRIPE_SECRET_KEY_TEST']);
+        $orderStatus = $orderStatusRepository->findOneBy(['status'=>0]);
 
         try {
             $session = $stripe->checkout->sessions->retrieve($request->query->get('session_id'), ['expand'=>['payment_intent']]);
@@ -123,7 +124,8 @@ class StripeController extends AbstractController {
                 //on met à jour les données de la commande "order" associée, avec de quoi retracer le paiement sur le site STRIPE (customer id et payment intent id)
                 $order->setStatusStripe($status)
                       ->setStripePaymentIntent($paymentIntent)
-                      ->setStripeCustomerId($customer->id);
+                      ->setStripeCustomerId($customer->id)
+                      ->setDeliveryStatus($orderStatus);
                 $manager->persist($order);
                 
 
@@ -147,6 +149,7 @@ class StripeController extends AbstractController {
                     }
 
                 }
+                
                 //envoie de la maj en bdd
                 $manager->flush();
             }

@@ -28,7 +28,6 @@ class Session
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     private ?MapSpot $mapSpot = null;
 
-    #[Assert\GreaterThanOrEqual('today', message:"Attention: Vous ne pouvez pas ajouter de session à une date antérieure à aujourd'hui.")]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]    
     private ?\DateTimeInterface $date = null;
 
@@ -55,14 +54,16 @@ class Session
     public function isAlreadyPast():bool{
         //date de la session
         $sessionDate = $this->date;
-        //date actuelle FR 
+        //date actuelle FR sans l'heurephp bin
         $now = new DateTime("now", new \DateTimeZone('Europe/Paris'));
+        //on set l'heure a 00:00 pour permettre une session le jour même
+        $now->setTime(0,0);
     
-       //si la date est déjà passée, on retourne false  
-       if($now > $sessionDate){
-           return $this->past = true;
-       } else {
-          return $this->past = false;
+       //si la date est déjà passée, on retourne false  (jour même autorisé , publication le matin pour l'apres midi => ok)
+       if($now <= $sessionDate){
+           return $this->past = false;
+       } else{
+          return $this->past = true;
        }
         
     }

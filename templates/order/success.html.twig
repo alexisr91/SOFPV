@@ -32,6 +32,7 @@
                       <hr>
                       {% endif %}
                     {% endfor %}
+                    <p><b>Prix transporteur : </b> {{order.transporter.price}} &euro;</p>
                     <p><b>Prix total TTC: </b> {{order.price}} &euro;</p>
                     <p><b>Adresse de livraison:</b><br> {{order.deliveryAddress|raw}}</p>
                     <div class="back">

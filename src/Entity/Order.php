@@ -50,14 +50,14 @@ class Order
     #[ORM\JoinColumn(nullable: false)]
     private ?Transporter $transporter = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $delivery_status = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $stripe_customer_id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $stripe_payment_intent = null;
+
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    private ?OrderStatus $delivery_status = null;
 
     public function __construct()
     {
@@ -78,11 +78,8 @@ class Order
            //on utilise updatedAt pour avoir une référence de temps entre la création et une modification potentielle de la commande
            $this->updatedAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));    
 
-           if(empty($this->delivery_status)){
-                $this->delivery_status = 0;
-           }
+           
     }
-
 
     public function getId(): ?int
     {
@@ -216,17 +213,6 @@ class Order
         return $this;
     }
 
-    public function getDeliveryStatus(): ?string
-    {
-        return $this->delivery_status;
-    }
-
-    public function setDeliveryStatus(string $delivery_status): self
-    {
-        $this->delivery_status = $delivery_status;
-
-        return $this;
-    }
 
     public function getStripeCustomerId(): ?string
     {
@@ -248,6 +234,18 @@ class Order
     public function setStripePaymentIntent(?string $stripe_payment_intent): self
     {
         $this->stripe_payment_intent = $stripe_payment_intent;
+
+        return $this;
+    }
+
+    public function getDeliveryStatus(): ?OrderStatus
+    {
+        return $this->delivery_status;
+    }
+
+    public function setDeliveryStatus(?OrderStatus $delivery_status): self
+    {
+        $this->delivery_status = $delivery_status;
 
         return $this;
     }

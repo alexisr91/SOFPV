@@ -61,7 +61,7 @@ class SessionController extends AbstractController
                     $this->addFlash('danger','Cette session existe déjà : veuillez-vous inscrire sur la session existante !');
                     return $this->redirectToRoute('session_map');
                 }
-
+                
                 //sinon on ajoute la session
                 $session->addUser($user)
                         ->setMapSpot($mapSpot);

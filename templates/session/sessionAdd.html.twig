@@ -3,7 +3,6 @@
 {% block title %}{{ parent() }} | {{ title }}{% endblock %}
 
 {% block body %}
-   
     <section id="sessionAdd">
         {{include('partials/_navbarMenu.html.twig')}}
         <div class="container-fluid pt-4">
@@ -28,19 +27,43 @@
         </div>       
     
     </section>
+    <style> 
+        td, th {padding:0.5em;}
+        .datepicker table tr td.active.active, .datepicker table tr td.active.highlighted.active, .datepicker table tr td.active.highlighted:active, .datepicker table tr td.active:active {background-color: #252525 }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-   
- 
         $(document).ready(function() {
-        // you may need to change this code if you are not using Bootstrap Datepicker
+        
+       
+        $.fn.datepicker.dates['fr'] = {
+            days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+            daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+            daysMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+            months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"],
+            monthsShort: ["Jan", "Fev", "Mar", "Avr", "Mai", "Juin", "Juil", "Aout", "Sep", "Oct", "Nov", "Dec"],
+            today: "Aujourd'hui",
+            clear: "Clear",
+            format: "dd-mm-yyyy",
+            titleFormat: "MM yyyy", 
+            weekStart: 0
+        };
+
         $('.js-datepicker').datepicker({
-            format: 'dd-mm-yyyy'
+            dateFormat:"dd-mm-yyyy",
+            language:'fr',
+            orientation: 'top right',
+            todayBtn:'linked',
+            todayHighlight: true
         });
-    });
 
+        });
+
+           
+          
     </script>
-
 
 
 {% endblock %}

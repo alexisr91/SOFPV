@@ -51,14 +51,16 @@
                       </ul>  
                       <hr>
                        <div class="orderStatus">
-                        {% if order.deliveryStatus == 0 %}
-                          <span class="prepare"><i class="fa-solid fa-circle"></i></span><strong>En cours de préparation</strong>
-                        {% elseif order.deliveryStatus == 1 %}
-                          <span class="transport"><i class="fa-solid fa-circle"></i> </span><strong>Remis au transporteur</strong>
-                        {% elseif order.deliveryStatus == 2 %}
-                          <span class="delivery"><i class="fa-solid fa-circle"></i></span><strong>En cours de livraison</strong>
-                        {% elseif order.deliveryStatus == 3 %}
-                          <span class="delivered"><i class="fa-solid fa-circle"></i></span><strong>Livré</strong>
+                        {% if order.delivery_status.status == 0 %}
+                          <span class="prepare"><i class="fa-solid fa-circle"></i></span><strong>{{order.delivery_status.status}}</strong>
+                        {% elseif order.delivery_status.status == 1 %}
+                          <span class="transport"><i class="fa-solid fa-circle"></i> </span><strong>{{order.delivery_status.status}}</strong>
+                        {% elseif order.delivery_status.status == 2 %}
+                          <span class="delivery"><i class="fa-solid fa-circle"></i></span><strong>{{order.delivery_status.status}}</strong>
+                        {% elseif order.delivery_status.status == 3 %}
+                          <span class="delivered"><i class="fa-solid fa-circle"></i></span><strong>{{order.delivery_status.status}}</strong>
+                        {% elseif order.delivery_status.status ==  4 %}
+                          <span class="canceled"><i class="fa-solid fa-circle"></i></span><strong>{{order.delivery_status.status}}</strong>
                         {% endif %}
                       </div>
                   </div> 
