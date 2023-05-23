@@ -348,7 +348,80 @@ section#home {
     height: 25em;
     filter: drop-shadow(0 0 0.5rem #940a02);
     animation: 2s linear 3s infinite alternate neon; }
-
+  #homeLogo body {
+    background-color: transparent;
+    padding: 100px; }
+  #homeLogo .glitch {
+    position: relative;
+    margin: 0 auto;
+    color: #fafafa;
+    font-size: 80px;
+    font-family: 'Play', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    transform: scale3d(0.8, 0.8, 0.8); }
+    #homeLogo .glitch::before, #homeLogo .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      background: transparent;
+      color: #fafafa;
+      clip: rect(0, 0, 100px, 0);
+      width: 100%; }
+    #homeLogo .glitch::before {
+      left: 7px;
+      text-shadow: 1px 1px green;
+      animation: glitch-effect 3s infinite linear alternate-reverse; }
+    #homeLogo .glitch::after {
+      left: 3px;
+      text-shadow: -1px 0 red;
+      animation: glitch-effect 2s infinite linear alternate-reverse; }
+@keyframes glitch-effect {
+  0% {
+    clip: rect(57px, 9999px, 10px, 0); }
+  5% {
+    clip: rect(53px, 9999px, 100px, 0); }
+  10% {
+    clip: rect(62px, 9999px, 1px, 0); }
+  15% {
+    clip: rect(64px, 9999px, 58px, 0); }
+  20% {
+    clip: rect(4px, 9999px, 77px, 0); }
+  25% {
+    clip: rect(96px, 9999px, 29px, 0); }
+  30% {
+    clip: rect(87px, 9999px, 20px, 0); }
+  35% {
+    clip: rect(2px, 9999px, 61px, 0); }
+  40% {
+    clip: rect(16px, 9999px, 56px, 0); }
+  45% {
+    clip: rect(9px, 9999px, 6px, 0); }
+  50% {
+    clip: rect(7px, 9999px, 49px, 0); }
+  55% {
+    clip: rect(51px, 9999px, 54px, 0); }
+  60% {
+    clip: rect(49px, 9999px, 57px, 0); }
+  65% {
+    clip: rect(1px, 9999px, 31px, 0); }
+  70% {
+    clip: rect(94px, 9999px, 29px, 0); }
+  75% {
+    clip: rect(96px, 9999px, 13px, 0); }
+  80% {
+    clip: rect(8px, 9999px, 95px, 0); }
+  85% {
+    clip: rect(36px, 9999px, 68px, 0); }
+  90% {
+    clip: rect(10px, 9999px, 26px, 0); }
+  95% {
+    clip: rect(2px, 9999px, 61px, 0); }
+  100% {
+    clip: rect(55px, 9999px, 1px, 0); } }
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
   height: 15em;
@@ -572,7 +645,7 @@ section#sessions, section#session {
     font-weight: bold; }
 
 section#sessions .container-fluid .row.main {
-  min-height: 60vh;
+  min-height: 80vh;
   margin-right: 1em; }
 section#sessions .container-fluid .text-muted {
   line-height: normal; }
@@ -585,7 +658,7 @@ section#sessions .container-fluid .spotMapChange p.spotName {
 
 /* ACCUEIL : SECTION #socialNetwork */
 section#socialNetwork {
-  height: 20em;
+  height: 15em;
   width: 100vw;
   background-color: #252525;
   padding-top: 3em; }
@@ -1576,7 +1649,8 @@ section#about {
       background-color: #fff;
       position: relative;
       display: flex;
-      flex-direction: column; }
+      flex-direction: column;
+      padding-left: 5em; }
     section#about .container-fluid h3 {
       margin-bottom: 1.5em;
       font-size: 1.7em; }
@@ -1587,7 +1661,7 @@ section#about {
       border-left: 15em solid #dadada;
       border-bottom: 20em solid transparent;
       position: absolute;
-      right: 20em;
+      right: 13em;
       top: 0;
       z-index: 0; }
     section#about .container-fluid .paragraph {
@@ -1601,12 +1675,10 @@ section#about {
         background-color: #fff;
         line-height: 2em;
         width: 50%;
-        margin-top: 5em;
-        margin-left: 3em; }
+        margin-top: 3em; }
       section#about .container-fluid .paragraph.about {
         width: 50%;
-        line-height: 2em;
-        margin-left: 3em; }
+        line-height: 2em; }
       section#about .container-fluid .paragraph .main {
         font-size: 1.6em;
         font-family: 'airstrike', sans-serif;
@@ -1633,7 +1705,6 @@ section#about {
         width: 12em; }
     section#about .container-fluid .videoWrap {
       width: 50%;
-      margin-left: 3em;
       padding: 2em; }
 
 /* MY PROFILE - _sidebarMenuProfile */

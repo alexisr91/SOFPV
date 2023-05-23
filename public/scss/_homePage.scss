@@ -14,9 +14,7 @@
         justify-content: center;
 
     a {
-        color:$white;
-      
-        
+        color:$white; 
    }
 }
 
@@ -29,6 +27,7 @@ section.homeWrap{
     position: absolute;
     top:0;}
 }
+
 section#home {
     display: flex;
     justify-content: center;
@@ -61,7 +60,63 @@ section#home {
         height:25em;
         filter: drop-shadow(0 0 0.5rem #940a02);
         animation: 2s linear 3s infinite alternate neon; }
-       
+
+        $steps: 20;
+        
+        body {
+            background-color: transparent;
+            padding: 100px;
+        }
+        
+        .glitch {
+            position: relative;
+            margin: 0 auto;
+            color: $white;
+            font-size: 80px;
+            font-family: 'Play', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.01em;
+            transform: scale3d(0.8,0.8,0.8);
+           
+        
+            &::before,
+            &::after {
+                content: attr(data-text);
+                position: absolute;
+                top: 0;
+                left: 0;
+                overflow: hidden;
+                background: transparent;
+                color: $white;
+                clip:rect(0,0,100px,0);
+                width: 100%;
+        
+            }
+        
+            &::before {
+                left: 7px;
+                text-shadow: 1px 1px green;
+                animation: glitch-effect 3s infinite linear alternate-reverse;
+                
+            }
+        
+            &::after {
+                left: 3px;
+                text-shadow: -1px 0 red;
+                animation: glitch-effect 2s infinite linear alternate-reverse;
+            }
+        }
+        
+        @keyframes glitch-effect{
+          
+            @for $i from 0 through $steps{
+                #{percentage($i*(1/$steps))}{
+                    clip:rect(random(100)+px,9999px,random(100)+px,0);
+                }
+            }
+            
+        }
 }
 
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
@@ -374,7 +429,7 @@ section#sessions, section#session {
 section#sessions {
     .container-fluid{
         .row.main{
-            min-height:60vh;
+            min-height:80vh;
             margin-right:1em;
         }
         .text-muted {line-height: normal;}
@@ -393,7 +448,7 @@ section#sessions {
 
 /* ACCUEIL : SECTION #socialNetwork */
 section#socialNetwork{
-    height:20em;
+    height:15em;
     width: 100vw;
     background-color: $base;
     padding-top: 3em;
