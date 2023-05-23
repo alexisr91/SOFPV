@@ -17,21 +17,21 @@
                     <div class="img-wrapper">
                         <img src="{{asset('../img/battery.png')}}" alt="icone de battery" class="img-fluid lipoIcon">
                     </div>
-                    <h4 class="value" data="{{counterLipo}}">0</h4>
+                    <h4 class="counterValue" data="{{counterLipo}}">0</h4>
                     <h5>LIPO HS</h5>
                 </div>
                 <div class="counter-wrapper">
                     <div class="img-wrapper">
                         <img src="{{asset('../img/circuit-board.png')}}" alt="icone de drone cassé" class="img-fluid">
                     </div>
-                    <h4 class="value" data="{{counterESC}}">0</h4>
+                    <h4 class="counterValue" data="{{counterESC}}">0</h4>
                     <h5>BURNED ESC</h5>
                 </div>
                 <div class="counter-wrapper">
                 <div class="img-wrapper">
                     <img src="{{asset('../img/broken.png')}}" alt="icone de drone cassé" class="img-fluid">
                 </div>
-                <h4 class="value" data="{{counterFrame}}">0</h4>
+                <h4 class="counterValue" data="{{counterFrame}}">0</h4>
                 <h5>BROKEN FRAMES</h5>
                 </div>
             </section>
@@ -191,8 +191,8 @@
 
     {# animation du counter #}
     <script>
-        window.onload = function () {
-        let counters = document.querySelectorAll('.value');
+
+        let counters = document.querySelectorAll('.counterValue');
         const speed = 2000;
 
         counters.forEach( counter => {
@@ -212,7 +212,6 @@
         });
 
         
-    };
    </script>
    
    {# map #}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="about">
+        {{include('partials/_navbarMenu.html.twig')}}
+        <div class="container-fluid">
+        <div class="wrap">
+            <div class="about paragraph">
+                <h3>Qui sommes-nous ?</h3>
+                    <p><span class="main"><strong>SO FPV</strong></span> est une communauté de passionnés de drones et d'aéromodelisme, qui pratiquent le vol en immersion dans le sud-ouest de la France.<br><br>
+                        Fondée en 2020 par un petit groupe de pilotes aux alentours de Toulouse, elle compte aujourd'hui plus de 200 membres, répartis de Bordeaux jusqu'à Montpellier.<br>
+                        Cette communauté est basée sur l'entraide entre les pilotes, qu'ils soient débutants ou confirmés, et dans laquelle on partage ses vidéos de vols, challenges, crashs et autres reviews...</br><br>
+                        SO FPV organise régulièrement des événements, des sessions de vol et des initiations pour faire découvrir ce loisir au grand public.
+                    </p>   
+            </div>
+            <div class="separator">
+                <div class="encart">
+                    <img src="{{asset('/img/logo.png')}}" alt="logo">
+                </div>
+            </div>
+            <div class="videoWrap">
+                <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube-nocookie.com/embed/zkm8fIVX_Gs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        
+            <div class="toKnow paragraph"> 
+                <h3>A savoir</h3>
+                    <p>SO FPV est un site qui a pour objectif de promouvoir le monde du FPV tout en respectant les règles de sécurité.</p>
+                    <p>Cela implique une connaissance de la règlementation et une responsabilité individuelle en tant que pilote.</p>
+                    <p>Vous pouvez retrouver les liens utiles à vos futures sessions ici :</p>
+                    <ul>
+                        <li><a href="https://www.geoportail.gouv.fr/donnees/restrictions-uas-categorie-ouverte-et-aeromodelisme" target="_blank"><b><i class="fa-solid fa-caret-right"></i> Géoportail (carte des zones soumises à des restrictions de vol)</b></a></li>
+                        <li><a href="https://www.demarches.interieur.gouv.fr/particuliers/drone-regles-pilotage-respecter" target="_blank"><b><i class="fa-solid fa-caret-right"></i> Ministère de l'Interieur: Règles de pilotage à respecter</b></a></li>
+                        <li><a href="https://www.ecologie.gouv.fr/alphatango" target="_blank"><b><i class="fa-solid fa-caret-right"></i> AlphaTango (enregistrement de vos drones)</b></a></li>
+                    </ul>
+                    <strong><p>Enjoy and fly safe <i class="fa-regular fa-face-smile-wink"></i></p></strong>
+            </div> 
+        </div>
+        </div>
+    </section>
+
+{% endblock %}
