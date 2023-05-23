@@ -1,5 +1,5 @@
 
-    window.onload = function () {
+
         //mise en place de la map avec Jawg et mapLibre
         const accessToken = 'Q9ah9vp2jsb80zff6WPhCh04KN53KZBOKSw417PFGIttmq5x0w5gYZMgItqFW2Kl';
         const map = new maplibregl.Map({
@@ -64,4 +64,4 @@
 
             })
           
-        })};
+        });

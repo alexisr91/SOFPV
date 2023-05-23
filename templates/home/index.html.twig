@@ -9,6 +9,7 @@
         <section id="home">      
             <div id="homeLogo">
                 <img src="{{asset('/img/logo.png')}}" alt="Logo SO FPV" class="img-fluid">
+                <h1 class="glitch" data-text="NEVER DISARM">NEVER DISARM</h1>
             </div>
             
             {# compteur lipo, bras, esc burned #}
@@ -45,12 +46,12 @@
                 {% set article = adminNews %}
                 {% set video = adminNews.video %}
                 {% set images = adminNews.images %}
-                        <div class="image">
+                        <div class="image mx-auto">
                             <div class="row">
                                 {{include('/partials/_articleMediaShow.html.twig')}}
                             </div>
                         </div>
-                        <div class="content"> 
+                        <div class="content mx-auto"> 
                             <h3>{{adminNews.title}}</h3>
                             <p class="card-text">{{adminNews.content|raw}}</p>
                             <span class="text-muted">Publié le {{adminNews.createdAt|date('d-m-Y')}} par {{adminNews.author.nickname}}</span>
@@ -189,9 +190,10 @@
        
     </section>
 
-    {# animation du counter #}
-    <script>
 
+    <script>
+        window.onload = function () {
+        // animation du counter 
         let counters = document.querySelectorAll('.counterValue');
         const speed = 2000;
 
@@ -211,7 +213,8 @@
              animate();
         });
 
-        
+        }
+
    </script>
    
    {# map #}
