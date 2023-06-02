@@ -458,7 +458,6 @@ section#profile {
         min-height: 30vh;
     }
 
-
     .my-drone {
         position: relative;
         .fav {
@@ -520,7 +519,7 @@ section#profile {
 
         span {
             margin: 0 1em;
-            width: 100%;
+            width: 90%;
         }
         .spotWrapper {
             border-radius: 4px;
@@ -607,6 +606,8 @@ section#search {
 
 @import "sessions";
 @import "about";
+
+@import "admin";
 
 @import "sideMenuProfile";
 

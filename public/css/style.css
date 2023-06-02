@@ -248,9 +248,135 @@ input {
 .animated-border-button:hover::after {
   width: 100%; }
 
+/* TOOLTIPS */
+[data-tooltip] {
+  --arrow-size: 5px;
+  position: relative;
+  z-index: 10; }
+
+[data-tooltip]:before,
+[data-tooltip]:after {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  left: 50%;
+  bottom: calc(100% + var(--arrow-size));
+  pointer-events: none;
+  transition: 0.2s;
+  will-change: transform; }
+
+[data-tooltip]:before {
+  content: attr(data-tooltip);
+  padding: 10px 18px;
+  min-width: 50px;
+  max-width: 300px;
+  width: max-content;
+  width: -moz-max-content;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: rgba(59, 72, 80, 0.9);
+  background-image: linear-gradient(30deg, rgba(59, 72, 80, 0.44), rgba(59, 68, 75, 0.44), rgba(60, 82, 88, 0.44));
+  box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  text-align: center;
+  white-space: pre-wrap;
+  transform: translate(-50%, calc(0px - var(--arrow-size))) scale(0.5); }
+
+/* Tooltip arrow */
+[data-tooltip]:after {
+  content: '';
+  border-style: solid;
+  border-width: var(--arrow-size) var(--arrow-size) 0px var(--arrow-size);
+  border-color: rgba(55, 64, 70, 0.9) transparent transparent transparent;
+  transition-duration: 0s;
+  transform-origin: top;
+  transform: translateX(-50%) scaleY(0); }
+
+/* Tooltip becomes visible at hover */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+  visibility: visible;
+  opacity: 1; }
+
+/* Scales from 0.5 to 1 -> grow effect */
+[data-tooltip]:hover:before {
+  transition-delay: 0.3s;
+  transform: translate(-50%, calc(0px - var(--arrow-size))) scale(1); }
+
+/* 
+  Arrow slide down effect only on mouseenter (NOT on mouseleave)
+*/
+[data-tooltip]:hover:after {
+  transition-delay: 0.5s;
+  /* Starting after the grow effect */
+  transition-duration: 0.2s;
+  transform: translateX(-50%) scaleY(1); }
+
+/* LEFT */
+/* Tooltip + arrow */
+[data-tooltip-location="left"]:before,
+[data-tooltip-location="left"]:after {
+  left: auto;
+  right: calc(100% + var(--arrow-size));
+  bottom: 50%; }
+
+/* Tooltip */
+[data-tooltip-location="left"]:before {
+  transform: translate(calc(0px - var(--arrow-size)), 50%) scale(0.5); }
+
+[data-tooltip-location="left"]:hover:before {
+  transform: translate(calc(0px - var(--arrow-size)), 50%) scale(1); }
+
+/* Arrow */
+[data-tooltip-location="left"]:after {
+  border-width: var(--arrow-size) 0px var(--arrow-size) var(--arrow-size);
+  border-color: transparent transparent transparent rgba(55, 64, 70, 0.9);
+  transform-origin: left;
+  transform: translateY(50%) scaleX(0); }
+
+[data-tooltip-location="left"]:hover:after {
+  transform: translateY(50%) scaleX(1); }
+
+/* RIGHT */
+[data-tooltip-location="right"]:before,
+[data-tooltip-location="right"]:after {
+  left: calc(100% + var(--arrow-size));
+  bottom: 50%; }
+
+[data-tooltip-location="right"]:before {
+  transform: translate(var(--arrow-size), 50%) scale(0.5); }
+
+[data-tooltip-location="right"]:hover:before {
+  transform: translate(var(--arrow-size), 50%) scale(1); }
+
+[data-tooltip-location="right"]:after {
+  border-width: var(--arrow-size) var(--arrow-size) var(--arrow-size) 0px;
+  border-color: transparent rgba(55, 64, 70, 0.9) transparent transparent;
+  transform-origin: right;
+  transform: translateY(50%) scaleX(0); }
+
+[data-tooltip-location="right"]:hover:after {
+  transform: translateY(50%) scaleX(1); }
+
+/* BOTTOM */
+[data-tooltip-location="bottom"]:before,
+[data-tooltip-location="bottom"]:after {
+  top: calc(100% + var(--arrow-size));
+  bottom: auto; }
+
+[data-tooltip-location="bottom"]:before {
+  transform: translate(-50%, var(--arrow-size)) scale(0.5); }
+
+[data-tooltip-location="bottom"]:hover:before {
+  transform: translate(-50%, var(--arrow-size)) scale(1); }
+
+[data-tooltip-location="bottom"]:after {
+  border-width: 0px var(--arrow-size) var(--arrow-size) var(--arrow-size);
+  border-color: transparent transparent rgba(55, 64, 70, 0.9) transparent;
+  transform-origin: bottom; }
+
 /* NAV MENU */
 section#navbarMenu {
-  background-color: #252525;
   width: 100vw;
   z-index: 1;
   margin: 0 auto;
@@ -360,7 +486,7 @@ section#home {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.01em;
-    transform: scale3d(0.8, 0.8, 0.8); }
+    transform: scale3d(0.6, 0.6, 0.6); }
     #homeLogo .glitch::before, #homeLogo .glitch::after {
       content: attr(data-text);
       position: absolute;
@@ -381,47 +507,47 @@ section#home {
       animation: glitch-effect 2s infinite linear alternate-reverse; }
 @keyframes glitch-effect {
   0% {
-    clip: rect(57px, 9999px, 10px, 0); }
+    clip: rect(17px, 9999px, 44px, 0); }
   5% {
-    clip: rect(53px, 9999px, 100px, 0); }
+    clip: rect(5px, 9999px, 63px, 0); }
   10% {
-    clip: rect(62px, 9999px, 1px, 0); }
+    clip: rect(93px, 9999px, 18px, 0); }
   15% {
-    clip: rect(64px, 9999px, 58px, 0); }
+    clip: rect(71px, 9999px, 32px, 0); }
   20% {
-    clip: rect(4px, 9999px, 77px, 0); }
+    clip: rect(47px, 9999px, 42px, 0); }
   25% {
-    clip: rect(96px, 9999px, 29px, 0); }
+    clip: rect(27px, 9999px, 11px, 0); }
   30% {
-    clip: rect(87px, 9999px, 20px, 0); }
+    clip: rect(3px, 9999px, 71px, 0); }
   35% {
-    clip: rect(2px, 9999px, 61px, 0); }
+    clip: rect(30px, 9999px, 48px, 0); }
   40% {
-    clip: rect(16px, 9999px, 56px, 0); }
+    clip: rect(78px, 9999px, 62px, 0); }
   45% {
-    clip: rect(9px, 9999px, 6px, 0); }
+    clip: rect(66px, 9999px, 80px, 0); }
   50% {
-    clip: rect(7px, 9999px, 49px, 0); }
+    clip: rect(9px, 9999px, 91px, 0); }
   55% {
-    clip: rect(51px, 9999px, 54px, 0); }
+    clip: rect(35px, 9999px, 24px, 0); }
   60% {
-    clip: rect(49px, 9999px, 57px, 0); }
+    clip: rect(66px, 9999px, 47px, 0); }
   65% {
-    clip: rect(1px, 9999px, 31px, 0); }
+    clip: rect(34px, 9999px, 74px, 0); }
   70% {
-    clip: rect(94px, 9999px, 29px, 0); }
+    clip: rect(67px, 9999px, 15px, 0); }
   75% {
-    clip: rect(96px, 9999px, 13px, 0); }
+    clip: rect(21px, 9999px, 54px, 0); }
   80% {
-    clip: rect(8px, 9999px, 95px, 0); }
+    clip: rect(55px, 9999px, 48px, 0); }
   85% {
-    clip: rect(36px, 9999px, 68px, 0); }
+    clip: rect(55px, 9999px, 84px, 0); }
   90% {
-    clip: rect(10px, 9999px, 26px, 0); }
+    clip: rect(89px, 9999px, 54px, 0); }
   95% {
-    clip: rect(2px, 9999px, 61px, 0); }
+    clip: rect(36px, 9999px, 25px, 0); }
   100% {
-    clip: rect(55px, 9999px, 1px, 0); } }
+    clip: rect(61px, 9999px, 58px, 0); } }
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
   height: 15em;
@@ -1514,7 +1640,7 @@ section#profile {
     min-height: 10em; }
     section#profile .sessions span {
       margin: 0 1em;
-      width: 100%; }
+      width: 90%; }
     section#profile .sessions .spotWrapper {
       border-radius: 4px;
       display: flex;
@@ -1707,31 +1833,159 @@ section#about {
       width: 50%;
       padding: 2em; }
 
+/*nav bar admin */
+section#adminNavbarMenu {
+  width: 100vw;
+  z-index: 1;
+  margin: 0 auto;
+  z-index: 3;
+  background-color: transparent !important;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; }
+  section#adminNavbarMenu a.navbar-brand {
+    font-family: 'airstrike', sans-serif;
+    font-size: 2rem; }
+  section#adminNavbarMenu a.position-relative span {
+    background-color: #DADADA;
+    color: #252525; }
+
+aside.adminSidebarMenu {
+  width: 15vw; }
+
+/* login */
+section#adminLogin {
+  text-align: center; }
+  section#adminLogin h3 {
+    font-family: "Play", sans-serif;
+    margin-bottom: 1em; }
+  section#adminLogin .container-fluid {
+    background-image: url("/img/quadsLavoir.jpeg");
+    background-color: #252525;
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex; }
+    section#adminLogin .container-fluid .formLogin {
+      margin: auto;
+      width: 20%;
+      padding: 2em;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
+
+/* dashboard */
+section#adminDashboard {
+  background-color: #fafafa;
+  min-height: 96vh; }
+  section#adminDashboard .container-fluid {
+    display: flex;
+    height: 90vh; }
+    section#adminDashboard .container-fluid .tablesWrap {
+      margin-top: 3em; }
+      section#adminDashboard .container-fluid .tablesWrap h5 {
+        margin-bottom: 1em; }
+    section#adminDashboard .container-fluid table {
+      border: transparent;
+      border-radius: 4px; }
+      section#adminDashboard .container-fluid table thead {
+        background-color: #DADADA; }
+      section#adminDashboard .container-fluid table th, section#adminDashboard .container-fluid table td {
+        padding: 1em; }
+    section#adminDashboard .container-fluid .wrap {
+      margin: 2em;
+      padding: 2em;
+      background-color: #fff;
+      width: 85%;
+      border-radius: 3px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
+    section#adminDashboard .container-fluid .statWrap {
+      margin-top: 3em; }
+    section#adminDashboard .container-fluid .card {
+      min-height: 5em; }
+      section#adminDashboard .container-fluid .card .col-4 {
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+      section#adminDashboard .container-fluid .card .col-8 {
+        text-align: center; }
+
+/*PAGE GESTION USERS */
+section#adminUsers .container-fluid {
+  display: flex;
+  min-height: 90vh;
+  background-color: #fafafa; }
+  section#adminUsers .container-fluid .wrap {
+    display: flex;
+    margin: 1em; }
+  section#adminUsers .container-fluid .row-grey, section#adminUsers .container-fluid .row-white {
+    display: flex;
+    align-items: center;
+    padding: 1em 2em;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer; }
+    section#adminUsers .container-fluid .row-grey:hover, section#adminUsers .container-fluid .row-white:hover {
+      border: 1px solid #252525;
+      transform: translateX(-0.5em); }
+    section#adminUsers .container-fluid .row-grey .avatar, section#adminUsers .container-fluid .row-white .avatar {
+      width: 40px;
+      margin-right: 0.5em; }
+  section#adminUsers .container-fluid .row-grey {
+    background-color: #DADADA; }
+  section#adminUsers .container-fluid .row-white {
+    background-color: #fafafa; }
+  section#adminUsers .container-fluid .viewUser {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1em;
+    padding: 3em;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
+    section#adminUsers .container-fluid .viewUser .main h3 {
+      letter-spacing: 1px; }
+    section#adminUsers .container-fluid .viewUser .main .avatar {
+      width: 125px;
+      box-shadow: rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px;
+      margin-bottom: 2em; }
+    section#adminUsers .container-fluid .viewUser .infos {
+      display: flex; }
+      section#adminUsers .container-fluid .viewUser .infos .dataUser {
+        margin-left: 3em;
+        position: relative;
+        width: 70%; }
+      section#adminUsers .container-fluid .viewUser .infos .text-muted {
+        font-size: 1em; }
+    section#adminUsers .container-fluid .viewUser .actions {
+      position: absolute;
+      right: 0;
+      top: 1em; }
+
 /* MY PROFILE - _sidebarMenuProfile */
-aside.sidebarMenu {
+aside.sidebarMenu, aside.adminSidebarMenu {
   z-index: 0;
   overflow-x: hidden;
   background-color: #fafafa;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  height: 100%;
-  width: 10vw; }
-  aside.sidebarMenu nav {
+  height: 100%; }
+  aside.sidebarMenu nav, aside.adminSidebarMenu nav {
     margin-top: 5em; }
-  aside.sidebarMenu a {
+  aside.sidebarMenu a, aside.adminSidebarMenu a {
     color: #252525; }
-    aside.sidebarMenu a:hover {
+    aside.sidebarMenu a:hover, aside.adminSidebarMenu a:hover {
       color: #252525; }
-  aside.sidebarMenu ul {
+  aside.sidebarMenu ul, aside.adminSidebarMenu ul {
     padding: 0;
     margin: 0; }
-  aside.sidebarMenu li {
+  aside.sidebarMenu li, aside.adminSidebarMenu li {
     padding: 1em 2em;
     width: 100%;
     height: 100%; }
 
-aside.sidebarMenu li:hover a, aside.sidebarMenu li:hover {
+aside.sidebarMenu {
+  width: 10vw; }
+
+aside.sidebarMenu li:hover a, aside.sidebarMenu li:hover, aside.adminSidebarMenu li:hover a, aside.adminSidebarMenu li:hover {
   background-color: #DADADA; }
 
 section#myArticles aside.sidebarMenu {

@@ -23,7 +23,6 @@ use App\Repository\LikesRepository;
 use App\Repository\ArticleRepository;
 use Symfony\Component\Form\FormError;
 use App\Repository\CategoryRepository;
-use App\Repository\CommentRepository;
 use FFMpeg\Filters\Video\ResizeFilter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
