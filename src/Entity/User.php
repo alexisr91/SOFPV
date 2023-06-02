@@ -111,6 +111,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'users')]
     private Collection $sessions;
 
+    #[ORM\Column]
+    private ?bool $active = null;
+
 
     //En cas d'appel de l'utilisateur via les articles, on passera par le pseudo
     public function __toString()
@@ -134,6 +137,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->orders = new ArrayCollection();
         $this->carts = new ArrayCollection();
         $this->sessions = new ArrayCollection();
+        $this->active = true;
     }
     
     //adresse complète de l'user avec ou sans complément d'adresse
@@ -644,6 +648,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->sessions->removeElement($session)) {
             $session->removeUser($this);
         }
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

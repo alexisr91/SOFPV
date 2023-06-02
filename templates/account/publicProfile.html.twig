@@ -60,7 +60,7 @@
                     </div>
                     <div class="sessions">
                     {% if user.sessions is empty %}
-                        <span class="alert alert-warning">Pas de sessions prévues</span>
+                        <span class="alert alert-warning">Pas de sessions prévues.</span>
                     {% else %}
                         {% for session in sessions %}
                         {% set spot = session.mapSpot %}

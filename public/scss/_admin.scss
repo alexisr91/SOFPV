@@ -1,0 +1,157 @@
+/*nav bar admin */
+section#adminNavbarMenu {
+    width:100vw;
+    z-index:1;
+    margin: 0 auto; 
+    z-index: 3;
+    background-color: transparent !important;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+    a.navbar-brand {
+        font-family:'airstrike', sans-serif;
+        font-size: 2rem;
+    }
+    a.position-relative span{
+        background-color: $grey;
+        color: $base;
+    }
+}
+aside.adminSidebarMenu {
+    width:15vw;
+}
+
+/* login */
+section#adminLogin {
+    text-align: center;
+    h3 {font-family: "Play", sans-serif; margin-bottom: 1em;}
+
+    .container-fluid {
+  
+        background-image: url('/img/quadsLavoir.jpeg');
+        background-color: $base;
+        background-blend-mode: multiply;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+
+        .formLogin{
+            margin: auto;
+            width: 20%;
+            padding: 2em;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+    }
+}
+
+/* dashboard */
+section#adminDashboard{
+    background-color: $white;
+    min-height:96vh;
+
+    .container-fluid {
+        display: flex;
+        height: 90vh;
+
+        .tablesWrap{
+            margin-top: 3em;
+            h5{ margin-bottom: 1em;}
+        }
+        table {
+            border:transparent;
+            border-radius: 4px;
+            thead {background-color: $grey;}
+            th, td {
+                padding:1em;
+            }
+        }
+
+        .wrap {
+            margin: 2em;
+            padding: 2em;
+            background-color: #fff;
+            width:85%;
+            border-radius: 3px;
+            box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+
+        .statWrap {
+            margin-top: 3em;
+        }
+        .card {
+            min-height: 5em;
+
+            .col-4{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .col-8{
+                text-align:center;
+            }
+        }
+    }
+}
+
+/*PAGE GESTION USERS */
+section#adminUsers {
+    .container-fluid {
+        display: flex;
+        min-height: 90vh;
+        background-color: $white;
+
+        .wrap {display: flex; margin:1em}
+
+        .row-grey, .row-white {
+            display: flex;
+            align-items: center;
+            padding: 1em 2em;
+            border:1px solid transparent;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:hover{
+                border: 1px solid  $base;
+                transform:translateX(-0.5em);
+            }
+
+            .avatar{width: 40px; margin-right: 0.5em;}
+        }
+
+        .row-grey {background-color: $grey;}
+        .row-white {background-color: $white;}
+
+        .viewUser{
+            display: flex;
+            flex-direction: column;
+            margin-left: 1em;
+            padding: 3em;
+            box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            .main {
+                h3 {letter-spacing: 1px;}
+              
+                .avatar {
+                    width: 125px;
+                     box-shadow:rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px;
+                    margin-bottom: 2em;
+                }
+        
+            }
+
+            .infos{
+                display: flex;
+                .dataUser { margin-left: 3em; position: relative; width:70%}
+                .text-muted {font-size: 1em;}
+            }
+
+            .actions {
+                position: absolute;
+                right:0;
+                top:1em;
+
+            }
+        }
+    }
+}

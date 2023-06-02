@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+    <section id="adminLogin">
+        <div class="container-fluid">
+            <div class="formLogin">
+                <h2>SO FPV</h2>
+                <h3><i class="fa-solid fa-user-lock"></i> Accès administrateur<h3/>
+                <form action="{{ path('admin_login') }}" method="post">
+                        <div class="input-group mb-4">
+                            <div class="input-group-text"><i class="fa-solid fa-at"></i></div>
+                                <input type="text" id="username" name="_username" value="{{ username }}" placeholder="Email" class="form-control"/>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-text"><i class="fa-solid fa-unlock-keyhole"></i></div>
+                            <input type="password" id="password" name="_password" placeholder="Mot de passe" class="form-control"/>
+                        </div>
+                        {% if error %}
+                            <div class="alert alert-danger"><i class="fa-solid fa-triangle-exclamation"></i> Identifiant ou mot de passe incorrect.</div>
+                        {% endif %}
+                    
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-dark btn-block">Connexion</button>
+                        </div>
+                        
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}
+{% block footer %}{% endblock %}
+

@@ -40,7 +40,7 @@ class CommentRepository extends ServiceEntityRepository
     }
 
 
-    //Retourne le nombre de commentaires
+    //Retourne le nombre de commentaires par article
     public function findNewComments($id){
         return $this->createQueryBuilder('c')
            ->select('count(c)')

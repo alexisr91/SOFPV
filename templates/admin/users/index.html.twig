@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="adminUsers">
+            {{include('partials/_adminNavbarMenu.html.twig')}}
+        <div class="container-fluid">
+
+            <div class="sidebar">
+                {{include('partials/_adminSidebarMenu.html.twig')}}
+            </div>
+            
+            <div class="row wrap pt-4 w-100">
+                <h3>Gestion des utilisateurs</h3>
+                <div class="col">
+                {% if pagination.data is empty %}
+                    <div class="w-100">
+                        <span class="alert alert-warning d-block">Il n'y a pas encore d'utilisateurs inscrits.</span>
+                    </div>
+                {% else %}
+                    <div class="d-flex align-item-center justify-content-between px-3">
+                        <p><b>Utilisateur</b></p>
+                        <p><b>Inscrit le</b></p>
+                        <p><b>Autorisation</b></p>
+                    </div>
+                    <ul class="nav-tabs">
+                        
+                    {% for user in pagination.data %} 
+
+                    <li data-toggle="tab" data-link="user-{{user.id}}">
+                        {# alternance des couleurs pour une meilleure lecture #}
+                        {% if loop.index is divisible by(2) %}
+                        <div class="row row-white">
+                        {% else %}
+                        <div class="row row-grey">
+                        {% endif %}
+                            <div class="col">
+                                <div class="d-flex">
+                                    <div class="col d-flex align-items-center pe-3">
+                                        <div class="avatar">
+                                            <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" class="img-fluid">
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <b>{{user.nickname}}</b>
+                                                {{user.email}}
+                                        </div>
+                                    </div>
+                                    <div class="my-auto">
+                                        <small>{{user.createdAt|date('d-m-Y')}}</small>
+                                    </div>
+                                    <div class="col d-flex align-items-center justify-content-end ps-3">
+                                        {% if user.active %}
+                                            <span class="badge bg-success px-3 py-2">Actif</span>
+                                        {% else %}
+                                            <span class="badge bg-danger px-3 py-2">Inactif</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>   
+                    {% endfor %}
+                    </ul>
+                    <div class="mt-4 p-3">
+                        {{pagination.display()}}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="col tab-content viewUser"> 
+                    {% for user in pagination.data %}
+                         <div id="user-{{user.id}}" {{loop.first ? 'class="tab-pane active"': 'class="tab-pane"'}}>
+                            <div class="main">
+                                <div class="avatar">
+                                    <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" class="img-fluid">
+                                </div>
+                                <h3>{{user.nickname}}</h3>
+                            </div>
+
+                            <hr>
+
+                            <div class="infos">
+
+                                <div class="text-muted">
+                                    <p> <i class="fa-regular fa-address-card"></i> Nom </p>
+                                    <p><i class="fa-solid fa-at"></i> Mail</p>
+                                    <p><i class="fa-solid fa-user-check"></i> Inscrit le </p>
+                                    <p><i class="fa-solid fa-map-pin"></i> Adresse</p> 
+                                </div>
+
+                                <div class="dataUser">
+                                {% if user.firstname and user.lastname %}
+                                    <p>{{user.firstname}} {{user.lastname}}</p>
+                                    {% else %}
+                                        <p><i>Non renseigné</i></p>                   
+                                    {% endif %} 
+                                    <p>{{user.email}}</p>
+                                    <p>{{user.createdAt|date('d-m-Y')}}</p>
+                                    <p>{{user.fullAddress|raw}}</p>
+                                    
+                                    <div class="actions">
+                                        {% if user.active %}
+                                            <a href="{{path('admin_user_desactivate', {'id' : user.id })}}" class="btn btn-danger"><i class="fa-solid fa-user-slash"></i> Désactiver le compte</a>
+                                        {% else  %}
+                                            <a href="{{path('admin_user_activate', {'id' : user.id })}}" class="btn btn-success"><i class="fa-solid fa-user-check"></i> Activer le compte</a>
+                                        {% endif %}
+                                    </div>
+
+                                </div> 
+
+                                
+                            </div>
+
+                        </div> 
+                    {% endfor %}
+                </div>   
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // changement d'onglet pour voir chaque user en detail et pouvoir desactiver son compte
+
+        //récupération des onglets
+        let tabs = document.querySelectorAll('[data-toggle]');
+        //onglet actif
+        let viewAlreadyActive = document.querySelector('.tab-pane.active');
+        
+
+       tabs.forEach(function(tab){
+        //id de l'user récupéré sur chaque onglet
+        let tabData = tab.dataset.link;
+            //on attend le click sur un des onglets
+            tab.addEventListener('click', function(tab){
+
+                let view = document.getElementById(tabData);
+                //on enlève la classe active de l'onglet deja affiché  
+                viewAlreadyActive.classList.remove('active');
+                //pour ajouter "active" à l'onglet cliqué et donc afficher son contenu
+                view.classList.toggle('active');
+                //on change l'onglet considéré comme actif pour gérer le prochain click
+                viewAlreadyActive = view;
+                     
+            });
+        })
+
+    </script>
+{% endblock %}
+
+

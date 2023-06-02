@@ -61,7 +61,7 @@ class AppFixtures extends Fixture
         $manager->persist($adminDrone);        
 
         //Création d'un jeu de fausses données pour les utilisateurs
-        for ($i = 0; $i < 8 ; $i++){
+        for ($i = 0; $i < 9 ; $i++){
             $user = new User();
 
             $user->setEmail($faker->safeEmail())

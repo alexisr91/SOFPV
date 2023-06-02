@@ -1,6 +1,6 @@
 /* MY PROFILE - _sidebarMenuProfile */
 
-aside.sidebarMenu{
+aside.sidebarMenu, aside.adminSidebarMenu{
     z-index: 0;
     overflow-x: hidden;
     background-color: $white;
@@ -8,7 +8,6 @@ aside.sidebarMenu{
     justify-content: flex-start;
     flex-direction: column;
     height: 100%;
-    width: 10vw;
     nav{
         margin-top: 5em;
     }
@@ -31,8 +30,10 @@ aside.sidebarMenu{
     }
 }
 
+aside.sidebarMenu {  width: 10vw; }
 
-aside.sidebarMenu li:hover a,  aside.sidebarMenu li:hover {
+
+aside.sidebarMenu li:hover a,  aside.sidebarMenu li:hover, aside.adminSidebarMenu li:hover a, aside.adminSidebarMenu li:hover {
     background-color: $grey ; 
 }
 
