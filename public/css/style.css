@@ -507,47 +507,47 @@ section#home {
       animation: glitch-effect 2s infinite linear alternate-reverse; }
 @keyframes glitch-effect {
   0% {
-    clip: rect(17px, 9999px, 44px, 0); }
+    clip: rect(85px, 9999px, 77px, 0); }
   5% {
-    clip: rect(5px, 9999px, 63px, 0); }
+    clip: rect(72px, 9999px, 99px, 0); }
   10% {
-    clip: rect(93px, 9999px, 18px, 0); }
+    clip: rect(81px, 9999px, 4px, 0); }
   15% {
-    clip: rect(71px, 9999px, 32px, 0); }
+    clip: rect(65px, 9999px, 18px, 0); }
   20% {
-    clip: rect(47px, 9999px, 42px, 0); }
+    clip: rect(99px, 9999px, 14px, 0); }
   25% {
-    clip: rect(27px, 9999px, 11px, 0); }
+    clip: rect(37px, 9999px, 7px, 0); }
   30% {
-    clip: rect(3px, 9999px, 71px, 0); }
+    clip: rect(1px, 9999px, 15px, 0); }
   35% {
-    clip: rect(30px, 9999px, 48px, 0); }
+    clip: rect(8px, 9999px, 73px, 0); }
   40% {
-    clip: rect(78px, 9999px, 62px, 0); }
+    clip: rect(78px, 9999px, 68px, 0); }
   45% {
-    clip: rect(66px, 9999px, 80px, 0); }
+    clip: rect(72px, 9999px, 17px, 0); }
   50% {
-    clip: rect(9px, 9999px, 91px, 0); }
+    clip: rect(51px, 9999px, 36px, 0); }
   55% {
-    clip: rect(35px, 9999px, 24px, 0); }
+    clip: rect(11px, 9999px, 78px, 0); }
   60% {
-    clip: rect(66px, 9999px, 47px, 0); }
+    clip: rect(61px, 9999px, 84px, 0); }
   65% {
-    clip: rect(34px, 9999px, 74px, 0); }
+    clip: rect(15px, 9999px, 82px, 0); }
   70% {
-    clip: rect(67px, 9999px, 15px, 0); }
+    clip: rect(45px, 9999px, 28px, 0); }
   75% {
-    clip: rect(21px, 9999px, 54px, 0); }
+    clip: rect(83px, 9999px, 47px, 0); }
   80% {
-    clip: rect(55px, 9999px, 48px, 0); }
+    clip: rect(17px, 9999px, 81px, 0); }
   85% {
-    clip: rect(55px, 9999px, 84px, 0); }
+    clip: rect(24px, 9999px, 60px, 0); }
   90% {
-    clip: rect(89px, 9999px, 54px, 0); }
+    clip: rect(20px, 9999px, 48px, 0); }
   95% {
-    clip: rect(36px, 9999px, 25px, 0); }
+    clip: rect(98px, 9999px, 44px, 0); }
   100% {
-    clip: rect(61px, 9999px, 58px, 0); } }
+    clip: rect(62px, 9999px, 81px, 0); } }
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
   height: 15em;
@@ -1061,54 +1061,54 @@ section#droneEdit .avatar {
   object-position: center; }
 
 /*Mes articles */
-section#myArticles {
+section#myArticles, section#adminBlog {
   background-image: url("/img/forestView.jpg"); }
-  section#myArticles article {
+  section#myArticles article, section#adminBlog article {
     position: relative; }
-  section#myArticles .container-fluid {
+  section#myArticles .container-fluid, section#adminBlog .container-fluid {
     display: flex;
     min-height: 100vh; }
-    section#myArticles .container-fluid .article-thumb {
+    section#myArticles .container-fluid .article-thumb, section#adminBlog .container-fluid .article-thumb {
       width: 40%;
       display: flex;
       align-items: center;
       background-color: rgba(218, 218, 218, 0.4);
       position: relative; }
-    section#myArticles .container-fluid .row-cols-md-1 {
+    section#myArticles .container-fluid .row-cols-md-1, section#adminBlog .container-fluid .row-cols-md-1 {
       margin-bottom: 3em; }
-    section#myArticles .container-fluid .card-title {
+    section#myArticles .container-fluid .card-title, section#adminBlog .container-fluid .card-title {
       margin-left: 0.5em; }
-    section#myArticles .container-fluid .sidebar {
+    section#myArticles .container-fluid .sidebar, section#adminBlog .container-fluid .sidebar {
       width: 10%; }
-    section#myArticles .container-fluid .article-body {
+    section#myArticles .container-fluid .article-body, section#adminBlog .container-fluid .article-body {
       width: 100%; }
-    section#myArticles .container-fluid .article-content {
+    section#myArticles .container-fluid .article-content, section#adminBlog .container-fluid .article-content {
       padding-right: 1em; }
-    section#myArticles .container-fluid .article-footer {
+    section#myArticles .container-fluid .article-footer, section#adminBlog .container-fluid .article-footer {
       display: flex;
       justify-content: space-between; }
-    section#myArticles .container-fluid .settings a {
+    section#myArticles .container-fluid .settings a, section#adminBlog .container-fluid .settings a {
       margin: 0 1em; }
-    section#myArticles .container-fluid .stats {
+    section#myArticles .container-fluid .stats, section#adminBlog .container-fluid .stats {
       display: flex;
       max-height: 3em; }
-      section#myArticles .container-fluid .stats .col {
+      section#myArticles .container-fluid .stats .col, section#adminBlog .container-fluid .stats .col {
         display: flex;
         justify-content: center;
         align-items: center; }
-      section#myArticles .container-fluid .stats .row {
+      section#myArticles .container-fluid .stats .row, section#adminBlog .container-fluid .stats .row {
         padding: 0;
         margin-right: 1em;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
         flex-grow: 0; }
-      section#myArticles .container-fluid .stats .icon {
+      section#myArticles .container-fluid .stats .icon, section#adminBlog .container-fluid .stats .icon {
         background-color: #DADADA;
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px; }
-  section#myArticles .thumb-wrap {
+  section#myArticles .thumb-wrap, section#adminBlog .thumb-wrap {
     height: 17em;
     width: 100%; }
-    section#myArticles .thumb-wrap img {
+    section#myArticles .thumb-wrap img, section#adminBlog .thumb-wrap img {
       object-fit: cover;
       width: 100%;
       height: 100%; }
@@ -1493,29 +1493,29 @@ section#blog {
   section#blog article {
     margin-top: 0 !important; }
 
-section#blog .row.g-0, section#blogHome .row.g-0, section#search .row.g-0, section#profile .row.g-0 {
+section#blog .row.g-0, section#blogHome .row.g-0, section#search .row.g-0, section#profile .row.g-0, section#adminBlog .row.g-0 {
   width: 100%; }
-section#blog img, section#blogHome img, section#search img, section#profile img {
+section#blog img, section#blogHome img, section#search img, section#profile img, section#adminBlog img {
   object-fit: cover;
   width: 100%;
   height: 100%; }
-section#blog .author, section#blogHome .author, section#search .author, section#profile .author {
+section#blog .author, section#blogHome .author, section#search .author, section#profile .author, section#adminBlog .author {
   display: flex;
   align-items: center;
   border-radius: 2px;
   height: 3em;
   margin-bottom: 1em;
   padding-right: 1em; }
-  section#blog .author .author-avatar, section#blogHome .author .author-avatar, section#search .author .author-avatar, section#profile .author .author-avatar {
+  section#blog .author .author-avatar, section#blogHome .author .author-avatar, section#search .author .author-avatar, section#profile .author .author-avatar, section#adminBlog .author .author-avatar {
     height: 100%; }
-    section#blog .author .author-avatar img, section#blogHome .author .author-avatar img, section#search .author .author-avatar img, section#profile .author .author-avatar img {
+    section#blog .author .author-avatar img, section#blogHome .author .author-avatar img, section#search .author .author-avatar img, section#profile .author .author-avatar img, section#adminBlog .author .author-avatar img {
       background-color: #fafafa;
       width: 100%;
       height: 100%;
       border-radius: 3px; }
-  section#blog .author .author-nickname, section#blogHome .author .author-nickname, section#search .author .author-nickname, section#profile .author .author-nickname {
+  section#blog .author .author-nickname, section#blogHome .author .author-nickname, section#search .author .author-nickname, section#profile .author .author-nickname, section#adminBlog .author .author-nickname {
     padding: 0 1em; }
-    section#blog .author .author-nickname h4, section#blogHome .author .author-nickname h4, section#search .author .author-nickname h4, section#profile .author .author-nickname h4 {
+    section#blog .author .author-nickname h4, section#blogHome .author .author-nickname h4, section#search .author .author-nickname h4, section#profile .author .author-nickname h4, section#adminBlog .author .author-nickname h4 {
       margin: 0; }
 
 section#blog, section#myArticles {
@@ -1917,6 +1917,11 @@ section#adminUsers .container-fluid {
   section#adminUsers .container-fluid .wrap {
     display: flex;
     margin: 1em; }
+  section#adminUsers .container-fluid .titleTable {
+    padding-left: 4em;
+    padding-right: 2em; }
+  section#adminUsers .container-fluid .nav-tabs {
+    border-bottom: 1px solid transparent !important; }
   section#adminUsers .container-fluid .row-grey, section#adminUsers .container-fluid .row-white {
     display: flex;
     align-items: center;
@@ -1924,21 +1929,26 @@ section#adminUsers .container-fluid {
     border: 1px solid transparent;
     border-radius: 4px;
     cursor: pointer; }
-    section#adminUsers .container-fluid .row-grey:hover, section#adminUsers .container-fluid .row-white:hover {
-      border: 1px solid #252525;
-      transform: translateX(-0.5em); }
     section#adminUsers .container-fluid .row-grey .avatar, section#adminUsers .container-fluid .row-white .avatar {
       width: 40px;
       margin-right: 0.5em; }
   section#adminUsers .container-fluid .row-grey {
     background-color: #DADADA; }
+    section#adminUsers .container-fluid .row-grey:hover, section#adminUsers .container-fluid .row-grey:focus {
+      box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+      transform: translateX(-0.5em); }
   section#adminUsers .container-fluid .row-white {
     background-color: #fafafa; }
+    section#adminUsers .container-fluid .row-white:hover, section#adminUsers .container-fluid .row-white:focus {
+      box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+      transform: translateX(-0.5em); }
   section#adminUsers .container-fluid .viewUser {
     display: flex;
     flex-direction: column;
-    margin-left: 1em;
+    margin: 0 2em 5em 2em;
     padding: 3em;
+    background: #fff;
+    border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
     section#adminUsers .container-fluid .viewUser .main h3 {
       letter-spacing: 1px; }
@@ -1958,6 +1968,42 @@ section#adminUsers .container-fluid {
       position: absolute;
       right: 0;
       top: 1em; }
+
+section#adminBlog .container-fluid {
+  background-color: #fafafa; }
+  section#adminBlog .container-fluid .wrap {
+    width: 75%;
+    margin: 0 auto;
+    display: block; }
+  section#adminBlog .container-fluid .article {
+    display: flex;
+    position: relative; }
+    section#adminBlog .container-fluid .article .article-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0 1em; }
+    section#adminBlog .container-fluid .article .article-content {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 7;
+      line-clamp: 7;
+      -webkit-box-orient: vertical; }
+  section#adminBlog .container-fluid .date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1em; }
+  section#adminBlog .container-fluid .stats .row {
+    margin: 0 0.5em; }
+  section#adminBlog .container-fluid .stats .alert {
+    margin-bottom: 0;
+    margin-left: 1em;
+    border: none;
+    border-radius: 0; }
+    section#adminBlog .container-fluid .stats .alert .icon {
+      color: #B30B00; }
 
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu, aside.adminSidebarMenu {
