@@ -101,7 +101,6 @@ class Pagination {
         $this->value = $value;
         return $this;
     }
-    
 
     //Est ce qu'on a indiqué une propriété et une valeur pour le critère du findBy ?
     private function isThereAProperty(){
@@ -130,11 +129,11 @@ class Pagination {
 
         $order = $this->order;
         
-        //on construit notre requete suivant si le critère propriété et valeur a été indiqué
+        //on construit notre requete suivant si le critère propriété et valeur a été indiqué et/ou avec plusieurs résultats (recherche via une barre avec un mot complété à moitié par exemple)
         if(!$this->isThereAProperty() ){
             $data = $repo->findBy([],['createdAt'=> $order], $this->limit, $offset);
             return $data;
-        } else {
+        } else if ($this->isThereAProperty())  {
            $data = $repo->findBy([$this->property => $this->value],['createdAt'=> $order], $this->limit, $offset); 
            return $data;
         }

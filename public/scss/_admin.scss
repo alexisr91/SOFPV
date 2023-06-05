@@ -103,7 +103,11 @@ section#adminUsers {
         background-color: $white;
 
         .wrap {display: flex; margin:1em}
-
+        .titleTable {
+            padding-left: 4em;
+            padding-right: 2em;
+        }
+        .nav-tabs {border-bottom: 1px solid transparent !important;}
         .row-grey, .row-white {
             display: flex;
             align-items: center;
@@ -112,22 +116,31 @@ section#adminUsers {
             border-radius: 4px;
             cursor: pointer;
 
-            &:hover{
-                border: 1px solid  $base;
-                transform:translateX(-0.5em);
-            }
-
             .avatar{width: 40px; margin-right: 0.5em;}
         }
 
-        .row-grey {background-color: $grey;}
-        .row-white {background-color: $white;}
+        .row-grey {background-color: $grey; 
+             
+            &:hover, &:focus{
+            box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.20);
+            transform:translateX(-0.5em);}
+        
+        }
+        .row-white {background-color: $white;
+            &:hover, &:focus{
+                box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.20);
+                transform:translateX(-0.5em);
+            }
+        
+        }
 
         .viewUser{
             display: flex;
             flex-direction: column;
-            margin-left: 1em;
+            margin: 0 2em 5em 2em;
             padding: 3em;
+            background:#fff;
+            border-radius: 4px;
             box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
             .main {
                 h3 {letter-spacing: 1px;}
@@ -153,5 +166,57 @@ section#adminUsers {
 
             }
         }
+    }
+}
+
+section#adminBlog {
+    .container-fluid {
+        background-color: $white;
+        .wrap {
+            width:75% ;
+            margin: 0 auto;
+            display: block;
+        }
+        .article {
+            display: flex;
+            position: relative;
+        
+            .article-body {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 0 1em;
+            }
+            .article-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 7; 
+                    line-clamp: 7;
+            -webkit-box-orient: vertical;
+            }
+        }
+        .date {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 1em;
+        }
+        .stats {
+            .row {margin: 0 0.5em;}
+            .alert {
+                margin-bottom: 0;
+                margin-left: 1em;
+                border:none;
+                border-radius: 0;
+
+                .icon {color:$accent;}
+            }
+        }
+
+        
+
+
+
     }
 }
