@@ -28,108 +28,33 @@
                 </div>
                 
             <div class="row row-cols-md-1 g-4 px-3">
-                  {% if pagination.data is empty %}
+                {% if pagination.data is empty %}
                 <div class="w-100">
-                    <span class="alert alert-warning d-block">Vous n'avez pas encore publié d'articles.</span>
+                    <span class="alert alert-warning d-block">Il n'y a pas encore d'articles.</span>
                 </div>
                 {% else %}
-                {% if requestedArticles is empty %}
-                        {% set data = pagination.data %}
-                    {% else %}
-                        {% set data = requestedArticles %}
-                    {% endif %}
+                    {# si on a une requete, on affiche que les résultats de la requete #}
+                     {% if app.request.query.get('q', null)  %}
 
-                {% for article in data %}
-                    <article class="col">
-                        <div class="article">  
-                            <div class="article-thumb">
-                              <div class="thumb-wrap">
-                                {% if article.video %}
-                                    {% set video = article.video %}
-                                    {% if video.isUploaded %}
-                                        <img class="figure-img rounded " src="{{asset('/uploads/article/video/thumb/'~ video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
-                                    {% else %}
-                                        {% include('/partials/_video.html.twig') %} 
-                                    {% endif %}
-                                {% elseif article.images is not empty %}
-                                  {% for image in article.images %}
-                                      {% if loop.first %}
-                                          <img class="figure-img rounded " src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
-                                      {% endif %}
-                                  {% endfor %}
-                              {% else %}
-                                  <img class="figure-img rounded " src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
-                              {% endif %}
-                              </div>
-                            </div>
-                            <div class="article-body">
-                                <div>
-                                    <div class="d-flex mb-2">            
-                                      <div class="category-badge badge {{article.category}}">
-                                          {{article.category|capitalize}}
-                                      </div>
-                                          <h5 class="card-title">{{article.title|capitalize}}</h5>
-                                    </div> 
-                                    {# Pour afficher une partie du contenu et utiliser les 2 filtres de twig pour tronquer + afficher avec les sauts de ligne #}
-                                    {% set articleContent = article.content|u.truncate(300, '...', false) %}
-                                    <p class="article-content">{{articleContent|raw}}</p>
-                                </div>
-                                <div class="article-footer">
-                                    <div class="stats">
-                                        <div class="alert row">
-                                            <div class="col">
-                                                {{article.alerts|length}}
-                                            </div>
-                                           <div class="col icon">
-                                                <i class="fa-solid fa-triangle-exclamation"></i>
-                                           </div>
-                                        </div>
-                                        <div class="views row">
-                                            <div class="col">
-                                                {{article.views}}
-                                            </div>
-                                           <div class="col icon">
-                                                <i class="fa-solid fa-eye"></i>
-                                           </div>
-                                        </div>
-                                        <div class="likes row">
-                                            <div class="col">
-                                                {{article.likes|length}}
-                                            </div>
-                                            <div class="col icon">
-                                                <i class="fa-regular fa-thumbs-up"></i>
-                                            </div>
-                                        </div>
-                                        <div class="comments row">
-                                            <div class="col">
-                                                {{article.comments|length}}
-                                            </div>
-                                            <div class="col icon">
-                                                <i class="fa-regular fa-comment"></i>
-                                            </div>
-                                        </div>
-                                        <div class="date">
-                                            {{article.createdAt|date('d-m-Y H:i')}}
-                                        </div>
-                                        
-                                    </div>
-                                  
-                                    <div class="settings">
-                                        <a href="{{path('article_show', {'slug': article.slug })}}" class="btn param btn-sm" target="_blank"><i class="fa-solid fa-eye"></i> Voir l'article</a>
-                                        <a href="#" class="btn btn-danger"><i class="fa-sharp fa-solid fa-eye-slash"></i> Désactiver </a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </article>
-                {% endfor %}
+                        {% for article in requestedArticles %}
+                            {{include('/partials/_adminArticle.html.twig')}}
+                        {% endfor %}
+
+                    {# sinon on affiche la pagination avec l'intégralité des articles #}
+                    {% else %}
+
+                        {% for article in pagination.data %} 
+                            {{include('/partials/_adminArticle.html.twig')}}
+                        {% endfor %}
+                        
+                    {% endif  %}
                 {{pagination.display()}}
                 {% endif %}
                 </div>
             </div>
         </div>
     </section>
+
 
  
 {% endblock %}

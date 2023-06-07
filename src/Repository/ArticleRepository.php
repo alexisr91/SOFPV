@@ -43,20 +43,14 @@ class ArticleRepository extends ServiceEntityRepository
     public function findLastArticles(){
         return $this->createQueryBuilder('a')
            ->andWhere('a.adminNews = false')
+           ->andWhere('a.active = true')
            ->orderBy('a.createdAt', 'DESC')
            ->setMaxResults(4)
            ->getQuery()
            ->getResult()
        ;
     }
-    //Tous les articles triés par date ( derniers publiés en premier )
-    // public function findAllArticlesByDate(){
-    //     return $this->createQueryBuilder('a')
-    //     ->orderBy('a.createdAt', 'DESC')
-    //     ->setMaxResults(30)
-    //     ->getQuery()
-    //     ->getResult();
-    // }
+  
 
     //Les 10 derniers articles du même auteur excluant l'article actuel (suggestions)
     public function findOtherArticlesByAuthor($id, $article){
@@ -65,6 +59,7 @@ class ArticleRepository extends ServiceEntityRepository
         ->setParameter('id', $id)
         ->andWhere('a.id != :article')
         ->setParameter('article', $article->getId())
+        ->andWhere('a.active = true')
         ->orderBy('a.createdAt', 'DESC')
         ->setMaxResults(8)
         ->getQuery()
@@ -89,13 +84,13 @@ class ArticleRepository extends ServiceEntityRepository
         ->setParameter('user', $user)
         ->andWhere('c.name = :question')
         ->setParameter('question', 'Question')
+        ->andWhere('a.active = true')
         ->orderBy('a.createdAt', 'DESC')
         ->setMaxResults(3)
         ->getQuery()
         ->getResult();
     }
 
-    //STATS : TO DO => à mettre dans un service
     // compte les nombre d'article par auteur
 
     public function countMyArticles($user){
@@ -122,7 +117,8 @@ class ArticleRepository extends ServiceEntityRepository
                         $qb->expr()->like('u.nickname', ':q'), 
                         $qb->expr()->like('c.name', ':q')
             ))
-        ->setParameter('q', '%'.$q.'%'); //retourne les resultats qui contiennent n'importe où le mot tapé ($q). Ex: cine => FPV cinematique trouvé
+        ->setParameter('q', '%'.$q.'%') //retourne les resultats qui contiennent n'importe où le mot tapé ($q). Ex: cine => FPV cinematique trouvé
+        ->andWhere('a.active = true');
 
             return $qb->getQuery()->getResult();
     }
@@ -133,7 +129,9 @@ class ArticleRepository extends ServiceEntityRepository
         $qb->leftJoin('a.category', 'c')
         ->leftJoin('a.author', 'u')
         ->where('a.title like :q')
-        ->setParameter('q', '%'.$q.'%');
+        ->setParameter('q', '%'.$q.'%')
+        ->andWhere('a.active = true')
+        ;
 
         return $qb->getQuery()->getResult();
     }

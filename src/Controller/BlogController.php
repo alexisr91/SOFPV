@@ -43,11 +43,12 @@ class BlogController extends AbstractController
     {
         // $articles = $articleRepo->findAllArticlesByDate();
         
-
         $paginationService->setEntityClass(Article::class)
+                        ->setProperty("active")
+                        ->setValue(true)
                         ->setPage($page)
                         ->setLimit(8)
-                        ->setOrder('DESC')
+                        ->setOrder("DESC");
                         
         ;
         //pour récupérer les différents nom de catégories (pour le filtre par catégorie)
@@ -193,7 +194,6 @@ class BlogController extends AbstractController
                            dd($e->getMessage());                    
                        }
 
-                   
                            $newImage = new Image();
                            $newImage->setSource($newName)
                                 ->setArticle($article); 
@@ -284,62 +284,68 @@ class BlogController extends AbstractController
     #[IsGranted("ROLE_USER")]
     public function show(Article $article, ArticleRepository $articleRepo, EntityManagerInterface $manager, Request $request){
 
-        $author = $article->getAuthor();
-        $title = $article->getTitle();
-        $video = $article->getVideo();
+        $user = $this->getUser();
 
-        //gestion des signalements de l'article
-        $alert = new Alert();
-        $formAlertArticle = $this->createForm(AlertArticleType::class, $alert);
-        $formAlertArticle->handleRequest($request);
+        if($article->isActive() == true || $this->isGranted('ROLE_ADMIN')){
+           ;
+            $author = $article->getAuthor();
+            $title = $article->getTitle();
+            $video = $article->getVideo();
 
+            //gestion des signalements de l'article
+            $alert = new Alert();
+            $formAlertArticle = $this->createForm(AlertArticleType::class, $alert);
+            $formAlertArticle->handleRequest($request);
 
+            //gestion des commentaires
+            $comment = new Comment();
+            $formComment = $this->createForm(CommentType::class, $comment);
+            $formComment->handleRequest($request);
 
-        //gestion des commentaires
-        $comment = new Comment();
-        $formComment = $this->createForm(CommentType::class, $comment);
-        $formComment->handleRequest($request);
+            //signalement
+            if($formAlertArticle->isSubmitted() && $formAlertArticle->isValid()){
 
-        //signalement
-        if($formAlertArticle->isSubmitted() && $formAlertArticle->isValid()){
+                $nblrAlert = nl2br($alert->getDescription());
+                $alert->setArticle($article)
+                    ->setDescription($nblrAlert);
+                $manager->persist($alert);
+                $manager->flush($alert);
 
-            $nblrAlert = nl2br($alert->getDescription());
-            $alert->setArticle($article)
-                  ->setDescription($nblrAlert);
-            $manager->persist($alert);
-            $manager->flush($alert);
+                $this->addFlash('success','Votre signalement a bien été pris en compte.');
+                return $this->redirectToRoute('article_show', ['slug'=>$article->getSlug()]);
+            }
 
-            $this->addFlash('success','Votre signalement a bien été pris en compte.');
-            return $this->redirectToRoute('article_show', ['slug'=>$article->getSlug()]);
-        }
+            //commentaire
+            if($formComment->isSubmitted() && $formComment->isValid()){
+                //On récupère le commentaire et on applique la méthode php nl2br() pour conserver les sauts de ligne
+                $nlbrContent = nl2br($comment->getContent());
 
-        //commentaire
-        if($formComment->isSubmitted() && $formComment->isValid()){
-            //On récupère le commentaire et on applique la méthode php nl2br() pour conserver les sauts de ligne
-            $nlbrContent = nl2br($comment->getContent());
+                $comment->setAuthor($this->getUser())
+                        ->setArticle($article)
+                        ->setContent($nlbrContent);
 
-            $comment->setAuthor($this->getUser())
-                    ->setArticle($article)
-                    ->setContent($nlbrContent);
+                $manager->persist($comment);
+                $manager->flush($comment);
 
-            $manager->persist($comment);
-            $manager->flush($comment);
+                $this->addFlash('success','Commentaire ajouté avec succès.');
+                return $this->redirectToRoute('article_show', ['slug'=>$article->getSlug()]);
+            }
+            
 
-            $this->addFlash('success','Commentaire ajouté avec succès.');
-            return $this->redirectToRoute('article_show', ['slug'=>$article->getSlug()]);
-        }
-        
+            //on ajoute une vue à l'article si le viewer n'est pas l'auteur de l'article
+            if($this->getUser()!= $author){
+                $article->setViews($article->getViews() + 1 );
+                $manager->persist($article);
+                $manager->flush();
+            }
 
-        //on ajoute une vue à l'article si le viewer n'est pas l'auteur de l'article
-        if($this->getUser()!= $author){
-            $article->setViews($article->getViews() + 1 );
-            $manager->persist($article);
-            $manager->flush();
-        }
+            //articles associés à l'auteur
+            $articles = $articleRepo->findOtherArticlesByAuthor($author->getId(), $article);
 
-        //articles associés à l'auteur
-        $articles = $articleRepo->findOtherArticlesByAuthor($author->getId(), $article);
-
+     //si l'article est desactivé et que l'user n'est pas admin       
+    } elseif ($article->isActive() == false){
+        throw $this->createAccessDeniedException('Cet article n\'est pas accessible.');
+    } 
         return $this->render('blog/article/show.html.twig', [
             'article'=>$article,
             'articles'=>$articles,
