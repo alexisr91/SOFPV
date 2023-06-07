@@ -533,7 +533,7 @@ class AccountController extends AbstractController
      public function profile(User $user, ArticleRepository $articleRepo, SessionRepository $sessionRepository)
     {
         $nickname = $user->getNickname();
-        $articles = $articleRepo->findBy(['author'=>$user],['createdAt'=>'DESC']);
+        $articles = $articleRepo->findBy(['author'=>$user, 'active'=>true ],['createdAt'=>'DESC']);
         $drone = $user->getDrone();
         $sessions = $sessionRepository->findSessionsForUser($user);
 

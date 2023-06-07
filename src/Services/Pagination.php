@@ -14,10 +14,12 @@ class Pagination {
     private $currentPage = 1;
     private $manager;
 
-    private $order;
+    
     private $property;
     private $value;
-
+    
+    private $order;
+ 
     private $twig;
     private $route;
 
@@ -77,7 +79,7 @@ class Pagination {
         return $this;
     }
 
-    //Choix du tri : DESC ou ASC par date
+    //Choix du tri 
     public function getOrder(){
         return $this->order;
     }
@@ -85,6 +87,7 @@ class Pagination {
         $this->order = $order;
         return $this;
     }
+
 
     //choix de la propriété et valeur du findBy
     public function getProperty(){
@@ -120,6 +123,8 @@ class Pagination {
             throw new \Exception("setEntityClass n'a pas été renseigné dans le controller correspondant.");
         }
 
+        $order = $this->order;
+
         //calcul l'offset ( à partir de quel élément on affiche les resultats)
         $offset =  $this->currentPage * $this->limit - $this->limit;
 
@@ -127,14 +132,13 @@ class Pagination {
         //on va chercher le bon repository
         $repo = $this->manager->getRepository($this->entityClass);
 
-        $order = $this->order;
         
-        //on construit notre requete suivant si le critère propriété et valeur a été indiqué et/ou avec plusieurs résultats (recherche via une barre avec un mot complété à moitié par exemple)
+        //on construit notre requete suivant si le critère propriété et valeur a été indiqué pour le findBy
         if(!$this->isThereAProperty() ){
-            $data = $repo->findBy([],['createdAt'=> $order], $this->limit, $offset);
+            $data = $repo->findBy([],['createdAt'=>$order], $this->limit, $offset);
             return $data;
         } else if ($this->isThereAProperty())  {
-           $data = $repo->findBy([$this->property => $this->value],['createdAt'=> $order], $this->limit, $offset); 
+           $data = $repo->findBy([$this->property => $this->value],['createdAt'=>$order], $this->limit, $offset); 
            return $data;
         }
     }

@@ -1,0 +1,135 @@
+ <article class="col">
+    <div class="article">  
+        <div class="article-thumb">
+            <div class="thumb-wrap">
+            {% if article.video %}
+                {% set video = article.video %}
+                    {% if video.isUploaded %}
+                        <img class="figure-img rounded " src="{{asset('/uploads/article/video/thumb/'~ video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
+                    {% else %}
+                        {% include('/partials/_video.html.twig') %} 
+                    {% endif %}
+            {% elseif article.images is not empty %}
+
+                {% for image in article.images %}
+                    {% if loop.first %}
+                        <img class="figure-img rounded " src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                    {% endif %}
+                {% endfor %}
+
+            {% elseif not article.video and article.active %}
+                <img class="figure-img rounded " src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+            {% elseif not article.active %}
+                <img class="figure-img rounded " src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+                <div class="overlay-inactive">
+                    <i class="fa-solid fa-eye-slash fa-xl"></i> Article désactivé 
+                </div>
+            {% endif %}
+
+            {# repaire visuel pour indiquer la présence de signalements sur les vignettes #}
+            {% if article.alerts|length > 0 %}
+            <div class="alerts"><span class="badge bg-danger fa-2x"><i class="fa-solid fa-triangle-exclamation"></i></span></div>
+            {% endif %}
+            </div>
+        </div>
+        <div class="article-body">
+            <div>
+                <div class="d-flex mb-2">            
+                    <div class="category-badge badge {{article.category}}">
+                        {{article.category|capitalize}}
+                    </div>
+                    <h5 class="card-title">{{article.title|capitalize}}</h5>
+                </div> 
+                {# Pour afficher une partie du contenu et utiliser les 2 filtres de twig pour tronquer + afficher avec les sauts de ligne #}
+                {% set articleContent = article.content|u.truncate(300, '...', false) %}
+                <p class="article-content">{{articleContent|raw}}</p>
+            </div>
+            <div class="article-footer">
+                <div class="stats">
+
+                    <div class="alert row">
+                        <div class="col">
+                            {{article.alerts|length}}
+                        </div>
+                        <div class="col icon">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                    </div>
+
+                    <div class="views row">
+                        <div class="col">
+                            {{article.views}}
+                        </div>
+                        <div class="col icon">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                    </div>
+                                        
+                    <div class="likes row">
+                        <div class="col">
+                            {{article.likes|length}}
+                        </div>
+                        <div class="col icon">
+                            <i class="fa-regular fa-thumbs-up"></i>
+                        </div>
+                    </div>
+                                        
+                    <div class="comments row">
+                        <div class="col">
+                            {{article.comments|length}}
+                        </div>
+                        <div class="col icon">
+                            <i class="fa-regular fa-comment"></i>
+                        </div>
+                    </div>
+
+                    <div class="date">
+                        {{article.createdAt|date('d-m-Y H:i')}}
+                    </div>
+                                        
+                </div>
+                                  
+                <div class="settings">
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#alertModal-{{article.id}}"><i class="fa-solid fa-triangle-exclamation"></i> Voir les signalements </button>     
+                    <a href="{{path('article_show', {'slug': article.slug })}}" class="btn param btn-sm" target="_blank"><i class="fa-solid fa-eye"></i> Voir l'article</a>
+                        {% if article.active %}
+                            <a href="{{path('admin_blog_desactivate', {'id': article.id })}}" class="btn btn-danger"><i class="fa-sharp fa-solid fa-eye-slash"></i> Désactiver </a>
+                        {% else %}
+                            <a href="{{path('admin_blog_activate', {'id': article.id })}}" class="btn btn-success"><i class="fa-sharp fa-solid fa-eye"></i> Activer </a>
+                        {% endif %}
+                </div>
+            </div>
+        </div>
+                            
+    </div>
+</article>
+
+{# modal #}
+    <div class="modal fade" id="alertModal-{{article.id}}" tabindex="-1" aria-labelledby="alertModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" tabindex="-1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fa-solid fa-triangle-exclamation"></i> Signalements de l'article</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">        
+                    {# si il y a une session sur un des points #}
+                    {% if article.alerts is not empty %}
+                        {# pour chaque session #}
+                        {% for alert in article.alerts %}
+                            <div class="wrapAlert">
+                                <p class="text-muted"><i class="fa-solid fa-calendar-day"></i>{{alert.createdAt|date('d-m-Y H:i')}}</p>
+                                <p class="text-muted"><i class="fa-solid fa-comment-dots fa-flip-horizontal"></i>{{alert.description|raw}}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert alert-warning">Il n'y a pas de signalements concernant cet article.</div>
+                    {% endif %}
+                </div>
+                <div class="modal-footer"> 
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{# fin du modal #}

@@ -24,7 +24,7 @@ class AdminUsersController extends AbstractController
         $pagination = $paginationService
             ->setEntityClass(User::class)
             ->setPage($page)
-            ->setLimit(20)
+            ->setLimit(10)
             ->setOrder('DESC');
             
 
@@ -48,7 +48,7 @@ class AdminUsersController extends AbstractController
             $this->addFlash('success','L\'utilisateur a bien été désactivé.');
         
         } else {
-            $this->addFlash('danger','L\'utilisateur n\'a pas pu être désactivé.');
+            $this->addFlash('danger','L\'utilisateur n\'existe pas.');
         }
     
         return $this->redirectToRoute('admin_users');

@@ -38,46 +38,81 @@
                         <p><b>Autorisation</b></p>
                     </div>
                     <ul class="nav-tabs">
-                    {% if requestedUsers is empty %}
-                        {% set data = pagination.data %}
-                    {% else %}
-                        {% set data = requestedUsers %}
-                    {% endif %}
+                    {# si il y a une requete #}
+                    {% if app.request.query.get('q', null) %}
 
-                    {% for user in data %}
-                    <li data-toggle="tab" data-link="user-{{user.id}}">
-                        {# alternance des couleurs pour une meilleure lecture #}
-                        {% if loop.index is divisible by(2) %}
-                        <div class="row row-white tabs">
-                        {% else %}
-                        <div class="row row-grey tabs">
-                        {% endif %}
-                            <div class="col">
-                                <div class="d-flex">
-                                    <div class="col d-flex align-items-center pe-3">
-                                        <div class="avatar">
-                                            <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" class="img-fluid">
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            <b>{{user.nickname}}</b>
-                                                {{user.email}}
-                                        </div>
-                                    </div>
-                                    <div class="my-auto">
-                                        <small>{{user.createdAt|date('d-m-Y')}}</small>
-                                    </div>
-                                    <div class="col d-flex align-items-center justify-content-end ps-3">
-                                        {% if user.active %}
-                                            <span class="badge bg-success px-3 py-2">Actif</span>
+                       {% for user in requestedUsers %}
+                            <li data-toggle="tab" data-link="user-{{user.id}}">
+                                {# alternance des couleurs pour une meilleure lecture #}
+                                {% if loop.index is divisible by(2) %}
+                                    <div class="row row-white tabs">
                                         {% else %}
-                                            <span class="badge bg-danger px-3 py-2">Inactif</span>
+                                    <div class="row row-grey tabs">
                                         {% endif %}
+                                        <div class="col">
+                                            <div class="d-flex">
+                                                <div class="col d-flex align-items-center pe-3">
+                                                    <div class="avatar">
+                                                        <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" class="img-fluid">
+                                                    </div>
+                                                    <div class="d-flex flex-column">
+                                                        <b>{{user.nickname}}</b>
+                                                        {{user.email}}
+                                                    </div>
+                                                </div>
+                                                <div class="my-auto">
+                                                    <small>{{user.createdAt|date('d-m-Y')}}</small>
+                                                </div>
+                                                <div class="col d-flex align-items-center justify-content-end ps-3">
+                                                    {% if user.active %}
+                                                        <span class="badge bg-success px-3 py-2">Actif</span>
+                                                    {% else %}
+                                                        <span class="badge bg-danger px-3 py-2">Inactif</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>   
+                            </li>   
                     {% endfor %}
+                {# sinon affichage de la pagination classique #}
+                {% else %}
+                    {% for user in pagination.data %}
+                            <li data-toggle="tab" data-link="user-{{user.id}}">
+                                {% if loop.index is divisible by(2) %}
+                                    <div class="row row-white tabs">
+                                        {% else %}
+                                    <div class="row row-grey tabs">
+                                        {% endif %}
+                                        <div class="col">
+                                            <div class="d-flex">
+                                                <div class="col d-flex align-items-center pe-3">
+                                                    <div class="avatar">
+                                                        <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" class="img-fluid">
+                                                    </div>
+                                                    <div class="d-flex flex-column">
+                                                        <b>{{user.nickname}}</b>
+                                                        {{user.email}}
+                                                    </div>
+                                                </div>
+                                                <div class="my-auto">
+                                                    <small>{{user.createdAt|date('d-m-Y')}}</small>
+                                                </div>
+                                                <div class="col d-flex align-items-center justify-content-end ps-3">
+                                                    {% if user.active %}
+                                                        <span class="badge bg-success px-3 py-2">Actif</span>
+                                                    {% else %}
+                                                        <span class="badge bg-danger px-3 py-2">Inactif</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </li>   
+                    {% endfor %}       
+                {% endif %}
+               
+                    
                     
                     </ul>
                     <div class="mt-4 p-3">
