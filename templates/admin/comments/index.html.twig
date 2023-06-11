@@ -19,6 +19,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Date</th>
                         <th>Auteur</th>
                         <th>Article</th>
                         <th colspan="2">Commentaire</th>
@@ -32,6 +33,7 @@
                 {% for alert in alerts %}
                     <tr>
                         <td>{{alert.id}}</td>
+                        <td>{{alert.createdAt|date('d-m-Y H:i')}}</td>
                         <td><b><a href="{{path('admin_users')}}">{{alert.comment.author}}</a><b></td>
                         <td><b><a href="{{path('article_show', {'slug':alert.comment.article.slug})}}" target='_blank'>{{alert.comment.article.title}}</a></b></td>
                         <td colspan="2">{{alert.comment.content|raw}}</td>

@@ -82,11 +82,11 @@
                         </div>
                         <div class="tablesWrap">
                             <div class="row mt-4">
-                                {# top 5 des utilisateurs qui postent le + d'articles, commentaires et participent aux sessions #}
+                                {# top 5 des utilisateurs qui postent le + d'articles, commentaires et participent aux sessions
                                 <div class="col">
                                     <h5> <i class="fa-solid fa-arrow-trend-up"></i> Utilisateurs les + actifs</h5>
                                     <table class="table table-striped">
-                                        <thead>
+                                        <thead class="positive">
                                             <tr>
                                                 <th>Utilisateur</th>
                                                 <th class="text-center">Articles</th>
@@ -105,12 +105,12 @@
                                         {% endfor %}
                                         </tbody>
                                     </table>
-                                </div>
+                                </div> #}
                                 {# top 5 articles les + appréciés #}
                                 <div class="col">
                                     <h5><i class="fa-solid fa-arrow-trend-up"></i> Articles les + appréciés</h5>
                                     <table class="table table-striped">
-                                        <thead>
+                                        <thead class="positive">
                                             <tr>
                                                 <th>Article</th>
                                                 <th>Auteur</th>
@@ -130,6 +130,29 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                {# test #}
+                                <div class="col">
+                                    <h5><i class="fa-solid fa-person-circle-exclamation"></i> Utilisateurs les + signalés </h5>
+                                    <table class="table table-striped">
+                                        <thead class="negative">
+                                            <tr>
+                                                 <th>Utilisateur</th>
+                                                <th class="text-center">Articles</th>
+                                                <th class="text-center">Commentaires</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for user in worstUsers %}
+                                            <tr>
+                                               <th><a href="{{path('account_profile', {'nickname': user.nickname})}}" target="_blank">{{user.nickname}}</a></th>
+                                                <td class="text-center">{{user.articles}}</td> 
+                                                <td class="text-center">{{user.comments}}</td>
+                                            </tr> 
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {# endtest #}
                             </div>  
                         </div>
                     </div>
