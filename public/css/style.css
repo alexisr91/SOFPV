@@ -507,47 +507,47 @@ section#home {
       animation: glitch-effect 2s infinite linear alternate-reverse; }
 @keyframes glitch-effect {
   0% {
-    clip: rect(8px, 9999px, 3px, 0); }
+    clip: rect(4px, 9999px, 81px, 0); }
   5% {
-    clip: rect(79px, 9999px, 21px, 0); }
+    clip: rect(82px, 9999px, 42px, 0); }
   10% {
-    clip: rect(44px, 9999px, 81px, 0); }
+    clip: rect(14px, 9999px, 43px, 0); }
   15% {
-    clip: rect(92px, 9999px, 35px, 0); }
+    clip: rect(52px, 9999px, 46px, 0); }
   20% {
-    clip: rect(73px, 9999px, 85px, 0); }
+    clip: rect(40px, 9999px, 14px, 0); }
   25% {
-    clip: rect(55px, 9999px, 52px, 0); }
+    clip: rect(59px, 9999px, 80px, 0); }
   30% {
-    clip: rect(8px, 9999px, 4px, 0); }
+    clip: rect(18px, 9999px, 47px, 0); }
   35% {
-    clip: rect(11px, 9999px, 19px, 0); }
+    clip: rect(68px, 9999px, 39px, 0); }
   40% {
-    clip: rect(99px, 9999px, 62px, 0); }
+    clip: rect(29px, 9999px, 20px, 0); }
   45% {
-    clip: rect(22px, 9999px, 36px, 0); }
+    clip: rect(35px, 9999px, 78px, 0); }
   50% {
-    clip: rect(56px, 9999px, 76px, 0); }
+    clip: rect(15px, 9999px, 80px, 0); }
   55% {
-    clip: rect(64px, 9999px, 6px, 0); }
+    clip: rect(21px, 9999px, 44px, 0); }
   60% {
-    clip: rect(9px, 9999px, 78px, 0); }
+    clip: rect(40px, 9999px, 84px, 0); }
   65% {
-    clip: rect(46px, 9999px, 40px, 0); }
+    clip: rect(60px, 9999px, 79px, 0); }
   70% {
-    clip: rect(14px, 9999px, 25px, 0); }
+    clip: rect(42px, 9999px, 67px, 0); }
   75% {
-    clip: rect(22px, 9999px, 24px, 0); }
+    clip: rect(86px, 9999px, 7px, 0); }
   80% {
-    clip: rect(24px, 9999px, 76px, 0); }
+    clip: rect(30px, 9999px, 79px, 0); }
   85% {
-    clip: rect(8px, 9999px, 34px, 0); }
+    clip: rect(46px, 9999px, 43px, 0); }
   90% {
-    clip: rect(6px, 9999px, 96px, 0); }
+    clip: rect(15px, 9999px, 66px, 0); }
   95% {
-    clip: rect(98px, 9999px, 63px, 0); }
+    clip: rect(58px, 9999px, 43px, 0); }
   100% {
-    clip: rect(56px, 9999px, 39px, 0); } }
+    clip: rect(66px, 9999px, 33px, 0); } }
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
   height: 15em;
@@ -1801,7 +1801,7 @@ section#about {
         background-color: #fff;
         line-height: 2em;
         width: 50%;
-        margin-top: 3em; }
+        margin: 3em 0 4em 0; }
       section#about .container-fluid .paragraph.about {
         width: 50%;
         line-height: 2em; }
@@ -1916,6 +1916,7 @@ section#adminUsers .container-fluid {
   background-color: #fafafa; }
   section#adminUsers .container-fluid .wrap {
     display: flex;
+    flex-direction: column;
     margin: 1em; }
   section#adminUsers .container-fluid .titleTable {
     padding-left: 4em;
@@ -1942,9 +1943,12 @@ section#adminUsers .container-fluid {
     section#adminUsers .container-fluid .row-white:hover, section#adminUsers .container-fluid .row-white:focus {
       box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
       transform: translateX(-0.5em); }
+  section#adminUsers .container-fluid .usersList {
+    width: 50%; }
   section#adminUsers .container-fluid .viewUser {
     display: flex;
     flex-direction: column;
+    width: 50%;
     margin: 0 2em 5em 2em;
     padding: 3em;
     background: #fff;
@@ -2031,6 +2035,26 @@ section#adminBlog .container-fluid {
     border-radius: 0; }
     section#adminBlog .container-fluid .stats .alert .icon {
       color: #B30B00; }
+
+section#adminComments .container-fluid {
+  display: flex;
+  min-height: 90vh;
+  background-color: #fafafa; }
+  section#adminComments .container-fluid .wrap {
+    margin-top: 3em;
+    width: 70%; }
+    section#adminComments .container-fluid .wrap .avatar {
+      width: 25px;
+      height: 25px; }
+      section#adminComments .container-fluid .wrap .avatar img {
+        width: 100%;
+        height: auto; }
+    section#adminComments .container-fluid .wrap table {
+      width: 100%;
+      border-color: transparent; }
+      section#adminComments .container-fluid .wrap table th, section#adminComments .container-fluid .wrap table td {
+        padding: 1.5em;
+        border-radius: 4px; }
 
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu, aside.adminSidebarMenu {

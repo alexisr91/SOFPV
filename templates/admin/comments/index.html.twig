@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="adminComments">
+            {{include('partials/_adminNavbarMenu.html.twig')}}
+        <div class="container-fluid">
+
+            <div class="sidebar">
+                {{include('partials/_adminSidebarMenu.html.twig')}}
+            </div>
+        
+            <div class="wrap">      
+            <h3>Gestion des commentaires</h3>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Auteur</th>
+                        <th>Article</th>
+                        <th colspan="2">Commentaire</th>
+                        <th class="text-center">Modération</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if alerts is empty %}
+                    <p>Aucun signalement de commentaire.</p>
+                {% else %}
+                {% for alert in alerts %}
+                    <tr>
+                        <td>{{alert.id}}</td>
+                        <td><b><a href="{{path('admin_users')}}">{{alert.comment.author}}</a><b></td>
+                        <td><b><a href="{{path('article_show', {'slug':alert.comment.article.slug})}}" target='_blank'>{{alert.comment.article.title}}</a></b></td>
+                        <td colspan="2">{{alert.comment.content|raw}}</td>
+                        <td class="text-center"><button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirm-{{alert.comment.id}}"><i class="fa-solid fa-comment-slash"></i></button></td>
+                    </tr>    
+                    {# modal de confirmation #}
+                    <div class="modal fade" id="confirm-{{alert.comment.id}}" tabindex="-1" aria-labelledby="confirm" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmTitle"><i class="fa-solid fa-comment-slash"></i> Modération</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="my-3">Êtes-vous sûr de vouloir modérer ce commentaire ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                <a href="{{path('admin_comment_moderate', {'id':alert.comment.id})}}" class="btn btn-danger">Modérer</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    {# fin du modal #}
+             
+                {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+    </section>
+    
+
+{% endblock %}

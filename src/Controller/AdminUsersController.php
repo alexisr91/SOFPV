@@ -20,6 +20,7 @@ class AdminUsersController extends AbstractController
         $q = $request->query->get('q');
 
         $requestedUsers = $userRepo->findByPseudo($q);
+        $allUsers = $userRepo->findAll();
 
         $pagination = $paginationService
             ->setEntityClass(User::class)
@@ -31,7 +32,8 @@ class AdminUsersController extends AbstractController
         return $this->render('admin/users/index.html.twig', [
             'title' => 'Gestion des utilisateurs',
             'pagination'=>$pagination,
-            'requestedUsers'=>$requestedUsers
+            'requestedUsers'=>$requestedUsers,
+            'allUsers'=>$allUsers
         ]);
     }
 
