@@ -34,11 +34,16 @@
                 </div>
                 {% else %}
                     {# si on a une requete, on affiche que les résultats de la requete #}
-                     {% if app.request.query.get('q', null)  %}
+                     {% if app.request.query.get('q') and requestedArticles is not empty %}
 
                         {% for article in requestedArticles %}
                             {{include('/partials/_adminArticle.html.twig')}}
                         {% endfor %}
+
+                  
+                    {% elseif requestedArticles is empty %}
+                    <div class="alert alert-warning">Aucun résultat ne correspond à votre recherche.</div>
+
 
                     {# sinon on affiche la pagination avec l'intégralité des articles #}
                     {% else %}

@@ -102,7 +102,8 @@ section#adminUsers {
         min-height: 90vh;
         background-color: $white;
 
-        .wrap {display: flex; margin:1em}
+        .wrap {display: flex;flex-direction: column; margin:1em}
+
         .titleTable {
             padding-left: 4em;
             padding-right: 2em;
@@ -133,10 +134,12 @@ section#adminUsers {
             }
         
         }
+        .usersList {width:50%;}
 
         .viewUser{
             display: flex;
             flex-direction: column;
+            width: 50%;
             margin: 0 2em 5em 2em;
             padding: 3em;
             background:#fff;
@@ -166,6 +169,7 @@ section#adminUsers {
 
             }
         }
+
     }
 }
 
@@ -246,6 +250,42 @@ section#adminBlog {
 
                 .icon {color:$accent;}
             }
+        }
+
+    }
+}
+
+section#adminComments {
+    .container-fluid {
+        display: flex;
+        min-height: 90vh;
+        background-color: $white;
+
+        .wrap {
+            margin-top: 3em;
+            width:70%;
+
+            .avatar {
+                width:25px;
+                height:25px;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            table {
+                width: 100%;
+                border-color: transparent;
+                th, td {
+                    padding: 1.5em; 
+                    border-radius: 4px;
+
+                }
+
+            }
+
         }
 
     }

@@ -12,8 +12,8 @@
                 {{include('partials/_adminSidebarMenu.html.twig')}}
             </div>
             
-            <div class="row wrap pt-4 w-100">
-                <div class="d-block">
+            <div class="wrap pt-4 w-100">
+                <div>
                     <h3>Gestion des utilisateurs</h3> 
                     <form class="searchForm input-group" action="{{path('admin_users')}}" method="GET"> 
                         <div class="input-group-text p-0">
@@ -26,7 +26,8 @@
                          
                     </form>
                 </div>
-                <div class="col">
+                <div class="d-flex my-4">
+                <div class="usersList">
                 {% if pagination.data is empty %}
                     <div class="w-100">
                         <span class="alert alert-warning d-block">Il n'y a pas encore d'utilisateurs inscrits.</span>
@@ -38,8 +39,8 @@
                         <p><b>Autorisation</b></p>
                     </div>
                     <ul class="nav-tabs">
-                    {# si il y a une requete #}
-                    {% if app.request.query.get('q', null) %}
+                    {# si il y a une requete et si il y a des résultats#}
+                    {% if app.request.query.get('q') and requestedUsers is not empty %}
 
                        {% for user in requestedUsers %}
                             <li data-toggle="tab" data-link="user-{{user.id}}">
@@ -75,8 +76,13 @@
                                     </div>
                             </li>   
                     {% endfor %}
-                {# sinon affichage de la pagination classique #}
+                {# si il n'y a pas de résultats #}
+                {% elseif requestedUsers is empty %}
+                <div class="alert alert-warning">
+                    Aucun résultat ne correspond à votre recherche.
+                </div>
                 {% else %}
+                {# sinon affichage de la pagination classique #}
                     {% for user in pagination.data %}
                             <li data-toggle="tab" data-link="user-{{user.id}}">
                                 {% if loop.index is divisible by(2) %}
@@ -111,18 +117,18 @@
                             </li>   
                     {% endfor %}       
                 {% endif %}
-               
-                    
-                    
+  
                     </ul>
                     <div class="mt-4 p-3">
                         {{pagination.display()}}
                     </div>
                     {% endif %}
                 </div>
-                <div class="col-5 tab-content viewUser"> 
-                    {% for user in pagination.data %}
+                <div class="tab-content viewUser">
+         
+                    {% for user in allUsers %}
                          <div id="user-{{user.id}}" {{loop.first ? 'class="tab-pane active"': 'class="tab-pane"'}}>
+               
                             <div class="main">
                                 <div class="avatar">
                                     <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" class="img-fluid">
@@ -150,7 +156,7 @@
                                     {% endif %} 
                                     <p>{{user.email}}</p>
                                     <p>{{user.createdAt|date('d-m-Y')}}</p>
-                                    <p>{{user.fullAddress|raw}}</p>
+                                    <p>{% if user.address is not null %}{{ user.fullAddress|raw}}{% else %} <i>Non renseigné</i> {% endif %}</p>
                                     
                                     
                                     <div class="actions">
@@ -166,9 +172,12 @@
                                 
                             </div>
 
-                        </div> 
+                        </div>
+                    
                     {% endfor %}
-                </div>   
+    
+                </div> 
+            </div>  
             </div>
         </div>
     </section>
