@@ -43,19 +43,6 @@ class Stats {
 
         return compact('users', 'articles', 'sessions', 'orders');
     }
-    
-    // //récupération des articles les + vus par vues et likés (articles les + appréciés)
-    // public function getArticlesStats(){
-    //     return $this->manager->createQuery(
-    //     'SELECT a.title, a.slug , u.nickname , a.views, COUNT(l.article) as likes
-    //     FROM App\Entity\Likes l
-    //     JOIN l.article a
-    //     JOIN a.author u
-    //     GROUP BY a
-    //     ORDER BY a.views DESC')
-    //     ->setMaxResults(5)
-    //     ->getResult();
-    // }
 
     //récupération des articles les + vus par vues et likés (articles les + appréciés)
     public function getArticlesStats(){
@@ -79,6 +66,19 @@ class Stats {
             (SELECT COUNT(s) FROM App\Entity\Session s WHERE u MEMBER OF s.users) as sess
             FROM App\Entity\User u
             ORDER BY articles DESC, sess DESC
+            ')
+            ->setMaxResults(5)
+            ->getResult();
+    }
+
+    //récupération des utilisateurs les + signalés (commentaires et articles)
+    public function getWorstUsers(){
+        return $this->manager->createQuery(
+            'SELECT u.nickname,
+            (SELECT COUNT(c) FROM App\Entity\AlertComment ac JOIN ac.comment c WHERE c.author = u) as comments,
+            (SELECT COUNT(a) FROM App\Entity\Alert a JOIN a.article ar WHERE ar.author = u) as articles
+            FROM App\Entity\User u
+            ORDER BY comments DESC, articles DESC
             ')
             ->setMaxResults(5)
             ->getResult();

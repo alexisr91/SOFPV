@@ -33,12 +33,14 @@
                         <span class="alert alert-warning d-block">Il n'y a pas encore d'utilisateurs inscrits.</span>
                     </div>
                 {% else %}
-                    <div class="d-flex align-item-center justify-content-between titleTable">
-                        <p><b>Utilisateur</b></p>
-                        <p><b>Inscrit le</b></p>
-                        <p><b>Autorisation</b></p>
-                    </div>
-                    <ul class="nav-tabs">
+                    
+                    <div class="nav-tabs">
+                        <div class="d-flex align-item-center justify-content-between titleTable">
+                            <p><b>Utilisateur</b></p>
+                            <p><b>Inscrit le</b></p>
+                            <p><b>Autorisation</b></p>
+                        </div>
+                    <ul>
                     {# si il y a une requete et si il y a des résultats#}
                     {% if app.request.query.get('q') and requestedUsers is not empty %}
 
@@ -76,6 +78,7 @@
                                     </div>
                             </li>   
                     {% endfor %}
+                
                 {# si il n'y a pas de résultats #}
                 {% elseif requestedUsers is empty %}
                 <div class="alert alert-warning">
@@ -119,7 +122,8 @@
                 {% endif %}
   
                     </ul>
-                    <div class="mt-4 p-3">
+                    </div>
+                    <div class="p-3">
                         {{pagination.display()}}
                     </div>
                     {% endif %}

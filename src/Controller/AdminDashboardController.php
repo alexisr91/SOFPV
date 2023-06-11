@@ -18,14 +18,19 @@ class AdminDashboardController extends AbstractController
 
         //les articles les + appréciés
         $mostLikedArticles = $statsService->getArticlesStats();
+        //utilisateurs les + actifs
         $mostActiveUsers = $statsService->getUsersStats();
+
+        //utilisateurs les plus signalés (commentaires et articles)
+        $worstUsers = $statsService->getWorstUsers();
 
 
         return $this->render('admin/dashboard/index.html.twig', [
             'title' => 'Tableau de bord de l\'administrateur',
             'stats'=>$stats,
             'mostLikedArticles'=>$mostLikedArticles,
-            'mostActiveUsers'=>$mostActiveUsers
+            'mostActiveUsers'=>$mostActiveUsers,
+            'worstUsers'=>$worstUsers
         ]);
     }
 

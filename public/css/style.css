@@ -507,47 +507,47 @@ section#home {
       animation: glitch-effect 2s infinite linear alternate-reverse; }
 @keyframes glitch-effect {
   0% {
-    clip: rect(4px, 9999px, 81px, 0); }
+    clip: rect(69px, 9999px, 83px, 0); }
   5% {
-    clip: rect(82px, 9999px, 42px, 0); }
+    clip: rect(84px, 9999px, 7px, 0); }
   10% {
-    clip: rect(14px, 9999px, 43px, 0); }
+    clip: rect(39px, 9999px, 46px, 0); }
   15% {
-    clip: rect(52px, 9999px, 46px, 0); }
+    clip: rect(7px, 9999px, 93px, 0); }
   20% {
-    clip: rect(40px, 9999px, 14px, 0); }
+    clip: rect(47px, 9999px, 83px, 0); }
   25% {
-    clip: rect(59px, 9999px, 80px, 0); }
+    clip: rect(17px, 9999px, 67px, 0); }
   30% {
-    clip: rect(18px, 9999px, 47px, 0); }
+    clip: rect(8px, 9999px, 27px, 0); }
   35% {
-    clip: rect(68px, 9999px, 39px, 0); }
+    clip: rect(85px, 9999px, 69px, 0); }
   40% {
-    clip: rect(29px, 9999px, 20px, 0); }
+    clip: rect(51px, 9999px, 16px, 0); }
   45% {
-    clip: rect(35px, 9999px, 78px, 0); }
+    clip: rect(53px, 9999px, 38px, 0); }
   50% {
-    clip: rect(15px, 9999px, 80px, 0); }
+    clip: rect(38px, 9999px, 45px, 0); }
   55% {
-    clip: rect(21px, 9999px, 44px, 0); }
+    clip: rect(13px, 9999px, 8px, 0); }
   60% {
-    clip: rect(40px, 9999px, 84px, 0); }
+    clip: rect(26px, 9999px, 65px, 0); }
   65% {
-    clip: rect(60px, 9999px, 79px, 0); }
+    clip: rect(43px, 9999px, 77px, 0); }
   70% {
-    clip: rect(42px, 9999px, 67px, 0); }
+    clip: rect(85px, 9999px, 84px, 0); }
   75% {
-    clip: rect(86px, 9999px, 7px, 0); }
+    clip: rect(92px, 9999px, 41px, 0); }
   80% {
-    clip: rect(30px, 9999px, 79px, 0); }
+    clip: rect(12px, 9999px, 53px, 0); }
   85% {
-    clip: rect(46px, 9999px, 43px, 0); }
+    clip: rect(9px, 9999px, 74px, 0); }
   90% {
-    clip: rect(15px, 9999px, 66px, 0); }
+    clip: rect(12px, 9999px, 5px, 0); }
   95% {
-    clip: rect(58px, 9999px, 43px, 0); }
+    clip: rect(60px, 9999px, 27px, 0); }
   100% {
-    clip: rect(66px, 9999px, 33px, 0); } }
+    clip: rect(9px, 9999px, 50px, 0); } }
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
   height: 15em;
@@ -1885,10 +1885,11 @@ section#adminDashboard {
       section#adminDashboard .container-fluid .tablesWrap h5 {
         margin-bottom: 1em; }
     section#adminDashboard .container-fluid table {
-      border: transparent;
-      border-radius: 4px; }
-      section#adminDashboard .container-fluid table thead {
-        background-color: #DADADA; }
+      border: transparent; }
+      section#adminDashboard .container-fluid table thead.positive {
+        background-color: #B1D7B4; }
+      section#adminDashboard .container-fluid table thead.negative {
+        background-color: #FF6969; }
       section#adminDashboard .container-fluid table th, section#adminDashboard .container-fluid table td {
         padding: 1em; }
     section#adminDashboard .container-fluid .wrap {
@@ -1944,7 +1945,11 @@ section#adminUsers .container-fluid {
       box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
       transform: translateX(-0.5em); }
   section#adminUsers .container-fluid .usersList {
-    width: 50%; }
+    width: 50%;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    min-height: 75vh; }
   section#adminUsers .container-fluid .viewUser {
     display: flex;
     flex-direction: column;

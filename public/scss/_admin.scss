@@ -61,8 +61,14 @@ section#adminDashboard{
         }
         table {
             border:transparent;
-            border-radius: 4px;
-            thead {background-color: $grey;}
+       
+            thead.positive{
+                background-color: #B1D7B4;
+            }
+            thead.negative {
+                background-color: #FF6969;
+            }
+
             th, td {
                 padding:1em;
             }
@@ -134,7 +140,15 @@ section#adminUsers {
             }
         
         }
-        .usersList {width:50%;}
+        .usersList {
+            width:50%;
+            justify-content: space-between;
+            display: flex;
+            flex-direction: column;
+            min-height: 75vh;
+        
+          
+        }
 
         .viewUser{
             display: flex;
