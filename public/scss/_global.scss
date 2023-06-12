@@ -70,7 +70,7 @@ input {
    transform: rotateX(180deg) ;
 }
 
-.param a, a.param {
+.param a, a.param, button.param {
     background-color: $grey;
     &:hover {
         background-color: $base !important;
