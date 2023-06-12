@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+
+    <section id="adminMapSpots">
+            {{include('partials/_adminNavbarMenu.html.twig')}}
+        <div class="container-fluid">
+
+            <div class="sidebar">
+                {{include('partials/_adminSidebarMenu.html.twig')}}
+            </div>
+
+            <div class="row">
+                {# côté gestion #}
+                <div class="col-md-4 pt-4 gestion ps-3">
+                    <h3>Gestion de la carte et des spots</h3>
+                    <button type="button" class="btn param addSpot" data-bs-toggle="collapse" href="#addSpotForm" aria-expended="false" aria-controls="addSpotForm"><i class="fa-solid fa-map-location-dot"></i> Ajouter un spot</button>
+                    <div class="collapse my-2" id="addSpotForm">
+                        <div class="card card-body">
+                            <div id="info" data-lngLat="0,0"></div>
+                        </div>
+                    </div>
+                    {% for spot in spots %}
+                        <div class="spotWrapper row">
+                                <div class="col">
+                                    <button type="button" class="spotMapChange"><p class="spotName"><i class="fa-solid fa-location-dot"></i>  {{spot.name}}</p></button>
+                                    <p class="geolocalisation ps-1 text-muted">{{spot.latitude}},{{spot.longitude}}</p>
+                                    <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{spot.authorization}} {{ spot.authorization == "Public" ? "" : "*" }}</p>
+                                    <p class="text-muted spotAddress"><i class="fa-solid fa-map-pin"></i> {{spot.address|raw}}</p>
+                                </div>
+                                <div class="col-1 me-4">
+                                    <button type="button" class="btn btn-danger btn-lg"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {# côté carte #}
+                <div class="col-md-8" id="map">
+                </div>
+            </div>
+             
+        </div>
+
+    </section>
+    {# map #}
+    <script src="{{ asset('js/map.js')}}"></script>
+    <script>
+            map.on('mousemove', function (e) {
+                document.getElementById('info').innerHTML =
+                // e.lngLat => longitude et latitude du point
+                JSON.stringify(e.lngLat.wrap());
+
+                map.on('click', function(e){
+                    let info = document.getElementById('info');
+                    info.dataset.lngLat =  e.lngLat;
+
+                    let spotGeolocalisation = JSON.parse(info.innerHTML);
+             
+                    console.log(spotGeolocalisation, e.lngLat);
+                    //on sépare les data pour les mettre dans la fonction de placement de marker sur la carte
+                    let recoverLatLong = spotGeolocalisation.split(',');
+                    new maplibregl.Marker({color:'#B30B00', scale:1.2}).setLngLat([recoverLatLong[0], recoverLatLong[1]]).setPopup(markerPopup).addTo(map);
+                     
+                })
+
+            });
+    </script>
+{% endblock %}

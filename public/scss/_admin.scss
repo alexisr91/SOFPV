@@ -304,3 +304,47 @@ section#adminComments {
 
     }
 }
+
+section#adminMapSpots{
+    .container-fluid {
+        display: flex;
+        background-color: $white;
+        min-height: 90vh;
+        max-width: 100vw;
+
+        .row{width: 100%; 
+            overflow: hidden
+        }
+
+        .gestion { 
+            overflow-y: auto;
+            height:90vh;
+        }
+
+        #map {height: 90vh;}
+
+        .spotWrapper {
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1em 0;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            max-height: fit-content; 
+            width: 100%;
+        }
+        .addSpot {
+            margin-top: 1em;
+        }
+       
+        .spotName {
+            font-size: 1.1em;
+            i {color:$accent;}
+        } 
+
+        .spotMapChange {
+            background-color: transparent;
+            border: none;
+        }
+    }
+}

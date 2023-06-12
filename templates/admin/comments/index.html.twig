@@ -21,7 +21,7 @@
                         <th>ID</th>
                         <th>Date</th>
                         <th>Auteur</th>
-                        <th>Article</th>
+                        <th colspan="2">Article</th>
                         <th colspan="2">Commentaire</th>
                         <th class="text-center">Modération</th>
                     </tr>
@@ -35,7 +35,7 @@
                         <td>{{alert.id}}</td>
                         <td>{{alert.createdAt|date('d-m-Y H:i')}}</td>
                         <td><b><a href="{{path('admin_users')}}">{{alert.comment.author}}</a><b></td>
-                        <td><b><a href="{{path('article_show', {'slug':alert.comment.article.slug})}}" target='_blank'>{{alert.comment.article.title}}</a></b></td>
+                        <td colspan="2"><b><a href="{{path('article_show', {'slug':alert.comment.article.slug})}}" target='_blank'>{{alert.comment.article.title}}</a></b></td>
                         <td colspan="2">{{alert.comment.content|raw}}</td>
                         <td class="text-center"><button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirm-{{alert.comment.id}}"><i class="fa-solid fa-comment-slash"></i></button></td>
                     </tr>    
