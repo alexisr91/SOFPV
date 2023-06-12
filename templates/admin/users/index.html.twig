@@ -164,9 +164,11 @@
                                     
                                     
                                     <div class="actions">
-                                        {% if user.active %}
+                                        {% if app.user == user %}
+                                        <span class="alert alert-success">Votre compte administrateur</span>
+                                        {% elseif user.active %}
                                             <a href="{{path('admin_user_desactivate', {'id' : user.id })}}" class="btn btn-danger"><i class="fa-solid fa-user-slash"></i> Désactiver le compte</a>
-                                        {% else  %}
+                                        {% else %}
                                             <a href="{{path('admin_user_activate', {'id' : user.id })}}" class="btn btn-success"><i class="fa-solid fa-user-check"></i> Activer le compte</a>
                                         {% endif %}
                                     </div>

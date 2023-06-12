@@ -24,6 +24,8 @@ security:
                 path: admin_logout
                 target: home
         main:
+            pattern: ^/
+            user_checker: App\Security\UserChecker
             lazy: true
             provider: app_user_provider
             form_login:
