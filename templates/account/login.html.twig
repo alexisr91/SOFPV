@@ -18,7 +18,7 @@
                             <input type="password" id="password" name="_password" placeholder="Mot de passe" class="form-control"/>
                         </div>
                         {% if error %}
-                            <div class="alert alert-danger"><i class="fa-solid fa-triangle-exclamation"></i> Identifiant ou mot de passe incorrect.</div>
+                            <div class="alert alert-danger"><i class="fa-solid fa-triangle-exclamation"></i> {{ error.messageKey|trans(error.messageData, 'security')}}</div>
                         {% endif %}
                     
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
