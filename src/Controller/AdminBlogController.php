@@ -25,7 +25,7 @@ class AdminBlogController extends AbstractController
         $pagination = $paginationService
                     ->setEntityClass(Article::class)
                     ->setPage($page)
-                    ->setLimit(10)
+                    ->setLimit(8)
                     ->setOrder("DESC");
                     ;
 

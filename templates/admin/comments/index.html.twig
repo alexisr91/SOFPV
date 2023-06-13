@@ -15,6 +15,9 @@
             <div class="wrap">      
             <h3>Gestion des commentaires signalés</h3>
 
+            {% if alerts is empty %}
+                <div class="alert alert-success my-4">Aucun commentaire n'a été signalé.</div>
+            {% else %}
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -27,9 +30,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                {% if alerts is empty %}
-                    <p>Aucun signalement de commentaire.</p>
-                {% else %}
                 {% for alert in alerts %}
                     <tr>
                         <td>{{alert.id}}</td>

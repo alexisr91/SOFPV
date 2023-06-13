@@ -19,7 +19,8 @@
             //on récupère le html qui correspond à "lat , long"
             let spotGeolocalisation = item.innerHTML;
             //on sépare les data pour les mettre dans la fonction de placement de marker sur la carte
-            let recoverLatLong = spotGeolocalisation.split(',');
+            let recoverLongLat = spotGeolocalisation.split(',');
+            console.log(recoverLongLat);
 
             //element précédent les données de géolocalisation(<p> placé juste avant qui contient le nom de chaque spot)
             //on récupère le firstChild qui est le #text, puis le contenu du #text qui est un string
@@ -32,7 +33,7 @@
 
             }).setHTML(`${spotName}`);
 
-            new maplibregl.Marker({color:'#B30B00', scale:1.2}).setLngLat([recoverLatLong[0], recoverLatLong[1]]).setPopup(markerPopup).addTo(map);
+            new maplibregl.Marker({color:'#B30B00', scale:1.2}).setLngLat([recoverLongLat[1], recoverLongLat[0]]).setPopup(markerPopup).addTo(map);
             
         })
        
@@ -51,11 +52,11 @@
                 let spotData = parent.querySelector('p:nth-child(2)').innerHTML;
 
                 //on sépare les données pour les passer à la carte
-                let latLongData = spotData.split(',');
+                let longLatData = spotData.split(',');
 
                 //animation qui "redirige" avec animation + zoom vers le point demandé par l'user
                 map.flyTo({
-                    center: [latLongData[0],latLongData[1]],
+                    center: [longLatData[1],longLatData[0]],
                     essential: true, 
                     zoom:15
 

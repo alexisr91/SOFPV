@@ -283,8 +283,8 @@ class AppFixtures extends Fixture
         $spot1->setName("La Sabla")
               ->setAuthorization("Télépilotes Pro")
               ->setAddress("5 rue Gilbert Affre, 31830 Plaisance-du-Touch")
-              ->setLongitude("43.556387")
-              ->setLatitude("1.301499")
+              ->setLatitude("43.556387")
+              ->setLongitude("1.301499")
               ->setAdminMapSpot(false);
               
         $spot[] = $spot1;
@@ -296,8 +296,8 @@ class AppFixtures extends Fixture
         $spot2->setName("Karting")
         ->setAuthorization("Public")
         ->setAddress("Rue de la Plage, 31150 Fenouillet")
-        ->setLongitude("43.670626")
-        ->setLatitude("1.384679")
+        ->setLatitude("43.670626")
+        ->setLongitude("1.384679")
         ->setAdminMapSpot(false);
 
         $spot[] = $spot2;
@@ -308,8 +308,8 @@ class AppFixtures extends Fixture
         $spot3->setName("Lavoir")
         ->setAuthorization("Public")
         ->setAddress("81400 Blaye-les-Mines")
-        ->setLongitude("44.039917")
-        ->setLatitude("2.142730")
+        ->setLatitude("44.039917")
+        ->setLongitude("2.142730")
         ->setAdminMapSpot(false);
 
         $spot[] = $spot3;
@@ -320,8 +320,8 @@ class AppFixtures extends Fixture
         $spot4->setName("DWS Gymnase")
         ->setAuthorization("Public")
         ->setAddress("26 route de Portet, 31270 Villeneuve-Tolosane")
-        ->setLongitude("43.522812")
-        ->setLatitude("1.355887")
+        ->setLatitude("43.522812")
+        ->setLongitude("1.355887")
         ->setAdminMapSpot(true);
 
         $spot[] = $spot4;
@@ -332,8 +332,8 @@ class AppFixtures extends Fixture
         $spot5->setName("Château de Bram")
         ->setAuthorization("Public")
         ->setAddress("Valgros, 11150 Bram")
-        ->setLongitude("43.237722")
-        ->setLatitude("2.130921")
+        ->setLatitude("43.237722")
+        ->setLongitude("2.130921")
         ->setAdminMapSpot(false);
 
         $spot[] = $spot5;
@@ -344,8 +344,8 @@ class AppFixtures extends Fixture
         $spot6->setName("Parc des Quinze Sols")
         ->setAuthorization("Public")
         ->setAddress("Chemin du Tiers État, 31700 Blagnac")
-        ->setLongitude("43.664566")
-        ->setLatitude("1.390432")
+        ->setLatitude("43.664566")
+        ->setLongitude("1.390432")
         ->setAdminMapSpot(false);
 
         $spot[] = $spot6;
