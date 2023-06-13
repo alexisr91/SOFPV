@@ -3,6 +3,14 @@
 {% block title %}{{ parent() }} | {{ title }}{% endblock %}
 
 {% block body %}
+{# geocode plugin pour faciliter la recherche du nouveau point par l'admin #}
+    <script src="https://unpkg.com/@maplibre/maplibre-gl-geocoder@1.2.0/dist/maplibre-gl-geocoder.min.js"></script>
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/@maplibre/maplibre-gl-geocoder@1.2.0/dist/maplibre-gl-geocoder.css"
+        type="text/css"
+        />
+{# end geocode plugin #}
 
     <section id="adminMapSpots">
             {{include('partials/_adminNavbarMenu.html.twig')}}
@@ -20,6 +28,11 @@
                     <div class="collapse my-2" id="addSpotForm">
                         <div class="card card-body">
                             <div id="info" data-lngLat="0,0"></div>
+                            {{form_start(form)}}
+                                {{form_widget(form)}}
+                                {{form_errors(form)}}
+                                <button type="submit" class="btn btn-success">Ajouter</button>
+                            {{form_end(form)}}
                         </div>
                     </div>
                     {% for spot in spots %}
@@ -47,24 +60,92 @@
     {# map #}
     <script src="{{ asset('js/map.js')}}"></script>
     <script>
-            map.on('mousemove', function (e) {
-                document.getElementById('info').innerHTML =
-                // e.lngLat => longitude et latitude du point
-                JSON.stringify(e.lngLat.wrap());
 
-                map.on('click', function(e){
-                    let info = document.getElementById('info');
-                    info.dataset.lngLat =  e.lngLat;
+    //debut geocode api
+        var geocoder_api = {
 
-                    let spotGeolocalisation = JSON.parse(info.innerHTML);
-             
-                    console.log(spotGeolocalisation, e.lngLat);
-                    //on sépare les data pour les mettre dans la fonction de placement de marker sur la carte
-                    let recoverLatLong = spotGeolocalisation.split(',');
-                    new maplibregl.Marker({color:'#B30B00', scale:1.2}).setLngLat([recoverLatLong[0], recoverLatLong[1]]).setPopup(markerPopup).addTo(map);
-                     
+            forwardGeocode: async (config) => {
+            const features = [];
+            try {
+                let request =
+                'https://nominatim.openstreetmap.org/search?q=' +
+                config.query +
+                '&format=geojson&polygon_geojson=1&addressdetails=1';
+
+                const response = await fetch(request);
+                const geojson = await response.json();
+
+                for (let feature of geojson.features) {
+
+                    let center = [
+                    feature.bbox[0] +
+                    (feature.bbox[2] - feature.bbox[0]) / 2,
+                    feature.bbox[1] +
+                    (feature.bbox[3] - feature.bbox[1]) / 2
+                    ];
+
+                let point = {
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',
+                        coordinates: center
+                    },
+
+                    place_name: feature.properties.display_name,
+                    properties: feature.properties,
+                    text: feature.properties.display_name,
+                    place_type: ['place'],
+                    center: center
+                };
+
+                features.push(point);
+                }
+
+            } catch (e) {
+                console.error(`Failed to forwardGeocode with error: ${e}`);
+            }
+            
+                return { features: features };
+            }
+        
+            };
+            map.addControl(
+                new MaplibreGeocoder(geocoder_api, {
+                maplibregl: maplibregl
                 })
+            );
 
-            });
+        // fin geocode
+        //debut création marker pour ajour d'un spot
+
+        let addSpot = document.querySelector('.addSpot');
+        let marker; 
+
+        //si l'admin clique sur ajouter un spot
+        addSpot.addEventListener('click', function(e){
+
+            //on attends le clic sur la carte pour ajouter un marker qui sera déplaçable 
+            map.on('click', function(element){
+            let geolocalisation = element.lngLat;
+            if(marker == undefined){
+                marker = new maplibregl.Marker({color:'#6C757D', scale:1.5, draggable: true}).setLngLat([geolocalisation.lng, geolocalisation.lat]).addTo(map); 
+            } 
+
+                marker.on('dragend', onDragEnd);
+
+                function onDragEnd() {
+                    var lngLat = marker.getLngLat();
+
+                    document.querySelector('#spot_longitude').value = lngLat.lng;
+                    document.querySelector('#spot_latitude').value = lngLat.lat ;
+                            
+                }          
+            }) ;
+
+        
+       
+        });
+
+        
     </script>
 {% endblock %}
