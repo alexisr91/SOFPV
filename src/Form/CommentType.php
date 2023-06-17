@@ -14,8 +14,9 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('content', TextareaType::class, [
-                'label'=>false,
-                'attr'=>['placeholder'=>'Ajoutez un commentaire...']
+                'label' => false,
+                'sanitize_html' => true,
+                'attr' => ['placeholder' => 'Ajoutez un commentaire...'],
             ])
         ;
     }
@@ -24,7 +25,7 @@ class CommentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Comment::class,
-            'sanitize_html' => true
+            'sanitize_html' => true,
         ]);
     }
 }

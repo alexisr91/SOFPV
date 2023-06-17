@@ -25,9 +25,10 @@ class Likes
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
-    }  
+    }
 
     public function getId(): ?int
     {

@@ -40,19 +40,19 @@
     
         {# Actu de l'admin "A la Une" - article selectionné par l'admin #}
         <section id="adminNews">
-            <div class="adminNews-wrapper">
-                <article>
+            <div class="adminNews-wrapper mx-auto">
+                <article class="row justify-content-center">
                 {% if adminNews %}
                 {% set article = adminNews %}
                 {% set video = adminNews.video %}
                 {% set images = adminNews.images %}
-                        <div class="image mx-auto">
-                            <div class="row">
+                        <div class="image col-md-12 col-lg-5">
+                            <div>
                                 {{include('/partials/_articleMediaShow.html.twig')}}
                             </div>
                         </div>
-                        <div class="content mx-auto"> 
-                            <h3>{{adminNews.title}}</h3>
+                        <div class="content col-md-12 col-lg-7"> 
+                            <h3><a href="{{path('article_show', {'slug': adminNews.slug})}}">{{adminNews.title}}</a></h3>
                             <p class="card-text">{{adminNews.content|raw}}</p>
                             <span class="text-muted">Publié le {{adminNews.createdAt|date('d-m-Y')}} par {{adminNews.author.nickname}}</span>
                         </div> 
@@ -67,18 +67,18 @@
         {# Derniers articles #} 
         <section id="blogHome">  
             <div class="container-fluid pt-4">
-                <div class="row px-3 mx-3">
+                <div class="row px-3">
                     {% for article in articles %}
                     {# alternance de l'affichage des articles suivant leur index dans le tableau #}
                         {% if loop.index is divisible by(2) %}
                             <div class="wrapper-left">
                                 {# personnalisation du nombre de caractères à tronquer pour eviter les problemes de css #}
-                                {% set articleContent = article.content|u.truncate(300, '...', false) %}
+                                {% set articleContent = article.content|u.truncate(200, '...', false) %}
                                 {{include('partials/_articleRight.html.twig')}}
                             </div>
                         {% else %}
                             <div class="wrapper-right">
-                                {% set articleContent = article.content|u.truncate(300, '...', false) %}
+                                {% set articleContent = article.content|u.truncate(200, '...', false) %}
                                 {{include('partials/_articleLeft.html.twig')}}
                             </div>           
                         {% endif %}
@@ -86,27 +86,32 @@
                 </div>
             </div>
         </section>
-
-
-        {# Items de la boutiques (notification New) #}
+        {# derniers items de la boutique  #}
         <section id="newOnShop">
             <div class="container-fluid">
-                <div class="row mt-4">
+                <div class="row wrapCard">
+                <h5 class="title">Boutique</h5>
                 {% for product in products %}
-                    <div class="col">
-                            <div class="card">
-                               {# si le produit est sorti il y a moins de 15 jours : badge new #}
-                                {% if product.isNewProduct() %}
-                                <span class="badge bg-danger badgeNewOnShop">New</span> 
-                                {% endif %}
-
-                                <img src="{{asset('../img/products/'~ product.image)}}" class="card-img-top img-fluid" alt="{{product.name}}">
+                    <div class="col-md-6 col-lg-3 mb-4">
+                            <div class="card h-100">
+                                <div class="card-image-product">
+                                    {# si le produit est sorti il y a moins de 15 jours : badge new #}
+                                    {% if product.isNewProduct() %}
+                                    <span class="badge bg-danger badgeNewOnShop">New</span> 
+                                    {% endif %}
+                                    <img src="{{asset('../uploads/products/'~ product.image)}}" alt="{{product.name}}">
+                                </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">{{product.name}}</h5>
-                                    {% set descriptionTruncated = product.description|u.truncate(200,'...', false) %}
-                                    <p class="card-text">{{descriptionTruncated|raw}}</p>
-                                    <p class="card-text price"><b>{{product.priceTTC|number_format(2)}} &euro;</b></p>
-                                    <a href="{{path('shop_show_product', {'slug' : product.slug})}}" class="btn btn-dark stretched-link">Voir le produit</a>
+                                    <div>
+                                        <h5 class="card-title">{{product.name}}</h5>
+                                        {% set descriptionTruncated = product.description|u.truncate(100,'...', false) %}
+                                        <p class="card-text">{{descriptionTruncated|raw}}</p>
+                                    </div>  
+                                    <div class="card-link">
+                                        <p class="card-text price"><b>{{product.priceTTC|number_format(2)}} &euro;</b></p>
+                                        <a href="{{path('shop_show_product', {'slug' : product.slug})}}" class="btn btn-dark stretched-link">Voir le produit</a>
+                                    </div>
+                                    
                                 </div>
                             </div>
                     </div>
@@ -119,11 +124,12 @@
         <section id="sessions">
             <div class="container-fluid">
                 <div class="row main">
-                    <div class="col-md-9" id="map">
+                    <div class="col-md-12 col-lg-6 col-xxl-8" id="map">
                     </div>
-                    <div class="col"> 
+                    <button class="btnMap btn param" type="button">Carte<i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="col-md-12 col-lg-6 col-xxl-4 colSessions"> 
                     <h5>Prochaines sessions</h5>
-                    {# spots dont les sessions n'apparaissent pas sur la page d'accueil #}
+                    {# spots dont les sessions n'apparaissent pas sur la page d'accueil pour affichage des points #}
                     {% for spot in mapSpots %}
                     <div hidden> 
                         <p class="spotName">{{spot.name}}</p>
@@ -131,31 +137,31 @@
                     </div>
                     {% endfor %}
                     {% if sessions is empty %}
-                        <div class="alert alert-warning">Il n'y a pas encore de sessions prévues.</div>
+                        <div class="alert alert-warning me-2">Il n'y a pas encore de sessions prévues.</div>
                     {% else %}
                         {% for session in sessions %}
                         {% set spot = session.mapSpot %}
                         <div class="spotWrapper row">
-                                <div class="col-sm-10">
+                                <div class="col-sm-9">
                                     <div class="row">
-                                        <div class="col">
-                                            <button type="button" class="spotMapChange"><p class="spotName"><strong><i class="fa-solid fa-location-dot"></i> {{spot.name}}</strong></p></button>
+                                        <div class="mainInfos">
+                                            <button type="button" class="spotMapChange btn" data-tooltip="Cliquez pour localiser sur la carte" data-tooltip-location="top"><p class="spotName"><strong><i class="fa-solid fa-location-dot"></i> {{spot.name}}</strong></p></button>
                                             <p class="geolocalisation" hidden>{{spot.latitude}},{{spot.longitude}}</p>
                                             <p class="text-muted"><i class="fa-solid fa-calendar-day"></i> {{session.date|format_datetime('full', 'none', locale='fr')}}</p>
                                             <p class="text-muted"><i class="fa-solid fa-clock"></i> {{session.timesheet|capitalize}}</p>
                                         </div>
-                                        <div class="col infoSpot">
+                                        <div class="infoSpot">
                                             <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{spot.authorization}}{{spot.authorization == "Public" ? "": " * " }}</p>
                                             <p class="text-muted"><i class="fa-solid fa-users"></i> {% for user in session.users %}{{user.nickname}}{{ loop.last ? "" : " , "}}{% endfor %}</p>
                                             <p class="text-muted"><i class="fa-solid fa-map-pin"></i> {{spot.address|raw}}</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-2 sub me-2">
                                      {% if app.user and app.user in session.users %}      
-                                            <span class="text-success"><i class="fa-solid fa-user-check fa-2x"></i><span>
+                                            <span class="text-success"  data-tooltip="Vous êtes déjà inscrit" data-tooltip-location="top"><i class="fa-solid fa-user-check fa-2x"></i></span>
                                      {% else %}
-                                            <a href="{{path('session_entry', {'id':session.id})}}"><i class="fa-solid fa-user-plus fa-2x"></i></a>
+                                            <a href="{{path('session_entry', {'id':session.id})}}" data-tooltip="S'inscrire à la session" data-tooltip-location="top"><i class="fa-solid fa-user-plus fa-2x"></i></a>
                                      {% endif %}
                                 </div>
                         </div>
@@ -163,7 +169,7 @@
                     {% endif %}
                        <div>
                             <p class="text-muted asterisque">
-                                <small>*  Diverses autorisations sont nécessaires pour voler dans cette zone (S1, S2 ou S3). Se réferer à la réglementation sur <a href="https://www.geoportail.gouv.fr/donnees/restrictions-uas-categorie-ouverte-et-aeromodelisme">Géoportail</a> et le site de la <a href="https://www.ecologie.gouv.fr/direction-generale-laviation-civile-dgac"> DGAC</a>.</small>
+                                <small>* Diverses autorisations sont nécessaires pour voler dans cette zone (S1, S2 ou S3). Se réferer à la réglementation sur <a href="https://www.geoportail.gouv.fr/donnees/restrictions-uas-categorie-ouverte-et-aeromodelisme">Géoportail</a> et le site de la <a href="https://www.ecologie.gouv.fr/direction-generale-laviation-civile-dgac"> DGAC</a>.</small>
                             </p>
                        </div>
                        
@@ -178,14 +184,14 @@
         <section id="socialNetwork">
                 <h3 class="text-center">Retrouvez nous sur les réseaux</h3>   
             <div class="socialLinks">
-                    <a href="#" target="_blank"><i class="fa-brands fa-facebook fa-3x"></i></a>
-                    <a href="#" target="_blank"><i class="fa-brands fa-instagram fa-3x"></i></a>
-                    <a href="#" target="_blank"><i class="fa-brands fa-tiktok fa-3x"></i></a>
-                    <a href="#" target="_blank"><i class="fa-brands fa-youtube fa-3x"></i></a> 
+                    <a href="https://m.facebook.com/groups/2750836911872324/?ref=share" target="_blank"><i class="fa-brands fa-facebook fa-3x"></i></a>
+                    <p class="soon" data-tooltip="Prochainement" data-tooltip-location="top" disabled><i class="fa-brands fa-instagram fa-3x"></i></p>
+                    <p class="soon" data-tooltip="Prochainement" data-tooltip-location="top"><i class="fa-brands fa-tiktok fa-3x"></i></p>
+                    <p class="soon" data-tooltip="Prochainement" data-tooltip-location="top"><i class="fa-brands fa-youtube fa-3x"></i></p> 
             </div> 
-        <div id="scrollBackToTop">
-            <a href="#"><i class="fa-solid fa-angles-up fa-2x"></i></a>
-        </div>
+            <div id="scrollBackToTop">
+                <span><i class="fa-solid fa-angles-up fa-2x"></i></span>
+            </div>
         </section>
        
     </section>
@@ -212,8 +218,15 @@
             }
              animate();
         });
+       
+       //remonte la page 
+       let btnBackToTop = document.querySelector('#scrollBackToTop');
+       let top = document.querySelector('#navbarMenu');
+       btnBackToTop.addEventListener('click', function(){
+            top.scrollIntoView(true,{behavior: "smooth"});
+       });
 
-        }
+    }
 
    </script>
    

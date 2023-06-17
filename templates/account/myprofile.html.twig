@@ -7,7 +7,7 @@
     <section id="myProfile" class="bg-dark">
         {{include('partials/_navbarMenu.html.twig')}}
     
-        <div class="container-fluid ">
+        <div class="container-fluid globalWrap">
         {# sidebar #}
         {{include('partials/_sidebarMenuProfile.html.twig')}}
 
@@ -18,7 +18,7 @@
                 </div>
                <div class="row">
 
-                <div class="col-4">
+                <div class="leftWrap">
                     {# avatar + pseudo #}
                     <div class="user">
                         <div id="myProfile-avatar">
@@ -35,24 +35,25 @@
                                 <b><i class="fa-solid fa-at"></i> </b>{{user.email}}<br>
                                 <b><i class="fa-solid fa-address-card"></i> </b> {% if user.firstname or user.lastname %}{{user.firstname}} {{user.lastname}} {% else %} <i>Non renseigné</i> {% endif %} <br>
                                                 
-                                <b><i class="fa-solid fa-house"></i> </b>  {% if user.address %} {{user.address}}<br> {{user.zip}}, {{user.city}} <br>
+                                <b><i class="fa-solid fa-house"></i> </b>  
+                                {% if user.address and user.addressComplement %} 
+                                    {{user.address|raw}}<br>
+                                    {{user.addressComplement|raw}}<br>
+                                    {{user.zip}}, {{user.city}} <br>
+                                {% elseif user.address %}
+                                {{user.address|raw}}  <br>
+                                {{user.zip}}, {{user.city}} <br>
                                 {% else %}
                                 <i>Non renseigné</i>
                                 {% endif %}
-                                
-                                {% if user.addressComplement %}
-                                    <br>{{user.addressComplement}}
-                                
-                                {% endif %}
-                                
                             </div>   
                             <div class="col">
-                                <i class="fa-brands fa-instagram"></i> {% if user.instagram %} {{user.instagram}} {% else %} <i>Non renseigné</i> {% endif %} <br>
-                                <i class="fa-brands fa-tiktok"></i> {% if user.tiktok %} {{user.tiktok}} {% else %} <i>Non renseigné</i> {% endif %} <br>
-                                <i class="fa-brands fa-facebook"></i> {% if user.facebook %} {{user.facebook}} {% else %} <i>Non renseigné</i> {% endif %} <br>
+                                <i class="fa-brands fa-instagram"></i> {% if user.instagram %} {{user.instagram|raw}} {% else %} <i>Non renseigné</i> {% endif %} <br>
+                                <i class="fa-brands fa-tiktok"></i> {% if user.tiktok %} {{user.tiktok|raw}} {% else %} <i>Non renseigné</i> {% endif %} <br>
+                                <i class="fa-brands fa-facebook"></i> {% if user.facebook %} {{user.facebook|raw}} {% else %} <i>Non renseigné</i> {% endif %} <br>
                             </div>
                         </div>   
-                        <div class="param">
+                        <div class="param modifyProfile">
                             <a href="{{path('account_edit')}}"><i class="fa-solid fa-user-gear"></i> Modifier mon profil</a>
                         </div>    
                     </div>
@@ -72,12 +73,12 @@
                             {% endif %}             
                     </div>
                     <div>
-                        <b>Frame: </b>{{user.drone.frame}}<br>
-                        <b>Moteurs: </b>{{user.drone.motors}}<br>
-                        <b>FC: </b>{{user.drone.fc}}<br>
-                        <b>ESC: </b>{{user.drone.esc}}<br>
-                        <b>CAM: </b>{{user.drone.cam}}<br>
-                        <b>Réception: </b>{{user.drone.reception}}<br>
+                        <b>Frame: </b>{{user.drone.frame|raw}}<br>
+                        <b>Moteurs: </b>{{user.drone.motors|raw}}<br>
+                        <b>FC: </b>{{user.drone.fc|raw}}<br>
+                        <b>ESC: </b>{{user.drone.esc|raw}}<br>
+                        <b>CAM: </b>{{user.drone.cam|raw}}<br>
+                        <b>Réception: </b>{{user.drone.reception|raw}}<br>
                         <b>Type de lipo: </b>{{user.drone.lipoCells}}S
                     </div>
                        {% endif %}
@@ -85,39 +86,39 @@
                         </div>
                     </div>
                 
-                <div class="col"> 
+                <div class="rightWrap"> 
                     <div class="dashboard">
                         <h3>Tableau de bord</h3>
                         <div class="row mx-auto mt-3">
                             <div class="col mb-3">
                                 <a href="{{path('article_add')}}" class="btn param"><i class="fa-solid fa-pen-to-square"></i> Ajouter un article</a>
                             </div>
-                            <div class="row row-cols-3 mx-auto">
-                                <div class="col">
+                            <div class="row mx-auto">
+                                <div class="col-sm-6">
                                     <div class="card text-bg-light mb-3">
-                                        <div class="card-header">Articles</div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title"><i class="fa-solid fa-photo-film fa-2x"></i></h5>
-                                                <h5>{{articleCount}}</h5>
-                                            </div>
+                                    <div class="card-header">Articles</div>
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title"><i class="fa-solid fa-photo-film fa-2x"></i></h5>
+                                            <h5>{{articleCount}}</h5>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col-sm-6">
                                     <div class="card text-bg-light mb-3">
-                                        <div class="card-header">Sessions prévues</div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title"><i class="fa-solid fa-calendar-days fa-2x"></i></h5>
-                                                <h5>{{sessionCount}}</h5>
-                                            </div>
+                                    <div class="card-header">Sessions prévues</div>
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title"><i class="fa-solid fa-calendar-days fa-2x"></i></h5>
+                                            <h5>{{sessionCount}}</h5>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col-sm col-md">
                                     <div class="card text-bg-light mb-3">
-                                        <div class="card-header">Statut de la dernière commande</div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title"><i class="fa-solid fa-bag-shopping fa-2x"></i></h5>
-                                                <h5>{% if lastOrderStatus %}{{lastOrderStatus.deliveryStatus.statusDescription}}{% else %}Pas de commande en cours.{% endif %}</h5>
-                                            </div>
+                                    <div class="card-header">Statut de la dernière commande</div>
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title"><i class="fa-solid fa-bag-shopping fa-2x"></i></h5>
+                                            <h5>{% if lastOrderStatus %}{{lastOrderStatus.deliveryStatus.statusDescription}}{% else %}Pas de commande en cours.{% endif %}</h5>
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -166,17 +167,17 @@
                         <div class="counters">
                             <h5>Crash board</h5>
                             <div class="row">
-                                <div class="col-md-4 counter">
+                                <div class="col-sm-4 counter">
                                     <p>Lipo HS</p>
                                     <a class="btn animated-counter" href="{{path('account_add_to_counter', {'name': 'Lipo'})}}" id="lipoCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></a>
                                 </div>
-                                <div class="col-md-4 counter">
+                                <div class="col-sm-4 counter">
                                     <p>ESC brûlé</p>
-                                    <a class="btn" href="{{path('account_add_to_counter', {'name': 'ESC'})}}" id="escCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></a>
+                                    <a class="btn animated-counter" href="{{path('account_add_to_counter', {'name': 'ESC'})}}" id="escCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></a>
                                 </div>
-                                <div class="col-md-4 counter">
+                                <div class="col-sm-4 counter">
                                     <p>Frame brisée</p>
-                                    <a class="btn" href="{{path('account_add_to_counter', {'name': 'Frame'})}}"  id="frameCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></a>
+                                    <a class="btn animated-counter" href="{{path('account_add_to_counter', {'name': 'Frame'})}}"  id="frameCounter"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-1"></i></a>
                                 </div>
                             </div>
                         </div>

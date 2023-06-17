@@ -2,20 +2,19 @@
 
 namespace App\Entity;
 
+use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
-
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
 #[HasLifecycleCallbacks()]
 class Order
 {
-    const DEVISE = 'eur';
+    public const DEVISE = 'eur';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -43,12 +42,24 @@ class Order
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\OneToMany(mappedBy: 'ordering', targetEntity: Cart::class, cascade:['persist','remove'] , orphanRemoval:true)]
+    #[ORM\OneToMany(mappedBy: 'ordering', targetEntity: Cart::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $carts;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Transporter $transporter = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $stripe_customer_id = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $stripe_payment_intent = null;
+
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    private ?OrderStatus $delivery_status = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $trackerID = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $stripe_customer_id = null;
@@ -66,19 +77,18 @@ class Order
 
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
-    public function prePersist(){
-        //mise en place de la date de création de la commande
-          if(empty($this->createdAt)){
-                $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
-           }
-           //mise en place d'une référence unique pour la commande
-           if(empty($this->reference)){
-               $this->reference = uniqid();
-           }
-           //on utilise updatedAt pour avoir une référence de temps entre la création et une modification potentielle de la commande
-           $this->updatedAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));    
-
-           
+    public function prePersist()
+    {
+        // mise en place de la date de création de la commande
+        if (empty($this->createdAt)) {
+            $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        }
+        // mise en place d'une référence unique pour la commande
+        if (empty($this->reference)) {
+            $this->reference = uniqid();
+        }
+        // on utilise updatedAt pour avoir une référence de temps entre la création et une modification potentielle de la commande
+        $this->updatedAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
     }
 
     public function getId(): ?int
@@ -158,7 +168,6 @@ class Order
         return $this;
     }
 
-
     public function getPrice(): ?float
     {
         return $this->price;
@@ -213,7 +222,6 @@ class Order
         return $this;
     }
 
-
     public function getStripeCustomerId(): ?string
     {
         return $this->stripe_customer_id;
@@ -246,6 +254,18 @@ class Order
     public function setDeliveryStatus(?OrderStatus $delivery_status): self
     {
         $this->delivery_status = $delivery_status;
+
+        return $this;
+    }
+
+    public function getTrackerID(): ?string
+    {
+        return $this->trackerID;
+    }
+
+    public function setTrackerID(?string $trackerID): self
+    {
+        $this->trackerID = $trackerID;
 
         return $this;
     }

@@ -1,7 +1,7 @@
 {# Menu navbar principal pour l'admin #}
 
 <section id="adminNavbarMenu" class="sticky-top">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-xxl navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="{{path('admin_dashboard')}}">SO FPV</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,8 +12,13 @@
                             <li class="nav-item mx-2">
                                 <a class="nav-link" href="{{path('admin_users')}}"><i class="fa-solid fa-user"></i> Utilisateurs</a>
                             </li>
-                            <li class="nav-item mx-2">
-                                <a class="nav-link" href="{{path('admin_blog')}}"><i class="fa-solid fa-photo-film"></i> Articles</a></li>    
+                            <li class="nav-item dropdown mx-2">
+                                <a class="nav-link dropdown-toggle" href="#" aria-labelledby="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-photo-film"></i> Articles</a>
+                                <ul class="dropdown-menu" aria-labelledby="blogDropdown">
+                                    <li><a class="dropdown-item" href="{{path('admin_blog')}}"><i class="fa-solid fa-list"></i> Tous les articles</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{path('admin_blog_alerts')}}"><i class="fa-solid fa-triangle-exclamation"></i> Articles signalés</a></li>    
+                                </ul>
                             </li>
                             <li class="nav-item mx-2">
                                 <a class="nav-link" href="{{path('admin_comments')}}"><i class="fa-solid fa-comment-slash"></i> Commentaires</a></li>    
@@ -23,22 +28,23 @@
                                 <a class="nav-link" href="{{path('admin_spots')}}"><i class="fa-solid fa-location-dot"></i> Carte et Spots</a></li>    
                             </li>  
                             <li class="nav-item dropdown mx-2">
-                                <a class="nav-link dropdown-toggle" href="#" aria-labelledby="sessionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Boutique</a>
+                                <a class="nav-link dropdown-toggle" href="#" aria-labelledby="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-shop"></i> Boutique</a>
                                 <ul class="dropdown-menu" aria-labelledby="shopDropdown">
-                                    <li><a class="dropdown-item" href="#">Gestion des produits</a></li>
+                                    <li><a class="dropdown-item" href="{{path('admin_shop')}}"><i class="fa-solid fa-shop"></i> Gestion des produits</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#">Gestion des commandes</a></li>
+                                    <li><a class="dropdown-item" href="{{path('admin_orders')}}"><i class="fa-solid fa-cart-flatbed"></i> Commandes à traiter</a></li>
+                                    <li><a class="dropdown-item" href="{{path('admin_orders_all')}}"><i class="fa-solid fa-list-ul"></i> Toutes les commandes</a></li>
                                     
                                 </ul>
                             </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link" href="{{path('admin_contact')}}"><i class="fa-solid fa-envelope"></i> Messagerie</a>
                         </li>    
-                        </ul>
-                        <ul class="navbar-nav connect">
-                            <li><a class="nav-link mx-1" href="{{path('home')}}" target="_blank"><i class="fa-solid fa-eye"></i> Voir le site</a></li>
-                            <li><a class="nav-link mx-1" href="{{path('admin_logout')}}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a></li>
-                        </ul>
+                    </ul>
+                    <ul class="navbar-nav connect">
+                        <li><a class="nav-link mx-1" href="{{path('home')}}" target="_blank"><i class="fa-solid fa-eye"></i> Voir le site</a></li>
+                        <li><a class="nav-link mx-1" href="{{path('admin_logout')}}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a></li>
+                    </ul>
                              
                 </div>
             </div>
@@ -48,5 +54,5 @@
 <div>
     {{include('/partials/_flashes.html.twig')}}
 </div>
-
+<script src="{{ asset('js/nav.js') }}"></script>
 

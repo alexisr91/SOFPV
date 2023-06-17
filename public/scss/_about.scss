@@ -8,14 +8,16 @@ section#about{
         background-color: $white;
 
             .wrap {
-                width:60%;
                 margin:0 auto;
                 background-color: #fff;
                 position: relative;
                 display: flex;
                 flex-direction: column;
-                padding-left: 5em;
+                justify-content: center;
+                align-items: center;
             }
+
+           
 
             h3 { margin-bottom: 1.5em; font-size: 1.7em ;}
 
@@ -34,7 +36,7 @@ section#about{
             .paragraph {      
                 padding: 2em;
                 background-color: #fff;
-                font-size: 1.1em;
+                font-size: 1em;
                 z-index: 1;
                 position: relative;
                 margin : 2em 0;

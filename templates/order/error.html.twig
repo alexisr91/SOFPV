@@ -6,11 +6,13 @@
  
     <section id="errorPayment">
         {{include('partials/_navbarMenu.html.twig')}}
-        <div class="container-fluid pt-4">
-            <div class="p-3 ms-2 wrapper">
-                <div class="recap ">
-                    <h3>Erreur lors de la transaction</h3>
-                    <p>Un problème est survenu lors de la commande. Vous pouvez rééssayer via le bouton ci-dessous.</p>
+        <div class="container-fluid ">
+            <div class="wrapper">
+                <div class="recap">
+                    <div>
+                        <h4><i class="fa-solid fa-circle-exclamation"></i> Erreur lors de la transaction</h4>
+                        <p>Un problème est survenu lors de la commande.</br> Nous vous invitons à réessayer via le bouton ci-dessous.</p>
+                    </div>
                     <div class="mt-4">
                         <a href="{{path('order_prepare', {'reference': reference})}}" class="btn param">Revenir à la commande</a>
                     </div>

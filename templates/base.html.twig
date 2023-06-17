@@ -25,6 +25,13 @@
         <script src="https://unpkg.com/maplibre-gl@3.0.1/dist/maplibre-gl.js"></script>
         <link href="https://unpkg.com/maplibre-gl@3.0.1/dist/maplibre-gl.css" rel="stylesheet" />
 
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker3.min.css" integrity="sha512-aQb0/doxDGrw/OC7drNaJQkIKFu6eSWnVMAwPN64p6sZKeJ4QCDYL42Rumw2ZtL8DB9f66q4CnLIUnAw28dEbg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="{{asset('/css/style.css')}}">
+         <!-- MAP -->
+        <script src="https://unpkg.com/maplibre-gl@3.0.1/dist/maplibre-gl.js"></script>
+        <link href="https://unpkg.com/maplibre-gl@3.0.1/dist/maplibre-gl.css" rel="stylesheet" />
+
         <title>{% block title %}So FPV{% endblock %}</title>
         
         <!-- Bootstrap bundle -->
@@ -38,9 +45,6 @@
         {# Bundle FOSJsRouting pour l'ajax - gestion likes #}
         <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}" defer></script>
         <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}" defer></script>
-        <script src="{{asset('js/script.js')}}" defer></script>
-
-       
         
     </head>
     <body>
@@ -51,8 +55,13 @@
 
         {% block footer %}
             <footer>
-                <p class="m-0"><i class="fa fa-copyright" aria-hidden="true"></i> SO FPV 2022 - Tous droits réservés | Laura Gaupin</p>  
-            </footer>  
+                <p class="m-0"><i class="fa fa-copyright" aria-hidden="true"></i> SO FPV 2023 - Tous droits réservés | Laura Gaupin 
+                    <button type="button" id="cguBtn" class="btn text-white" data-bs-toggle="modal" data-bs-target="#cgu">CGU</button>  - 
+                    <button type="button" id="cgvBtn" class="btn text-white" data-bs-toggle="modal" data-bs-target="#cgv">CGV</button>  -   
+                    <button type="button" id="mlBtn" class="btn text-white" data-bs-toggle="modal" data-bs-target="#ml">Mentions légales</button> 
+                </p>
+            </footer>
+            {{include('partials/_CguAndCgv.html.twig')}}  
         {% endblock %}
 
     </body>

@@ -11,8 +11,11 @@ use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Sequentially;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class DroneType extends AbstractType
 {
@@ -20,72 +23,74 @@ class DroneType extends AbstractType
     {
         $builder
             ->add('frame', TextType::class, [
-                'label' => 'Frame'
+                'label' => 'Frame',
+                'sanitize_html' => true,
             ])
             ->add('motors', TextType::class, [
-                'label'=> 'Moteurs'
+                'label' => 'Moteurs',
+                'sanitize_html' => true,
             ])
             ->add('fc', TextType::class, [
-                'label' => 'FC'
+                'label' => 'FC',
+                'sanitize_html' => true,
             ])
             ->add('esc', TextType::class, [
-                'label'=> 'ESC'
+                'label' => 'ESC',
+                'sanitize_html' => true,
             ])
             ->add('cam', TextType::class, [
-                'label'=> 'Caméra'
-        
+                'label' => 'Caméra',
+                'sanitize_html' => true,
             ])
             ->add('reception', ChoiceType::class, [
-                'choices'=> [
+                'choices' => [
                     'Crossfire' => 'Crossfire',
-                    'FrSky'=>'FrSky',
-                    'ExpressLRS'=> 'ExpressLRS',
-                    'Autre'=>'Autre'                   
-                ], 
-                'label'=>'Protocole de réception'
+                    'FrSky' => 'FrSky',
+                    'ExpressLRS' => 'ExpressLRS',
+                    'Autre' => 'Autre',
+                ],
+                'label' => 'Protocole de réception',
             ])
             ->add('lipoCells', ChoiceType::class, [
-                'choices'=> [
-                    '1S'=> 1,
-                    '2S'=> 2,
-                    '3S'=> 3,
-                    '4S'=> 4,
-                    '5S'=> 5,
-                    '6S'=> 6
+                'choices' => [
+                    '1S' => 1,
+                    '2S' => 2,
+                    '3S' => 3,
+                    '4S' => 4,
+                    '5S' => 5,
+                    '6S' => 6,
                 ],
-                'label'=>'Voltage'
+                'label' => 'Voltage',
             ])
             ->add('image', FileType::class, [
-                'required'=>false,
-                'mapped'=>false,
-                'constraints'=> [
-                //vérification séquentielle pour valider les différentes contraintes liées au fichier ET à l'image
+                'required' => false,
+                'mapped' => false,
+                'constraints' => [
+                // vérification séquentielle pour valider les différentes contraintes liées au fichier ET à l'image
                     new Sequentially([
-                        new File([                               
+                        new File([
                             'mimeTypes' => 'image/*',
                             'mimeTypesMessage' => 'Format invalide: Veuillez sélectionner un fichier image.',
                             'maxSize' => '5000k',
-                            'maxSizeMessage'=> 'Fichier trop volumineux : le maximum autorisé est {{ limit }}k.',
+                            'maxSizeMessage' => 'Fichier trop volumineux : le maximum autorisé est {{ limit }}k.',
                         ]),
                         new Image([
-                            'allowSquare'=>true,
-                            'minHeight'=>50,
-                            'minWidth'=>50,
-                            'maxHeight'=>1080,
-                            'maxWidth'=>1920
-                                    
-                        ])
-                    ])
-                ]   
-                
+                            'allowSquare' => true,
+                            'minHeight' => 50,
+                            'minWidth' => 50,
+                            'maxHeight' => 1080,
+                            'maxWidth' => 1920,
+                        ]),
+                    ]),
+                ],
             ]);
-        
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Drone::class
+            'data_class' => Drone::class,
+            'sanitize_html' => true,
         ]);
     }
 }

@@ -49,23 +49,21 @@ class Session
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
     }
 
-    #[Prepersist]
-    #[PreUpdate]
-    public function isAlreadyPast():bool{
-        //date de la session
+    public function isAlreadyPast(): bool
+    {
+        // date de la session
         $sessionDate = $this->date;
-        //date actuelle FR sans l'heurephp bin
-        $now = new DateTime("now", new \DateTimeZone('Europe/Paris'));
-        //on set l'heure a 00:00 pour permettre une session le jour même
-        $now->setTime(0,0);
-    
-       //si la date est déjà passée, on retourne false  (jour même autorisé , publication le matin pour l'apres midi => ok)
-       if($now <= $sessionDate){
-           return $this->past = false;
-       } else{
-          return $this->past = true;
-       }
-        
+        // date actuelle FR sans l'heure
+        $now = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        // on set l'heure a 00:00 pour permettre une session le jour même - set hour to 00:00 for accept same day session
+        $now->setTime(0, 0);
+
+        // si la date est déjà passée, on retourne false  (la publication pour le jour même est autorisé )
+        if ($now <= $sessionDate) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public function getId(): ?int

@@ -1,10 +1,14 @@
 section#session {
     .container-fluid {
         background-color: $white;
-        min-height: 90vh;
+        height: 90vh;
         max-width: 100vw;
 
-        #map {height: 90vh;}
+        .colSessions {
+            position: relative;
+            overflow-y: auto;
+            height:90vh;
+        }
 
         .ad-restriction {
             position: absolute;
@@ -33,7 +37,16 @@ section#session {
             font-weight: bold;
         }
         .spotMapChange{padding: 0;}
-      
+
+        #map.showMap {  
+            height:50vh;
+            transition: height 1s ;
+        }
+
+        #map.hideMap {
+            height: 0;
+            transition: height 1s;
+        }
        
     }   
 }
@@ -57,11 +70,14 @@ section#sessionAdd {
         top:0;
     }
     .container-fluid {height:90vh}
-
+    .wrapper {height: 90vh; justify-content: center; align-items: center;}
     .formSession{
-        width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
         position: relative;
-        margin:10% auto;
+        margin:0 auto;
         padding: 3em 4em;
         border-radius: 5px;
         background-color: #fff;

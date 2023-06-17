@@ -2,28 +2,27 @@
 
 namespace App\Entity;
 
-use App\Entity\Drone;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\UserRepository;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\Length as ConstraintsLength;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[UniqueEntity(
-    fields:['email'],
-    message:"Un autre utilisateur s'est déjà inscrit avec cette adresse mail."
+    fields: ['email'],
+    message: "Un autre utilisateur s'est déjà inscrit avec cette adresse mail."
 )]
 #[UniqueEntity(
-    fields:['nickname'],
-    message:"Ce pseudo est déjà utilisé."
+    fields: ['nickname'],
+    message: 'Ce pseudo est déjà utilisé.'
 )]
-
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -31,17 +30,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180, nullable:false)]
-    private ?string $email ;
+    #[ORM\Column(length: 180, nullable: false)]
+    private ?string $email;
 
     #[ORM\Column]
     private array $roles = [];
 
-    #[ConstraintsLength(min:8, minMessage:"Le mot de passe doit contenir 8 caractères minimum.")]
+    #[ConstraintsLength(min: 8, minMessage: 'Le mot de passe doit contenir 8 caractères minimum.')]
     #[ORM\Column(length: 255, nullable: false)]
     private ?string $password;
 
-    #[ConstraintsLength(min:4, minMessage:"Votre pseudo doit contenir 4 caractères minimum.")]
+    #[ConstraintsLength(min: 4, minMessage: 'Votre pseudo doit contenir 4 caractères minimum.')]
     #[ORM\Column(length: 255, nullable: false)]
     private ?string $nickname;
 
@@ -51,7 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $banner;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable:false)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: false)]
     private ?\DateTimeInterface $createdAt;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -75,22 +74,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Drone $drone = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Video::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Video::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $videos;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Article::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Article::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $articles;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Likes::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Likes::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $likes;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $comments;
 
     #[ORM\ManyToMany(targetEntity: Counter::class, mappedBy: 'user')]
     private Collection $counters;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: AlertComment::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: AlertComment::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $alertComments;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -102,26 +101,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $tiktok = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class, cascade: ['persist', 'remove'])]
     private Collection $orders;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Cart::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Cart::class, cascade: ['persist', 'remove'])]
     private Collection $carts;
 
-    #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'users')]
+    #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'users', cascade: ['persist', 'remove'])]
     private Collection $sessions;
 
     #[ORM\Column]
     private ?bool $active = null;
 
-
-    //En cas d'appel de l'utilisateur via les articles, on passera par le pseudo
+    // En cas d'appel de l'utilisateur via les articles, on passera par le pseudo
     public function __toString()
     {
         return $this->getNickname();
     }
 
-    //mise en place de la date de création de l'utilisateur
+    // mise en place de la date de création de l'utilisateur
     public function __construct()
     {
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
@@ -129,7 +127,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->articles = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        //mise en place d'un avatar et une bannière par défaut à la création de l'user
+        // mise en place d'un avatar et une bannière par défaut à la création de l'user
         $this->banner = 'bannerDefault.png';
         $this->avatar = 'avatarDefault.jpg';
         $this->counters = new ArrayCollection();
@@ -139,13 +137,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->sessions = new ArrayCollection();
         $this->active = true;
     }
-    
-    //adresse complète de l'user avec ou sans complément d'adresse
-    public function getFullAddress(){
-        if($this->addressComplement != null){
+
+    // adresse complète de l'user avec ou sans complément d'adresse
+    public function getFullAddress()
+    {
+        if (null != $this->addressComplement) {
             return "{$this->address}<br>{$this->addressComplement}<br>{$this->zip}<br>{$this->city}";
         } else {
             return "{$this->address}<br>{$this->zip}<br>{$this->city}";
+        }
+    }
+
+    public function getFullName()
+    {
+        if (null == !$this->firstname && null == !$this->lastname) {
+            return "{$this->firstname} {$this->lastname}";
+        } elseif (null == $this->firstname) {
+            return "M/Mme {$this->lastname}";
+        } else {
+            return null;
         }
     }
 
@@ -167,7 +177,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * L'identifiant de l'user
+     * L'identifiant de l'user.
      *
      * @see UserInterface
      */
@@ -213,7 +223,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
@@ -596,6 +606,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getUser() === $this) {
+                $order->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Collection<int, Cart>
      */
     public function getCarts(): Collection
@@ -663,6 +703,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-
 }

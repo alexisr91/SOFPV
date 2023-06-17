@@ -25,7 +25,7 @@ class Alert
 
     public function __construct()
     {
-        $this->createdAt = new \Datetime('now', new \DateTimeZone('Europe/Paris'));
+        $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
     }
 
     public function getId(): ?int

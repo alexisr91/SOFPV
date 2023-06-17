@@ -10,10 +10,10 @@
         {{include('partials/_navbarMenu.html.twig')}}
 
         <div class="containerRegister my-auto row rounded">
-                    <div class="col p-0">
-                        <img src="{{asset('../img/HiMavic.jpg')}}" alt="drone qui salue" class="img-fluid rounded-start">
+                    <div class="illustration p-0">
+                        <img src="{{asset('../img/HiMavic.jpg')}}" alt="drone qui salue" class="rounded-start">
                     </div>
-                    <div class="col rounded registerForm text-center">
+                    <div class= "registerForm text-center rounded">
                   
                     {{form_start(form)}}
                             <div class="form-group">
@@ -36,8 +36,16 @@
                                  {{form_widget(form.password.second)}}
                                 <div class="form-error">
                                     {{ form_errors(form.password.second) }}
-                                </div>
+                                </div>     
                             </div>
+                            <div>
+                           
+                            {{form_row(form.cgu)}}
+                                <button type="button" id="cguBtn" class="btn param" data-bs-toggle="modal" data-bs-target="#cgu">Voir les CGU</button>   
+                                <button type="button" id="cgvBtn" class="btn param" data-bs-toggle="modal" data-bs-target="#cgv">Voir les CGV</button>
+                                <button type="button" id="mlBtn" class="btn param mt-2" data-bs-toggle="modal" data-bs-target="#ml">Mentions légales</button>    
+                            </div>
+                            
                             
                             <div class="text-center mb-3 mt-3">
                                 <button type='submit' class="btn btn-dark btn-lg">S'inscrire</button>
@@ -47,7 +55,8 @@
                         <p>Déjà inscrit ? Connectez-vous <a href="{{path('account_login')}}"><b>ici</b></a> !</p>
                             
                     </div>                 
-        </div>  
+        </div>
+            {{include('partials/_CguAndCgv.html.twig')}}  
     </section>
 {% endblock %}
 

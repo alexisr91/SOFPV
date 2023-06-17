@@ -12,7 +12,9 @@ Images : carousel qui adapte le format landscape ou portrait des images  #}
 
         {% if article.images is not empty %}
         <li class="nav-item" role="presentation">
-            <button {% if article.video %} class="nav-link" {% else %} class="nav-link active" {% endif %} id="profile-tab" data-bs-toggle="tab" data-bs-target="#imagesTab" type="button" role="tab" aria-controls="images-tab" aria-selected="false"><i class="fa-sharp fa-solid fa-images"></i> Images</button>
+            <button {% if article.video %} class="nav-link" {% else %} class="nav-link active" {% endif %} id="profile-tab" data-bs-toggle="tab" data-bs-target="#imagesTab" type="button" role="tab" aria-controls="images-tab" aria-selected="false">
+                <i class="fa-sharp fa-solid fa-images"></i> Images
+            </button>
         </li>
         {% endif %}
     </ul>
@@ -27,11 +29,11 @@ Images : carousel qui adapte le format landscape ou portrait des images  #}
                 </div>
             </div>
         {% endif %}
-    </div>
+    
         {# onglet carousel images si il y en a #}
         {% if article.images is not empty %}
 
-        <div {% if not article.video %} class="tab-pane fade show active" {% else %} class="tab-pane fade show" {% endif %} id="imagesTab" role="tabpanel" aria-labelledby="images-tab">
+        <div {{ article.video ? "class='tab-pane fade show'":"class='tab-pane fade show active'"}} class="tab-pane fade show active col-md-12"  id="imagesTab" role="tabpanel" aria-labelledby="images-tab">
             <div id="carouselImages" class="carousel slide " data-bs-ride="true">
                 <div class="carousel-indicators">
                 {% for image in article.images %}
@@ -59,15 +61,13 @@ Images : carousel qui adapte le format landscape ou portrait des images  #}
                             
         </div>
         {% endif %}
-    
+    </div>
     {% if not article.video and article.images is empty %}                   
     <div class="row">
         {# si il n'y a ni video, ni images : image par defaut #}
-       
             <div>
                 <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" > 
             </div>    
-        
     </div>
     {% endif %}
     

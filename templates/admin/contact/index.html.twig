@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="adminContact">
+            {{include('partials/_adminNavbarMenu.html.twig')}}
+        <div class="container-fluid">
+                {{include('partials/_adminSidebarMenu.html.twig')}}
+            <div class="wrap">
+                <h3 class="my-4">Messagerie</h3> 
+                <div> 
+                {% if messages is empty %}
+         
+                    <div class="alert alert-success">Il n'y a pas encore de messages.</div>
+            
+                {% else %}
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="name">Prénom et Nom</th>
+                            <th class="subject">Sujet</th>
+                            <th class="date">Date</th>
+                            <th class="message">Message</th>
+                            <th class="actions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                        {% for message in messages %}
+ 
+                            {% set preview = message.message|u.truncate(300, '...', false) %}
+
+                        {# alternance de couleurs #}
+                        {% if loop.index is divisible by(2) %}
+
+                        <tr class="grey">
+
+                        {% else %}
+
+                        <tr class="white">
+
+                        {% endif %}
+                            <td class="name" data-label="Prénom et nom">{{message.fullName}}</td>
+                            <td class="subject" data-label="Sujet">{{message.subject}}</td>
+                            <td class="date" data-label="Date">{{message.createdAt|date('d-m-Y H:i')}}</td>
+                            <td class="message"> 
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#viewMessage{{message.id}}">
+                                    {{preview|raw}}
+                                </button>
+                            </td>
+                            {% if not message.closed %}
+                            <td class="actions" data-label="Actions">
+                                <div>
+                                    <a href="{{path('admin_contact_response', {'id' : message.id})}}" class="btn btn-success me-2" data-tooltip="Répondre" data-tooltip-location="top">
+                                        <i class="fa-solid fa-envelope-open-text"></i>
+                                    </a>
+                                    <form action="{{url('admin_contact_close', {'id':message.id})}}}}" method="post">
+                                        <input type="hidden" name="token" value="{{csrf_token('close')}}">
+                                        <button type="submit" class="btn btn-danger" data-tooltip="Clôturer" data-tooltip-location="top"><i class="fa-solid fa-envelope-circle-check"></i></button>
+                                    </form>
+                                </div>
+                            </td>
+                            {% else %}
+                            <td class="actions" data-label="Actions"><div><button type="button" class="btn param disabled"><i class="fa-solid fa-envelope-circle-check fa-2x"></i></button></div></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                        
+                    </tbody>
+                </table> 
+                {% endif %}
+
+                {% for message in messages %}
+                 {# modal voir le mail entier #}
+                        <div class="modal fade" id="viewMessage{{message.id}}" tabindex="-1" aria-labelledby="viewMessage-{{message.id}}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title"><i class="fa-solid fa-envelope-open"></i> Email de {{message.fullName}}</h6>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="text-muted">
+                                            <p><i class="fa-solid fa-at"></i> Mail : {{message.email}}</p>
+                                            <p><i class="fa-solid fa-clock"></i> Date : {{message.createdAt|date('d-m-Y H:i')}}</p>
+                                            <p><i class="fa-solid fa-bookmark"></i> Sujet: {{message.subject}}</p>
+                                        </div>
+                                        {# le message entier #}
+                                        <div class="message">
+                                            {{message.message|raw}}
+                                        </div>
+                                        {# la réponse envoyée si il y en a #}
+                                       
+                                        {% if message.adminResponseContact %}
+                                        <span class="text-muted"><i class="fa-solid fa-reply fa-flip-both"></i> Votre réponse </span> 
+                                        <div class="response">
+                                            {{message.adminResponseContact.message|raw}}
+                                        </div>
+                                        {% else %}
+                                            <div class="alert"><span class="alert alert-warning">Ce message n'a pas encore de réponse.</span></div>
+                                        {% endif %}
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                        <a href="{{path('admin_contact_response', {'id' : message.id})}}" class="btn btn-success"><i class="fa-solid fa-envelope-open-text"></i> Répondre</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {# endmodal #}
+                {% endfor %}
+                </div>
+            </div>
+               
+                </div>
+            </div>
+        </div>
+   
+    </section>
+
+
+ 
+{% endblock %}
+
+

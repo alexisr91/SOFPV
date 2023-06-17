@@ -14,8 +14,9 @@ class AlertArticleType extends AbstractType
     {
         $builder
             ->add('description', TextareaType::class, [
-                'label'=>false,
-                'attr'=>['placeholder'=>'Pour quel(s) motif(s) signalez-vous cet article ?']
+                'label' => false,
+                'sanitize_html' => true,
+                'attr' => ['placeholder' => 'Pour quel(s) motif(s) signalez-vous cet article ?'],
             ])
         ;
     }
@@ -24,6 +25,7 @@ class AlertArticleType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Alert::class,
+            'sanitize_html' => true,
         ]);
     }
 }

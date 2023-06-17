@@ -7,19 +7,22 @@
     <section id="shop">
         {{include('partials/_navbarMenu.html.twig')}}
         <div class="container-fluid pt-4">
-            <div class="row row-cols-md-4 g-4 px-3">
+            <div class="row wrap g-4">
+            <span class="alert alert-warning"><i class="fa-solid fa-triangle-exclamation"></i> Cette section de SO FPV est publiée à titre démonstratif, <strong>les produits présentés ne sont donc pas disponible à la vente.</strong></span>
             {% for product in products %}
-                <div class="col">
+                <div class="col-sm-6 col-lg-4 col-xl-3">
                     <div class="card h-100">
-                        {# si le produit est sorti il y a moins de 15 jours : badge new #}
-                        {% if product.isNewProduct() %}
-                            <span class="badge bg-danger badgeNewOnShop">New</span> 
-                        {% endif %}
-                        <img src="{{asset('../img/products/'~ product.image)}}" class="card-img-top img-fluid" alt="{{product.name}}">
+                        <div class="card-image-product">
+                            {# si le produit est sorti il y a moins de 15 jours : badge new #}
+                            {% if product.isNewProduct() %}
+                                <span class="badge bg-danger badgeNewOnShop">New</span> 
+                            {% endif %}
+                            <img src="{{asset('../uploads/products/'~ product.image)}}" class="card-img-top img-fluid" alt="{{product.name}}">
+                        </div>
                         <div class="card-body">
                             <div class="pb-3">
                                 <h5 class="card-title">{{product.name}}</h5>
-                                 {% set descriptionTruncated = product.description|u.truncate(200,'...', false) %}
+                                 {% set descriptionTruncated = product.description|u.truncate(110,'...', false) %}
                                 <p class="card-text">{{descriptionTruncated|raw}}</p>
                             </div>
                             
@@ -42,5 +45,6 @@
             </div>
     
     </section>
+    
 
 {% endblock %}

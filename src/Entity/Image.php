@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ImageRepository;
+use Doctrine\ORM\Mapping as ORM;
+
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
@@ -11,14 +12,15 @@ class Image
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $source;
+    private string $source;
 
-    #[ORM\ManyToOne(inversedBy:'images', targetEntity:Article::class, cascade:['persist', 'remove'])]
-    private $article;
-    
+    #[ORM\ManyToOne(inversedBy: 'images', targetEntity: Article::class, cascade: ['persist'])]
+    #[ORM\JoinColumn(nullable: true)]
+    private Article $article;
+
     public function getId(): ?int
     {
         return $this->id;

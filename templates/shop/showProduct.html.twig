@@ -6,12 +6,15 @@
  
     <section id="showProduct">
         {{include('partials/_navbarMenu.html.twig')}}
-        <div class="container-fluid pt-4">
-            <div class="row g-4 px-5">
-                <div class="col">
-                    <img src="{{asset('../img/products/'~ product.image)}}" class="img-fluid" alt="{{product.name}}">
+        <div class="container-fluid">
+            <div class="row wrap">
+                <span class="alert alert-warning"><i class="fa-solid fa-triangle-exclamation"></i> Cette section de SO FPV est publiée à titre démonstratif, <strong>les produits présentés ne sont donc pas disponible à la vente.</strong></span>
+                <div class="imgProductWrap"> 
+                    <div class="imgProduct">
+                        <img src="{{asset('../uploads/products/'~ product.image)}}" alt="{{product.name}}">
+                    </div>
                 </div>
-                <div class="col position-relative">
+                <div class="description">
                     <h2>{{product.name}}</h2>
                     <p>{{product.description|raw}}<p>
                     <div class="stock">
@@ -22,23 +25,58 @@
                         {% endif %}
                     </div>
                     <hr>
-                    <h4 class="price">{{product.priceTTC|number_format(2)}} &euro;</h4>
-                    <div class="addToCartWrapper">
-                        <form method="post" accept-charset="UTF-8" >
-                            <div class="d-flex">
-                                {{ form_start(form) }}
-                                    {{ form_row(form.quantity, {'label':false,'attr': {'min':1, 'max':stock }}) }}
-                                    <button type="submit"{{product.stock == 0 ? "class='btn outOfStock disabled' " : "class='btn btn-success'"}}>Ajouter au panier</button>
-                                {{ form_end(form) }}
-                            </div>
-                        </form> 
-                       
+                      {# {{dump(app.session.get('tempStock'), app.session.get('cart'), product.id, stock)}} #}
+                    <div class="priceAndQty">
+                        <h4 class="price">{{product.priceTTC|number_format(2)}} &euro;</h4>
+                        <div class="addToCartWrapper">
+                            <form method="post" accept-charset="UTF-8" >
+                                <div class="d-flex">
+                                    {{ form_start(form) }}
+                                        {{ form_row(form.quantity, {'label':false,'attr': {'min':1, 'max':stock }}) }}
+                                        <button type="submit"{{product.stock == 0 or stock == 0 ? "class='btn outOfStock disabled' " : "class='btn btn-success'"}}>Ajouter</button>
+                                    {{ form_end(form) }}
+                                </div>
+                            </form> 
+                        
+                        </div>
                     </div>
                 </div>    
-                   
+                {# partie information livraison etc #} 
+                <div class="encartInfo row">
+                    <div class="transporter text-center">
+                        <div class="mb-2">
+                            <i class="fa-solid fa-truck-fast fa-2x"></i>
+                        </div>
+                        <div>
+                            <p>Livraison avec <strong>Chronopost</strong> ou <strong>Colissimo</strong><br>
+                            en 24h ou 48h en France Métropolitaine.</p>
+                        </div>
+                    </div>
+                    <div class="separation my-auto"></div>
+                    <div class="stripe text-center">
+                        <div class="mb-2">
+                            <i class="fa-solid fa-lock fa-2x"></i>
+                        </div>
+                        <div class="stripeSentence">
+                            <p>Paiement sécurisé avec </p><i class="fa-brands fa-stripe fa-2x ms-2"></i>
+                        </div>
+                    </div>
+                    <div class="separation my-auto"></div>
+                    <div class="question text-center">
+                        <div class="mb-2">
+                            <i class="fa-solid fa-circle-question fa-2x"></i>
+                        </div>
+                        <div>
+                            <p>Une question sur le produit ? <br>Contactez-nous ici <a href="{{path('contact')}}" class="ms-1"><i class="fa-solid fa-circle-chevron-right"></i></a> </p>
+                        </div>
+
+                    </div>
+                     
+                </div>
             </div>
 
     
     </section>
+
 
 {% endblock %}

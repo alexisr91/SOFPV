@@ -39,24 +39,36 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
-   public function findLastFourProducts(): array
-   {
-       return $this->createQueryBuilder('p')
-           ->orderBy('p.createdAt', 'DESC')
-           ->setMaxResults(4)
-           ->getQuery()
-           ->getResult()
-       ;
-   }
+    public function findLastFourProducts($active): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.active = :active')
+            ->setParameter('active', $active)
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
+    // articles hors stock (uniquement ceux qui sont en ligne)
+    public function getProductsOutOfStock()
+    {
+        return $this->createQueryBuilder('p')
+        ->where('p.stock = 0')
+        ->andWhere('p.active = 1')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
 
-//    public function findOneBySomeField($value): ?Product
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Product
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

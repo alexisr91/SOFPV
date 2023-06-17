@@ -9,14 +9,14 @@ section#shop {
         border-radius: 3px;
 
         .row {
-            width: 70%;
             margin: 0 auto;
         }
 
-
         .card {
             .price {
-                font-size: 1.3em;
+                font-size: 1.1em;
+                padding: 0 0.5em;
+                align-self: center;
             }
             .card-body {
                 display: flex ;
@@ -37,13 +37,27 @@ section#shop {
 }
 
 section#showProduct {
+
     .container-fluid {
-        width: 70%;
         background-color: $white;
         margin: 0 auto;
-        min-height: 90vh; 
+        min-height: 90vh;
+        position: relative; 
 
-        .col{ margin:3em auto 2em auto;}
+        .imgProduct {
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            
+            height: auto;
+            max-width: 21em;
+            margin: 1em auto;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                
+            }
+        }
 
         .stock {
             padding: 1em 0;
@@ -53,6 +67,14 @@ section#showProduct {
             font-family: 'Play', sans-serif;
             font-weight: bold;
         }
+
+        .description {
+            align-self: end;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
         .addToCartWrapper{
             padding-top: 1em;
             .d-flex {max-height:2.5em}
@@ -69,22 +91,38 @@ section#showProduct {
 
         }
         .backToShop {position: absolute; bottom:1em; left: 1em;}
+
+        .encartInfo {
+            background-color: $grey;
+            border-radius: 4px;
+        }
+
+        .separation {
+            background-color:$white;
+            width: 2px;
+            padding: 0;
+            height: 75%;
+        }
     }
 }
 
 section#cart {
     .container-fluid {
-        width: 70%;
         background-color: $white;
         margin: 0 auto;
         min-height: 90vh; 
 
+        .wrapper {padding:2em; overflow: auto;}
+
         table {
-            td {padding: 1em; vertical-align: middle;}
-            td.img {
-                width:100px;
-                height: auto;
+            td.product {
+                
+                .img {
+                    display: flex;
+                }
             }
+            td {height: max-content;}
+            form {display: inline-flex; padding:0.5em}
             td.delete-all {
                 text-align: end;
             }
@@ -97,18 +135,15 @@ section#cart {
 /* ORDER */
 section#prepareOrder {
     .container-fluid {
+
         background-color: $white;
         min-height: 90vh;
-        width:80%;
         margin: 0 auto;
         padding: 2em;
 
+
         h3 {margin-bottom: 1em;}
 
-        .delivery, .recap, .transporter{
-            padding: 2em;
-            margin:2em;    
-        }
       
         .table {
             td, th {padding: 1em; vertical-align: middle;}
@@ -121,14 +156,18 @@ section#prepareOrder {
         }
 
         div.payment {
+            text-align: center;
             .btn {margin:1em 0;}
             .stripeLogo {
+                justify-content: center;
                 display: flex;
                 align-items: center;
                 p {margin-bottom: 0;}
                 span {margin-left: 0.5em}
             }
         }
+
+        
     
         
     } 
@@ -136,12 +175,12 @@ section#prepareOrder {
 
 section#successPayment {
     width: 100vw;
-    height: 96vh;
-    background-color: $white;
-    background-position:center;
+    min-height: 96vh;
+    background: url('../img/setup2-yusuf-miah.jpg') no-repeat 0 0 rgba(0,0,0,0.5);
+    background-blend-mode: multiply;
     background-size: cover;
     position: relative;
-    &:before {
+    &::before {
         height: 96vh;
         width: 100vw;
         content:"";
@@ -150,9 +189,13 @@ section#successPayment {
         bottom: 0;}
 
     .container-fluid {
-        background-color: $white;
         margin: 0 auto;
         height:90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .wrapper {margin: 1em;}
 
         h6 {color:rgba($base, 0.6)}
         p {margin: 2em auto;}
@@ -160,22 +203,21 @@ section#successPayment {
         .deliveryImage {
             width:80px;
             height: 80px;
-            margin: 0 auto;
             animation: 2s linear 1s infinite alternate flyingDelivery;
         }
 
         .recap {
-            width: 40%;
             position: relative;
             margin: 5% auto;
             padding: 2em;
             border-radius: 5px;
-            background-color: #fff;
-            box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            background-color: $white;
+            box-shadow:rgba(250, 250, 250,0.5) 2px 2px 2px;
 
 
             .products {
-                display: flex;   
+                display: flex;
+                align-items: center;   
                 div {margin:0.5em 1em;}
         
             }
@@ -193,22 +235,40 @@ section#successPayment {
 }
 section#errorPayment {
     .container-fluid {
-        background-color: $white;
-        margin: 0 auto;
-        min-height:90vh;
+        width: 100vw;
+        min-height: 96vh;
+        background: url('../img/setup2-yusuf-miah.jpg') no-repeat 0 0 rgba(0,0,0,0.5);
+        background-blend-mode: multiply;
+        background-size: cover;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &::before {
+            height: 100%;
+            width: 100vw;
+            content:"";
+            background:url('../img/noise1.png') repeat 0 0 rgba(0,0,0,0.5);
+            position: absolute;
+            bottom: 0;}
     }
 
+    h4, p {width: 100%;}
 
     .recap{
-        width: 40%;
+        width: 100%;
         position: relative;
-        margin: 5% auto;
-         padding: 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2em;
         border-radius: 5px;
         background-color: #fff;
         box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
-        p{margin-bottom: 3em;}
+        p{margin-bottom: 2em;}
     }
     
 }

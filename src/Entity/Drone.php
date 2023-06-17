@@ -149,12 +149,12 @@ class Drone
     public function setUser(?User $user): self
     {
         // unset the owning side of the relation if necessary
-        if ($user === null && $this->user !== null) {
+        if (null === $user && null !== $this->user) {
             $this->user->setDrone(null);
         }
 
         // set the owning side of the relation if necessary
-        if ($user !== null && $user->getDrone() !== $this) {
+        if (null !== $user && $user->getDrone() !== $this) {
             $user->setDrone($this);
         }
 

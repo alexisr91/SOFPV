@@ -9,19 +9,21 @@
         <div class="container-fluid">
             <div class="row">
                 {# côté carte #}
-                <div class="col-md-9" id="map">
-                </div>
+                <div class="col-lg-8 col-xxl-9" id="map">
+                </div> 
+                <button class="btnMap btn param" type="button">Carte <i class="fa-solid fa-chevron-down"></i></button>
                 {# côté sessions #}
-                <div class="col-md-3 position-relative">
+                <div class="col-lg-4 col-xxl-3 colSessions">
+               
                 {% for spot in spots %}
                 <div class="spotWrapper row">
-                        <div class="col">
-                            <button type="button" class="spotMapChange"><p class="spotName"><i class="fa-solid fa-location-dot"></i>  {{spot.name}}</p></button>
+                        <div class="col-md-8">
+                            <button type="button" class="spotMapChange" data-tooltip="Cliquez pour localiser" data-tooltip-location="right"><p class="spotName"><i class="fa-solid fa-location-dot"></i>  {{spot.name}}</p></button>
                             <p class="geolocalisation" hidden>{{spot.latitude}},{{spot.longitude}}</p>
                             <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{spot.authorization}} {{ spot.authorization == "Public" ? "" : "*" }}</p>
                             <p class="text-muted spotAddress"><i class="fa-solid fa-map-pin"></i> {{spot.address|raw}}</p>
                         </div>
-                        <div class="col d-flex justify-content-center">
+                        <div class="viewSessionBtn col-md-4">
                             <button type="button" class="btn animated-border-button" data-bs-toggle="modal" data-bs-target="#spotModal-{{spot.id}}" data-bs-spotView="{{spot.id}}"> Voir les sessions</button>     
                         </div>
                      
@@ -49,29 +51,41 @@
                                                 </div>
                                                 <div class="col-md-5">
                                                     <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{session.mapSpot.authorization}}{{session.mapSpot.authorization == "Public" ? "": " * " }}</p>
-                                                    <p class="text-muted"><i class="fa-solid fa-users"></i>{% if session.users|length == 0 %}<i> Pas d'inscrit(s)</i>{% else %}{% for user in session.users %}{{user.nickname}}{{ loop.last ? "" : " , "}}{% endfor %}{% endif %}</p>
+                                                    <p class="text-muted"><i class="fa-solid fa-users"></i>{% if session.users|length == 0 %}<i> Pas d'inscrit(s)</i>{% else %}{% for user in session.users %} {{user.nickname}}{{ loop.last ? "" : " , "}}{% endfor %}{% endif %}</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-2 sub">
+                                            {# if user is connected and he's already subscribed to the flight session #}
+                                            {# si l'utilisateur est connecté et qu'il est déjà inscrit à la session #}
                                             {% if app.user and app.user in session.users %}      
-                                                <span class="text-success"><i class="fa-solid fa-user-check fa-2x"></i><span>
+                                                <span class="text-success" data-tooltip="Déjà inscrit(e)" data-tooltip-location="left"><i class="fa-solid fa-user-check fa-2x"></i><span>
                                             {% else %}
-                                                <a href="{{path('session_entry', {'id':session.id})}}"><i class="fa-solid fa-user-plus fa-2x"></i></a>
+                                                {# else, possibility to subscribe to the flight session #}
+                                                {# sinon l'utilisateur peut s'inscrire #}
+                                                <a href="{{path('session_entry', {'id':session.id})}}" data-tooltip="S'inscrire à la session" data-tooltip-location="left"><i class="fa-solid fa-user-plus fa-2x"></i></a>
+                                                
                                             {% endif %}
                                         </div>
                                     </div>
+                                    {# if there's no sessions with a valid date #}
+                                    {# si il n'y a pas de session dont la date n'est pas passée #}
+                                    {% elseif not session.past|length == 0 %}
+                                        <div class="alert alert-warning">Il n'y a pas encore de session prévue sur ce spot.</div>
                                     {% endif %}
                                 {% endfor %}
                             {% else  %}
                             <div class="alert alert-warning">Il n'y a pas encore de session prévue sur ce spot.</div>
                             {% endif %}
                             </div>
+                            {# if the spot is not blocked by adminSpot option and if the user is not connected #}
+                            {# si le spot n'est pas bloqué par l'option adminSpot et que l'utilisateur n'est pas connecté #}
                             <div class="modal-footer"> 
                                 {% if spot.adminMapSpot == false and not app.user %}
                                     <p class="text-muted p-2">Vous devez vous<a href="{{path('account_login')}}"> <strong>connecter</strong></a> pour ajouter ou vous inscrire à une session.</p>
                                 {% endif %}
-
+                                {# if the user is authentified with a role user, with adminSpot option not activated OR the user has a role admin and adminSpot option is activated #}
+                                {# si l'utilisateur est authentifié avec un role user, que l'option adminSpot n'est pas mise OU que l'utilisateur est un admin et que l'option adminSpot est à true #}
                                 {% if (is_granted("ROLE_USER") and spot.adminMapSpot == false) or (is_granted("ROLE_ADMIN") and spot.adminMapSpot == true) %}
                                     <a href="{{path('session_add', {'id': spot.id })}}" class="btn btn-success">Ajouter une session</a>
                                 {% elseif spot.adminMapSpot == true %}
@@ -99,4 +113,5 @@
 </section>
     {# map #}
     <script src="{{ asset('js/map.js')}}"></script>
+    
 {% endblock %}

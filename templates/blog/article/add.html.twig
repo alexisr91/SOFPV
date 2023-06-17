@@ -5,142 +5,66 @@
 {% block body %}
  
     <section id="addArticle" class=" position-relative">
-        {# spinner pour l'attente du téléversement video #} 
-        <div class="overlayLoading" id="overlayLoading"><span class="loader"><p>Chargement en cours...</p></span></div>
 
         {{include('partials/_navbarMenu.html.twig')}}
 
         <div class="container-fluid wrapper"> 
         
             {{include('partials/_sidebarMenuProfile.html.twig')}}
-            <div class="row">
-            <h2>Publier un article</h2>
-           
-           
-                <div class="col-md-6 col-sm-12">
-                    <h5><i class="fa-solid fa-pen"></i> Contenu de l'article</h5>
-                    {{form_start(form)}}
-                        {{form_row(form.title)}}
-                        {{form_row(form.category)}}   
-                        {{form_row(form.content)}}
-                        {# si l'user est admin, le formulaire affiché sera spécifique et il aura accès à la selection de l'article à la une #}
-                        {% if is_granted("ROLE_ADMIN") %}
-                            {{form_row(form.adminNews)}}
-                        {% endif %}
-                       
-                </div>
-               
-                <div class="col-md-6 col-sm-12">
-                    <h5><i class="fa-solid fa-film"></i> Téléversez une vidéo...</h5>
-                        {{form_row(form.video.title)}}
-                        {{form_row(form.video.source)}}
-                    <hr>
-
-                    <h5><i class="fa-brands fa-youtube"></i></i> ...Ou insérez un lien Youtube</h5>
-                        {{form_row(form.video.link)}}
-                                           
-                    <h5 class="mt-3"><i class="fa-solid fa-images"></i> Ajouter des images</h5>
-
-                        {{ form_row(form.images) }}
-
-                    {% if form.images.vars.value is not null %}
-                        <div class="d-flex flex-row flex-wrap" id="imgWrap" >
-                       </div>
-                    {% endif %}
-                     
-                </div>
-                    <div>
-                        <a href="{{path('account_articles')}}" class="btn btn-dark btn-lg"><i class="fa-solid fa-chevron-left"></i> Retour</a>
-                        <button type="submit" id="submitArticle" class="btn btn-dark btn-lg">Publier</button>
+            <div class="wrapForm"> 
+            <h4>Publier un article</h4>
+                <div class="row">
+                    <div class="column2">
+                        <h5><i class="fa-solid fa-pen"></i> Contenu de l'article</h5>
+                        {{form_start(form)}}
+                            {{form_row(form.title)}}
+                            {{form_row(form.category)}}   
+                            {{form_row(form.content)}}
+                            {# si l'user est admin, le formulaire affiché sera spécifique et il aura accès à la selection de l'article à la une #}
+                            {% if is_granted("ROLE_ADMIN") %}
+                                {{form_row(form.adminNews)}}
+                            {% endif %}
                     </div>
-                    
-            </div>
+                    <div class="column2">
+                        <h5><i class="fa-solid fa-film"></i> Téléversez une vidéo...</h5>
+                            {{form_row(form.video.title)}}
+                            {{form_row(form.video.source)}}
+                        <hr>
+                        <h5><i class="fa-brands fa-youtube"></i> ...Ou insérez un lien Youtube</h5>
+                            {{form_row(form.video.link)}}
+                                            
+                        <h5 class="mt-3"><i class="fa-solid fa-images"></i> Ajouter des images</h5>
+                            {{ form_row(form.images) }}
+                    </div>
+                    <div class="mt-2">
+                        <a href="{{path('account_articles')}}" class="btn btn-dark"><i class="fa-solid fa-chevron-left"></i> Retour</a>
+                        <button type="submit" id="submitArticle" class="btn btn-success">Publier</button>
+                    </div>
+                </div>
               {{form_end(form)}}  
-        </div>
-        
+            </div>
+        </div>      
     </section>
 
-    <script>
-    // loader le temps que l'upload se fasse , avant la redirection
-    const button = document.getElementById("submitArticle");
-    const loader = document.getElementById("overlayLoading");
-        
-    loader.classList.add('d-none');
-
-    button.addEventListener('click', function(e){
-        loader.classList.remove('d-none');
-        loader.classList.add('d-block');
-    });
-    
-
+<script>
+   
    window.onload = () => {
+          //désactivation du bouton lors de l'envoi du formulaire
+            //select form to listen
+            let formSubmit = document.querySelector('form[name="article"]');
+
+            //wait for submit
+            formSubmit.addEventListener("submit", function(e){
+                //select button
+                let submitButton = document.getElementById('submitArticle');
+                //disable button
+                submitButton.disabled = true;
+                //change content to a spinner
+                submitButton.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Chargement en cours ';
+            }) 
+    }    
     
-        //input concernant les images
-        let imgInput = document.querySelector("[multiple]");
-        //div qui englobe les prévisualisation des images
-        const imgWrap = document.querySelector("#imgWrap");
-
-        //on clone la FileList pour avoir son controle
-        let list = new DataTransfer(); 
-        
-        //on écoute le changement de l'input image
-        imgInput.addEventListener("change", () => {
-          
-
-            //pour chaque fichier dans l'input
-            for(const file of imgInput.files){
-                //on créé chaque fichier..
-                let listFile = new File([file], file.name);
-                //..qu'on ajoute à la FileList nouvellement créée
-                list.items.add(file);
-                //on init la prévisualisation
-                previewImg()
-                
-            }
-           
-          
-           //on selectionne les boutons delete
-            let deleteBtn = document.querySelectorAll(".delete");
-            //pour chaque bouton
-            for(let i = 0; i < deleteBtn.length ; i++){
-                let file = imgInput.files[i]
-                //on ecoute le click
-                deleteBtn[i].addEventListener('click', () => {
-                    //on enlève la div pour supprimer visuellement l'image
-                    deleteBtn[i].parentElement.remove();
-                    
-                    let dataList = list.items; 
-
-                    //on enlève le fichier de la liste
-                    dataList.remove(i)
-                   
-                    //on synchro l'input avec la datalist clonée
-                    imgInput.files = list.files
-                })
-            }
-           
-        })
-       
-        function previewImg(){
-            let images = "" 
-            //on transforme l'objet en array
-            let inputFilesToArray = Object.values(imgInput.files);
-
-            Array.prototype.forEach.call(inputFilesToArray, (image, index)=>{
-
-                images += `<div class="position-relative thumbnail-edit"><img src="${URL.createObjectURL(image)}" alt="prévisualisation d'image" class="img-thumbnail img-fluid">
-                    <button type="button" class="btn btn-danger btn-sm delete">X</button></div>`
-
-                    imgWrap.innerHTML = images;
-     
-            })
-        
-        }
-
-        
-    }
-    
-    </script>
+</script>
 {% endblock %}
 
 

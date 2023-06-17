@@ -6,35 +6,34 @@
  
     <section id="successPayment">
         {{include('partials/_navbarMenu.html.twig')}}
-        <div class="container-fluid pt-4">
-            <div class="p-3 ms-2 wrapper row">
+        <div class="container-fluid">
+            <div class="wrapper row">
                
                 <div class="recap">  
                 <h3>Merci pour votre commande !</h3>
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center justify-content-between">
                         <h6>Votre commande sera traitée dans les meilleurs délais par notre équipe.</h6> 
                         <div class="deliveryImage">
                             <img src="{{asset('/img/deliveryDroneByFreepik.png')}}" class="img-fluid" alt="drone livreur par Freepik">
                         </div> 
                     </div>
-                    <p class="mt-0"><b>Numéro de commande: </b>{{order.reference}}</p>
-                    <p><b>Transporteur:</b> {{order.transporter.name}}</p>
+                    <p class="mt-0"><span><b><i class="fa-solid fa-hashtag"></i> Référence de la commande: </b>{{order.reference}}</p>
+                    <p><b><i class="fa-solid fa-truck"></i> Transporteur / Prix :</b> {{order.transporter.name}} / {{order.transporter.price|number_format(2)}} &euro;</p>
                     
-                    <p><b>Détail de votre commande:</b><p>
+                    <p><b><i class="fa-solid fa-basket-shopping"></i> Détail de votre commande:</b><p>
                     {% for cart in carts %}
                     <hr>
                     <div class="products">
                         <div><strong>x{{cart.quantity}}</strong></div>
                         <div>{{cart.product.name|capitalize}}</div>
-                        <div>{{cart.product.priceTTC}} &euro;/unité</div>
+                        <div>{{cart.product.priceTTC}} &euro;<span class="text-muted"> /unité</span></div>
                       </div> 
                       {% if loop.last %}
                       <hr>
                       {% endif %}
                     {% endfor %}
-                    <p><b>Prix transporteur : </b> {{order.transporter.price}} &euro;</p>
-                    <p><b>Prix total TTC: </b> {{order.price}} &euro;</p>
-                    <p><b>Adresse de livraison:</b><br> {{order.deliveryAddress|raw}}</p>
+                    <p><b><i class="fa-solid fa-cash-register"></i> Prix total TTC: </b> {{order.price}} &euro;</p>
+                    <p><b><i class="fa-solid fa-house"></i> Adresse de livraison:</b><br> {{order.deliveryAddress|raw}}</p>
                     <div class="back">
                         <a href="{{path('account_myprofile')}}" class="btn btn-dark btn-lg">Retour</a>
                     </div>

@@ -1,20 +1,7 @@
 /*nav bar admin */
 section#adminNavbarMenu {
-    width:100vw;
-    z-index:1;
-    margin: 0 auto; 
-    z-index: 3;
     background-color: transparent !important;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-
-    a.navbar-brand {
-        font-family:'airstrike', sans-serif;
-        font-size: 2rem;
-    }
-    a.position-relative span{
-        background-color: $grey;
-        color: $base;
-    }
 }
 aside.adminSidebarMenu {
     width:15vw;
@@ -36,9 +23,12 @@ section#adminLogin {
         display: flex;
 
         .formLogin{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
             margin: auto;
-            width: 20%;
-            padding: 2em;
+            padding: 3em 4em;
             background-color: #fff;
             border-radius: 4px;
             box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -53,7 +43,6 @@ section#adminDashboard{
 
     .container-fluid {
         display: flex;
-        height: 90vh;
 
         .tablesWrap{
             margin-top: 3em;
@@ -75,16 +64,36 @@ section#adminDashboard{
         }
 
         .wrap {
-            margin: 2em;
-            padding: 2em;
+            display: flex;
+            flex-wrap: wrap;
+            // margin: 2em auto;
+            // padding: 2em;
             background-color: #fff;
-            width:85%;
-            border-radius: 3px;
+            // width:85%;
+            border-radius: 4px;
             box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
         }
 
+        .shortCuts {
+            margin: 2em auto;
+            .badge {margin-left:0.5em}
+
+            .card-body {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+            }
+
+        }
+   
         .statWrap {
             margin-top: 3em;
+
+            .users{background-color: rgba($base, 0.7); color: $white}
+            .articles{ background-color: rgba($accent, 0.75); color: $white;}
+            .sessions{background-color:$grey; color:$base }
+            .orders{background-color:$white; color: $base}
         }
         .card {
             min-height: 5em;
@@ -103,42 +112,52 @@ section#adminDashboard{
 
 /*PAGE GESTION USERS */
 section#adminUsers {
+   
+    .users, .subDate, .auth, .actions {
+        display: flex;
+        align-items: center;
+    }
+    .users {
+        justify-content: flex-start;
+    }
+    .subDate, .auth{
+        justify-content: center;
+    }
+    .actions {
+        justify-content: end;
+    }
+
+}
+section#adminUsers, section#adminShop {
     .container-fluid {
         display: flex;
         min-height: 90vh;
         background-color: $white;
 
-        .wrap {display: flex;flex-direction: column; margin:1em}
+        .titleTable {display: flex;}
+        
+        .wrap {display: flex;
+            flex-direction: column;
+            padding-top: 2em;
+            }
 
-        .titleTable {
-            padding-left: 4em;
-            padding-right: 2em;
-        }
-        .nav-tabs {border-bottom: 1px solid transparent !important;}
         .row-grey, .row-white {
             display: flex;
             align-items: center;
-            padding: 1em 2em;
+            // padding: 1em 2em;
             border:1px solid transparent;
             border-radius: 4px;
-            cursor: pointer;
-
-            .avatar{width: 40px; margin-right: 0.5em;}
-        }
-
-        .row-grey {background-color: $grey; 
-             
-            &:hover, &:focus{
-            box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.20);
-            transform:translateX(-0.5em);}
-        
-        }
-        .row-white {background-color: $white;
-            &:hover, &:focus{
-                box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.20);
-                transform:translateX(-0.5em);
+            
+            .avatar, .imgProduct {
+                aspect-ratio: 1;
+                width: 40px;
+                height: 40px;
+                img{
+                    object-fit: cover;
+                    width: auto;
+                    height: 100%;
+                }
             }
-        
         }
         .usersList {
             width:50%;
@@ -150,24 +169,27 @@ section#adminUsers {
           
         }
 
-        .viewUser{
+        .row-grey {background-color: $grey; }
+        .row-white {background-color: $white;}
+
+        .usersList, .productsList {
             display: flex;
             flex-direction: column;
-            width: 50%;
-            margin: 0 2em 5em 2em;
-            padding: 3em;
-            background:#fff;
-            border-radius: 4px;
-            box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            min-height: 75vh;
+            padding: 0;
+        }
+
+       
             .main {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
                 h3 {letter-spacing: 1px;}
-              
-                .avatar {
-                    width: 125px;
-                     box-shadow:rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px;
+                .avatar {width: 125px;}
+                .avatar, .imgProduct {
+                    box-shadow:rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px;
                     margin-bottom: 2em;
-                }
-        
+                }  
             }
 
             .infos{
@@ -176,26 +198,40 @@ section#adminUsers {
                 .text-muted {font-size: 1em;}
             }
 
-            .actions {
-                position: absolute;
-                right:0;
-                top:1em;
-
-            }
         }
 
-    }
+    
 }
 
-section#adminBlog {
+section#adminBlog, section#adminBlogAlerts {
     .container-fluid {
-        background-color: $white;
-        
-        .wrap {
-            width:75% ;
-            margin: 0 auto;
-            display: block;
+        background-color: $white; 
+        .wrap { 
+            margin: 0 1em;
+            display: flex;
+            flex-direction: column;
+            width:100%;
+            
+            #titleAndForm { z-index: 1;}
+
         }
+
+        .article {
+            display: flex;
+            position: relative;
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 1em;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        
+            .article-body {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            
+        }
+       
         .alerts {
             position: absolute;
             left:1em;
@@ -215,23 +251,19 @@ section#adminBlog {
             padding: 2em;
         }
 
-        .article {
-            display: flex;
-            position: relative;
         
-            .article-body {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                padding: 0 1em;
-            }
-            .article-content {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 7; 
-                    line-clamp: 7;
-            -webkit-box-orient: vertical;
+        .wrapAlert {
+            margin: 1em auto;
+            padding:1em;
+            width: 100%;
+            border-radius: 4px;
+            box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+            i {margin-right: 0.5em;}
+            .text-muted {
+                margin: 0.5em;
+                line-height: normal; 
+                font-size: 1em;
             }
         }
         .wrapAlert {
@@ -252,10 +284,10 @@ section#adminBlog {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-left: 1em;
         }
         .stats {
             .row {margin: 0 0.5em;}
+            .icon {height: 50%;}
             .alert {
                 margin-bottom: 0;
                 margin-left: 1em;
@@ -264,6 +296,10 @@ section#adminBlog {
 
                 .icon {color:$accent;}
             }
+        }
+
+        .settings {
+            a.show {background-color: $grey;}
         }
 
     }
@@ -277,7 +313,6 @@ section#adminComments {
 
         .wrap {
             margin-top: 3em;
-            width:70%;
 
             .avatar {
                 width:25px;
@@ -288,7 +323,6 @@ section#adminComments {
                     height: auto;
                 }
             }
-
             table {
                 width: 100%;
                 border-color: transparent;
@@ -311,18 +345,23 @@ section#adminMapSpots{
         background-color: $white;
         min-height: 90vh;
         width: 100vw;
-        padding-right: 1em;
 
-        .row{width: 100%; 
-            overflow: hidden
+        .reset {
+            margin-top: 1em;
+            margin-left: 1em;
+            i {
+                padding:0.5em;
+            }
         }
-
         .gestion { 
             overflow-y: auto;
             height:90vh;
         }
 
-        #map {height: 90vh;}
+        .colInfo {width: 80%;}
+        .colDelete {width: 20%;}
+
+        .btnMap {margin-bottom: 1.5em;}
 
         .spotWrapper {
             border-radius: 4px;
@@ -340,8 +379,11 @@ section#adminMapSpots{
         }
        
         .spotName {
-            font-size: 1.1em;
-            i {color:$accent;}
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            // font-size: 1.1em;
+            i {color:$accent; margin-right: 0.5em;}
         } 
 
         .spotMapChange {
@@ -350,5 +392,253 @@ section#adminMapSpots{
         }
     }
 
+    #map {padding: 0;}
+
+    #map.base {height:100%;}
+        
+    #map.showMap {  
+        height:50vh;
+        transition: height 1s ;
+    }
+
+    #map.hideMap {
+        height: 0;
+        transition: height 1s;
+    }
+
     .maplibregl-map {padding:1em}
 }
+
+section#adminShop {
+
+    .name, .price, .stock, .status, .actions {
+        display: flex;
+        align-items: center;
+    }
+    .name {
+        justify-content: flex-start;
+    }
+    .price, .stock, .status {
+        justify-content: center;
+    }
+
+    .price {padding: 0 0.2em;}
+    .actions {
+        justify-content: end;
+    }
+
+    table {  
+        width: 100%;
+        th, td {padding: 1em;}
+        td a { margin:auto 0.5em;}
+        th {color: rgba($base,0.6); font-weight: 400;}
+        .badge {margin-bottom:0;}
+    }
+
+    .imgProductView {
+        width:10em;
+        height: 10em;
+        box-shadow:rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px;
+        margin-bottom: 2em;
+        img{
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .productsList {
+        ul {
+           display: flex;
+           flex-direction: column;
+           justify-content: space-between;
+    
+        } 
+    }
+
+    .titleTable {
+        display: flex;
+    }
+
+
+}
+
+section#adminEditProduct, section#adminOrderModify {
+    .container-fluid {
+        display: flex;
+        background-color: $white;
+        min-height: 90vh;
+
+        h4 {margin-top: 2em ;}
+
+        .formWrap {
+            margin: 0 auto;
+        }
+
+        #imgWrap {
+            margin: 0 auto;
+            img{
+                object-fit: cover;
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+
+section#adminBlogAlerts {
+    .container-fluid {
+        display: flex;
+        background-color: $white;
+        min-height: 90vh;
+    }
+}
+
+section#adminOrders, section#adminAllOrders{
+   
+    h4{padding-left: 1em;}
+    .container-fluid {
+       
+        display: flex;
+        background-color: $white;
+        min-height: 90vh;
+        padding: 0;
+
+        .wrap {
+            padding-top: 2em;
+        }
+
+        .modal-body {padding:2em;}
+
+
+        .infoOrder{
+            padding: 2em;
+            box-shadow: rgba(0, 0, 0, 0.2) 1.5px 1.5px 2px;
+            margin-top: 1em;
+            border-radius: 4px;
+        }
+
+        .infoUser {
+            padding: 2em;
+            box-shadow: rgba(0, 0, 0, 0.2) 1.5px 1.5px 2px;
+            margin-top: 1em;
+            border-radius: 4px;
+
+        }
+
+        .orderProducts {
+            display: flex ;
+            justify-content: space-between;
+            padding: 2em;
+            box-shadow: rgba(0, 0, 0, 0.2) 1.5px 1.5px 2px;
+            margin-top: 1em;
+            border-radius: 4px;
+            .orderImg {
+                aspect-ratio: 1;
+                width:25px;
+                height: 25px;
+                margin-left: 1em;
+                img {
+                    width:100%;
+                    height: auto;
+                } 
+            }
+          
+        }
+
+        table {
+            width: 100%;
+
+            thead {
+                background-color: $grey; 
+                th { padding: 1em;border-radius: 4px;}
+            }
+
+            tbody {
+                td { padding: 1em;border-radius: 4px; border-bottom: 1px solid $grey;}
+            }
+        
+        }
+
+    }
+}
+
+section#adminContact {
+    .container-fluid {
+        display: flex;
+        background-color: $white;
+        min-height: 90vh;
+
+        .wrap {width:95%; padding: 2em;}
+
+       
+
+        .modal-body {
+            padding: 2em;
+            .message { 
+                background-color: $white;
+                margin-bottom: 2em;
+            }
+            .response {
+                background-color: $grey;
+            }
+            .message, .response {
+                border-radius: 4px;
+                padding: 1em;
+                box-shadow: rgba(0, 0, 0, 0.2) 1.5px 1.5px 2px;
+            }
+        
+        }
+
+        table {
+            width: 100%;
+
+            th.message {padding-left: 2em;}
+
+            .date, .actions {text-align: center;}
+
+                button {
+                    text-align: left;
+                }
+            
+            }
+            td.actions form {display: inline-flex; }
+
+            thead {
+                background-color: $grey; 
+                th { padding: 1em;border-radius: 4px;}
+            }
+
+            tbody {
+                .white {background-color: $white;}
+                .grey {background-color: rgba($grey, 0.3);}
+                td { padding: 1em;border-radius: 4px; border-bottom: 1px solid $grey;}
+            }
+        
+        }
+
+    }
+
+
+ section#responseContact {
+    .container-fluid{
+        min-height: 90vh;
+        display: flex;
+
+        .initMsg {
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 2em;
+            margin: 2em 0;
+        }
+      
+        .wrap {
+            display: flex;
+            align-items: flex-start;
+            background-color: $white;
+            border-radius: 4px;
+        }
+
+    }
+ }

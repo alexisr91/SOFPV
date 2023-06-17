@@ -1,11 +1,17 @@
 /* NAV MENU */
-section#navbarMenu {
+section#homePage{
+    section#navbarMenu {
+        background-color: transparent !important;
+    }
+}
+
+section#navbarMenu, section#adminNavbarMenu {
     width:100vw;
     z-index:1;
     margin: 0 auto; 
-    z-index: 3;
-    background-color: transparent !important;
-    
+    z-index: 20;
+    position: relative;
+
     a.navbar-brand {
         font-family:'airstrike', sans-serif;
         font-size: 2rem;
@@ -14,6 +20,13 @@ section#navbarMenu {
         background-color: $grey;
         color: $base;
     }
+
+    
+}
+
+section#navbarMenu {
+  background-color: $base;
+  .connect, .menu {justify-content: center; align-items: center;}
 }
 
 section#navbarMenu.sticky-top {
@@ -21,4 +34,8 @@ section#navbarMenu.sticky-top {
     background-color: $base !important;
 }
 
+section#navbarMenu.sticky-top {
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    background-color: $base !important;
+}
 

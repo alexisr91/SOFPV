@@ -11,7 +11,7 @@
             <div class="about paragraph">
                 <h3>Qui sommes-nous ?</h3>
                     <p><span class="main"><strong>SO FPV</strong></span> est une communauté de passionnés de drones et d'aéromodelisme, qui pratiquent le vol en immersion dans le sud-ouest de la France.<br><br>
-                        Fondée en 2020 par un petit groupe de pilotes aux alentours de Toulouse, elle compte aujourd'hui plus de 200 membres, répartis de Bordeaux jusqu'à Montpellier.<br>
+                        Fondée en 2020 par un petit groupe de pilotes aux alentours de Toulouse, elle compte aujourd'hui plus de 400 membres, répartis de Bordeaux jusqu'à Montpellier.<br>
                         Cette communauté est basée sur l'entraide entre les pilotes, qu'ils soient débutants ou confirmés, et dans laquelle on partage ses vidéos de vols, challenges, crashs et autres reviews...</br><br>
                         SO FPV organise régulièrement des événements, des sessions de vol et des initiations pour faire découvrir ce loisir au grand public.
                     </p>   
@@ -24,7 +24,9 @@
             <div class="videoWrap">
                 <div class="ratio ratio-16x9">
                         <iframe src="https://www.youtube-nocookie.com/embed/zkm8fIVX_Gs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
+                       
+                </div> 
+                <legend>Drone Winter Session 01 par Fly In The Box</legend>
             </div>
         
             <div class="toKnow paragraph"> 
@@ -37,10 +39,15 @@
                         <li><a href="https://www.demarches.interieur.gouv.fr/particuliers/drone-regles-pilotage-respecter" target="_blank"><b><i class="fa-solid fa-caret-right"></i> Ministère de l'Interieur: Règles de pilotage à respecter</b></a></li>
                         <li><a href="https://www.ecologie.gouv.fr/alphatango" target="_blank"><b><i class="fa-solid fa-caret-right"></i> AlphaTango (enregistrement de vos drones)</b></a></li>
                     </ul>
-                    <strong><p>Enjoy and fly safe <i class="fa-regular fa-face-smile-wink"></i></p></strong>
-            </div> 
+
+                    <p>Vous pouvez également consulter nos Conditions Générales d'utilisation (CGU) et de vente (CGV) ci-dessous:</p>
+                    <button type="button" id="cguBtn" class="btn param" data-bs-toggle="modal" data-bs-target="#cgu">Voir les CGU</button>   
+                    <button type="button" id="cgvBtn" class="btn param" data-bs-toggle="modal" data-bs-target="#cgv">Voir les CGV</button>   
+
+                    <strong><p class="mt-3">Enjoy and fly safe <i class="fa-regular fa-face-smile-wink"></i></p></strong>
+            </div>
         </div>
-        </div>
+        {{include('partials/_CguAndCgv.html.twig')}}
     </section>
 
 {% endblock %}

@@ -10,6 +10,8 @@ parameters:
     upload_image: '%kernel.project_dir%/public/uploads/article/image/'
     upload_video: '%kernel.project_dir%/public/uploads/article/video/'
     upload_thumb: '%kernel.project_dir%/public/uploads/article/video/thumb/'
+    upload_product: '%kernel.project_dir%/public/uploads/products/'
+    project_dir: '%kernel.project_dir%'
     router.request_context.scheme: 'https'
     asset.request_context.secure: true
     

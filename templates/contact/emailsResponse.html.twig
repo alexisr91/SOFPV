@@ -1,0 +1,24 @@
+{% apply inline_css %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+       
+        html, body {font-family: 'Play', sans-serif;}
+    
+    </style>
+{% endapply %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+</head>
+    <body>
+        <h1> SO FPV </h1>
+        <p><b>Sujet :</b> {{contact.subject}}</p>
+        <p><b>Message:</b></p>
+        <div>
+            {{contact.message|raw}}
+        </div>
+        
+    </body>
+</html>

@@ -17,7 +17,7 @@
                <div class="row">
 
                 {# partie infos de l'user #}
-                <div class="col-3">
+                <div class="leftWrap">
                     <div class="user">
                         <div id="profile-avatar">
                             <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar" class="img-fluid"/>
@@ -27,9 +27,9 @@
                     {# bloc réseaux sociaux #}
                     {% if user.facebook or user.tiktok or user.instagram %}
                     <div class="social">
-                        {% if user.instagram %}<div><i class="fa-brands fa-instagram fa-2x"></i> <b>{{user.instagram}}</b></div> {% endif %}
-                         {% if user.tiktok %}<div><i class="fa-brands fa-tiktok fa-2x"></i> <b>{{user.tiktok}}</b></div> {% endif %}
-                         {% if user.facebook %}<div><i class="fa-brands fa-facebook fa-2x"></i> <b>{{user.facebook}}</b></div> {% endif %}
+                        {% if user.instagram %}<div><i class="fa-brands fa-instagram fa-2x"></i> <b>{{user.instagram|raw}}</b></div> {% endif %}
+                         {% if user.tiktok %}<div><i class="fa-brands fa-tiktok fa-2x"></i> <b>{{user.tiktok|raw}}</b></div> {% endif %}
+                         {% if user.facebook %}<div><i class="fa-brands fa-facebook fa-2x"></i> <b>{{user.facebook|raw}}</b></div> {% endif %}
                     </div>
                     {% endif %}
                     {# bloc ma config de drone #}
@@ -47,33 +47,38 @@
                                 {% endif %}             
                         </div>
                         <div>
-                            <b>Frame: </b>{{user.drone.frame}}<br>
-                            <b>Moteurs: </b>{{user.drone.motors}}<br>
-                            <b>FC: </b>{{user.drone.fc}}<br>
-                            <b>ESC: </b>{{user.drone.esc}}<br>
-                            <b>CAM: </b>{{user.drone.cam}}<br>
-                            <b>Réception: </b>{{user.drone.reception}}<br>
+                            <b>Frame: </b>{{user.drone.frame|raw}}<br>
+                            <b>Moteurs: </b>{{user.drone.motors|raw}}<br>
+                            <b>FC: </b>{{user.drone.fc|raw}}<br>
+                            <b>ESC: </b>{{user.drone.esc|raw}}<br>
+                            <b>CAM: </b>{{user.drone.cam|raw}}<br>
+                            <b>Réception: </b>{{user.drone.reception|raw}}<br>
                             <b>Type de lipo: </b>{{user.drone.lipoCells}}S
                         </div>
                     
                         {% endif %}
                     </div>
+                    
+                    <button class="btnSessions btn param w-100" type="button" data-tooltip="Sessions de {{user.nickname}}" data-tooltip-location="top"><i class="fa-solid fa-calendar-days"></i><i class="fa-solid fa-chevron-up"></i></button>
+                            
                     <div class="sessions">
                     {% if user.sessions is empty %}
-                        <span class="alert alert-warning">Pas de sessions prévues.</span>
+                   
+                    <div class="py-4"><span class="alert alert-warning">Pas de sessions prévues.</span></div>
+                     
                     {% else %}
                         {% for session in sessions %}
                         {% set spot = session.mapSpot %}
-                        <div class="spotWrapper row">
+                        <div class="spotWrapper">
                                 <div class="col-sm-12">
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-xl-6">
                                             <p class="spotName"><strong><i class="fa-solid fa-location-dot"></i> {{spot.name}}</strong></p>
                                             <p class="geolocalisation" hidden>{{spot.latitude}},{{spot.longitude}}</p>
                                             <p class="text-muted"><i class="fa-solid fa-calendar-day"></i> {{session.date|format_datetime('full', 'none', locale='fr')}}</p>
                                             <p class="text-muted"><i class="fa-solid fa-clock"></i> {{session.timesheet|capitalize}}</p>
                                         </div>
-                                        <div class="col-lg-6 infoSpot">
+                                        <div class="col-xl-6 infoSpot">
                                             <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{spot.authorization}}{{spot.authorization == "Public" ? "": " * " }}</p>
                                             <p class="text-muted"><i class="fa-solid fa-users"></i> {% for user in session.users %}{{user.nickname}}{{ loop.last ? "" : " , "}}{% endfor %}</p>
                                             <p class="text-muted"><i class="fa-solid fa-map-pin"></i> {{spot.address|raw}}</p>
@@ -90,12 +95,12 @@
                 </div>
 
                 {# partie articles de l'user #}
-                <div class="col">
+                <div class="rightWrap">
                     <div class="user-content">
                         {% if articles is not empty %}
-                        <div class="row row-cols-md-1 g-4 px-3">
+                        <div class="wrapper-left">
                             {% for article in articles %}
-                            {% set articleContent = article.content|u.truncate(300, '...', false) %}
+                            {% set articleContent = article.content|u.truncate(150, '...', false) %}
                                 {{include('/partials/_articleRight.html.twig')}} 
                             {% endfor %}
                             
@@ -108,10 +113,36 @@
          
         </div>
             {# retour en haut #}
-            <div id="scrollBackToTop">
+            {# <div id="scrollBackToTop">
                 <a href="#"><i class="fa-solid fa-angles-up fa-2x"></i></a>
-            </div>
+            </div> #}
         
     </section>
+      <script>
+        //selection du bouton
+        let btnSessions = document.querySelector('.btnSessions');
+       
+       //on écoute le click
+        btnSessions.addEventListener('click', function(e){ 
+          
+            let session = document.querySelector('.sessions');
+            
+            if(session.classList.contains('showSessions')){
+                btnSessions.innerHTML = '<i class="fa-solid fa-calendar-days"></i><i class="fa-solid fa-chevron-down"></i>';
+                session.classList.remove('showSessions')
+                session.classList.add('hideSessions'); 
+       
+            } else if (session.classList.contains('hideSessions')){
+                btnSessions.innerHTML = '<i class="fa-solid fa-calendar-days"></i><i class="fa-solid fa-chevron-up"></i>'; 
+                session.classList.add('showSessions'); 
+                session.classList.remove('hideSessions'); 
+        
+            } else {
+                btnSessions.innerHTML = '<i class="fa-solid fa-calendar-days"></i><i class="fa-solid fa-chevron-up"></i>'; 
+                session.classList.add('hideSessions'); 
+            }
+
+        });
+    </script>
 {% endblock %}
 

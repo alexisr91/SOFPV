@@ -7,13 +7,17 @@
     <section id="prepareOrder">
         {{include('partials/_navbarMenu.html.twig')}}
         <div class="container-fluid pt-4">
-            <div class="p-3 ms-2 wrapper row">
-                <h3>Création de la commande</h3>
+            <div class="wrapper row">
+                <h4>Création de la commande</h4>
+                <div class="row">
                 {# Selection de l'adresse de livraison #}
-                <div class="col delivery">
+                <div class="col-sm-6 delivery">
                     {{form_start(form)}}
                     <legend><i class="fa-solid fa-location-dot"></i> Adresse de livraison</legend>
-                    
+                     <div class="row">
+                            <div class="col">{{form_row(form.firstname, { 'value': user.firstname })}}</div>
+                            <div class="col">{{form_row(form.lastname, { 'value': user.lastname })}}</div>
+                        </div>
                     {% for deliveryAddress in form.deliveryAddress %}
                         {{ form_widget(deliveryAddress)}}
                         {% if loop.index == 1 %}
@@ -35,48 +39,7 @@
                     </div>
        
                 </div>
-                
-                {# Tableau récapitulatif du panier validé : prix par produits, quantité, prix total par produit, prix du transporteur + prix global à régler #}
-                <div class="col recap">
-                    <legend><i class="fa-solid fa-basket-shopping"></i> Récapitulatif de la commande <span class="text-muted"><small>({{totalQuantity}} produit(s))</small></span></legend>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Produit</th>
-                                    <th>Prix</th>
-                                    <th class="text-center">Quantité</th>
-                                    <th>Total</th>              
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {% for cart in carts %}
-                                <tr>
-                                    <td>{{cart.product.name|capitalize}}<br></td>
-                                    <td>{{ cart.product.priceTTC|number_format(2) }} &euro;</td>
-                                    <td class="text-center"> 
-                                        {{ cart.quantity }} 
-                                    </td>
-                                    <td>{{ cart.amount|number_format(2)}} &euro;</td>
-                                </tr> 
-                            {% endfor %}
-                            </tbody>           
-                            <tfoot>
-                                <tr>
-                                    <th>Frais de port</th>
-                                    <th class='transporterPrice'></th>
-                                    <th></th>
-                                    <th class='basePrice'>{{total|number_format(2)}} &euro; </th>
-                                </tr>
-                                <tr>
-                                    <td colspan="3"><b>Total</b></td>
-                                    <td class="totalPrice"></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                </div>
-                {# Selection du transporteur #}
-                <div class="row">
-                    <div class="col transporter">
+                <div class="col-sm-6 transporter">
                         <legend class="h4"><i class="fa-solid fa-truck-fast"></i> Choix du transporteur</legend>
                         {% for transporterChoice in form.transporter %}
                           <div class="p-3">
@@ -90,8 +53,49 @@
                         {% endfor %}  
                         
                     </div>
-                    <div class="col payment">
-                        <button type="submit" class="btn btn-success btn-lg">Paiement</button>
+                </div>
+                {# Selection du transporteur #}
+                <div class="row">
+                    {# Tableau récapitulatif du panier validé : prix par produits, quantité, prix total par produit, prix du transporteur + prix global à régler #}
+                <div class="col-sm-12 recap">
+                    <legend><i class="fa-solid fa-basket-shopping"></i> Récapitulatif de la commande <span class="text-muted"><small>({{totalQuantity}} produit(s))</small></span></legend>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Produit</th>
+                                    <th>Prix<span class="text-muted">/Unité</span></th>
+                                    <th class="text-center">Quantité</th>
+                                    <th>Total</th>              
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for cart in carts %}
+                                <tr>
+                                    <td data-label="Produit">{{cart.product.name|capitalize}}<br></td>
+                                    <td data-label="Prix/U">{{ cart.product.priceTTC|number_format(2) }} &euro;</td>
+                                    <td data-label="Quantité" class="text-center"> 
+                                    {{ cart.quantity }} 
+                                    </td>
+                                    <td data-label="Total">{{ cart.amount|number_format(2)}} &euro;</td>
+                                </tr> 
+                            {% endfor %}
+                            </tbody>           
+                            <tfoot>
+                                <tr>
+                                    <th>Frais de port</th>
+                                    <th class='transporterPrice'></th>
+                                    <th class="text-center"></th>
+                                    <th class='basePrice'>{{total|number_format(2)}} &euro; </th>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Montant à régler</b></td>
+                                    <td class="totalPrice"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                </div>
+                    <div class="col-sm-12 payment">
+                        <button type="submit" class="btn btn-success btn-lg submit">Payer</button>
                         <div class="stripeLogo">
                             <p class="text-muted">Powered by </p>
                            <span class="text-muted"><i class="fa-brands fa-stripe fa-3x"></i></span>
@@ -119,18 +123,26 @@
         //élément de la table contenant le prix total avec transporteur
         let totalPrice = document.querySelector('.totalPrice');
 
+        //bouton submit pour l'affichage dynamique du prix
+        let paymentBtn = document.querySelector('.submit');
+
        
+        // ALERTE TEMPORAIRE pour indiquer l'état fictif de la boutique
+        paymentBtn.addEventListener('click', function(e){
+            confirm("Attention ! Cette boutique est fictive et les produits présentés ne sont pas rééls/disponibles à la vente (voir CGU et CGV). La boutique est actuellement à titre démonstratif.") ;           
+        })
         
             //pour chaque transporteur, on écoute le changement sur l'input
             transporters.forEach(function(transporter){
 
                 if(transporter.checked){
                     let price = transporter.dataset.price;
-                    transporterPrice.innerHTML = `+ ${price} \u20AC`;
+                    transporterPrice.innerHTML = `${price} \u20AC`;
                     transporterCheckedPrice = price;
                      //Affichage du prix avec les valeurs selectionnées par défaut
                     let sumPriceOnload = parseFloat(transporterCheckedPrice)+ parseFloat(basePrice);
-                    totalPrice.innerHTML = `${sumPriceOnload} \u20AC`;
+                    totalPrice.innerHTML = `<strong>${parseFloat(sumPriceOnload).toFixed(2)} \u20AC</strong>`;
+                    paymentBtn.innerHTML = `Payer ${parseFloat(sumPriceOnload).toFixed(2)} \u20AC`
 
                 }
 
@@ -146,8 +158,10 @@
                 
 
                 //affichage dans la table
-                totalPrice.innerHTML = `${priceWithTransporter} \u20AC`;
+                totalPrice.innerHTML = `<strong>${parseFloat(priceWithTransporter).toFixed(2)} \u20AC</strong>`;
                
+               //maj du bouton de paiement
+                paymentBtn.innerHTML = `Payer ${parseFloat(priceWithTransporter).toFixed(2)} \u20AC`
 
                 });
             });

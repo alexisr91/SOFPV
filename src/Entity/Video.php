@@ -15,7 +15,7 @@ class Video
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable:true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -52,7 +52,54 @@ class Video
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->thumbnail = 'blogDefault.png';
         $this->duration = '00:00';
+    }
 
+    // Convert URL provided by user to an embed Youtube URL
+    // Conversion de l'URL fourni par l'user en URL lisible avec Youtube (embed)
+    public function convertYT($videoURL): string
+    {
+        //  from https://www.youtube.com/watch?v=Ojs5cERnQqg
+        // or from https://youtu.be/Ojs5cERnQqg?feature=shared
+        // or from https://m.youtube.com/watch?v=Ojs5cERnQqg
+
+        // to https://www.youtube.com/embed/Ojs5cERnQqg which is readable
+
+        //if url gotten by option "share" of Youtube
+        if(str_contains($videoURL, 'youtu.be')){
+            //convert first part of URL string
+            $firstConvert = str_replace('youtu.be', 'www.youtube.com', $videoURL);
+
+            //explode url
+            $explode = explode('/', $firstConvert);
+
+            //get parts of "https://www.youtube.com/" and recompose it
+            $baseOfURL = $explode[0].'//'.$explode[2].'/';
+
+            //get part of URL wich contain video reference ex:"Ojs5cERnQqg?feature=shared"
+            $videoRef = $explode[3]; 
+
+            //concatenate with 'embed/' to get valid format
+            $convertedURL = $baseOfURL."embed/".$videoRef;
+            
+            // delete all string after '?'  
+            $convertedURL = strtok($convertedURL, '?');    
+
+        //if url is gotten through mobile browser
+        } else if(str_contains($videoURL, 'm.youtube')) {
+            //convert
+            $convertedURL = str_replace('m.youtube', 'www.youtube', $videoURL);
+            $convertedURL = str_replace('watch?v=', 'embed/', $videoURL);
+
+            // delete all string after '&' to avoid youtube channel error
+            $convertedURL = strtok($convertedURL, '&');
+
+        } else {
+             // Difference entre  watch?v= et embed/
+            $convertedURL = str_replace('watch?v=', 'embed/', $videoURL);
+            // suppression de la partie concernant le channel Youtube (https://www.youtube.com/xxxxxxxxxxxx&ab_channel=LofiGirl)
+            $convertedURL = strtok($convertedURL, '&');
+        }
+        return $convertedURL;
     }
 
     //Conversion de l'URL fourni par l'user en URL lisible avec Youtube (embed)
@@ -176,12 +223,12 @@ class Video
     public function setArticle(?Article $article): self
     {
         // unset the owning side of the relation if necessary
-        if ($article === null && $this->article !== null) {
+        if (null === $article && null !== $this->article) {
             $this->article->setVideo(null);
         }
 
         // set the owning side of the relation if necessary
-        if ($article !== null && $article->getVideo() !== $this) {
+        if (null !== $article && $article->getVideo() !== $this) {
             $article->setVideo($this);
         }
 

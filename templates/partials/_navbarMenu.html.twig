@@ -1,14 +1,14 @@
 {# Menu navbar principal #}
 
-<section id="navbarMenu" class="sticky-top">
-    <nav class="navbar navbar-expand-lg navbar-dark">
+<section id="navbarMenu">
+    <nav class="navbar navbar-expand-xl navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="{{path('home')}}">SO FPV</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 menu">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{{path('blog')}}">Actualités</a>
                             </li>
@@ -22,7 +22,7 @@
                                 <a class="nav-link" href="{{path('about')}}">A propos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Contact</a>
+                                <a class="nav-link" href="{{path('contact')}}">Contact</a>
                             </li>
                             
                         </ul>
@@ -38,7 +38,7 @@
                                         </div> 
                                     </form>
                             </li>
-                            <li>
+                            <li class="cart">
                                 <a class="nav-link mx-3 position-relative" href="{{path('cart')}}"><i class="fa-solid fa-cart-shopping"></i> 
                                 {% if app.session.get('cart') %}
                                     {% set cart = app.session.get('cart') %}
@@ -51,6 +51,8 @@
                                 </a>
                             </li>
                             {% if app.user %} 
+                                
+                                <li><a class="nav-link" href="{{path('account_myprofile')}}"><i class="fa-solid fa-circle-user"></i> Mon compte</a></li>
                                 
                                 <li><a class="nav-link" href="{{path('account_myprofile')}}"><i class="fa-solid fa-circle-user"></i> Mon compte</a></li>
                                 <li><a class="nav-link " href="{{path('account_logout')}}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a></li>
@@ -70,5 +72,7 @@
 <div>
     {{include('/partials/_flashes.html.twig')}}
 </div>
+
+<script src="{{ asset('js/nav.js') }}"></script>
 
 
