@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
+use App\Repository\CommentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\CommentRepository;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
@@ -31,11 +31,11 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
-    #[ORM\OneToMany(mappedBy: 'comment', targetEntity: AlertComment::class)]
+    #[ORM\OneToMany(mappedBy: 'comment', targetEntity: AlertComment::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $alertComments;
 
-
-    public function __construct(){
+    public function __construct()
+    {
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->alertComments = new ArrayCollection();
     }
@@ -122,6 +122,4 @@ class Comment
 
         return $this;
     }
-
-
 }

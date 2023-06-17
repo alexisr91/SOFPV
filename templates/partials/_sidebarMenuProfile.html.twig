@@ -1,11 +1,19 @@
 {# Menu sidebar pour l'user connecté #} 
- <aside class="sidebarMenu">
-        <nav class="sticky-top">
-            <ul>
-                <li><a href="{{path('account_myprofile')}}"><i class="fa-solid fa-table-columns"></i> Tableau de bord</a></li>
-                <li><a href="{{path('account_articles')}}"><i class="fa-solid fa-photo-film"></i> Mes articles</a></li>
-                 <li><a href="{{path('account_mySessions')}}"><i class="fa-solid fa-calendar-days"></i> Mes sessions</a></li>
-                <li><a href="{{path('account_myOrders')}}"><i class="fa-solid fa-bag-shopping"></i> Mes commandes</a></li>               
-            </ul>
-        </nav>
+<aside class="sidebarMenu collapseMenu">
+    <nav class="sidebarNav">
+        <ul>
+            <li><a href="{{path('account_myprofile')}}"><i class="fa-solid fa-table-columns"></i> Tableau de bord</a></li>
+            <li><a href="{{path('account_articles')}}"><i class="fa-solid fa-photo-film"></i> Mes articles</a></li>
+            <li><a href="{{path('account_mySessions')}}"><i class="fa-solid fa-calendar-days"></i> Mes sessions</a></li>
+            <li><a href="{{path('account_myOrders')}}"><i class="fa-solid fa-bag-shopping"></i> Mes commandes</a></li>               
+        </ul>
+    </nav>
 </aside>
+<div class="btnWrap">
+    <button type="button"class="collapsedMenuBtn users">
+        <i class="fa-solid fa-caret-right"></i>
+    </button>
+</div>
+
+<script src="{{ asset('js/sidebar.js') }}"></script>
+

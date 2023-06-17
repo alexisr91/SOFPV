@@ -5,12 +5,11 @@ namespace App\Form;
 use App\Entity\MapSpot;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SpotType extends AbstractType
 {
@@ -18,33 +17,35 @@ class SpotType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'required'=>true,
-                'label'=>'Nom du spot',
-                'attr'=>['placeholder'=>'Ex: La Sabla']
+                'required' => true,
+                'label' => 'Nom du spot',
+                'sanitize_html' => true,
+                'attr' => ['placeholder' => 'Ex: La Sabla'],
                 ])
-            ->add('authorization',ChoiceType::class, [
-                'choices'=>[
+            ->add('authorization', ChoiceType::class, [
+                'choices' => [
                     'Public' => 'Public',
-                    'Télépilotes Pro' => 'Télépilotes Pro'
+                    'Télépilotes Pro' => 'Télépilotes Pro',
                 ],
-                'label' => 'Type d\'autorisation'
+                'label' => 'Type d\'autorisation',
             ])
-            ->add('address', TextType::class , [
-               'label'=>'Adresse la plus proche',
-               'required'=>true,
-               'attr'=> ['placeholder'=>'Ex: 5 rue Gilbert Affre, 31830 Plaisance-du-Touch'],            
+            ->add('address', TextType::class, [
+               'label' => 'Adresse la plus proche',
+               'required' => true,
+               'sanitize_html' => true,
+               'attr' => ['placeholder' => 'Ex: 5 rue Gilbert Affre, 31830 Plaisance-du-Touch'],
             ])
             ->add('longitude', NumberType::class, [
-                'required'=>true,
-                'label'=>'Longitude'
+                'required' => true,
+                'label' => 'Longitude',
             ])
             ->add('latitude', NumberType::class, [
-                'required'=>true,
-                'label'=>'Latitude'
+                'required' => true,
+                'label' => 'Latitude',
             ])
             ->add('adminMapSpot', CheckboxType::class, [
-                'label'=>'Cochez si vous souhaitez que les sessions soient uniquement organisées par vous.',
-                'required'=>false
+                'label' => 'Cochez si vous souhaitez que les sessions soient uniquement organisées par vous.',
+                'required' => false,
             ])
         ;
     }
@@ -53,6 +54,7 @@ class SpotType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => MapSpot::class,
+            'sanitize_html' => true,
         ]);
     }
 }

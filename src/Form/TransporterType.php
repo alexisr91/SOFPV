@@ -22,6 +22,7 @@ class TransporterType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Transporter::class,
+            'sanitize_html' => true,
         ]);
     }
 }

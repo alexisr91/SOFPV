@@ -2,19 +2,16 @@
 
 namespace App\Entity;
 
-use App\Entity\Image;
-use Cocur\Slugify\Slugify;
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints\Valid;
 
 #[UniqueEntity(
-    fields:"title", 
-    message: "Un autre article possède déjà ce titre, veuillez en changer !"
+    fields: 'title',
+    message: 'Un autre article possède déjà ce titre, veuillez en changer !'
 )]
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -35,7 +32,7 @@ class Article
     private ?string $content = null;
 
     #[Valid()]
-    #[ORM\OneToOne(inversedBy: 'article', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'article', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private ?Video $video = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
@@ -46,8 +43,29 @@ class Article
     private ?\DateTimeInterface $createdAt = null;
 
     #[Valid()]
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Image::class, cascade: ['persist', 'remove'], orphanRemoval:true)]
-    protected ?Collection $images;
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Image::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    protected ?Collection $images = null;
+
+    #[ORM\Column]
+    private ?int $views = null;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Likes::class, orphanRemoval: true)]
+    private ?Collection $likes = null;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class, orphanRemoval: true)]
+    private ?Collection $comments = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles', cascade: ['persist'])]
+    private ?Category $category = null;
+
+    #[ORM\Column]
+    private ?bool $adminNews = null;
+
+    #[ORM\Column]
+    private ?bool $active = null;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Alert::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private ?Collection $alerts = null;
 
     #[ORM\Column]
     private ?int $views = null;
@@ -72,24 +90,26 @@ class Article
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));   
         $this->images = new ArrayCollection();
         $this->views = 0;
         $this->likes = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->adminNews = 0;
-        $this->active = 1;
+        $this->adminNews = false;
+        $this->active = true;
         $this->alerts = new ArrayCollection();
     }
 
-    //creation du slug et update si le titre est modifié par l'auteur
+    // création du slug et mise à jour si le titre est modifié par l'auteur
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
-    public function initSlug(){
-        if(empty($this->slug) || $this->slug != $this->title){
+    public function initSlug()
+    {
+        if (empty($this->slug) || $this->slug != $this->title) {
             $slugger = new Slugify();
             $this->slug = $slugger->slugify($this->title);
         }
+        return $this->slug;
     }
 
     public function getId(): ?int
@@ -169,20 +189,20 @@ class Article
         return $this;
     }
 
-    
+    /**
+     * @return Collection<int, Image>
+     */
     public function getImages(): Collection
     {
         return $this->images;
     }
 
-    public function addImage(Image $image)
-    {       
-        if(!$this->images->contains($image)){ 
-            $image->setArticle($this);  
+    public function addImage(Image $image): void
+    {
+        if (!$this->images->contains($image)) {
+            $image->setArticle($this);
             $this->images->add($image);
-             
         }
-      
     }
 
     public function removeImage(Image $image): self

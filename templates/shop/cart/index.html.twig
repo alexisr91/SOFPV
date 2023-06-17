@@ -7,58 +7,89 @@
     <section id="cart">
         {{include('partials/_navbarMenu.html.twig')}}
         <div class="container-fluid pt-4">
-            <div class="p-3 ms-2 wrapper">
-                <h2>Votre panier</h2>
+            <div class="wrapper">
+                <h4>Votre panier</h4>
                 <table class="table">
                     <thead>
                         <tr>
                             <th></th>
                             <th>Produit</th>
-                            <th>Prix</th>
-                            <th class="text-center">Quantité</th>
-                            <th>Total</th>
+                            <th class="price">Prix</th>
+                            <th class="qty">Quantité</th>
+                            <th class="total">Total</th>
                             <th></th>                     
                         </tr>
                     </thead>
                     <tbody>
                     {% for data in cardData %}
                         <tr>
-                            <td class="img"><img src="{{asset('img/products/'~ data.product.image)}}" alt="" class="img-fluid"></td>
-                            <td>{{ data.product.name|capitalize }}</td>
-                            <td>{{ data.product.priceTTC|number_format(2) }} &euro;</td>
-                            <td class="text-center"> 
-                                <a href="{{path('cart_remove', {'id': data.product.id })}}" class="btn btn param"><i class="fa-solid fa-minus"></i></a>
-                                   {{ data.quantity }} 
-                                <a href="{{path('cart_add', {'id': data.product.id} )}}" class="btn param" {% if data.product.stock == 1 %}disabled{% endif %}><i class="fa-solid fa-plus"></i></a>
+                            <td class="product" data-label="Produit">
+                                <div class="wrapImgProduct">
+                                    <div class="img">
+                                        <img src="{{asset('/uploads/products/'~ data.product.image)}}" alt="{{data.product.name}}" class="img-fluid">
+                                    </div> 
+                                    {{ data.product.name|capitalize }}
+                                </div>
+                            </td>
+                            <td data-label="Prix" class="price">{{ data.product.priceTTC|number_format(2) }} &euro;</td>
+                            <td data-label="Quantité" class="qty"> 
+                                <div>{# remove 1 product in cart line #}
+                                     {# check token before remove one product #}
+                                    <form action="{{url('cart_remove', {'id': data.product.id })}}" method="post">
+                                        <input type="hidden" name="token" value="{{csrf_token('remove' ~ data.product.id)}}">
+                                        <button type="submit" class="btn param remove"><i class="fa-solid fa-minus"></i></button>
+                                    </form> 
+                              
+                                    {{ data.quantity }}
+                                    {# add 1 product in cart line #}
+                                    {# check token before add one product #}
+                                    <form action="{{url('cart_add', {'id': data.product.id} )}}" method="post">
+                                        <input type="hidden" name="token" value="{{csrf_token('add' ~ data.product.id)}}">
+                                        <button type="submit" class="btn param add" {% if data.product.stock == 1 %} disabled{% endif %}>
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                    </form> 
+                                </div>           
                             </td>
                             {% set totalTTCForeachTypeOfProduct =  data.quantity * data.product.priceTTC %}
-                            <td>{{ totalTTCForeachTypeOfProduct|number_format(2)}} &euro;</td>
-                            <td>
-                                <a href="{{path('cart_delete', {'id': data.product.id })}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a> 
+                            <td data-label="Total" class="total">{{ totalTTCForeachTypeOfProduct|number_format(2)}} &euro;</td>
+                            {# delete cart line #}
+                            <td data-label="Supprimer" class="delete">
+                                {# form with token #}
+                                 <form action="{{url('cart_delete', {'id': data.product.id })}}" method="post">
+                                    <input type="hidden" name="token" value="{{csrf_token('delete' ~ data.product.id)}}">
+                                    <button type="submit"class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                </form> 
                             </td>
                         </tr>
-                    {% else %}
-                        <tr>
+                    {% else %}                        <tr>
                             <td colspan="5" class="text-center">Votre panier est vide.</td>
                         </tr>
                     {% endfor %}
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="2"><b>Total</b></td>
-                            <td><strong>{{total|number_format(2)}} &euro;</strong></td>
+                            <td colspan="1"><b>Total</b></td>
+                            <td class="total"><strong>{{total|number_format(2)}} &euro;</strong></td>
                             <td colspan="3" class="delete-all">
                                 {% if cardData is not empty %}
-                                <a href="{{path('cart_delete_all')}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Vider le panier</a> 
+                                {# delete all in the cart => token check #}
+                                <form action="{{url('cart_delete_all')}}" method="post">
+                                    <input type="hidden" name="token" value="{{csrf_token('deleteAll')}}">
+                                    <button type="submit"class="btn btn-danger"><i class="fa-solid fa-trash"></i> Vider le panier</button>
+                                </form>  
                                 {% endif %}
                             </td>
                         </tr>
                     </tfoot>
                 </table>
-                <div class="d-flex justify-content-between align-items-center p-3">
-                    <a href="{{path('shop')}}" class="btn param"><i class="fa-solid fa-angle-left"></i> Continuer mes achats <i class="fa-solid fa-basket-shopping"></i></a>
-                    <a href="{{path('cart_validate')}}" class="btn param btn-lg validate">Valider mon panier</a>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{{path('shop')}}" class="btn param continue"><i class="fa-solid fa-angle-left"></i> Continuer mes achats <i class="fa-solid fa-basket-shopping"></i></a>
+                    <a href="{{path('cart_validate')}}" class="btn param validate">Valider mon panier <i class="fa-solid fa-chevron-right"></i></a>
                 </div>
+                {# {{dump(app.session.get('tempStock'), 'stock restant')}}
+                {{dump(app.session.get('cart'), 'panier')}} #}
+
             </div>
            {# {{dump(app.session.get('tempStock'), 'stock restant')}}
            {{dump(app.session.get('cart'), 'panier')}} #}

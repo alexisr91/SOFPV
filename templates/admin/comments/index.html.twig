@@ -8,9 +8,7 @@
             {{include('partials/_adminNavbarMenu.html.twig')}}
         <div class="container-fluid">
 
-            <div class="sidebar">
-                {{include('partials/_adminSidebarMenu.html.twig')}}
-            </div>
+            {{include('partials/_adminSidebarMenu.html.twig')}}
         
             <div class="wrap">      
             <h3>Gestion des commentaires signalés</h3>
@@ -32,12 +30,12 @@
                 <tbody>
                 {% for alert in alerts %}
                     <tr>
-                        <td>{{alert.id}}</td>
-                        <td>{{alert.createdAt|date('d-m-Y H:i')}}</td>
-                        <td><b><a href="{{path('admin_users')}}">{{alert.comment.author}}</a><b></td>
-                        <td colspan="2"><b><a href="{{path('article_show', {'slug':alert.comment.article.slug})}}" target='_blank'>{{alert.comment.article.title}}</a></b></td>
-                        <td colspan="2">{{alert.comment.content|raw}}</td>
-                        <td class="text-center"><button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirm-{{alert.comment.id}}"><i class="fa-solid fa-comment-slash"></i></button></td>
+                        <td data-label="ID">{{alert.id}}</td>
+                        <td data-label="Date">{{alert.createdAt|date('d-m-Y H:i')}}</td>
+                        <td data-label="Auteur"><b><a href="{{path('admin_users')}}">{{alert.comment.author}}</a><b></td>
+                        <td data-label="Article" colspan="2"><b><a href="{{path('article_show', {'slug':alert.comment.article.slug})}}" target='_blank'>{{alert.comment.article.title}}</a></b></td>
+                        <td data-label="Commentaire" colspan="2">{{alert.comment.content|raw}}</td>
+                        <td data-label="Modération" class="text-center"><button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirm-{{alert.comment.id}}"><i class="fa-solid fa-comment-slash"></i></button></td>
                     </tr>    
                     {# modal de confirmation #}
                     <div class="modal fade" id="confirm-{{alert.comment.id}}" tabindex="-1" aria-labelledby="confirm" aria-hidden="true">
@@ -51,8 +49,12 @@
                                 <p class="my-3">Êtes-vous sûr de vouloir modérer ce commentaire ?</p>
                             </div>
                             <div class="modal-footer">
+                                {# Form pour envoyer le token avant validation #}
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                <a href="{{path('admin_comment_moderate', {'id':alert.comment.id})}}" class="btn btn-danger">Modérer</a>
+                                <form action="{{url('admin_comment_moderate', {'id':alert.comment.id})}}" method="post">
+                                    <input type="hidden" name="token" value="{{csrf_token('moderate')}}">
+                                    <button type="submit"class="btn btn-danger">Modérer</button>
+                                </form>
                             </div>
                             </div>
                         </div>

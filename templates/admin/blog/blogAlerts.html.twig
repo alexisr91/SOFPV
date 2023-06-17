@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="adminBlogAlerts">
+            {{include('partials/_adminNavbarMenu.html.twig')}}
+        <div class="container-fluid">
+                {{include('partials/_adminSidebarMenu.html.twig')}}
+            
+            <div class="wrap py-4">
+                <div>
+                    <h4>Gestion des articles signalés</h4> 
+                </div>
+                
+            <div class="row row-cols-md-1 g-4 px-3">
+                {% if articles is empty %}
+         
+                    <div class="alert alert-success">Il n'y a pas encore d'articles signalés.</div>
+            
+                {% else %}
+                    {% for article in articles %}
+                        {{include('/partials/_adminArticle.html.twig')}}
+                    {% endfor %}
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+ 
+{% endblock %}
+
+

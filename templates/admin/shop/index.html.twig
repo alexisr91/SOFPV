@@ -1,0 +1,258 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+
+{% block body %}
+ 
+    <section id="adminShop">
+            {{include('partials/_adminNavbarMenu.html.twig')}}
+        <div class="container-fluid mainWrap">
+
+                {{include('partials/_adminSidebarMenu.html.twig')}}
+        
+            <div class="wrap">
+                <div class="titleAndBtn">  
+                    <h3>Gestion des produits</h3>
+                    <button type="button" class="btn btn-success addProductMainBtn" data-bs-toggle="modal" data-bs-target="#addProduct">
+                        <i class="fa-solid fa-plus"></i> Ajouter un produit
+                    </button>
+               </div> 
+            
+                {% if products is empty %}
+                    <div class="w-100">
+                        <span class="alert alert-warning d-block">Il n'y a pas encore de produits.</span>
+                    </div>
+                {% else %}
+                        <div class="titleTable">
+                            <div class="name col mb-2"><b>Nom du produit</b></div>
+                            <div class="price col mb-2"><b>Prix TTC</b></div>
+                            <div class="stock col mb-2"><b>Stock</b></div>
+                            <div class="status col mb-2"><b>Statut</b></div>
+                            <div class="actions col mb-2"><b>Actions</b></div>
+                        </div>
+                    <ul class="productsList">
+                    {% for product in products %}
+                            <li data-toggle="tab" data-link="product-{{product.id}}">
+                                {% if loop.index is divisible by(2) %}
+                                    <div class="row row-white tabs">
+                                {% else %}
+                                    <div class="row row-grey tabs">
+                                {% endif %}
+                                        <div class="col">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="name col">
+                                                    <div class="imgProduct">
+                                                        <img src="{{asset('/uploads/products/'~ product.image)}}" class="img-fluid">
+                                                    </div>
+                                                    <div class="d-flex flex-column">
+                                                        <b>{{product.name}}</b>                                                
+                                                    </div>
+                                                </div>
+                                                <div class="price col">
+                                                     {{product.priceTTC|number_format(2)}} &euro;
+                                                </div>
+                                                <div class="stock col">
+                                                  <span {{product.stock == 0 ? 'class="badge bg-danger"' : 'class="badge bg-success"' }}>{{product.stock}}</span>
+                                                </div>
+                                                <div class="status col">
+                                                    {% if product.active %}
+                                                        <span class="badge bg-success px-3 py-2">En ligne</span>
+                                                    {% else %}
+                                                        <span class="badge bg-danger px-3 py-2">Désactivé</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="actions col">
+                                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#viewProduct-{{product.id}}"><i class="fa-solid fa-eye"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </li>
+                            {# modal pour voir le detail #}
+                            <div class="modal fade" id="viewProduct-{{product.id}}" tabindex="-1" aria-labelledby="viewProduct-{{product.id}}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="fs-5">Détail du produit</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="main">
+                                <div class="imgProductView">
+                                    <img src="{{asset('/uploads/products/'~ product.image)}}" class="img-fluid">
+                                </div>
+
+                                <h3>{{product.name}}</h3> 
+
+                            </div>
+                            <hr>
+                             <table>
+                                    <tr>
+                                        <th><i class="fa-solid fa-hashtag"></i> ID</th>
+                                        <td>{{product.id}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th><i class="fa-solid fa-tag"></i> Nom du produit</th>
+                                        <td>{{product.name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th><i class="fa-solid fa-boxes-stacked"></i> Stock</th>
+                                        <td>  <span {{product.stock == 0 ? 'class="badge bg-danger"' : 'class="badge bg-success"' }}>{{product.stock}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <th><i class="fa-solid fa-euro-sign"></i> Prix HT</th>
+                                        <td>{{product.priceHT|number_format(2)}}&euro;</td>
+                                    </tr>
+                                    <tr>
+                                        <th><i class="fa-solid fa-euro-sign"></i> Prix TTC</th>
+                                        <td>{{product.priceTTC|number_format(2)}}&euro;</td>
+                                    </tr>
+                                    <tr>
+                                        <th><i class="fa-solid fa-list"></i> Description</th>
+                                        <td>{{product.description|raw}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th><i class="fa-solid fa-gear"></i> Actions</th>
+                                        <td>
+                                            <a href="{{path('admin_shop_modify', {'id':product.id})}}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Modifier</a>
+                                           {# si le produit est actif, on passe par un formulaire avec un token pour la désactivation #}
+                                            {% if product.active %}
+                                                <form action="{{url('admin_shop_delete', {'id': product.id })}}" method="post">
+                                                    <input type="hidden" name="token" value="{{csrf_token('delete')}}">
+                                                    <button type="submit"class="btn btn-danger"><i class="fa-solid fa-xmark"></i> Désactiver</button>
+                                                </form>
+                                            {% else %}
+                                                <form action="{{url('admin_shop_reactivate', {'id': product.id })}}" method="post">
+                                                    <input type="hidden" name="token" value="{{csrf_token('reactivate')}}">
+                                                    <button type="submit"class="btn btn-success"><i class="fa-solid fa-check"></i> Mettre en ligne</button>
+                                                </form>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+
+                            </table>
+    
+                            </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+               
+                    {% endfor %}       
+                {% endif %}
+  
+                    </ul>
+
+                     {# modal #}
+                       <div class="modal fade" id="addProduct" tabindex="-1" aria-labelledby="addProduct" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="fs-5">Ajouter un produit</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {{form_start(form)}}
+                                         {{form_row(form.name)}}
+                                            {{form_row(form.description)}}
+                                            {{form_row(form.stock)}}   
+                                            {{form_row(form.price_HT , {'empty_data': 0})}}    
+                                            {{form_row(form.price_TTC)}}
+                                            {{form_row(form.image)}}
+
+                                        <div class="d-flex flex-row flex-wrap" id="imgWrap"></div>  
+  
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success"><i class="fa-solid fa-plus"></i> Ajouter</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                    {{form_end(form)}}
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        {# endmodal #}
+                 
+            </div>
+        </div>
+    </section>
+
+    <script>
+
+        // changement d'onglet pour voir chaque produit en detail et pouvoir le desactiver
+
+        //récupération des onglets
+        let tabs = document.querySelectorAll('[data-toggle]');
+        //onglet actif
+        let viewAlreadyActive = document.querySelector('.tab-pane.active');
+      
+
+       tabs.forEach(function(tab){
+        //id du produit récupéré sur chaque onglet
+        let tabData = tab.dataset.link;
+            //on attend le click sur un des onglets
+            tab.addEventListener('click', function(tab){
+
+                let view = document.getElementById(tabData);
+
+                //on enlève la classe active de l'onglet deja affiché  
+                viewAlreadyActive.classList.remove('active');
+         
+                //pour ajouter "active" à l'onglet cliqué et donc afficher son contenu
+                view.classList.toggle('active');
+       
+                //on change l'onglet considéré comme actif pour gérer le prochain click
+                viewAlreadyActive = view;
+                        
+            });
+        })
+
+  
+    //affichage du calcul du prix TTC avant la modification
+    let priceHTinput = document.querySelector('#product_price_HT');
+    
+    priceHTinput.addEventListener('change', function() {
+
+        //TVA fr
+        const tva = 20/100;
+
+        //la valeur de l'input priceHT rentré par l'utilisateur avant soumission du formulaire
+        let newPriceHT = parseFloat(this.value);
+
+        let priceTTCinput =  document.querySelector('#product_price_TTC');
+
+        //application de la TVA
+        let newPriceTTC = newPriceHT + (newPriceHT * tva);
+        console.log(newPriceHT);
+
+        //modification de la valeur dans l'input du pric TTC
+        priceTTCinput.value = parseFloat(newPriceTTC).toFixed(2);
+
+        
+    });
+
+
+    //prévisualisation de l'image
+
+    let imgInput = document.querySelector('#product_image');
+    const imgWrap = document.querySelector('#imgWrap');
+
+    imgInput.addEventListener("change", () => {
+        let file = Object.values(imgInput.files);
+        
+        let image = ""; 
+
+        Array.prototype.forEach.call(file, (img)=>{
+            image += `<img src="${URL.createObjectURL(img)}" alt="prévisualisation d'image" class="img-thumbnail img-fluid">`
+            imgWrap.innerHTML = image;
+        })
+        
+   
+    })
+
+    </script>
+{% endblock %}
+
+

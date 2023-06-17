@@ -20,6 +20,7 @@ security:
                 default_target_path: admin_dashboard
                 login_path: admin_login
                 check_path: admin_login
+                enable_csrf: true
             logout:
                 path: admin_logout
                 target: home

@@ -2,11 +2,11 @@
 
 namespace App\Repository;
 
-use App\Entity\User;
-use App\Entity\Likes;
 use App\Entity\Article;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Likes;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Likes>
@@ -41,7 +41,7 @@ class LikesRepository extends ServiceEntityRepository
         }
     }
 
-    //On vérifie si il y a une corrélation entre le like, l'article et l'user pour vérifier si l'article a déjà été "liké"
+    // On vérifie si il y a une corrélation entre le like, l'article et l'user pour vérifier si l'article a déjà été "liké"
     public function getLikeByUserAndArticle(User $user, Article $article)
     {
         return $this->createQueryBuilder('l')
@@ -55,28 +55,28 @@ class LikesRepository extends ServiceEntityRepository
         ->getOneOrNullResult();
     }
 
-//    /**
-//     * @return Likes[] Returns an array of Likes objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('l.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Likes[] Returns an array of Likes objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('l')
+    //            ->andWhere('l.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('l.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Likes
-//    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Likes
+    //    {
+    //        return $this->createQueryBuilder('l')
+    //            ->andWhere('l.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

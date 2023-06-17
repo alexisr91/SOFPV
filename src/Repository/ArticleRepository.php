@@ -40,51 +40,59 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     // les 4 derniers articles publiés ( pour la page d'accueil ) qui ne sont pas l'article à la une (adminNews)
-    public function findLastArticles(){
+    public function findLastArticles($adminNews, $active):array
+    {
         return $this->createQueryBuilder('a')
-           ->andWhere('a.adminNews = false')
-           ->andWhere('a.active = true')
+           ->andWhere('a.adminNews = :adminNews')
+           ->setParameter('adminNews', $adminNews)
+           ->andWhere('a.active = :active')
+           ->setParameter('active', $active)
            ->orderBy('a.createdAt', 'DESC')
            ->setMaxResults(4)
            ->getQuery()
            ->getResult()
-       ;
+        ;
     }
-  
 
-    //Les 10 derniers articles du même auteur excluant l'article actuel (suggestions)
-    public function findOtherArticlesByAuthor($id, $article){
+    // Les 8 derniers articles du même auteur excluant l'article actuel (suggestions du même auteur)
+    public function findOtherArticlesByAuthor($id, $article, $active):array
+    {
         return $this->createQueryBuilder('a')
         ->andWhere('a.author = :id')
         ->setParameter('id', $id)
         ->andWhere('a.id != :article')
-        ->setParameter('article', $article->getId())
-        ->andWhere('a.active = true')
+        ->setParameter('article', $article)
+        ->andWhere('a.active = :active')
+        ->setParameter('active', $active)
         ->orderBy('a.createdAt', 'DESC')
         ->setMaxResults(8)
         ->getQuery()
         ->getResult();
     }
 
-    //Le dernier article qu'à posté l'admin en cochant l'option adminNews (qui permet de mettre cet article "à la Une" de la page d'accueil)
-    public function findAdminNewsArticle(){
+    // Le dernier article qu'à posté l'admin en cochant l'option adminNews (qui permet de mettre cet article "à la Une" de la page d'accueil)
+    public function findAdminNewsArticle($adminNews):array
+    {
         return $this->createQueryBuilder('a')
-        ->andWhere('a.adminNews = true')
+        ->andWhere('a.adminNews = :adminNews')
+        ->setParameter('adminNews', $adminNews)
         ->orderBy('a.createdAt', 'DESC')
         ->setMaxResults(8)
         ->getQuery()
         ->getResult();
     }
 
-    //Les 3 dernières questions de l'user connecté (raccourcis dans le dashboard pour avoir les réponses d'aide de manière plus accessible)
-    public function findMylastQuestions($user){
+    // Les 3 dernières questions de l'utilisateur connecté (raccourcis dans le dashboard pour avoir les commentaires de réponse de manière plus accessible)
+    public function findMylastQuestions($user, $category, $active)
+    {
         return $this->createQueryBuilder('a')
-        ->join('a.category' , 'c')
+        ->join('a.category', 'c')
         ->andWhere('a.author = :user')
         ->setParameter('user', $user)
-        ->andWhere('c.name = :question')
-        ->setParameter('question', 'Question')
-        ->andWhere('a.active = true')
+        ->andWhere('c.name = :category')
+        ->setParameter('category', $category)
+        ->andWhere('a.active = :active')
+        ->setParameter('active', $active)
         ->orderBy('a.createdAt', 'DESC')
         ->setMaxResults(3)
         ->getQuery()
@@ -92,8 +100,8 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     // compte les nombre d'article par auteur
-
-    public function countMyArticles($user){
+    public function countMyArticles($user):int
+    {
         return $this->createQueryBuilder('a')
         ->select('count(a)')
         ->andWhere('a.author = :user')
@@ -103,63 +111,80 @@ class ArticleRepository extends ServiceEntityRepository
         ->getSingleScalarResult();
     }
 
-    //recherche des articles par critère
-    public function searchByCriteria($q){
+    
+    // retourne les resultats qui contiennent n'importe où le mot tapé ($q). Ex: cine => FPV cinematique trouvé
+    // recherche des article par titre, seulement si les articles et leurs auteurs sont actifs
+    public function findByTitle($q, $active):array
+    {
         $qb = $this->createQueryBuilder('a');
-        $qb
-        ->addSelect('c')
-        ->addSelect('u')
-        ->leftJoin('a.category', 'c')
-        ->leftJoin('a.author', 'u')
-        ->where( 
-            $qb->expr()->orX(
-                        $qb->expr()->like('a.title', ':q'),
-                        $qb->expr()->like('u.nickname', ':q'), 
-                        $qb->expr()->like('c.name', ':q')
-            ))
-        ->setParameter('q', '%'.$q.'%') //retourne les resultats qui contiennent n'importe où le mot tapé ($q). Ex: cine => FPV cinematique trouvé
-        ->andWhere('a.active = true');
-
-            return $qb->getQuery()->getResult();
-    }
-
-    //recherche des article par titre
-    public function findByTitle($q){
-        $qb = $this->createQueryBuilder('a');
-        $qb->leftJoin('a.category', 'c')
-        ->leftJoin('a.author', 'u')
+        $qb->leftJoin('a.author', 'u')
         ->where('a.title like :q')
         ->setParameter('q', '%'.$q.'%')
-        ->andWhere('a.active = true')
+        ->andWhere('a.active = :active')
+        ->andWhere('u.active = :active')
+        ->setParameter('active', $active)
         ;
-
         return $qb->getQuery()->getResult();
     }
 
+    // retourne les articles qui sont signalés au moins une fois
+    public function findAlertedArticles():array
+    {
+        return $this->createQueryBuilder('a')
+        ->join('a.alerts', 'al')
+        ->where('al.article = a.id')
+        ->orderBy('a.createdAt', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
 
-    
-//    /**
-//     * @return Article[] Returns an array of Article objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //For stats service : get publications which are the most liked
+    public function getMostLikedArticles(){
 
-//    public function findOneBySomeField($value): ?Article
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $manager = $this->getEntityManager();
+        return $manager->createQuery(
+            'SELECT a.title, a.slug , u.nickname , a.views,
+        (SELECT COUNT(l) FROM App\Entity\Likes l WHERE l.article = a ) as likes
+        FROM App\Entity\Article a
+        JOIN a.author u
+        GROUP BY a
+        ORDER BY a.views DESC')
+        ->setMaxResults(5)
+        ->getResult();
+
+    }
+
+    //For stats service : get article count
+    public function getArticleCount(){
+        $manager = $this->getEntityManager();
+        return $manager->createQuery(
+            'SELECT COUNT(a) FROM App\Entity\Article a')
+            ->getSingleScalarResult();
+    }
+
+
+    //    /**
+    //     * @return Article[] Returns an array of Article objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('a.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Article
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

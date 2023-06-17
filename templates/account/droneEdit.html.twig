@@ -9,9 +9,8 @@
     <section id="droneEdit">
         {{include('partials/_navbarMenu.html.twig')}}
         <div class="container-fluid">
-            <div class="sidebar">
-                {{include('partials/_sidebarMenuProfile.html.twig')}}
-            </div>
+           
+            {{include('partials/_sidebarMenuProfile.html.twig')}}
         
             <div class="wrapper">
             
@@ -21,7 +20,7 @@
                 <h2>Ajouter un drone</h2>
             {% endif %}
                 <div class="row"> 
-                    <div class="col-md-8 p-3 mx-auto">
+                    <div class="config mx-auto">
                         <h4>Ma config</h4>
                         <hr>  
                         {{form_start(form)}}
@@ -40,7 +39,7 @@
                             {% endif %}
                         </div>
                     
-                        <div class="text-center">
+                        <div class="text-center mt-4">
                             <button type="submit" class="btn btn-dark btn-lg">Enregister</button>
                             <a href="{{path('account_myprofile')}}" class="btn btn-light"><i class="fa-solid fa-arrow-rotate-left"></i> Retour</a>
                             {{form_end(form)}}

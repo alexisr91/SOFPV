@@ -16,7 +16,7 @@ class Category
     private ?int $id;
 
     #[ORM\Column(length: 255)]
-    private ?string $name ;
+    private ?string $name;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Article::class)]
     private Collection $articles;

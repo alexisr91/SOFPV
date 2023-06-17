@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+ 
+    <section id="contact">
+        {{include('partials/_navbarMenu.html.twig')}}
+
+        <div class="container-fluid"> 
+        
+            <div class="wrap">
+           
+                
+                <h2>Formulaire de contact</h2>    
+
+                {{form_start(form)}}
+                    {{form_row(form, {'label':false})}} 
+                    <button type="submit" class="btn btn-dark btn-lg">Envoyer ma demande</button>
+                {{form_end(form)}}
+            
+                    
+               
+            </div>
+            
+
+        </div>
+ 
+    </section>
+{% endblock %}

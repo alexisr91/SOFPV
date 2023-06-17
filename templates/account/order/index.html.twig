@@ -9,9 +9,9 @@
         {{include('partials/_navbarMenu.html.twig')}}
 
         <div class="container-fluid">
-          <div class="sidebar">
+     
               {{include('partials/_sidebarMenuProfile.html.twig')}}
-          </div>
+  
           <div class="wrapper">
             <h3>Mes commandes</h3>
             <div class="row">
@@ -19,7 +19,7 @@
               <span class="alert alert-success">Vous n'avez pas encore de commande.</span>
             {% else %}
             {% for order in orders %}
-                <div class="order col-md-3 m-3">
+                <div class="order">
                   <div class="d-flex justify-content-between">
                     <div>
                       <div class="orderRef">
@@ -28,7 +28,7 @@
                           <p class="text-muted">{{order.createdAt|date('d-m-Y - H:i')}} </p>
                       </div>
                       <div class="price">
-                        <span class="badge bg-grey">{{order.price}} &euro;</span>
+                        <span class="badge bg-grey">{{order.price|number_format(2)}} &euro;</span>
                       </div>
                   </div>       
                       <div class="deliveryAddress">
@@ -50,18 +50,25 @@
                       {% endfor %}
                       </ul>  
                       <hr>
+                      {% if order.deliveryStatus.status > 0 and order.deliveryStatus.status < 4 %}
+                          <div class="my-4 ps-4">
+                            <span class="text-muted"><i class="fa-solid fa-barcode"></i> Numéro de suivi : </span>{{order.trackerID}}
+                          </div>
+                      {% endif  %}
                        <div class="orderStatus">
-                        {% if order.delivery_status.status == 0 %}
-                          <span class="prepare"><i class="fa-solid fa-circle"></i></span><strong>{{order.delivery_status.status}}</strong>
-                        {% elseif order.delivery_status.status == 1 %}
-                          <span class="transport"><i class="fa-solid fa-circle"></i> </span><strong>{{order.delivery_status.status}}</strong>
-                        {% elseif order.delivery_status.status == 2 %}
-                          <span class="delivery"><i class="fa-solid fa-circle"></i></span><strong>{{order.delivery_status.status}}</strong>
-                        {% elseif order.delivery_status.status == 3 %}
-                          <span class="delivered"><i class="fa-solid fa-circle"></i></span><strong>{{order.delivery_status.status}}</strong>
-                        {% elseif order.delivery_status.status ==  4 %}
-                          <span class="canceled"><i class="fa-solid fa-circle"></i></span><strong>{{order.delivery_status.status}}</strong>
+                        {% if order.deliveryStatus.status == 0 %}
+                          <span class="prepare">
+                        {% elseif order.deliveryStatus.status == 1 %}
+                          <span class="transport">
+                        {% elseif order.deliveryStatus.status == 2 %}
+                          <span class="delivery">
+                        {% elseif order.deliveryStatus.status == 3 %}
+                          <span class="delivered">
+                        {% elseif order.deliveryStatus.status ==  4 %}
+                          <span class="canceled">
                         {% endif %}
+                          <i class="fa-solid fa-circle"></i></span><strong>{{order.deliveryStatus.statusDescription}}</strong>
+                          
                       </div>
                   </div> 
                   {% endfor %}

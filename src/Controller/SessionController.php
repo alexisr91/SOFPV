@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Session;
 use App\Form\SessionType;
 use App\Repository\UserRepository;
@@ -18,101 +19,123 @@ use Symfony\Component\Validator\Constraints\Timezone;
 
 class SessionController extends AbstractController
 {
-    //carte des points de vol
+    // carte des points de vol
+    // map of flight spots
     #[Route('/session/map', name: 'session_map')]
-    public function index(MapSpotRepository $mapSpotRepository): Response
+    public function index(MapSpotRepository $mapSpotRepository, SessionRepository $sessionRepository, EntityManagerInterface $manager): Response
     {
         $spots = $mapSpotRepository->findAll();
 
+        $checkSessions = $sessionRepository->findAll();
+        // vérification et update pour voir si les sessions sont déjà passées
+        // check if flight sessions are already past, if it's true, update it
+
+        foreach ($checkSessions as $session) {
+            // si elles le sont, on envoie en bdd past = true pour qu'elles n'apparaissent plus
+            // if it's true, update "past" on true for hiding them
+            if ($session->isAlreadyPast()) {
+                $session->setPast(true);
+                $manager->persist($session);
+                $manager->flush();
+            }
+        }
+
         return $this->render('session/index.html.twig', [
-            'title'=>'Carte des sessions',
-            'spots'=>$spots
+            'title' => 'Carte des sessions',
+            'spots' => $spots,
         ]);
 
     }
 
-    //ajout d'une session
+    // add a flight session
+    // ajout d'une session de vol
     #[IsGranted('ROLE_USER')]
-    #[Route('/session/add/{id}', name:'session_add')]
-    public function addSession(MapSpotRepository $mapSpotRepository, SessionRepository $sessionRepository, EntityManagerInterface $manager, Request $request, $id){
-
+    #[Route('/session/add/{id}', name: 'session_add')]
+    public function addSession(MapSpotRepository $mapSpotRepository, SessionRepository $sessionRepository, EntityManagerInterface $manager, Request $request, int $id) : Response
+    {
+        /** @var User $user */
         $user = $this->getUser();
 
-        $session = new Session; 
+        $session = new Session();
 
         $form = $this->createForm(SessionType::class, $session);
-        $form->handleRequest($request); 
-        
-        $mapSpot= $mapSpotRepository->find($id);
+        $form->handleRequest($request);
 
-        if($form->isSubmitted()&& $form->isValid()){
-    
-            //si le point existe bien
-            if($mapSpot){
+        $mapSpot = $mapSpotRepository->find($id);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            // if the spot exists
+            // si le point existe bien
+            if ($mapSpot) {
                 $date = $form->get('date')->getData();
                 $timeSheet = $form->get('timesheet')->getData();
 
-                //on vérifie si il existe déjà une session sur ce MapSpot, avec la même heure et le même créneau horaire
+                // check if a flight session exist on the map spot, with the same hour and same timesheet
+                // on vérifie si il existe déjà une session de vol sur ce MapSpot, avec la même heure et le même créneau horaire
                 $sameSessionOnDb = $sessionRepository->isSessionAlreadyExist($id, $date, $timeSheet);
 
-                //si il y en a une, on redirige vers la page des sessions avec un flash
-                if($sameSessionOnDb !== null ){
-                    $this->addFlash('danger','Cette session existe déjà : veuillez-vous inscrire sur la session existante !');
+                // if there is a flight session, we redirect on flight sessions page with a toast
+                // si il y en a une, on redirige vers la page des sessions avec un flash
+                if (null !== $sameSessionOnDb) {
+                    $this->addFlash('danger', 'Cette session existe déjà : veuillez-vous inscrire sur la session existante !');
+
                     return $this->redirectToRoute('session_map');
                 }
-                
-                //sinon on ajoute la session
+                // else we add the flight session on database
+                // sinon on ajoute la session à la base de données
                 $session->addUser($user)
-                        ->setMapSpot($mapSpot);
+                        ->setMapSpot($mapSpot)
+                        ->setPast(false);
                 $manager->persist($session);
-                $manager->flush();  
-                
-                $this->addFlash('success', 'Votre session a bien été ajoutée ! Vous y êtes automatiquement inscrit.');
-                return $this->redirectToRoute('session_map');
+                $manager->flush();
 
+                $this->addFlash('success', 'Votre session a bien été ajoutée ! Vous y êtes automatiquement inscrit.');
+
+                return $this->redirectToRoute('session_map');
             } else {
                 $this->addFlash('danger', 'Le spot est introuvable, la session n\'a pas pu être créée.');
+
                 return $this->redirectToRoute('session_map');
-            }   
+            }
         }
-
         return $this->render('session/sessionAdd.html.twig', [
-            'title'=>'Ajout d\'une session',
-            'form'=>$form->createView(),
-            'mapSpot'=>$mapSpot
+            'title' => 'Ajout d\'une session',
+            'form' => $form->createView(),
+            'mapSpot' => $mapSpot,
         ]);
-
     }
 
-    public function isSessionAlreadyExist($session){
-
-    }
-
-    //inscription à une session existante
-    #[IsGranted("ROLE_USER")]
-    #[Route('/session/entry/{id}', name:'session_entry')]
-    public function subUserToASession(UserRepository $userRepository, Session $session, EntityManagerInterface $manager){
-
+    // subscription to a session
+    // inscription à une session existante
+    #[IsGranted('ROLE_USER')]
+    #[Route('/session/entry/{id}', name: 'session_entry')]
+    public function subUserToASession(UserRepository $userRepository, Session $session, EntityManagerInterface $manager) : Response
+    {
+         /** @var User $user */
         $user = $this->getUser();
-        //on récupères les users inscrits à cette session
+
+        // get users list who are registered on a session
+        // récupére la liste des inscrits à une session
         $checkUserOnSession = $userRepository->findIfAlreadyRegisteredOnSession($session);
 
-        if(!in_array($user, $checkUserOnSession)){
-            //si l'user n'est pas dans la liste, on l'ajoute à la session
+       // check if user is already subscribed to the flight session by list subscribed users
+        if (!in_array($user, $checkUserOnSession)) {
+            // if the user is not in the list, we add him on flight session
+            // si l'user n'est pas dans la liste, on l'ajoute à la session
             $session->addUser($user);
             $manager->persist($session);
             $manager->flush();
 
-            $this->addFlash('success','Votre inscription à la session est bien enregistrée !');
+            $this->addFlash('success', 'Votre inscription à la session est bien enregistrée !');
+
             return $this->redirectToRoute('session_map');
-            //sinon on lui envoie un flash pour le prévenir qu'il est déja inscrit
+
+            // sinon on lui envoie un flash pour le prévenir qu'il est déja inscrit
+            // else we send a toast with a flash message to inform him he's already subscribed to it
         } else {
             $this->addFlash('danger', 'Vous êtes déjà inscrit à cette session.');
+
             return $this->redirectToRoute('session_map');
         }
-        
-      
-        
     }
 }

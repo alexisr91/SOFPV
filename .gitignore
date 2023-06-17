@@ -7,6 +7,11 @@
 /public/bundles/
 /var/
 /vendor/
+
+/public/videosImagesTest
+/ffmpeg/ffprobe.exe
+/ffmpeg/ffmpeg.exe
+/ffmpeg/ffplay.exe
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
@@ -18,3 +23,12 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###

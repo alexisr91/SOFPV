@@ -39,8 +39,10 @@ class SessionRepository extends ServiceEntityRepository
         }
     }
 
-    //verifie la corrélation entre une session dejà existante pour éviter les doublons
-    public function isSessionAlreadyExist($id, $date, $timeSheet){
+    // verifie la corrélation entre une session dejà existante pour éviter les doublons
+    //check if a session exists with same id, date and timesheet
+    public function isSessionAlreadyExist($id, $date, $timeSheet)
+    {
         return $this->createQueryBuilder('s')
         ->join('s.mapSpot', 'm')
         ->where('m.id = :id')
@@ -52,22 +54,23 @@ class SessionRepository extends ServiceEntityRepository
         ->getQuery()
         ->getOneOrNullResult()
         ;
-
     }
 
-    //retourne les 5 dernieres sessions ajoutées
-    public function findLastSessions(){
+    // retourne les 5 dernieres sessions ajoutées
+    public function findLastSessions()
+    {
         return $this->createQueryBuilder('s')
         ->where('s.past = false')
         ->orderBy('s.date', 'ASC')
-        ->setMaxResults(5)
+        ->setMaxResults(6)
         ->getQuery()
         ->getResult()
         ;
     }
 
-    //retourne les 4 prochaines sessions de l'user concerné (profil public)
-    public function findSessionsForUser($user){
+    // retourne les 4 prochaines sessions de l'user concerné (profil public)
+    public function findSessionsForUser($user)
+    {
         return $this->createQueryBuilder('s')
         ->join('s.users', 'u')
         ->where('s.past = false')
@@ -77,13 +80,15 @@ class SessionRepository extends ServiceEntityRepository
         ->setMaxResults(4)
         ->getQuery()
         ->getResult();
-
     }
-    //retourne toutes les sessions de l'user concerné (profil public)
-    public function findAllSessionsForUser($user){
+
+    // retourne toutes les sessions de l'user concerné (profil public)
+    public function findAllSessionsForUser($user, $sessionStatus)
+    {
         return $this->createQueryBuilder('s')
         ->join('s.users', 'u')
-        ->where('s.past = false')
+        ->where('s.past = :sessionStatus')
+        ->setParameter('sessionStatus', $sessionStatus)
         ->andWhere('u = :user')
         ->setParameter('user', $user)
         ->orderBy('s.date', 'ASC')
@@ -91,27 +96,36 @@ class SessionRepository extends ServiceEntityRepository
         ->getResult();
     }
 
-
-    //compte le nombre de sessions actives de l'user (dashboard)
-    public function countMySessions($user){
+    // compte le nombre de sessions actives de l'user (dashboard)
+    public function countMySessions($user, $sessionStatus):int
+    {
         return $this->createQueryBuilder('s')
         ->join('s.users', 'u')
         ->select('count(s)')
         ->where('u = :user')
         ->setParameter('user', $user)
-        ->andWhere('s.past = false')
+        ->andWhere('s.past = :sessionStatus')
+        ->setParameter('sessionStatus', $sessionStatus)
         ->getQuery()
         ->getSingleScalarResult();
     }
 
+    //for stats service : count sessions
+    public function getSessionsCount():int
+    {
+        $manager = $this->getEntityManager();
+        return $manager->createQuery(
+            'SELECT COUNT(s) FROM App\Entity\Session s')
+            ->getSingleScalarResult();
+    }
 
-//    public function findOneBySomeField($value): ?Session
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Session
+    //    {
+    //        return $this->createQueryBuilder('s')
+    //            ->andWhere('s.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

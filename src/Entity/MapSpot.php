@@ -87,7 +87,6 @@ class MapSpot
         return $this;
     }
 
-
     public function getLongitude(): ?string
     {
         return $this->longitude;

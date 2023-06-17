@@ -39,40 +39,66 @@ class OrderRepository extends ServiceEntityRepository
         }
     }
 
-    //commandes finalisées et payées par user
-   public function findOrderSucceededByUser($user): array
-   {
-       return $this->createQueryBuilder('o')
-           ->andWhere('o.user = :user')
-           ->setParameter('user', $user)
-           ->andWhere('o.status_stripe = :status')
-           ->setParameter('status', 'succeeded')
-           ->orderBy('o.createdAt', 'DESC')
-           ->setMaxResults(10)
-           ->getQuery()
-           ->getResult()
-       ;
-   }
+    // commandes finalisées et payées par user
+    public function findOrderSucceededByUser($user, $status): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.user = :user')
+            ->setParameter('user', $user)
+            ->andWhere('o.status_stripe = :status')
+            ->setParameter('status', $status)
+            ->orderBy('o.createdAt', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
-   //trouve le status de la dernière commande de l'user (mon profil)
-   public function findLastOrder($user){
+    // trouve le status de la dernière commande de l'user (mon profil)
+    public function findLastOrder($user, $status)
+    {
         return $this->createQueryBuilder('o')
         ->join('o.delivery_status', 's')
         ->where('o.user = :user')
         ->setParameter('user', $user)
-        ->andWhere('s.status != 4')
+        ->andWhere('s.status != :status')
+        ->setParameter('status', $status)
         ->orderBy('o.createdAt', 'DESC')
+        ->setMaxResults(1)
         ->getQuery()
-        ->getOneOrNullResult();
-   }
+        ->getOneOrNullResult()
+        ;
+    }
 
-//    public function findOneBySomeField($value): ?Order
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    // admin: commandes à traiter (les plus anciennes en premier)
+    public function findOrderToMake($status)
+    {
+        return $this->createQueryBuilder('o')
+        ->join('o.delivery_status', 's')
+        ->where('s.status = :status')
+        ->setParameter('status', $status)
+        ->orderBy('o.createdAt', 'ASC')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
+    //for stat service : get orders count
+    public function getOrderCount():int
+    {
+        $manager = $this->getEntityManager();
+        return $manager->createQuery(
+            'SELECT COUNT(o) FROM App\Entity\Order o')
+            ->getSingleScalarResult();
+    }
+
+    //    public function findOneBySomeField($value): ?Order
+    //    {
+    //        return $this->createQueryBuilder('o')
+    //            ->andWhere('o.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

@@ -15,19 +15,25 @@
     <section id="adminMapSpots">
             {{include('partials/_adminNavbarMenu.html.twig')}}
         <div class="container-fluid">
-
-            <div class="sidebar">
                 {{include('partials/_adminSidebarMenu.html.twig')}}
-            </div>
-
-            <div class="row">
-                {# côté gestion #}
-                <div class="col-md-4 pt-4 gestion ps-3">
+            <div class="row main">
+                {# côté carte - map side #}
+                <div class="col-md-6 col-xxl-8" id="map">
+                </div>
+                <button class="btnMap btn param" type="button">Carte <i class="fa-solid fa-chevron-down"></i></button>
+                {# côté gestion - gestion side #}
+                <div class="col-md-6 col-xxl-4 gestion">
                     <h3>Gestion de la carte et des spots</h3>
-                    <button type="button" class="btn param addSpot" data-bs-toggle="collapse" href="#addSpotForm" aria-expended="false" aria-controls="addSpotForm"><i class="fa-solid fa-map-location-dot"></i> Ajouter un spot</button>
+                    <button type="button" class="btn param addSpot" data-bs-toggle="collapse" href="#addSpotForm" aria-expended="false" aria-controls="addSpotForm">
+                        <i class="fa-solid fa-map-location-dot"></i> Ajouter un spot
+                    </button>
+                    <button type="button" class="btn btn-danger reset"><i class="fa-solid fa-rotate-left"></i></button>
                     <div class="collapse my-2" id="addSpotForm">
                         <div class="card card-body">
-                            <div id="info" data-lngLat="0,0"></div>
+                            <p class="text-muted">
+                                <i class="fa-regular fa-lightbulb"></i>
+                                 Cliquez sur la carte et déplacez le point pour ajouter automatiquement la longitude et la latitude.
+                            </p>
                             {{form_start(form)}}
                                 {{form_widget(form)}}
                                 {{form_errors(form)}}
@@ -35,117 +41,50 @@
                             {{form_end(form)}}
                         </div>
                     </div>
+                    {# loop for each spot #}
                     {% for spot in spots %}
                         <div class="spotWrapper row">
-                                <div class="col">
+                                <div class="colInfo">
                                     <button type="button" class="spotMapChange"><p class="spotName"><i class="fa-solid fa-location-dot"></i>  {{spot.name}}</p></button>
                                     <p class="geolocalisation ps-1 text-muted">{{spot.latitude}},{{spot.longitude}}</p>
                                     <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{spot.authorization}} {{ spot.authorization == "Public" ? "" : "*" }}</p>
                                     <p class="text-muted spotAddress"><i class="fa-solid fa-map-pin"></i> {{spot.address|raw}}</p>
                                 </div>
-                                <div class="col-1 me-4">
-                                    <button type="button" class="btn btn-danger btn-lg"><i class="fa-solid fa-trash"></i></button>
+                                <div class="colDelete">
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDelete-{{spot.id}}"><i class="fa-solid fa-trash"></i></button>
                                 </div>
+                               {# confirm spot delete #}
+                               <div class="modal fade" id="confirmDelete-{{spot.id}}" tabindex="-1" aria-labelledby="confimDelete{{spot.id}}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title"><i class="fa-solid fa-triangle-exclamation"></i> Confirmation de suppression </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Voulez-vous vraiment supprimer ce spot ?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="{{url('admin_spot_delete', {'id': spot.id })}}" method="post">
+                                                <input type="hidden" name="token" value="{{csrf_token('delete')}}">
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                            </form>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               {# end modal #}
                         </div>
                     {% endfor %}
                 </div>
-                {# côté carte #}
-                <div class="col-md-8" id="map">
-                </div>
             </div>
-             
         </div>
-
     </section>
+
     {# map #}
     <script src="{{ asset('js/map.js')}}"></script>
-    <script>
-
-    //debut geocode api
-        var geocoder_api = {
-
-            forwardGeocode: async (config) => {
-            const features = [];
-            try {
-                let request =
-                'https://nominatim.openstreetmap.org/search?q=' +
-                config.query +
-                '&format=geojson&polygon_geojson=1&addressdetails=1';
-
-                const response = await fetch(request);
-                const geojson = await response.json();
-
-                for (let feature of geojson.features) {
-
-                    let center = [
-                    feature.bbox[0] +
-                    (feature.bbox[2] - feature.bbox[0]) / 2,
-                    feature.bbox[1] +
-                    (feature.bbox[3] - feature.bbox[1]) / 2
-                    ];
-
-                let point = {
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Point',
-                        coordinates: center
-                    },
-
-                    place_name: feature.properties.display_name,
-                    properties: feature.properties,
-                    text: feature.properties.display_name,
-                    place_type: ['place'],
-                    center: center
-                };
-
-                features.push(point);
-                }
-
-            } catch (e) {
-                console.error(`Failed to forwardGeocode with error: ${e}`);
-            }
-            
-                return { features: features };
-            }
-        
-            };
-            map.addControl(
-                new MaplibreGeocoder(geocoder_api, {
-                maplibregl: maplibregl
-                })
-            );
-
-        // fin geocode
-        //debut création marker pour ajour d'un spot
-
-        let addSpot = document.querySelector('.addSpot');
-        let marker; 
-
-        //si l'admin clique sur ajouter un spot
-        addSpot.addEventListener('click', function(e){
-
-            //on attends le clic sur la carte pour ajouter un marker qui sera déplaçable 
-            map.on('click', function(element){
-            let geolocalisation = element.lngLat;
-            if(marker == undefined){
-                marker = new maplibregl.Marker({color:'#6C757D', scale:1.5, draggable: true}).setLngLat([geolocalisation.lng, geolocalisation.lat]).addTo(map); 
-            } 
-
-                marker.on('dragend', onDragEnd);
-
-                function onDragEnd() {
-                    var lngLat = marker.getLngLat();
-
-                    document.querySelector('#spot_longitude').value = lngLat.lng;
-                    document.querySelector('#spot_latitude').value = lngLat.lat ;
-                            
-                }          
-            }) ;
-
-        
-       
-        });
-
-        
-    </script>
+    <script src="{{ asset('js/adminMapSpot.js')}}"></script>
+     
+    
 {% endblock %}

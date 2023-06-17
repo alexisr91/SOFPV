@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CartRepository::class)]
 class Cart
 {
-    const DEVISE = 'eur';
+    public const DEVISE = 'eur';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -48,7 +48,6 @@ class Cart
     {
         return $this->id;
     }
-   
 
     public function getQuantity(): ?int
     {
@@ -67,9 +66,9 @@ class Cart
         return $this->amount;
     }
 
-    public function setAmount(Product $product, $quantity): self
+    public function setAmount(Product $product, int $quantity): self
     {
-        $this->amount = ($product->getPriceTTC()*$quantity);
+        $this->amount = ($product->getPriceTTC() * $quantity);
 
         return $this;
     }
@@ -97,7 +96,6 @@ class Cart
 
         return $this;
     }
-
 
     public function getOrdering(): ?Order
     {
@@ -134,5 +132,4 @@ class Cart
 
         return $this;
     }
-
 }

@@ -7,7 +7,7 @@
     <section id="adminDashboard">
         {{include('partials/_adminNavbarMenu.html.twig')}}
     
-        <div class="container-fluid ">
+        <div class="container-fluid wrapper">
         {# sidebar #}
         {{include('partials/_adminSidebarMenu.html.twig')}}
 
@@ -16,8 +16,8 @@
                         <h3>Tableau de bord</h3>
                         <div class="row statWrap">
                             {# nombre d'users #} 
-                            <div class="col">
-                                <div class="card text-dark bg-light mb-3 p-2 ">
+                            <div class="col-6 col-sm-3" data-tooltip="Utilisateurs inscrits" data-tooltip-location="top">
+                                <div class="card users mb-3 p-2 ">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-4">
@@ -32,8 +32,8 @@
                                 </div>
                             </div>
                             {# nombre d'articles #}
-                             <div class="col">
-                                <div class="card text-dark bg-light mb-3 p-2">
+                             <div class="col-6 col-sm-3" data-tooltip="Articles publiés" data-tooltip-location="top">
+                                <div class="card articles mb-3 p-2">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-4">
@@ -48,8 +48,8 @@
                                 </div>
                             </div>
                             {# nombre de sessions #}
-                             <div class="col">
-                                <div class="card text-dark bg-light  mb-3 p-2">
+                             <div class="col-6 col-sm-3" data-tooltip="Sessions créées" data-tooltip-location="bottom">
+                                <div class="card sessions mb-3 p-2">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-4">
@@ -64,8 +64,8 @@
                                 </div>
                             </div>
                             {# nombre de commandes en cours #}
-                             <div class="col">
-                                <div class="card text-dark bg-light  mb-3 p-2">
+                             <div class="col-6 col-sm-3" data-tooltip="Commandes passées" data-tooltip-location="bottom">
+                                <div class="card orders mb-3 p-2">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-4">
@@ -80,6 +80,63 @@
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="row shortCuts">
+                            <div class="col">
+                                <div class="card text-dark bg-light  mb-3 p-2">
+                                    <div class="card-body orders">
+                                        <div>
+                                            <h5 class="my-2"><i class="fa-solid fa-cart-flatbed"></i> Commandes à traiter
+                                             {% if ordersToPrepare > 0 %}
+                                                <span class="badge bg-danger">
+                                             {% else %}
+                                                <span class="badge bg-success">
+                                             {% endif %}
+                                            {{ordersToPrepare}}</span></h5>
+                                        </div>
+                                        <div> 
+                                            <a href="{{path('admin_orders')}}" class="stretched-link"> <i class="fa-solid fa-chevron-right"></i></a>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            {# <div class="col">
+                                <div class="card text-dark bg-light mb-3 p-2">
+                                    <div class="card-body">
+                                        <div>
+                                            <h5 class="my-2"><i class="fa-solid fa-envelope"></i> Messages <span class="badge bg-danger">0</span></h5>
+                                        </div>
+                                        <div> 
+                                            <a href="#" class="stretched-link"> <i class="fa-solid fa-chevron-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> #}
+                            <div class="col">
+                                <div class="card text-dark bg-light mb-3 p-2">
+                                    <div class="card-body">
+                                        <div>
+                                            <h5 class="my-2"><i class="fa-solid fa-shop-slash"></i> Produits hors stock 
+                                             {% if outOfStock > 0 %}
+                                                <span class="badge bg-danger">
+                                             {% else %}
+                                                <span class="badge bg-success">
+                                             {% endif %}
+                                            {{outOfStock}}</span></h5>
+                                           
+                                        </div>
+                                        <div> 
+                                            <a href="{{path('admin_shop')}}" class="stretched-link"><i class="fa-solid fa-chevron-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        
+                        </div>
+                        
                         <div class="tablesWrap">
                             <div class="row mt-4">
                                 {# top 5 des utilisateurs qui postent le + d'articles, commentaires et participent aux sessions
@@ -106,8 +163,9 @@
                                         </tbody>
                                     </table>
                                 </div> #}
+                           
                                 {# top 5 articles les + appréciés #}
-                                <div class="col">
+                                <div class="col mostAppreciated">
                                     <h5><i class="fa-solid fa-arrow-trend-up"></i> Articles les + appréciés</h5>
                                     <table class="table table-striped">
                                         <thead class="positive">
@@ -131,7 +189,7 @@
                                     </table>
                                 </div>
                                 {# test #}
-                                <div class="col">
+                                <div class="col worstUsers">
                                     <h5><i class="fa-solid fa-person-circle-exclamation"></i> Utilisateurs les + signalés </h5>
                                     <table class="table table-striped">
                                         <thead class="negative">

@@ -2,11 +2,11 @@
 
 namespace App\Repository;
 
-use App\Entity\User;
 use App\Entity\AlertComment;
 use App\Entity\Comment;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<AlertComment>
@@ -41,7 +41,7 @@ class AlertCommentRepository extends ServiceEntityRepository
         }
     }
 
-    //On vérifie si il y a une corrélation entre le signalement, le commentaire et l'user pour vérifier si le commentaire a déjà été signalé
+    // On vérifie si il y a une corrélation entre le signalement, le commentaire et l'user pour vérifier si le commentaire a déjà été signalé
     public function getAlertByUserAndComment(User $user, Comment $comment)
     {
         return $this->createQueryBuilder('a')
@@ -55,28 +55,28 @@ class AlertCommentRepository extends ServiceEntityRepository
         ->getOneOrNullResult();
     }
 
-//    /**
-//     * @return AlertComment[] Returns an array of AlertComment objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return AlertComment[] Returns an array of AlertComment objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('a.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?AlertComment
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?AlertComment
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

@@ -7,19 +7,18 @@
     <section id="adminBlog">
             {{include('partials/_adminNavbarMenu.html.twig')}}
         <div class="container-fluid">
-            <div class="sidebar">
                 {{include('partials/_adminSidebarMenu.html.twig')}}
-            </div>
             
-            <div class="row wrap pt-4">
-                <div>
-                    <h3>Gestion des articles</h3> 
+            <div class="wrap pt-4">
+                <div id="titleAndForm">
+                    <h4>Gestion des articles</h4> 
                     <form class="searchForm input-group" action="{{path('admin_blog')}}" method="GET"> 
                         <div class="input-group-text p-0">
                             <button class="btn btn-light" type="submit">
                                <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                             <input class="form-control" type="search" placeholder="Rechercher par titre" aria-label="Rechercher" name="q" required>
+                            {# reset the search request #}
                             <a href="{{path('admin_blog')}}" class="btn btn-danger"><i class="fa-solid fa-xmark"></i></a>
                         </div>
                          
@@ -27,25 +26,28 @@
                     
                 </div>
                 
-            <div class="row row-cols-md-1 g-4 px-3">
+            <div class="row articlesWrap g-4 ">
                 {% if pagination.data is empty %}
                 <div class="w-100">
                     <span class="alert alert-warning d-block">Il n'y a pas encore d'articles.</span>
                 </div>
                 {% else %}
                     {# si on a une requete, on affiche que les résultats de la requete #}
+                    {# if we got a request, show only results #}
                      {% if app.request.query.get('q') and requestedArticles is not empty %}
 
+                        {# loop on publications which match with request #}
                         {% for article in requestedArticles %}
                             {{include('/partials/_adminArticle.html.twig')}}
                         {% endfor %}
 
-                  
+                    {# if there's no results #}
                     {% elseif requestedArticles is empty %}
                     <div class="alert alert-warning">Aucun résultat ne correspond à votre recherche.</div>
 
 
                     {# sinon on affiche la pagination avec l'intégralité des articles #}
+                    {# else we show publication with pagination #}
                     {% else %}
 
                         {% for article in pagination.data %} 
@@ -53,15 +55,13 @@
                         {% endfor %}
                         
                     {% endif  %}
+                {# display pagination control #}
                 {{pagination.display()}}
                 {% endif %}
                 </div>
             </div>
         </div>
     </section>
-
-
- 
 {% endblock %}
 
 

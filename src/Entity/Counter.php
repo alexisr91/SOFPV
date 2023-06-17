@@ -26,8 +26,8 @@ class Counter
 
     public function __construct()
     {
-       $this->count = 0;
-       $this->user = new ArrayCollection(); 
+        $this->count = 0;
+        $this->user = new ArrayCollection();
     }
 
     public function getId(): ?int

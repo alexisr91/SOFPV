@@ -1,16 +1,17 @@
     {# NB : Parti pris de mettre les views de manière globale sur l'article plutot que sur la vidéo #}
 
     {% if video.isUploaded %}
-    <video id="player" playsinline controls data-poster="{{asset('uploads/article/video/thumb/' ~ video.thumbnail )}}" data-plyr-config='{ "title":"{{video.title}}"}'>
+    <video id="player" playsinline controls data-poster="{{asset('uploads/article/video/thumb/' ~ video.thumbnail )}}" data-plyr-config='{ "title":"{{video.title|raw}}"}'>
         <source src="{{asset('uploads/article/video/' ~ video.source )}}" type="video/mp4" />
     </video>
     {% else %}
     <div class="ytPlayer">
-        <iframe height="315" width="560" src="{{video.source}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe height="315" width="560" src="{{video.source}}" title="YouTube video player" frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
     {% endif %}
 
- 
+    {# NB : Parti pris de mettre les views de manière globale sur l'article plutot que sur la vidéo #}
 
     {# Vérification si il y a un titre de vidéo (pour éviter des décalages css) #}
     {# {% if video.title %}

@@ -1,10 +1,17 @@
 {# Menu sidebar pour l'admin #} 
- <aside class="adminSidebarMenu">
+ <aside class="adminSidebarMenu collapseMenu">
         <nav class="sticky-top">
             <ul>
                 <li><a href="{{path('admin_dashboard')}}"><i class="fa-solid fa-table-columns"></i> Tableau de bord</a></li>
-                <li><a href="#"><i class="fa-solid fa-cart-flatbed"></i> Commandes à traiter<span class="badge bg-danger mx-2">0</span></a></li>
-                <li><a href="#"><i class="fa-solid fa-map-location-dot"></i> Ajout d'un spot</a></li>          
+                <li><a href="{{path('admin_orders')}}"><i class="fa-solid fa-cart-flatbed"></i> Commandes à traiter</a></li>
+                <li><a href="{{path('admin_comments')}}"><i class="fa-solid fa-comment-slash"></i> Commentaires signalés</a></li>
+                <li><a href="{{path('admin_blog_alerts')}}"><i class="fa-solid fa-triangle-exclamation"></i> Articles signalés</a></li>
+                <li><a href="{{path('admin_spots')}}"><i class="fa-solid fa-map-location-dot"></i> Ajout d'un spot</a></li>
+                <li><a href="{{path('admin_contact')}}"><i class="fa-solid fa-envelope"></i> Messagerie</a>       </li>    
             </ul>
         </nav>
 </aside>
+<div class="btnWrap">
+    <button type="button"class="collapsedMenuBtn admin"><i class="fa-solid fa-caret-right"></i></button>
+</div>
+<script src="{{ asset('js/sidebar.js') }}"></script>

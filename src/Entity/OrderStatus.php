@@ -29,7 +29,6 @@ class OrderStatus
         return $this->statusDescription;
     }
 
-
     public function __construct()
     {
         $this->orders = new ArrayCollection();

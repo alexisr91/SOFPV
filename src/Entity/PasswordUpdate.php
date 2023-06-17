@@ -6,15 +6,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class PasswordUpdate
 {
-
     private $oldPassword;
 
-    #[Assert\Length(min:8, minMessage:"Le mot de passe doit comporter au moins 8 caractères.")]
+    #[Assert\Length(min: 8, minMessage: 'Le mot de passe doit comporter au moins 8 caractères.')]
     private $newPassword;
 
-    #[Assert\EqualTo(propertyPath:"newPassword", message:"Les deux mots de passe ne correspondent pas.")]
+    #[Assert\EqualTo(propertyPath: 'newPassword', message: 'Les deux mots de passe ne correspondent pas.')]
     private $confirmPassword;
-
 
     public function getOldPassword(): ?string
     {

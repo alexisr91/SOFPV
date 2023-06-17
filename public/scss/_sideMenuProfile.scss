@@ -1,14 +1,29 @@
 /* MY PROFILE - _sidebarMenuProfile */
 
 aside.sidebarMenu, aside.adminSidebarMenu{
-    z-index: 0;
-    overflow-x: hidden;
-    background-color: $white;
     display: flex;
     justify-content: flex-start;
-    flex-direction: column;
-    height: 100%;
+    width: 0;
+    min-height: 100%;
+    position: relative;
+    overflow-x: hidden;
+    z-index: 15;
+    background-color: $white;
+    box-shadow:rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px;
+    
+
+    &.close { 
+        width:0;
+        transition: width 1s ;
+    }
+
+    &.open {
+        width:15em;
+        transition: width 1s ;
+    }
+
     nav{
+
         margin-top: 5em;
     }
     a{
@@ -30,10 +45,26 @@ aside.sidebarMenu, aside.adminSidebarMenu{
     }
 }
 
-aside.sidebarMenu {  width: 10vw; }
+.btnWrap {
+        height: 2em;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;  
+    button.collapsedMenuBtn {
+        height: 2em;    
+        width: 2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 0;
+      
+        &.admin {background-color: $white;}
+        &.users {background-color: $white;}
+     
+    }
+}
 
 
-aside.sidebarMenu li:hover a,  aside.sidebarMenu li:hover, aside.adminSidebarMenu li:hover a, aside.adminSidebarMenu li:hover {
+aside.sidebarMenu li:hover a,  aside.sidebarMenu li:hover,  aside.adminSidebarMenu li:hover a,  aside.adminSidebarMenu li:hover{
     background-color: $grey ; 
 }
 

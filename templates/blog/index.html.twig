@@ -6,9 +6,9 @@
  
     <section id="blog">
         {{include('partials/_navbarMenu.html.twig')}}
-        <div class="container-fluid pt-4">
-            <div class="row row-cols-md-1 g-4 px-3">
-                <div class="d-flex mb-4 filter">
+        <div class="container-fluid">
+            <div class="row wrap">
+                <div class="d-flex filter">
                     <select name="cat" id="cat" class="p-2">
                         <option value="all">Toutes les catégories</option>
                         {% for category in categories %}
@@ -16,13 +16,21 @@
                         {% endfor %}
                     </select>
                 </div>
-            {% for article in pagination.data %}
-                {% set articleContent = article.content|u.truncate(300, '...', false) %}
-                {{include('partials/_articleRight.html.twig')}}
-            {% endfor %}
-                {{pagination.display()}}
-            </div>
+                    
+                    {% for article in pagination.data %}
+                     {% if loop.index is divisible by(2) %}
+                            <div class="wrapper-left white">
+                        {% else %}
+                            <div class="wrapper-left grey">
+                        {% endif %}         
+
+                            {% set articleContent = article.content|u.truncate(150, '...', false) %}
+                            {{include('partials/_articleRight.html.twig')}}
+                        </div>
+                    {% endfor %}
+                {{pagination.display()}}    
+                </div> 
         </div>
     </section>
-
+<script src="{{asset('js/category.js')}}"></script>
 {% endblock %}

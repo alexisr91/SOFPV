@@ -1,24 +1,26 @@
- <article class="col">
+<article class="adminArticle" >
     <div class="article">  
-        <div class="article-thumb">
+        <div class="article-thumb ratio ratio-16x9">
             <div class="thumb-wrap">
+            {# if there is a video #}
             {% if article.video %}
+            {# set variable video to easily adapt the file included for video #}
                 {% set video = article.video %}
-                    {% if video.isUploaded %}
-                        <img class="figure-img rounded " src="{{asset('/uploads/article/video/thumb/'~ video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
-                    {% else %}
-                        {% include('/partials/_video.html.twig') %} 
-                    {% endif %}
-            {% elseif article.images is not empty %}
-
+                    {# include check if the video is uploaded or not, with illustration thumbnails #}
+                    {% include('/partials/_video.html.twig') %} 
+            {# if there are images and if article is active #}
+            {% elseif article.images is not empty and article.active %}
+                {# keep first image to illustrate #}
                 {% for image in article.images %}
                     {% if loop.first %}
                         <img class="figure-img rounded " src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
                     {% endif %}
                 {% endfor %}
-
+            {# if there's no images and no video : thumbnail by default #}
             {% elseif not article.video and article.active %}
                 <img class="figure-img rounded " src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+
+            {# if the publication is moderated : thumbnail by default with overlay message #}
             {% elseif not article.active %}
                 <img class="figure-img rounded " src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
                 <div class="overlay-inactive">
@@ -27,6 +29,7 @@
             {% endif %}
 
             {# repaire visuel pour indiquer la présence de signalements sur les vignettes #}
+            {# visual marker to know if there is an alert or more on the thumbnail #}
             {% if article.alerts|length > 0 %}
             <div class="alerts"><span class="badge bg-danger fa-2x"><i class="fa-solid fa-triangle-exclamation"></i></span></div>
             {% endif %}
@@ -34,17 +37,22 @@
         </div>
         <div class="article-body">
             <div>
-                <div class="d-flex mb-2">            
+                <div class="d-flex mb-2 align-items-baseline">            
                     <div class="category-badge badge {{article.category}}">
                         {{article.category|capitalize}}
                     </div>
-                    <h5 class="card-title">{{article.title|capitalize}}</h5>
+                    <h5 class="card-title">{{article.title|raw}}</h5>
                 </div> 
                 {# Pour afficher une partie du contenu et utiliser les 2 filtres de twig pour tronquer + afficher avec les sauts de ligne #}
+                {# displaying a part of the content : filters to truncate and to display with breaklines #}
                 {% set articleContent = article.content|u.truncate(300, '...', false) %}
                 <p class="article-content">{{articleContent|raw}}</p>
             </div>
+            {# stats part of the publication #}
             <div class="article-footer">
+                <div class="date">
+                    {{article.createdAt|date('d-m-Y H:i')}}
+                </div>
                 <div class="stats">
 
                     <div class="alert row">
@@ -82,20 +90,30 @@
                             <i class="fa-regular fa-comment"></i>
                         </div>
                     </div>
-
-                    <div class="date">
-                        {{article.createdAt|date('d-m-Y H:i')}}
-                    </div>
                                         
                 </div>
-                                  
+                              
                 <div class="settings">
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#alertModal-{{article.id}}"><i class="fa-solid fa-triangle-exclamation"></i> Voir les signalements </button>     
-                    <a href="{{path('article_show', {'slug': article.slug })}}" class="btn param btn-sm" target="_blank"><i class="fa-solid fa-eye"></i> Voir l'article</a>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#alertModal-{{article.id}}">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Voir les signalements 
+                    </button>     
+
+                    <a href="{{path('article_show', {'slug': article.slug })}}" class="btn show" target="_blank"><i class="fa-solid fa-eye"></i> Voir l'article</a>
+                        {# if the article is active, we can desactivate it through anti-CRSF form #}
+                        {# si l'article est actif, on peut le désactiver via un formulaire anti CSRF  #}
                         {% if article.active %}
-                            <a href="{{path('admin_blog_desactivate', {'id': article.id })}}" class="btn btn-danger"><i class="fa-sharp fa-solid fa-eye-slash"></i> Désactiver </a>
+                            <form action="{{url('admin_blog_desactivate', {'id':article.id })}}" method="post">
+                                <input type="hidden" name="token" value="{{csrf_token('desactivate')}}">
+                                <button type="submit" class="btn btn-danger"><i class="fa-sharp fa-solid fa-eye-slash"></i> Désactiver</button>
+                            </form>
+
+                        {# same processus to activate #} 
+                        {# même processus pour activer #}   
                         {% else %}
-                            <a href="{{path('admin_blog_activate', {'id': article.id })}}" class="btn btn-success"><i class="fa-sharp fa-solid fa-eye"></i> Activer </a>
+                            <form action="{{url('admin_blog_activate', {'id':article.id })}}" method="post">
+                                <input type="hidden" name="token" value="{{csrf_token('activate')}}">
+                                <button type="submit" class="btn btn-success"><i class="fa-sharp fa-solid fa-eye"></i> Activer</button>
+                            </form>
                         {% endif %}
                 </div>
             </div>
@@ -104,7 +122,7 @@
     </div>
 </article>
 
-{# modal #}
+{# modal to view reasons to report/alert #}
     <div class="modal fade" id="alertModal-{{article.id}}" tabindex="-1" aria-labelledby="alertModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" tabindex="-1">
             <div class="modal-content">
@@ -113,9 +131,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">        
-                    {# si il y a une session sur un des points #}
                     {% if article.alerts is not empty %}
-                        {# pour chaque session #}
                         {% for alert in article.alerts %}
                             <div class="wrapAlert">
                                 <p class="text-muted"><i class="fa-solid fa-calendar-day"></i>{{alert.createdAt|date('d-m-Y H:i')}}</p>
@@ -132,4 +148,4 @@
             </div>
         </div>
     </div>
-{# fin du modal #}
+{# end modal #}

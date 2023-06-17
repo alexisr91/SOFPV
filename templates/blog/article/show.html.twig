@@ -9,26 +9,25 @@
         {{include('partials/_navbarMenu.html.twig')}}
     
         <div class="container-fluid wrapper">
-            <div class="row col-xs-12 col-md-10" id="wrapArticleContent">
-                    <h2>{{article.title}}</h2>  
-                <div class="col-md-8">
+            <div class="row col-xs-12" id="wrapArticleContent">
+                <h2>{{article.title|raw}}</h2>      
+                <div class="col-md-9 col-lg-8">
                     {{include('/partials/_articleMediaShow.html.twig')}}
-                    <div class="d-flex justify-content-between align-items-center px-1">
+                    <div class="d-flex px-1 wrapInfos">
                         <div class="user">
                             <div class="avatar">
                                     <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar de {{user.nickname}}" class="img-fluid"/>
                             </div>
-                                <h2><a href="{{path('account_profile', {'nickname': user.nickname })}}">{{user.nickname}}</a> </h2>
+                                <h3><a href="{{path('account_profile', {'nickname': user.nickname })}}">{{user.nickname}}</a> </h3>
                         </div>
-                        <div>
-                            <span class="mx-2">
+                        <div class="articleInfo">
+                            <span class="viewsAndDate">
                             {{article.views}}{{article.views <= 1 ? ' vue':' vues'}} • {{article.createdAt|date('d-m-Y')}}
                             </span>
-
-                            <button type="button" class="btn btn-light text-danger" data-bs-toggle="modal" data-bs-target="#articleAlert"><i class="fa-solid fa-triangle-exclamation fa-2x"></i></button>
-                          
+                            <div>   
+                                <button type="button" class="btn btn-light text-danger" data-bs-toggle="modal" data-bs-target="#articleAlert"><i class="fa-solid fa-triangle-exclamation fa-2x"></i></button>
                             
-                            {% set isLiked = false %}
+                                {% set isLiked = false %}
                                 {# Si il y a des likes, on verifie dans ces likes si il y en a un qui a une correspondance avec l'user connecté #}
                                     {% if article.likes %}
                                         {% for like in article.likes %}
@@ -46,12 +45,12 @@
                                         <a href="{{path('article_like', {'id':article.id})}}" class="btn" id="like-article" data-id='{{article.id}}'>
                                         <i class="fa-regular fa-thumbs-up fa-2x"></i> <span id="like-count">{{article.likes|length }}</span>
                                     {% endif %}
-                            </a>
-                            
+                                        </a>
+                           </div> 
                         </div>
                     </div>
                     <div class="my-3 article-content-show">
-                        <p class="pe-4">{{article.content|raw}}</p>    
+                        <p class="px-2">{{article.content|raw}}</p>    
                     </div>
                     
                     {# Espace commentaire #}
@@ -76,7 +75,11 @@
                                 {% set isAlreadyAlerted = false %}
                                 {# Si le commentaire appartient à l'auteur, il peut le supprimer #}
                                 {% if comment.author == app.user %}
-                                    <a href="{{path('comment_delete', {'id': comment.id})}}" class="btn btn-danger btn-sm">X Supprimer</a>
+                                    <form action="{{url('comment_delete', {'id':comment.id})}}" method="post">
+                                        <input type="hidden" name="token" value="{{csrf_token('commentDelete' ~ comment.id)}}">
+                                        <button type="submit "class="btn btn-danger btn-sm">X Supprimer</button>
+                                    </form>
+                    
                                 {% else %}
                                 {% if comment.alertComments is not null %}
                                     {% for alertComment in comment.alertComments %}
@@ -86,10 +89,12 @@
                                     {% endfor %}
                                 {% endif %}
                                 {% endif %}
+                                {# check if the comment has already an alert, and if the author is different than the connected user #}
+                                {# check action with token through ajax  #}
                                 {% if isAlreadyAlerted == false and comment.author != app.user %}
-                                    <a href="{{path('comment_alert', {'id': comment.id})}}" class="btn text-danger " data-alert="alert-{{comment.id}}"><i class="fa-solid fa-triangle-exclamation"></i> </a>  
+                                    <a href="{{path('comment_alert', {'id':comment.id})}}" class="btn text-danger " data-alert="alert-{{comment.id}}" data-token="{{ csrf_token('alert' ~ comment.id )}}"><i class="fa-solid fa-triangle-exclamation"></i> </a>  
                                 {% elseif isAlreadyAlerted == true %}
-                                    <a href="{{path('comment_alert', {'id': comment.id})}}" class="btn text-danger alertMessage" data-alert="alert-{{comment.id}}"><i class="fa-solid fa-triangle-exclamation"></i><span class="px-1 text-danger">Commentaire signalé !</span></a>
+                                    <a href="{{path('comment_alert', {'id':comment.id})}}" class="btn text-danger alertMessage" data-alert="alert-{{comment.id}}" data-token="{{ csrf_token('alert' ~ comment.id )}}"><i class="fa-solid fa-triangle-exclamation"></i><span class="px-1 text-danger">Commentaire signalé !</span></a>
                                 {% endif %}
                                 
                             </div>
@@ -97,15 +102,14 @@
                         </div>
                         {% endfor %}
                     </div>
-
-                    
                 </div>
-                <div class="col-md-4">
-                {# articles du même auteur #}
-                    <div class="row g-4" id="wrapSameAuthorArticle">
+                <div class="col-md-3 col-lg-4">
+                {# articles du même auteur #}   
+                    <h5>Articles du même auteur</h5>
+                    <div class="row" id="wrapSameAuthorArticle">
                     {% if articles|length > 0 %}
                         {% for article in articles %}
-                             <div class="col-md-6">
+                             <div class="col-sm-6 col-md-12 col-xl-6">
                                 <div class="card">
                                 <div class="thumb-wrap">
                                     {% if article.video %}
@@ -183,7 +187,8 @@
                     headers: {
                         "X-Requested-With": "XMLHttpRequest",
                         "Content-Type": "application/json"
-                    }
+                    },
+                    body:JSON.stringify({"token": this.dataset.token})
                 }).then(
                     // On récupère la réponse en JSON
                     response => response.json()
@@ -211,10 +216,11 @@
                 response =>response.json()
             ).then(data => {
                 if(data.success){
+                    let countLike = document.querySelector("#like-count").firstChild.data;
                     like.classList.toggle('liked');
-                    
+                    //if like button have been liked by user, +1 to counter and filled icon. Else -1 to counter if user remove his like and show unfilled icon
                     like.innerHTML = like.classList.contains('liked') ? `<i class="fa-solid fa-thumbs-up fa-2x"></i> <span id="like-count">${parseInt(countLike)+1}</span>`
-                                    : `<i class="fa-regular fa-thumbs-up fa-2x"></i> <span id="like-count">${parseInt(countLike)}</span>`
+                                    : `<i class="fa-regular fa-thumbs-up fa-2x"></i> <span id="like-count">${parseInt(countLike)-1}</span>`
                 } else 
                     alert(data.error)
                 

@@ -5,8 +5,7 @@
 {% block body %}
     <section id="sessionAdd">
         {{include('partials/_navbarMenu.html.twig')}}
-        <div class="container-fluid pt-4">
-            <div class="p-3 ms-2 wrapper row">
+            <div class="wrapper row">
                <div class="formSession"> 
                <h3>{{mapSpot.name}}</h3>
                <p class="text-muted"><i class="fa-solid fa-circle-info"></i> {{mapSpot.authorization}}</p>
@@ -23,8 +22,7 @@
                {% endif %}
                </div>
              
-            </div>
-        </div>       
+            </div>    
     
     </section>
     <style> 

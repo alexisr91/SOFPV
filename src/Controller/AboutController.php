@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AboutController extends AbstractController
 {
+    // page "à propos"
+    // "about" of SO FPV
     #[Route('/about', name: 'about')]
     public function index(): Response
     {

@@ -1,68 +1,90 @@
 
 
-        //mise en place de la map avec Jawg et mapLibre
+        //initialize map with MapLibre and Jawg for map style
         const accessToken = 'Q9ah9vp2jsb80zff6WPhCh04KN53KZBOKSw417PFGIttmq5x0w5gYZMgItqFW2Kl';
         const map = new maplibregl.Map({
            container: 'map',
            style: `https://api.jawg.io/styles/jawg-sunny.json?access-token=${accessToken}`,
            zoom: 9,
-           center: [1.4364900000002763, 43.59818000000044],
+           center: [1.4364900000002763, 43.59818000000044], 
         }).addControl(new maplibregl.NavigationControl(), 'top-right');
-    
+        
 
-        //récupération des spots
+        //get spots
         let spotsGeolocalisation = document.querySelectorAll('.geolocalisation');
 
-        //on boucle sur chaque spot de session
+        //loop on each spot
         spotsGeolocalisation.forEach(function(item){
 
-            //on récupère le html qui correspond à "lat , long"
+            //get html wich contains "lat,long"
             let spotGeolocalisation = item.innerHTML;
-            //on sépare les data pour les mettre dans la fonction de placement de marker sur la carte
+           
+            // split datas to put it on positioning function on map
             let recoverLongLat = spotGeolocalisation.split(',');
-            console.log(recoverLongLat);
 
-            //element précédent les données de géolocalisation(<p> placé juste avant qui contient le nom de chaque spot)
-            //on récupère le firstChild qui est le #text, puis le contenu du #text qui est un string
+            //this element is the parent of geolocalisation datas: we get firstchild which correponds to #text, then his content 
             let spotName = item.previousElementSibling.firstChild.textContent;
 
+            //popup on marker
             const markerPopup = new maplibregl.Popup({
                     closeOnClick: true,
                     focusAfterOpen : false,
                     className : 'popupMap'
 
             }).setHTML(`${spotName}`);
-
+        
+            //we set mapspot name on it, then using lat long datas to create marker and add it to the map
             new maplibregl.Marker({color:'#B30B00', scale:1.2}).setLngLat([recoverLongLat[1], recoverLongLat[0]]).setPopup(markerPopup).addTo(map);
             
         })
        
-        //récupération des boutons pour modifier la vue de la carte suivant le spot selectionné
+        //get all spot buttons to make a 'flyTo' animation on click
         let spotsMapChange = document.querySelectorAll('.spotMapChange');
 
-        //pour chaque bouton
+        //for each button
         spotsMapChange.forEach(function(item){
-            //on écoute le click
+            //we listening to the click
             item.addEventListener('click', ()=>{
 
-                //on récupère le container qui regroupe les info du point
+                //get container wich contains spot informations
                 let parent = item.parentNode;
 
-                //on cible les données texte dans le p associé a la geolocalisation
+                //target inner HTML text on <p> which is associated to geolocalisation
                 let spotData = parent.querySelector('p:nth-child(2)').innerHTML;
 
-                //on sépare les données pour les passer à la carte
+                //split data to set it on map
                 let longLatData = spotData.split(',');
 
-                //animation qui "redirige" avec animation + zoom vers le point demandé par l'user
+                //flyTo animation with zoom on spot
                 map.flyTo({
                     center: [longLatData[1],longLatData[0]],
                     essential: true, 
                     zoom:15
-
                 })
-
-
             })
+        });
+
+        //responsive solution for map
+        //select button
+        let btnMap = document.querySelector('.btnMap');
+       
+       //listen click on it
+        btnMap.addEventListener('click', function(e){ 
           
+            let map = document.querySelector('#map');
+            //if map contains "showMap" class, inverted chevron and fold map through CSS
+            if(map.classList.contains('showMap')){
+                btnMap.innerHTML = 'Carte <i class="fa-solid fa-chevron-down"></i>';
+                map.classList.remove('showMap')
+                map.classList.add('hideMap'); 
+            //if it contains classe "hideMap" , unfold map on click  
+            } else if (map.classList.contains('hideMap')){
+                btnMap.innerHTML = 'Carte <i class="fa-solid fa-chevron-up"></i>'; 
+                map.classList.add('showMap'); 
+                map.classList.remove('hideMap'); 
+            //if it contains nothing, unfold it and add class "showMap"
+            } else {
+                btnMap.innerHTML = 'Carte <i class="fa-solid fa-chevron-up"></i>'; 
+                map.classList.add('showMap'); 
+            }
         });

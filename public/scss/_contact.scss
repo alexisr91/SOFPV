@@ -1,0 +1,30 @@
+section#contact {
+    .container-fluid{
+        background-color: $base;
+        background-image: url('../img/setup1-yusuf-miah.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+     
+            &::before {
+                height: 100%;
+                width: 100vw;
+                content:"";
+                background:url('../img/noise2.png') repeat 0 0 rgba(0,0,0,0.5);
+                position: absolute;
+                bottom: 0;
+            }
+
+        .wrap {
+            background-color: $white;
+            padding: 3em;
+            border-radius: 4px;
+            z-index: 1;
+        }
+
+    }
+}
