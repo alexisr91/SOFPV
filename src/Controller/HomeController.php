@@ -61,12 +61,17 @@ class HomeController extends AbstractController
         $mapSpots = $mapSpotRepository->findAll();
 
         //le dernier article à la une coché par l'admin
-        $adminNews = $articleRepo->findAdminNewsArticle();
+        $isAdminNews = true;
+        $adminNews = $articleRepo->findAdminNewsArticle($isAdminNews);
 
         //le compte de lipo, d'esc et de frames brisés pour l'animation de la page d'accueil
-        $counterLipo = $counterRepo->countLipo();
-        $counterESC = $counterRepo->countESC();
-        $counterFrame = $counterRepo->countFrame();
+        $lipo = "Lipo";
+        $esc = "ESC";
+        $frame = "Frame";
+
+        $counterLipo = $counterRepo->count($lipo);
+        $counterESC = $counterRepo->count($esc);
+        $counterFrame = $counterRepo->count($frame);
 
         //les 4 produits les plus récents
         $products = $productRepo->findLastFourProducts();

@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Cocur\Slugify\Slugify;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\PositiveOrZero;
@@ -34,6 +32,7 @@ class Product
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
+    
     #[ORM\Column]
     #[PositiveOrZero]
     private int $stock;

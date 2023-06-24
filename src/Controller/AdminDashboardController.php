@@ -39,6 +39,11 @@ class AdminDashboardController extends AbstractController
         // amount of actives products which no longer in stock (shortcut)
         $outOfStock = count($productRepository->getProductsOutOfStock());
 
+        $status = 0;
+        $ordersToPrepare = count($orderRepository->findOrderToMake($status)) ;
+        $outOfStock = count($productRepository->getProductsOutOfStock());
+
+
         return $this->render('admin/dashboard/index.html.twig', [
             'title' => 'Tableau de bord de l\'administrateur',
             'stats' => $stats,

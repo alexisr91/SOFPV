@@ -461,8 +461,9 @@ class BlogController extends AbstractController
                 $manager->flush();
             }
 
+            $active = true;
             //articles associés à l'auteur
-            $articles = $articleRepo->findOtherArticlesByAuthor($author->getId(), $article);
+            $articles = $articleRepo->findOtherArticlesByAuthor($author->getId(), $article, $active);
 
      //si l'article est desactivé et que l'user n'est pas admin       
     } elseif ($article->isActive() == false){
