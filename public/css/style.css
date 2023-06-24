@@ -1472,7 +1472,8 @@ section#myOrders .container-fluid {
     section#myOrders .container-fluid .wrapper .order {
       border-radius: 5px;
       padding: 2em 2em 1em 2em;
-      background-color: #fff; }
+      background-color: #fff;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
       section#myOrders .container-fluid .wrapper .order .orderRef {
         font-weight: bold;
         font-size: 1.2em; }
@@ -2829,8 +2830,28 @@ section#adminDashboard {
       width: 85%;
       border-radius: 3px;
       box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
+    section#adminDashboard .container-fluid .shortCuts {
+      margin: 3em auto; }
+      section#adminDashboard .container-fluid .shortCuts .badge {
+        margin-left: 0.5em; }
+      section#adminDashboard .container-fluid .shortCuts .card-body {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
     section#adminDashboard .container-fluid .statWrap {
       margin-top: 3em; }
+      section#adminDashboard .container-fluid .statWrap .users {
+        background-color: rgba(37, 37, 37, 0.7);
+        color: #fafafa; }
+      section#adminDashboard .container-fluid .statWrap .articles {
+        background-color: rgba(179, 11, 0, 0.75);
+        color: #fafafa; }
+      section#adminDashboard .container-fluid .statWrap .sessions {
+        background-color: #DADADA;
+        color: #252525; }
+      section#adminDashboard .container-fluid .statWrap .orders {
+        background-color: #fafafa;
+        color: #252525; }
     section#adminDashboard .container-fluid .card {
       min-height: 5em; }
       section#adminDashboard .container-fluid .card .col-4 {
@@ -2841,46 +2862,51 @@ section#adminDashboard {
         text-align: center; }
 
 /*PAGE GESTION USERS */
-section#adminUsers .container-fluid {
+section#adminUsers .titleTable {
+  padding-left: 4em;
+  padding-right: 2em; }
+
+section#adminUsers .container-fluid, section#adminShop .container-fluid {
   display: flex;
   min-height: 90vh;
   background-color: #fafafa; }
-  section#adminUsers .container-fluid .wrap {
+  section#adminUsers .container-fluid .wrap, section#adminShop .container-fluid .wrap {
     display: flex;
     flex-direction: column;
     margin: 1em; }
-  section#adminUsers .container-fluid .titleTable {
-    padding-left: 4em;
-    padding-right: 2em; }
-  section#adminUsers .container-fluid .nav-tabs {
+  section#adminUsers .container-fluid .nav-tabs, section#adminShop .container-fluid .nav-tabs {
     border-bottom: 1px solid transparent !important; }
-  section#adminUsers .container-fluid .row-grey, section#adminUsers .container-fluid .row-white {
+  section#adminUsers .container-fluid .row-grey, section#adminUsers .container-fluid .row-white, section#adminShop .container-fluid .row-grey, section#adminShop .container-fluid .row-white {
     display: flex;
     align-items: center;
     padding: 1em 2em;
     border: 1px solid transparent;
     border-radius: 4px;
     cursor: pointer; }
-    section#adminUsers .container-fluid .row-grey .avatar, section#adminUsers .container-fluid .row-white .avatar {
+    section#adminUsers .container-fluid .row-grey .avatar, section#adminUsers .container-fluid .row-grey .imgProduct, section#adminUsers .container-fluid .row-white .avatar, section#adminUsers .container-fluid .row-white .imgProduct, section#adminShop .container-fluid .row-grey .avatar, section#adminShop .container-fluid .row-grey .imgProduct, section#adminShop .container-fluid .row-white .avatar, section#adminShop .container-fluid .row-white .imgProduct {
       width: 40px;
       margin-right: 0.5em; }
-  section#adminUsers .container-fluid .row-grey {
+  section#adminUsers .container-fluid .row-grey, section#adminShop .container-fluid .row-grey {
     background-color: #DADADA; }
-    section#adminUsers .container-fluid .row-grey:hover, section#adminUsers .container-fluid .row-grey:focus {
+    section#adminUsers .container-fluid .row-grey:hover, section#adminUsers .container-fluid .row-grey:focus, section#adminShop .container-fluid .row-grey:hover, section#adminShop .container-fluid .row-grey:focus {
       box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
       transform: translateX(-0.5em); }
-  section#adminUsers .container-fluid .row-white {
+  section#adminUsers .container-fluid .row-white, section#adminShop .container-fluid .row-white {
     background-color: #fafafa; }
-    section#adminUsers .container-fluid .row-white:hover, section#adminUsers .container-fluid .row-white:focus {
+    section#adminUsers .container-fluid .row-white:hover, section#adminUsers .container-fluid .row-white:focus, section#adminShop .container-fluid .row-white:hover, section#adminShop .container-fluid .row-white:focus {
       box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
       transform: translateX(-0.5em); }
-  section#adminUsers .container-fluid .usersList {
+  section#adminUsers .container-fluid .usersList, section#adminUsers .container-fluid .productsList, section#adminShop .container-fluid .usersList, section#adminShop .container-fluid .productsList {
     width: 50%;
     justify-content: space-between;
     display: flex;
     flex-direction: column;
     min-height: 75vh; }
-  section#adminUsers .container-fluid .viewUser {
+  section#adminUsers .container-fluid .viewUser .actions, section#adminShop .container-fluid .viewUser .actions {
+    position: absolute;
+    right: 0;
+    top: 1em; }
+  section#adminUsers .container-fluid .viewUser, section#adminUsers .container-fluid .viewProduct, section#adminShop .container-fluid .viewUser, section#adminShop .container-fluid .viewProduct {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -2889,24 +2915,21 @@ section#adminUsers .container-fluid {
     background: #fff;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-    section#adminUsers .container-fluid .viewUser .main h3 {
+    section#adminUsers .container-fluid .viewUser .main h3, section#adminUsers .container-fluid .viewProduct .main h3, section#adminShop .container-fluid .viewUser .main h3, section#adminShop .container-fluid .viewProduct .main h3 {
       letter-spacing: 1px; }
-    section#adminUsers .container-fluid .viewUser .main .avatar {
-      width: 125px;
+    section#adminUsers .container-fluid .viewUser .main .avatar, section#adminUsers .container-fluid .viewProduct .main .avatar, section#adminShop .container-fluid .viewUser .main .avatar, section#adminShop .container-fluid .viewProduct .main .avatar {
+      width: 125px; }
+    section#adminUsers .container-fluid .viewUser .main .avatar, section#adminUsers .container-fluid .viewUser .main .imgProduct, section#adminUsers .container-fluid .viewProduct .main .avatar, section#adminUsers .container-fluid .viewProduct .main .imgProduct, section#adminShop .container-fluid .viewUser .main .avatar, section#adminShop .container-fluid .viewUser .main .imgProduct, section#adminShop .container-fluid .viewProduct .main .avatar, section#adminShop .container-fluid .viewProduct .main .imgProduct {
       box-shadow: rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px;
       margin-bottom: 2em; }
-    section#adminUsers .container-fluid .viewUser .infos {
+    section#adminUsers .container-fluid .viewUser .infos, section#adminUsers .container-fluid .viewProduct .infos, section#adminShop .container-fluid .viewUser .infos, section#adminShop .container-fluid .viewProduct .infos {
       display: flex; }
-      section#adminUsers .container-fluid .viewUser .infos .dataUser {
+      section#adminUsers .container-fluid .viewUser .infos .dataUser, section#adminUsers .container-fluid .viewProduct .infos .dataUser, section#adminShop .container-fluid .viewUser .infos .dataUser, section#adminShop .container-fluid .viewProduct .infos .dataUser {
         margin-left: 3em;
         position: relative;
         width: 70%; }
-      section#adminUsers .container-fluid .viewUser .infos .text-muted {
+      section#adminUsers .container-fluid .viewUser .infos .text-muted, section#adminUsers .container-fluid .viewProduct .infos .text-muted, section#adminShop .container-fluid .viewUser .infos .text-muted, section#adminShop .container-fluid .viewProduct .infos .text-muted {
         font-size: 1em; }
-    section#adminUsers .container-fluid .viewUser .actions {
-      position: absolute;
-      right: 0;
-      top: 1em; }
 
 section#adminBlog .container-fluid {
   background-color: #fafafa; }
@@ -3031,6 +3054,41 @@ section#adminMapSpots .container-fluid {
     border: none; }
 section#adminMapSpots .maplibregl-map {
   padding: 1em; }
+
+section#adminShop table {
+  width: 100%; }
+  section#adminShop table th, section#adminShop table td {
+    padding: 1em; }
+  section#adminShop table td a {
+    margin: auto 0.5em; }
+  section#adminShop table th {
+    color: rgba(37, 37, 37, 0.6);
+    font-weight: 400; }
+  section#adminShop table .badge {
+    margin-bottom: 0; }
+section#adminShop .imgProduct {
+  width: 170px; }
+section#adminShop .productsList ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  section#adminShop .productsList ul .price {
+    margin-left: 5em; }
+section#adminShop .titleTable {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em; }
+
+section#adminEditProduct .container-fluid {
+  display: flex;
+  background-color: #fafafa;
+  min-height: 90vh; }
+  section#adminEditProduct .container-fluid .row {
+    margin-top: 3em;
+    height: 100%;
+    width: 80%; }
+  section#adminEditProduct .container-fluid .thumbnail-edit {
+    width: 20em; }
 
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu, aside.adminSidebarMenu {
