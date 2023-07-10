@@ -59,9 +59,23 @@ section#showProduct {
             }
         }
 
+        .imgProduct {
+            width:25em;
+            height:25em;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                
+            }
+        }
+
         .stock {
             padding: 1em 0;
         }
+
         h2 {margin-bottom: 1.5em;}
         h4.price {
             font-family: 'Play', sans-serif;

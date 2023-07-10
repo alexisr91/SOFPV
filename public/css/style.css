@@ -2636,9 +2636,13 @@ section#search .container-fluid {
 
 section#session .container-fluid {
   background-color: #fafafa;
-  min-height: 90vh;
+  height: 90vh;
   max-width: 100vw; }
   section#session .container-fluid #map {
+    height: 90vh; }
+  section#session .container-fluid .colSessions {
+    position: relative;
+    overflow-y: auto;
     height: 90vh; }
   section#session .container-fluid .ad-restriction {
     position: absolute;
@@ -2886,6 +2890,10 @@ section#adminUsers .container-fluid, section#adminShop .container-fluid {
     section#adminUsers .container-fluid .row-grey .avatar, section#adminUsers .container-fluid .row-grey .imgProduct, section#adminUsers .container-fluid .row-white .avatar, section#adminUsers .container-fluid .row-white .imgProduct, section#adminShop .container-fluid .row-grey .avatar, section#adminShop .container-fluid .row-grey .imgProduct, section#adminShop .container-fluid .row-white .avatar, section#adminShop .container-fluid .row-white .imgProduct {
       width: 40px;
       margin-right: 0.5em; }
+      section#adminUsers .container-fluid .row-grey .avatar img, section#adminUsers .container-fluid .row-grey .imgProduct img, section#adminUsers .container-fluid .row-white .avatar img, section#adminUsers .container-fluid .row-white .imgProduct img, section#adminShop .container-fluid .row-grey .avatar img, section#adminShop .container-fluid .row-grey .imgProduct img, section#adminShop .container-fluid .row-white .avatar img, section#adminShop .container-fluid .row-white .imgProduct img {
+        object-fit: cover;
+        width: auto;
+        height: 100%; }
   section#adminUsers .container-fluid .row-grey, section#adminShop .container-fluid .row-grey {
     background-color: #DADADA; }
     section#adminUsers .container-fluid .row-grey:hover, section#adminUsers .container-fluid .row-grey:focus, section#adminShop .container-fluid .row-grey:hover, section#adminShop .container-fluid .row-grey:focus {
@@ -2931,17 +2939,17 @@ section#adminUsers .container-fluid, section#adminShop .container-fluid {
       section#adminUsers .container-fluid .viewUser .infos .text-muted, section#adminUsers .container-fluid .viewProduct .infos .text-muted, section#adminShop .container-fluid .viewUser .infos .text-muted, section#adminShop .container-fluid .viewProduct .infos .text-muted {
         font-size: 1em; }
 
-section#adminBlog .container-fluid {
+section#adminBlog .container-fluid, section#adminBlogAlerts .container-fluid {
   background-color: #fafafa; }
-  section#adminBlog .container-fluid .wrap {
+  section#adminBlog .container-fluid .wrap, section#adminBlogAlerts .container-fluid .wrap {
     width: 75%;
     margin: 0 auto;
     display: block; }
-  section#adminBlog .container-fluid .alerts {
+  section#adminBlog .container-fluid .alerts, section#adminBlogAlerts .container-fluid .alerts {
     position: absolute;
     left: 1em;
     top: 1em; }
-  section#adminBlog .container-fluid .overlay-inactive {
+  section#adminBlog .container-fluid .overlay-inactive, section#adminBlogAlerts .container-fluid .overlay-inactive {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -2952,46 +2960,46 @@ section#adminBlog .container-fluid {
     background-color: rgba(255, 255, 255, 0.8);
     font-size: 2em;
     padding: 2em; }
-  section#adminBlog .container-fluid .article {
+  section#adminBlog .container-fluid .article, section#adminBlogAlerts .container-fluid .article {
     display: flex;
     position: relative; }
-    section#adminBlog .container-fluid .article .article-body {
+    section#adminBlog .container-fluid .article .article-body, section#adminBlogAlerts .container-fluid .article .article-body {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding: 0 1em; }
-    section#adminBlog .container-fluid .article .article-content {
+    section#adminBlog .container-fluid .article .article-content, section#adminBlogAlerts .container-fluid .article .article-content {
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 7;
       line-clamp: 7;
       -webkit-box-orient: vertical; }
-  section#adminBlog .container-fluid .wrapAlert {
+  section#adminBlog .container-fluid .wrapAlert, section#adminBlogAlerts .container-fluid .wrapAlert {
     margin: 1em auto;
     padding: 1em;
     width: 100%;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-    section#adminBlog .container-fluid .wrapAlert i {
+    section#adminBlog .container-fluid .wrapAlert i, section#adminBlogAlerts .container-fluid .wrapAlert i {
       margin-right: 0.5em; }
-    section#adminBlog .container-fluid .wrapAlert .text-muted {
+    section#adminBlog .container-fluid .wrapAlert .text-muted, section#adminBlogAlerts .container-fluid .wrapAlert .text-muted {
       margin: 0.5em;
       line-height: normal;
       font-size: 1em; }
-  section#adminBlog .container-fluid .date {
+  section#adminBlog .container-fluid .date, section#adminBlogAlerts .container-fluid .date {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-left: 1em; }
-  section#adminBlog .container-fluid .stats .row {
+  section#adminBlog .container-fluid .stats .row, section#adminBlogAlerts .container-fluid .stats .row {
     margin: 0 0.5em; }
-  section#adminBlog .container-fluid .stats .alert {
+  section#adminBlog .container-fluid .stats .alert, section#adminBlogAlerts .container-fluid .stats .alert {
     margin-bottom: 0;
     margin-left: 1em;
     border: none;
     border-radius: 0; }
-    section#adminBlog .container-fluid .stats .alert .icon {
+    section#adminBlog .container-fluid .stats .alert .icon, section#adminBlogAlerts .container-fluid .stats .alert .icon {
       color: #B30B00; }
 
 section#adminComments .container-fluid {
@@ -3055,6 +3063,18 @@ section#adminMapSpots .container-fluid {
 section#adminMapSpots .maplibregl-map {
   padding: 1em; }
 
+section#adminShop .name, section#adminShop .price, section#adminShop .stock, section#adminShop .status {
+  display: flex;
+  align-items: center; }
+section#adminShop .name {
+  flex-basis: 50%;
+  justify-content: flex-start; }
+section#adminShop .price, section#adminShop .stock {
+  flex-basis: 16%;
+  justify-content: center; }
+section#adminShop .status {
+  flex-basis: 16%;
+  justify-content: end; }
 section#adminShop table {
   width: 100%; }
   section#adminShop table th, section#adminShop table td {
@@ -3066,18 +3086,25 @@ section#adminShop table {
     font-weight: 400; }
   section#adminShop table .badge {
     margin-bottom: 0; }
-section#adminShop .imgProduct {
-  width: 170px; }
+section#adminShop .imgProductView {
+  width: 10em;
+  height: 10em;
+  box-shadow: rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px;
+  margin-bottom: 2em; }
+  section#adminShop .imgProductView img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%; }
 section#adminShop .productsList ul {
   display: flex;
   flex-direction: column;
   justify-content: space-between; }
-  section#adminShop .productsList ul .price {
-    margin-left: 5em; }
 section#adminShop .titleTable {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5em; }
+  display: flex; }
+  section#adminShop .titleTable .name {
+    padding-left: 1em; }
+  section#adminShop .titleTable .status {
+    padding-right: 1em; }
 
 section#adminEditProduct .container-fluid {
   display: flex;
@@ -3087,8 +3114,17 @@ section#adminEditProduct .container-fluid {
     margin-top: 3em;
     height: 100%;
     width: 80%; }
-  section#adminEditProduct .container-fluid .thumbnail-edit {
-    width: 20em; }
+  section#adminEditProduct .container-fluid #imgWrap {
+    width: 20em;
+    height: 20em; }
+    section#adminEditProduct .container-fluid #imgWrap img {
+      object-fit: cover;
+      width: 100%; }
+
+section#adminBlogAlerts .container-fluid {
+  display: flex;
+  background-color: #fafafa;
+  min-height: 90vh; }
 
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu, aside.adminSidebarMenu {

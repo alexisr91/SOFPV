@@ -76,7 +76,7 @@ class HomeController extends AbstractController
         //les 4 produits les plus récents
         $products = $productRepo->findLastFourProducts();
         
-        //les 5 dernières sessions ajoutées
+        //les 6 dernières sessions ajoutées
         $sessions = $sessionRepository->findLastSessions();
 
         //les spots(points) ajoutés par l'admin sur lesquels des sessions peuvent etre ajoutées
