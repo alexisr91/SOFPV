@@ -60,6 +60,32 @@ class ShopController extends AbstractController
                 // if there's no temporary data, we get product stock on database
                 $stock = $product->getStock();
             }
+            
+            if($form->isSubmitted() && $form->isValid()){
+                //on récupère la quantité souhaitée par l'utilisateur
+                $quantity = (int)$form->get('quantity')->getData();  
+                
+                $productId = $product->getId();
+
+                //récupération du panier actuel
+                //On récupère les données de session du panier, la valeur par défaut sera un array vide
+                $cart = $session->get("cart", []); 
+
+                if(empty($cart[$productId])){
+                    //si le panier est vide on met la quantité récupérée par le form
+                    $cart[$productId] = $quantity;  
+                } else { //si il est déjà présent on l'incrémente à la quantité dejà présente   
+                    $cart[$productId]+= $quantity ;
+            
+                }   
+
+                //si il n'y a pas encore de produits ajoutés au panier, on créé la data "produit" => "stock restant" en se basant sur le stock réel du produit en bdd
+                if(empty($tempStock[$productId])){      
+                    $tempStock[$productId] = $product->getStock() - $quantity ;
+                } else { 
+                    //sinon on déduit la quantité ajoutée 
+                    $tempStock[$productId] -=  $quantity;
+                }
 
             if ($form->isSubmitted() && $form->isValid()) {
                 // on récupère la quantité souhaitée par l'utilisateur - get quantity wanted by user

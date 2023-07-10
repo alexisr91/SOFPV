@@ -497,6 +497,7 @@ section#sessions {
             min-height:60vh;
             margin-right:1em;
         }
+        .colSessions {height: 100%;overflow-y: scroll;}
         .text-muted {line-height: normal;}
         .infoSpot {
             display: flex;
