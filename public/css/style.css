@@ -2697,6 +2697,29 @@ section#sessionAdd {
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
 
+section#contact .container-fluid {
+  background-color: #252525;
+  background-image: url("../img/setup1-yusuf-miah.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  section#contact .container-fluid::before {
+    height: 100vh;
+    width: 100vw;
+    content: "";
+    background: url("../img/noise2.png") repeat 0 0 rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 0; }
+  section#contact .container-fluid .row {
+    width: 33%;
+    background-color: #fafafa;
+    padding: 3em;
+    border-radius: 4px;
+    z-index: 1; }
+
 section#about {
   width: 100vw;
   height: 100vh;
@@ -3133,7 +3156,7 @@ section#adminOrders .container-fluid, section#adminAllOrders .container-fluid {
   section#adminOrders .container-fluid .wrap, section#adminAllOrders .container-fluid .wrap {
     width: 80%;
     padding: 2em; }
-  section#adminOrders .container-fluid .modal-bodey, section#adminAllOrders .container-fluid .modal-bodey {
+  section#adminOrders .container-fluid .modal-body, section#adminAllOrders .container-fluid .modal-body {
     padding: 2em; }
   section#adminOrders .container-fluid .infoOrder, section#adminAllOrders .container-fluid .infoOrder {
     padding: 2em;
@@ -3168,6 +3191,27 @@ section#adminOrders .container-fluid, section#adminAllOrders .container-fluid {
         padding: 1em;
         border-radius: 4px; }
     section#adminOrders .container-fluid table tbody td, section#adminAllOrders .container-fluid table tbody td {
+      padding: 1em;
+      border-radius: 4px;
+      border-bottom: 1px solid #DADADA; }
+
+section#adminContact .container-fluid {
+  display: flex;
+  background-color: #fafafa;
+  min-height: 90vh; }
+  section#adminContact .container-fluid .wrap {
+    width: 95%;
+    padding: 2em; }
+  section#adminContact .container-fluid .modal-body {
+    padding: 2em; }
+  section#adminContact .container-fluid table {
+    width: 100%; }
+    section#adminContact .container-fluid table thead {
+      background-color: #DADADA; }
+      section#adminContact .container-fluid table thead th {
+        padding: 1em;
+        border-radius: 4px; }
+    section#adminContact .container-fluid table tbody td {
       padding: 1em;
       border-radius: 4px;
       border-bottom: 1px solid #DADADA; }

@@ -647,7 +647,8 @@ section#addArticle, section#editArticle {
 }
 // SECTION BLOG - INDEX
 section#blog {
-    background-image: url('/img/bando2.jpg');
+    background-image: url('/img/RaceTrack.jpeg');
+    background-size: cover;
 
     .row-cols-md-1 {min-height: 83vh;
         .filter {max-height: 2.5em;}
@@ -938,7 +939,9 @@ section#search {
 }
 
 
+
 @import "sessions";
+@import "contact";
 @import "about";
 
 @import "admin";
