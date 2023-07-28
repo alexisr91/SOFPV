@@ -430,6 +430,9 @@ section#navbarMenu, section#adminNavbarMenu {
   section#navbarMenu a.position-relative span, section#adminNavbarMenu a.position-relative span {
     background-color: #DADADA;
     color: #252525; }
+  section#navbarMenu .connect, section#navbarMenu .menu {
+    justify-content: center;
+    align-items: center; }
 
 section#navbarMenu {
   background-color: #252525; }
@@ -719,6 +722,16 @@ section#blogHome {
     top: 0; }
   section#blogHome hr {
     margin: 0; }
+  section#blogHome .wrapper-left, section#blogHome .wrapper-right {
+    position: relative; }
+  section#blogHome .wrapper-left .category-badge {
+    position: absolute;
+    left: 2%;
+    top: 8%; }
+  section#blogHome .wrapper-right .category-badge {
+    position: absolute;
+    right: 2%;
+    top: 8%; }
   section#blogHome article {
     display: flex;
     margin: 3em auto;
@@ -758,7 +771,6 @@ section#blogHome {
 /* ACCUEIL : SECTION #newOnShop */
 section#newOnShop {
   width: 100vw;
-  height: 50em;
   background-image: url("/img/NazgulFrame.jpg");
   background-color: #252525;
   background-position: center;
