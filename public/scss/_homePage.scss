@@ -264,8 +264,6 @@ section#adminNews {
             margin-top: 1em;
             align-self: center;
         }
-     
-        .image {width:50%;}
       
         .row{
             padding: 2em;      
@@ -296,7 +294,6 @@ section#blogHome
         top:0;}
     
     hr { margin:0 }
-
 
 
     article{
@@ -358,7 +355,6 @@ section#blogHome
 
 section#newOnShop {
     width: 100vw;
-    height: 50em;
     background-image: url('/img/NazgulFrame.jpg');
     background-color: $base;
     background-position:center;
@@ -499,14 +495,15 @@ section#sessions {
         }
         .colSessions {height: 100%;overflow-y: scroll;}
         .text-muted {line-height: normal;}
-        .infoSpot {
+        .infoSpot, .mainInfos {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-end;
         }
-        .spotMapChange p.spotName {
-            padding: 0 0 1em 0;
-        }
+
+        .spotName {line-height: normal;}
+        .spotMapChange {display: flex; padding-left: 0;}
+    
     }
     
 }
