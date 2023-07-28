@@ -110,6 +110,17 @@ section#register {
             height:45em;}
     }
     
+    .registerForm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 50%;
+    }
+    .illustration {
+        width:50%;
+        &img { object-fit: cover;
+            height:45em;}
+    }
 }
 
 }
