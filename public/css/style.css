@@ -2829,9 +2829,12 @@ section#adminLogin {
     height: 100vh;
     display: flex; }
     section#adminLogin .container-fluid .formLogin {
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
       margin: auto;
-      width: 20%;
-      padding: 2em;
+      padding: 3em 4em;
       background-color: #fff;
       border-radius: 4px;
       box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
@@ -2856,7 +2859,7 @@ section#adminDashboard {
       section#adminDashboard .container-fluid table th, section#adminDashboard .container-fluid table td {
         padding: 1em; }
     section#adminDashboard .container-fluid .wrap {
-      margin: 2em;
+      margin: 2em auto;
       padding: 2em;
       background-color: #fff;
       width: 85%;
@@ -5883,5 +5886,25 @@ section#adminEditProduct .buttons {
   section#responseContact .wrap {
     width: 75vw;
     margin: 0 auto; } }
+
+/**** PARTIE ADMIN ****/
+section#adminLogin {
+  /* xs to md*/
+  /* xl */
+  /*over xl */ }
+  @media screen and (max-width: 576px) {
+    section#adminLogin .formLogin {
+      width: 100vw;
+      height: 100%; }
+      section#adminLogin .formLogin h3 {
+        font-size: 1.2rem; } }
+  @media screen and (min-width: 1600px) {
+    section#adminLogin .formLogin {
+      width: 30vw; }
+    section#adminLogin form {
+      width: 70%; } }
+  @media screen and (min-width: 1800px) {
+    section#adminLogin .formLogin {
+      height: 35vh; } }
 
 /*# sourceMappingURL=style.css.map */
