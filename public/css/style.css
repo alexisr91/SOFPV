@@ -32,7 +32,7 @@ a {
   color: #252525; }
 
 a:hover {
-  color: #B40B00; }
+  color: #B30B00; }
 
 h1, h2, h3, h4 {
   font-family: 'airstrike', sans-serif; }
@@ -71,7 +71,7 @@ input {
     background-color: transparent; }
 
 .form-error {
-  color: #B40B00; }
+  color: #B30B00; }
   .form-error ul {
     list-style-type: none; }
 
@@ -102,7 +102,7 @@ input {
   z-index: 3;
   padding: 0.5em 1em; }
   .category-badge.Session {
-    background-color: #B40B00; }
+    background-color: #B30B00; }
   .category-badge.Crash {
     background-color: #FF5A08; }
   .category-badge.Question {
@@ -130,16 +130,6 @@ input {
 
 #articleTabs {
   padding: 0; }
-
-.modal-dialog embed {
-  width: 100%;
-  height: 85vh; }
-
-#cgu .modal-header, #cgv .modal-header {
-  color: #252525; }
-
-.modal-backdrop {
-  z-index: none !important; }
 
 .ytPlayer::after {
   content: "";
@@ -188,7 +178,7 @@ input {
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3) inset; }
 
 .loader:after {
-  box-shadow: 0 2px 0 #B40B00 inset;
+  box-shadow: 0 2px 0 #B30B00 inset;
   animation: rotate 2s linear infinite; }
 
 #myTab .nav-link {
@@ -422,7 +412,7 @@ section#navbarMenu, section#adminNavbarMenu {
   width: 100vw;
   z-index: 1;
   margin: 0 auto;
-  z-index: 20;
+  z-index: 3;
   position: relative; }
   section#navbarMenu a.navbar-brand, section#adminNavbarMenu a.navbar-brand {
     font-family: 'airstrike', sans-serif;
@@ -436,16 +426,6 @@ section#navbarMenu {
   section#navbarMenu .connect, section#navbarMenu .menu {
     justify-content: center;
     align-items: center; }
-
-section#navbarMenu {
-  background-color: #252525; }
-  section#navbarMenu .connect, section#navbarMenu .menu {
-    justify-content: center;
-    align-items: center; }
-
-section#navbarMenu.sticky-top {
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-  background-color: #252525 !important; }
 
 section#navbarMenu.sticky-top {
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -530,7 +510,7 @@ section#home {
   align-items: center;
   width: 100%; }
   #homeLogo img {
-    height: 22em;
+    height: 25em;
     filter: drop-shadow(0 0 0.5rem #940a02);
     animation: 2s linear 3s infinite alternate neon; }
   #homeLogo body {
@@ -566,91 +546,47 @@ section#home {
       animation: glitch-effect 2s infinite linear alternate-reverse; }
 @keyframes glitch-effect {
   0% {
-<<<<<<< HEAD
-    clip: rect(27px, 9999px, 68px, 0); }
+    clip: rect(51px, 9999px, 13px, 0); }
   5% {
-    clip: rect(63px, 9999px, 61px, 0); }
+    clip: rect(63px, 9999px, 49px, 0); }
   10% {
-    clip: rect(64px, 9999px, 62px, 0); }
+    clip: rect(69px, 9999px, 83px, 0); }
   15% {
-    clip: rect(97px, 9999px, 18px, 0); }
+    clip: rect(75px, 9999px, 53px, 0); }
   20% {
-    clip: rect(3px, 9999px, 76px, 0); }
+    clip: rect(23px, 9999px, 59px, 0); }
   25% {
-    clip: rect(45px, 9999px, 88px, 0); }
+    clip: rect(61px, 9999px, 80px, 0); }
   30% {
-    clip: rect(42px, 9999px, 1px, 0); }
+    clip: rect(11px, 9999px, 42px, 0); }
   35% {
-    clip: rect(87px, 9999px, 56px, 0); }
+    clip: rect(83px, 9999px, 8px, 0); }
   40% {
-    clip: rect(42px, 9999px, 44px, 0); }
+    clip: rect(43px, 9999px, 69px, 0); }
   45% {
-    clip: rect(74px, 9999px, 56px, 0); }
+    clip: rect(12px, 9999px, 29px, 0); }
   50% {
-    clip: rect(29px, 9999px, 46px, 0); }
+    clip: rect(73px, 9999px, 5px, 0); }
   55% {
-    clip: rect(19px, 9999px, 6px, 0); }
+    clip: rect(61px, 9999px, 91px, 0); }
   60% {
-    clip: rect(4px, 9999px, 83px, 0); }
+    clip: rect(71px, 9999px, 36px, 0); }
   65% {
-    clip: rect(75px, 9999px, 48px, 0); }
+    clip: rect(35px, 9999px, 36px, 0); }
   70% {
-    clip: rect(68px, 9999px, 10px, 0); }
+    clip: rect(83px, 9999px, 47px, 0); }
   75% {
-    clip: rect(64px, 9999px, 91px, 0); }
+    clip: rect(17px, 9999px, 15px, 0); }
   80% {
-    clip: rect(100px, 9999px, 38px, 0); }
+    clip: rect(62px, 9999px, 46px, 0); }
   85% {
-    clip: rect(22px, 9999px, 99px, 0); }
+    clip: rect(71px, 9999px, 15px, 0); }
   90% {
-    clip: rect(29px, 9999px, 81px, 0); }
+    clip: rect(4px, 9999px, 20px, 0); }
   95% {
-    clip: rect(48px, 9999px, 65px, 0); }
+    clip: rect(60px, 9999px, 96px, 0); }
   100% {
-    clip: rect(30px, 9999px, 49px, 0); } }
-=======
-    clip: rect(59px, 9999px, 78px, 0); }
-  5% {
-    clip: rect(90px, 9999px, 46px, 0); }
-  10% {
-    clip: rect(97px, 9999px, 19px, 0); }
-  15% {
-    clip: rect(91px, 9999px, 93px, 0); }
-  20% {
-    clip: rect(33px, 9999px, 25px, 0); }
-  25% {
-    clip: rect(92px, 9999px, 59px, 0); }
-  30% {
-    clip: rect(78px, 9999px, 22px, 0); }
-  35% {
-    clip: rect(33px, 9999px, 74px, 0); }
-  40% {
-    clip: rect(26px, 9999px, 27px, 0); }
-  45% {
-    clip: rect(83px, 9999px, 87px, 0); }
-  50% {
-    clip: rect(8px, 9999px, 82px, 0); }
-  55% {
-    clip: rect(6px, 9999px, 35px, 0); }
-  60% {
-    clip: rect(4px, 9999px, 88px, 0); }
-  65% {
-    clip: rect(47px, 9999px, 81px, 0); }
-  70% {
-    clip: rect(52px, 9999px, 21px, 0); }
-  75% {
-    clip: rect(30px, 9999px, 93px, 0); }
-  80% {
-    clip: rect(16px, 9999px, 97px, 0); }
-  85% {
-    clip: rect(65px, 9999px, 64px, 0); }
-  90% {
-    clip: rect(93px, 9999px, 45px, 0); }
-  95% {
-    clip: rect(100px, 9999px, 4px, 0); }
-  100% {
-    clip: rect(39px, 9999px, 15px, 0); } }
->>>>>>> d89b290 (shop: cart responsive css)
+    clip: rect(57px, 9999px, 1px, 0); } }
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
   height: 15em;
@@ -735,18 +671,17 @@ section#adminNews {
         max-width: 75%;
         height: auto; }
     section#adminNews .adminNews-wrapper .image {
-      aspect-ratio: 16/9;
-      align-self: center; }
+      margin-left: 2%; }
     section#adminNews .adminNews-wrapper .content {
       border-left: 5px solid #DADADA;
       padding: 2em;
       background-color: #fafafa;
       display: flex;
       flex-direction: column;
+      width: max-content;
       height: fit-content;
       margin-left: 2%;
-      margin-top: 1em;
-      align-self: center; }
+      margin-top: 1em; }
     section#adminNews .adminNews-wrapper .row {
       padding: 2em; }
     section#adminNews .adminNews-wrapper h3 {
@@ -858,7 +793,7 @@ section#sessions, section#session {
   section#sessions h5, section#session h5 {
     margin: 1em; }
   section#sessions p, section#session p {
-    line-height: 1em; }
+    line-height: 0.5em; }
   section#sessions p.asterisque, section#session p.asterisque {
     line-height: normal;
     padding: 1em; }
@@ -885,11 +820,11 @@ section#sessions, section#session {
     background-color: #fafafa;
     border: none; }
     section#sessions .spotMapChange:hover i, section#session .spotMapChange:hover i {
-      color: #B40B00; }
+      color: #B30B00; }
     section#sessions .spotMapChange p.spotName, section#session .spotMapChange p.spotName {
       padding: 1em 1em 1em 0; }
   section#sessions .locationDot, section#session .locationDot {
-    color: #B40B00; }
+    color: #B30B00; }
   section#sessions .popupMap, section#session .popupMap {
     font-weight: bold; }
 
@@ -910,14 +845,6 @@ section#sessions .container-fluid .spotMapChange {
   display: flex;
   padding-left: 0;
   width: fit-content; }
-section#sessions .container-fluid #map.base {
-  height: 100%; }
-section#sessions .container-fluid #map.showMap {
-  height: 50vh;
-  transition: height 1s; }
-section#sessions .container-fluid #map.hideMap {
-  height: 0;
-  transition: height 1s; }
 
 /* ACCUEIL : SECTION #socialNetwork */
 section#socialNetwork {
@@ -934,14 +861,11 @@ section#socialNetwork {
     display: flex;
     justify-content: center;
     align-items: center; }
-    section#socialNetwork .socialLinks a, section#socialNetwork .socialLinks p.soon {
+    section#socialNetwork .socialLinks a {
       padding-left: 2em;
-      color: #fafafa !important;
-      z-index: 1; }
-      section#socialNetwork .socialLinks a:hover, section#socialNetwork .socialLinks p.soon:hover {
-        color: #B40B00; }
-    section#socialNetwork .socialLinks p {
-      margin-bottom: 0; }
+      color: #fafafa; }
+      section#socialNetwork .socialLinks a:hover {
+        color: #B30B00; }
 
 /* LOGIN  */
 section#login {
@@ -1008,24 +932,21 @@ section#register {
     min-width: 100%;
     margin-bottom: 1em;
     padding: 0.5em; }
-  section#register .modal-dialog, section#register .modal-content {
-    height: 90vh; }
-  section#register embed {
-    width: 100%;
-    height: 100%; }
-  section#register .containerRegister {
-    background-color: #fafafa;
-    width: 50%;
-    padding: 2em; }
-    section#register .containerRegister .registerForm {
-      display: flex;
-      flex-direction: column;
-      justify-content: center; }
-    section#register .containerRegister .illustration {
-      width: 50%; }
-      section#register .containerRegister .illustrationimg {
-        object-fit: cover;
-        height: 45em; }
+
+.containerRegister {
+  background-color: #fafafa;
+  width: 50%;
+  padding: 2em; }
+  .containerRegister .registerForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%; }
+  .containerRegister .illustration {
+    width: 50%; }
+    .containerRegister .illustrationimg {
+      object-fit: cover;
+      height: 45em; }
 
 /*MON PROFIL - page account, edit, mes articles */
 /* MYPROFILE - infos personnelles */
@@ -1061,9 +982,9 @@ section#myProfile {
     section#myProfile .dashboard .notification {
       z-index: 5;
       position: absolute;
-      bottom: 0.8em;
+      bottom: 0.5em;
       right: 5em; }
-  section#myProfile .param.modifyProfile {
+  section#myProfile .param {
     margin-top: 1em; }
   section#myProfile .counters {
     width: 100%;
@@ -1075,42 +996,6 @@ section#myProfile {
     section#myProfile .counters .counter {
       text-align: center;
       margin: 0; }
-      section#myProfile .counters .counter .animated-counter {
-        position: relative;
-        background-color: transparent;
-        font-size: 16px;
-        color: #252525;
-        padding: 0.8em 1.8em;
-        cursor: pointer;
-        user-select: none;
-        text-align: center;
-        text-decoration: none;
-        transition-duration: 0.4s;
-        -webkit-transition-duration: 0.4s;
-        /* Safari */ }
-        section#myProfile .counters .counter .animated-counter:hover {
-          transition-duration: 0.1s;
-          background-color: rgba(218, 218, 218, 0.4); }
-        section#myProfile .counters .counter .animated-counter:active {
-          top: 1px; }
-        section#myProfile .counters .counter .animated-counter:after {
-          content: "";
-          display: block;
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          opacity: 0;
-          transition: all 0.5s;
-          box-shadow: 0 0 10px 40px #DADADA; }
-        section#myProfile .counters .counter .animated-counter:active:after {
-          box-shadow: 0 0 0 0 #DADADA;
-          position: absolute;
-          left: 0;
-          top: 0;
-          opacity: 1;
-          transition: 0s; }
       section#myProfile .counters .counter p {
         margin-top: 1em;
         background-color: rgba(218, 218, 218, 0.3);
@@ -1120,34 +1005,29 @@ section#myProfile {
     position: relative; }
     section#myProfile .my-drone .fav {
       float: right;
-      aspect-ratio: 1;
+      max-width: 125px;
+      max-height: 125px;
+      object-fit: cover;
       object-position: center;
-      overflow: hidden;
-      margin-left: 0.5em; }
-      section#myProfile .my-drone .fav img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover; }
+      overflow: hidden; }
     section#myProfile .my-drone a {
       background-color: #DADADA;
       padding: 0.5 1em;
       border-radius: 3px;
       position: absolute;
-      top: 1.5em;
+      top: 1em;
       right: 3em; }
   section#myProfile .globalWrap {
     background-color: #252525;
     display: flex;
     flex-direction: row; }
   section#myProfile #myProfile-avatar, section#myProfile .show-article-avatar {
-    aspect-ratio: 1;
     max-height: 125px;
     max-width: 125px; }
     section#myProfile #myProfile-avatar img, section#myProfile .show-article-avatar img {
       background-color: #fafafa;
       width: 100%;
-      height: 100%;
-      object-fit: cover; }
+      height: 100%; }
   section#myProfile .user {
     background-color: #fafafa;
     margin: 0 2em 2em 2em;
@@ -1193,11 +1073,6 @@ section#myProfileEdit, section#droneEdit {
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-height: 90vh; }
-<<<<<<< HEAD
-  section#myProfileEdit #profile_banner, section#droneEdit #profile_banner {
-    margin-bottom: 1em; }
-=======
->>>>>>> d89b290 (shop: cart responsive css)
   section#myProfileEdit .pwd, section#droneEdit .pwd {
     margin-left: 1em; }
   section#myProfileEdit .infos, section#myProfileEdit .public, section#droneEdit .infos, section#droneEdit .public {
@@ -1246,50 +1121,20 @@ section#droneEdit .avatar {
   object-position: center; }
 
 /*Mes articles */
-section#myArticles .container-fluid, section#myArticles section#adminBlog .container-fluid, section#myArticles section#adminBlogAlerts .container-fluid {
-  flex-wrap: wrap;
-  background-color: #fafafa; }
-section#myArticles .dateAndStats {
-  display: flex;
-  flex-direction: column; }
-section#myArticles .wrap {
-  margin: 0 1em;
-  display: flex;
-  flex-direction: column;
-  width: 100%; }
-section#myArticles .article {
-  margin-bottom: 1em; }
-
-section#myArticles .category-badge, section#adminBlog .category-badge, section#adminBlogAlerts .category-badge {
-  z-index: 1; }
-section#myArticles .articleWrap, section#adminBlog .articleWrap, section#adminBlogAlerts .articleWrap {
-  padding-top: 1em; }
-section#myArticles .article, section#adminBlog .article, section#adminBlogAlerts .article {
-  display: flex;
-  position: relative;
-  background-color: #fff;
-  border-radius: 4px;
-  padding: 1em;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-  section#myArticles .article .article-body, section#adminBlog .article .article-body, section#adminBlogAlerts .article .article-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; }
-  section#myArticles .article .article-content, section#adminBlog .article .article-content, section#adminBlogAlerts .article .article-content {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 7;
-    line-clamp: 7;
-    -webkit-box-orient: vertical; }
+section#myArticles article, section#adminBlog article, section#adminBlogAlerts article {
+  position: relative; }
 section#myArticles .container-fluid, section#adminBlog .container-fluid, section#adminBlogAlerts .container-fluid {
-  display: flex; }
+  display: flex;
+  min-height: 100vh; }
   section#myArticles .container-fluid .article-thumb, section#adminBlog .container-fluid .article-thumb, section#adminBlogAlerts .container-fluid .article-thumb {
-    aspect-ratio: 16/9;
+    width: 40%;
     display: flex;
     align-items: center;
     background-color: rgba(218, 218, 218, 0.4);
     position: relative; }
+  section#myArticles .container-fluid .row-cols-md-1, section#adminBlog .container-fluid .row-cols-md-1, section#adminBlogAlerts .container-fluid .row-cols-md-1 {
+    margin-bottom: 3em;
+    display: block; }
   section#myArticles .container-fluid .card-title, section#adminBlog .container-fluid .card-title, section#adminBlogAlerts .container-fluid .card-title {
     margin-left: 0.5em; }
   section#myArticles .container-fluid .sidebar, section#adminBlog .container-fluid .sidebar, section#adminBlogAlerts .container-fluid .sidebar {
@@ -1312,6 +1157,7 @@ section#myArticles .container-fluid, section#adminBlog .container-fluid, section
       align-items: center; }
     section#myArticles .container-fluid .stats .row, section#adminBlog .container-fluid .stats .row, section#adminBlogAlerts .container-fluid .stats .row {
       padding: 0;
+      margin-right: 1em;
       box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
       flex-grow: 0; }
     section#myArticles .container-fluid .stats .icon, section#adminBlog .container-fluid .stats .icon, section#adminBlogAlerts .container-fluid .stats .icon {
@@ -1319,208 +1165,12 @@ section#myArticles .container-fluid, section#adminBlog .container-fluid, section
       border-top-right-radius: 3px;
       border-bottom-right-radius: 3px; }
 section#myArticles .thumb-wrap, section#adminBlog .thumb-wrap, section#adminBlogAlerts .thumb-wrap {
-  width: 100%;
-  height: 100%; }
+  height: 17em;
+  width: 100%; }
   section#myArticles .thumb-wrap img, section#adminBlog .thumb-wrap img, section#adminBlogAlerts .thumb-wrap img {
+    object-fit: cover;
     width: 100%;
-    height: 100%;
-    object-fit: cover; }
-
-/*MES COMMANDES */
-section#myOrders .container-fluid {
-  background-color: #fafafa;
-  display: flex;
-  min-height: 90vh; }
-  section#myOrders .container-fluid .wrapper {
-    width: 100%;
-    padding: 0 1em; }
-    section#myOrders .container-fluid .wrapper h3 {
-      margin: 1em; }
-    section#myOrders .container-fluid .wrapper span.alert {
-      width: 50%;
-      margin: 0 auto; }
-    section#myOrders .container-fluid .wrapper .order {
-      border-radius: 5px;
-      padding: 2em 2em 1em 2em;
-      background-color: #fff;
-      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-      margin-bottom: 1em; }
-      section#myOrders .container-fluid .wrapper .order .orderRef {
-        font-weight: bold;
-        font-size: 1.2em; }
-      section#myOrders .container-fluid .wrapper .order .orderStatus {
-        padding: 1em; }
-        section#myOrders .container-fluid .wrapper .order .orderStatus i {
-          margin-right: 0.5em; }
-        section#myOrders .container-fluid .wrapper .order .orderStatus span.prepare {
-          color: orange; }
-        section#myOrders .container-fluid .wrapper .order .orderStatus span.transport {
-          color: yellow; }
-        section#myOrders .container-fluid .wrapper .order .orderStatus span.delivery {
-          color: yellowgreen; }
-        section#myOrders .container-fluid .wrapper .order .orderStatus span.delivered {
-          color: green; }
-      section#myOrders .container-fluid .wrapper .order .transporter, section#myOrders .container-fluid .wrapper .order .deliveryAddress {
-        margin-bottom: 1em; }
-      section#myOrders .container-fluid .wrapper .order .price span.bg-grey {
-        padding: 0.8em 1em;
-        font-size: 1em;
-        background-color: rgba(37, 37, 37, 0.9); }
-  section#myOrders .container-fluid h3 {
-    margin: 1em 0; }
-
-/** MES SESSIONS **/
-section#mySessions .container-fluid {
-  background-color: #fafafa;
-  min-height: 90vh;
-  display: flex; }
-  section#mySessions .container-fluid .wrapper {
-    padding-top: 3em;
-    padding-right: 1em;
-    margin: 0 auto; }
-    section#mySessions .container-fluid .wrapper h5 {
-      margin: 0.5em; }
-    section#mySessions .container-fluid .wrapper .wrapSession {
-      margin: 1em auto;
-      padding: 1em 0;
-      display: flex;
-      align-items: center;
-      border-radius: 4px;
-      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-      section#mySessions .container-fluid .wrapper .wrapSession .col-sm-12 {
-        align-items: flex-start;
-        display: flex;
-        flex-direction: column;
-        justify-content: center; }
-      section#mySessions .container-fluid .wrapper .wrapSession .text-muted {
-        margin: 0.5em;
-        line-height: normal;
-        font-size: 1em; }
-    section#mySessions .container-fluid .wrapper .caution {
-      margin: 1em auto; }
-
-section#profile {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: #252525; }
-  section#profile .author {
-    display: none !important; }
-  section#profile .wrap {
-    margin-top: 0.5em;
-    height: 100%;
-    background-color: #252525;
-    min-height: 90vh;
-    width: 100vw; }
-  section#profile .my-drone, section#profile .social {
-    background-color: #fafafa;
-    padding: 2em;
-    border-radius: 3px; }
-  section#profile .social {
-    display: flex;
-    justify-content: space-around; }
-    section#profile .social div {
-      display: flex;
-      justify-content: center;
-      align-items: center; }
-      section#profile .social div i {
-        margin: 0 0.5em 0 0; }
-  section#profile .right {
-    margin: 1em auto; }
-  section#profile .user-content {
-    position: relative;
-    background-color: #fafafa;
-    padding: 1em;
-    border-radius: 3px;
-    min-height: 30vh; }
-  section#profile .my-drone {
-    position: relative; }
-    section#profile .my-drone .fav {
-      float: right;
-      object-fit: cover;
-      object-position: center;
-      overflow: hidden;
-      aspect-ratio: 1; }
-      section#profile .my-drone .fav img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; }
-    section#profile .my-drone a {
-      background-color: #DADADA;
-      padding: 0.5 1em;
-      border-radius: 3px;
-      position: absolute;
-      top: 2em;
-      right: 3em; }
-  section#profile .container-fluid {
-    background-color: #252525; }
-  section#profile #profile-avatar, section#profile .show-article-avatar {
-    max-height: 125px;
-    max-width: 125px;
-    aspect-ratio: 1; }
-    section#profile #profile-avatar img, section#profile .show-article-avatar img {
-      background-color: #fafafa;
-      width: 100%;
-      height: 100%;
-      object-fit: cover; }
-  section#profile .user {
-    background-color: #fafafa;
-    border-radius: 3px;
-    display: flex;
-    align-items: center; }
-    section#profile .user h2 {
-      margin: 0.5% 2%;
-      font-size: 2.5em; }
-  section#profile .sessions.showSessions {
-    display: inherit; }
-  section#profile .sessions.hideSessions {
-    display: none; }
-  section#profile .sessions {
-    background-color: #fafafa;
-    border-radius: 3px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 10em; }
-    section#profile .sessions span {
-      margin: 0 1em;
-      width: 90%; }
-    section#profile .sessions .spotWrapper {
-      border-radius: 4px;
-      padding: 1em;
-      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-      max-height: fit-content;
-      width: 100%; }
-      section#profile .sessions .spotWrapper .infoSpot {
-        margin: auto; }
-      section#profile .sessions .spotWrapper .iconWrap {
-        padding: 1em 2em;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        border-radius: 4px; }
-      section#profile .sessions .spotWrapper p.spotName {
-        font-size: 1.1em;
-        margin-bottom: 0; }
-      section#profile .sessions .spotWrapper p.text-muted {
-        margin-bottom: 0; }
-  section#profile .article {
-    display: flex;
-    position: relative; }
-  section#profile .article-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 1em; }
-  section#profile .article-content {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 7;
-    line-clamp: 7;
-    -webkit-box-orient: vertical; }
+    height: 100%; }
 
 /*MES COMMANDES */
 section#myOrders .container-fluid {
@@ -1685,21 +1335,11 @@ section#cart .container-fluid {
   section#cart .container-fluid .wrapper {
     padding: 2em;
     overflow: auto; }
-<<<<<<< HEAD
-  section#cart .container-fluid table td.product .img {
-    display: flex; }
-  section#cart .container-fluid table td {
-    height: max-content; }
-  section#cart .container-fluid table form {
-    display: inline-flex;
-    padding: 0.5em; }
-=======
   section#cart .container-fluid table td.product {
     display: flex;
     align-items: center; }
     section#cart .container-fluid table td.product .img {
       display: flex; }
->>>>>>> d89b290 (shop: cart responsive css)
   section#cart .container-fluid table td.delete-all {
     text-align: end; }
   section#cart .container-fluid table a {
@@ -1711,10 +1351,14 @@ section#cart .container-fluid {
 section#prepareOrder .container-fluid {
   background-color: #fafafa;
   min-height: 90vh;
+  width: 80%;
   margin: 0 auto;
   padding: 2em; }
   section#prepareOrder .container-fluid h3 {
     margin-bottom: 1em; }
+  section#prepareOrder .container-fluid .delivery, section#prepareOrder .container-fluid .recap, section#prepareOrder .container-fluid .transporter {
+    padding: 2em;
+    margin: 2em; }
   section#prepareOrder .container-fluid .table td, section#prepareOrder .container-fluid .table th {
     padding: 1em;
     vertical-align: middle; }
@@ -1722,18 +1366,15 @@ section#prepareOrder .container-fluid {
     font-weight: bold; }
   section#prepareOrder .container-fluid div.transporter .description {
     color: rgba(37, 37, 37, 0.7); }
-  section#prepareOrder .container-fluid div.payment {
-    text-align: center; }
-    section#prepareOrder .container-fluid div.payment .btn {
-      margin: 1em 0; }
-    section#prepareOrder .container-fluid div.payment .stripeLogo {
-      justify-content: center;
-      display: flex;
-      align-items: center; }
-      section#prepareOrder .container-fluid div.payment .stripeLogo p {
-        margin-bottom: 0; }
-      section#prepareOrder .container-fluid div.payment .stripeLogo span {
-        margin-left: 0.5em; }
+  section#prepareOrder .container-fluid div.payment .btn {
+    margin: 1em 0; }
+  section#prepareOrder .container-fluid div.payment .stripeLogo {
+    display: flex;
+    align-items: center; }
+    section#prepareOrder .container-fluid div.payment .stripeLogo p {
+      margin-bottom: 0; }
+    section#prepareOrder .container-fluid div.payment .stripeLogo span {
+      margin-left: 0.5em; }
 
 section#successPayment {
   width: 100vw;
@@ -1788,42 +1429,6 @@ section#errorPayment .container-fluid {
   background: url("../img/setup2-yusuf-miah.jpg") no-repeat 0 0 rgba(0, 0, 0, 0.5);
   background-blend-mode: multiply;
   background-size: cover;
-<<<<<<< HEAD
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-  section#errorPayment .container-fluid::before {
-    height: 100%;
-    width: 100vw;
-    content: "";
-    background: url("../img/noise1.png") repeat 0 0 rgba(0, 0, 0, 0.5);
-    position: absolute;
-    bottom: 0; }
-section#errorPayment h4, section#errorPayment p {
-  width: 100%; }
-section#errorPayment .recap {
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2em;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-  section#errorPayment .recap p {
-    margin-bottom: 2em; }
-
-section#errorPayment .container-fluid {
-  background-color: #fafafa;
-  margin: 0 auto;
-  min-height: 90vh; }
-section#errorPayment .recap {
-  width: 40%;
-=======
->>>>>>> d89b290 (shop: cart responsive css)
   position: relative;
   display: flex;
   justify-content: center;
@@ -1872,20 +1477,19 @@ section#showArticle .wrapper {
   background-image: url("/img/raceTrack.jpeg");
   background-color: #252525;
   background-blend-mode: multiply;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-size: contain;
   background-attachment: fixed;
   display: flex;
   justify-content: center;
   align-items: center; }
 section#showArticle #wrapArticleContent {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
   background-color: #fafafa;
+  padding: 3em;
   border-radius: 3px;
-  margin: 1em auto;
-  width: 100%; }
+  margin: 1em auto; }
   section#showArticle #wrapArticleContent .nav-link {
     color: #252525; }
 section#showArticle .article-content-show {
@@ -1903,38 +1507,23 @@ section#showArticle .banner {
 section#showArticle #player {
   width: 100%; }
 section#showArticle .col-md-8 {
-  padding: 0; }
-section#showArticle .col-lg-8 {
-  max-width: 70em; }
-section#showArticle .wrapMainInfos {
-  justify-content: space-between;
-  align-items: center; }
-section#showArticle .articleInfo {
-  display: flex;
-  align-items: center; }
-  section#showArticle .articleInfo div {
-    display: flex;
-    align-items: center; }
+  padding-left: 0; }
 section#showArticle .user {
-  width: 100%;
   display: flex;
   padding-right: 2em;
   border-radius: 3px;
   justify-content: start;
-  align-items: center; }
+  align-items: center;
+  margin-top: 1em; }
   section#showArticle .user .avatar {
     max-height: 75px;
     max-width: 75px;
-    margin-right: 1em;
-    aspect-ratio: 1; }
+    margin-right: 1em; }
     section#showArticle .user .avatar img {
       background-color: #fafafa;
       width: 100%;
       height: 100%;
-      object-fit: cover;
       border-radius: 3px; }
-section#showArticle .addCommentForm {
-  margin-bottom: 1em; }
 section#showArticle .addCommentForm form {
   display: flex;
   align-items: center; }
@@ -1946,7 +1535,7 @@ section#showArticle .addCommentForm form {
     section#showArticle .addCommentForm form #comment > div {
       margin-bottom: 0 !important; }
 section#showArticle .commentWrap {
-  margin: 0 auto 1em auto;
+  margin: 1em auto;
   padding: 1em;
   border-radius: 3px;
   background-color: rgba(218, 218, 218, 0.2); }
@@ -1962,8 +1551,8 @@ section#showArticle .commentWrap {
       max-width: 35px;
       border-radius: 3px; }
 section#showArticle .thumb-wrap {
-  width: 100%;
-  aspect-ratio: 16/9; }
+  height: 13em;
+  width: 100%; }
   section#showArticle .thumb-wrap img {
     object-fit: cover;
     width: 100%;
@@ -1988,27 +1577,34 @@ section#addArticle .wrapper, section#editArticle .wrapper {
   background-color: #fafafa;
   border-radius: 3px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
   background-image: url("/img/raceTrack.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #252525;
   background-blend-mode: multiply; }
-  section#addArticle .wrapper .wrapForm, section#editArticle .wrapper .wrapForm {
+  section#addArticle .wrapper .row, section#editArticle .wrapper .row {
+    width: 90%;
+    height: 80%;
+    margin: 0 2em;
+    padding: 3em;
     border-radius: 3px;
-    padding: 2em;
     background-color: #fafafa; }
-    section#addArticle .wrapper .wrapForm div.images div.mb-3, section#editArticle .wrapper .wrapForm div.images div.mb-3 {
+    section#addArticle .wrapper .row div.images div.mb-3, section#editArticle .wrapper .row div.images div.mb-3 {
       width: 50% !important;
       margin-bottom: 0 !important; }
 
 section#blog {
   background-image: url("/img/RaceTrack.jpeg");
   background-size: cover; }
-  section#blog .filter {
-    max-height: 2.5em;
-    margin-top: 1em; }
+  section#blog .row-cols-md-1 {
+    min-height: 83vh; }
+    section#blog .row-cols-md-1 .filter {
+      max-height: 2.5em; }
   section#blog article {
-    margin-top: 0; }
+    margin-top: 0 !important; }
 
 section#blog .row.g-0, section#blogHome .row.g-0, section#search .row.g-0, section#profile .row.g-0, section#adminBlog .row.g-0, section#adminBlogAlerts .row.g-0 {
   width: 100%; }
@@ -2021,12 +1617,15 @@ section#blog .author, section#blogHome .author, section#search .author, section#
   align-items: center;
   border-radius: 2px;
   height: 3em;
-  margin-bottom: 1em; }
-  section#blog .author .author-avatar img, section#blogHome .author .author-avatar img, section#search .author .author-avatar img, section#profile .author .author-avatar img, section#adminBlog .author .author-avatar img, section#adminBlogAlerts .author .author-avatar img {
-    background-color: #fafafa;
-    width: 100%;
-    height: 100%;
-    border-radius: 3px; }
+  margin-bottom: 1em;
+  padding-right: 1em; }
+  section#blog .author .author-avatar, section#blogHome .author .author-avatar, section#search .author .author-avatar, section#profile .author .author-avatar, section#adminBlog .author .author-avatar, section#adminBlogAlerts .author .author-avatar {
+    height: 100%; }
+    section#blog .author .author-avatar img, section#blogHome .author .author-avatar img, section#search .author .author-avatar img, section#profile .author .author-avatar img, section#adminBlog .author .author-avatar img, section#adminBlogAlerts .author .author-avatar img {
+      background-color: #fafafa;
+      width: 100%;
+      height: 100%;
+      border-radius: 3px; }
   section#blog .author .author-nickname, section#blogHome .author .author-nickname, section#search .author .author-nickname, section#profile .author .author-nickname, section#adminBlog .author .author-nickname, section#adminBlogAlerts .author .author-nickname {
     padding: 0 1em; }
     section#blog .author .author-nickname h4, section#blogHome .author .author-nickname h4, section#search .author .author-nickname h4, section#profile .author .author-nickname h4, section#adminBlog .author .author-nickname h4, section#adminBlogAlerts .author .author-nickname h4 {
@@ -2042,6 +1641,7 @@ section#blog, section#myArticles {
     border-radius: 3px;
     margin: 0 auto;
     background-color: #fafafa;
+    width: 70%;
     padding-bottom: 1em; }
   section#blog .row-cols-md-1, section#myArticles .row-cols-md-1 {
     margin-bottom: 3em; }
@@ -2051,7 +1651,8 @@ section#blog, section#myArticles {
   section#blog .article-body, section#myArticles .article-body {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; }
+    justify-content: space-between;
+    padding: 1em; }
   section#blog .article-content, section#myArticles .article-content {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -2064,654 +1665,133 @@ section#blog .card-body, section#myArticles .card-body, section#blogHome .card-b
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%; }
-
-/**SEARCH PAGE ***/
-section#search h3 {
-  font-family: 'Play', sans-serif;
-  font-weight: bolder; }
-section#search .author-avatar {
-  max-width: 75px;
-  aspect-ratio: 1; }
-  section#search .author-avatar img {
-    width: 100%;
-    height: auto; }
-section#search .container-fluid {
-  background-image: url("/img/forestView.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-blend-mode: multiply;
-  background-attachment: fixed;
-  background-color: #252525;
-  display: flex;
-  justify-content: center; }
-  section#search .container-fluid .col-xs-12 {
-    background-color: #fafafa;
-    padding: 2em;
-    border-radius: 3px;
-    min-height: 89vh; }
-  section#search .container-fluid .article {
-    display: flex;
-    justify-content: center;
-    align-items: center; }
-
-section#session .container-fluid {
-  background-color: #fafafa;
-  height: 90vh;
-  max-width: 100vw; }
-  section#session .container-fluid .colSessions {
-    position: relative;
-    overflow-y: auto;
-    height: 90vh; }
-  section#session .container-fluid .ad-restriction {
-    position: absolute;
-    bottom: 1em; }
-  section#session .container-fluid .spotAddress, section#session .container-fluid .adminMsg {
-    line-height: normal; }
-  section#session .container-fluid .modal-footer {
-    display: flex;
-    justify-content: space-between; }
-  section#session .container-fluid .wrapSession {
-    margin: 1em auto;
-    padding: 1em 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 4px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-    section#session .container-fluid .wrapSession .text-muted {
-      margin: 0.5em;
-      line-height: normal; }
-  section#session .container-fluid .locationDot {
-    color: #B40B00; }
-  section#session .container-fluid .popupMap {
-    font-weight: bold; }
-  section#session .container-fluid .spotMapChange {
-    padding: 0; }
-  section#session .container-fluid #map.showMap {
-    height: 50vh;
-    transition: height 1s; }
-  section#session .container-fluid #map.hideMap {
-    height: 0;
-    transition: height 1s; }
-
-section#sessionAdd {
-  position: relative;
-  background-image: url("/img/setup2-yusuf-miah.jpg");
-  background-size: cover;
-  background-attachment: fixed;
-  background-color: rgba(37, 37, 37, 0.7);
-  background-blend-mode: multiply;
-  top: 0;
-  height: 96vh;
-  width: 100vw; }
-  section#sessionAdd:before {
-    height: 96vh;
-    width: 100vw;
-    content: "";
-    background: url("/img/noise1.png") repeat 0 0 rgba(0, 0, 0, 0.5);
-    position: absolute;
-    top: 0; }
-  section#sessionAdd .container-fluid {
-    height: 90vh; }
-  section#sessionAdd .wrapper {
-    height: 90vh;
-    justify-content: center;
-    align-items: center; }
-  section#sessionAdd .formSession {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    position: relative;
-    margin: 0 auto;
-    padding: 3em 4em;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-
-section#contact .container-fluid {
-  background-color: #252525;
-  background-image: url("../img/setup1-yusuf-miah.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-  section#contact .container-fluid::before {
-    height: 100%;
-    width: 100vw;
-    content: "";
-    background: url("../img/noise2.png") repeat 0 0 rgba(0, 0, 0, 0.5);
-    position: absolute;
-    bottom: 0; }
-  section#contact .container-fluid .wrap {
-    background-color: #fafafa;
-    padding: 3em;
-    border-radius: 4px;
-    z-index: 1; }
+  padding: 0 2rem 0.5rem 2rem; }
 
-section#about {
-  width: 100vw;
-  height: 100vh;
-  background-color: #fafafa;
-  position: relative; }
-  section#about .container-fluid {
-    background-color: #fafafa; }
-    section#about .container-fluid .wrap {
-      margin: 0 auto;
-      background-color: #fff;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center; }
-    section#about .container-fluid h3 {
-      margin-bottom: 1.5em;
-      font-size: 1.7em; }
-    section#about .container-fluid .separator {
-      background-color: transparent;
-      height: 100em;
-      width: 0;
-      border-left: 15em solid #dadada;
-      border-bottom: 20em solid transparent;
-      position: absolute;
-      right: 13em;
-      top: 0;
-      z-index: 0; }
-    section#about .container-fluid .paragraph {
-      padding: 2em;
-      background-color: #fff;
-      font-size: 1em;
-      z-index: 1;
-      position: relative;
-      margin: 2em 0; }
-      section#about .container-fluid .paragraph.toKnow {
-        background-color: #fff;
-        line-height: 2em;
-        width: 50%;
-        margin: 3em 0 4em 0; }
-      section#about .container-fluid .paragraph.about {
-        width: 50%;
-        line-height: 2em; }
-      section#about .container-fluid .paragraph .main {
-        font-size: 1.6em;
-        font-family: 'airstrike', sans-serif;
-        margin-right: 0.5em; }
-    section#about .container-fluid .illustration {
-      width: 10em;
-      background-color: white;
-      position: absolute;
-      top: 0;
-      right: 0; }
-    section#about .container-fluid .encart {
-      background-color: #252525;
-      outline: 1em solid #fff;
-      border-radius: 50%;
-      width: 15em;
-      height: 15em;
-      position: absolute;
-      top: 13em;
-      right: 6.4em;
-      margin: 1em; }
-      section#about .container-fluid .encart img {
-        display: block;
-        margin: 0.5em auto;
-        width: 12em; }
-    section#about .container-fluid .videoWrap {
-      width: 50%;
-      padding: 2em; }
-
-/*nav bar admin */
-section#adminNavbarMenu {
-  background-color: transparent !important;
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; }
-
-aside.adminSidebarMenu {
-  width: 15vw; }
-
-/* login */
-section#adminLogin {
-  text-align: center; }
-  section#adminLogin h3 {
-    font-family: "Play", sans-serif;
-    margin-bottom: 1em; }
-  section#adminLogin .container-fluid {
-    background-image: url("/img/quadsLavoir.jpeg");
-    background-color: #252525;
-    background-blend-mode: multiply;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-    display: flex; }
-    section#adminLogin .container-fluid .formLogin {
-      justify-content: center;
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      margin: auto;
-      padding: 3em 4em;
-      background-color: #fff;
-      border-radius: 4px;
-      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-
-/* dashboard */
-section#adminDashboard {
-  background-color: #fafafa;
-  min-height: 96vh; }
-  section#adminDashboard .container-fluid {
-    display: flex; }
-    section#adminDashboard .container-fluid .tablesWrap {
-      margin-top: 3em; }
-      section#adminDashboard .container-fluid .tablesWrap h5 {
-        margin-bottom: 1em; }
-    section#adminDashboard .container-fluid table {
-      border: transparent; }
-      section#adminDashboard .container-fluid table thead.positive {
-        background-color: #B1D7B4; }
-      section#adminDashboard .container-fluid table thead.negative {
-        background-color: #FF6969; }
-      section#adminDashboard .container-fluid table th, section#adminDashboard .container-fluid table td {
-        padding: 1em; }
-    section#adminDashboard .container-fluid .wrap {
-      display: flex;
-      flex-wrap: wrap;
-      background-color: #fff;
-      border-radius: 4px;
-      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-    section#adminDashboard .container-fluid .shortCuts {
-      margin: 2em auto; }
-      section#adminDashboard .container-fluid .shortCuts .badge {
-        margin-left: 0.5em; }
-      section#adminDashboard .container-fluid .shortCuts .card-body {
-        display: flex;
-        justify-content: space-between;
-        align-items: center; }
-    section#adminDashboard .container-fluid .statWrap {
-      margin-top: 3em; }
-      section#adminDashboard .container-fluid .statWrap .users {
-        background-color: rgba(37, 37, 37, 0.7);
-        color: #fafafa; }
-      section#adminDashboard .container-fluid .statWrap .articles {
-        background-color: rgba(180, 11, 0, 0.75);
-        color: #fafafa; }
-      section#adminDashboard .container-fluid .statWrap .sessions {
-        background-color: #DADADA;
-        color: #252525; }
-      section#adminDashboard .container-fluid .statWrap .orders {
-        background-color: #fafafa;
-        color: #252525; }
-    section#adminDashboard .container-fluid .card {
-      min-height: 5em; }
-      section#adminDashboard .container-fluid .card .col-4 {
-        display: flex;
-        justify-content: center;
-        align-items: center; }
-      section#adminDashboard .container-fluid .card .col-8 {
-        text-align: center; }
-
-/*PAGE GESTION USERS */
-section#adminUsers .users, section#adminUsers .subDate, section#adminUsers .auth, section#adminUsers .actions {
-  display: flex;
-  align-items: center; }
-section#adminUsers .users {
-  justify-content: flex-start; }
-section#adminUsers .subDate, section#adminUsers .auth {
-  justify-content: center; }
-section#adminUsers .actions {
-  justify-content: end; }
-
-section#adminUsers .container-fluid, section#adminShop .container-fluid {
-  display: flex;
-  min-height: 90vh;
-  background-color: #fafafa; }
-  section#adminUsers .container-fluid .titleTable, section#adminShop .container-fluid .titleTable {
-    display: flex; }
-  section#adminUsers .container-fluid .wrap, section#adminShop .container-fluid .wrap {
-    display: flex;
-    flex-direction: column;
-    padding-top: 2em; }
-  section#adminUsers .container-fluid .row-grey, section#adminUsers .container-fluid .row-white, section#adminShop .container-fluid .row-grey, section#adminShop .container-fluid .row-white {
-    display: flex;
-    align-items: center;
-    border: 1px solid transparent;
-    border-radius: 4px; }
-    section#adminUsers .container-fluid .row-grey .avatar, section#adminUsers .container-fluid .row-grey .imgProduct, section#adminUsers .container-fluid .row-white .avatar, section#adminUsers .container-fluid .row-white .imgProduct, section#adminShop .container-fluid .row-grey .avatar, section#adminShop .container-fluid .row-grey .imgProduct, section#adminShop .container-fluid .row-white .avatar, section#adminShop .container-fluid .row-white .imgProduct {
-      aspect-ratio: 1;
-      width: 40px;
-      height: 40px; }
-      section#adminUsers .container-fluid .row-grey .avatar img, section#adminUsers .container-fluid .row-grey .imgProduct img, section#adminUsers .container-fluid .row-white .avatar img, section#adminUsers .container-fluid .row-white .imgProduct img, section#adminShop .container-fluid .row-grey .avatar img, section#adminShop .container-fluid .row-grey .imgProduct img, section#adminShop .container-fluid .row-white .avatar img, section#adminShop .container-fluid .row-white .imgProduct img {
-        object-fit: cover;
-        width: auto;
-        height: 100%; }
-  section#adminUsers .container-fluid .row-grey, section#adminShop .container-fluid .row-grey {
-    background-color: #DADADA; }
-  section#adminUsers .container-fluid .row-white, section#adminShop .container-fluid .row-white {
-    background-color: #fafafa; }
-  section#adminUsers .container-fluid .usersList, section#adminUsers .container-fluid .productsList, section#adminShop .container-fluid .usersList, section#adminShop .container-fluid .productsList {
-    display: flex;
-    flex-direction: column;
-    min-height: 75vh;
-    padding: 0; }
-  section#adminUsers .container-fluid .main, section#adminShop .container-fluid .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center; }
-    section#adminUsers .container-fluid .main h3, section#adminShop .container-fluid .main h3 {
-      letter-spacing: 1px; }
-    section#adminUsers .container-fluid .main .avatar, section#adminShop .container-fluid .main .avatar {
-      width: 125px; }
-    section#adminUsers .container-fluid .main .avatar, section#adminUsers .container-fluid .main .imgProduct, section#adminShop .container-fluid .main .avatar, section#adminShop .container-fluid .main .imgProduct {
-      box-shadow: rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px;
-      margin-bottom: 2em; }
-  section#adminUsers .container-fluid .infos, section#adminShop .container-fluid .infos {
-    display: flex; }
-    section#adminUsers .container-fluid .infos .dataUser, section#adminShop .container-fluid .infos .dataUser {
-      margin-left: 3em;
-      position: relative;
-      width: 70%; }
-    section#adminUsers .container-fluid .infos .text-muted, section#adminShop .container-fluid .infos .text-muted {
-      font-size: 1em; }
-
-section#adminBlog .container-fluid, section#adminBlogAlerts .container-fluid {
-  background-color: #fafafa; }
-  section#adminBlog .container-fluid .wrap, section#adminBlogAlerts .container-fluid .wrap {
-    margin: 0 1em;
-    display: flex;
-    flex-direction: column;
-    width: 100%; }
-    section#adminBlog .container-fluid .wrap #titleAndForm, section#adminBlogAlerts .container-fluid .wrap #titleAndForm {
-      z-index: 1; }
-  section#adminBlog .container-fluid .article, section#adminBlogAlerts .container-fluid .article {
-    display: flex;
-    position: relative;
-    background-color: #fff;
-    border-radius: 4px;
-    padding: 1em;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-    section#adminBlog .container-fluid .article .article-body, section#adminBlogAlerts .container-fluid .article .article-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between; }
-  section#adminBlog .container-fluid .alerts, section#adminBlogAlerts .container-fluid .alerts {
-    position: absolute;
-    left: 1em;
-    top: 1em; }
-  section#adminBlog .container-fluid .overlay-inactive, section#adminBlogAlerts .container-fluid .overlay-inactive {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    font-size: 2em;
-    padding: 2em; }
-  section#adminBlog .container-fluid .wrapAlert, section#adminBlogAlerts .container-fluid .wrapAlert {
-    margin: 1em auto;
-    padding: 1em;
-    width: 100%;
-    border-radius: 4px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-    section#adminBlog .container-fluid .wrapAlert i, section#adminBlogAlerts .container-fluid .wrapAlert i {
-      margin-right: 0.5em; }
-    section#adminBlog .container-fluid .wrapAlert .text-muted, section#adminBlogAlerts .container-fluid .wrapAlert .text-muted {
-      margin: 0.5em;
-      line-height: normal;
-      font-size: 1em; }
-  section#adminBlog .container-fluid .date, section#adminBlogAlerts .container-fluid .date {
-    display: flex;
-    justify-content: center;
-    align-items: center; }
-  section#adminBlog .container-fluid .stats .row, section#adminBlogAlerts .container-fluid .stats .row {
-    margin: 0 0.5em; }
-  section#adminBlog .container-fluid .stats .icon, section#adminBlogAlerts .container-fluid .stats .icon {
-    height: 50%; }
-  section#adminBlog .container-fluid .stats .alert, section#adminBlogAlerts .container-fluid .stats .alert {
-    margin-bottom: 0;
-    margin-left: 1em;
-    border: none;
-    border-radius: 0; }
-    section#adminBlog .container-fluid .stats .alert .icon, section#adminBlogAlerts .container-fluid .stats .alert .icon {
-      color: #B40B00; }
-  section#adminBlog .container-fluid .settings a.show, section#adminBlogAlerts .container-fluid .settings a.show {
-    background-color: #DADADA; }
-
-section#adminComments .container-fluid {
-  display: flex;
-  min-height: 90vh;
-  background-color: #fafafa; }
-  section#adminComments .container-fluid .wrap {
-    margin-top: 3em; }
-    section#adminComments .container-fluid .wrap .avatar {
-      width: 25px;
-      height: 25px; }
-      section#adminComments .container-fluid .wrap .avatar img {
-        width: 100%;
-        height: auto; }
-    section#adminComments .container-fluid .wrap table {
-      width: 100%;
-      border-color: transparent; }
-      section#adminComments .container-fluid .wrap table th, section#adminComments .container-fluid .wrap table td {
-        padding: 1.5em;
-        border-radius: 4px; }
-
-section#adminMapSpots .container-fluid {
-  display: flex;
-  background-color: #fafafa;
-  min-height: 90vh;
-  width: 100vw; }
-  section#adminMapSpots .container-fluid .reset {
-    margin-top: 1em;
-    margin-left: 1em; }
-    section#adminMapSpots .container-fluid .reset i {
-      padding: 0.5em; }
-  section#adminMapSpots .container-fluid .gestion {
-    overflow-y: auto;
-    height: 90vh; }
-  section#adminMapSpots .container-fluid .colInfo {
-    width: 80%; }
-  section#adminMapSpots .container-fluid .colDelete {
-    width: 20%; }
-  section#adminMapSpots .container-fluid .btnMap {
-    margin-bottom: 1.5em; }
-  section#adminMapSpots .container-fluid .spotWrapper {
-    border-radius: 4px;
-    display: flex;
-    padding: 0.5em 1em;
-    justify-content: center;
-    align-items: center;
-    margin: 1em 0;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    max-height: fit-content;
-    width: 100%; }
-  section#adminMapSpots .container-fluid .addSpot {
-    margin-top: 1em; }
-  section#adminMapSpots .container-fluid .spotName {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center; }
-    section#adminMapSpots .container-fluid .spotName i {
-      color: #B40B00;
-      margin-right: 0.5em; }
-  section#adminMapSpots .container-fluid .spotMapChange {
-    background-color: transparent;
-    border: none; }
-section#adminMapSpots #map {
-  padding: 0; }
-section#adminMapSpots #map.base {
-  height: 100%; }
-section#adminMapSpots #map.showMap {
-  height: 50vh;
-  transition: height 1s; }
-section#adminMapSpots #map.hideMap {
-  height: 0;
-  transition: height 1s; }
-section#adminMapSpots .maplibregl-map {
-  padding: 1em; }
-
-section#adminShop .name, section#adminShop .price, section#adminShop .stock, section#adminShop .status, section#adminShop .actions {
-  display: flex;
-  align-items: center; }
-section#adminShop .name {
-  justify-content: flex-start; }
-section#adminShop .price, section#adminShop .stock, section#adminShop .status {
-  justify-content: center; }
-section#adminShop .price {
-  padding: 0 0.2em; }
-section#adminShop .actions {
-  justify-content: end; }
-section#adminShop table {
-  width: 100%; }
-  section#adminShop table th, section#adminShop table td {
-    padding: 1em; }
-  section#adminShop table td a {
-    margin: auto 0.5em; }
-  section#adminShop table th {
-    color: rgba(37, 37, 37, 0.6);
-    font-weight: 400; }
-  section#adminShop table .badge {
-    margin-bottom: 0; }
-section#adminShop .imgProductView {
-  width: 10em;
-  height: 10em;
-  box-shadow: rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px;
-  margin-bottom: 2em; }
-  section#adminShop .imgProductView img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%; }
-section#adminShop .productsList ul {
+section#profile {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; }
-section#adminShop .titleTable {
-  display: flex; }
-
-section#adminEditProduct .container-fluid, section#adminOrderModify .container-fluid {
-  display: flex;
-  background-color: #fafafa;
-  min-height: 90vh; }
-  section#adminEditProduct .container-fluid h4, section#adminOrderModify .container-fluid h4 {
-    margin-top: 2em; }
-  section#adminEditProduct .container-fluid .formWrap, section#adminOrderModify .container-fluid .formWrap {
-    margin: 0 auto; }
-  section#adminEditProduct .container-fluid #imgWrap, section#adminOrderModify .container-fluid #imgWrap {
-    margin: 0 auto; }
-    section#adminEditProduct .container-fluid #imgWrap img, section#adminOrderModify .container-fluid #imgWrap img {
-      object-fit: cover;
-      width: 100%; }
-
-section#adminBlogAlerts .container-fluid {
-  display: flex;
-  background-color: #fafafa;
-  min-height: 90vh; }
-
-section#adminOrders h4, section#adminAllOrders h4 {
-  padding-left: 1em; }
-section#adminOrders .container-fluid, section#adminAllOrders .container-fluid {
-  display: flex;
-  background-color: #fafafa;
-  min-height: 90vh;
-  padding: 0; }
-  section#adminOrders .container-fluid .wrap, section#adminAllOrders .container-fluid .wrap {
-    padding-top: 2em; }
-  section#adminOrders .container-fluid .modal-body, section#adminAllOrders .container-fluid .modal-body {
-    padding: 2em; }
-  section#adminOrders .container-fluid .infoOrder, section#adminAllOrders .container-fluid .infoOrder {
-    padding: 2em;
-    box-shadow: rgba(0, 0, 0, 0.2) 1.5px 1.5px 2px;
-    margin-top: 1em;
-    border-radius: 4px; }
-  section#adminOrders .container-fluid .infoUser, section#adminAllOrders .container-fluid .infoUser {
-    padding: 2em;
-    box-shadow: rgba(0, 0, 0, 0.2) 1.5px 1.5px 2px;
-    margin-top: 1em;
-    border-radius: 4px; }
-  section#adminOrders .container-fluid .orderProducts, section#adminAllOrders .container-fluid .orderProducts {
-    display: flex;
-    justify-content: space-between;
-    padding: 2em;
-    box-shadow: rgba(0, 0, 0, 0.2) 1.5px 1.5px 2px;
-    margin-top: 1em;
-    border-radius: 4px; }
-    section#adminOrders .container-fluid .orderProducts .orderImg, section#adminAllOrders .container-fluid .orderProducts .orderImg {
-      aspect-ratio: 1;
-      width: 25px;
-      height: 25px;
-      margin-left: 1em; }
-      section#adminOrders .container-fluid .orderProducts .orderImg img, section#adminAllOrders .container-fluid .orderProducts .orderImg img {
-        width: 100%;
-        height: auto; }
-  section#adminOrders .container-fluid table, section#adminAllOrders .container-fluid table {
-    width: 100%; }
-    section#adminOrders .container-fluid table thead, section#adminAllOrders .container-fluid table thead {
-      background-color: #DADADA; }
-      section#adminOrders .container-fluid table thead th, section#adminAllOrders .container-fluid table thead th {
-        padding: 1em;
-        border-radius: 4px; }
-    section#adminOrders .container-fluid table tbody td, section#adminAllOrders .container-fluid table tbody td {
-      padding: 1em;
-      border-radius: 4px;
-      border-bottom: 1px solid #DADADA; }
-
-section#adminContact .container-fluid {
-  display: flex;
-  background-color: #fafafa;
-  min-height: 90vh; }
-  section#adminContact .container-fluid .wrap {
-    width: 95%;
-    padding: 2em; }
-  section#adminContact .container-fluid .modal-body {
-    padding: 2em; }
-    section#adminContact .container-fluid .modal-body .message {
-      background-color: #fafafa;
-      margin-bottom: 2em; }
-    section#adminContact .container-fluid .modal-body .response {
-      background-color: #DADADA; }
-    section#adminContact .container-fluid .modal-body .message, section#adminContact .container-fluid .modal-body .response {
-      border-radius: 4px;
-      padding: 1em;
-      box-shadow: rgba(0, 0, 0, 0.2) 1.5px 1.5px 2px; }
-  section#adminContact .container-fluid table {
-    width: 100%; }
-    section#adminContact .container-fluid table th.message {
-      padding-left: 2em; }
-    section#adminContact .container-fluid table .date, section#adminContact .container-fluid table .actions {
-      text-align: center; }
-    section#adminContact .container-fluid table button {
-      text-align: left; }
-  section#adminContact .container-fluid td.actions form {
-    display: inline-flex; }
-  section#adminContact .container-fluid thead {
-    background-color: #DADADA; }
-    section#adminContact .container-fluid thead th {
-      padding: 1em;
-      border-radius: 4px; }
-  section#adminContact .container-fluid tbody .white {
-    background-color: #fafafa; }
-  section#adminContact .container-fluid tbody .grey {
-    background-color: rgba(218, 218, 218, 0.3); }
-  section#adminContact .container-fluid tbody td {
-    padding: 1em;
-    border-radius: 4px;
-    border-bottom: 1px solid #DADADA; }
-
-section#responseContact .container-fluid {
-  min-height: 90vh;
-  display: flex; }
-  section#responseContact .container-fluid .initMsg {
-    background-color: #fff;
-    border-radius: 4px;
-    padding: 2em;
-    margin: 2em 0; }
-  section#responseContact .container-fluid .wrap {
-    display: flex;
-    align-items: flex-start;
+  width: 100%;
+  background-color: #252525; }
+  section#profile #scrollBackToTop {
+    left: 2em;
+    bottom: 1em;
+    right: 0; }
+  section#profile .author {
+    display: none; }
+  section#profile .wrap {
+    margin-top: 0.5em;
+    height: 100%;
+    background-color: #252525;
+    min-height: 90vh;
+    width: 100vw; }
+  section#profile .my-drone, section#profile .social {
     background-color: #fafafa;
-    border-radius: 4px; }
+    margin: 0 2em 2em 2em;
+    padding: 2em;
+    border-radius: 3px; }
+  section#profile .social {
+    display: flex;
+    justify-content: space-around; }
+    section#profile .social div {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      section#profile .social div i {
+        margin: 0 0.5em 0 0; }
+  section#profile .user-content {
+    position: relative;
+    background-color: #fafafa;
+    margin-right: 2em;
+    padding: 2em 1em;
+    border-radius: 3px;
+    min-height: 30vh; }
+  section#profile .my-drone {
+    position: relative; }
+    section#profile .my-drone .fav {
+      float: right;
+      max-width: 125px;
+      max-height: 125px;
+      object-fit: cover;
+      object-position: center;
+      overflow: hidden; }
+    section#profile .my-drone a {
+      background-color: #DADADA;
+      padding: 0.5 1em;
+      border-radius: 3px;
+      position: absolute;
+      top: 2em;
+      right: 3em; }
+  section#profile .container-fluid {
+    display: grid;
+    grid-template-columns: 10% minmax(500px, 85%);
+    background-color: #252525; }
+  section#profile #profile-avatar, section#profile .show-article-avatar {
+    max-height: 125px;
+    max-width: 125px; }
+    section#profile #profile-avatar img, section#profile .show-article-avatar img {
+      background-color: #fafafa;
+      width: 100%;
+      height: 100%; }
+  section#profile .user {
+    background-color: #fafafa;
+    margin: 0 2em 2em 2em;
+    border-radius: 3px;
+    display: flex;
+    align-items: center; }
+    section#profile .user h2 {
+      margin: 0.5% 2%;
+      font-size: 2.5em; }
+  section#profile .sessions {
+    background-color: #fafafa;
+    margin: 0 2em 2em 2em;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 10em; }
+    section#profile .sessions span {
+      margin: 0 1em;
+      width: 90%; }
+    section#profile .sessions .spotWrapper {
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1em;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      width: 100%;
+      max-height: fit-content; }
+      section#profile .sessions .spotWrapper .infoSpot {
+        margin: auto; }
+      section#profile .sessions .spotWrapper .iconWrap {
+        padding: 1em 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px; }
+      section#profile .sessions .spotWrapper p.spotName {
+        font-size: 1.1em;
+        margin-bottom: 0; }
+      section#profile .sessions .spotWrapper p.text-muted {
+        margin-bottom: 0; }
+  section#profile .article {
+    display: flex;
+    position: relative; }
+  section#profile .article-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em; }
+  section#profile .article-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    line-clamp: 7;
+    -webkit-box-orient: vertical; }
 
 /**SEARCH PAGE ***/
 section#search h3 {
@@ -3381,11 +2461,7 @@ aside.sidebarMenu, aside.adminSidebarMenu {
   min-height: 100%;
   position: relative;
   overflow-x: hidden;
-<<<<<<< HEAD
-  z-index: 15;
-=======
   z-index: 2;
->>>>>>> d89b290 (shop: cart responsive css)
   background-color: #fafafa;
   box-shadow: rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px; }
   aside.sidebarMenu.close, aside.adminSidebarMenu.close {
@@ -3445,14 +2521,7 @@ footer {
   position: relative; }
 
 /** PARTIALS **/
-<<<<<<< HEAD
-.btnWrap {
-  z-index: 15; }
-
-/* PARTIALS ADMIN ARTICLES */
-=======
 /*ADMIN ARTICLES*/
->>>>>>> d89b290 (shop: cart responsive css)
 section#adminBlog article.adminArticle, section#adminBlogAlerts article.adminArticle {
   /*xs*/
   /* sm */
@@ -3575,64 +2644,7 @@ section#adminBlog article.adminArticle, section#adminBlogAlerts article.adminArt
       object-fit: cover;
       max-width: 25vw; } }
 
-<<<<<<< HEAD
-/** PARTIALS ARTICLE LEFT**/
-/* PARTIALS ARTICLE RIGHT */
-.wrapper-right .category-badge {
-  right: -1em; }
-
-/****PARTIALS ARTICLES ****/
-.wrapper-left, .wrapper-right {
-  position: relative; }
-  .wrapper-left .author-avatar, .wrapper-right .author-avatar {
-    height: 100%;
-    aspect-ratio: 1; }
-  @media screen and (max-width: 576px) {
-    .wrapper-left .author, .wrapper-right .author {
-      height: 3em;
-      padding: 0;
-      width: max-content; }
-      .wrapper-left .author .author-avatar, .wrapper-right .author .author-avatar {
-        width: max-content; }
-      .wrapper-left .author .author-nickname h4, .wrapper-right .author .author-nickname h4 {
-        font-size: 1.2em !important; }
-    .wrapper-left .category-badge, .wrapper-right .category-badge {
-      font-size: x-small; } }
-  @media screen and (max-width: 768px) {
-    .wrapper-left .card-title, .wrapper-right .card-title {
-      font-size: 1em; }
-    .wrapper-left .author .author-nickname h4, .wrapper-right .author .author-nickname h4 {
-      font-size: 1.1em; } }
-  @media screen and (max-width: 991px) {
-    .wrapper-left, .wrapper-right {
-      border-radius: 4px;
-      margin: 0 auto;
-      padding: 0; }
-      .wrapper-left .card-body, .wrapper-right .card-body {
-        padding: 1em 0; } }
-  @media screen and (min-width: 991px) {
-    .wrapper-left .card-body, .wrapper-right .card-body {
-      padding: 0 1em; } }
-
-@media screen and (max-width: 991px) {
-  .wrapper-right .category-badge {
-    right: -1em; } }
-@media screen and (min-width: 991px) {
-  .wrapper-right .category-badge {
-    position: absolute;
-    right: 2em;
-    top: 2em; } }
-
-@media screen and (min-width: 991px) {
-  .wrapper-left .category-badge {
-    position: absolute;
-    left: 2em;
-    top: 2em; } }
-
-/****PARTIALS NAVBARS ****/
-=======
 /**** NAVBARS ****/
->>>>>>> d89b290 (shop: cart responsive css)
 @media screen and (max-width: 1200px) {
   section#navbarMenu .navbar-collapse, section#adminNavbarMenu .navbar-collapse {
     border-radius: 4px;
@@ -3640,15 +2652,13 @@ section#adminBlog article.adminArticle, section#adminBlogAlerts article.adminArt
 
 @media screen and (max-width: 1200px) {
   section#navbarMenu .navbar-collapse {
-    background-color: rgba(37, 37, 37, 0.9); }
-    section#navbarMenu .navbar-collapse .cart {
-      margin-top: 1.5em; } }
+    background-color: rgba(37, 37, 37, 0.9); } }
 
 @media screen and (max-width: 1200px) {
   section#adminNavbarMenu .navbar-collapse {
     background-color: rgba(250, 250, 250, 0.9); } }
 
-/**PARTIALS  sidebar & admin side bar **/
+/** sidebar & admin side bar **/
 @media screen and (max-width: 450px) {
   aside.sidebarMenu nav, aside.adminSidebarMenu nav {
     margin-top: 10em; }
@@ -3661,7 +2671,7 @@ section#adminBlog article.adminArticle, section#adminBlogAlerts article.adminArt
     aside.sidebarMenu.collapseMenu.open, aside.adminSidebarMenu.collapseMenu.open {
       position: absolute;
       top: 0;
-      width: 70vw;
+      width: 90vw;
       transition: width 1s; }
 
   button.collapsedMenuBtn {
@@ -3705,12 +2715,7 @@ section#home {
         font-size: 60px; } }
   @media screen and (min-width: 576px) and (max-width: 1800px) {
     section#home #homeLogo img {
-      height: 17em; }
-    section#home #homeLogo h1.glitch {
-      font-size: 60px; } }
-  @media screen and (min-width: 1800px) and (max-width: 2000px) {
-    section#home #homeLogo img {
-      height: 19em; }
+      height: 20em; }
     section#home #homeLogo h1.glitch {
       font-size: 60px; } }
 
@@ -3730,89 +2735,68 @@ section#counter {
     section#counter div.img-wrapper {
       width: 3.5em;
       height: 3.5em; } }
-  @media screen and (min-width: 768px) and (max-width: 1800px) {
+  @media screen and (min-width: 768px) and (max-width: 1200px) {
     section#counter h4 {
       font-size: 2.5em;
       margin-top: 0.5em; }
     section#counter h5 {
       font-size: 1.5em; } }
 
-@media screen and (max-width: 768px) {
-  section#adminNews .adminNews-wrapper .content {
-    font-size: 0.9em; } }
-@media screen and (max-width: 992px) {
-  section#adminNews .adminNews-wrapper .content {
-    border-left: none;
-    width: max-content; }
-  section#adminNews .adminNews-wrapper .image {
-    max-width: 80vw; } }
-@media screen and (min-width: 992px) {
-  section#adminNews .adminNews-wrapper article {
-    flex-wrap: nowrap; }
-  section#adminNews .adminNews-wrapper .content, section#adminNews .adminNews-wrapper .image {
-    padding: 2%; } }
-@media screen and (min-width: 1800px) {
-  section#adminNews .adminNews-wrapper .content, section#adminNews .adminNews-wrapper .image {
-    padding: 2% 4%; }
-  section#adminNews .adminNews-wrapper .content {
-    margin-right: 0; } }
-@media screen and (min-width: 2000px) {
-  section#adminNews .adminNews-wrapper .content, section#adminNews .adminNews-wrapper .image {
-    padding: 2% 5%; }
-  section#adminNews .adminNews-wrapper .content {
-    margin-right: 0; } }
+section#adminNews {
+  /* xs , sm, md */ }
+  @media screen and (max-width: 768px) {
+    section#adminNews .adminNews-wrapper .content {
+      border-left: none;
+      font-size: 0.9em; } }
 
 section#blogHome {
+  /*sm*/
   /*md*/
   /*lg*/ }
-  section#blogHome .category-badge {
-    max-height: fit-content; }
-  @media screen and (max-width: 991px) {
+  @media screen and (max-width: 768px) {
+    section#blogHome .card-title {
+      font-size: 1em; }
+    section#blogHome .author .author-nickname h4 {
+      font-size: 1.1em; } }
+  @media screen and (max-width: 992px) {
     section#blogHome {
       padding-bottom: 0; }
+      section#blogHome .wrapper-left, section#blogHome .wrapper-right {
+        border-radius: 4px;
+        margin: 0 auto;
+        padding: 0; }
+        section#blogHome .wrapper-left .category-badge, section#blogHome .wrapper-right .category-badge {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative; }
       section#blogHome .wrapper-left {
-        background-color: rgba(250, 250, 250, 0.8); } }
+        background-color: rgba(250, 250, 250, 0.8); }
+      section#blogHome .wrapper-right .category-badge {
+        right: -1em; }
+      section#blogHome .card-body {
+        padding: 0 0 0.5em 0; } }
   @media screen and (max-width: 1800px) {
     section#blogHome article {
       max-width: 90%; } }
 
 section#newOnShop {
   /*xs*/
-  /*md to lg*/
-  /*lg + */ }
+  /*md to xxl*/ }
   @media screen and (max-width: 450px) {
     section#newOnShop {
       padding: 2em auto; }
       section#newOnShop .wrapCard {
-        width: 85%;
-        font-size: 0.9em; } }
-  @media screen and (min-width: 450px) and (max-width: 576px) {
+        width: 100%; } }
+  @media screen and (min-width: 450px) and (min-width: 1700px) {
     section#newOnShop .wrapCard {
-      width: 85%;
-      font-size: 0.9em; } }
-  @media screen and (min-width: 576px) and (max-width: 992px) {
-    section#newOnShop .wrapCard {
-      width: 65%;
-      font-size: 0.9em; } }
-  @media screen and (min-width: 992px) and (max-width: 1400px) {
-    section#newOnShop .wrapCard {
-      width: 90%;
-      font-size: 1em; } }
-  @media screen and (min-width: 1400px) and (max-width: 1600px) {
-    section#newOnShop .wrapCard {
-      width: 85%; } }
-  @media screen and (min-width: 1600px) and (max-width: 1900px) {
-    section#newOnShop .wrapCard {
-      width: 80%; } }
-  @media screen and (min-width: 1900px) {
-    section#newOnShop .wrapCard {
-      width: 65%; } }
+      width: 60%; } }
 
 @media screen and (max-width: 576px) {
-  section#sessions #map {
-    height: 0; }
   section#sessions .spotWrapper {
     position: relative; }
+  section#sessions #map {
+    height: 20em; }
   section#sessions .sub span {
     position: absolute;
     top: 1em;
@@ -3820,21 +2804,15 @@ section#newOnShop {
   section#sessions .spotMapChange {
     min-width: 50%; } }
 @media screen and (min-width: 576px) and (max-width: 991px) {
-  section#sessions #map {
-    height: 0; }
   section#sessions .spotWrapper {
     padding: 0.5em; }
+  section#sessions #map {
+    height: 20em; }
   section#sessions .colSessions {
     overflow-y: initial; } }
 @media screen and (min-width: 992px) {
   section#sessions #map {
-<<<<<<< HEAD
-    height: 100% !important; }
-  section#sessions .btnMap {
-    display: none; } }
-=======
     height: 100%; } }
->>>>>>> d89b290 (shop: cart responsive css)
 @media screen and (min-width: 576px) {
   section#sessions .infoSpot, section#sessions .mainInfos {
     width: 50%; } }
@@ -3897,9 +2875,7 @@ section#register {
     section#register .containerRegister {
       width: 100%;
       height: 100%;
-      border-radius: 0; }
-    section#register .registerForm {
-      width: 100%; } }
+      border-radius: 0; } }
   @media screen and (min-width: 450px) and (max-width: 1200px) {
     section#register .containerRegister {
       width: 80%; } }
@@ -3917,8 +2893,7 @@ section#register {
         object-fit: cover;
         object-position: center; }
       section#register .containerRegister .registerForm {
-        padding: 2em;
-        width: 50%; } }
+        padding: 2em; } }
   @media screen and (min-width: 992px) and (max-width: 1200px) {
     section#register .containerRegister {
       width: 50%; } }
@@ -3926,281 +2901,7 @@ section#register {
     section#register .containerRegister {
       width: 40%; } }
 
-<<<<<<< HEAD
-/**** ACTUALITES (blog) INDEX  ****/
-section#blog {
-  padding-bottom: 0; }
-  section#blog .row.wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center; }
-  @media screen and (max-width: 400px) {
-    section#blog .container-fluid .right {
-      max-width: 100%; } }
-  @media screen and (max-width: 576px) {
-    section#blog .container-fluid .row article .card-body {
-      padding: 0; } }
-  @media screen and (max-width: 768px) {
-    section#blog #cat {
-      font-size: small; } }
-  @media screen and (min-width: 400px) and (max-width: 768px) {
-    section#blog .container-fluid .right {
-      width: 90%; } }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
-    section#blog .filter {
-      margin-bottom: 2em; }
-    section#blog .row {
-      width: 90%; }
-    section#blog .right {
-      width: 80%; } }
-  @media screen and (max-width: 992px) {
-    section#blog article {
-      margin: 1em auto;
-      padding: 1em; }
-      section#blog article .card-body {
-        padding: 1em 0;
-        margin: 1em auto; }
-      section#blog article .card-title {
-        padding-right: 0.5em; }
-      section#blog article .colThumb {
-        margin: 0 auto;
-        max-width: 30em; }
-      section#blog article .white {
-        background-color: #fff; }
-      section#blog article .grey {
-        background-color: #DADADA; }
-      section#blog article .white, section#blog article .grey {
-        border-radius: 4px;
-        margin: 1em auto; } }
-  @media screen and (min-width: 991px) {
-    section#blog .category-badge {
-      position: absolute;
-      left: 3em;
-      top: 8%; } }
-  @media screen and (min-width: 992px) and (max-width: 1200px) {
-    section#blog .row {
-      width: 100%;
-      padding: 1em; }
-    section#blog .filter {
-      margin-bottom: 1em; } }
-  @media screen and (min-width: 992px) and (max-width: 1200px) {
-    section#blog .row {
-      width: 100%;
-      padding: 1em 2em; }
-    section#blog .filter {
-      margin-bottom: 1em; } }
-  @media screen and (min-width: 1200px) and (max-width: 1400px) {
-    section#blog .row.wrap {
-      width: 90%;
-      padding: 1em 2em; }
-    section#blog .filter {
-      margin-bottom: 1em; } }
-  @media screen and (min-width: 1400px) and (max-width: 1800px) {
-    section#blog .row.wrap {
-      width: 80%;
-      padding: 1em 2em; }
-    section#blog .filter {
-      margin-bottom: 1em; } }
-  @media screen and (min-width: 1800px) {
-    section#blog .row.wrap {
-      width: 70%;
-      padding: 1em 2em; }
-    section#blog .filter {
-      margin-bottom: 1em; } }
-
-/**** BLOG : show article **/
-@media screen and (max-width: 576px) {
-  section#showArticle #wrapArticleContent {
-    padding: 0.5em; } }
-@media screen and (min-width: 576px) and (max-width: 768px) {
-  section#showArticle #wrapArticleContent {
-    padding: 1em; } }
-@media screen and (max-width: 992px) {
-  section#showArticle h2 {
-    font-size: 1.2em; }
-  section#showArticle h3 a {
-    font-size: 0.9em;
-    margin-bottom: 0; }
-  section#showArticle h5 {
-    font-size: 1.1em; }
-  section#showArticle #wrapArticleContent {
-    margin: 0; }
-    section#showArticle #wrapArticleContent .wrapInfos .user {
-      padding-right: 0;
-      margin-top: 1em; }
-    section#showArticle #wrapArticleContent .wrapInfos .avatar {
-      max-width: 40px; }
-    section#showArticle #wrapArticleContent .wrapInfos .articleInfo {
-      flex-wrap: wrap;
-      justify-content: end; }
-    section#showArticle #wrapArticleContent #like-article {
-      font-size: small; }
-    section#showArticle #wrapArticleContent button.text-danger {
-      font-size: small; }
-    section#showArticle #wrapArticleContent .viewsAndDate {
-      font-size: small; }
-  section#showArticle .commentWrap {
-    font-size: 0.9em; }
-    section#showArticle .commentWrap .btn-danger {
-      font-size: small; }
-  section#showArticle .addCommentForm {
-    justify-content: center;
-    align-items: center;
-    display: flex; }
-    section#showArticle .addCommentForm form {
-      width: 100%; }
-  section#showArticle #wrapSameAuthorArticle .card {
-    margin-bottom: 1em;
-    border-radius: 4px; } }
-@media screen and (max-width: 992px) {
-  section#showArticle .card-body {
-    font-size: 0.8em; } }
-@media screen and (max-width: 1400px) {
-  section#showArticle .nav-link {
-    font-size: small; } }
-@media screen and (min-width: 768px) and (max-width: 1600px) {
-  section#showArticle #wrapArticleContent {
-    margin: 0;
-    padding: 2em 1.5em; }
-  section#showArticle .wrapInfos .user {
-    padding-right: 0;
-    margin-top: 1em; }
-  section#showArticle .wrapInfos .avatar {
-    max-width: 55px; }
-  section#showArticle .wrapInfos .articleInfo {
-    flex-wrap: wrap;
-    justify-content: end; }
-  section#showArticle h2 {
-    font-size: 1.4em; }
-  section#showArticle h3 a {
-    font-size: 0.9em;
-    margin-bottom: 0; }
-  section#showArticle h5 {
-    font-size: 1em; }
-  section#showArticle #like-article {
-    font-size: small; }
-  section#showArticle button.text-danger {
-    font-size: small; }
-  section#showArticle .viewsAndDate {
-    font-size: small; }
-  section#showArticle .articleInfo {
-    width: 100%; }
-  section#showArticle #wrapSameAuthorArticle .col-xl-6 {
-    padding-right: 0;
-    margin-bottom: 0.5em; } }
-@media screen and (min-width: 1200px) and (max-width: 1600px) {
-  section#showArticle #wrapArticleContent {
-    margin: 1vh; } }
-@media screen and (min-width: 1600px) {
-  section#showArticle #wrapArticleContent {
-    padding: 2em;
-    margin: 1vh 5vh; }
-  section#showArticle .wrapInfos .user {
-    padding-right: 0;
-    margin-top: 1em; }
-  section#showArticle .wrapInfos .avatar {
-    max-width: 55px; }
-  section#showArticle .wrapInfos .articleInfo {
-    flex-wrap: wrap;
-    justify-content: end; }
-  section#showArticle h2 {
-    font-size: 1.5em; }
-  section#showArticle h3 a {
-    font-size: 1em;
-    margin-bottom: 0; }
-  section#showArticle h5 {
-    font-size: 1.1em; }
-  section#showArticle .articleInfo {
-    width: 100%; }
-  section#showArticle #wrapSameAuthorArticle .col-xl-6 {
-    padding-right: 0;
-    margin-bottom: 1em; } }
-@media screen and (min-width: 2000px) {
-  section#showArticle #wrapArticleContent {
-    max-width: 80vw; } }
-
-/*** SESSION : INDEX ***/
-@media screen and (max-width: 768px) {
-  section#session #map {
-    height: 0; }
-  section#session .btnMap {
-    display: block; }
-  section#session .viewSessionBtn {
-    justify-content: center;
-    display: flex; }
-  section#session .sub {
-    display: flex;
-    justify-content: flex-end; } }
-@media screen and (min-width: 576px) and (max-width: 992px) {
-  section#session .spotWrapper {
-    width: 80%;
-    margin: 1em auto; } }
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  section#session #map {
-    height: 0; }
-  section#session .btnMap {
-    display: block; }
-  section#session .viewSessionBtn {
-    display: flex; } }
-@media screen and (min-width: 992px) {
-  section#session #map {
-    height: 90vh; }
-  section#session .btnMap {
-    display: none; }
-  section#session .viewSessionBtn {
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap; } }
-@media screen and (min-width: 1200px) and (max-width: 1400px) {
-  section#session .colSessions {
-    width: 33%; }
-  section#session #map {
-    width: 67%; } }
-@media screen and (min-width: 1600px) {
-  section#session .colSessions {
-    width: 25%; }
-  section#session #map {
-    width: 75%; } }
-
-/*** SESSION : ADD ***/
-section#sessionAdd {
-  /* sm to lg */
-  /*xl*/
-  /* over xl*/ }
-  @media screen and (max-width: 576px) {
-    section#sessionAdd .wrapper {
-      height: 90vh; }
-    section#sessionAdd .formSession {
-      justify-content: center;
-      height: 100%;
-      width: 100%; }
-      section#sessionAdd .formSession form {
-        width: 100%; } }
-  @media screen and (min-width: 576px) and (max-width: 768px) {
-    section#sessionAdd .formSession {
-      width: 80%; } }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
-    section#sessionAdd .formSession {
-      width: 70%; } }
-  @media screen and (min-width: 992px) and (max-width: 1200px) {
-    section#sessionAdd .formSession {
-      width: 60%; } }
-  @media screen and (min-width: 1200px) and (max-width: 1400px) {
-    section#sessionAdd .formSession {
-      width: 50%; } }
-  @media screen and (min-width: 1400px) and (max-width: 1600px) {
-    section#sessionAdd .formSession {
-      width: 45%; } }
-  @media screen and (min-width: 1600px) and (max-width: 1800px) {
-    section#sessionAdd .formSession {
-      width: 40%; } }
-  @media screen and (min-width: 1800px) {
-    section#sessionAdd .formSession {
-      width: 33%; } }
-
-=======
 /**** ACTUALITES (blog)  ****/
->>>>>>> d89b290 (shop: cart responsive css)
 /*** SHOP : INDEX ***/
 section#shop {
   /*xs to sm */ }
@@ -4218,24 +2919,12 @@ section#shop {
       width: 80vw !important; }
       section#shop .wrap .card {
         max-width: 20em; } }
-<<<<<<< HEAD
-  @media screen and (max-width: 1400px) {
-    section#shop .wrap .card {
-      font-size: 0.9em; } }
-  @media screen and (min-width: 992px) and (max-width: 1200px) {
-    section#shop .wrap {
-      width: 90vw; } }
-  @media screen and (min-width: 1200px) and (max-width: 1400px) {
-    section#shop .wrap {
-      width: 80vw; } }
-=======
   @media screen and (min-width: 992px) and (max-width: 1600px) {
     section#shop .wrap {
       width: 90vw; } }
   @media screen and (min-width: 992px) and (max-width: 1200px) {
     section#shop .wrap {
       width: 90vw; } }
->>>>>>> d89b290 (shop: cart responsive css)
   @media screen and (min-width: 1400px) and (max-width: 1600px) {
     section#shop .wrap {
       width: 75vw; } }
@@ -4250,7 +2939,6 @@ section#shop {
       section#shop .wrap .card .price {
         font-size: 1.2em; } }
 
-<<<<<<< HEAD
 /*** SHOP : SHOW PRODUCT ***/
 @media screen and (min-width: 768px) {
   section#showProduct .encartInfo .transporter, section#showProduct .encartInfo .stripe, section#showProduct .encartInfo .question {
@@ -4265,7 +2953,7 @@ section#shop {
     padding-left: 0; } }
 @media screen and (max-width: 768px) {
   section#showProduct .description {
-    line-height: 1.2em;
+    line-height: 1em;
     width: 100%; }
   section#showProduct .stripeSentence {
     display: flex;
@@ -4287,6 +2975,8 @@ section#shop {
 @media screen and (min-width: 992px) {
   section#showProduct .wrap {
     padding: 2em; }
+  section#showProduct .description {
+    line-height: 1em; }
   section#showProduct .encartInfo {
     margin: 3em auto 1em auto; }
   section#showProduct .description {
@@ -4307,8 +2997,6 @@ section#shop {
   section#showProduct .encartInfo {
     width: 80%; } }
 
-=======
->>>>>>> d89b290 (shop: cart responsive css)
 /*** SHOP : CART ***/
 @media screen and (max-width: 768px) {
   section#cart .wrapper .product .img img {
@@ -4332,11 +3020,6 @@ section#shop {
     section#cart .wrapper tr {
       display: block;
       margin: 1em; }
-<<<<<<< HEAD
-    section#cart .wrapper td[data-label="Produit"] {
-      background-color: #DADADA; }
-=======
->>>>>>> d89b290 (shop: cart responsive css)
     section#cart .wrapper td {
       display: flex;
       justify-content: space-between;
@@ -4383,10 +3066,7 @@ section#shop {
     font-size: 1em; }
   section#cart .wrapImgProduct {
     display: flex;
-<<<<<<< HEAD
-=======
     justify-content: center;
->>>>>>> d89b290 (shop: cart responsive css)
     align-items: center; }
   section#cart .delete, section#cart .price, section#cart .total {
     text-align: right; }
@@ -4400,93 +3080,6 @@ section#shop {
     width: 80vw;
     margin: 0 auto; } }
 
-<<<<<<< HEAD
-/*** ORDER: PREPARE ***/
-@media screen and (max-width: 576px) {
-  section#prepareOrder .container-fluid.pt-4 {
-    padding: 1em; } }
-@media screen and (min-width: 576px) and (max-width: 768px) {
-  section#prepareOrder .container-fluid.pt-4 {
-    padding: 2em; } }
-@media screen and (min-width: 768px) {
-  section#prepareOrder .container-fluid.pt-4 {
-    padding: 3em; } }
-@media screen and (max-width: 992px) {
-  section#prepareOrder legend {
-    font-size: 1.2em; }
-    section#prepareOrder legend span {
-      display: block; }
-  section#prepareOrder .wrapper {
-    justify-content: center; }
-    section#prepareOrder .wrapper h4 {
-      font-size: 1.1em; }
-    section#prepareOrder .wrapper .delivery, section#prepareOrder .wrapper .recap, section#prepareOrder .wrapper .transporter {
-      padding: 1em;
-      width: 100%; }
-    section#prepareOrder .wrapper thead {
-      visibility: hidden;
-      height: 0;
-      position: absolute;
-      top: 0; }
-    section#prepareOrder .wrapper .table > :not(:first-child) {
-      border-top: none; }
-    section#prepareOrder .wrapper tr {
-      display: block;
-      margin: 1em; }
-    section#prepareOrder .wrapper td {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid #DADADA;
-      border-bottom: none;
-      font-size: 0.9em; }
-      section#prepareOrder .wrapper td a.add {
-        margin: 0 0 0 1em; }
-      section#prepareOrder .wrapper td a.btn-danger {
-        margin: 0; }
-      section#prepareOrder .wrapper td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        padding-right: 1em; }
-      section#prepareOrder .wrapper td:first-child {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px; }
-      section#prepareOrder .wrapper td:last-child {
-        border: 1px solid #DADADA;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px; }
-    section#prepareOrder .wrapper td[data-label="Produit"] {
-      background-color: #DADADA; }
-    section#prepareOrder .wrapper tfoot .basePrice {
-      display: none; }
-    section#prepareOrder .wrapper tfoot tr {
-      border-bottom: 1px solid transparent; }
-  section#prepareOrder .btn.param, section#prepareOrder a.param {
-    font-size: 0.9em; } }
-@media screen and (min-width: 992px) {
-  section#prepareOrder .row {
-    justify-content: center; }
-  section#prepareOrder .wrapper thead {
-    visibility: visible;
-    position: relative; }
-  section#prepareOrder .wrapper td {
-    vertical-align: middle;
-    padding: 1em 0; }
-  section#prepareOrder .wrapper .img {
-    width: 50px !important;
-    height: auto;
-    margin-right: 1em; }
-  section#prepareOrder .delivery, section#prepareOrder .recap, section#prepareOrder .transporter {
-    padding: 2em; }
-  section#prepareOrder .btn.param, section#prepareOrder a.param {
-    font-size: 1em; } }
-@media screen and (min-width: 1600px) {
-  section#prepareOrder .wrapper.row {
-    margin: 0px 4vw;
-    border-radius: 4px; } }
-
-=======
->>>>>>> d89b290 (shop: cart responsive css)
 /*** ORDER : SUCCESS ****/
 @media screen and (max-width: 576px) {
   section#successPayment .wrapper .recap .deliveryImage {
@@ -4657,168 +3250,7 @@ section#contact {
     section#contact .wrap {
       width: 33vw; } }
 
-<<<<<<< HEAD
-/*** SEARCH PAGE***/
-@media screen and (max-width: 992px) {
-  section#search .card-body {
-    padding: 1em 0; }
-  section#search .white {
-    background-color: #fff; }
-  section#search .grey {
-    background-color: #DADADA; }
-  section#search .white, section#search .grey {
-    border-radius: 4px;
-    margin: 1em auto; }
-  section#search article {
-    padding: 1em; }
-  section#search .card-title {
-    padding-right: 0.5em; }
-  section#search .colThumb {
-    margin: 0 auto;
-    max-width: 30em; } }
-@media screen and (min-width: 992px) {
-  section#search .wrapper-left {
-    margin: 1em auto; } }
-
-=======
->>>>>>> d89b290 (shop: cart responsive css)
 /****** PARTIE ACCOUNT *******/
-/*** ACCOUNT : MON PROFIL ***/
-@media screen and (max-width: 576px) {
-  section#myProfile .banner {
-    height: 12vh;
-    margin: 0 0 0.5em; }
-  section#myProfile .leftWrap, section#myProfile .rightWrap, section#myProfile .user, section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
-    border-radius: 0; }
-  section#myProfile .user #myProfile-avatar {
-    max-width: 75px; }
-  section#myProfile .fav {
-    max-width: 75px; }
-  section#myProfile .counters {
-    display: none; } }
-@media screen and (min-width: 576px) and (max-width: 768px) {
-  section#myProfile .row {
-    margin: 0 auto; }
-  section#myProfile .user #myProfile-avatar {
-    max-width: 75px; }
-  section#myProfile .fav {
-    max-width: 75px; }
-  section#myProfile .banner {
-    height: 13vh;
-    margin: 0 0 1em; }
-  section#myProfile .leftWrap, section#myProfile .rightWrap, section#myProfile .user, section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
-    border-radius: 4px; } }
-@media screen and (max-width: 768px) {
-  section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
-    font-size: 0.9em; } }
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  section#myProfile .wrap {
-    width: 90%; }
-  section#myProfile .banner {
-    height: 12vh;
-    margin: 0 0 0.5em; }
-  section#myProfile .user #myProfile-avatar {
-    max-width: 90px; }
-  section#myProfile .fav {
-    max-width: 90px; }
-  section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
-    font-size: 0.95em; }
-  section#myProfile .leftWrap, section#myProfile .rightWrap, section#myProfile .user, section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
-    border-radius: 4px; } }
-@media screen and (min-width: 768px) {
-  section#myProfile .globalWrap {
-    padding-right: 1em; }
-  section#myProfile .wrap {
-    margin: 0 auto; } }
-@media screen and (max-width: 992px) {
-  section#myProfile h3 {
-    font-size: large; }
-  section#myProfile .banner {
-    margin: 0 0 0.5em; }
-  section#myProfile .leftWrap, section#myProfile .rightWrap, section#myProfile .user, section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
-    margin: 0 0 0.5em 0;
-    width: 100%; }
-  section#myProfile .leftWrap {
-    margin: 0; }
-  section#myProfile .user h2 {
-    font-size: x-large; }
-  section#myProfile .dashboard h5 {
-    font-size: medium; }
-    section#myProfile .dashboard h5 i {
-      font-size: 1.5em; }
-  section#myProfile #accordionQuestion {
-    display: none; } }
-@media screen and (min-width: 992px) {
-  section#myProfile .banner {
-    margin: 0 0 2em 0;
-    height: 12vh; }
-  section#myProfile h3 {
-    font-size: large; }
-  section#myProfile .user h2 {
-    font-size: x-large; }
-  section#myProfile .user #myProfile-avatar {
-    max-width: 90px; }
-  section#myProfile .fav {
-    max-width: 90px; }
-  section#myProfile .leftWrap {
-    width: 40%;
-    margin: 0; }
-  section#myProfile .rightWrap {
-    width: 60%;
-    margin: 0; }
-  section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard, section#myProfile .user {
-    margin: 0 0 1em 0;
-    font-size: 0.95em; }
-  section#myProfile .dashboard h5 {
-    font-size: medium; }
-    section#myProfile .dashboard h5 i {
-      font-size: 1.5em; } }
-@media screen and (min-width: 1400px) and (max-width: 1600px) {
-  section#myProfile .banner {
-    height: 13vh; }
-  section#myProfile .wrap {
-    width: 90%; }
-  section#myProfile .col-md {
-    width: 33.3%; }
-  section#myProfile .col-sm-6 {
-    width: 33.3% !important; } }
-@media screen and (min-width: 1600px) and (max-width: 1800px) {
-  section#myProfile .banner {
-    height: 15vh; }
-  section#myProfile .wrap {
-    width: 90%; }
-  section#myProfile .col-md {
-    width: 33.3%; }
-  section#myProfile .col-sm-6 {
-    width: 33.3% !important; } }
-@media screen and (min-width: 1800px) {
-  section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
-    font-size: 1em; }
-  section#myProfile h3 {
-    font-size: x-large !important; }
-  section#myProfile .user h2 {
-    font-size: xx-large; }
-  section#myProfile .user #myProfile-avatar {
-    max-width: 100px; }
-  section#myProfile .dashboard h5 {
-    font-size: large; }
-    section#myProfile .dashboard h5 i {
-      font-size: 2em; }
-  section#myProfile .banner {
-    height: 18vh; }
-  section#myProfile .wrap {
-    width: 80%; }
-  section#myProfile .leftWrap {
-    width: 35%; }
-  section#myProfile .rightWrap {
-    width: 65%; }
-  section#myProfile .dashboard {
-    min-height: 95%; }
-  section#myProfile .col-md {
-    width: 33.3%; }
-  section#myProfile .col-sm-6 {
-    width: 33.3% !important; } }
-
 /**** ACCOUNT: EDITION DES INFO PERSO  ****/
 section#myProfileEdit {
   /* xs to md*/
@@ -4950,177 +3382,6 @@ section#myPwdEdit {
     section#myPwdEdit .wrapper {
       width: 35%; } }
 
-<<<<<<< HEAD
-/*** ACCOUNT : EDIT ARTICLE ***/
-section#editArticle .wrapForm, section#addArticle .wrapForm {
-  width: 90%;
-  margin: 0 auto; }
-@media screen and (min-width: 768px) {
-  section#editArticle .wrapper, section#addArticle .wrapper {
-    padding-right: 1em; } }
-@media screen and (max-width: 992px) {
-  section#editArticle .column1, section#editArticle .columns2, section#addArticle .column1, section#addArticle .columns2 {
-    width: 100%; } }
-@media screen and (min-width: 992px) {
-  section#editArticle .column1, section#editArticle .column2, section#addArticle .column1, section#addArticle .column2 {
-    width: 50%;
-    padding: 0.5em; } }
-@media screen and (max-width: 1400px) {
-  section#editArticle h4, section#addArticle h4 {
-    font-size: 1.2em;
-    margin-bottom: 1em; }
-  section#editArticle h5, section#addArticle h5 {
-    font-size: 1.1em; } }
-@media screen and (min-width: 1800px) {
-  section#editArticle .wrapForm, section#addArticle .wrapForm {
-    width: 80%;
-    margin: 0 auto; } }
-
-/*** ACCOUNT : MES ARTICLES  ***/
-section#myArticles {
-  /*xs*/
-  /* sm */
-  /*md to lg*/ }
-  @media screen and (max-width: 576px) {
-    section#myArticles .articlesWrap {
-      margin-top: 2em; }
-    section#myArticles .wrap {
-      margin: 0; }
-    section#myArticles .article {
-      flex-wrap: wrap;
-      padding: 1em; }
-      section#myArticles .article h5 {
-        font-size: 1.1em; }
-      section#myArticles .article .article-thumb, section#myArticles .article .article-body {
-        width: 100%; }
-      section#myArticles .article .article-thumb {
-        margin-bottom: 1em; }
-      section#myArticles .article .dateAndStats {
-        width: 100%; }
-        section#myArticles .article .dateAndStats .date {
-          display: flex;
-          justify-content: center; }
-      section#myArticles .article .article-footer {
-        flex-wrap: wrap; }
-        section#myArticles .article .article-footer .stats {
-          height: fit-content;
-          justify-content: center;
-          margin: 1em 0;
-          width: 100%; }
-          section#myArticles .article .article-footer .stats .alert, section#myArticles .article .article-footer .stats .views, section#myArticles .article .article-footer .stats .likes, section#myArticles .article .article-footer .stats .comments {
-            width: 3em;
-            height: 3em; }
-        section#myArticles .article .article-footer .settings {
-          display: flex;
-          width: 100%;
-          flex-wrap: wrap;
-          justify-content: center;
-          align-items: center; }
-          section#myArticles .article .article-footer .settings button, section#myArticles .article .article-footer .settings a {
-            font-size: 0.9em;
-            margin: 0.5em; } }
-  @media screen and (min-width: 576px) and (max-width: 768px) {
-    section#myArticles {
-      padding: 0; }
-      section#myArticles .article {
-        flex-wrap: wrap;
-        margin: 0 auto; }
-        section#myArticles .article h5 {
-          font-size: 1.1em; }
-        section#myArticles .article .article-thumb, section#myArticles .article .article-body {
-          width: 75vw;
-          margin: 1em auto; }
-        section#myArticles .article .date {
-          margin: 0 auto; }
-        section#myArticles .article .article-footer {
-          flex-wrap: wrap; }
-          section#myArticles .article .article-footer .dateAndStats {
-            width: 50%; }
-            section#myArticles .article .article-footer .dateAndStats .date {
-              display: flex;
-              justify-content: center; }
-          section#myArticles .article .article-footer .stats {
-            height: fit-content;
-            justify-content: center;
-            margin: 1em 0;
-            width: 100%; }
-            section#myArticles .article .article-footer .stats .alert, section#myArticles .article .article-footer .stats .views, section#myArticles .article .article-footer .stats .likes, section#myArticles .article .article-footer .stats .comments {
-              width: 3em;
-              height: 3em; }
-          section#myArticles .article .article-footer .settings {
-            display: flex;
-            width: 100%;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center; }
-            section#myArticles .article .article-footer .settings button, section#myArticles .article .article-footer .settings a {
-              font-size: 0.9em;
-              margin: 0.5em; } }
-  @media screen and (min-width: 360px) {
-    section#myArticles .article .settings, section#myArticles .article .article-footer {
-      justify-content: center; } }
-  @media screen and (min-height: 768px) and (max-width: 992px) {
-    section#myArticles .article .settings {
-      justify-content: flex-start; } }
-  @media screen and (min-width: 768px) {
-    section#myArticles {
-      padding: 0; }
-      section#myArticles .article {
-        width: 100%; }
-        section#myArticles .article h5 {
-          font-size: 1.1em; }
-        section#myArticles .article .article-thumb, section#myArticles .article .article-body {
-          width: 100%;
-          height: fit-content; }
-        section#myArticles .article .dateAndStats {
-          width: 100%; }
-          section#myArticles .article .dateAndStats .date {
-            display: flex;
-            justify-content: end;
-            width: 100%;
-            padding-right: 0.5em; }
-          section#myArticles .article .dateAndStats .stats {
-            margin: 1em 0 1em auto;
-            width: 15em; }
-        section#myArticles .article .article-thumb {
-          object-fit: contain;
-          max-width: 40vw; }
-        section#myArticles .article .article-body {
-          width: 100%;
-          padding-left: 1em;
-          height: auto; }
-        section#myArticles .article .article-footer {
-          flex-wrap: wrap; }
-        section#myArticles .article .settings {
-          display: flex;
-          width: 100%;
-          flex-wrap: wrap;
-          align-items: center;
-          justify-content: end; }
-          section#myArticles .article .settings button, section#myArticles .article .settings a {
-            font-size: 0.9em;
-            margin: 0.5em; }
-        section#myArticles .article .stats {
-          height: fit-content;
-          justify-content: center;
-          margin: 1em;
-          width: 100%; }
-          section#myArticles .article .stats .alert, section#myArticles .article .stats .views, section#myArticles .article .stats .likes, section#myArticles .article .stats .comments {
-            width: 3em;
-            height: 3em; } }
-  @media screen and (min-width: 1400px) {
-    section#myArticles .article .article-thumb {
-      object-fit: cover;
-      max-width: 30vw; } }
-  @media screen and (min-width: 1800px) {
-    section#myArticles .articlesWrap {
-      width: 80vw; }
-    section#myArticles .article .article-thumb {
-      object-fit: cover;
-      max-width: 25vw; } }
-
-=======
->>>>>>> d89b290 (shop: cart responsive css)
 /*** ACCOUNT : MES SESSIONS ***/
 @media screen and (max-width: 768px) {
   section#mySessions .wrapper {
@@ -5136,20 +3397,6 @@ section#myArticles {
 section#myOrders {
   /*xs*/ }
   @media screen and (max-width: 576px) {
-<<<<<<< HEAD
-    section#myOrders h3 {
-      font-size: large; }
-    section#myOrders .wrapper h3 {
-      margin: 1em; } }
-  @media screen and (min-width: 576px) and (max-width: 768px) {
-    section#myOrders h3 {
-      font-size: large; }
-    section#myOrders .wrapper .row {
-      padding: 0 1em; } }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
-    section#myOrders h3 {
-      font-size: x-large; }
-=======
     section#myOrders .wrapper h3 {
       margin: 1em;
       font-size: 1.3em; } }
@@ -5157,7 +3404,6 @@ section#myOrders {
     section#myOrders .wrapper .row {
       padding: 0 1em; } }
   @media screen and (min-width: 768px) and (max-width: 992px) {
->>>>>>> d89b290 (shop: cart responsive css)
     section#myOrders .wrapper .row {
       padding: 0 1em; }
     section#myOrders .wrapper .order {
@@ -5166,11 +3412,6 @@ section#myOrders {
       section#myOrders .wrapper .order .badge {
         font-size: 1em; } }
   @media screen and (min-width: 992px) and (max-width: 1400px) {
-<<<<<<< HEAD
-    section#myOrders h3 {
-      font-size: x-large; }
-=======
->>>>>>> d89b290 (shop: cart responsive css)
     section#myOrders .wrapper .row {
       padding: 0 1em;
       margin: 0 auto; }
@@ -5180,881 +3421,12 @@ section#myOrders {
       section#myOrders .wrapper .order .badge {
         font-size: 1em; } }
   @media screen and (min-width: 1400px) {
-<<<<<<< HEAD
-    section#myOrders h3 {
-      font-size: x-large; }
-=======
->>>>>>> d89b290 (shop: cart responsive css)
     section#myOrders .wrapper .row {
       padding: 0 1em;
       margin: 1em auto; }
     section#myOrders .wrapper .order {
       margin: 1em;
       width: 31%; } }
-<<<<<<< HEAD
-
-/*** ACCOUNT PROFIL PUBLIC ***/
-@media screen and (max-width: 576px) {
-  section#profile .btnSessions {
-    display: block;
-    margin-bottom: 0.2em;
-    width: 100%; }
-  section#profile .category-badge {
-    max-height: fit-content; }
-  section#profile .user #profile-avatar {
-    max-width: 75px; }
-  section#profile .fav {
-    max-width: 75px; }
-  section#profile .banner {
-    display: none; }
-  section#profile .my-drone {
-    display: none; } }
-@media screen and (max-width: 991px) {
-  section#profile {
-    padding-bottom: 0; }
-    section#profile .wrapper-left {
-      background-color: rgba(250, 250, 250, 0.8); } }
-@media screen and (min-width: 576px) and (max-width: 768px) {
-  section#profile .row {
-    margin: 0 auto; }
-  section#profile .my-drone {
-    margin-bottom: 1em; }
-  section#profile .user #profile-avatar {
-    max-width: 75px; }
-  section#profile .fav {
-    max-width: 75px; }
-  section#profile .banner {
-    height: 13vh;
-    margin: 0 0 1em; }
-  section#profile .leftWrap, section#profile .rightWrap, section#profile .user, section#profile .sessions, section#profile .user-content {
-    border-radius: 4px; } }
-@media screen and (max-width: 768px) {
-  section#profile .personnal-info, section#profile .my-drone {
-    font-size: 0.9em; } }
-@media screen and (min-width: 768px) {
-  section#profile .btnSessions {
-    display: none; }
-  section#profile .wrap {
-    margin: 0 auto; } }
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  section#profile .banner {
-    height: 12vh; }
-  section#profile .my-drone {
-    margin-bottom: 1em; }
-  section#profile h4 {
-    font-size: large; }
-  section#profile .user #profile-avatar {
-    max-width: 75px; }
-  section#profile .fav {
-    max-width: 75px; }
-  section#profile .user-content, section#profile .my-drone {
-    font-size: 0.95em;
-    margin: 0 0 1em 0; }
-  section#profile .leftWrap {
-    width: 45%;
-    margin: 0; }
-  section#profile .rightWrap {
-    width: 55%;
-    margin: 0; }
-  section#profile .leftWrap, section#profile .rightWrap, section#profile .user, section#profile .sessions, section#profile .user-content {
-    border-radius: 4px; } }
-@media screen and (max-width: 992px) {
-  section#profile h3 {
-    font-size: large; }
-  section#profile .banner {
-    margin: 0 0 0.5em; }
-  section#profile .row {
-    padding: 0 1em; }
-  section#profile .user, section#profile .sessions {
-    margin-bottom: 1em; }
-    section#profile .user h2, section#profile .sessions h2 {
-      font-size: x-large; } }
-@media screen and (min-width: 992px) {
-  section#profile .row {
-    margin: 0 1em; }
-  section#profile .banner {
-    margin: 0 1em 1em 1em; }
-    section#profile .banner .banner {
-      height: 5em; }
-  section#profile .user {
-    margin-bottom: 1em; }
-  section#profile .leftWrap, section#profile .rightWrap {
-    margin: 0; }
-  section#profile .leftWrap, section#profile .rightWrap, section#profile .user, section#profile .sessions, section#profile .user-content {
-    border-radius: 4px; }
-  section#profile .wrapper-left {
-    padding-right: 1em; } }
-@media screen and (min-width: 992px) and (max-width: 1400px) {
-  section#profile h3 {
-    font-size: large; }
-  section#profile .user #profile-avatar {
-    max-width: 75px; }
-  section#profile .user h2 {
-    font-size: x-large; }
-  section#profile .fav {
-    max-width: 75px; }
-  section#profile .user-content, section#profile .my-drone {
-    font-size: 0.9em;
-    margin: 0 0 1em 0; }
-  section#profile .card-title {
-    font-size: large; }
-  section#profile .leftWrap {
-    width: 40%; }
-  section#profile .rightWrap {
-    width: 60%; } }
-@media screen and (min-width: 1400px) and (max-width: 1600px) {
-  section#profile .banner {
-    height: 10em; }
-  section#profile h3 {
-    font-size: large; }
-  section#profile .user #profile-avatar {
-    max-width: 75px; }
-  section#profile .user h2 {
-    font-size: x-large; }
-  section#profile .fav {
-    max-width: 75px; }
-  section#profile .user-content, section#profile .my-drone {
-    font-size: 0.9em;
-    margin: 0 0 1em 0; }
-  section#profile .card-title {
-    font-size: large; }
-  section#profile .leftWrap {
-    width: 40%; }
-  section#profile .rightWrap {
-    width: 60%; } }
-@media screen and (min-width: 1600px) and (max-width: 1800px) {
-  section#profile .banner {
-    height: 10em; }
-  section#profile h3 {
-    font-size: large; }
-  section#profile .user #profile-avatar {
-    max-width: 90px; }
-  section#profile .user h2 {
-    font-size: x-large; }
-  section#profile .fav {
-    max-width: 90px; }
-  section#profile .user-content, section#profile .my-drone {
-    font-size: 0.9em;
-    margin: 0 0 1em 0; }
-  section#profile .card-title {
-    font-size: large; }
-  section#profile .leftWrap {
-    width: 35%; }
-  section#profile .rightWrap {
-    width: 65%; } }
-@media screen and (min-width: 1800px) {
-  section#profile .banner {
-    height: 13em; }
-  section#profile h3 {
-    font-size: x-large; }
-  section#profile .user #profile-avatar {
-    max-width: 100px; }
-  section#profile .user h2 {
-    font-size: xx-large; }
-  section#profile .fav {
-    max-width: 100px; }
-  section#profile .user-content, section#profile .my-drone {
-    font-size: 1em;
-    margin: 0 0 1em 0; }
-  section#profile .card-title {
-    font-size: large; }
-  section#profile .leftWrap {
-    width: 35%; }
-  section#profile .rightWrap {
-    width: 65%; }
-  section#profile .wrap {
-    width: 90vw; } }
-@media screen and (min-width: 1900px) {
-  section#profile .leftWrap {
-    width: 30%; }
-  section#profile .rightWrap {
-    width: 70%; } }
-
-/**** PARTIE ADMIN ****/
-section#adminLogin {
-  /* xs to md*/
-  /* xl */
-  /*over xl */ }
-  @media screen and (max-width: 576px) {
-    section#adminLogin .formLogin {
-      width: 100vw;
-      height: 100%; }
-      section#adminLogin .formLogin h3 {
-        font-size: 1.2rem; } }
-  @media screen and (min-width: 1600px) {
-    section#adminLogin .formLogin {
-      width: 30vw; }
-    section#adminLogin form {
-      width: 70%; } }
-  @media screen and (min-width: 1800px) {
-    section#adminLogin .formLogin {
-      height: 35vh; } }
-
-/*** ADMIN : DASHBOARD ***/
-@media screen and (max-width: 576px) {
-  section#adminDashboard .dashboard {
-    width: 100vw;
-    padding: 2.5em 1em;
-    font-size: small; }
-  section#adminDashboard h3 {
-    font-size: large; }
-  section#adminDashboard h5 {
-    font-size: large; }
-  section#adminDashboard .wrap {
-    margin: 0; }
-  section#adminDashboard .statWrap {
-    font-size: x-small; }
-    section#adminDashboard .statWrap .card-body {
-      padding: 0; }
-    section#adminDashboard .statWrap .card-title {
-      display: none; }
-  section#adminDashboard .shortCuts h5 {
-    font-size: large; }
-  section#adminDashboard .shortCuts .col {
-    flex: auto; }
-  section#adminDashboard .worstUsers {
-    margin-top: 1em; } }
-@media screen and (min-width: 576px) and (max-width: 768px) {
-  section#adminDashboard .dashboard {
-    width: 100vw;
-    padding: 2.5em 1em;
-    font-size: small; }
-  section#adminDashboard h3 {
-    font-size: large; }
-  section#adminDashboard h5 {
-    font-size: large; }
-  section#adminDashboard .wrap {
-    margin: 0; }
-  section#adminDashboard .statWrap {
-    margin: 0 0.5em;
-    font-size: x-small; }
-    section#adminDashboard .statWrap .card-body {
-      padding: 0; }
-    section#adminDashboard .statWrap .card-title {
-      display: none; }
-  section#adminDashboard .shortCuts h5 {
-    font-size: medium; }
-  section#adminDashboard .worstUsers {
-    margin-top: 1em;
-    flex: auto; }
-  section#adminDashboard .mostAppreciated {
-    flex: auto; }
-  section#adminDashboard .worstUsers, section#adminDashboard .mostAppreciated {
-    margin-left: 1em;
-    margin-right: 1em; } }
-@media screen and (min-width: 768px) and (max-width: 1200px) {
-  section#adminDashboard .dashboard {
-    padding: 2em 1em; }
-  section#adminDashboard h3 {
-    font-size: large; }
-  section#adminDashboard h5 {
-    font-size: large; }
-  section#adminDashboard .wrap {
-    margin: 2em 2em 2em 0; }
-  section#adminDashboard .statWrap {
-    margin: 0 0.5em;
-    font-size: x-small; }
-    section#adminDashboard .statWrap .card-body {
-      padding: 0; }
-    section#adminDashboard .statWrap .card-title {
-      display: none; }
-  section#adminDashboard .shortCuts h5 {
-    font-size: medium; }
-  section#adminDashboard .worstUsers {
-    margin-top: 1em;
-    flex: auto; }
-  section#adminDashboard .mostAppreciated {
-    flex: auto; }
-  section#adminDashboard .worstUsers, section#adminDashboard .mostAppreciated {
-    margin-left: 1em;
-    margin-right: 1em; } }
-@media screen and (min-width: 1200px) and (max-width: 1400px) {
-  section#adminDashboard .dashboard {
-    padding: 1em;
-    margin: 0 auto; }
-  section#adminDashboard .wrapper {
-    padding-right: 2em; }
-  section#adminDashboard h3 {
-    font-size: x-large; }
-  section#adminDashboard h5 {
-    font-size: large; }
-  section#adminDashboard .wrap {
-    margin: 2em auto; }
-  section#adminDashboard .statWrap {
-    margin: 0 0.5em;
-    font-size: small; }
-    section#adminDashboard .statWrap .card-body {
-      padding: 0; }
-    section#adminDashboard .statWrap .card-title {
-      display: none; }
-  section#adminDashboard .shortCuts h5 {
-    font-size: medium; }
-  section#adminDashboard .worstUsers, section#adminDashboard .mostAppreciated {
-    margin-left: 1em;
-    margin-right: 1em;
-    font-size: medium; } }
-@media screen and (min-width: 1400px) and (max-width: 1600px) {
-  section#adminDashboard .dashboard {
-    padding: 1em;
-    margin: 0 auto; }
-  section#adminDashboard h3 {
-    font-size: x-large; }
-  section#adminDashboard h5 {
-    font-size: large; }
-  section#adminDashboard .wrap {
-    margin: 2em auto; }
-  section#adminDashboard .statWrap {
-    margin: 0 0.5em;
-    font-size: small; }
-    section#adminDashboard .statWrap .card-body {
-      padding: 0; }
-  section#adminDashboard .shortCuts h5 {
-    font-size: medium; }
-  section#adminDashboard .worstUsers, section#adminDashboard .mostAppreciated {
-    margin-left: 1em;
-    margin-right: 1em;
-    font-size: medium; } }
-@media screen and (min-width: 1600px) {
-  section#adminDashboard .wrap {
-    width: 80vw;
-    margin: 2em auto; }
-  section#adminDashboard .dashboard {
-    padding: 2em;
-    margin: 0 auto;
-    width: 100%; }
-  section#adminDashboard h5 {
-    font-size: large; }
-  section#adminDashboard h3 {
-    font-size: x-large; } }
-
-/** ADMIN : USERS index + ADMIN : shop index **/
-@media screen and (max-width: 768px) {
-  section#adminShop .titleAndBtn, section#adminShop .titleAndSearch, section#adminUsers .titleAndBtn, section#adminUsers .titleAndSearch {
-    margin-bottom: 1em; }
-    section#adminShop .titleAndBtn h3, section#adminShop .titleAndSearch h3, section#adminUsers .titleAndBtn h3, section#adminUsers .titleAndSearch h3 {
-      font-size: large; }
-    section#adminShop .titleAndBtn .addProductMainBtn, section#adminShop .titleAndSearch .addProductMainBtn, section#adminUsers .titleAndBtn .addProductMainBtn, section#adminUsers .titleAndSearch .addProductMainBtn {
-      font-size: small; }
-  section#adminShop .wrap, section#adminUsers .wrap {
-    width: 100vw;
-    padding: 0 1em; }
-  section#adminShop .imgProduct, section#adminShop div.col .users .avatar, section#adminShop .subDate, section#adminUsers .imgProduct, section#adminUsers div.col .users .avatar, section#adminUsers .subDate {
-    display: none; }
-  section#adminShop .productsList, section#adminShop .usersList, section#adminShop .titleTable, section#adminUsers .productsList, section#adminUsers .usersList, section#adminUsers .titleTable {
-    font-size: small; }
-  section#adminShop .modal-dialog, section#adminUsers .modal-dialog {
-    font-size: medium; }
-    section#adminShop .modal-dialog a, section#adminUsers .modal-dialog a {
-      margin-bottom: 1em; }
-  section#adminShop .row-grey, section#adminShop .row-white, section#adminUsers .row-grey, section#adminUsers .row-white {
-    padding: 1em 0.5em; }
-  section#adminShop .name, section#adminUsers .name {
-    flex-basis: 15%; }
-  section#adminShop .users, section#adminUsers .users {
-    flex-basis: 30%; }
-  section#adminShop .actions button, section#adminUsers .actions button {
-    font-size: 0.9em; } }
-@media screen and (min-width: 768px) {
-  section#adminShop .mainWrap, section#adminUsers .mainWrap {
-    padding-right: 1em; } }
-@media screen and (min-width: 767px) and (max-width: 1200px) {
-  section#adminShop .row-grey .imgProduct, section#adminShop .row-grey .avatar, section#adminShop .row-white .imgProduct, section#adminShop .row-white .avatar, section#adminUsers .row-grey .imgProduct, section#adminUsers .row-grey .avatar, section#adminUsers .row-white .imgProduct, section#adminUsers .row-white .avatar {
-    margin-right: 1em; }
-  section#adminShop .titleAndBtn, section#adminShop .titleAndSearch, section#adminUsers .titleAndBtn, section#adminUsers .titleAndSearch {
-    margin-bottom: 1em; }
-    section#adminShop .titleAndBtn h3, section#adminShop .titleAndSearch h3, section#adminUsers .titleAndBtn h3, section#adminUsers .titleAndSearch h3 {
-      font-size: large; }
-    section#adminShop .titleAndBtn .addProductMainBtn, section#adminShop .titleAndSearch .addProductMainBtn, section#adminUsers .titleAndBtn .addProductMainBtn, section#adminUsers .titleAndSearch .addProductMainBtn {
-      font-size: medium; }
-  section#adminShop .wrap, section#adminUsers .wrap {
-    width: 90vw;
-    margin: 0 auto; }
-  section#adminShop .productsList, section#adminShop .usersList, section#adminShop .titleTable, section#adminUsers .productsList, section#adminUsers .usersList, section#adminUsers .titleTable {
-    font-size: 0.9em; }
-  section#adminShop .modal-dialog, section#adminUsers .modal-dialog {
-    font-size: medium; }
-    section#adminShop .modal-dialog a, section#adminUsers .modal-dialog a {
-      margin-bottom: 1em; }
-  section#adminShop .row-grey, section#adminShop .row-white, section#adminUsers .row-grey, section#adminUsers .row-white {
-    padding: 1em 0.5em; }
-  section#adminShop .name, section#adminUsers .name {
-    flex-basis: 15%; }
-  section#adminShop .users, section#adminUsers .users {
-    flex-basis: 30%; }
-  section#adminShop .actions button, section#adminUsers .actions button {
-    font-size: 0.9em; } }
-@media screen and (min-width: 1200px) and (max-width: 1600px) {
-  section#adminShop .row-grey .imgProduct, section#adminShop .row-grey .avatar, section#adminShop .row-white .imgProduct, section#adminShop .row-white .avatar, section#adminUsers .row-grey .imgProduct, section#adminUsers .row-grey .avatar, section#adminUsers .row-white .imgProduct, section#adminUsers .row-white .avatar {
-    width: 50px !important;
-    height: 50px !important;
-    margin-right: 1em; } }
-@media screen and (min-width: 1200px) {
-  section#adminShop .titleAndBtn, section#adminShop .titleAndSearch, section#adminUsers .titleAndBtn, section#adminUsers .titleAndSearch {
-    margin-bottom: 1em; }
-    section#adminShop .titleAndBtn h3, section#adminShop .titleAndSearch h3, section#adminUsers .titleAndBtn h3, section#adminUsers .titleAndSearch h3 {
-      font-size: x-large; }
-    section#adminShop .titleAndBtn .addProductMainBtn, section#adminShop .titleAndSearch .addProductMainBtn, section#adminUsers .titleAndBtn .addProductMainBtn, section#adminUsers .titleAndSearch .addProductMainBtn {
-      font-size: medium; }
-  section#adminShop .wrap, section#adminUsers .wrap {
-    margin: 0 auto;
-    width: 70vw; }
-  section#adminShop .productsList, section#adminShop .usersList, section#adminShop .titleTable, section#adminUsers .productsList, section#adminUsers .usersList, section#adminUsers .titleTable {
-    font-size: 1em; }
-  section#adminShop .modal-dialog a, section#adminUsers .modal-dialog a {
-    margin-bottom: 1em; }
-  section#adminShop .row-grey, section#adminShop .row-white, section#adminUsers .row-grey, section#adminUsers .row-white {
-    padding: 1em 0.5em; }
-  section#adminShop .name, section#adminUsers .name {
-    flex-basis: 15%; }
-  section#adminShop .users, section#adminUsers .users {
-    flex-basis: 30%; }
-  section#adminShop .actions button, section#adminUsers .actions button {
-    font-size: 0.9em; } }
-@media screen and (min-width: 1600px) {
-  section#adminShop .row-grey .imgProduct, section#adminShop .row-grey .avatar, section#adminShop .row-white .imgProduct, section#adminShop .row-white .avatar, section#adminUsers .row-grey .imgProduct, section#adminUsers .row-grey .avatar, section#adminUsers .row-white .imgProduct, section#adminUsers .row-white .avatar {
-    width: 75px !important;
-    height: 75px !important;
-    margin-right: 2em; } }
-
-/** ADMIN : BLOG index + BLOG alerts **/
-@media screen and (max-width: 768px) {
-  section#adminBlog h4, section#adminBlogAlerts h4 {
-    font-size: 1.1em;
-    margin: 1em; }
-  section#adminBlog .article, section#adminBlogAlerts .article {
-    margin: 1em auto; }
-  section#adminBlog .articlesWrap, section#adminBlogAlerts .articlesWrap {
-    margin: 0 auto; }
-    section#adminBlog .articlesWrap .adminArticle, section#adminBlogAlerts .articlesWrap .adminArticle {
-      padding-right: 0; }
-  section#adminBlog #titleAndForm, section#adminBlogAlerts #titleAndForm {
-    margin: 1em auto; } }
-@media screen and (min-width: 768px) {
-  section#adminBlog .wrap, section#adminBlogAlerts .wrap {
-    padding-right: 1em; }
-  section#adminBlog .articleWrap, section#adminBlogAlerts .articleWrap {
-    margin: 0 auto; }
-  section#adminBlog #titleAndForm, section#adminBlogAlerts #titleAndForm {
-    margin: 0 0 1em 0; } }
-
-/*** ADMIN COMMENTS ***/
-@media screen and (max-width: 1200px) {
-  section#adminComments h3 {
-    font-size: large;
-    padding: 0 1em; }
-  section#adminComments .wrap {
-    width: 100%; }
-    section#adminComments .wrap thead {
-      visibility: hidden;
-      height: 0;
-      position: absolute;
-      top: 0; }
-    section#adminComments .wrap .table > :not(:first-child) {
-      border-top: none; }
-    section#adminComments .wrap tr {
-      display: block;
-      margin: 1em 1em 2em 1em;
-      background-color: #fafafa !important; }
-      section#adminComments .wrap tr td:first-child {
-        background-color: #DADADA; }
-    section#adminComments .wrap td {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid #DADADA;
-      border-bottom: none;
-      font-size: 0.9em; }
-      section#adminComments .wrap td a.add {
-        margin: 0 0 0 1em; }
-      section#adminComments .wrap td a.btn-danger {
-        margin: 0; }
-      section#adminComments .wrap td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        padding-right: 1em; }
-      section#adminComments .wrap td:first-child {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px; }
-      section#adminComments .wrap td:last-child {
-        border: 1px solid #DADADA;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px; }
-  section#adminComments .btn.param, section#adminComments a.param {
-    font-size: 0.9em; } }
-@media screen and (min-width: 1200px) {
-  section#adminComments h3 {
-    font-size: x-large; }
-  section#adminComments .wrap {
-    width: 95vw; }
-    section#adminComments .wrap thead {
-      visibility: visible;
-      position: relative; }
-    section#adminComments .wrap td {
-      vertical-align: middle;
-      padding: 1em 0; }
-  section#adminComments .btn, section#adminComments a {
-    font-size: 1em; } }
-@media screen and (min-width: 1400px) {
-  section#adminComments .wrap {
-    width: 80vw;
-    margin: 0 auto; } }
-
-/**** ADMIN MAPSPOT ****/
-@media screen and (max-width: 576px) {
-  section#adminMapSpots #map {
-    height: 0; }
-    section#adminMapSpots #map .mapboxgl-ctrl-geocoder {
-      display: none; }
-  section#adminMapSpots .spotWrapper {
-    position: relative; }
-  section#adminMapSpots .spotMapChange {
-    min-width: 50%; }
-  section#adminMapSpots .row.main {
-    padding: 0 1em; }
-  section#adminMapSpots h3 {
-    font-size: large;
-    text-align: center; }
-  section#adminMapSpots .addSpot, section#adminMapSpots .reset {
-    font-size: small; }
-  section#adminMapSpots .spotName {
-    font-size: 1em; }
-  section#adminMapSpots #addSpotForm #spot {
-    font-size: 0.9em; } }
-@media screen and (min-width: 576px) and (max-width: 768px) {
-  section#adminMapSpots h3 {
-    font-size: large;
-    margin-top: 1em;
-    text-align: center; }
-  section#adminMapSpots .row.main {
-    margin: 0 auto;
-    width: 100%;
-    padding-left: 0; } }
-@media screen and (min-width: 768px) {
-  section#adminMapSpots h3 {
-    margin-top: 1em; }
-  section#adminMapSpots .row.main {
-    width: 100%; }
-  section#adminMapSpots #map {
-    height: 100% !important; }
-  section#adminMapSpots .btnMap {
-    display: none; } }
-@media screen and (min-width: 576px) and (max-width: 991px) {
-  section#adminMapSpots #map {
-    height: 0; }
-    section#adminMapSpots #map .mapboxgl-ctrl-geocoder {
-      display: none; }
-  section#adminMapSpots .spotWrapper {
-    padding: 0.5em; }
-  section#adminMapSpots .gestion {
-    overflow-y: initial; }
-  section#adminMapSpots .spotWrapper {
-    position: relative; }
-  section#adminMapSpots .spotMapChange {
-    min-width: 50%; }
-  section#adminMapSpots .row.main {
-    padding: 0 1em; }
-  section#adminMapSpots h3 {
-    font-size: large; }
-  section#adminMapSpots .addSpot, section#adminMapSpots .reset {
-    font-size: small; }
-  section#adminMapSpots .spotName {
-    font-size: 1em; }
-  section#adminMapSpots #addSpotForm #spot {
-    font-size: 0.9em; } }
-@media screen and (min-width: 991px) {
-  section#adminMapSpots h3 {
-    font-size: larger; } }
-@media screen and (min-width: 1900px) {
-  section#adminMapSpots .gestion {
-    width: 24vw !important; }
-  section#adminMapSpots #map {
-    width: 75vw !important; } }
-
-/****  ADMIN ORDERS : index + all ***/
-@media screen and (max-width: 1200px) {
-  section#adminOrders .wrap, section#adminAllOrders .wrap {
-    width: 100%; }
-    section#adminOrders .wrap thead, section#adminAllOrders .wrap thead {
-      visibility: hidden;
-      height: 0;
-      position: absolute;
-      top: 0; }
-    section#adminOrders .wrap .table > :not(:first-child), section#adminAllOrders .wrap .table > :not(:first-child) {
-      border-top: none; }
-    section#adminOrders .wrap tr, section#adminAllOrders .wrap tr {
-      display: block;
-      margin: 1em 1em 2em 1em; }
-      section#adminOrders .wrap tr td:first-child, section#adminAllOrders .wrap tr td:first-child {
-        background-color: #DADADA; }
-    section#adminOrders .wrap td, section#adminAllOrders .wrap td {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid #DADADA;
-      border-bottom: none;
-      font-size: 0.9em; }
-      section#adminOrders .wrap td a.add, section#adminAllOrders .wrap td a.add {
-        margin: 0 0 0 1em; }
-      section#adminOrders .wrap td a.btn-danger, section#adminAllOrders .wrap td a.btn-danger {
-        margin: 0; }
-      section#adminOrders .wrap td::before, section#adminAllOrders .wrap td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        padding-right: 1em; }
-      section#adminOrders .wrap td:first-child, section#adminAllOrders .wrap td:first-child {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px; }
-      section#adminOrders .wrap td:last-child, section#adminAllOrders .wrap td:last-child {
-        border: 1px solid #DADADA;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px; }
-  section#adminOrders .btn.param, section#adminOrders a.param, section#adminAllOrders .btn.param, section#adminAllOrders a.param {
-    font-size: 0.9em; } }
-@media screen and (min-width: 1200px) {
-  section#adminOrders .wrap, section#adminAllOrders .wrap {
-    width: 95vw; }
-    section#adminOrders .wrap thead, section#adminAllOrders .wrap thead {
-      visibility: visible;
-      position: relative; }
-    section#adminOrders .wrap td, section#adminAllOrders .wrap td {
-      vertical-align: middle;
-      padding: 1em 0; }
-  section#adminOrders .btn, section#adminOrders a, section#adminAllOrders .btn, section#adminAllOrders a {
-    font-size: 1em; }
-  section#adminOrders .delete, section#adminOrders .price, section#adminOrders .total, section#adminAllOrders .delete, section#adminAllOrders .price, section#adminAllOrders .total {
-    text-align: right; }
-  section#adminOrders .qty, section#adminAllOrders .qty {
-    text-align: center; } }
-@media screen and (min-width: 1400px) {
-  section#adminOrders .wrap, section#adminAllOrders .wrap {
-    width: 80vw;
-    margin: 0 auto; } }
-
-/*** ADMIN: ORDERS : MODIFY ***/
-@media screen and (max-width: 576px) {
-  section#adminOrderModify h4 {
-    font-size: 1.1em; }
-  section#adminOrderModify h5 {
-    font-size: 1em; } }
-@media screen and (min-width: 576px) {
-  section#adminOrderModify h4 {
-    font-size: 1.2em; }
-  section#adminOrderModify h5 {
-    font-size: 1.1em; } }
-@media screen and (min-width: 992px) and (max-width: 1200px) {
-  section#adminOrderModify .formWrap {
-    width: 70%; } }
-@media screen and (min-width: 1200px) and (max-width: 1400px) {
-  section#adminOrderModify .formWrap {
-    width: 60%; } }
-@media screen and (min-width: 1400px) {
-  section#adminOrderModify .formWrap {
-    width: 50%; } }
-
-/* PRODUCT MODIFY + ORDERS MODIFY */
-@media screen and (max-width: 576px) {
-  section#adminOrderModify .formWrap, section#adminEditProduct .formWrap {
-    width: 80%; }
-  section#adminOrderModify h4, section#adminEditProduct h4 {
-    font-size: 1.1em; }
-  section#adminOrderModify h5, section#adminEditProduct h5 {
-    font-size: 1em; } }
-@media screen and (min-height: 576px) and (max-width: 992px) {
-  section#adminOrderModify .formWrap, section#adminEditProduct .formWrap {
-    width: 80%; } }
-@media screen and (min-width: 576px) {
-  section#adminOrderModify h4, section#adminEditProduct h4 {
-    font-size: 1.2em; }
-  section#adminOrderModify h5, section#adminEditProduct h5 {
-    font-size: 1.1em; } }
-
-/***ADMIN SHOP : MODIFY***/
-section#adminEditProduct .buttons {
-  margin: 1em; }
-@media screen and (max-width: 576px) {
-  section#adminEditProduct #imgWrap {
-    width: 15em;
-    height: 15em; } }
-@media screen and (min-width: 576px) {
-  section#adminEditProduct #imgWrap {
-    width: 15em;
-    height: 15em; } }
-@media screen and (min-width: 768px) {
-  section#adminEditProduct .formWrap {
-    width: 90%;
-    justify-content: space-between;
-    align-content: flex-start; }
-  section#adminEditProduct .column1, section#adminEditProduct .column2 {
-    width: 50%; } }
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  section#adminEditProduct .formWrap {
-    width: 95%;
-    justify-content: center; }
-  section#adminEditProduct .column1, section#adminEditProduct .column2 {
-    width: 50%; } }
-
-/*** ADMIN : CONTACT index ***/
-@media screen and (max-width: 430px) {
-  section#adminContact .alert {
-    font-size: smaller; } }
-@media screen and (max-width: 1200px) {
-  section#adminContact h3 {
-    font-size: large;
-    padding: 0 1em; }
-  section#adminContact .wrap {
-    width: 100%; }
-    section#adminContact .wrap thead {
-      visibility: hidden;
-      height: 0;
-      position: absolute;
-      top: 0; }
-    section#adminContact .wrap .table > :not(:first-child) {
-      border-top: none; }
-    section#adminContact .wrap table .actions {
-      justify-content: space-between; }
-    section#adminContact .wrap table tr {
-      display: block;
-      margin: 1em 1em 2em 1em;
-      background-color: #fafafa !important; }
-      section#adminContact .wrap table tr td:first-child {
-        background-color: #DADADA; }
-    section#adminContact .wrap table td {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid #DADADA;
-      border-bottom: none;
-      font-size: 0.9em; }
-      section#adminContact .wrap table td a.add {
-        margin: 0 0 0 1em; }
-      section#adminContact .wrap table td a.btn-danger {
-        margin: 0; }
-      section#adminContact .wrap table td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        padding-right: 1em; }
-      section#adminContact .wrap table td:first-child {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px; }
-      section#adminContact .wrap table td:last-child {
-        border: 1px solid #DADADA;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px; }
-  section#adminContact .btn.param, section#adminContact a.param {
-    font-size: 0.9em; } }
-@media screen and (max-width: 1900px) {
-  section#adminContact td.action a.btn-success {
-    margin-bottom: 1em; } }
-@media screen and (min-width: 1200px) {
-  section#adminContact h3 {
-    font-size: x-large; }
-  section#adminContact .wrap {
-    width: 95vw; }
-    section#adminContact .wrap table .name {
-      width: 10%; }
-    section#adminContact .wrap table .subject {
-      width: 15%; }
-    section#adminContact .wrap table .date {
-      width: 10%; }
-    section#adminContact .wrap table .message {
-      width: 50%; }
-    section#adminContact .wrap table .actions {
-      width: 15%; }
-    section#adminContact .wrap thead {
-      visibility: visible;
-      position: relative; }
-    section#adminContact .wrap td {
-      vertical-align: middle;
-      padding: 1em 0; }
-  section#adminContact .btn, section#adminContact a {
-    font-size: 1em; } }
-@media screen and (min-width: 1400px) {
-  section#adminContact .wrap {
-    width: 80vw;
-    margin: 0 auto; } }
-
-/*** ADMIN : CONTACT RESPONSE PAGE ***/
-@media screen and (min-width: 350px) and (max-width: 1400px) {
-  section#responseContact .wrap .text-muted {
-    font-size: 0.9em; }
-  section#responseContact .wrap h3 {
-    font-size: 1.2rem; }
-  section#responseContact .wrap button {
-    font-size: 1em; } }
-@media screen and (min-width: 576px) {
-  section#responseContact .wrap {
-    margin: 0  auto; }
-    section#responseContact .wrap textarea {
-      height: 20vh; }
-    section#responseContact .wrap .text-muted {
-      padding: 2em 1em 1em 1em; }
-    section#responseContact .wrap .initMsg {
-      margin: 0; } }
-@media screen and (min-width: 768px) {
-  section#responseContact .wrap {
-    padding: 1em; } }
-@media screen and (max-width: 576px) {
-  section#responseContact .wrap {
-    padding: 2em 1em; }
-    section#responseContact .wrap .text-muted {
-      padding: 2em 1em; }
-    section#responseContact .wrap .initMsg {
-      margin: 0; }
-    section#responseContact .wrap .col-sm-12 {
-      padding: 1em; }
-    section#responseContact .wrap .col {
-      width: 100%; }
-    section#responseContact .wrap textarea {
-      height: 10vh; } }
-@media screen and (min-width: 576px) and (max-width: 768px) {
-  section#responseContact .wrap {
-    padding: 2em; }
-    section#responseContact .wrap .col-sm-12 {
-      padding: 1em 2em; } }
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  section#responseContact {
-    padding-right: 1em; }
-    section#responseContact .wrap {
-      width: 90vw; }
-      section#responseContact .wrap .col-sm-12 {
-        padding: 1em 2em; } }
-@media screen and (min-width: 992px) and (max-width: 1200px) {
-  section#responseContact {
-    padding-right: 1em; }
-    section#responseContact .wrap {
-      width: 80vw;
-      padding: 1em; }
-      section#responseContact .wrap .col-sm-12 {
-        padding: 1em 2em; } }
-@media screen and (min-width: 1200px) and (max-width: 1400px) {
-  section#responseContact {
-    padding-right: 1em; }
-    section#responseContact .wrap {
-      width: 90vw; }
-      section#responseContact .wrap .col-sm-12 {
-        padding: 1em; }
-      section#responseContact .wrap h3 {
-        font-size: 1.3rem; } }
-@media screen and (min-width: 1400px) {
-  section#responseContact {
-    padding-right: 1em; }
-    section#responseContact .wrap {
-      width: 90vw; }
-      section#responseContact .wrap .text-muted {
-        font-size: 1em; }
-      section#responseContact .wrap .col-sm-12 {
-        padding: 1em 2em;
-        width: 50% !important; }
-      section#responseContact .wrap h3 {
-        font-size: 1.3rem; }
-      section#responseContact .wrap button {
-        font-size: 1.2em; } }
-@media screen and (min-width: 1800px) {
-  section#responseContact .wrap {
-    width: 75vw;
-    margin: 0 auto; } }
-=======
->>>>>>> d89b290 (shop: cart responsive css)
 
 /**** PARTIE ADMIN ****/
 section#adminLogin {
