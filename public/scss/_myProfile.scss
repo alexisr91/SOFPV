@@ -6,6 +6,8 @@ section#myProfile {
     background-color: $base;
     .wrap {
         height:100%;
+        width: 90%;
+        margin: 0 auto;
         background-color: $base;
         min-height: 90vh;
         }
@@ -213,6 +215,10 @@ section#myProfileEdit, section#droneEdit {
     background-attachment: fixed;
     
     #profile_banner {margin-bottom:1em;}
+
+    .pwd {margin-left: 1em;}
+
+    .infos, .public {padding: 0 2em;}
 
     .pwd {margin-left: 1em;}
 
