@@ -566,6 +566,7 @@ section#home {
       animation: glitch-effect 2s infinite linear alternate-reverse; }
 @keyframes glitch-effect {
   0% {
+<<<<<<< HEAD
     clip: rect(27px, 9999px, 68px, 0); }
   5% {
     clip: rect(63px, 9999px, 61px, 0); }
@@ -607,6 +608,49 @@ section#home {
     clip: rect(48px, 9999px, 65px, 0); }
   100% {
     clip: rect(30px, 9999px, 49px, 0); } }
+=======
+    clip: rect(59px, 9999px, 78px, 0); }
+  5% {
+    clip: rect(90px, 9999px, 46px, 0); }
+  10% {
+    clip: rect(97px, 9999px, 19px, 0); }
+  15% {
+    clip: rect(91px, 9999px, 93px, 0); }
+  20% {
+    clip: rect(33px, 9999px, 25px, 0); }
+  25% {
+    clip: rect(92px, 9999px, 59px, 0); }
+  30% {
+    clip: rect(78px, 9999px, 22px, 0); }
+  35% {
+    clip: rect(33px, 9999px, 74px, 0); }
+  40% {
+    clip: rect(26px, 9999px, 27px, 0); }
+  45% {
+    clip: rect(83px, 9999px, 87px, 0); }
+  50% {
+    clip: rect(8px, 9999px, 82px, 0); }
+  55% {
+    clip: rect(6px, 9999px, 35px, 0); }
+  60% {
+    clip: rect(4px, 9999px, 88px, 0); }
+  65% {
+    clip: rect(47px, 9999px, 81px, 0); }
+  70% {
+    clip: rect(52px, 9999px, 21px, 0); }
+  75% {
+    clip: rect(30px, 9999px, 93px, 0); }
+  80% {
+    clip: rect(16px, 9999px, 97px, 0); }
+  85% {
+    clip: rect(65px, 9999px, 64px, 0); }
+  90% {
+    clip: rect(93px, 9999px, 45px, 0); }
+  95% {
+    clip: rect(100px, 9999px, 4px, 0); }
+  100% {
+    clip: rect(39px, 9999px, 15px, 0); } }
+>>>>>>> d89b290 (shop: cart responsive css)
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
   height: 15em;
@@ -992,6 +1036,8 @@ section#myProfile {
   background-color: #252525; }
   section#myProfile .wrap {
     height: 100%;
+    width: 90%;
+    margin: 0 auto;
     background-color: #252525;
     min-height: 90vh; }
   section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
@@ -1147,8 +1193,11 @@ section#myProfileEdit, section#droneEdit {
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-height: 90vh; }
+<<<<<<< HEAD
   section#myProfileEdit #profile_banner, section#droneEdit #profile_banner {
     margin-bottom: 1em; }
+=======
+>>>>>>> d89b290 (shop: cart responsive css)
   section#myProfileEdit .pwd, section#droneEdit .pwd {
     margin-left: 1em; }
   section#myProfileEdit .infos, section#myProfileEdit .public, section#droneEdit .infos, section#droneEdit .public {
@@ -1480,7 +1529,9 @@ section#myOrders .container-fluid {
   min-height: 90vh; }
   section#myOrders .container-fluid .wrapper {
     width: 100%;
-    padding: 0 2em; }
+    padding: 0 1em; }
+    section#myOrders .container-fluid .wrapper h3 {
+      margin: 1em; }
     section#myOrders .container-fluid .wrapper span.alert {
       width: 50%;
       margin: 0 auto; }
@@ -1488,7 +1539,8 @@ section#myOrders .container-fluid {
       border-radius: 5px;
       padding: 2em 2em 1em 2em;
       background-color: #fff;
-      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      margin-bottom: 1em; }
       section#myOrders .container-fluid .wrapper .order .orderRef {
         font-weight: bold;
         font-size: 1.2em; }
@@ -1511,17 +1563,16 @@ section#myOrders .container-fluid {
         font-size: 1em;
         background-color: rgba(37, 37, 37, 0.9); }
   section#myOrders .container-fluid h3 {
-    margin: 2em 0;
-    height: 2em; }
+    margin: 1em 0; }
 
 /** MES SESSIONS **/
 section#mySessions .container-fluid {
   background-color: #fafafa;
-  height: 90vh;
+  min-height: 90vh;
   display: flex; }
   section#mySessions .container-fluid .wrapper {
-    width: 80%;
     padding-top: 3em;
+    padding-right: 1em;
     margin: 0 auto; }
     section#mySessions .container-fluid .wrapper h5 {
       margin: 0.5em; }
@@ -1532,10 +1583,17 @@ section#mySessions .container-fluid {
       align-items: center;
       border-radius: 4px;
       box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
+      section#mySessions .container-fluid .wrapper .wrapSession .col-sm-12 {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; }
       section#mySessions .container-fluid .wrapper .wrapSession .text-muted {
         margin: 0.5em;
         line-height: normal;
         font-size: 1em; }
+    section#mySessions .container-fluid .wrapper .caution {
+      margin: 1em auto; }
 
 /*SHOP */
 /** SHOP **/
@@ -1627,6 +1685,7 @@ section#cart .container-fluid {
   section#cart .container-fluid .wrapper {
     padding: 2em;
     overflow: auto; }
+<<<<<<< HEAD
   section#cart .container-fluid table td.product .img {
     display: flex; }
   section#cart .container-fluid table td {
@@ -1634,6 +1693,13 @@ section#cart .container-fluid {
   section#cart .container-fluid table form {
     display: inline-flex;
     padding: 0.5em; }
+=======
+  section#cart .container-fluid table td.product {
+    display: flex;
+    align-items: center; }
+    section#cart .container-fluid table td.product .img {
+      display: flex; }
+>>>>>>> d89b290 (shop: cart responsive css)
   section#cart .container-fluid table td.delete-all {
     text-align: end; }
   section#cart .container-fluid table a {
@@ -1722,6 +1788,7 @@ section#errorPayment .container-fluid {
   background: url("../img/setup2-yusuf-miah.jpg") no-repeat 0 0 rgba(0, 0, 0, 0.5);
   background-blend-mode: multiply;
   background-size: cover;
+<<<<<<< HEAD
   position: relative;
   display: flex;
   justify-content: center;
@@ -1755,14 +1822,34 @@ section#errorPayment .container-fluid {
   min-height: 90vh; }
 section#errorPayment .recap {
   width: 40%;
+=======
+>>>>>>> d89b290 (shop: cart responsive css)
   position: relative;
-  margin: 5% auto;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  section#errorPayment .container-fluid::before {
+    height: 100%;
+    width: 100vw;
+    content: "";
+    background: url("../img/noise1.png") repeat 0 0 rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 0; }
+section#errorPayment h4, section#errorPayment p {
+  width: 100%; }
+section#errorPayment .recap {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 2em;
   border-radius: 5px;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
   section#errorPayment .recap p {
-    margin-bottom: 3em; }
+    margin-bottom: 2em; }
 
 /*Ajouter une video */
 section#addVideo {
@@ -2717,19 +2804,18 @@ section#contact .container-fluid {
   background-image: url("../img/setup1-yusuf-miah.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 90vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center; }
   section#contact .container-fluid::before {
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     content: "";
     background: url("../img/noise2.png") repeat 0 0 rgba(0, 0, 0, 0.5);
     position: absolute;
     bottom: 0; }
-  section#contact .container-fluid .row {
-    width: 33%;
+  section#contact .container-fluid .wrap {
     background-color: #fafafa;
     padding: 3em;
     border-radius: 4px;
@@ -2973,9 +3059,41 @@ section#adminUsers .container-fluid, section#adminShop .container-fluid {
 section#adminBlog .container-fluid, section#adminBlogAlerts .container-fluid {
   background-color: #fafafa; }
   section#adminBlog .container-fluid .wrap, section#adminBlogAlerts .container-fluid .wrap {
-    width: 75%;
-    margin: 0 auto;
-    display: block; }
+    margin: 0 1em;
+    display: flex;
+    flex-direction: column;
+    width: 100%; }
+    section#adminBlog .container-fluid .wrap #titleAndForm, section#adminBlogAlerts .container-fluid .wrap #titleAndForm {
+      z-index: 1; }
+    section#adminBlog .container-fluid .wrap .article-thumb, section#adminBlogAlerts .container-fluid .wrap .article-thumb {
+      aspect-ratio: 16/9; }
+    section#adminBlog .container-fluid .wrap .thumb-wrap, section#adminBlogAlerts .container-fluid .wrap .thumb-wrap {
+      width: 100%;
+      height: 100%; }
+      section#adminBlog .container-fluid .wrap .thumb-wrap img, section#adminBlogAlerts .container-fluid .wrap .thumb-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; }
+  section#adminBlog .container-fluid .category-badge, section#adminBlogAlerts .container-fluid .category-badge {
+    z-index: 1; }
+  section#adminBlog .container-fluid .article, section#adminBlogAlerts .container-fluid .article {
+    display: flex;
+    position: relative;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 1em;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
+    section#adminBlog .container-fluid .article .article-body, section#adminBlogAlerts .container-fluid .article .article-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; }
+    section#adminBlog .container-fluid .article .article-content, section#adminBlogAlerts .container-fluid .article .article-content {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 7;
+      line-clamp: 7;
+      -webkit-box-orient: vertical; }
   section#adminBlog .container-fluid .alerts, section#adminBlogAlerts .container-fluid .alerts {
     position: absolute;
     left: 1em;
@@ -2991,21 +3109,6 @@ section#adminBlog .container-fluid, section#adminBlogAlerts .container-fluid {
     background-color: rgba(255, 255, 255, 0.8);
     font-size: 2em;
     padding: 2em; }
-  section#adminBlog .container-fluid .article, section#adminBlogAlerts .container-fluid .article {
-    display: flex;
-    position: relative; }
-    section#adminBlog .container-fluid .article .article-body, section#adminBlogAlerts .container-fluid .article .article-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 0 1em; }
-    section#adminBlog .container-fluid .article .article-content, section#adminBlogAlerts .container-fluid .article .article-content {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 7;
-      line-clamp: 7;
-      -webkit-box-orient: vertical; }
   section#adminBlog .container-fluid .wrapAlert, section#adminBlogAlerts .container-fluid .wrapAlert {
     margin: 1em auto;
     padding: 1em;
@@ -3021,10 +3124,11 @@ section#adminBlog .container-fluid, section#adminBlogAlerts .container-fluid {
   section#adminBlog .container-fluid .date, section#adminBlogAlerts .container-fluid .date {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding-left: 1em; }
+    align-items: center; }
   section#adminBlog .container-fluid .stats .row, section#adminBlogAlerts .container-fluid .stats .row {
     margin: 0 0.5em; }
+  section#adminBlog .container-fluid .stats .icon, section#adminBlogAlerts .container-fluid .stats .icon {
+    height: 50%; }
   section#adminBlog .container-fluid .stats .alert, section#adminBlogAlerts .container-fluid .stats .alert {
     margin-bottom: 0;
     margin-left: 1em;
@@ -3032,6 +3136,8 @@ section#adminBlog .container-fluid, section#adminBlogAlerts .container-fluid {
     border-radius: 0; }
     section#adminBlog .container-fluid .stats .alert .icon, section#adminBlogAlerts .container-fluid .stats .alert .icon {
       color: #B30B00; }
+  section#adminBlog .container-fluid .settings a.show, section#adminBlogAlerts .container-fluid .settings a.show {
+    background-color: #DADADA; }
 
 section#adminComments .container-fluid {
   display: flex;
@@ -3261,15 +3367,11 @@ section#responseContact .container-fluid {
     border-radius: 4px;
     padding: 2em;
     margin: 2em 0; }
-  section#responseContact .container-fluid .row {
+  section#responseContact .container-fluid .wrap {
     display: flex;
-    width: 100%;
     align-items: flex-start;
     background-color: #fafafa;
-    padding: 3em;
     border-radius: 4px; }
-    section#responseContact .container-fluid .row .text-muted {
-      font-size: 1em; }
 
 /* MY PROFILE - _sidebarMenuProfile */
 aside.sidebarMenu, aside.adminSidebarMenu {
@@ -3279,7 +3381,11 @@ aside.sidebarMenu, aside.adminSidebarMenu {
   min-height: 100%;
   position: relative;
   overflow-x: hidden;
+<<<<<<< HEAD
   z-index: 15;
+=======
+  z-index: 2;
+>>>>>>> d89b290 (shop: cart responsive css)
   background-color: #fafafa;
   box-shadow: rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px; }
   aside.sidebarMenu.close, aside.adminSidebarMenu.close {
@@ -3339,10 +3445,14 @@ footer {
   position: relative; }
 
 /** PARTIALS **/
+<<<<<<< HEAD
 .btnWrap {
   z-index: 15; }
 
 /* PARTIALS ADMIN ARTICLES */
+=======
+/*ADMIN ARTICLES*/
+>>>>>>> d89b290 (shop: cart responsive css)
 section#adminBlog article.adminArticle, section#adminBlogAlerts article.adminArticle {
   /*xs*/
   /* sm */
@@ -3465,6 +3575,7 @@ section#adminBlog article.adminArticle, section#adminBlogAlerts article.adminArt
       object-fit: cover;
       max-width: 25vw; } }
 
+<<<<<<< HEAD
 /** PARTIALS ARTICLE LEFT**/
 /* PARTIALS ARTICLE RIGHT */
 .wrapper-right .category-badge {
@@ -3519,6 +3630,9 @@ section#adminBlog article.adminArticle, section#adminBlogAlerts article.adminArt
     top: 2em; } }
 
 /****PARTIALS NAVBARS ****/
+=======
+/**** NAVBARS ****/
+>>>>>>> d89b290 (shop: cart responsive css)
 @media screen and (max-width: 1200px) {
   section#navbarMenu .navbar-collapse, section#adminNavbarMenu .navbar-collapse {
     border-radius: 4px;
@@ -3714,9 +3828,13 @@ section#newOnShop {
     overflow-y: initial; } }
 @media screen and (min-width: 992px) {
   section#sessions #map {
+<<<<<<< HEAD
     height: 100% !important; }
   section#sessions .btnMap {
     display: none; } }
+=======
+    height: 100%; } }
+>>>>>>> d89b290 (shop: cart responsive css)
 @media screen and (min-width: 576px) {
   section#sessions .infoSpot, section#sessions .mainInfos {
     width: 50%; } }
@@ -3808,6 +3926,7 @@ section#register {
     section#register .containerRegister {
       width: 40%; } }
 
+<<<<<<< HEAD
 /**** ACTUALITES (blog) INDEX  ****/
 section#blog {
   padding-bottom: 0; }
@@ -4079,6 +4198,9 @@ section#sessionAdd {
     section#sessionAdd .formSession {
       width: 33%; } }
 
+=======
+/**** ACTUALITES (blog)  ****/
+>>>>>>> d89b290 (shop: cart responsive css)
 /*** SHOP : INDEX ***/
 section#shop {
   /*xs to sm */ }
@@ -4096,6 +4218,7 @@ section#shop {
       width: 80vw !important; }
       section#shop .wrap .card {
         max-width: 20em; } }
+<<<<<<< HEAD
   @media screen and (max-width: 1400px) {
     section#shop .wrap .card {
       font-size: 0.9em; } }
@@ -4105,6 +4228,14 @@ section#shop {
   @media screen and (min-width: 1200px) and (max-width: 1400px) {
     section#shop .wrap {
       width: 80vw; } }
+=======
+  @media screen and (min-width: 992px) and (max-width: 1600px) {
+    section#shop .wrap {
+      width: 90vw; } }
+  @media screen and (min-width: 992px) and (max-width: 1200px) {
+    section#shop .wrap {
+      width: 90vw; } }
+>>>>>>> d89b290 (shop: cart responsive css)
   @media screen and (min-width: 1400px) and (max-width: 1600px) {
     section#shop .wrap {
       width: 75vw; } }
@@ -4119,6 +4250,7 @@ section#shop {
       section#shop .wrap .card .price {
         font-size: 1.2em; } }
 
+<<<<<<< HEAD
 /*** SHOP : SHOW PRODUCT ***/
 @media screen and (min-width: 768px) {
   section#showProduct .encartInfo .transporter, section#showProduct .encartInfo .stripe, section#showProduct .encartInfo .question {
@@ -4175,6 +4307,8 @@ section#shop {
   section#showProduct .encartInfo {
     width: 80%; } }
 
+=======
+>>>>>>> d89b290 (shop: cart responsive css)
 /*** SHOP : CART ***/
 @media screen and (max-width: 768px) {
   section#cart .wrapper .product .img img {
@@ -4198,8 +4332,11 @@ section#shop {
     section#cart .wrapper tr {
       display: block;
       margin: 1em; }
+<<<<<<< HEAD
     section#cart .wrapper td[data-label="Produit"] {
       background-color: #DADADA; }
+=======
+>>>>>>> d89b290 (shop: cart responsive css)
     section#cart .wrapper td {
       display: flex;
       justify-content: space-between;
@@ -4246,6 +4383,10 @@ section#shop {
     font-size: 1em; }
   section#cart .wrapImgProduct {
     display: flex;
+<<<<<<< HEAD
+=======
+    justify-content: center;
+>>>>>>> d89b290 (shop: cart responsive css)
     align-items: center; }
   section#cart .delete, section#cart .price, section#cart .total {
     text-align: right; }
@@ -4259,6 +4400,7 @@ section#shop {
     width: 80vw;
     margin: 0 auto; } }
 
+<<<<<<< HEAD
 /*** ORDER: PREPARE ***/
 @media screen and (max-width: 576px) {
   section#prepareOrder .container-fluid.pt-4 {
@@ -4343,6 +4485,8 @@ section#shop {
     margin: 0px 4vw;
     border-radius: 4px; } }
 
+=======
+>>>>>>> d89b290 (shop: cart responsive css)
 /*** ORDER : SUCCESS ****/
 @media screen and (max-width: 576px) {
   section#successPayment .wrapper .recap .deliveryImage {
@@ -4513,6 +4657,7 @@ section#contact {
     section#contact .wrap {
       width: 33vw; } }
 
+<<<<<<< HEAD
 /*** SEARCH PAGE***/
 @media screen and (max-width: 992px) {
   section#search .card-body {
@@ -4535,6 +4680,8 @@ section#contact {
   section#search .wrapper-left {
     margin: 1em auto; } }
 
+=======
+>>>>>>> d89b290 (shop: cart responsive css)
 /****** PARTIE ACCOUNT *******/
 /*** ACCOUNT : MON PROFIL ***/
 @media screen and (max-width: 576px) {
@@ -4803,6 +4950,7 @@ section#myPwdEdit {
     section#myPwdEdit .wrapper {
       width: 35%; } }
 
+<<<<<<< HEAD
 /*** ACCOUNT : EDIT ARTICLE ***/
 section#editArticle .wrapForm, section#addArticle .wrapForm {
   width: 90%;
@@ -4971,6 +5119,8 @@ section#myArticles {
       object-fit: cover;
       max-width: 25vw; } }
 
+=======
+>>>>>>> d89b290 (shop: cart responsive css)
 /*** ACCOUNT : MES SESSIONS ***/
 @media screen and (max-width: 768px) {
   section#mySessions .wrapper {
@@ -4986,6 +5136,7 @@ section#myArticles {
 section#myOrders {
   /*xs*/ }
   @media screen and (max-width: 576px) {
+<<<<<<< HEAD
     section#myOrders h3 {
       font-size: large; }
     section#myOrders .wrapper h3 {
@@ -4998,6 +5149,15 @@ section#myOrders {
   @media screen and (min-width: 768px) and (max-width: 992px) {
     section#myOrders h3 {
       font-size: x-large; }
+=======
+    section#myOrders .wrapper h3 {
+      margin: 1em;
+      font-size: 1.3em; } }
+  @media screen and (min-width: 576px) and (max-width: 768px) {
+    section#myOrders .wrapper .row {
+      padding: 0 1em; } }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+>>>>>>> d89b290 (shop: cart responsive css)
     section#myOrders .wrapper .row {
       padding: 0 1em; }
     section#myOrders .wrapper .order {
@@ -5006,8 +5166,11 @@ section#myOrders {
       section#myOrders .wrapper .order .badge {
         font-size: 1em; } }
   @media screen and (min-width: 992px) and (max-width: 1400px) {
+<<<<<<< HEAD
     section#myOrders h3 {
       font-size: x-large; }
+=======
+>>>>>>> d89b290 (shop: cart responsive css)
     section#myOrders .wrapper .row {
       padding: 0 1em;
       margin: 0 auto; }
@@ -5017,14 +5180,18 @@ section#myOrders {
       section#myOrders .wrapper .order .badge {
         font-size: 1em; } }
   @media screen and (min-width: 1400px) {
+<<<<<<< HEAD
     section#myOrders h3 {
       font-size: x-large; }
+=======
+>>>>>>> d89b290 (shop: cart responsive css)
     section#myOrders .wrapper .row {
       padding: 0 1em;
       margin: 1em auto; }
     section#myOrders .wrapper .order {
       margin: 1em;
       width: 31%; } }
+<<<<<<< HEAD
 
 /*** ACCOUNT PROFIL PUBLIC ***/
 @media screen and (max-width: 576px) {
@@ -5886,6 +6053,8 @@ section#adminEditProduct .buttons {
   section#responseContact .wrap {
     width: 75vw;
     margin: 0 auto; } }
+=======
+>>>>>>> d89b290 (shop: cart responsive css)
 
 /**** PARTIE ADMIN ****/
 section#adminLogin {
@@ -5906,5 +6075,104 @@ section#adminLogin {
   @media screen and (min-width: 1800px) {
     section#adminLogin .formLogin {
       height: 35vh; } }
+
+/** ADMIN : BLOG index + BLOG alerts **/
+@media screen and (max-width: 768px) {
+  section#adminBlog h4, section#adminBlogAlerts h4 {
+    font-size: 1.1em;
+    margin: 1em; }
+  section#adminBlog .article, section#adminBlogAlerts .article {
+    margin: 1em auto; }
+  section#adminBlog .articlesWrap, section#adminBlogAlerts .articlesWrap {
+    margin: 0 auto; }
+    section#adminBlog .articlesWrap .adminArticle, section#adminBlogAlerts .articlesWrap .adminArticle {
+      padding-right: 0; }
+  section#adminBlog #titleAndForm, section#adminBlogAlerts #titleAndForm {
+    margin: 1em auto; } }
+@media screen and (min-width: 768px) {
+  section#adminBlog .articleWrap, section#adminBlogAlerts .articleWrap {
+    margin: 0 auto; }
+  section#adminBlog #titleAndForm, section#adminBlogAlerts #titleAndForm {
+    margin: 0 0 1em 0; } }
+
+/*** ADMIN : CONTACT RESPONSE PAGE ***/
+@media screen and (min-width: 350px) and (max-width: 1400px) {
+  section#responseContact .wrap .text-muted {
+    font-size: 0.9em; }
+  section#responseContact .wrap h3 {
+    font-size: 1.2rem; }
+  section#responseContact .wrap button {
+    font-size: 1em; } }
+@media screen and (min-width: 576px) {
+  section#responseContact .wrap textarea {
+    height: 20vh; }
+  section#responseContact .wrap .text-muted {
+    padding: 2em 1em 1em 1em; }
+  section#responseContact .wrap .initMsg {
+    margin: 0; } }
+@media screen and (min-width: 768px) {
+  section#responseContact .wrap {
+    margin: 0  auto;
+    padding: 1em; } }
+@media screen and (max-width: 576px) {
+  section#responseContact .wrap {
+    padding: 2em 1em; }
+    section#responseContact .wrap .text-muted {
+      padding: 2em 1em; }
+    section#responseContact .wrap .initMsg {
+      margin: 0; }
+    section#responseContact .wrap .col-sm-12 {
+      padding: 1em; }
+    section#responseContact .wrap .col {
+      width: 100%; }
+    section#responseContact .wrap textarea {
+      height: 10vh; } }
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  section#responseContact .wrap {
+    padding: 2em; }
+    section#responseContact .wrap .col-sm-12 {
+      padding: 1em 2em; } }
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  section#responseContact {
+    padding-right: 1em; }
+    section#responseContact .wrap {
+      width: 90vw; }
+      section#responseContact .wrap .col-sm-12 {
+        padding: 1em 2em; } }
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  section#responseContact {
+    padding-right: 1em; }
+    section#responseContact .wrap {
+      width: 80vw;
+      padding: 1em; }
+      section#responseContact .wrap .col-sm-12 {
+        padding: 1em 2em; } }
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+  section#responseContact {
+    padding-right: 1em; }
+    section#responseContact .wrap {
+      width: 90vw; }
+      section#responseContact .wrap .col-sm-12 {
+        padding: 1em; }
+      section#responseContact .wrap h3 {
+        font-size: 1.3rem; } }
+@media screen and (min-width: 1400px) {
+  section#responseContact {
+    padding-right: 1em; }
+    section#responseContact .wrap {
+      width: 90vw; }
+      section#responseContact .wrap .text-muted {
+        font-size: 1em; }
+      section#responseContact .wrap .col-sm-12 {
+        padding: 1em 2em;
+        width: 50% !important; }
+      section#responseContact .wrap h3 {
+        font-size: 1.3rem; }
+      section#responseContact .wrap button {
+        font-size: 1.2em; } }
+@media screen and (min-width: 1800px) {
+  section#responseContact .wrap {
+    width: 75vw;
+    margin: 0 auto; } }
 
 /*# sourceMappingURL=style.css.map */
