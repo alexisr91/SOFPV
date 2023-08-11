@@ -629,9 +629,6 @@ section#addArticle, section#editArticle {
         background-color: $white;
         border-radius: 3px;
         display: flex;
-        justify-content: center;
-        align-items: center; 
-        height:90vh;
         background-image: url('/img/raceTrack.jpeg');
         background-repeat: no-repeat;
         background-size: cover;
@@ -639,12 +636,9 @@ section#addArticle, section#editArticle {
         background-blend-mode:multiply;
         
 
-        .row{
-            width:90%;
-            height:80%;
-            margin: 0 2em;
-            padding: 3em;
+        .wrapForm{
             border-radius: 3px;
+            padding: 2em;
             background-color: $white;
                 div.images div.mb-3 {
                 width:50% !important;
@@ -661,11 +655,9 @@ section#blog {
     background-image: url('/img/RaceTrack.jpeg');
     background-size: cover;
 
-    .row-cols-md-1 {min-height: 83vh;
-        .filter {max-height: 2.5em;}
-    }
+    .filter {max-height: 2.5em; margin-top: 1em;}
     article {
-        margin-top: 0 !important;
+        margin-top: 0;
     }
     
 }
@@ -715,7 +707,6 @@ section#blog, section#myArticles {
         border-radius: 3px;
         margin: 0 auto;
         background-color:$white;
-        width: 70%;
         padding-bottom: 1em; 
     }
     .row-cols-md-1 {margin-bottom: 3em;}

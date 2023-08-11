@@ -546,47 +546,47 @@ section#home {
       animation: glitch-effect 2s infinite linear alternate-reverse; }
 @keyframes glitch-effect {
   0% {
-    clip: rect(51px, 9999px, 13px, 0); }
+    clip: rect(47px, 9999px, 33px, 0); }
   5% {
-    clip: rect(63px, 9999px, 49px, 0); }
+    clip: rect(66px, 9999px, 86px, 0); }
   10% {
-    clip: rect(69px, 9999px, 83px, 0); }
+    clip: rect(35px, 9999px, 39px, 0); }
   15% {
-    clip: rect(75px, 9999px, 53px, 0); }
+    clip: rect(6px, 9999px, 23px, 0); }
   20% {
-    clip: rect(23px, 9999px, 59px, 0); }
+    clip: rect(78px, 9999px, 88px, 0); }
   25% {
-    clip: rect(61px, 9999px, 80px, 0); }
+    clip: rect(24px, 9999px, 79px, 0); }
   30% {
-    clip: rect(11px, 9999px, 42px, 0); }
+    clip: rect(58px, 9999px, 78px, 0); }
   35% {
-    clip: rect(83px, 9999px, 8px, 0); }
+    clip: rect(97px, 9999px, 96px, 0); }
   40% {
-    clip: rect(43px, 9999px, 69px, 0); }
+    clip: rect(85px, 9999px, 75px, 0); }
   45% {
-    clip: rect(12px, 9999px, 29px, 0); }
+    clip: rect(76px, 9999px, 93px, 0); }
   50% {
-    clip: rect(73px, 9999px, 5px, 0); }
+    clip: rect(6px, 9999px, 98px, 0); }
   55% {
-    clip: rect(61px, 9999px, 91px, 0); }
+    clip: rect(39px, 9999px, 76px, 0); }
   60% {
-    clip: rect(71px, 9999px, 36px, 0); }
+    clip: rect(8px, 9999px, 61px, 0); }
   65% {
-    clip: rect(35px, 9999px, 36px, 0); }
+    clip: rect(87px, 9999px, 35px, 0); }
   70% {
-    clip: rect(83px, 9999px, 47px, 0); }
+    clip: rect(21px, 9999px, 49px, 0); }
   75% {
-    clip: rect(17px, 9999px, 15px, 0); }
+    clip: rect(46px, 9999px, 50px, 0); }
   80% {
-    clip: rect(62px, 9999px, 46px, 0); }
+    clip: rect(18px, 9999px, 26px, 0); }
   85% {
-    clip: rect(71px, 9999px, 15px, 0); }
+    clip: rect(19px, 9999px, 46px, 0); }
   90% {
-    clip: rect(4px, 9999px, 20px, 0); }
+    clip: rect(3px, 9999px, 69px, 0); }
   95% {
-    clip: rect(60px, 9999px, 96px, 0); }
+    clip: rect(26px, 9999px, 33px, 0); }
   100% {
-    clip: rect(57px, 9999px, 1px, 0); } }
+    clip: rect(92px, 9999px, 80px, 0); } }
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
   height: 15em;
@@ -1121,20 +1121,36 @@ section#droneEdit .avatar {
   object-position: center; }
 
 /*Mes articles */
-section#myArticles article, section#adminBlog article, section#adminBlogAlerts article {
-  position: relative; }
-section#myArticles .container-fluid, section#adminBlog .container-fluid, section#adminBlogAlerts .container-fluid {
+section#myArticles .category-badge, section#adminBlog .category-badge, section#adminBlogAlerts .category-badge {
+  z-index: 1; }
+section#myArticles .articleWrap, section#adminBlog .articleWrap, section#adminBlogAlerts .articleWrap {
+  padding-top: 1em; }
+section#myArticles .article, section#adminBlog .article, section#adminBlogAlerts .article {
   display: flex;
-  min-height: 100vh; }
+  position: relative;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 1em;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
+  section#myArticles .article .article-body, section#adminBlog .article .article-body, section#adminBlogAlerts .article .article-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+  section#myArticles .article .article-content, section#adminBlog .article .article-content, section#adminBlogAlerts .article .article-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    line-clamp: 7;
+    -webkit-box-orient: vertical; }
+section#myArticles .container-fluid, section#adminBlog .container-fluid, section#adminBlogAlerts .container-fluid {
+  display: flex; }
   section#myArticles .container-fluid .article-thumb, section#adminBlog .container-fluid .article-thumb, section#adminBlogAlerts .container-fluid .article-thumb {
-    width: 40%;
+    aspect-ratio: 16/9;
     display: flex;
     align-items: center;
     background-color: rgba(218, 218, 218, 0.4);
     position: relative; }
-  section#myArticles .container-fluid .row-cols-md-1, section#adminBlog .container-fluid .row-cols-md-1, section#adminBlogAlerts .container-fluid .row-cols-md-1 {
-    margin-bottom: 3em;
-    display: block; }
   section#myArticles .container-fluid .card-title, section#adminBlog .container-fluid .card-title, section#adminBlogAlerts .container-fluid .card-title {
     margin-left: 0.5em; }
   section#myArticles .container-fluid .sidebar, section#adminBlog .container-fluid .sidebar, section#adminBlogAlerts .container-fluid .sidebar {
@@ -1157,7 +1173,6 @@ section#myArticles .container-fluid, section#adminBlog .container-fluid, section
       align-items: center; }
     section#myArticles .container-fluid .stats .row, section#adminBlog .container-fluid .stats .row, section#adminBlogAlerts .container-fluid .stats .row {
       padding: 0;
-      margin-right: 1em;
       box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
       flex-grow: 0; }
     section#myArticles .container-fluid .stats .icon, section#adminBlog .container-fluid .stats .icon, section#adminBlogAlerts .container-fluid .stats .icon {
@@ -1165,12 +1180,12 @@ section#myArticles .container-fluid, section#adminBlog .container-fluid, section
       border-top-right-radius: 3px;
       border-bottom-right-radius: 3px; }
 section#myArticles .thumb-wrap, section#adminBlog .thumb-wrap, section#adminBlogAlerts .thumb-wrap {
-  height: 17em;
-  width: 100%; }
+  width: 100%;
+  height: 100%; }
   section#myArticles .thumb-wrap img, section#adminBlog .thumb-wrap img, section#adminBlogAlerts .thumb-wrap img {
-    object-fit: cover;
     width: 100%;
-    height: 100%; }
+    height: 100%;
+    object-fit: cover; }
 
 /*MES COMMANDES */
 section#myOrders .container-fluid {
@@ -1577,34 +1592,27 @@ section#addArticle .wrapper, section#editArticle .wrapper {
   background-color: #fafafa;
   border-radius: 3px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
   background-image: url("/img/raceTrack.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #252525;
   background-blend-mode: multiply; }
-  section#addArticle .wrapper .row, section#editArticle .wrapper .row {
-    width: 90%;
-    height: 80%;
-    margin: 0 2em;
-    padding: 3em;
+  section#addArticle .wrapper .wrapForm, section#editArticle .wrapper .wrapForm {
     border-radius: 3px;
+    padding: 2em;
     background-color: #fafafa; }
-    section#addArticle .wrapper .row div.images div.mb-3, section#editArticle .wrapper .row div.images div.mb-3 {
+    section#addArticle .wrapper .wrapForm div.images div.mb-3, section#editArticle .wrapper .wrapForm div.images div.mb-3 {
       width: 50% !important;
       margin-bottom: 0 !important; }
 
 section#blog {
   background-image: url("/img/RaceTrack.jpeg");
   background-size: cover; }
-  section#blog .row-cols-md-1 {
-    min-height: 83vh; }
-    section#blog .row-cols-md-1 .filter {
-      max-height: 2.5em; }
+  section#blog .filter {
+    max-height: 2.5em;
+    margin-top: 1em; }
   section#blog article {
-    margin-top: 0 !important; }
+    margin-top: 0; }
 
 section#blog .row.g-0, section#blogHome .row.g-0, section#search .row.g-0, section#profile .row.g-0, section#adminBlog .row.g-0, section#adminBlogAlerts .row.g-0 {
   width: 100%; }
@@ -1641,7 +1649,6 @@ section#blog, section#myArticles {
     border-radius: 3px;
     margin: 0 auto;
     background-color: #fafafa;
-    width: 70%;
     padding-bottom: 1em; }
   section#blog .row-cols-md-1, section#myArticles .row-cols-md-1 {
     margin-bottom: 3em; }
@@ -2145,17 +2152,6 @@ section#adminBlog .container-fluid, section#adminBlogAlerts .container-fluid {
     width: 100%; }
     section#adminBlog .container-fluid .wrap #titleAndForm, section#adminBlogAlerts .container-fluid .wrap #titleAndForm {
       z-index: 1; }
-    section#adminBlog .container-fluid .wrap .article-thumb, section#adminBlogAlerts .container-fluid .wrap .article-thumb {
-      aspect-ratio: 16/9; }
-    section#adminBlog .container-fluid .wrap .thumb-wrap, section#adminBlogAlerts .container-fluid .wrap .thumb-wrap {
-      width: 100%;
-      height: 100%; }
-      section#adminBlog .container-fluid .wrap .thumb-wrap img, section#adminBlogAlerts .container-fluid .wrap .thumb-wrap img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; }
-  section#adminBlog .container-fluid .category-badge, section#adminBlogAlerts .container-fluid .category-badge {
-    z-index: 1; }
   section#adminBlog .container-fluid .article, section#adminBlogAlerts .container-fluid .article {
     display: flex;
     position: relative;
@@ -2167,13 +2163,6 @@ section#adminBlog .container-fluid, section#adminBlogAlerts .container-fluid {
       display: flex;
       flex-direction: column;
       justify-content: space-between; }
-    section#adminBlog .container-fluid .article .article-content, section#adminBlogAlerts .container-fluid .article .article-content {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 7;
-      line-clamp: 7;
-      -webkit-box-orient: vertical; }
   section#adminBlog .container-fluid .alerts, section#adminBlogAlerts .container-fluid .alerts {
     position: absolute;
     left: 1em;
@@ -2343,13 +2332,15 @@ section#adminBlogAlerts .container-fluid {
   background-color: #fafafa;
   min-height: 90vh; }
 
+section#adminOrders h4, section#adminAllOrders h4 {
+  padding-left: 1em; }
 section#adminOrders .container-fluid, section#adminAllOrders .container-fluid {
   display: flex;
   background-color: #fafafa;
-  min-height: 90vh; }
+  min-height: 90vh;
+  padding: 0; }
   section#adminOrders .container-fluid .wrap, section#adminAllOrders .container-fluid .wrap {
-    width: 80%;
-    padding: 2em; }
+    padding-top: 2em; }
   section#adminOrders .container-fluid .modal-body, section#adminAllOrders .container-fluid .modal-body {
     padding: 2em; }
   section#adminOrders .container-fluid .infoOrder, section#adminAllOrders .container-fluid .infoOrder {
@@ -2521,7 +2512,10 @@ footer {
   position: relative; }
 
 /** PARTIALS **/
-/*ADMIN ARTICLES*/
+.btnWrap {
+  z-index: 2; }
+
+/* PARTIALS ADMIN ARTICLES */
 section#adminBlog article.adminArticle, section#adminBlogAlerts article.adminArticle {
   /*xs*/
   /* sm */
@@ -2644,7 +2638,14 @@ section#adminBlog article.adminArticle, section#adminBlogAlerts article.adminArt
       object-fit: cover;
       max-width: 25vw; } }
 
-/**** NAVBARS ****/
+/**** PARTIALS ARTICLE RIGHT ET LEFT ****/
+article.right .author, article.left .author {
+  width: max-content; }
+@media screen and (max-width: 991px) {
+  article.right .author, article.left .author {
+    margin: 1em 0; } }
+
+/****PARTIALS NAVBARS ****/
 @media screen and (max-width: 1200px) {
   section#navbarMenu .navbar-collapse, section#adminNavbarMenu .navbar-collapse {
     border-radius: 4px;
@@ -2652,13 +2653,15 @@ section#adminBlog article.adminArticle, section#adminBlogAlerts article.adminArt
 
 @media screen and (max-width: 1200px) {
   section#navbarMenu .navbar-collapse {
-    background-color: rgba(37, 37, 37, 0.9); } }
+    background-color: rgba(37, 37, 37, 0.9); }
+    section#navbarMenu .navbar-collapse .cart {
+      margin-top: 1.5em; } }
 
 @media screen and (max-width: 1200px) {
   section#adminNavbarMenu .navbar-collapse {
     background-color: rgba(250, 250, 250, 0.9); } }
 
-/** sidebar & admin side bar **/
+/**PARTIALS  sidebar & admin side bar **/
 @media screen and (max-width: 450px) {
   aside.sidebarMenu nav, aside.adminSidebarMenu nav {
     margin-top: 10em; }
@@ -2753,12 +2756,20 @@ section#blogHome {
   /*sm*/
   /*md*/
   /*lg*/ }
+  section#blogHome .category-badge {
+    max-height: fit-content; }
+  @media screen and (max-width: 576px) {
+    section#blogHome .author {
+      height: 3em;
+      padding: 0; }
+    section#blogHome .category-badge {
+      font-size: x-small; } }
   @media screen and (max-width: 768px) {
     section#blogHome .card-title {
       font-size: 1em; }
     section#blogHome .author .author-nickname h4 {
       font-size: 1.1em; } }
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 991px) {
     section#blogHome {
       padding-bottom: 0; }
       section#blogHome .wrapper-left, section#blogHome .wrapper-right {
@@ -2901,7 +2912,96 @@ section#register {
     section#register .containerRegister {
       width: 40%; } }
 
-/**** ACTUALITES (blog)  ****/
+/**** ACTUALITES (blog) INDEX  ****/
+section#blog {
+  padding-bottom: 0; }
+  section#blog .row.wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+  @media screen and (max-width: 400px) {
+    section#blog .container-fluid .right {
+      max-width: 100%; } }
+  @media screen and (max-width: 576px) {
+    section#blog .container-fluid .row article .card-body {
+      padding: 0; } }
+  @media screen and (min-width: 400px) and (max-width: 768px) {
+    section#blog .container-fluid .right {
+      width: 90%; } }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    section#blog .filter {
+      margin-bottom: 2em; }
+    section#blog .row {
+      width: 90%; }
+    section#blog .right {
+      width: 80%; } }
+  @media screen and (max-width: 992px) {
+    section#blog article {
+      margin: 1em auto;
+      padding-bottom: 1em; }
+      section#blog article .card-body {
+        padding: 0; } }
+  @media screen and (min-width: 992px) and (max-width: 1200px) {
+    section#blog .row {
+      width: 100%;
+      padding: 1em 2em; }
+    section#blog .filter {
+      margin-bottom: 1em; }
+    section#blog .right {
+      width: 100%; }
+    section#blog .colThumb {
+      width: 45%; }
+    section#blog .colText {
+      width: 55%; } }
+  @media screen and (min-width: 992px) and (max-width: 1200px) {
+    section#blog .row {
+      width: 100%;
+      padding: 1em 2em; }
+    section#blog .filter {
+      margin-bottom: 1em; }
+    section#blog .right {
+      width: 100%; }
+    section#blog .colThumb {
+      width: 45%; }
+    section#blog .colText {
+      width: 55%; } }
+  @media screen and (min-width: 1200px) and (max-width: 1400px) {
+    section#blog .row {
+      width: 90%;
+      padding: 1em 2em; }
+    section#blog .filter {
+      margin-bottom: 1em; }
+    section#blog .right {
+      width: 100%; }
+    section#blog .colThumb {
+      width: 30%; }
+    section#blog .colText {
+      width: 70%; } }
+  @media screen and (min-width: 1400px) and (max-width: 1800px) {
+    section#blog .row {
+      width: 90%;
+      padding: 1em 2em; }
+    section#blog .filter {
+      margin-bottom: 1em; }
+    section#blog .right {
+      width: 95%; }
+    section#blog .colThumb {
+      width: 30%; }
+    section#blog .colText {
+      width: 70%; } }
+  @media screen and (min-width: 1800px) {
+    section#blog .row {
+      width: 80%;
+      padding: 1em 2em; }
+    section#blog .filter {
+      margin-bottom: 1em; }
+    section#blog .right {
+      width: 85%; }
+    section#blog .colThumb {
+      width: 30%; }
+    section#blog .colText {
+      width: 70%; } }
+
 /*** SHOP : INDEX ***/
 section#shop {
   /*xs to sm */ }
@@ -2919,12 +3019,12 @@ section#shop {
       width: 80vw !important; }
       section#shop .wrap .card {
         max-width: 20em; } }
-  @media screen and (min-width: 992px) and (max-width: 1600px) {
-    section#shop .wrap {
-      width: 90vw; } }
   @media screen and (min-width: 992px) and (max-width: 1200px) {
     section#shop .wrap {
       width: 90vw; } }
+  @media screen and (min-width: 1200px) and (max-width: 1400px) {
+    section#shop .wrap {
+      width: 80vw; } }
   @media screen and (min-width: 1400px) and (max-width: 1600px) {
     section#shop .wrap {
       width: 75vw; } }
@@ -3382,6 +3482,38 @@ section#myPwdEdit {
     section#myPwdEdit .wrapper {
       width: 35%; } }
 
+/*** ACCOUNT : EDIT ARTICLE ***/
+section#editArticle .wrapForm, section#addArticle .wrapForm {
+  width: 90%;
+  margin: 0 auto; }
+@media screen and (min-width: 768px) {
+  section#editArticle .wrapper, section#addArticle .wrapper {
+    padding-right: 1em; } }
+@media screen and (max-width: 992px) {
+  section#editArticle .column1, section#editArticle .columns2, section#addArticle .column1, section#addArticle .columns2 {
+    width: 100%; } }
+@media screen and (min-width: 992px) {
+  section#editArticle .column1, section#editArticle .column2, section#addArticle .column1, section#addArticle .column2 {
+    width: 50%;
+    padding: 0.5em; } }
+@media screen and (max-width: 1400px) {
+  section#editArticle h4, section#addArticle h4 {
+    font-size: 1.2em;
+    margin-bottom: 1em; }
+  section#editArticle h5, section#addArticle h5 {
+    font-size: 1.1em; } }
+@media screen and (min-width: 1800px) {
+  section#editArticle .wrapForm, section#addArticle .wrapForm {
+    width: 80%;
+    margin: 0 auto; } }
+
+/*** ACCOUNT : MES ARTICLES  ***/
+section#myArticles {
+  /*xs*/
+  /* sm */
+  /*md to lg*/
+  /*xl*/ }
+
 /*** ACCOUNT : MES SESSIONS ***/
 @media screen and (max-width: 768px) {
   section#mySessions .wrapper {
@@ -3466,6 +3598,66 @@ section#adminLogin {
     margin: 0 auto; }
   section#adminBlog #titleAndForm, section#adminBlogAlerts #titleAndForm {
     margin: 0 0 1em 0; } }
+
+/****  ADMIN ORDERS : index + all ***/
+@media screen and (max-width: 1200px) {
+  section#adminOrders .wrap, section#adminAllOrders .wrap {
+    width: 100%; }
+    section#adminOrders .wrap thead, section#adminAllOrders .wrap thead {
+      visibility: hidden;
+      height: 0;
+      position: absolute;
+      top: 0; }
+    section#adminOrders .wrap .table > :not(:first-child), section#adminAllOrders .wrap .table > :not(:first-child) {
+      border-top: none; }
+    section#adminOrders .wrap tr, section#adminAllOrders .wrap tr {
+      display: block;
+      margin: 1em 1em 2em 1em; }
+      section#adminOrders .wrap tr td:first-child, section#adminAllOrders .wrap tr td:first-child {
+        background-color: #DADADA; }
+    section#adminOrders .wrap td, section#adminAllOrders .wrap td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #DADADA;
+      border-bottom: none;
+      font-size: 0.9em; }
+      section#adminOrders .wrap td a.add, section#adminAllOrders .wrap td a.add {
+        margin: 0 0 0 1em; }
+      section#adminOrders .wrap td a.btn-danger, section#adminAllOrders .wrap td a.btn-danger {
+        margin: 0; }
+      section#adminOrders .wrap td::before, section#adminAllOrders .wrap td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        padding-right: 1em; }
+      section#adminOrders .wrap td:first-child, section#adminAllOrders .wrap td:first-child {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px; }
+      section#adminOrders .wrap td:last-child, section#adminAllOrders .wrap td:last-child {
+        border: 1px solid #DADADA;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px; }
+  section#adminOrders .btn.param, section#adminOrders a.param, section#adminAllOrders .btn.param, section#adminAllOrders a.param {
+    font-size: 0.9em; } }
+@media screen and (min-width: 1200px) {
+  section#adminOrders .wrap, section#adminAllOrders .wrap {
+    width: 95vw; }
+    section#adminOrders .wrap thead, section#adminAllOrders .wrap thead {
+      visibility: visible;
+      position: relative; }
+    section#adminOrders .wrap td, section#adminAllOrders .wrap td {
+      vertical-align: middle;
+      padding: 1em 0; }
+  section#adminOrders .btn, section#adminOrders a, section#adminAllOrders .btn, section#adminAllOrders a {
+    font-size: 1em; }
+  section#adminOrders .delete, section#adminOrders .price, section#adminOrders .total, section#adminAllOrders .delete, section#adminAllOrders .price, section#adminAllOrders .total {
+    text-align: right; }
+  section#adminOrders .qty, section#adminAllOrders .qty {
+    text-align: center; } }
+@media screen and (min-width: 1400px) {
+  section#adminOrders .wrap, section#adminAllOrders .wrap {
+    width: 80vw;
+    margin: 0 auto; } }
 
 /*** ADMIN : CONTACT RESPONSE PAGE ***/
 @media screen and (min-width: 350px) and (max-width: 1400px) {

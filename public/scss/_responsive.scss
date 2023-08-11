@@ -1,12 +1,7 @@
 /** PARTIALS **/
-<<<<<<< HEAD
 .btnWrap{z-index: 15;}
 
 /* PARTIALS ADMIN ARTICLES */
-=======
-
-/*ADMIN ARTICLES*/
->>>>>>> d89b290 (shop: cart responsive css)
 section#adminBlog, section#adminBlogAlerts {
     article.adminArticle {
 
@@ -176,7 +171,6 @@ section#adminBlog, section#adminBlogAlerts {
 
     }
 
-<<<<<<< HEAD
 /** PARTIALS ARTICLE LEFT**/
 
 /* PARTIALS ARTICLE RIGHT */
@@ -248,11 +242,6 @@ section#adminBlog, section#adminBlogAlerts {
 }
 
 /****PARTIALS NAVBARS ****/
-=======
-
-
-/**** NAVBARS ****/
->>>>>>> d89b290 (shop: cart responsive css)
 
 section#navbarMenu, section#adminNavbarMenu {
     @media screen and (max-width:1200px){
@@ -555,13 +544,9 @@ section#sessions {
     }
 
     @media screen and (min-width:992px) {
-<<<<<<< HEAD
         #map {height:100% !important;}
         .btnMap {display: none;}
 
-=======
-        #map {height:100%;}
->>>>>>> d89b290 (shop: cart responsive css)
     }
 
     @media screen and (min-width:576px){
@@ -1551,405 +1536,6 @@ section#errorPayment {
     }
 }
 
-/*** SHOP : INDEX ***/
-
-section#shop {
-    /*xs to sm */
-    @media screen and (max-width:576px){
-        .wrap {width: 80vw !important; 
-            max-width: 25em;
-            .card {
-                margin: 0 auto;
-            }
-        }
-       
-       
-    } 
-    @media screen and (min-width:576px) and (max-width:768px){
-        .wrap {
-            width: 90vw !important ;   
-        }
-    } 
-    @media screen and (min-width:768px) and (max-width:992px){
-        .wrap {   
-            width: 80vw !important ;
-            .card {
-                max-width: 20em;
-            }
-        
-        }
-    } 
-
-    @media screen and (min-width:992px)and(max-width:1600px){
-        .wrap {  
-            width: 90vw;
-        }
-    }
-    @media screen and (min-width:992px)and(max-width:1200px){
-        .wrap {  
-            width: 90vw;
-        }
-    }
-
-    @media screen and (min-width:1400px)and(max-width:1600px){
-        .wrap { 
-            width: 75vw; 
-        }
-    }
-    @media screen and (min-width:1600px)and(max-width:1800px){
-        .wrap {  
-            width: 70vw;
-            .card {
-                .price {font-size: 1.2em;}
-            }
-        }
-    }
-    @media screen and (min-width:1800px){
-        .wrap {  
-            width: 60vw;
-            .card {
-                .price {font-size: 1.2em;}
-            }
-        }
-    }
-
-}
-/*** SHOP : SHOW PRODUCT ***/
-
-section#showProduct {
-
-    @media screen and (min-width:768px) {
-        .encartInfo {
-            .transporter, .stripe, .question {width: 33%;padding: 2em 1em 1em 1em ;}
-            .stripeSentence {
-                p{ margin-bottom: 0;}
-            }
-        }
-        .imgProductWrap {
-            width: 45%;
-            margin-top: 0.5em;
-            margin-bottom: 1em;
-            padding-left: 0;
-            }
-       
-        
-    } 
-
-
-    @media screen and (max-width:768px) {
-
-        .description {
-            line-height: 1em; 
-            width: 100%;
-        }
-        .stripeSentence {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1em;
-
-            p{ margin-bottom: 0;}
-        
-        }  
-        .separation {display: none;}
-
-        .encartInfo {
-            margin: 2em auto;
-            padding: 1em;
-            width: 100%;
-            .transporter, .stripe, .question {width: 100%; padding: 0; font-size: 0.9em;}
-        }
-          
-    }
-
-    @media screen and (min-width:992px ) {
-        .wrap {padding: 2em;}
-        
-        .description {
-            line-height: 1em; 
-        }
-        .encartInfo {
-            margin: 3em auto 1em auto;
-        }
-        .description { width: 45%;}
-    }
-    @media screen and (max-width:992px) {
-        .wrap {padding:1em 2em;}
-    }
-
-    @media screen and (min-width:768px) and (max-width:992px) { 
-        .description { width: 55%;}
-        
-        .encartInfo {
-            margin: 2em auto;
-            width: 95%;
-        }
-    }
-    @media screen and (min-width:992px) and (max-width:1200px) { 
-
-           
-        .encartInfo {
-            width:90%;
-        }
-    
-    }
-    @media screen and (min-width:1200px)  { 
-
-        .encartInfo {
-            width:80%;
-    
-        }
-    
-    }
-}
-
-
-/*** SHOP : CART ***/
-section#cart {
-    @media screen and (max-width:768px) {
-        .wrapper {
-             .product {
-                .img img{display: none;}
-            }
-
-            .btn.continue {
-                i {display: none;}
-                    margin-right: 1em;
-                }
-            .btn.validate {
-                i {font-size: 0.9em;}
-            }
-        }
-       
-    }
-
-    
-
-    @media screen and (max-width:992px) {
-        
-        .wrapper {width:100%;
-
-            thead {
-                visibility: hidden;
-                height: 0;
-                position: absolute;
-                top: 0;
-            }
-            .table > :not(:first-child) {
-                border-top:none;
-            }
-            tr {display: block; margin:1em;}
-            td {
-                display:flex;
-                justify-content: space-between;
-                align-items: center;
-                border:1px solid $grey;
-                border-bottom: none;
-                font-size: 0.9em;
-
-               a.add {margin: 0 0 0 1em;}
-               a.btn-danger {margin:0;}
-
-
-                &::before{
-                    content: attr(data-label);
-                    font-weight: bold;
-                    padding-right: 1em;
-                }
-                &:first-child {border-top-left-radius: 4px; border-top-right-radius: 4px;}
-                &:last-child {border: 1px solid $grey; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;}
-            }
-
-            .wrapImgProduct {display: flex; align-items: center;}
-            .img {
-                width: 50px !important;
-                height: auto;
-                margin-right: 1em;
-            }
-        }
-
-        .btn.param, a.param {font-size: 0.9em;}
-    }
-
-    @media screen and (min-width:992px)  {
-        
-        .wrapper {
-
-            thead {
-                visibility:visible;
-                position: relative;
-            }
-            td {vertical-align: middle; padding: 1em 0;}
-            .img {
-                width: 50px !important;
-                height: auto;
-                margin-right: 1em;
-            }
-        }
-
-        .btn.param, a.param {font-size: 1em;}
-        .wrapImgProduct {display: flex; justify-content: center;align-items: center;}
-        .delete, .price, .total {text-align: right;}
-        .qty {text-align: center;}
-    }
-
-    @media screen and (max-width:1400px) {
-        .wrapper {width: 100%;}
-    }
-    @media screen and (min-width:1400px) {
-        .wrapper {width:80vw; margin:0 auto;}
-    }
-
-
-
-}
-
-
-/*** ORDER : SUCCESS ****/
-section#successPayment {
-    @media screen and (max-width: 576px) {
-        .wrapper {
-            .recap {
-                .deliveryImage{ display: none;}    
-            }
-        }
-    }
-
-    @media screen and (min-width: 576px) and (max-width:768px) {
-        .wrapper {
-            .recap {
-                .deliveryImage{ 
-                    width:60px;
-                    height:60px; 
-                }
-
-            }
-        }
-    }
-
-    @media screen and (max-width: 768px) {
-        .wrapper {
-            margin: 0;
-            height: 100%;
-            .recap {
-                width: 100vw;
-                margin: 0;
-            }
-            h3{font-size: 1.2em;}
-            h6{padding: 0.5em 0;}
-        }
-    }
-
-    @media screen and (min-width:768px) and (max-width:1800px){
-        .wrapper {
-            .recap {
-                margin: 0 auto;
-
-                h3{font-size: 1.3em;}
-                h6{padding: 0.5em 0;}
-                .deliveryImage{ 
-                    width:70px;
-                    height:70px; 
-                }
-
-            }
-        }
-    }
-
-    @media screen and (min-width: 768px) and (max-width:992px) {
-        .wrapper {
-            .recap {
-                width: 80vw;
-
-            }
-        }
-    }
-
-    @media screen and (min-width: 992px) and (max-width:1200px) {
-        .wrapper {
-            .recap {
-                width: 60vw;
-            }
-        }
-    }
-    @media screen and (min-width: 1200px) and (max-width:1800px) {
-        .wrapper {
-            .recap {
-                width: 55vw;
-            }
-        }
-    }
-    @media screen and (min-width: 1800px) {
-        .wrapper {
-            .recap {
-                width: 40vw;
-                margin: 0 auto;
-
-                h6{padding: 0.5em 0;}
-
-            }
-        }
-    }
-
-}
-
-/***ORDER : ERROR ***/
-section#errorPayment {
-   
-    @media screen and (max-width: 768px) {
-        .wrapper {
-            margin: 0;
-            height: 100vh;
-            .recap {
-                width: 100vw;
-                height: 100%;
-            }
-            h3{font-size: 1.1em;}
-        }
-    }
-
-    @media screen and (min-width:768px) and (max-width:1800px){
-        .wrapper {
-            .recap {
-                width: 50vw;
-                margin: 0 auto;
-            }
-        }
-    }
-
-    @media screen and (min-width: 768px) and (max-width:992px) {
-        .wrapper {
-            .recap {
-                width: 80vw;
-            }
-        }
-    }
-
-    @media screen and (min-width: 992px) and (max-width:1200px) {
-        .wrapper {
-            .recap {
-                width: 60vw;
-            }
-        }
-    }
-    @media screen and (min-width: 1200px) and (max-width:1800px) {
-        .wrapper {
-            .recap {
-                width: 55vw;
-            }
-        }
-    }
-    @media screen and (min-width: 1800px) {
-        .wrapper {
-            .recap {
-                width: 40vw;
-                margin: 0 auto;
-
-            }
-        }
-    }
-}
-
 
 /**** ABOUT  ****/
 section#about {  
@@ -2057,7 +1643,6 @@ section#contact {
     }
 }
 
-<<<<<<< HEAD
 /*** SEARCH PAGE***/
 section#search {
   
@@ -2081,8 +1666,6 @@ section#search {
 
 }
 
-=======
->>>>>>> d89b290 (shop: cart responsive css)
 /****** PARTIE ACCOUNT *******/
 
 /*** ACCOUNT : MON PROFIL ***/
@@ -2266,10 +1849,7 @@ section#myProfileEdit {
           h4 {font-size: 1.1em;}
           .wrapTitle {justify-content: unset;}
           .pwd{font-size: 0.9em;}
-<<<<<<< HEAD
 
-=======
->>>>>>> d89b290 (shop: cart responsive css)
        }
    
        @media screen and (max-width:992px) {
@@ -2405,10 +1985,6 @@ section#myPwdEdit {
         .wrapper{
             width: 35%;
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> d89b290 (shop: cart responsive css)
         .form {width:70%}
     }
     /*over xl */
@@ -2421,7 +1997,6 @@ section#myPwdEdit {
             
 }
 
-<<<<<<< HEAD
 
 /*** ACCOUNT : EDIT ARTICLE ***/
 section#editArticle, section#addArticle {
@@ -2633,8 +2208,6 @@ section#myArticles {
 
 
 
-=======
->>>>>>> d89b290 (shop: cart responsive css)
 /*** ACCOUNT : MES SESSIONS ***/
 
 section#mySessions {
@@ -2662,7 +2235,6 @@ section#mySessions {
 section#myOrders {
     /*xs*/
     @media screen and (max-width:576px){
-<<<<<<< HEAD
         h3{font-size: large;}
         .wrapper {
             h3 {margin: 1em;}
@@ -2670,22 +2242,12 @@ section#myOrders {
     }
     @media screen and (min-width:576px)and(max-width:768px){
         h3{font-size: large;}
-=======
-        .wrapper {
-            h3 {margin: 1em; font-size: 1.3em;}
-        }
-    }
-    @media screen and (min-width:576px)and(max-width:768px){
->>>>>>> d89b290 (shop: cart responsive css)
         .wrapper {
             .row {padding:0 1em}
         }
     }
     @media screen and (min-width:768px)and(max-width:992px){
-<<<<<<< HEAD
         h3{font-size: x-large;}
-=======
->>>>>>> d89b290 (shop: cart responsive css)
         .wrapper {  
             .row {padding:0 1em}
             .order {
@@ -2698,10 +2260,7 @@ section#myOrders {
         }
     }
     @media screen and (min-width:992px)and(max-width:1400px){
-<<<<<<< HEAD
         h3{font-size: x-large;}
-=======
->>>>>>> d89b290 (shop: cart responsive css)
         .wrapper {  
          
             .row {padding:0 1em; margin: 0 auto;}
@@ -2716,10 +2275,7 @@ section#myOrders {
     }
 
     @media screen and (min-width:1400px) {
-<<<<<<< HEAD
         h3{font-size: x-large;}
-=======
->>>>>>> d89b290 (shop: cart responsive css)
         .wrapper {
             .row {padding:0 1em; margin:1em auto;}
             .order {
@@ -2733,7 +2289,6 @@ section#myOrders {
     
 }
 
-<<<<<<< HEAD
 /*** ACCOUNT PROFIL PUBLIC ***/
 section#profile {
     @media screen and (max-width:576px) {
@@ -2978,8 +2533,6 @@ section#profile {
 
 }
 
-=======
->>>>>>> d89b290 (shop: cart responsive css)
 /**** PARTIE ADMIN ****/
 section#adminLogin {
         /* xs to md*/
@@ -3009,7 +2562,6 @@ section#adminLogin {
     
         }
 }
-<<<<<<< HEAD
 /*** ADMIN : DASHBOARD ***/
 section#adminDashboard {
    
@@ -3268,8 +2820,6 @@ section#adminShop, section#adminUsers {
 }
 
 
-=======
->>>>>>> d89b290 (shop: cart responsive css)
 /** ADMIN : BLOG index + BLOG alerts **/
 section#adminBlog ,section#adminBlogAlerts{
 
@@ -3285,17 +2835,13 @@ section#adminBlog ,section#adminBlogAlerts{
         
     }
     @media screen and (min-width:768px){
-<<<<<<< HEAD
         .wrap {padding-right: 1em;}
-=======
->>>>>>> d89b290 (shop: cart responsive css)
         .articleWrap {margin: 0 auto;}
         #titleAndForm {margin: 0 0 1em 0;}
         
     }
 }
 
-<<<<<<< HEAD
 /*** ADMIN COMMENTS ***/
 section#adminComments {
     @media screen and (max-width:1200px) {
@@ -3671,8 +3217,6 @@ section#adminContact {
         .wrap {width:80vw; margin:0 auto;}
     }
 }
-=======
->>>>>>> d89b290 (shop: cart responsive css)
 
 /*** ADMIN : CONTACT RESPONSE PAGE ***/
 section#responseContact {
@@ -3687,27 +3231,17 @@ section#responseContact {
 
     @media screen and (min-width:576px) {
         .wrap {
-<<<<<<< HEAD
              margin: 0  auto;
              textarea {height:20vh;}
             .text-muted {padding:2em 1em 1em 1em;}
             .initMsg{margin: 0;}   
-=======
-             textarea {height:20vh;}
-            .text-muted {padding:2em 1em 1em 1em;}
-            .initMsg{margin: 0;}
->>>>>>> d89b290 (shop: cart responsive css)
         }
        
     }
 
     @media screen and (min-width:768px) {
         .wrap {
-<<<<<<< HEAD
         
-=======
-            margin: 0  auto;
->>>>>>> d89b290 (shop: cart responsive css)
             padding: 1em; 
         }
      
@@ -3783,8 +3317,4 @@ section#responseContact {
     @media screen and (min-width:1800px) {
         .wrap{width:75vw; margin: 0 auto;}
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d89b290 (shop: cart responsive css)
