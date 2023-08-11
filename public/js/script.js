@@ -1,6 +1,11 @@
 
+   
+
     //FILTRE PAR CATEGORIE (BLOG ACTUALITES)
-    $('#cat').on('change', function(){
+    
+   
+    $('#cat').on('change', function(){ 
+
         let cat = $(this).val() //on select le nom de la catégorie dès qu'un choix se fait sur le menu deroulant
         sessionStorage.setItem('storedCat', cat); //on stocke ce choix
 
@@ -12,8 +17,9 @@
             $('.category').parent().parent().fadeOut('fast')
             $('.'+ cat).parent().parent().fadeIn('slow') // on fait apparaitre le container grand parent dont la categorie correspond au choix du menu
         }
-        
+      
     })
+
 
     //récupération de la catégorie précédente lors du changement de page
     window.addEventListener('load', (event) => {
