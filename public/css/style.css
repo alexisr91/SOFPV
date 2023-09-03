@@ -546,47 +546,47 @@ section#home {
       animation: glitch-effect 2s infinite linear alternate-reverse; }
 @keyframes glitch-effect {
   0% {
-    clip: rect(47px, 9999px, 33px, 0); }
+    clip: rect(50px, 9999px, 7px, 0); }
   5% {
-    clip: rect(66px, 9999px, 86px, 0); }
+    clip: rect(31px, 9999px, 85px, 0); }
   10% {
-    clip: rect(35px, 9999px, 39px, 0); }
+    clip: rect(8px, 9999px, 59px, 0); }
   15% {
-    clip: rect(6px, 9999px, 23px, 0); }
+    clip: rect(79px, 9999px, 53px, 0); }
   20% {
-    clip: rect(78px, 9999px, 88px, 0); }
+    clip: rect(88px, 9999px, 81px, 0); }
   25% {
-    clip: rect(24px, 9999px, 79px, 0); }
+    clip: rect(40px, 9999px, 80px, 0); }
   30% {
-    clip: rect(58px, 9999px, 78px, 0); }
+    clip: rect(41px, 9999px, 80px, 0); }
   35% {
-    clip: rect(97px, 9999px, 96px, 0); }
+    clip: rect(88px, 9999px, 76px, 0); }
   40% {
-    clip: rect(85px, 9999px, 75px, 0); }
+    clip: rect(96px, 9999px, 15px, 0); }
   45% {
-    clip: rect(76px, 9999px, 93px, 0); }
+    clip: rect(67px, 9999px, 2px, 0); }
   50% {
-    clip: rect(6px, 9999px, 98px, 0); }
+    clip: rect(56px, 9999px, 23px, 0); }
   55% {
-    clip: rect(39px, 9999px, 76px, 0); }
+    clip: rect(93px, 9999px, 23px, 0); }
   60% {
-    clip: rect(8px, 9999px, 61px, 0); }
+    clip: rect(87px, 9999px, 19px, 0); }
   65% {
-    clip: rect(87px, 9999px, 35px, 0); }
+    clip: rect(42px, 9999px, 60px, 0); }
   70% {
-    clip: rect(21px, 9999px, 49px, 0); }
+    clip: rect(39px, 9999px, 20px, 0); }
   75% {
-    clip: rect(46px, 9999px, 50px, 0); }
+    clip: rect(30px, 9999px, 33px, 0); }
   80% {
-    clip: rect(18px, 9999px, 26px, 0); }
+    clip: rect(71px, 9999px, 56px, 0); }
   85% {
-    clip: rect(19px, 9999px, 46px, 0); }
+    clip: rect(6px, 9999px, 61px, 0); }
   90% {
-    clip: rect(3px, 9999px, 69px, 0); }
+    clip: rect(72px, 9999px, 3px, 0); }
   95% {
-    clip: rect(26px, 9999px, 33px, 0); }
+    clip: rect(54px, 9999px, 24px, 0); }
   100% {
-    clip: rect(92px, 9999px, 80px, 0); } }
+    clip: rect(48px, 9999px, 33px, 0); } }
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
   height: 15em;
@@ -704,16 +704,6 @@ section#blogHome {
     top: 0; }
   section#blogHome hr {
     margin: 0; }
-  section#blogHome .wrapper-left, section#blogHome .wrapper-right {
-    position: relative; }
-  section#blogHome .wrapper-left .category-badge {
-    position: absolute;
-    left: 2%;
-    top: 8%; }
-  section#blogHome .wrapper-right .category-badge {
-    position: absolute;
-    right: 2%;
-    top: 8%; }
   section#blogHome article {
     display: flex;
     margin: 3em auto;
@@ -793,7 +783,7 @@ section#sessions, section#session {
   section#sessions h5, section#session h5 {
     margin: 1em; }
   section#sessions p, section#session p {
-    line-height: 0.5em; }
+    line-height: 1em; }
   section#sessions p.asterisque, section#session p.asterisque {
     line-height: normal;
     padding: 1em; }
@@ -845,6 +835,14 @@ section#sessions .container-fluid .spotMapChange {
   display: flex;
   padding-left: 0;
   width: fit-content; }
+section#sessions .container-fluid #map.base {
+  height: 100%; }
+section#sessions .container-fluid #map.showMap {
+  height: 50vh;
+  transition: height 1s; }
+section#sessions .container-fluid #map.hideMap {
+  height: 0;
+  transition: height 1s; }
 
 /* ACCUEIL : SECTION #socialNetwork */
 section#socialNetwork {
@@ -932,21 +930,25 @@ section#register {
     min-width: 100%;
     margin-bottom: 1em;
     padding: 0.5em; }
-
-.containerRegister {
-  background-color: #fafafa;
-  width: 50%;
-  padding: 2em; }
-  .containerRegister .registerForm {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 50%; }
-  .containerRegister .illustration {
-    width: 50%; }
-    .containerRegister .illustrationimg {
-      object-fit: cover;
-      height: 45em; }
+  section#register .modal-dialog, section#register .modal-content {
+    height: 90vh; }
+  section#register embed {
+    width: 100%;
+    height: 100%; }
+  section#register .containerRegister {
+    background-color: #fafafa;
+    width: 50%;
+    padding: 2em; }
+    section#register .containerRegister .registerForm {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 50%; }
+    section#register .containerRegister .illustration {
+      width: 50%; }
+      section#register .containerRegister .illustrationimg {
+        object-fit: cover;
+        height: 45em; }
 
 /*MON PROFIL - page account, edit, mes articles */
 /* MYPROFILE - infos personnelles */
@@ -957,8 +959,6 @@ section#myProfile {
   background-color: #252525; }
   section#myProfile .wrap {
     height: 100%;
-    width: 90%;
-    margin: 0 auto;
     background-color: #252525;
     min-height: 90vh; }
   section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
@@ -982,9 +982,9 @@ section#myProfile {
     section#myProfile .dashboard .notification {
       z-index: 5;
       position: absolute;
-      bottom: 0.5em;
+      bottom: 0.8em;
       right: 5em; }
-  section#myProfile .param {
+  section#myProfile .param.modifyProfile {
     margin-top: 1em; }
   section#myProfile .counters {
     width: 100%;
@@ -996,6 +996,42 @@ section#myProfile {
     section#myProfile .counters .counter {
       text-align: center;
       margin: 0; }
+      section#myProfile .counters .counter .animated-counter {
+        position: relative;
+        background-color: transparent;
+        font-size: 16px;
+        color: #252525;
+        padding: 0.8em 1.8em;
+        cursor: pointer;
+        user-select: none;
+        text-align: center;
+        text-decoration: none;
+        transition-duration: 0.4s;
+        -webkit-transition-duration: 0.4s;
+        /* Safari */ }
+        section#myProfile .counters .counter .animated-counter:hover {
+          transition-duration: 0.1s;
+          background-color: rgba(218, 218, 218, 0.4); }
+        section#myProfile .counters .counter .animated-counter:active {
+          top: 1px; }
+        section#myProfile .counters .counter .animated-counter:after {
+          content: "";
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          transition: all 0.5s;
+          box-shadow: 0 0 10px 40px #DADADA; }
+        section#myProfile .counters .counter .animated-counter:active:after {
+          box-shadow: 0 0 0 0 #DADADA;
+          position: absolute;
+          left: 0;
+          top: 0;
+          opacity: 1;
+          transition: 0s; }
       section#myProfile .counters .counter p {
         margin-top: 1em;
         background-color: rgba(218, 218, 218, 0.3);
@@ -1005,17 +1041,16 @@ section#myProfile {
     position: relative; }
     section#myProfile .my-drone .fav {
       float: right;
-      max-width: 125px;
-      max-height: 125px;
       object-fit: cover;
       object-position: center;
-      overflow: hidden; }
+      overflow: hidden;
+      margin-left: 0.5em; }
     section#myProfile .my-drone a {
       background-color: #DADADA;
       padding: 0.5 1em;
       border-radius: 3px;
       position: absolute;
-      top: 1em;
+      top: 1.5em;
       right: 3em; }
   section#myProfile .globalWrap {
     background-color: #252525;
@@ -1121,6 +1156,20 @@ section#droneEdit .avatar {
   object-position: center; }
 
 /*Mes articles */
+section#myArticles .container-fluid, section#myArticles section#adminBlog .container-fluid, section#myArticles section#adminBlogAlerts .container-fluid {
+  flex-wrap: wrap;
+  background-color: #fafafa; }
+section#myArticles .wrap {
+  padding-top: 1.5em;
+  margin: 0 1em;
+  display: flex;
+  flex-direction: column;
+  width: 100%; }
+section#myArticles h4 {
+  margin-top: 1em; }
+section#myArticles .article {
+  margin-bottom: 1em; }
+
 section#myArticles .category-badge, section#adminBlog .category-badge, section#adminBlogAlerts .category-badge {
   z-index: 1; }
 section#myArticles .articleWrap, section#adminBlog .articleWrap, section#adminBlogAlerts .articleWrap {
@@ -1260,6 +1309,122 @@ section#mySessions .container-fluid {
     section#mySessions .container-fluid .wrapper .caution {
       margin: 1em auto; }
 
+section#profile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #252525; }
+  section#profile .author {
+    display: none !important; }
+  section#profile .wrap {
+    margin-top: 0.5em;
+    height: 100%;
+    background-color: #252525;
+    min-height: 90vh;
+    width: 100vw; }
+  section#profile .my-drone, section#profile .social {
+    background-color: #fafafa;
+    padding: 2em;
+    border-radius: 3px; }
+  section#profile .social {
+    display: flex;
+    justify-content: space-around; }
+    section#profile .social div {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      section#profile .social div i {
+        margin: 0 0.5em 0 0; }
+  section#profile .right {
+    margin: 1em auto; }
+  section#profile .user-content {
+    position: relative;
+    background-color: #fafafa;
+    padding: 1em;
+    border-radius: 3px;
+    min-height: 30vh; }
+  section#profile .my-drone {
+    position: relative; }
+    section#profile .my-drone .fav {
+      float: right;
+      object-fit: cover;
+      object-position: center;
+      overflow: hidden; }
+    section#profile .my-drone a {
+      background-color: #DADADA;
+      padding: 0.5 1em;
+      border-radius: 3px;
+      position: absolute;
+      top: 2em;
+      right: 3em; }
+  section#profile .container-fluid {
+    background-color: #252525; }
+  section#profile #profile-avatar, section#profile .show-article-avatar {
+    max-height: 125px;
+    max-width: 125px; }
+    section#profile #profile-avatar img, section#profile .show-article-avatar img {
+      background-color: #fafafa;
+      width: 100%;
+      height: 100%; }
+  section#profile .user {
+    background-color: #fafafa;
+    border-radius: 3px;
+    display: flex;
+    align-items: center; }
+    section#profile .user h2 {
+      margin: 0.5% 2%;
+      font-size: 2.5em; }
+  section#profile .sessions.showSessions {
+    display: inherit; }
+  section#profile .sessions.hideSessions {
+    display: none; }
+  section#profile .sessions {
+    background-color: #fafafa;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 10em; }
+    section#profile .sessions span {
+      margin: 0 1em;
+      width: 90%; }
+    section#profile .sessions .spotWrapper {
+      border-radius: 4px;
+      padding: 1em;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      max-height: fit-content;
+      width: 100%; }
+      section#profile .sessions .spotWrapper .infoSpot {
+        margin: auto; }
+      section#profile .sessions .spotWrapper .iconWrap {
+        padding: 1em 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px; }
+      section#profile .sessions .spotWrapper p.spotName {
+        font-size: 1.1em;
+        margin-bottom: 0; }
+      section#profile .sessions .spotWrapper p.text-muted {
+        margin-bottom: 0; }
+  section#profile .article {
+    display: flex;
+    position: relative; }
+  section#profile .article-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em; }
+  section#profile .article-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    line-clamp: 7;
+    -webkit-box-orient: vertical; }
+
 /*SHOP */
 /** SHOP **/
 section#shop {
@@ -1366,14 +1531,10 @@ section#cart .container-fluid {
 section#prepareOrder .container-fluid {
   background-color: #fafafa;
   min-height: 90vh;
-  width: 80%;
   margin: 0 auto;
   padding: 2em; }
   section#prepareOrder .container-fluid h3 {
     margin-bottom: 1em; }
-  section#prepareOrder .container-fluid .delivery, section#prepareOrder .container-fluid .recap, section#prepareOrder .container-fluid .transporter {
-    padding: 2em;
-    margin: 2em; }
   section#prepareOrder .container-fluid .table td, section#prepareOrder .container-fluid .table th {
     padding: 1em;
     vertical-align: middle; }
@@ -1381,15 +1542,18 @@ section#prepareOrder .container-fluid {
     font-weight: bold; }
   section#prepareOrder .container-fluid div.transporter .description {
     color: rgba(37, 37, 37, 0.7); }
-  section#prepareOrder .container-fluid div.payment .btn {
-    margin: 1em 0; }
-  section#prepareOrder .container-fluid div.payment .stripeLogo {
-    display: flex;
-    align-items: center; }
-    section#prepareOrder .container-fluid div.payment .stripeLogo p {
-      margin-bottom: 0; }
-    section#prepareOrder .container-fluid div.payment .stripeLogo span {
-      margin-left: 0.5em; }
+  section#prepareOrder .container-fluid div.payment {
+    text-align: center; }
+    section#prepareOrder .container-fluid div.payment .btn {
+      margin: 1em 0; }
+    section#prepareOrder .container-fluid div.payment .stripeLogo {
+      justify-content: center;
+      display: flex;
+      align-items: center; }
+      section#prepareOrder .container-fluid div.payment .stripeLogo p {
+        margin-bottom: 0; }
+      section#prepareOrder .container-fluid div.payment .stripeLogo span {
+        margin-left: 0.5em; }
 
 section#successPayment {
   width: 100vw;
@@ -1492,17 +1656,17 @@ section#showArticle .wrapper {
   background-image: url("/img/raceTrack.jpeg");
   background-color: #252525;
   background-blend-mode: multiply;
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-attachment: fixed;
   display: flex;
   justify-content: center;
   align-items: center; }
 section#showArticle #wrapArticleContent {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
   background-color: #fafafa;
-  padding: 3em;
   border-radius: 3px;
   margin: 1em auto; }
   section#showArticle #wrapArticleContent .nav-link {
@@ -1522,14 +1686,25 @@ section#showArticle .banner {
 section#showArticle #player {
   width: 100%; }
 section#showArticle .col-md-8 {
-  padding-left: 0; }
+  padding: 0; }
+section#showArticle .col-lg-8 {
+  max-width: 70em; }
+section#showArticle .wrapMainInfos {
+  justify-content: space-between;
+  align-items: center; }
+section#showArticle .articleInfo {
+  display: flex;
+  align-items: center; }
+  section#showArticle .articleInfo div {
+    display: flex;
+    align-items: center; }
 section#showArticle .user {
+  width: 100%;
   display: flex;
   padding-right: 2em;
   border-radius: 3px;
   justify-content: start;
-  align-items: center;
-  margin-top: 1em; }
+  align-items: center; }
   section#showArticle .user .avatar {
     max-height: 75px;
     max-width: 75px;
@@ -1539,6 +1714,8 @@ section#showArticle .user {
       width: 100%;
       height: 100%;
       border-radius: 3px; }
+section#showArticle .addCommentForm {
+  margin-bottom: 1em; }
 section#showArticle .addCommentForm form {
   display: flex;
   align-items: center; }
@@ -1550,7 +1727,7 @@ section#showArticle .addCommentForm form {
     section#showArticle .addCommentForm form #comment > div {
       margin-bottom: 0 !important; }
 section#showArticle .commentWrap {
-  margin: 1em auto;
+  margin: 0 auto 1em auto;
   padding: 1em;
   border-radius: 3px;
   background-color: rgba(218, 218, 218, 0.2); }
@@ -1566,8 +1743,8 @@ section#showArticle .commentWrap {
       max-width: 35px;
       border-radius: 3px; }
 section#showArticle .thumb-wrap {
-  height: 13em;
-  width: 100%; }
+  width: 100%;
+  aspect-ratio: 16/9; }
   section#showArticle .thumb-wrap img {
     object-fit: cover;
     width: 100%;
@@ -1625,15 +1802,12 @@ section#blog .author, section#blogHome .author, section#search .author, section#
   align-items: center;
   border-radius: 2px;
   height: 3em;
-  margin-bottom: 1em;
-  padding-right: 1em; }
-  section#blog .author .author-avatar, section#blogHome .author .author-avatar, section#search .author .author-avatar, section#profile .author .author-avatar, section#adminBlog .author .author-avatar, section#adminBlogAlerts .author .author-avatar {
-    height: 100%; }
-    section#blog .author .author-avatar img, section#blogHome .author .author-avatar img, section#search .author .author-avatar img, section#profile .author .author-avatar img, section#adminBlog .author .author-avatar img, section#adminBlogAlerts .author .author-avatar img {
-      background-color: #fafafa;
-      width: 100%;
-      height: 100%;
-      border-radius: 3px; }
+  margin-bottom: 1em; }
+  section#blog .author .author-avatar img, section#blogHome .author .author-avatar img, section#search .author .author-avatar img, section#profile .author .author-avatar img, section#adminBlog .author .author-avatar img, section#adminBlogAlerts .author .author-avatar img {
+    background-color: #fafafa;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px; }
   section#blog .author .author-nickname, section#blogHome .author .author-nickname, section#search .author .author-nickname, section#profile .author .author-nickname, section#adminBlog .author .author-nickname, section#adminBlogAlerts .author .author-nickname {
     padding: 0 1em; }
     section#blog .author .author-nickname h4, section#blogHome .author .author-nickname h4, section#search .author .author-nickname h4, section#profile .author .author-nickname h4, section#adminBlog .author .author-nickname h4, section#adminBlogAlerts .author .author-nickname h4 {
@@ -1658,8 +1832,7 @@ section#blog, section#myArticles {
   section#blog .article-body, section#myArticles .article-body {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 1em; }
+    justify-content: space-between; }
   section#blog .article-content, section#myArticles .article-content {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1672,138 +1845,14 @@ section#blog .card-body, section#myArticles .card-body, section#blogHome .card-b
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
-  padding: 0 2rem 0.5rem 2rem; }
-
-section#profile {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: #252525; }
-  section#profile #scrollBackToTop {
-    left: 2em;
-    bottom: 1em;
-    right: 0; }
-  section#profile .author {
-    display: none; }
-  section#profile .wrap {
-    margin-top: 0.5em;
-    height: 100%;
-    background-color: #252525;
-    min-height: 90vh;
-    width: 100vw; }
-  section#profile .my-drone, section#profile .social {
-    background-color: #fafafa;
-    margin: 0 2em 2em 2em;
-    padding: 2em;
-    border-radius: 3px; }
-  section#profile .social {
-    display: flex;
-    justify-content: space-around; }
-    section#profile .social div {
-      display: flex;
-      justify-content: center;
-      align-items: center; }
-      section#profile .social div i {
-        margin: 0 0.5em 0 0; }
-  section#profile .user-content {
-    position: relative;
-    background-color: #fafafa;
-    margin-right: 2em;
-    padding: 2em 1em;
-    border-radius: 3px;
-    min-height: 30vh; }
-  section#profile .my-drone {
-    position: relative; }
-    section#profile .my-drone .fav {
-      float: right;
-      max-width: 125px;
-      max-height: 125px;
-      object-fit: cover;
-      object-position: center;
-      overflow: hidden; }
-    section#profile .my-drone a {
-      background-color: #DADADA;
-      padding: 0.5 1em;
-      border-radius: 3px;
-      position: absolute;
-      top: 2em;
-      right: 3em; }
-  section#profile .container-fluid {
-    display: grid;
-    grid-template-columns: 10% minmax(500px, 85%);
-    background-color: #252525; }
-  section#profile #profile-avatar, section#profile .show-article-avatar {
-    max-height: 125px;
-    max-width: 125px; }
-    section#profile #profile-avatar img, section#profile .show-article-avatar img {
-      background-color: #fafafa;
-      width: 100%;
-      height: 100%; }
-  section#profile .user {
-    background-color: #fafafa;
-    margin: 0 2em 2em 2em;
-    border-radius: 3px;
-    display: flex;
-    align-items: center; }
-    section#profile .user h2 {
-      margin: 0.5% 2%;
-      font-size: 2.5em; }
-  section#profile .sessions {
-    background-color: #fafafa;
-    margin: 0 2em 2em 2em;
-    border-radius: 3px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 10em; }
-    section#profile .sessions span {
-      margin: 0 1em;
-      width: 90%; }
-    section#profile .sessions .spotWrapper {
-      border-radius: 4px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1em;
-      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-      width: 100%;
-      max-height: fit-content; }
-      section#profile .sessions .spotWrapper .infoSpot {
-        margin: auto; }
-      section#profile .sessions .spotWrapper .iconWrap {
-        padding: 1em 2em;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        border-radius: 4px; }
-      section#profile .sessions .spotWrapper p.spotName {
-        font-size: 1.1em;
-        margin-bottom: 0; }
-      section#profile .sessions .spotWrapper p.text-muted {
-        margin-bottom: 0; }
-  section#profile .article {
-    display: flex;
-    position: relative; }
-  section#profile .article-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 1em; }
-  section#profile .article-content {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 7;
-    line-clamp: 7;
-    -webkit-box-orient: vertical; }
+  height: 100%; }
 
 /**SEARCH PAGE ***/
 section#search h3 {
   font-family: 'Play', sans-serif;
   font-weight: bolder; }
+section#search .author-avatar {
+  max-width: 75px; }
 section#search .container-fluid {
   background-image: url("/img/forestView.jpg");
   background-repeat: no-repeat;
@@ -1827,8 +1876,6 @@ section#session .container-fluid {
   background-color: #fafafa;
   height: 90vh;
   max-width: 100vw; }
-  section#session .container-fluid #map {
-    height: 90vh; }
   section#session .container-fluid .colSessions {
     position: relative;
     overflow-y: auto;
@@ -1857,6 +1904,12 @@ section#session .container-fluid {
     font-weight: bold; }
   section#session .container-fluid .spotMapChange {
     padding: 0; }
+  section#session .container-fluid #map.showMap {
+    height: 50vh;
+    transition: height 1s; }
+  section#session .container-fluid #map.hideMap {
+    height: 0;
+    transition: height 1s; }
 
 section#sessionAdd {
   position: relative;
@@ -1877,10 +1930,17 @@ section#sessionAdd {
     top: 0; }
   section#sessionAdd .container-fluid {
     height: 90vh; }
+  section#sessionAdd .wrapper {
+    height: 90vh;
+    justify-content: center;
+    align-items: center; }
   section#sessionAdd .formSession {
-    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
     position: relative;
-    margin: 10% auto;
+    margin: 0 auto;
     padding: 3em 4em;
     border-radius: 5px;
     background-color: #fff;
@@ -1923,6 +1983,9 @@ section#about {
       flex-direction: column;
       justify-content: center;
       align-items: center; }
+    section#about .container-fluid .modal-dialog embed {
+      width: 100%;
+      height: 85vh; }
     section#about .container-fluid h3 {
       margin-bottom: 1.5em;
       font-size: 1.7em; }
@@ -2017,8 +2080,7 @@ section#adminDashboard {
   background-color: #fafafa;
   min-height: 96vh; }
   section#adminDashboard .container-fluid {
-    display: flex;
-    height: 90vh; }
+    display: flex; }
     section#adminDashboard .container-fluid .tablesWrap {
       margin-top: 3em; }
       section#adminDashboard .container-fluid .tablesWrap h5 {
@@ -2032,14 +2094,13 @@ section#adminDashboard {
       section#adminDashboard .container-fluid table th, section#adminDashboard .container-fluid table td {
         padding: 1em; }
     section#adminDashboard .container-fluid .wrap {
-      margin: 2em auto;
-      padding: 2em;
+      display: flex;
+      flex-wrap: wrap;
       background-color: #fff;
-      width: 85%;
-      border-radius: 3px;
+      border-radius: 4px;
       box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
     section#adminDashboard .container-fluid .shortCuts {
-      margin: 3em auto; }
+      margin: 2em auto; }
       section#adminDashboard .container-fluid .shortCuts .badge {
         margin-left: 0.5em; }
       section#adminDashboard .container-fluid .shortCuts .card-body {
@@ -2070,78 +2131,68 @@ section#adminDashboard {
         text-align: center; }
 
 /*PAGE GESTION USERS */
-section#adminUsers .titleTable {
-  padding-left: 4em;
-  padding-right: 2em; }
+section#adminUsers .users, section#adminUsers .subDate, section#adminUsers .auth, section#adminUsers .actions {
+  display: flex;
+  align-items: center; }
+section#adminUsers .users {
+  justify-content: flex-start; }
+section#adminUsers .subDate, section#adminUsers .auth {
+  justify-content: center; }
+section#adminUsers .actions {
+  justify-content: end; }
 
 section#adminUsers .container-fluid, section#adminShop .container-fluid {
   display: flex;
   min-height: 90vh;
   background-color: #fafafa; }
+  section#adminUsers .container-fluid .titleTable, section#adminShop .container-fluid .titleTable {
+    display: flex; }
   section#adminUsers .container-fluid .wrap, section#adminShop .container-fluid .wrap {
     display: flex;
     flex-direction: column;
-    margin: 1em; }
-  section#adminUsers .container-fluid .nav-tabs, section#adminShop .container-fluid .nav-tabs {
-    border-bottom: 1px solid transparent !important; }
+    padding-top: 2em; }
   section#adminUsers .container-fluid .row-grey, section#adminUsers .container-fluid .row-white, section#adminShop .container-fluid .row-grey, section#adminShop .container-fluid .row-white {
     display: flex;
     align-items: center;
-    padding: 1em 2em;
     border: 1px solid transparent;
-    border-radius: 4px;
-    cursor: pointer; }
+    border-radius: 4px; }
     section#adminUsers .container-fluid .row-grey .avatar, section#adminUsers .container-fluid .row-grey .imgProduct, section#adminUsers .container-fluid .row-white .avatar, section#adminUsers .container-fluid .row-white .imgProduct, section#adminShop .container-fluid .row-grey .avatar, section#adminShop .container-fluid .row-grey .imgProduct, section#adminShop .container-fluid .row-white .avatar, section#adminShop .container-fluid .row-white .imgProduct {
+      aspect-ratio: 1;
       width: 40px;
-      margin-right: 0.5em; }
+      height: 40px; }
       section#adminUsers .container-fluid .row-grey .avatar img, section#adminUsers .container-fluid .row-grey .imgProduct img, section#adminUsers .container-fluid .row-white .avatar img, section#adminUsers .container-fluid .row-white .imgProduct img, section#adminShop .container-fluid .row-grey .avatar img, section#adminShop .container-fluid .row-grey .imgProduct img, section#adminShop .container-fluid .row-white .avatar img, section#adminShop .container-fluid .row-white .imgProduct img {
         object-fit: cover;
         width: auto;
         height: 100%; }
   section#adminUsers .container-fluid .row-grey, section#adminShop .container-fluid .row-grey {
     background-color: #DADADA; }
-    section#adminUsers .container-fluid .row-grey:hover, section#adminUsers .container-fluid .row-grey:focus, section#adminShop .container-fluid .row-grey:hover, section#adminShop .container-fluid .row-grey:focus {
-      box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
-      transform: translateX(-0.5em); }
   section#adminUsers .container-fluid .row-white, section#adminShop .container-fluid .row-white {
     background-color: #fafafa; }
-    section#adminUsers .container-fluid .row-white:hover, section#adminUsers .container-fluid .row-white:focus, section#adminShop .container-fluid .row-white:hover, section#adminShop .container-fluid .row-white:focus {
-      box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
-      transform: translateX(-0.5em); }
   section#adminUsers .container-fluid .usersList, section#adminUsers .container-fluid .productsList, section#adminShop .container-fluid .usersList, section#adminShop .container-fluid .productsList {
-    width: 50%;
     justify-content: space-between;
     display: flex;
     flex-direction: column;
-    min-height: 75vh; }
-  section#adminUsers .container-fluid .viewUser .actions, section#adminShop .container-fluid .viewUser .actions {
-    position: absolute;
-    right: 0;
-    top: 1em; }
-  section#adminUsers .container-fluid .viewUser, section#adminUsers .container-fluid .viewProduct, section#adminShop .container-fluid .viewUser, section#adminShop .container-fluid .viewProduct {
+    min-height: 75vh;
+    padding: 0; }
+  section#adminUsers .container-fluid .main, section#adminShop .container-fluid .main {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    margin: 0 2em 5em 2em;
-    padding: 3em;
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-    section#adminUsers .container-fluid .viewUser .main h3, section#adminUsers .container-fluid .viewProduct .main h3, section#adminShop .container-fluid .viewUser .main h3, section#adminShop .container-fluid .viewProduct .main h3 {
+    align-items: center; }
+    section#adminUsers .container-fluid .main h3, section#adminShop .container-fluid .main h3 {
       letter-spacing: 1px; }
-    section#adminUsers .container-fluid .viewUser .main .avatar, section#adminUsers .container-fluid .viewProduct .main .avatar, section#adminShop .container-fluid .viewUser .main .avatar, section#adminShop .container-fluid .viewProduct .main .avatar {
+    section#adminUsers .container-fluid .main .avatar, section#adminShop .container-fluid .main .avatar {
       width: 125px; }
-    section#adminUsers .container-fluid .viewUser .main .avatar, section#adminUsers .container-fluid .viewUser .main .imgProduct, section#adminUsers .container-fluid .viewProduct .main .avatar, section#adminUsers .container-fluid .viewProduct .main .imgProduct, section#adminShop .container-fluid .viewUser .main .avatar, section#adminShop .container-fluid .viewUser .main .imgProduct, section#adminShop .container-fluid .viewProduct .main .avatar, section#adminShop .container-fluid .viewProduct .main .imgProduct {
+    section#adminUsers .container-fluid .main .avatar, section#adminUsers .container-fluid .main .imgProduct, section#adminShop .container-fluid .main .avatar, section#adminShop .container-fluid .main .imgProduct {
       box-shadow: rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px;
       margin-bottom: 2em; }
-    section#adminUsers .container-fluid .viewUser .infos, section#adminUsers .container-fluid .viewProduct .infos, section#adminShop .container-fluid .viewUser .infos, section#adminShop .container-fluid .viewProduct .infos {
-      display: flex; }
-      section#adminUsers .container-fluid .viewUser .infos .dataUser, section#adminUsers .container-fluid .viewProduct .infos .dataUser, section#adminShop .container-fluid .viewUser .infos .dataUser, section#adminShop .container-fluid .viewProduct .infos .dataUser {
-        margin-left: 3em;
-        position: relative;
-        width: 70%; }
-      section#adminUsers .container-fluid .viewUser .infos .text-muted, section#adminUsers .container-fluid .viewProduct .infos .text-muted, section#adminShop .container-fluid .viewUser .infos .text-muted, section#adminShop .container-fluid .viewProduct .infos .text-muted {
-        font-size: 1em; }
+  section#adminUsers .container-fluid .infos, section#adminShop .container-fluid .infos {
+    display: flex; }
+    section#adminUsers .container-fluid .infos .dataUser, section#adminShop .container-fluid .infos .dataUser {
+      margin-left: 3em;
+      position: relative;
+      width: 70%; }
+    section#adminUsers .container-fluid .infos .text-muted, section#adminShop .container-fluid .infos .text-muted {
+      font-size: 1em; }
 
 section#adminBlog .container-fluid, section#adminBlogAlerts .container-fluid {
   background-color: #fafafa; }
@@ -2232,11 +2283,7 @@ section#adminMapSpots .container-fluid {
   display: flex;
   background-color: #fafafa;
   min-height: 90vh;
-  width: 100vw;
-  padding-right: 1em; }
-  section#adminMapSpots .container-fluid .row {
-    width: 100%;
-    overflow: hidden; }
+  width: 100vw; }
   section#adminMapSpots .container-fluid .reset {
     margin-top: 1em;
     margin-left: 1em; }
@@ -2245,8 +2292,12 @@ section#adminMapSpots .container-fluid {
   section#adminMapSpots .container-fluid .gestion {
     overflow-y: auto;
     height: 90vh; }
-  section#adminMapSpots .container-fluid #map {
-    height: 90vh; }
+  section#adminMapSpots .container-fluid .colInfo {
+    width: 80%; }
+  section#adminMapSpots .container-fluid .colDelete {
+    width: 20%; }
+  section#adminMapSpots .container-fluid .btnMap {
+    margin-bottom: 1.5em; }
   section#adminMapSpots .container-fluid .spotWrapper {
     border-radius: 4px;
     display: flex;
@@ -2260,26 +2311,38 @@ section#adminMapSpots .container-fluid {
   section#adminMapSpots .container-fluid .addSpot {
     margin-top: 1em; }
   section#adminMapSpots .container-fluid .spotName {
-    font-size: 1.1em; }
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; }
     section#adminMapSpots .container-fluid .spotName i {
-      color: #B30B00; }
+      color: #B30B00;
+      margin-right: 0.5em; }
   section#adminMapSpots .container-fluid .spotMapChange {
     background-color: transparent;
     border: none; }
+section#adminMapSpots #map {
+  padding: 0; }
+section#adminMapSpots #map.base {
+  height: 100%; }
+section#adminMapSpots #map.showMap {
+  height: 50vh;
+  transition: height 1s; }
+section#adminMapSpots #map.hideMap {
+  height: 0;
+  transition: height 1s; }
 section#adminMapSpots .maplibregl-map {
   padding: 1em; }
 
-section#adminShop .name, section#adminShop .price, section#adminShop .stock, section#adminShop .status {
+section#adminShop .name, section#adminShop .price, section#adminShop .stock, section#adminShop .status, section#adminShop .actions {
   display: flex;
   align-items: center; }
 section#adminShop .name {
-  flex-basis: 50%;
   justify-content: flex-start; }
-section#adminShop .price, section#adminShop .stock {
-  flex-basis: 16%;
+section#adminShop .price, section#adminShop .stock, section#adminShop .status {
   justify-content: center; }
-section#adminShop .status {
-  flex-basis: 16%;
+section#adminShop .price {
+  padding: 0 0.2em; }
+section#adminShop .actions {
   justify-content: end; }
 section#adminShop table {
   width: 100%; }
@@ -2307,22 +2370,17 @@ section#adminShop .productsList ul {
   justify-content: space-between; }
 section#adminShop .titleTable {
   display: flex; }
-  section#adminShop .titleTable .name {
-    padding-left: 1em; }
-  section#adminShop .titleTable .status {
-    padding-right: 1em; }
 
 section#adminEditProduct .container-fluid, section#adminOrderModify .container-fluid {
   display: flex;
   background-color: #fafafa;
   min-height: 90vh; }
-  section#adminEditProduct .container-fluid .row, section#adminOrderModify .container-fluid .row {
-    margin-top: 3em;
-    height: 100%;
-    width: 80%; }
+  section#adminEditProduct .container-fluid h4, section#adminOrderModify .container-fluid h4 {
+    margin-top: 2em; }
+  section#adminEditProduct .container-fluid .formWrap, section#adminOrderModify .container-fluid .formWrap {
+    margin: 0 auto; }
   section#adminEditProduct .container-fluid #imgWrap, section#adminOrderModify .container-fluid #imgWrap {
-    width: 20em;
-    height: 20em; }
+    margin: 0 auto; }
     section#adminEditProduct .container-fluid #imgWrap img, section#adminOrderModify .container-fluid #imgWrap img {
       object-fit: cover;
       width: 100%; }
@@ -2502,7 +2560,6 @@ section#myArticles aside.sidebarMenu {
 /* FOOTER */
 footer {
   width: 100vw;
-  height: 3em;
   padding: 1em;
   display: flex;
   align-items: center;
@@ -2638,12 +2695,57 @@ section#adminBlog article.adminArticle, section#adminBlogAlerts article.adminArt
       object-fit: cover;
       max-width: 25vw; } }
 
-/**** PARTIALS ARTICLE RIGHT ET LEFT ****/
-article.right .author, article.left .author {
-  width: max-content; }
+/** PARTIALS ARTICLE LEFT**/
+/* PARTIALS ARTICLE RIGHT */
+.wrapper-right .category-badge {
+  right: -1em; }
+
+/****PARTIALS ARTICLES ****/
+.wrapper-left, .wrapper-right {
+  position: relative; }
+  .wrapper-left .author-avatar, .wrapper-right .author-avatar {
+    height: 100%; }
+  @media screen and (max-width: 576px) {
+    .wrapper-left .author, .wrapper-right .author {
+      height: 3em;
+      padding: 0;
+      width: max-content; }
+      .wrapper-left .author .author-avatar, .wrapper-right .author .author-avatar {
+        width: max-content; }
+      .wrapper-left .author .author-nickname h4, .wrapper-right .author .author-nickname h4 {
+        font-size: 1.2em !important; }
+    .wrapper-left .category-badge, .wrapper-right .category-badge {
+      font-size: x-small; } }
+  @media screen and (max-width: 768px) {
+    .wrapper-left .card-title, .wrapper-right .card-title {
+      font-size: 1em; }
+    .wrapper-left .author .author-nickname h4, .wrapper-right .author .author-nickname h4 {
+      font-size: 1.1em; } }
+  @media screen and (max-width: 991px) {
+    .wrapper-left, .wrapper-right {
+      border-radius: 4px;
+      margin: 0 auto;
+      padding: 0; }
+      .wrapper-left .card-body, .wrapper-right .card-body {
+        padding: 1em 0; } }
+  @media screen and (min-width: 991px) {
+    .wrapper-left .card-body, .wrapper-right .card-body {
+      padding: 0 1em; } }
+
 @media screen and (max-width: 991px) {
-  article.right .author, article.left .author {
-    margin: 1em 0; } }
+  .wrapper-right .category-badge {
+    right: -1em; } }
+@media screen and (min-width: 991px) {
+  .wrapper-right .category-badge {
+    position: absolute;
+    right: 2em;
+    top: 2em; } }
+
+@media screen and (min-width: 991px) {
+  .wrapper-left .category-badge {
+    position: absolute;
+    left: 2em;
+    top: 2em; } }
 
 /****PARTIALS NAVBARS ****/
 @media screen and (max-width: 1200px) {
@@ -2674,7 +2776,7 @@ article.right .author, article.left .author {
     aside.sidebarMenu.collapseMenu.open, aside.adminSidebarMenu.collapseMenu.open {
       position: absolute;
       top: 0;
-      width: 90vw;
+      width: 70vw;
       transition: width 1s; }
 
   button.collapsedMenuBtn {
@@ -2753,40 +2855,15 @@ section#adminNews {
       font-size: 0.9em; } }
 
 section#blogHome {
-  /*sm*/
   /*md*/
   /*lg*/ }
   section#blogHome .category-badge {
     max-height: fit-content; }
-  @media screen and (max-width: 576px) {
-    section#blogHome .author {
-      height: 3em;
-      padding: 0; }
-    section#blogHome .category-badge {
-      font-size: x-small; } }
-  @media screen and (max-width: 768px) {
-    section#blogHome .card-title {
-      font-size: 1em; }
-    section#blogHome .author .author-nickname h4 {
-      font-size: 1.1em; } }
   @media screen and (max-width: 991px) {
     section#blogHome {
       padding-bottom: 0; }
-      section#blogHome .wrapper-left, section#blogHome .wrapper-right {
-        border-radius: 4px;
-        margin: 0 auto;
-        padding: 0; }
-        section#blogHome .wrapper-left .category-badge, section#blogHome .wrapper-right .category-badge {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          position: relative; }
       section#blogHome .wrapper-left {
-        background-color: rgba(250, 250, 250, 0.8); }
-      section#blogHome .wrapper-right .category-badge {
-        right: -1em; }
-      section#blogHome .card-body {
-        padding: 0 0 0.5em 0; } }
+        background-color: rgba(250, 250, 250, 0.8); } }
   @media screen and (max-width: 1800px) {
     section#blogHome article {
       max-width: 90%; } }
@@ -2804,10 +2881,10 @@ section#newOnShop {
       width: 60%; } }
 
 @media screen and (max-width: 576px) {
+  section#sessions #map {
+    height: 0; }
   section#sessions .spotWrapper {
     position: relative; }
-  section#sessions #map {
-    height: 20em; }
   section#sessions .sub span {
     position: absolute;
     top: 1em;
@@ -2815,15 +2892,17 @@ section#newOnShop {
   section#sessions .spotMapChange {
     min-width: 50%; } }
 @media screen and (min-width: 576px) and (max-width: 991px) {
+  section#sessions #map {
+    height: 0; }
   section#sessions .spotWrapper {
     padding: 0.5em; }
-  section#sessions #map {
-    height: 20em; }
   section#sessions .colSessions {
     overflow-y: initial; } }
 @media screen and (min-width: 992px) {
   section#sessions #map {
-    height: 100%; } }
+    height: 100% !important; }
+  section#sessions .btnMap {
+    display: none; } }
 @media screen and (min-width: 576px) {
   section#sessions .infoSpot, section#sessions .mainInfos {
     width: 50%; } }
@@ -2925,6 +3004,9 @@ section#blog {
   @media screen and (max-width: 576px) {
     section#blog .container-fluid .row article .card-body {
       padding: 0; } }
+  @media screen and (max-width: 768px) {
+    section#blog #cat {
+      font-size: small; } }
   @media screen and (min-width: 400px) and (max-width: 768px) {
     section#blog .container-fluid .right {
       width: 90%; } }
@@ -2938,69 +3020,247 @@ section#blog {
   @media screen and (max-width: 992px) {
     section#blog article {
       margin: 1em auto;
-      padding-bottom: 1em; }
+      padding: 1em; }
       section#blog article .card-body {
-        padding: 0; } }
+        padding: 1em 0;
+        margin: 1em auto; }
+      section#blog article .card-title {
+        padding-right: 0.5em; }
+      section#blog article .colThumb {
+        margin: 0 auto;
+        max-width: 30em; }
+      section#blog article .white {
+        background-color: #fff; }
+      section#blog article .grey {
+        background-color: #DADADA; }
+      section#blog article .white, section#blog article .grey {
+        border-radius: 4px;
+        margin: 1em auto; } }
+  @media screen and (min-width: 991px) {
+    section#blog .category-badge {
+      position: absolute;
+      left: 3em;
+      top: 8%; } }
+  @media screen and (min-width: 992px) and (max-width: 1200px) {
+    section#blog .row {
+      width: 100%;
+      padding: 1em; }
+    section#blog .filter {
+      margin-bottom: 1em; } }
   @media screen and (min-width: 992px) and (max-width: 1200px) {
     section#blog .row {
       width: 100%;
       padding: 1em 2em; }
     section#blog .filter {
-      margin-bottom: 1em; }
-    section#blog .right {
-      width: 100%; }
-    section#blog .colThumb {
-      width: 45%; }
-    section#blog .colText {
-      width: 55%; } }
-  @media screen and (min-width: 992px) and (max-width: 1200px) {
-    section#blog .row {
-      width: 100%;
-      padding: 1em 2em; }
-    section#blog .filter {
-      margin-bottom: 1em; }
-    section#blog .right {
-      width: 100%; }
-    section#blog .colThumb {
-      width: 45%; }
-    section#blog .colText {
-      width: 55%; } }
+      margin-bottom: 1em; } }
   @media screen and (min-width: 1200px) and (max-width: 1400px) {
-    section#blog .row {
+    section#blog .row.wrap {
       width: 90%;
       padding: 1em 2em; }
     section#blog .filter {
-      margin-bottom: 1em; }
-    section#blog .right {
-      width: 100%; }
-    section#blog .colThumb {
-      width: 30%; }
-    section#blog .colText {
-      width: 70%; } }
+      margin-bottom: 1em; } }
   @media screen and (min-width: 1400px) and (max-width: 1800px) {
-    section#blog .row {
-      width: 90%;
-      padding: 1em 2em; }
-    section#blog .filter {
-      margin-bottom: 1em; }
-    section#blog .right {
-      width: 95%; }
-    section#blog .colThumb {
-      width: 30%; }
-    section#blog .colText {
-      width: 70%; } }
-  @media screen and (min-width: 1800px) {
-    section#blog .row {
+    section#blog .row.wrap {
       width: 80%;
       padding: 1em 2em; }
     section#blog .filter {
-      margin-bottom: 1em; }
-    section#blog .right {
-      width: 85%; }
-    section#blog .colThumb {
-      width: 30%; }
-    section#blog .colText {
+      margin-bottom: 1em; } }
+  @media screen and (min-width: 1800px) {
+    section#blog .row.wrap {
+      width: 70%;
+      padding: 1em 2em; }
+    section#blog .filter {
+      margin-bottom: 1em; } }
+
+/**** BLOG : show article **/
+@media screen and (max-width: 576px) {
+  section#showArticle #wrapArticleContent {
+    padding: 0.5em; } }
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  section#showArticle #wrapArticleContent {
+    padding: 1em; } }
+@media screen and (max-width: 992px) {
+  section#showArticle h2 {
+    font-size: 1.2em; }
+  section#showArticle h3 a {
+    font-size: 0.9em;
+    margin-bottom: 0; }
+  section#showArticle h5 {
+    font-size: 1.1em; }
+  section#showArticle #wrapArticleContent {
+    margin: 0; }
+    section#showArticle #wrapArticleContent .wrapInfos .user {
+      padding-right: 0;
+      margin-top: 1em; }
+    section#showArticle #wrapArticleContent .wrapInfos .avatar {
+      max-width: 40px; }
+    section#showArticle #wrapArticleContent .wrapInfos .articleInfo {
+      flex-wrap: wrap;
+      justify-content: end; }
+    section#showArticle #wrapArticleContent #like-article {
+      font-size: small; }
+    section#showArticle #wrapArticleContent button.text-danger {
+      font-size: small; }
+    section#showArticle #wrapArticleContent .viewsAndDate {
+      font-size: small; }
+  section#showArticle .commentWrap {
+    font-size: 0.9em; }
+    section#showArticle .commentWrap .btn-danger {
+      font-size: small; }
+  section#showArticle .addCommentForm {
+    justify-content: center;
+    align-items: center;
+    display: flex; }
+    section#showArticle .addCommentForm form {
+      width: 100%; }
+  section#showArticle #wrapSameAuthorArticle .card {
+    margin-bottom: 1em;
+    border-radius: 4px; } }
+@media screen and (max-width: 992px) {
+  section#showArticle .card-body {
+    font-size: 0.8em; } }
+@media screen and (max-width: 1400px) {
+  section#showArticle .nav-link {
+    font-size: small; } }
+@media screen and (min-width: 768px) and (max-width: 1600px) {
+  section#showArticle #wrapArticleContent {
+    margin: 0;
+    padding: 2em 1.5em; }
+  section#showArticle .wrapInfos .user {
+    padding-right: 0;
+    margin-top: 1em; }
+  section#showArticle .wrapInfos .avatar {
+    max-width: 55px; }
+  section#showArticle .wrapInfos .articleInfo {
+    flex-wrap: wrap;
+    justify-content: end; }
+  section#showArticle h2 {
+    font-size: 1.4em; }
+  section#showArticle h3 a {
+    font-size: 0.9em;
+    margin-bottom: 0; }
+  section#showArticle h5 {
+    font-size: 1em; }
+  section#showArticle #like-article {
+    font-size: small; }
+  section#showArticle button.text-danger {
+    font-size: small; }
+  section#showArticle .viewsAndDate {
+    font-size: small; }
+  section#showArticle .articleInfo {
+    width: 100%; }
+  section#showArticle #wrapSameAuthorArticle .col-xl-6 {
+    padding-right: 0;
+    margin-bottom: 0.5em; } }
+@media screen and (min-width: 1200px) and (max-width: 1600px) {
+  section#showArticle #wrapArticleContent {
+    margin: 1vh; } }
+@media screen and (min-width: 1600px) {
+  section#showArticle #wrapArticleContent {
+    padding: 2em;
+    margin: 1vh 5vh; }
+  section#showArticle .wrapInfos .user {
+    padding-right: 0;
+    margin-top: 1em; }
+  section#showArticle .wrapInfos .avatar {
+    max-width: 55px; }
+  section#showArticle .wrapInfos .articleInfo {
+    flex-wrap: wrap;
+    justify-content: end; }
+  section#showArticle h2 {
+    font-size: 1.5em; }
+  section#showArticle h3 a {
+    font-size: 1em;
+    margin-bottom: 0; }
+  section#showArticle h5 {
+    font-size: 1.1em; }
+  section#showArticle .articleInfo {
+    width: 100%; }
+  section#showArticle #wrapSameAuthorArticle .col-xl-6 {
+    padding-right: 0;
+    margin-bottom: 1em; } }
+@media screen and (min-width: 2000px) {
+  section#showArticle #wrapArticleContent {
+    max-width: 80vw; } }
+
+/*** SESSION : INDEX ***/
+@media screen and (max-width: 768px) {
+  section#session #map {
+    height: 0; }
+  section#session .btnMap {
+    display: block; }
+  section#session .viewSessionBtn {
+    justify-content: center;
+    display: flex; }
+  section#session .sub {
+    display: flex;
+    justify-content: flex-end; } }
+@media screen and (min-width: 576px) and (max-width: 992px) {
+  section#session .spotWrapper {
+    width: 80%;
+    margin: 1em auto; } }
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  section#session #map {
+    height: 0; }
+  section#session .btnMap {
+    display: block; }
+  section#session .viewSessionBtn {
+    display: flex; } }
+@media screen and (min-width: 992px) {
+  section#session #map {
+    height: 90vh; }
+  section#session .btnMap {
+    display: none; }
+  section#session .viewSessionBtn {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap; } }
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+  section#session .colSessions {
+    width: 33%; }
+  section#session #map {
+    width: 67%; } }
+@media screen and (min-width: 1600px) {
+  section#session .colSessions {
+    width: 25%; }
+  section#session #map {
+    width: 75%; } }
+
+/*** SESSION : ADD ***/
+section#sessionAdd {
+  /* sm to lg */
+  /*xl*/
+  /* over xl*/ }
+  @media screen and (max-width: 576px) {
+    section#sessionAdd .wrapper {
+      height: 90vh; }
+    section#sessionAdd .formSession {
+      justify-content: center;
+      height: 100%;
+      width: 100%; }
+      section#sessionAdd .formSession form {
+        width: 100%; } }
+  @media screen and (min-width: 576px) and (max-width: 768px) {
+    section#sessionAdd .formSession {
+      width: 80%; } }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    section#sessionAdd .formSession {
       width: 70%; } }
+  @media screen and (min-width: 992px) and (max-width: 1200px) {
+    section#sessionAdd .formSession {
+      width: 60%; } }
+  @media screen and (min-width: 1200px) and (max-width: 1400px) {
+    section#sessionAdd .formSession {
+      width: 50%; } }
+  @media screen and (min-width: 1400px) and (max-width: 1600px) {
+    section#sessionAdd .formSession {
+      width: 45%; } }
+  @media screen and (min-width: 1600px) and (max-width: 1800px) {
+    section#sessionAdd .formSession {
+      width: 40%; } }
+  @media screen and (min-width: 1800px) {
+    section#sessionAdd .formSession {
+      width: 33%; } }
 
 /*** SHOP : INDEX ***/
 section#shop {
@@ -3120,6 +3380,8 @@ section#shop {
     section#cart .wrapper tr {
       display: block;
       margin: 1em; }
+    section#cart .wrapper td[data-label="Produit"] {
+      background-color: #DADADA; }
     section#cart .wrapper td {
       display: flex;
       justify-content: space-between;
@@ -3179,6 +3441,90 @@ section#shop {
   section#cart .wrapper {
     width: 80vw;
     margin: 0 auto; } }
+
+/*** ORDER: PREPARE ***/
+@media screen and (max-width: 576px) {
+  section#prepareOrder .container-fluid.pt-4 {
+    padding: 1em; } }
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  section#prepareOrder .container-fluid.pt-4 {
+    padding: 2em; } }
+@media screen and (min-width: 768px) {
+  section#prepareOrder .container-fluid.pt-4 {
+    padding: 3em; } }
+@media screen and (max-width: 992px) {
+  section#prepareOrder legend {
+    font-size: 1.2em; }
+    section#prepareOrder legend span {
+      display: block; }
+  section#prepareOrder .wrapper {
+    justify-content: center; }
+    section#prepareOrder .wrapper h4 {
+      font-size: 1.1em; }
+    section#prepareOrder .wrapper .delivery, section#prepareOrder .wrapper .recap, section#prepareOrder .wrapper .transporter {
+      padding: 1em;
+      width: 100%; }
+    section#prepareOrder .wrapper thead {
+      visibility: hidden;
+      height: 0;
+      position: absolute;
+      top: 0; }
+    section#prepareOrder .wrapper .table > :not(:first-child) {
+      border-top: none; }
+    section#prepareOrder .wrapper tr {
+      display: block;
+      margin: 1em; }
+    section#prepareOrder .wrapper td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #DADADA;
+      border-bottom: none;
+      font-size: 0.9em; }
+      section#prepareOrder .wrapper td a.add {
+        margin: 0 0 0 1em; }
+      section#prepareOrder .wrapper td a.btn-danger {
+        margin: 0; }
+      section#prepareOrder .wrapper td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        padding-right: 1em; }
+      section#prepareOrder .wrapper td:first-child {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px; }
+      section#prepareOrder .wrapper td:last-child {
+        border: 1px solid #DADADA;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px; }
+    section#prepareOrder .wrapper td[data-label="Produit"] {
+      background-color: #DADADA; }
+    section#prepareOrder .wrapper tfoot .basePrice {
+      display: none; }
+    section#prepareOrder .wrapper tfoot tr {
+      border-bottom: 1px solid transparent; }
+  section#prepareOrder .btn.param, section#prepareOrder a.param {
+    font-size: 0.9em; } }
+@media screen and (min-width: 992px) {
+  section#prepareOrder .row {
+    justify-content: center; }
+  section#prepareOrder .wrapper thead {
+    visibility: visible;
+    position: relative; }
+  section#prepareOrder .wrapper td {
+    vertical-align: middle;
+    padding: 1em 0; }
+  section#prepareOrder .wrapper .img {
+    width: 50px !important;
+    height: auto;
+    margin-right: 1em; }
+  section#prepareOrder .delivery, section#prepareOrder .recap, section#prepareOrder .transporter {
+    padding: 2em; }
+  section#prepareOrder .btn.param, section#prepareOrder a.param {
+    font-size: 1em; } }
+@media screen and (min-width: 1600px) {
+  section#prepareOrder .wrapper.row {
+    margin: 0px 4vw;
+    border-radius: 4px; } }
 
 /*** ORDER : SUCCESS ****/
 @media screen and (max-width: 576px) {
@@ -3350,7 +3696,165 @@ section#contact {
     section#contact .wrap {
       width: 33vw; } }
 
+/*** SEARCH PAGE***/
+@media screen and (max-width: 992px) {
+  section#search .card-body {
+    padding: 1em 0; }
+  section#search .white {
+    background-color: #fff; }
+  section#search .grey {
+    background-color: #DADADA; }
+  section#search .white, section#search .grey {
+    border-radius: 4px;
+    margin: 1em auto; }
+  section#search article {
+    padding: 1em; }
+  section#search .card-title {
+    padding-right: 0.5em; }
+  section#search .colThumb {
+    margin: 0 auto;
+    max-width: 30em; } }
+@media screen and (min-width: 992px) {
+  section#search .wrapper-left {
+    margin: 1em auto; } }
+
 /****** PARTIE ACCOUNT *******/
+/*** ACCOUNT : MON PROFIL ***/
+@media screen and (max-width: 576px) {
+  section#myProfile .banner {
+    height: 12vh;
+    margin: 0 0 0.5em; }
+  section#myProfile .leftWrap, section#myProfile .rightWrap, section#myProfile .user, section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
+    border-radius: 0; }
+  section#myProfile .user #myProfile-avatar {
+    max-width: 75px; }
+  section#myProfile .fav {
+    max-width: 75px; }
+  section#myProfile .counters {
+    display: none; } }
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  section#myProfile .row {
+    margin: 0 auto; }
+  section#myProfile .user #myProfile-avatar {
+    max-width: 75px; }
+  section#myProfile .fav {
+    max-width: 75px; }
+  section#myProfile .banner {
+    height: 13vh;
+    margin: 0 0 1em; }
+  section#myProfile .leftWrap, section#myProfile .rightWrap, section#myProfile .user, section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
+    border-radius: 4px; } }
+@media screen and (max-width: 768px) {
+  section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
+    font-size: 0.9em; } }
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  section#myProfile .wrap {
+    width: 90%; }
+  section#myProfile .banner {
+    height: 12vh;
+    margin: 0 0 0.5em; }
+  section#myProfile .user #myProfile-avatar {
+    max-width: 90px; }
+  section#myProfile .fav {
+    max-width: 90px; }
+  section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
+    font-size: 0.95em; }
+  section#myProfile .leftWrap, section#myProfile .rightWrap, section#myProfile .user, section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
+    border-radius: 4px; } }
+@media screen and (min-width: 768px) {
+  section#myProfile .globalWrap {
+    padding-right: 1em; }
+  section#myProfile .wrap {
+    margin: 0 auto; } }
+@media screen and (max-width: 992px) {
+  section#myProfile h3 {
+    font-size: large; }
+  section#myProfile .banner {
+    margin: 0 0 0.5em; }
+  section#myProfile .leftWrap, section#myProfile .rightWrap, section#myProfile .user, section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
+    margin: 0 0 0.5em 0;
+    width: 100%; }
+  section#myProfile .leftWrap {
+    margin: 0; }
+  section#myProfile .user h2 {
+    font-size: x-large; }
+  section#myProfile .dashboard h5 {
+    font-size: medium; }
+    section#myProfile .dashboard h5 i {
+      font-size: 1.5em; }
+  section#myProfile #accordionQuestion {
+    display: none; } }
+@media screen and (min-width: 992px) {
+  section#myProfile .banner {
+    margin: 0 0 2em 0;
+    height: 12vh; }
+  section#myProfile h3 {
+    font-size: large; }
+  section#myProfile .user h2 {
+    font-size: x-large; }
+  section#myProfile .user #myProfile-avatar {
+    max-width: 90px; }
+  section#myProfile .fav {
+    max-width: 90px; }
+  section#myProfile .leftWrap {
+    width: 40%;
+    margin: 0; }
+  section#myProfile .rightWrap {
+    width: 60%;
+    margin: 0; }
+  section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard, section#myProfile .user {
+    margin: 0 0 1em 0;
+    font-size: 0.95em; }
+  section#myProfile .dashboard h5 {
+    font-size: medium; }
+    section#myProfile .dashboard h5 i {
+      font-size: 1.5em; } }
+@media screen and (min-width: 1400px) and (max-width: 1600px) {
+  section#myProfile .banner {
+    height: 13vh; }
+  section#myProfile .wrap {
+    width: 90%; }
+  section#myProfile .col-md {
+    width: 33.3%; }
+  section#myProfile .col-sm-6 {
+    width: 33.3% !important; } }
+@media screen and (min-width: 1600px) and (max-width: 1800px) {
+  section#myProfile .banner {
+    height: 15vh; }
+  section#myProfile .wrap {
+    width: 90%; }
+  section#myProfile .col-md {
+    width: 33.3%; }
+  section#myProfile .col-sm-6 {
+    width: 33.3% !important; } }
+@media screen and (min-width: 1800px) {
+  section#myProfile .personnal-info, section#myProfile .my-drone, section#myProfile .dashboard {
+    font-size: 1em; }
+  section#myProfile h3 {
+    font-size: x-large !important; }
+  section#myProfile .user h2 {
+    font-size: xx-large; }
+  section#myProfile .user #myProfile-avatar {
+    max-width: 100px; }
+  section#myProfile .dashboard h5 {
+    font-size: large; }
+    section#myProfile .dashboard h5 i {
+      font-size: 2em; }
+  section#myProfile .banner {
+    height: 18vh; }
+  section#myProfile .wrap {
+    width: 80%; }
+  section#myProfile .leftWrap {
+    width: 35%; }
+  section#myProfile .rightWrap {
+    width: 65%; }
+  section#myProfile .dashboard {
+    min-height: 95%; }
+  section#myProfile .col-md {
+    width: 33.3%; }
+  section#myProfile .col-sm-6 {
+    width: 33.3% !important; } }
+
 /**** ACCOUNT: EDITION DES INFO PERSO  ****/
 section#myProfileEdit {
   /* xs to md*/
@@ -3511,8 +4015,123 @@ section#editArticle .wrapForm, section#addArticle .wrapForm {
 section#myArticles {
   /*xs*/
   /* sm */
-  /*md to lg*/
-  /*xl*/ }
+  /*md to lg*/ }
+  @media screen and (max-width: 576px) {
+    section#myArticles .wrap {
+      margin: 0; }
+    section#myArticles .article {
+      flex-wrap: wrap;
+      padding: 1em; }
+      section#myArticles .article h5 {
+        font-size: 1.1em; }
+      section#myArticles .article .article-thumb, section#myArticles .article .article-body {
+        width: 100%; }
+      section#myArticles .article .article-thumb {
+        margin-bottom: 1em; }
+      section#myArticles .article .date {
+        margin: 0 auto; }
+      section#myArticles .article .article-footer {
+        flex-wrap: wrap; }
+        section#myArticles .article .article-footer .stats {
+          height: fit-content;
+          justify-content: center;
+          margin: 1em 0;
+          width: 100%; }
+          section#myArticles .article .article-footer .stats .alert, section#myArticles .article .article-footer .stats .views, section#myArticles .article .article-footer .stats .likes, section#myArticles .article .article-footer .stats .comments {
+            width: 3em;
+            height: 3em; }
+        section#myArticles .article .article-footer .settings {
+          display: flex;
+          width: 100%;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center; }
+          section#myArticles .article .article-footer .settings button, section#myArticles .article .article-footer .settings a {
+            font-size: 0.9em;
+            margin: 0.5em; } }
+  @media screen and (min-width: 576px) and (max-width: 768px) {
+    section#myArticles {
+      padding: 0; }
+      section#myArticles .article {
+        flex-wrap: wrap;
+        margin: 0 auto; }
+        section#myArticles .article h5 {
+          font-size: 1.1em; }
+        section#myArticles .article .article-thumb, section#myArticles .article .article-body {
+          width: 75vw;
+          margin: 1em auto; }
+        section#myArticles .article .date {
+          margin: 0 auto; }
+        section#myArticles .article .article-footer {
+          flex-wrap: wrap; }
+          section#myArticles .article .article-footer .stats {
+            height: fit-content;
+            justify-content: center;
+            margin: 1em 0;
+            width: 100%; }
+            section#myArticles .article .article-footer .stats .alert, section#myArticles .article .article-footer .stats .views, section#myArticles .article .article-footer .stats .likes, section#myArticles .article .article-footer .stats .comments {
+              width: 3em;
+              height: 3em; }
+          section#myArticles .article .article-footer .settings {
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center; }
+            section#myArticles .article .article-footer .settings button, section#myArticles .article .article-footer .settings a {
+              font-size: 0.9em;
+              margin: 0.5em; } }
+  @media screen and (min-width: 360px) {
+    section#myArticles .article .settings, section#myArticles .article .article-footer {
+      justify-content: center; } }
+  @media screen and (min-height: 768px) and (max-width: 992px) {
+    section#myArticles .article .settings {
+      justify-content: flex-start; } }
+  @media screen and (min-width: 768px) {
+    section#myArticles {
+      padding: 0; }
+      section#myArticles .article {
+        width: 100%; }
+        section#myArticles .article h5 {
+          font-size: 1.1em; }
+        section#myArticles .article .article-thumb, section#myArticles .article .article-body {
+          width: 100%;
+          height: fit-content; }
+        section#myArticles .article .article-thumb {
+          object-fit: contain;
+          max-width: 40vw; }
+        section#myArticles .article .article-body {
+          width: 100%;
+          padding-left: 1em;
+          height: auto; }
+        section#myArticles .article .date {
+          margin: 0.5em auto; }
+        section#myArticles .article .article-footer {
+          flex-wrap: wrap; }
+        section#myArticles .article .settings {
+          display: flex;
+          width: 100%;
+          flex-wrap: wrap;
+          align-items: center; }
+          section#myArticles .article .settings button, section#myArticles .article .settings a {
+            font-size: 0.9em;
+            margin: 0.5em; }
+        section#myArticles .article .stats {
+          height: fit-content;
+          justify-content: center;
+          margin: 1em;
+          width: 100%; }
+          section#myArticles .article .stats .alert, section#myArticles .article .stats .views, section#myArticles .article .stats .likes, section#myArticles .article .stats .comments {
+            width: 3em;
+            height: 3em; } }
+  @media screen and (min-width: 1400px) {
+    section#myArticles .article .article-thumb {
+      object-fit: cover;
+      max-width: 30vw; } }
+  @media screen and (min-width: 1800px) {
+    section#myArticles .article .article-thumb {
+      object-fit: cover;
+      max-width: 25vw; } }
 
 /*** ACCOUNT : MES SESSIONS ***/
 @media screen and (max-width: 768px) {
@@ -3560,6 +4179,183 @@ section#myOrders {
       margin: 1em;
       width: 31%; } }
 
+/*** ACCOUNT PROFIL PUBLIC ***/
+@media screen and (max-width: 576px) {
+  section#profile .btnSessions {
+    display: block;
+    margin-bottom: 0.2em;
+    width: 100%; }
+  section#profile .category-badge {
+    max-height: fit-content; }
+  section#profile .user #profile-avatar {
+    max-width: 75px; }
+  section#profile .fav {
+    max-width: 75px; }
+  section#profile .banner {
+    display: none; }
+  section#profile .my-drone {
+    display: none; } }
+@media screen and (max-width: 991px) {
+  section#profile {
+    padding-bottom: 0; }
+    section#profile .wrapper-left {
+      background-color: rgba(250, 250, 250, 0.8); } }
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  section#profile .row {
+    margin: 0 auto; }
+  section#profile .my-drone {
+    margin-bottom: 1em; }
+  section#profile .user #profile-avatar {
+    max-width: 75px; }
+  section#profile .fav {
+    max-width: 75px; }
+  section#profile .banner {
+    height: 13vh;
+    margin: 0 0 1em; }
+  section#profile .leftWrap, section#profile .rightWrap, section#profile .user, section#profile .sessions, section#profile .user-content {
+    border-radius: 4px; } }
+@media screen and (max-width: 768px) {
+  section#profile .personnal-info, section#profile .my-drone {
+    font-size: 0.9em; } }
+@media screen and (min-width: 768px) {
+  section#profile .btnSessions {
+    display: none; }
+  section#profile .wrap {
+    margin: 0 auto; } }
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  section#profile .banner {
+    height: 12vh; }
+  section#profile .my-drone {
+    margin-bottom: 1em; }
+  section#profile h4 {
+    font-size: large; }
+  section#profile .user #profile-avatar {
+    max-width: 75px; }
+  section#profile .fav {
+    max-width: 75px; }
+  section#profile .user-content, section#profile .my-drone {
+    font-size: 0.95em;
+    margin: 0 0 1em 0; }
+  section#profile .leftWrap {
+    width: 45%;
+    margin: 0; }
+  section#profile .rightWrap {
+    width: 55%;
+    margin: 0; }
+  section#profile .leftWrap, section#profile .rightWrap, section#profile .user, section#profile .sessions, section#profile .user-content {
+    border-radius: 4px; } }
+@media screen and (max-width: 992px) {
+  section#profile h3 {
+    font-size: large; }
+  section#profile .banner {
+    margin: 0 0 0.5em; }
+  section#profile .row {
+    padding: 0 1em; }
+  section#profile .user, section#profile .sessions {
+    margin-bottom: 1em; }
+    section#profile .user h2, section#profile .sessions h2 {
+      font-size: x-large; } }
+@media screen and (min-width: 992px) {
+  section#profile .row {
+    margin: 0 1em; }
+  section#profile .banner {
+    margin: 0 1em 1em 1em; }
+    section#profile .banner .banner {
+      height: 5em; }
+  section#profile .user {
+    margin-bottom: 1em; }
+  section#profile .leftWrap, section#profile .rightWrap {
+    margin: 0; }
+  section#profile .leftWrap, section#profile .rightWrap, section#profile .user, section#profile .sessions, section#profile .user-content {
+    border-radius: 4px; }
+  section#profile .wrapper-left {
+    padding-right: 1em; } }
+@media screen and (min-width: 992px) and (max-width: 1400px) {
+  section#profile h3 {
+    font-size: large; }
+  section#profile .user #profile-avatar {
+    max-width: 75px; }
+  section#profile .user h2 {
+    font-size: x-large; }
+  section#profile .fav {
+    max-width: 75px; }
+  section#profile .user-content, section#profile .my-drone {
+    font-size: 0.9em;
+    margin: 0 0 1em 0; }
+  section#profile .card-title {
+    font-size: large; }
+  section#profile .leftWrap {
+    width: 40%; }
+  section#profile .rightWrap {
+    width: 60%; } }
+@media screen and (min-width: 1400px) and (max-width: 1600px) {
+  section#profile .banner {
+    height: 10em; }
+  section#profile h3 {
+    font-size: large; }
+  section#profile .user #profile-avatar {
+    max-width: 75px; }
+  section#profile .user h2 {
+    font-size: x-large; }
+  section#profile .fav {
+    max-width: 75px; }
+  section#profile .user-content, section#profile .my-drone {
+    font-size: 0.9em;
+    margin: 0 0 1em 0; }
+  section#profile .card-title {
+    font-size: large; }
+  section#profile .leftWrap {
+    width: 40%; }
+  section#profile .rightWrap {
+    width: 60%; } }
+@media screen and (min-width: 1600px) and (max-width: 1800px) {
+  section#profile .banner {
+    height: 10em; }
+  section#profile h3 {
+    font-size: large; }
+  section#profile .user #profile-avatar {
+    max-width: 90px; }
+  section#profile .user h2 {
+    font-size: x-large; }
+  section#profile .fav {
+    max-width: 90px; }
+  section#profile .user-content, section#profile .my-drone {
+    font-size: 0.9em;
+    margin: 0 0 1em 0; }
+  section#profile .card-title {
+    font-size: large; }
+  section#profile .leftWrap {
+    width: 35%; }
+  section#profile .rightWrap {
+    width: 65%; } }
+@media screen and (min-width: 1800px) {
+  section#profile .banner {
+    height: 13em; }
+  section#profile h3 {
+    font-size: x-large; }
+  section#profile .user #profile-avatar {
+    max-width: 100px; }
+  section#profile .user h2 {
+    font-size: xx-large; }
+  section#profile .fav {
+    max-width: 100px; }
+  section#profile .user-content, section#profile .my-drone {
+    font-size: 1em;
+    margin: 0 0 1em 0; }
+  section#profile .card-title {
+    font-size: large; }
+  section#profile .leftWrap {
+    width: 35%; }
+  section#profile .rightWrap {
+    width: 65%; }
+  section#profile .wrap {
+    width: 90vw; } }
+@media screen and (min-width: 1900px) {
+  section#profile .leftWrap {
+    width: 30%; }
+  section#profile .rightWrap {
+    width: 70%; } }
+
 /**** PARTIE ADMIN ****/
 section#adminLogin {
   /* xs to md*/
@@ -3580,6 +4376,233 @@ section#adminLogin {
     section#adminLogin .formLogin {
       height: 35vh; } }
 
+/*** ADMIN : DASHBOARD ***/
+@media screen and (max-width: 576px) {
+  section#adminDashboard .dashboard {
+    width: 100vw;
+    padding: 2.5em 1em;
+    font-size: small; }
+  section#adminDashboard h3 {
+    font-size: large; }
+  section#adminDashboard h5 {
+    font-size: large; }
+  section#adminDashboard .wrap {
+    margin: 0; }
+  section#adminDashboard .statWrap {
+    font-size: x-small; }
+    section#adminDashboard .statWrap .card-body {
+      padding: 0; }
+    section#adminDashboard .statWrap .card-title {
+      display: none; }
+  section#adminDashboard .shortCuts h5 {
+    font-size: large; }
+  section#adminDashboard .shortCuts .col {
+    flex: auto; }
+  section#adminDashboard .worstUsers {
+    margin-top: 1em; } }
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  section#adminDashboard .dashboard {
+    width: 100vw;
+    padding: 2.5em 1em;
+    font-size: small; }
+  section#adminDashboard h3 {
+    font-size: large; }
+  section#adminDashboard h5 {
+    font-size: large; }
+  section#adminDashboard .wrap {
+    margin: 0; }
+  section#adminDashboard .statWrap {
+    margin: 0 0.5em;
+    font-size: x-small; }
+    section#adminDashboard .statWrap .card-body {
+      padding: 0; }
+    section#adminDashboard .statWrap .card-title {
+      display: none; }
+  section#adminDashboard .shortCuts h5 {
+    font-size: medium; }
+  section#adminDashboard .worstUsers {
+    margin-top: 1em;
+    flex: auto; }
+  section#adminDashboard .mostAppreciated {
+    flex: auto; }
+  section#adminDashboard .worstUsers, section#adminDashboard .mostAppreciated {
+    margin-left: 1em;
+    margin-right: 1em; } }
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  section#adminDashboard .dashboard {
+    padding: 2em 1em; }
+  section#adminDashboard h3 {
+    font-size: large; }
+  section#adminDashboard h5 {
+    font-size: large; }
+  section#adminDashboard .wrap {
+    margin: 2em 2em 2em 0; }
+  section#adminDashboard .statWrap {
+    margin: 0 0.5em;
+    font-size: x-small; }
+    section#adminDashboard .statWrap .card-body {
+      padding: 0; }
+    section#adminDashboard .statWrap .card-title {
+      display: none; }
+  section#adminDashboard .shortCuts h5 {
+    font-size: medium; }
+  section#adminDashboard .worstUsers {
+    margin-top: 1em;
+    flex: auto; }
+  section#adminDashboard .mostAppreciated {
+    flex: auto; }
+  section#adminDashboard .worstUsers, section#adminDashboard .mostAppreciated {
+    margin-left: 1em;
+    margin-right: 1em; } }
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+  section#adminDashboard .dashboard {
+    padding: 1em;
+    margin: 0 auto; }
+  section#adminDashboard .wrapper {
+    padding-right: 2em; }
+  section#adminDashboard h3 {
+    font-size: x-large; }
+  section#adminDashboard h5 {
+    font-size: large; }
+  section#adminDashboard .wrap {
+    margin: 2em auto; }
+  section#adminDashboard .statWrap {
+    margin: 0 0.5em;
+    font-size: small; }
+    section#adminDashboard .statWrap .card-body {
+      padding: 0; }
+    section#adminDashboard .statWrap .card-title {
+      display: none; }
+  section#adminDashboard .shortCuts h5 {
+    font-size: medium; }
+  section#adminDashboard .worstUsers, section#adminDashboard .mostAppreciated {
+    margin-left: 1em;
+    margin-right: 1em;
+    font-size: medium; } }
+@media screen and (min-width: 1400px) and (max-width: 1600px) {
+  section#adminDashboard .dashboard {
+    padding: 1em;
+    margin: 0 auto; }
+  section#adminDashboard h3 {
+    font-size: x-large; }
+  section#adminDashboard h5 {
+    font-size: large; }
+  section#adminDashboard .wrap {
+    margin: 2em auto; }
+  section#adminDashboard .statWrap {
+    margin: 0 0.5em;
+    font-size: small; }
+    section#adminDashboard .statWrap .card-body {
+      padding: 0; }
+  section#adminDashboard .shortCuts h5 {
+    font-size: medium; }
+  section#adminDashboard .worstUsers, section#adminDashboard .mostAppreciated {
+    margin-left: 1em;
+    margin-right: 1em;
+    font-size: medium; } }
+@media screen and (min-width: 1600px) {
+  section#adminDashboard .wrap {
+    width: 80vw;
+    margin: 2em auto; }
+  section#adminDashboard .dashboard {
+    padding: 2em;
+    margin: 0 auto;
+    width: 100%; }
+  section#adminDashboard h5 {
+    font-size: large; }
+  section#adminDashboard h3 {
+    font-size: x-large; } }
+
+/** ADMIN : USERS index + ADMIN : shop index **/
+@media screen and (max-width: 768px) {
+  section#adminShop .titleAndBtn, section#adminShop .titleAndSearch, section#adminUsers .titleAndBtn, section#adminUsers .titleAndSearch {
+    margin-bottom: 1em; }
+    section#adminShop .titleAndBtn h3, section#adminShop .titleAndSearch h3, section#adminUsers .titleAndBtn h3, section#adminUsers .titleAndSearch h3 {
+      font-size: large; }
+    section#adminShop .titleAndBtn .addProductMainBtn, section#adminShop .titleAndSearch .addProductMainBtn, section#adminUsers .titleAndBtn .addProductMainBtn, section#adminUsers .titleAndSearch .addProductMainBtn {
+      font-size: small; }
+  section#adminShop .wrap, section#adminUsers .wrap {
+    width: 100vw;
+    padding: 0 1em; }
+  section#adminShop .imgProduct, section#adminShop div.col .users .avatar, section#adminShop .subDate, section#adminUsers .imgProduct, section#adminUsers div.col .users .avatar, section#adminUsers .subDate {
+    display: none; }
+  section#adminShop .productsList, section#adminShop .usersList, section#adminShop .titleTable, section#adminUsers .productsList, section#adminUsers .usersList, section#adminUsers .titleTable {
+    font-size: small; }
+  section#adminShop .modal-dialog, section#adminUsers .modal-dialog {
+    font-size: medium; }
+    section#adminShop .modal-dialog a, section#adminUsers .modal-dialog a {
+      margin-bottom: 1em; }
+  section#adminShop .row-grey, section#adminShop .row-white, section#adminUsers .row-grey, section#adminUsers .row-white {
+    padding: 1em 0.5em; }
+  section#adminShop .name, section#adminUsers .name {
+    flex-basis: 15%; }
+  section#adminShop .users, section#adminUsers .users {
+    flex-basis: 30%; }
+  section#adminShop .actions button, section#adminUsers .actions button {
+    font-size: 0.9em; } }
+@media screen and (min-width: 768px) {
+  section#adminShop .mainWrap, section#adminUsers .mainWrap {
+    padding-right: 1em; } }
+@media screen and (min-width: 767px) and (max-width: 1200px) {
+  section#adminShop .row-grey .imgProduct, section#adminShop .row-grey .avatar, section#adminShop .row-white .imgProduct, section#adminShop .row-white .avatar, section#adminUsers .row-grey .imgProduct, section#adminUsers .row-grey .avatar, section#adminUsers .row-white .imgProduct, section#adminUsers .row-white .avatar {
+    margin-right: 1em; }
+  section#adminShop .titleAndBtn, section#adminShop .titleAndSearch, section#adminUsers .titleAndBtn, section#adminUsers .titleAndSearch {
+    margin-bottom: 1em; }
+    section#adminShop .titleAndBtn h3, section#adminShop .titleAndSearch h3, section#adminUsers .titleAndBtn h3, section#adminUsers .titleAndSearch h3 {
+      font-size: large; }
+    section#adminShop .titleAndBtn .addProductMainBtn, section#adminShop .titleAndSearch .addProductMainBtn, section#adminUsers .titleAndBtn .addProductMainBtn, section#adminUsers .titleAndSearch .addProductMainBtn {
+      font-size: medium; }
+  section#adminShop .wrap, section#adminUsers .wrap {
+    width: 90vw;
+    margin: 0 auto; }
+  section#adminShop .productsList, section#adminShop .usersList, section#adminShop .titleTable, section#adminUsers .productsList, section#adminUsers .usersList, section#adminUsers .titleTable {
+    font-size: 0.9em; }
+  section#adminShop .modal-dialog, section#adminUsers .modal-dialog {
+    font-size: medium; }
+    section#adminShop .modal-dialog a, section#adminUsers .modal-dialog a {
+      margin-bottom: 1em; }
+  section#adminShop .row-grey, section#adminShop .row-white, section#adminUsers .row-grey, section#adminUsers .row-white {
+    padding: 1em 0.5em; }
+  section#adminShop .name, section#adminUsers .name {
+    flex-basis: 15%; }
+  section#adminShop .users, section#adminUsers .users {
+    flex-basis: 30%; }
+  section#adminShop .actions button, section#adminUsers .actions button {
+    font-size: 0.9em; } }
+@media screen and (min-width: 1200px) and (max-width: 1600px) {
+  section#adminShop .row-grey .imgProduct, section#adminShop .row-grey .avatar, section#adminShop .row-white .imgProduct, section#adminShop .row-white .avatar, section#adminUsers .row-grey .imgProduct, section#adminUsers .row-grey .avatar, section#adminUsers .row-white .imgProduct, section#adminUsers .row-white .avatar {
+    width: 50px !important;
+    height: 50px !important;
+    margin-right: 1em; } }
+@media screen and (min-width: 1200px) {
+  section#adminShop .titleAndBtn, section#adminShop .titleAndSearch, section#adminUsers .titleAndBtn, section#adminUsers .titleAndSearch {
+    margin-bottom: 1em; }
+    section#adminShop .titleAndBtn h3, section#adminShop .titleAndSearch h3, section#adminUsers .titleAndBtn h3, section#adminUsers .titleAndSearch h3 {
+      font-size: x-large; }
+    section#adminShop .titleAndBtn .addProductMainBtn, section#adminShop .titleAndSearch .addProductMainBtn, section#adminUsers .titleAndBtn .addProductMainBtn, section#adminUsers .titleAndSearch .addProductMainBtn {
+      font-size: medium; }
+  section#adminShop .wrap, section#adminUsers .wrap {
+    margin: 0 auto;
+    width: 70vw; }
+  section#adminShop .productsList, section#adminShop .usersList, section#adminShop .titleTable, section#adminUsers .productsList, section#adminUsers .usersList, section#adminUsers .titleTable {
+    font-size: 1em; }
+  section#adminShop .modal-dialog a, section#adminUsers .modal-dialog a {
+    margin-bottom: 1em; }
+  section#adminShop .row-grey, section#adminShop .row-white, section#adminUsers .row-grey, section#adminUsers .row-white {
+    padding: 1em 0.5em; }
+  section#adminShop .name, section#adminUsers .name {
+    flex-basis: 15%; }
+  section#adminShop .users, section#adminUsers .users {
+    flex-basis: 30%; }
+  section#adminShop .actions button, section#adminUsers .actions button {
+    font-size: 0.9em; } }
+@media screen and (min-width: 1600px) {
+  section#adminShop .row-grey .imgProduct, section#adminShop .row-grey .avatar, section#adminShop .row-white .imgProduct, section#adminShop .row-white .avatar, section#adminUsers .row-grey .imgProduct, section#adminUsers .row-grey .avatar, section#adminUsers .row-white .imgProduct, section#adminUsers .row-white .avatar {
+    width: 75px !important;
+    height: 75px !important;
+    margin-right: 2em; } }
+
+/** ADMIN : users index **/
 /** ADMIN : BLOG index + BLOG alerts **/
 @media screen and (max-width: 768px) {
   section#adminBlog h4, section#adminBlogAlerts h4 {
@@ -3594,10 +4617,83 @@ section#adminLogin {
   section#adminBlog #titleAndForm, section#adminBlogAlerts #titleAndForm {
     margin: 1em auto; } }
 @media screen and (min-width: 768px) {
+  section#adminBlog .wrap, section#adminBlogAlerts .wrap {
+    padding-right: 1em; }
   section#adminBlog .articleWrap, section#adminBlogAlerts .articleWrap {
     margin: 0 auto; }
   section#adminBlog #titleAndForm, section#adminBlogAlerts #titleAndForm {
     margin: 0 0 1em 0; } }
+
+/**** ADMIN MAPSPOT ****/
+@media screen and (max-width: 576px) {
+  section#adminMapSpots #map {
+    height: 0; }
+    section#adminMapSpots #map .mapboxgl-ctrl-geocoder {
+      display: none; }
+  section#adminMapSpots .spotWrapper {
+    position: relative; }
+  section#adminMapSpots .spotMapChange {
+    min-width: 50%; }
+  section#adminMapSpots .row.main {
+    padding: 0 1em; }
+  section#adminMapSpots h3 {
+    font-size: large;
+    text-align: center; }
+  section#adminMapSpots .addSpot, section#adminMapSpots .reset {
+    font-size: small; }
+  section#adminMapSpots .spotName {
+    font-size: 1em; }
+  section#adminMapSpots #addSpotForm #spot {
+    font-size: 0.9em; } }
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  section#adminMapSpots h3 {
+    font-size: large;
+    margin-top: 1em;
+    text-align: center; }
+  section#adminMapSpots .row.main {
+    margin: 0 auto;
+    width: 100%;
+    padding-left: 0; } }
+@media screen and (min-width: 768px) {
+  section#adminMapSpots h3 {
+    margin-top: 1em; }
+  section#adminMapSpots .row.main {
+    width: 100%; }
+  section#adminMapSpots #map {
+    height: 100% !important; }
+  section#adminMapSpots .btnMap {
+    display: none; } }
+@media screen and (min-width: 576px) and (max-width: 991px) {
+  section#adminMapSpots #map {
+    height: 0; }
+    section#adminMapSpots #map .mapboxgl-ctrl-geocoder {
+      display: none; }
+  section#adminMapSpots .spotWrapper {
+    padding: 0.5em; }
+  section#adminMapSpots .gestion {
+    overflow-y: initial; }
+  section#adminMapSpots .spotWrapper {
+    position: relative; }
+  section#adminMapSpots .spotMapChange {
+    min-width: 50%; }
+  section#adminMapSpots .row.main {
+    padding: 0 1em; }
+  section#adminMapSpots h3 {
+    font-size: large; }
+  section#adminMapSpots .addSpot, section#adminMapSpots .reset {
+    font-size: small; }
+  section#adminMapSpots .spotName {
+    font-size: 1em; }
+  section#adminMapSpots #addSpotForm #spot {
+    font-size: 0.9em; } }
+@media screen and (min-width: 991px) {
+  section#adminMapSpots h3 {
+    font-size: larger; } }
+@media screen and (min-width: 1900px) {
+  section#adminMapSpots .gestion {
+    width: 24vw !important; }
+  section#adminMapSpots #map {
+    width: 75vw !important; } }
 
 /****  ADMIN ORDERS : index + all ***/
 @media screen and (max-width: 1200px) {
@@ -3658,6 +4754,69 @@ section#adminLogin {
   section#adminOrders .wrap, section#adminAllOrders .wrap {
     width: 80vw;
     margin: 0 auto; } }
+
+/*** ADMIN: ORDERS : MODIFY ***/
+@media screen and (max-width: 576px) {
+  section#adminOrderModify h4 {
+    font-size: 1.1em; }
+  section#adminOrderModify h5 {
+    font-size: 1em; } }
+@media screen and (min-width: 576px) {
+  section#adminOrderModify h4 {
+    font-size: 1.2em; }
+  section#adminOrderModify h5 {
+    font-size: 1.1em; } }
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  section#adminOrderModify .formWrap {
+    width: 70%; } }
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+  section#adminOrderModify .formWrap {
+    width: 60%; } }
+@media screen and (min-width: 1400px) {
+  section#adminOrderModify .formWrap {
+    width: 50%; } }
+
+/* PRODUCT MODIFY + ORDERS MODIFY */
+@media screen and (max-width: 576px) {
+  section#adminOrderModify .formWrap, section#adminEditProduct .formWrap {
+    width: 80%; }
+  section#adminOrderModify h4, section#adminEditProduct h4 {
+    font-size: 1.1em; }
+  section#adminOrderModify h5, section#adminEditProduct h5 {
+    font-size: 1em; } }
+@media screen and (min-height: 576px) and (max-width: 992px) {
+  section#adminOrderModify .formWrap, section#adminEditProduct .formWrap {
+    width: 80%; } }
+@media screen and (min-width: 576px) {
+  section#adminOrderModify h4, section#adminEditProduct h4 {
+    font-size: 1.2em; }
+  section#adminOrderModify h5, section#adminEditProduct h5 {
+    font-size: 1.1em; } }
+
+/***ADMIN SHOP : MODIFY***/
+section#adminEditProduct .buttons {
+  margin: 1em; }
+@media screen and (max-width: 576px) {
+  section#adminEditProduct #imgWrap {
+    width: 15em;
+    height: 15em; } }
+@media screen and (min-width: 576px) {
+  section#adminEditProduct #imgWrap {
+    width: 15em;
+    height: 15em; } }
+@media screen and (min-width: 768px) {
+  section#adminEditProduct .formWrap {
+    width: 90%;
+    justify-content: space-between;
+    align-content: flex-start; }
+  section#adminEditProduct .column1, section#adminEditProduct .column2 {
+    width: 50%; } }
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  section#adminEditProduct .formWrap {
+    width: 95%;
+    justify-content: center; }
+  section#adminEditProduct .column1, section#adminEditProduct .column2 {
+    width: 50%; } }
 
 /*** ADMIN : CONTACT RESPONSE PAGE ***/
 @media screen and (min-width: 350px) and (max-width: 1400px) {

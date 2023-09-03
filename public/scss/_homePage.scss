@@ -504,6 +504,18 @@ section#sessions {
         .spotName {line-height: normal}
         .spotMapChange {display: flex; padding-left: 0;width: fit-content;}
     
+        #map.base {height:100%;}
+        
+        #map.showMap {  
+            height:50vh;
+            transition: height 1s ;
+        }
+
+        #map.hideMap {
+            height: 0;
+            transition: height 1s;
+        }
+       
     }
     
 }

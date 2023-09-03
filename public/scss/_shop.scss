@@ -135,18 +135,15 @@ section#cart {
 /* ORDER */
 section#prepareOrder {
     .container-fluid {
+
         background-color: $white;
         min-height: 90vh;
-        width:80%;
         margin: 0 auto;
         padding: 2em;
 
+
         h3 {margin-bottom: 1em;}
 
-        .delivery, .recap, .transporter{
-            padding: 2em;
-            margin:2em;    
-        }
       
         .table {
             td, th {padding: 1em; vertical-align: middle;}
@@ -159,14 +156,18 @@ section#prepareOrder {
         }
 
         div.payment {
+            text-align: center;
             .btn {margin:1em 0;}
             .stripeLogo {
+                justify-content: center;
                 display: flex;
                 align-items: center;
                 p {margin-bottom: 0;}
                 span {margin-left: 0.5em}
             }
         }
+
+        
     
         
     } 
