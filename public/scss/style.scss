@@ -485,16 +485,16 @@ section#showArticle {
         background-blend-mode:multiply;
         background-size: contain;
         background-attachment: fixed;
+        // background-color: $white;
         display: flex;
         justify-content: center;
         align-items: center ;
     }
     #wrapArticleContent {
         display: flex;
-        justify-content: center;
+        justify-content:space-between;
         align-items: flex-start;
         background-color: $white;
-        padding:3em;
         border-radius: 3px;
         margin: 1em auto;
         
@@ -528,16 +528,32 @@ section#showArticle {
     }
 
     .col-md-8 {
-        padding-left: 0;
+        padding: 0;
     }
-    
+    .col-lg-8 {
+        max-width: 70em;
+    }
+    .wrapMainInfos {
+        justify-content: space-between;
+        align-items: center;
+
+       
+    } 
+    .articleInfo{
+        display:flex;
+        align-items: center;
+
+        & div {  
+            display:flex;
+            align-items: center;}
+    }
     .user{
+        width: 100%;
         display: flex;
         padding-right: 2em;
         border-radius: 3px;
         justify-content: start;
         align-items: center;
-        margin-top: 1em;
         .avatar{
             max-height:75px;
             max-width:75px;
@@ -549,6 +565,9 @@ section#showArticle {
                 border-radius: 3px;
             }
         }
+    }
+    .addCommentForm {
+        margin-bottom: 1em;
     }
     .addCommentForm form{
         display: flex;
@@ -566,7 +585,7 @@ section#showArticle {
         }
     }
         .commentWrap {
-            margin: 1em auto;
+            margin: 0 auto 1em auto;
             padding: 1em;
             border-radius: 3px;
             background-color: rgba($grey, 0.2);
@@ -586,8 +605,8 @@ section#showArticle {
             }
        }
        .thumb-wrap {  
-        height: 13em;
         width: 100%;
+        aspect-ratio: 16/9;
      img {
         object-fit: cover;
         width:100%;
@@ -678,10 +697,8 @@ section#blog, section#blogHome, section#search, section#profile, section#adminBl
         border-radius: 2px;
         height: 3em;
         margin-bottom:1em;
-        padding-right: 1em;
 
         .author-avatar {
-        height: 100%;
             img{
                 background-color:$white;
                 width: 100%;
@@ -720,7 +737,6 @@ section#blog, section#myArticles {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 1em;
     }
     .article-content {
         overflow: hidden;
@@ -738,183 +754,18 @@ section#blog, section#myArticles, section#blogHome, section#search, section#prof
         flex-direction: column;
         justify-content: space-between;
         height: 100%;
-        padding: 0 2rem 0.5rem 2rem;
     }
 }
-//profil public 
 
-section#profile {
-    display: flex;
-    flex-direction: column;
-    width:100%;
-    background-color: $base; 
-
-    #scrollBackToTop {
-        left: 2em;
-        bottom:1em;
-        right: 0;
-    }
-    
-    .author {display: none;}
-    .wrap {
-        margin-top: 0.5em;
-        height:100%;
-        background-color: $base;
-        min-height: 90vh;
-        width: 100vw;
-        }
-
-
-    .my-drone, .social{
-        background-color:$white;
-        margin:0 2em 2em 2em;
-        padding: 2em;
-        border-radius: 3px;
-    }
-
-    .social {
-        display: flex;
-        justify-content: space-around;
-        div{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            i  {
-                margin: 0 0.5em 0 0;
-            }
-        }
-       
-    }
-    
-    .user-content {
-        position: relative;
-        background-color: $white;
-        margin-right: 2em;
-        padding: 2em 1em;
-        border-radius: 3px;
-        min-height: 30vh;
-    }
-
-    .my-drone {
-        position: relative;
-        .fav {
-            float:right;
-            max-width: 125px;
-            max-height: 125px;
-            object-fit: cover;
-            object-position: center;
-            overflow: hidden;
-            }
-        a {
-            background-color: $grey;
-            padding:0.5 1em;
-            border-radius: 3px;
-            position: absolute;
-            top:2em;
-            right: 3em;
-        }
-    }
-   
-    
-    .container-fluid {
-        display: grid;
-        grid-template-columns: 10% minmax(500px, 85%);
-        background-color: $base;
-    }
-
-    #profile-avatar, .show-article-avatar {
-        max-height:125px;
-        max-width:125px;
-        img{
-            background-color:$white;
-            width: 100%;
-            height: 100%;
-        }
-    } 
-    .user{
-        background-color:$white;
-        margin:0 2em 2em 2em;
-        border-radius: 3px;
-        display: flex;
-        align-items: center;
-    
-        h2 {
-        margin: 0.5% 2% ;
-        font-size: 2.5em;
-        }
-    }
-
-    .sessions {
-        background-color:$white;
-        margin:0 2em 2em 2em;
-        border-radius: 3px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 10em;
-
-        span {
-            margin: 0 1em;
-            width: 90%;
-        }
-        .spotWrapper {
-            border-radius: 4px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1em;
-            box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-            width: 100%;
-            max-height: fit-content;
-            .infoSpot {
-                margin: auto;
-            }
-            .iconWrap {
-                padding: 1em 2em;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                border-radius: 4px;
-            }
-             
-            p.spotName {
-                font-size: 1.1em;
-                margin-bottom: 0;
-            }
-            p.text-muted {margin-bottom: 0;}
-        }
-    }
-    .article {
-        display: flex;
-        position: relative;
-    }
-
-    .article-body {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 1em;
-    }
-    .article-content {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 7; 
-                line-clamp: 7;
-        -webkit-box-orient: vertical;
-    }
-
-}
 
 /**SEARCH PAGE ***/
 section#search {
-    
+   
     h3 {
         font-family: 'Play', sans-serif;
         font-weight: bolder;
     }
+    .author-avatar {max-width: 75px;}
     .container-fluid {
         background-image: url('/img/forestView.jpg');
         background-repeat: no-repeat;
@@ -941,7 +792,6 @@ section#search {
 }
 
 
-
 @import "sessions";
 @import "contact";
 @import "about";
@@ -954,7 +804,6 @@ section#search {
 
 footer {
     width: 100vw;
-    height: 3em;
     padding: 1em;
     display: flex;
     align-items: center;
