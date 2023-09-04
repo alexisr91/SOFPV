@@ -546,47 +546,47 @@ section#home {
       animation: glitch-effect 2s infinite linear alternate-reverse; }
 @keyframes glitch-effect {
   0% {
-    clip: rect(50px, 9999px, 7px, 0); }
+    clip: rect(5px, 9999px, 7px, 0); }
   5% {
-    clip: rect(31px, 9999px, 85px, 0); }
+    clip: rect(9px, 9999px, 54px, 0); }
   10% {
-    clip: rect(8px, 9999px, 59px, 0); }
+    clip: rect(74px, 9999px, 47px, 0); }
   15% {
-    clip: rect(79px, 9999px, 53px, 0); }
+    clip: rect(59px, 9999px, 22px, 0); }
   20% {
-    clip: rect(88px, 9999px, 81px, 0); }
+    clip: rect(17px, 9999px, 82px, 0); }
   25% {
-    clip: rect(40px, 9999px, 80px, 0); }
+    clip: rect(57px, 9999px, 8px, 0); }
   30% {
-    clip: rect(41px, 9999px, 80px, 0); }
+    clip: rect(17px, 9999px, 20px, 0); }
   35% {
-    clip: rect(88px, 9999px, 76px, 0); }
+    clip: rect(43px, 9999px, 13px, 0); }
   40% {
-    clip: rect(96px, 9999px, 15px, 0); }
+    clip: rect(74px, 9999px, 83px, 0); }
   45% {
-    clip: rect(67px, 9999px, 2px, 0); }
+    clip: rect(79px, 9999px, 100px, 0); }
   50% {
-    clip: rect(56px, 9999px, 23px, 0); }
+    clip: rect(16px, 9999px, 86px, 0); }
   55% {
-    clip: rect(93px, 9999px, 23px, 0); }
+    clip: rect(23px, 9999px, 11px, 0); }
   60% {
-    clip: rect(87px, 9999px, 19px, 0); }
+    clip: rect(47px, 9999px, 15px, 0); }
   65% {
-    clip: rect(42px, 9999px, 60px, 0); }
+    clip: rect(97px, 9999px, 82px, 0); }
   70% {
-    clip: rect(39px, 9999px, 20px, 0); }
+    clip: rect(19px, 9999px, 100px, 0); }
   75% {
-    clip: rect(30px, 9999px, 33px, 0); }
+    clip: rect(54px, 9999px, 6px, 0); }
   80% {
-    clip: rect(71px, 9999px, 56px, 0); }
+    clip: rect(82px, 9999px, 4px, 0); }
   85% {
-    clip: rect(6px, 9999px, 61px, 0); }
+    clip: rect(52px, 9999px, 89px, 0); }
   90% {
-    clip: rect(72px, 9999px, 3px, 0); }
+    clip: rect(71px, 9999px, 97px, 0); }
   95% {
-    clip: rect(54px, 9999px, 24px, 0); }
+    clip: rect(24px, 9999px, 75px, 0); }
   100% {
-    clip: rect(48px, 9999px, 33px, 0); } }
+    clip: rect(55px, 9999px, 21px, 0); } }
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
   height: 15em;
@@ -1159,14 +1159,14 @@ section#droneEdit .avatar {
 section#myArticles .container-fluid, section#myArticles section#adminBlog .container-fluid, section#myArticles section#adminBlogAlerts .container-fluid {
   flex-wrap: wrap;
   background-color: #fafafa; }
+section#myArticles .dateAndStats {
+  display: flex;
+  flex-direction: column; }
 section#myArticles .wrap {
-  padding-top: 1.5em;
   margin: 0 1em;
   display: flex;
   flex-direction: column;
   width: 100%; }
-section#myArticles h4 {
-  margin-top: 1em; }
 section#myArticles .article {
   margin-bottom: 1em; }
 
@@ -2264,8 +2264,7 @@ section#adminComments .container-fluid {
   min-height: 90vh;
   background-color: #fafafa; }
   section#adminComments .container-fluid .wrap {
-    margin-top: 3em;
-    width: 70%; }
+    margin-top: 3em; }
     section#adminComments .container-fluid .wrap .avatar {
       width: 25px;
       height: 25px; }
@@ -2462,31 +2461,21 @@ section#adminContact .container-fluid {
       padding-left: 2em; }
     section#adminContact .container-fluid table .date, section#adminContact .container-fluid table .actions {
       text-align: center; }
-    section#adminContact .container-fluid table .name {
-      width: 10%; }
-    section#adminContact .container-fluid table .subject {
-      width: 15%; }
-    section#adminContact .container-fluid table .date {
-      width: 10%; }
-    section#adminContact .container-fluid table .message {
-      width: 50%; }
-      section#adminContact .container-fluid table .message button {
-        text-align: left; }
-    section#adminContact .container-fluid table .actions {
-      width: 15%; }
-    section#adminContact .container-fluid table thead {
-      background-color: #DADADA; }
-      section#adminContact .container-fluid table thead th {
-        padding: 1em;
-        border-radius: 4px; }
-    section#adminContact .container-fluid table tbody .white {
-      background-color: #fafafa; }
-    section#adminContact .container-fluid table tbody .grey {
-      background-color: rgba(218, 218, 218, 0.3); }
-    section#adminContact .container-fluid table tbody td {
+    section#adminContact .container-fluid table button {
+      text-align: left; }
+  section#adminContact .container-fluid thead {
+    background-color: #DADADA; }
+    section#adminContact .container-fluid thead th {
       padding: 1em;
-      border-radius: 4px;
-      border-bottom: 1px solid #DADADA; }
+      border-radius: 4px; }
+  section#adminContact .container-fluid tbody .white {
+    background-color: #fafafa; }
+  section#adminContact .container-fluid tbody .grey {
+    background-color: rgba(218, 218, 218, 0.3); }
+  section#adminContact .container-fluid tbody td {
+    padding: 1em;
+    border-radius: 4px;
+    border-bottom: 1px solid #DADADA; }
 
 section#responseContact .container-fluid {
   min-height: 90vh;
@@ -4017,6 +4006,8 @@ section#myArticles {
   /* sm */
   /*md to lg*/ }
   @media screen and (max-width: 576px) {
+    section#myArticles .articlesWrap {
+      margin-top: 2em; }
     section#myArticles .wrap {
       margin: 0; }
     section#myArticles .article {
@@ -4028,8 +4019,11 @@ section#myArticles {
         width: 100%; }
       section#myArticles .article .article-thumb {
         margin-bottom: 1em; }
-      section#myArticles .article .date {
-        margin: 0 auto; }
+      section#myArticles .article .dateAndStats {
+        width: 100%; }
+        section#myArticles .article .dateAndStats .date {
+          display: flex;
+          justify-content: center; }
       section#myArticles .article .article-footer {
         flex-wrap: wrap; }
         section#myArticles .article .article-footer .stats {
@@ -4064,6 +4058,11 @@ section#myArticles {
           margin: 0 auto; }
         section#myArticles .article .article-footer {
           flex-wrap: wrap; }
+          section#myArticles .article .article-footer .dateAndStats {
+            width: 50%; }
+            section#myArticles .article .article-footer .dateAndStats .date {
+              display: flex;
+              justify-content: center; }
           section#myArticles .article .article-footer .stats {
             height: fit-content;
             justify-content: center;
@@ -4097,6 +4096,16 @@ section#myArticles {
         section#myArticles .article .article-thumb, section#myArticles .article .article-body {
           width: 100%;
           height: fit-content; }
+        section#myArticles .article .dateAndStats {
+          width: 100%; }
+          section#myArticles .article .dateAndStats .date {
+            display: flex;
+            justify-content: end;
+            width: 100%;
+            padding-right: 0.5em; }
+          section#myArticles .article .dateAndStats .stats {
+            margin: 1em 0 1em auto;
+            width: 15em; }
         section#myArticles .article .article-thumb {
           object-fit: contain;
           max-width: 40vw; }
@@ -4104,15 +4113,14 @@ section#myArticles {
           width: 100%;
           padding-left: 1em;
           height: auto; }
-        section#myArticles .article .date {
-          margin: 0.5em auto; }
         section#myArticles .article .article-footer {
           flex-wrap: wrap; }
         section#myArticles .article .settings {
           display: flex;
           width: 100%;
           flex-wrap: wrap;
-          align-items: center; }
+          align-items: center;
+          justify-content: end; }
           section#myArticles .article .settings button, section#myArticles .article .settings a {
             font-size: 0.9em;
             margin: 0.5em; }
@@ -4129,6 +4137,8 @@ section#myArticles {
       object-fit: cover;
       max-width: 30vw; } }
   @media screen and (min-width: 1800px) {
+    section#myArticles .articlesWrap {
+      width: 80vw; }
     section#myArticles .article .article-thumb {
       object-fit: cover;
       max-width: 25vw; } }
@@ -4148,13 +4158,18 @@ section#myArticles {
 section#myOrders {
   /*xs*/ }
   @media screen and (max-width: 576px) {
+    section#myOrders h3 {
+      font-size: large; }
     section#myOrders .wrapper h3 {
-      margin: 1em;
-      font-size: 1.3em; } }
+      margin: 1em; } }
   @media screen and (min-width: 576px) and (max-width: 768px) {
+    section#myOrders h3 {
+      font-size: large; }
     section#myOrders .wrapper .row {
       padding: 0 1em; } }
   @media screen and (min-width: 768px) and (max-width: 992px) {
+    section#myOrders h3 {
+      font-size: x-large; }
     section#myOrders .wrapper .row {
       padding: 0 1em; }
     section#myOrders .wrapper .order {
@@ -4163,6 +4178,8 @@ section#myOrders {
       section#myOrders .wrapper .order .badge {
         font-size: 1em; } }
   @media screen and (min-width: 992px) and (max-width: 1400px) {
+    section#myOrders h3 {
+      font-size: x-large; }
     section#myOrders .wrapper .row {
       padding: 0 1em;
       margin: 0 auto; }
@@ -4172,6 +4189,8 @@ section#myOrders {
       section#myOrders .wrapper .order .badge {
         font-size: 1em; } }
   @media screen and (min-width: 1400px) {
+    section#myOrders h3 {
+      font-size: x-large; }
     section#myOrders .wrapper .row {
       padding: 0 1em;
       margin: 1em auto; }
@@ -4602,7 +4621,6 @@ section#adminLogin {
     height: 75px !important;
     margin-right: 2em; } }
 
-/** ADMIN : users index **/
 /** ADMIN : BLOG index + BLOG alerts **/
 @media screen and (max-width: 768px) {
   section#adminBlog h4, section#adminBlogAlerts h4 {
@@ -4623,6 +4641,68 @@ section#adminLogin {
     margin: 0 auto; }
   section#adminBlog #titleAndForm, section#adminBlogAlerts #titleAndForm {
     margin: 0 0 1em 0; } }
+
+/*** ADMIN COMMENTS ***/
+@media screen and (max-width: 1200px) {
+  section#adminComments h3 {
+    font-size: large;
+    padding: 0 1em; }
+  section#adminComments .wrap {
+    width: 100%; }
+    section#adminComments .wrap thead {
+      visibility: hidden;
+      height: 0;
+      position: absolute;
+      top: 0; }
+    section#adminComments .wrap .table > :not(:first-child) {
+      border-top: none; }
+    section#adminComments .wrap tr {
+      display: block;
+      margin: 1em 1em 2em 1em;
+      background-color: #fafafa !important; }
+      section#adminComments .wrap tr td:first-child {
+        background-color: #DADADA; }
+    section#adminComments .wrap td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #DADADA;
+      border-bottom: none;
+      font-size: 0.9em; }
+      section#adminComments .wrap td a.add {
+        margin: 0 0 0 1em; }
+      section#adminComments .wrap td a.btn-danger {
+        margin: 0; }
+      section#adminComments .wrap td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        padding-right: 1em; }
+      section#adminComments .wrap td:first-child {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px; }
+      section#adminComments .wrap td:last-child {
+        border: 1px solid #DADADA;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px; }
+  section#adminComments .btn.param, section#adminComments a.param {
+    font-size: 0.9em; } }
+@media screen and (min-width: 1200px) {
+  section#adminComments h3 {
+    font-size: x-large; }
+  section#adminComments .wrap {
+    width: 95vw; }
+    section#adminComments .wrap thead {
+      visibility: visible;
+      position: relative; }
+    section#adminComments .wrap td {
+      vertical-align: middle;
+      padding: 1em 0; }
+  section#adminComments .btn, section#adminComments a {
+    font-size: 1em; } }
+@media screen and (min-width: 1400px) {
+  section#adminComments .wrap {
+    width: 80vw;
+    margin: 0 auto; } }
 
 /**** ADMIN MAPSPOT ****/
 @media screen and (max-width: 576px) {
@@ -4817,6 +4897,86 @@ section#adminEditProduct .buttons {
     justify-content: center; }
   section#adminEditProduct .column1, section#adminEditProduct .column2 {
     width: 50%; } }
+
+/*** ADMIN : CONTACT index ***/
+@media screen and (max-width: 430px) {
+  section#adminContact .alert {
+    font-size: smaller; } }
+@media screen and (max-width: 1200px) {
+  section#adminContact h3 {
+    font-size: large;
+    padding: 0 1em; }
+  section#adminContact .wrap {
+    width: 100%; }
+    section#adminContact .wrap thead {
+      visibility: hidden;
+      height: 0;
+      position: absolute;
+      top: 0; }
+    section#adminContact .wrap .table > :not(:first-child) {
+      border-top: none; }
+    section#adminContact .wrap table .actions {
+      justify-content: space-between; }
+    section#adminContact .wrap table tr {
+      display: block;
+      margin: 1em 1em 2em 1em;
+      background-color: #fafafa !important; }
+      section#adminContact .wrap table tr td:first-child {
+        background-color: #DADADA; }
+    section#adminContact .wrap table td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #DADADA;
+      border-bottom: none;
+      font-size: 0.9em; }
+      section#adminContact .wrap table td a.add {
+        margin: 0 0 0 1em; }
+      section#adminContact .wrap table td a.btn-danger {
+        margin: 0; }
+      section#adminContact .wrap table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        padding-right: 1em; }
+      section#adminContact .wrap table td:first-child {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px; }
+      section#adminContact .wrap table td:last-child {
+        border: 1px solid #DADADA;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px; }
+  section#adminContact .btn.param, section#adminContact a.param {
+    font-size: 0.9em; } }
+@media screen and (max-width: 1900px) {
+  section#adminContact td.action a.btn-success {
+    margin-bottom: 1em; } }
+@media screen and (min-width: 1200px) {
+  section#adminContact h3 {
+    font-size: x-large; }
+  section#adminContact .wrap {
+    width: 95vw; }
+    section#adminContact .wrap table .name {
+      width: 10%; }
+    section#adminContact .wrap table .subject {
+      width: 15%; }
+    section#adminContact .wrap table .date {
+      width: 10%; }
+    section#adminContact .wrap table .message {
+      width: 50%; }
+    section#adminContact .wrap table .actions {
+      width: 15%; }
+    section#adminContact .wrap thead {
+      visibility: visible;
+      position: relative; }
+    section#adminContact .wrap td {
+      vertical-align: middle;
+      padding: 1em 0; }
+  section#adminContact .btn, section#adminContact a {
+    font-size: 1em; } }
+@media screen and (min-width: 1400px) {
+  section#adminContact .wrap {
+    width: 80vw;
+    margin: 0 auto; } }
 
 /*** ADMIN : CONTACT RESPONSE PAGE ***/
 @media screen and (min-width: 350px) and (max-width: 1400px) {
