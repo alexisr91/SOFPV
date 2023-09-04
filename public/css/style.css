@@ -412,7 +412,7 @@ section#navbarMenu, section#adminNavbarMenu {
   width: 100vw;
   z-index: 1;
   margin: 0 auto;
-  z-index: 3;
+  z-index: 20;
   position: relative; }
   section#navbarMenu a.navbar-brand, section#adminNavbarMenu a.navbar-brand {
     font-family: 'airstrike', sans-serif;
@@ -546,47 +546,47 @@ section#home {
       animation: glitch-effect 2s infinite linear alternate-reverse; }
 @keyframes glitch-effect {
   0% {
-    clip: rect(5px, 9999px, 7px, 0); }
+    clip: rect(85px, 9999px, 50px, 0); }
   5% {
-    clip: rect(9px, 9999px, 54px, 0); }
+    clip: rect(41px, 9999px, 37px, 0); }
   10% {
-    clip: rect(74px, 9999px, 47px, 0); }
+    clip: rect(68px, 9999px, 78px, 0); }
   15% {
-    clip: rect(59px, 9999px, 22px, 0); }
+    clip: rect(85px, 9999px, 16px, 0); }
   20% {
-    clip: rect(17px, 9999px, 82px, 0); }
+    clip: rect(22px, 9999px, 88px, 0); }
   25% {
-    clip: rect(57px, 9999px, 8px, 0); }
+    clip: rect(99px, 9999px, 75px, 0); }
   30% {
-    clip: rect(17px, 9999px, 20px, 0); }
+    clip: rect(56px, 9999px, 65px, 0); }
   35% {
-    clip: rect(43px, 9999px, 13px, 0); }
+    clip: rect(5px, 9999px, 60px, 0); }
   40% {
-    clip: rect(74px, 9999px, 83px, 0); }
+    clip: rect(63px, 9999px, 7px, 0); }
   45% {
-    clip: rect(79px, 9999px, 100px, 0); }
+    clip: rect(51px, 9999px, 46px, 0); }
   50% {
-    clip: rect(16px, 9999px, 86px, 0); }
+    clip: rect(44px, 9999px, 63px, 0); }
   55% {
-    clip: rect(23px, 9999px, 11px, 0); }
+    clip: rect(27px, 9999px, 91px, 0); }
   60% {
-    clip: rect(47px, 9999px, 15px, 0); }
+    clip: rect(36px, 9999px, 2px, 0); }
   65% {
-    clip: rect(97px, 9999px, 82px, 0); }
+    clip: rect(89px, 9999px, 77px, 0); }
   70% {
-    clip: rect(19px, 9999px, 100px, 0); }
+    clip: rect(55px, 9999px, 5px, 0); }
   75% {
-    clip: rect(54px, 9999px, 6px, 0); }
+    clip: rect(90px, 9999px, 18px, 0); }
   80% {
-    clip: rect(82px, 9999px, 4px, 0); }
+    clip: rect(27px, 9999px, 5px, 0); }
   85% {
-    clip: rect(52px, 9999px, 89px, 0); }
+    clip: rect(4px, 9999px, 36px, 0); }
   90% {
-    clip: rect(71px, 9999px, 97px, 0); }
+    clip: rect(83px, 9999px, 66px, 0); }
   95% {
-    clip: rect(24px, 9999px, 75px, 0); }
+    clip: rect(83px, 9999px, 41px, 0); }
   100% {
-    clip: rect(55px, 9999px, 21px, 0); } }
+    clip: rect(69px, 9999px, 7px, 0); } }
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
   height: 15em;
@@ -942,8 +942,7 @@ section#register {
     section#register .containerRegister .registerForm {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      width: 50%; }
+      justify-content: center; }
     section#register .containerRegister .illustration {
       width: 50%; }
       section#register .containerRegister .illustrationimg {
@@ -1108,6 +1107,8 @@ section#myProfileEdit, section#droneEdit {
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-height: 90vh; }
+  section#myProfileEdit #profile_banner, section#droneEdit #profile_banner {
+    margin-bottom: 1em; }
   section#myProfileEdit .pwd, section#droneEdit .pwd {
     margin-left: 1em; }
   section#myProfileEdit .infos, section#myProfileEdit .public, section#droneEdit .infos, section#droneEdit .public {
@@ -2499,7 +2500,7 @@ aside.sidebarMenu, aside.adminSidebarMenu {
   min-height: 100%;
   position: relative;
   overflow-x: hidden;
-  z-index: 2;
+  z-index: 15;
   background-color: #fafafa;
   box-shadow: rgba(0, 0, 0, 0.4) 1.5px 1.5px 2px; }
   aside.sidebarMenu.close, aside.adminSidebarMenu.close {
@@ -2559,7 +2560,7 @@ footer {
 
 /** PARTIALS **/
 .btnWrap {
-  z-index: 2; }
+  z-index: 15; }
 
 /* PARTIALS ADMIN ARTICLES */
 section#adminBlog article.adminArticle, section#adminBlogAlerts article.adminArticle {
@@ -2954,7 +2955,9 @@ section#register {
     section#register .containerRegister {
       width: 100%;
       height: 100%;
-      border-radius: 0; } }
+      border-radius: 0; }
+    section#register .registerForm {
+      width: 100%; } }
   @media screen and (min-width: 450px) and (max-width: 1200px) {
     section#register .containerRegister {
       width: 80%; } }
@@ -2972,7 +2975,8 @@ section#register {
         object-fit: cover;
         object-position: center; }
       section#register .containerRegister .registerForm {
-        padding: 2em; } }
+        padding: 2em;
+        width: 50%; } }
   @media screen and (min-width: 992px) and (max-width: 1200px) {
     section#register .containerRegister {
       width: 50%; } }
@@ -3302,7 +3306,7 @@ section#shop {
     padding-left: 0; } }
 @media screen and (max-width: 768px) {
   section#showProduct .description {
-    line-height: 1em;
+    line-height: 1.2em;
     width: 100%; }
   section#showProduct .stripeSentence {
     display: flex;
@@ -3324,8 +3328,6 @@ section#shop {
 @media screen and (min-width: 992px) {
   section#showProduct .wrap {
     padding: 2em; }
-  section#showProduct .description {
-    line-height: 1em; }
   section#showProduct .encartInfo {
     margin: 3em auto 1em auto; }
   section#showProduct .description {
@@ -4987,15 +4989,16 @@ section#adminEditProduct .buttons {
   section#responseContact .wrap button {
     font-size: 1em; } }
 @media screen and (min-width: 576px) {
-  section#responseContact .wrap textarea {
-    height: 20vh; }
-  section#responseContact .wrap .text-muted {
-    padding: 2em 1em 1em 1em; }
-  section#responseContact .wrap .initMsg {
-    margin: 0; } }
+  section#responseContact .wrap {
+    margin: 0  auto; }
+    section#responseContact .wrap textarea {
+      height: 20vh; }
+    section#responseContact .wrap .text-muted {
+      padding: 2em 1em 1em 1em; }
+    section#responseContact .wrap .initMsg {
+      margin: 0; } }
 @media screen and (min-width: 768px) {
   section#responseContact .wrap {
-    margin: 0  auto;
     padding: 1em; } }
 @media screen and (max-width: 576px) {
   section#responseContact .wrap {
