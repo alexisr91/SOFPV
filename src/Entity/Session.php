@@ -43,6 +43,8 @@ class Session
     #[ORM\Column]
     private ?bool $past = null;
 
+    protected $updatedAt; 
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -64,6 +66,10 @@ class Session
         } else {
             return true;
         }
+    }
+
+    public function setUpdate(){
+        $this->updatedAt = new DateTime("now", new \DateTimeZone('Europe/Paris'));
     }
 
     public function getId(): ?int
@@ -151,6 +157,18 @@ class Session
     public function setPast(bool $past): self
     {
         $this->past = $past;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
