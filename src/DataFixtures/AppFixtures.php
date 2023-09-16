@@ -36,6 +36,7 @@ class AppFixtures extends Fixture
         // Création de l'admin
         $admin = new User();
         $adminDrone = new Drone();
+       
 
         $admin->setEmail('naerys.404@gmail.com')
         ->setPassword($this->hasher->hashPassword($admin, 'testtest'))

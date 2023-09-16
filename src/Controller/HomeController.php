@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Session;
 use App\Repository\ArticleRepository;
 use App\Repository\CounterRepository;
 use App\Repository\MapSpotRepository;
@@ -11,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -79,8 +81,15 @@ class HomeController extends AbstractController
         //les 6 dernières sessions ajoutées encore actives
         $sessions = $sessionRepository->findLastSessions();
 
+        //on met à jour les sessions pour voir si elles sont dejà passées ou non
+
         foreach($sessions as $session){
-            $session->setUpdate();
+            //si certaines le sont, on envoie past  = true a la bdd pour qu'elles n'apparaissent plus
+            if($session->isAlreadyPast()){
+                $session->setPast(true);
+                $manager->persist($session);
+                $manager->flush();
+            }
         }
 
       
