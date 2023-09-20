@@ -60,12 +60,19 @@ class ShopController extends AbstractController
                 // if there's no temporary data, we get product stock on database
                 $stock = $product->getStock();
             }
+            //si il y a une donnée de tempStock et qu'elle est a 0 (stock bdd - stock temporaire = 0) on met le stock à 0
+            else if (isset($tempStock[$productId]) && $tempStock[$productId] === 0) { 
+                $stock = 0;
+               
+            } else {
+            //sinon on se base sur le stock de la bdd
+                $stock = $product->getStock();
+            }
+
             
             if($form->isSubmitted() && $form->isValid()){
                 //on récupère la quantité souhaitée par l'utilisateur
                 $quantity = (int)$form->get('quantity')->getData();  
-                
-                $productId = $product->getId();
 
                 //récupération du panier actuel
                 //On récupère les données de session du panier, la valeur par défaut sera un array vide
@@ -73,7 +80,7 @@ class ShopController extends AbstractController
 
                 if(empty($cart[$productId])){
                     //si le panier est vide on met la quantité récupérée par le form
-                    $cart[$productId] = $quantity;  
+                    $cart[$productId] = $quantity; 
                 } else { //si il est déjà présent on l'incrémente à la quantité dejà présente   
                     $cart[$productId]+= $quantity ;
             
