@@ -32,7 +32,7 @@ a {
   color: #252525; }
 
 a:hover {
-  color: #B30B00; }
+  color: #B40B00; }
 
 h1, h2, h3, h4 {
   font-family: 'airstrike', sans-serif; }
@@ -71,7 +71,7 @@ input {
     background-color: transparent; }
 
 .form-error {
-  color: #B30B00; }
+  color: #B40B00; }
   .form-error ul {
     list-style-type: none; }
 
@@ -102,7 +102,7 @@ input {
   z-index: 3;
   padding: 0.5em 1em; }
   .category-badge.Session {
-    background-color: #B30B00; }
+    background-color: #B40B00; }
   .category-badge.Crash {
     background-color: #FF5A08; }
   .category-badge.Question {
@@ -178,7 +178,7 @@ input {
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3) inset; }
 
 .loader:after {
-  box-shadow: 0 2px 0 #B30B00 inset;
+  box-shadow: 0 2px 0 #B40B00 inset;
   animation: rotate 2s linear infinite; }
 
 #myTab .nav-link {
@@ -546,47 +546,47 @@ section#home {
       animation: glitch-effect 2s infinite linear alternate-reverse; }
 @keyframes glitch-effect {
   0% {
-    clip: rect(96px, 9999px, 100px, 0); }
+    clip: rect(41px, 9999px, 3px, 0); }
   5% {
-    clip: rect(97px, 9999px, 94px, 0); }
+    clip: rect(17px, 9999px, 24px, 0); }
   10% {
-    clip: rect(6px, 9999px, 99px, 0); }
+    clip: rect(38px, 9999px, 87px, 0); }
   15% {
-    clip: rect(41px, 9999px, 56px, 0); }
+    clip: rect(78px, 9999px, 45px, 0); }
   20% {
-    clip: rect(25px, 9999px, 36px, 0); }
+    clip: rect(27px, 9999px, 89px, 0); }
   25% {
-    clip: rect(84px, 9999px, 100px, 0); }
+    clip: rect(45px, 9999px, 67px, 0); }
   30% {
-    clip: rect(99px, 9999px, 87px, 0); }
+    clip: rect(20px, 9999px, 79px, 0); }
   35% {
-    clip: rect(32px, 9999px, 76px, 0); }
+    clip: rect(41px, 9999px, 75px, 0); }
   40% {
-    clip: rect(89px, 9999px, 95px, 0); }
+    clip: rect(36px, 9999px, 55px, 0); }
   45% {
-    clip: rect(31px, 9999px, 49px, 0); }
+    clip: rect(11px, 9999px, 48px, 0); }
   50% {
-    clip: rect(1px, 9999px, 12px, 0); }
+    clip: rect(30px, 9999px, 54px, 0); }
   55% {
-    clip: rect(93px, 9999px, 45px, 0); }
+    clip: rect(13px, 9999px, 50px, 0); }
   60% {
-    clip: rect(39px, 9999px, 44px, 0); }
+    clip: rect(7px, 9999px, 41px, 0); }
   65% {
-    clip: rect(18px, 9999px, 45px, 0); }
+    clip: rect(99px, 9999px, 41px, 0); }
   70% {
-    clip: rect(19px, 9999px, 62px, 0); }
+    clip: rect(12px, 9999px, 39px, 0); }
   75% {
-    clip: rect(81px, 9999px, 85px, 0); }
+    clip: rect(27px, 9999px, 39px, 0); }
   80% {
-    clip: rect(94px, 9999px, 36px, 0); }
+    clip: rect(51px, 9999px, 84px, 0); }
   85% {
-    clip: rect(51px, 9999px, 100px, 0); }
+    clip: rect(79px, 9999px, 79px, 0); }
   90% {
-    clip: rect(44px, 9999px, 61px, 0); }
+    clip: rect(30px, 9999px, 43px, 0); }
   95% {
-    clip: rect(22px, 9999px, 32px, 0); }
+    clip: rect(31px, 9999px, 28px, 0); }
   100% {
-    clip: rect(60px, 9999px, 91px, 0); } }
+    clip: rect(62px, 9999px, 28px, 0); } }
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
   height: 15em;
@@ -810,11 +810,11 @@ section#sessions, section#session {
     background-color: #fafafa;
     border: none; }
     section#sessions .spotMapChange:hover i, section#session .spotMapChange:hover i {
-      color: #B30B00; }
+      color: #B40B00; }
     section#sessions .spotMapChange p.spotName, section#session .spotMapChange p.spotName {
       padding: 1em 1em 1em 0; }
   section#sessions .locationDot, section#session .locationDot {
-    color: #B30B00; }
+    color: #B40B00; }
   section#sessions .popupMap, section#session .popupMap {
     font-weight: bold; }
 
@@ -863,7 +863,7 @@ section#socialNetwork {
       padding-left: 2em;
       color: #fafafa !important; }
       section#socialNetwork .socialLinks a:hover, section#socialNetwork .socialLinks p.soon:hover {
-        color: #B30B00; }
+        color: #B40B00; }
     section#socialNetwork .socialLinks p {
       margin-bottom: 0; }
 
@@ -1902,7 +1902,7 @@ section#session .container-fluid {
       margin: 0.5em;
       line-height: normal; }
   section#session .container-fluid .locationDot {
-    color: #B30B00; }
+    color: #B40B00; }
   section#session .container-fluid .popupMap {
     font-weight: bold; }
   section#session .container-fluid .spotMapChange {
@@ -2116,7 +2116,7 @@ section#adminDashboard {
         background-color: rgba(37, 37, 37, 0.7);
         color: #fafafa; }
       section#adminDashboard .container-fluid .statWrap .articles {
-        background-color: rgba(179, 11, 0, 0.75);
+        background-color: rgba(180, 11, 0, 0.75);
         color: #fafafa; }
       section#adminDashboard .container-fluid .statWrap .sessions {
         background-color: #DADADA;
@@ -2258,7 +2258,7 @@ section#adminBlog .container-fluid, section#adminBlogAlerts .container-fluid {
     border: none;
     border-radius: 0; }
     section#adminBlog .container-fluid .stats .alert .icon, section#adminBlogAlerts .container-fluid .stats .alert .icon {
-      color: #B30B00; }
+      color: #B40B00; }
   section#adminBlog .container-fluid .settings a.show, section#adminBlogAlerts .container-fluid .settings a.show {
     background-color: #DADADA; }
 
@@ -2317,7 +2317,7 @@ section#adminMapSpots .container-fluid {
     justify-content: flex-start;
     align-items: center; }
     section#adminMapSpots .container-fluid .spotName i {
-      color: #B30B00;
+      color: #B40B00;
       margin-right: 0.5em; }
   section#adminMapSpots .container-fluid .spotMapChange {
     background-color: transparent;
