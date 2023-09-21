@@ -76,7 +76,7 @@ class HomeController extends AbstractController
         $counterFrame = $counterRepo->count($frame);
 
         //les 4 produits les plus récents
-        $products = $productRepo->findLastFourProducts();
+        $products = $productRepo->findLastFourProducts($active);
         
         //les 6 dernières sessions ajoutées encore actives
         $sessions = $sessionRepository->findLastSessions();
