@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image as ConstraintsImage;
 use Symfony\Component\Validator\Constraints\Sequentially;
 
-class AdminArticleType extends ArticleType
+class AdminArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
