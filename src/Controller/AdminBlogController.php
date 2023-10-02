@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Alert;
 use App\Entity\Article;
 use App\Services\Pagination;
 use Doctrine\ORM\EntityManagerInterface;

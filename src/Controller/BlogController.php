@@ -77,7 +77,7 @@ class BlogController extends AbstractController
         $video = new Video();
         
 
-        //vérification de l'accès de l'user connecté
+        //vérification de l'accès de l'user authentifié
         $adminAccess = $this->isGranted('ROLE_ADMIN');
         
         //si l'user est un admin: on lui présente le formulaire avec l'option permettant de mettre son article "à la une" de la page d'accueil
@@ -401,15 +401,15 @@ class BlogController extends AbstractController
     }
 
 
-    //Visualisation de l'article + autres articles du même auteur en excluant l'article actuel (Utilisateur connecté uniquement : comparaison avec l'auteur pour ajout ou non d'une vue + possible ajout de commentaire)
+    //Visualisation de l'article + autres articles du même auteur en excluant l'article actuel 
+    //(Utilisateur connecté uniquement : comparaison avec l'auteur pour ajout ou non d'une vue)
     #[Route('/blog/show/{slug}', name:'article_show')]
     #[IsGranted("ROLE_USER")]
     public function show(Article $article, ArticleRepository $articleRepo, EntityManagerInterface $manager, Request $request){
 
-        $user = $this->getUser();
 
         if($article->isActive() == true || $this->isGranted('ROLE_ADMIN')){
-           ;
+           
             $author = $article->getAuthor();
             $title = $article->getTitle();
             $video = $article->getVideo();
@@ -424,9 +424,10 @@ class BlogController extends AbstractController
             $formComment = $this->createForm(CommentType::class, $comment);
             $formComment->handleRequest($request);
 
-            //signalement
+            //si un signalement est soumis
             if($formAlertArticle->isSubmitted() && $formAlertArticle->isValid()){
-
+                
+                //On garde la mise en place des sauts de ligne avec nl2br()
                 $nblrAlert = nl2br($alert->getDescription());
                 $alert->setArticle($article)
                     ->setDescription($nblrAlert);
@@ -437,7 +438,7 @@ class BlogController extends AbstractController
                 return $this->redirectToRoute('article_show', ['slug'=>$article->getSlug()]);
             }
 
-            //commentaire
+            //si un commentaire est soumis
             if($formComment->isSubmitted() && $formComment->isValid()){
                 //On récupère le commentaire et on applique la méthode php nl2br() pour conserver les sauts de ligne
                 $nlbrContent = nl2br($comment->getContent());
@@ -461,6 +462,7 @@ class BlogController extends AbstractController
                 $manager->flush();
             }
 
+            //paramètre pour obtenir les articles actifs
             $active = true;
             //articles associés à l'auteur
             $articles = $articleRepo->findOtherArticlesByAuthor($author->getId(), $article, $active);
@@ -484,7 +486,7 @@ class BlogController extends AbstractController
     #[Route('/blog/{id}/like', options: ['expose' => true] , name:'article_like')]
     public function like(Article $article, EntityManagerInterface $manager, LikesRepository $likesRepository){
 
-        //si on récupère un user connecté
+        //si on récupère un user connecté (connexion nécessaire pour l'accès à la visualisation)
         if($this->getUser()){
 
             $user = $this->getUser();
@@ -495,7 +497,7 @@ class BlogController extends AbstractController
             //si c'est déjà liké et qu'on rappuie sur "like", on enlève le like
             if($isLiked){
                 $manager->remove($isLiked);
-            //sinon on créé un nouveau Like qui va s'associer à l'user et à l'article    
+            //sinon on créé un nouveau Like qui va s'associer à l'utilisateur et à l'article    
             } else {
                 $like = new Likes();
                 $like->setUser($user)
@@ -509,7 +511,7 @@ class BlogController extends AbstractController
         } else {
             return new JsonResponse(["error"=> "Vous ne pouvez pas liker vos articles."]);
         }
-        //si l'user tente de like sans être connecté, on retourne une réponse en JSON    
+        //si l'user tente de liker sans être connecté, on retourne une réponse en JSON    
         } else {
             return new JsonResponse(["error"=> "Attention, vous devez être connecté pour pouvoir liker un article."]);
         }
