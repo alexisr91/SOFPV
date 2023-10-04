@@ -412,6 +412,20 @@ class AppFixtures extends Fixture
 
         $manager->flush();
     
+        //Foret de Bouconne ( public)
+        $spot6 = new MapSpot();
+        $spot6->setName("Forêt de Bouconne")
+        ->setAuthorization("Public")
+        ->setAddress("Chem. du Ratelier, 31530 Montaigut-sur-Save")
+        ->setLatitude("43.635499837933")
+        ->setLongitude("1.2286994043916")
+        ->setAdminMapSpot(false);
+
+        $spot[] = $spot6;
+        $manager->persist($spot6);
+
+        $manager->flush();
+    
 
    }
 }
