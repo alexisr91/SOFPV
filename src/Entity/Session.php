@@ -5,16 +5,12 @@ namespace App\Entity;
 use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\PreUpdate;
-use Doctrine\ORM\Mapping\PrePersist;
 use App\Repository\SessionRepository;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\Common\Collections\ArrayCollection;
 
 
 #[ORM\Entity(repositoryClass: SessionRepository::class)]
-#[HasLifecycleCallbacks] 
 class Session
 {
     #[ORM\Id]
