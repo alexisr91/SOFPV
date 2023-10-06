@@ -157,20 +157,28 @@ class AdminShopController extends AbstractController
 
     //réactivation d'un produit
     #[Route('admin/shop/reactivate/{id}', name:'admin_shop_reactivate')]
-    public function reactivate(EntityManagerInterface $manager, ProductRepository $productRepository, $id){
+    public function reactivate(EntityManagerInterface $manager, ProductRepository $productRepository, $id, Request $request){
 
-        //on vérifie que le produit existe et a été trouvé dans la bdd
-        $product = $productRepository->findOneBy(['id'=>$id]);
-         if($product){
+        
+        $token = $request->request->get('token');
 
-            $product->setActive(true);
-            $manager->flush();
-            $this->addFlash('success','Le produit a bien été activé. Il est désormais visible dans la boutique.');
+        //vérification du token
+        if($this->isCsrfTokenValid('reactivate', $token)){
 
-         
+            //on vérifie que le produit existe et a été trouvé dans la bdd
+            $product = $productRepository->findOneBy(['id'=>$id]);
+            if($product){
+                $product->setActive(true);
+                $manager->flush();
+                $this->addFlash('success','Le produit a bien été activé. Il est désormais visible dans la boutique.');
+
+            
+            } else {
+                $this->addFlash('danger','Le produit n\'existe pas.');
+            }
+            return $this->redirectToRoute('admin_shop');
         } else {
-             $this->addFlash('danger','Le produit n\'existe pas.');
+            throw new BadRequestHttpException();
         }
-        return $this->redirectToRoute('admin_shop');
     }
 }
