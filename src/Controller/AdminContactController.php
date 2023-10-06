@@ -20,7 +20,7 @@ class AdminContactController extends AbstractController
     // mails list received from contact form
     // liste de mails reçu via le formulaire de contact
     #[Route('/admin/contact', name: 'admin_contact')]
-    public function index(ContactRepository $contactRepository, AdminResponseContactRepository $responsesRepository): Response
+    public function index(ContactRepository $contactRepository): Response
     {
         // select messages (closed/last archived on end) by sending date
         // tri des messages (les clôturés / archivés en dernier) et par date d'envoi
