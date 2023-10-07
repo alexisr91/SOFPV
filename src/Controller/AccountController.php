@@ -479,13 +479,17 @@ class AccountController extends AbstractController
                 }
 
                 //On garde la mise en place des sauts de ligne avec nl2br()
+                //Keep lineBreak 
                 $articleContent = nl2br($article->getContent());
+
                 //On set le contenu modifié avec nl2br avant le persist et l'envoi en bdd
                 $article->setContent($articleContent);
 
                 //on verifie si il y a des nouvelles images
                 $newImages = $form->get('images')->getData();
 
+                //boucle sur chaque nouvelle image
+                //loop on each new image
                 if(!empty($newImages)){
                     foreach($newImages as $image){
 
