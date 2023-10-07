@@ -114,4 +114,26 @@ class AdminUsersController extends AbstractController
             throw new BadRequestHttpException();
         }
     }
+
+    //delete all the account data from the user
+    //supprime entièrement le compte utilisateur (RGPD)
+    #[Route('admin/user/delete/{id}' , name:'admin_user_delete')]
+    public function delete(EntityManagerInterface $manager, UserRepository $userRepository, $id, Request $request){
+
+        $token = $request->request->get('token');
+        $user = $userRepository->findOneBy(['id'=>$id]);
+
+        //vérification du token
+        if($this->isCsrfTokenValid('delete'. $user->getId(), $token)){
+
+            $manager->remove($user);
+            $manager->flush();
+
+            $this->addFlash('success','L\'utilisateur et ses données ont bien été supprimés.');
+            return $this->redirectToRoute('admin_users');
+
+        } else {
+            throw new BadRequestHttpException();
+        }
+    }
 }
