@@ -116,14 +116,13 @@ section#cart {
 
         table {
             td.product {
-                display: flex;
-                align-items: center; 
-
+                
                 .img {
                     display: flex;
                 }
             }
-           
+            td {height: max-content;}
+            form {display: inline-flex; padding:0.5em}
             td.delete-all {
                 text-align: end;
             }

@@ -28,6 +28,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 
@@ -346,6 +347,7 @@ class BlogController extends AbstractController
 
                 $manager->flush();
 
+                //succes
                 return new JsonResponse(['success'=> 200]);
             } else {
                 return new JsonResponse(['error' => 'Vous ne pouvez pas liker vos articles.'], 400);
@@ -403,6 +405,7 @@ class BlogController extends AbstractController
 
     //Visualisation de l'article + autres articles du même auteur en excluant l'article actuel 
     //(Utilisateur connecté uniquement : comparaison avec l'auteur pour ajout ou non d'une vue)
+    //Show an article by his slug and show others publications by the same author, only for connected users + compare author with user to add or not a view
     #[Route('/blog/show/{slug}', name:'article_show')]
     #[IsGranted("ROLE_USER")]
     public function show(Article $article, ArticleRepository $articleRepo, EntityManagerInterface $manager, Request $request){
@@ -482,7 +485,7 @@ class BlogController extends AbstractController
         ]);
     }
 
-
+    //ajout d'un like / add a like
     #[Route('/blog/{id}/like', options: ['expose' => true] , name:'article_like')]
     public function like(Article $article, EntityManagerInterface $manager, LikesRepository $likesRepository){
 
@@ -509,11 +512,11 @@ class BlogController extends AbstractController
             return new JsonResponse(["success"=> 200]);
 
         } else {
-            return new JsonResponse(["error"=> "Vous ne pouvez pas liker vos articles."]);
+            return new JsonResponse(["error"=> "Vous ne pouvez pas liker vos articles."], 400);
         }
         //si l'user tente de liker sans être connecté, on retourne une réponse en JSON    
         } else {
-            return new JsonResponse(["error"=> "Attention, vous devez être connecté pour pouvoir liker un article."]);
+            return new JsonResponse(["error"=> "Attention, vous devez être connecté pour pouvoir liker un article."], 400);
         }
 
             return $this->render('blog/index.html.twig', [
@@ -523,33 +526,41 @@ class BlogController extends AbstractController
 
     }
 
+    //ajout d'un signalement sur un commentaire - add an alert on a comment
     #[Route('/blog/comment/{id}/alert', options: ['expose' => true], name:'comment_alert')]
+    #[IsGranted("ROLE_USER")]
     public function AlertComment(Comment $comment, AlertCommentRepository $alertCommentRepo, EntityManagerInterface $manager, Request $request){
 
+        //récupération des données json
         $data = json_decode($request->getContent(), true);
 
-        if($this->getUser()){
-            $user = $this->getUser();
+        $user = $this->getUser();
 
-            $isAlreadyAlerted = $alertCommentRepo->getAlertByUserAndComment($user, $comment);
-            
-                if($isAlreadyAlerted){
-                    $manager->remove($isAlreadyAlerted);
-                } else {
-                    $alertComment = new AlertComment();
-                    $alertComment->setUser($user)
-                            ->setComment($comment);
-                    $manager->persist($alertComment);
+        //vérification du token
+        if($this->isCsrfTokenValid('alert'.$comment->getId(), $data['_token'])){
 
-                }
+                //on vérifie que l'utilisateur n'a pas déjà signalé l'article            
+                $isAlreadyAlerted = $alertCommentRepo->getAlertByUserAndComment($user, $comment);
+                    //si il y a déjà un signalement
+                    if($isAlreadyAlerted){
+                        //on l'enlève
+                        $manager->remove($isAlreadyAlerted);
+                    } else {
+                        //sinon on crée un nouveau signalement
+                        $alertComment = new AlertComment();
+                        $alertComment->setUser($user)
+                                ->setComment($comment);
+                        $manager->persist($alertComment);
 
-                $manager->flush();
-                return new JsonResponse(["success" => 200]);     
+                    }
+
+                    $manager->flush();
+                    return new JsonResponse(["success" => 200]);     
            
-        } else {
-            return new JsonResponse(["error", "Attention, vous devez être connecté pour pouvoir signaler un commentaire."]);
-        }
-       
+       }  else {
+            //si le token n'est pas valide
+            return new JsonResponse(['error'=>'Token invalide'], 400);   
+       }
 
     }
 
