@@ -40,7 +40,11 @@ class AdminDashboardController extends AbstractController
         $outOfStock = count($productRepository->getProductsOutOfStock());
 
         $status = 0;
-        $ordersToPrepare = count($orderRepository->findOrderToMake($status)) ;
+        
+        //amount of orders to prepare
+        $ordersToPrepare = count($orderRepository->findOrderToMake($status));
+
+        //amount of actives products which no longer in stock (shortcut)
         $outOfStock = count($productRepository->getProductsOutOfStock());
 
 
