@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Order;
-use App\Entity\OrderStatus;
 use App\Form\OrderType;
 use App\Repository\CartRepository;
 use Symfony\Component\Form\FormError;

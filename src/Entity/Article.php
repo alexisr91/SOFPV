@@ -85,7 +85,7 @@ class Article
     #[ORM\Column]
     private ?bool $active = null;
 
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Alert::class)]
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Alert::class, cascade: ['persist', 'remove'], orphanRemoval:true)]
     private Collection $alerts;
 
     public function __construct()

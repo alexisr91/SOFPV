@@ -126,19 +126,21 @@ class AdminContactController extends AbstractController
        
         if($contact){
 
+            //create a new instance of adminResponseContact 
             $contactResponse = new AdminResponseContact();
-
+        
             $form = $this->createForm(ResponseContactType::class, $contactResponse);
             $form->handleRequest($request);
 
             if($form->isSubmitted() && $form->isValid()){
-
+                //keep breaklines
                 $contactResponse->setMessage(nl2br($form->get('message')->getData()))
                                 ->setContact($contact);
                 
                 $manager->persist($contactResponse);
                 $manager->flush();
 
+                //mailer preparation : we use TemplatedEmail with htmlTemplate to have a personnalised template for responses
                 //préparation du mail via le mailer
                 $email = (new TemplatedEmail())
                 ->from('admin@sofpv.fr')

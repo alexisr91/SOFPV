@@ -28,7 +28,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 
@@ -76,15 +75,17 @@ class BlogController extends AbstractController
         // new instance for Article(publication) and Video
         $article = new Article();
         $video = new Video();
-        
 
+        //check if the authentified user is an admin
         //vérification de l'accès de l'user authentifié
         $adminAccess = $this->isGranted('ROLE_ADMIN');
         
+        //if he's an admin : show him a form with an option "A la Une" which show his publication on top of the homepage
         //si l'user est un admin: on lui présente le formulaire avec l'option permettant de mettre son article "à la une" de la page d'accueil
         if($adminAccess){ 
             $form = $this->createForm(AdminArticleType::class, $article);
         } else {
+            //else the user will have a classic form without the "A la Une" option, his publication will be shown on classic section of home page
             //sinon l'user aura le formulaire classique, son article apparaîtra avec les autres dans les articles de la page d'accueil
             $form = $this->createForm(ArticleType::class, $article); 
         }
@@ -347,7 +348,7 @@ class BlogController extends AbstractController
 
                 $manager->flush();
 
-                //succes
+                //success
                 return new JsonResponse(['success'=> 200]);
             } else {
                 return new JsonResponse(['error' => 'Vous ne pouvez pas liker vos articles.'], 400);
@@ -410,27 +411,27 @@ class BlogController extends AbstractController
     #[IsGranted("ROLE_USER")]
     public function show(Article $article, ArticleRepository $articleRepo, EntityManagerInterface $manager, Request $request){
 
-
+        // if the publication is active or current user has an admin role 
         if($article->isActive() == true || $this->isGranted('ROLE_ADMIN')){
            
             $author = $article->getAuthor();
             $title = $article->getTitle();
             $video = $article->getVideo();
 
-            //gestion des signalements de l'article
+            //gestion des signalements 
             $alert = new Alert();
             $formAlertArticle = $this->createForm(AlertArticleType::class, $alert);
             $formAlertArticle->handleRequest($request);
 
-            //gestion des commentaires
+            //gestion des commentaires 
             $comment = new Comment();
             $formComment = $this->createForm(CommentType::class, $comment);
             $formComment->handleRequest($request);
 
-            //si un signalement est soumis
+            //si un signalement est soumis - if an alert is submitted 
             if($formAlertArticle->isSubmitted() && $formAlertArticle->isValid()){
                 
-                //On garde la mise en place des sauts de ligne avec nl2br()
+                //keep breaklines
                 $nblrAlert = nl2br($alert->getDescription());
                 $alert->setArticle($article)
                     ->setDescription($nblrAlert);
@@ -441,9 +442,10 @@ class BlogController extends AbstractController
                 return $this->redirectToRoute('article_show', ['slug'=>$article->getSlug()]);
             }
 
-            //si un commentaire est soumis
+            //si un commentaire est soumis - if a comment is sbmitted
             if($formComment->isSubmitted() && $formComment->isValid()){
-                //On récupère le commentaire et on applique la méthode php nl2br() pour conserver les sauts de ligne
+
+                //On récupère le commentaire et on applique la méthode php nl2br() pour conserver les sauts de ligne //keep breaklines
                 $nlbrContent = nl2br($comment->getContent());
 
                 $comment->setAuthor($this->getUser())
@@ -458,19 +460,20 @@ class BlogController extends AbstractController
             }
             
 
-            //on ajoute une vue à l'article si le viewer n'est pas l'auteur de l'article
+            //on ajoute une vue à l'article si le viewer n'est pas l'auteur de l'article - add a view if current user is not the author
             if($this->getUser()!= $author){
                 $article->setViews($article->getViews() + 1 );
                 $manager->persist($article);
                 $manager->flush();
             }
 
-            //paramètre pour obtenir les articles actifs
+            //paramètre pour obtenir les articles actifs - to get active publications
             $active = true;
-            //articles associés à l'auteur
+
+            //articles associés à l'auteur - find other publications for the same author (without current publication for avoid duplication )
             $articles = $articleRepo->findOtherArticlesByAuthor($author->getId(), $article, $active);
 
-     //si l'article est desactivé et que l'user n'est pas admin       
+     //si l'article est desactivé - if publication isn't active
     } elseif ($article->isActive() == false){
         throw $this->createAccessDeniedException('Cet article n\'est pas accessible.');
     } 
@@ -494,13 +497,19 @@ class BlogController extends AbstractController
 
             $user = $this->getUser();
 
+            //if user is not the author
             if($user != $article->getAuthor()){
+
+            //check if it's already liked   
             $isLiked = $likesRepository->getLikeByUserAndArticle($user, $article);
 
             //si c'est déjà liké et qu'on rappuie sur "like", on enlève le like
+            //if it is already liked, remove associated like
             if($isLiked){
                 $manager->remove($isLiked);
+
             //sinon on créé un nouveau Like qui va s'associer à l'utilisateur et à l'article    
+            //else create a new instance of Like, associated with user and publication
             } else {
                 $like = new Likes();
                 $like->setUser($user)
@@ -514,7 +523,8 @@ class BlogController extends AbstractController
         } else {
             return new JsonResponse(["error"=> "Vous ne pouvez pas liker vos articles."], 400);
         }
-        //si l'user tente de liker sans être connecté, on retourne une réponse en JSON    
+        //si l'utilisateur tente de liker sans être connecté, on retourne une réponse en JSON    
+        //if user try to like without being connected, json response (in case of : not really possible to a classic access to a publication without authentification)
         } else {
             return new JsonResponse(["error"=> "Attention, vous devez être connecté pour pouvoir liker un article."], 400);
         }
@@ -531,22 +541,24 @@ class BlogController extends AbstractController
     #[IsGranted("ROLE_USER")]
     public function AlertComment(Comment $comment, AlertCommentRepository $alertCommentRepo, EntityManagerInterface $manager, Request $request){
 
+        //get json data
         //récupération des données json
         $data = json_decode($request->getContent(), true);
 
         $user = $this->getUser();
 
-        //vérification du token
+        //vérification du token - token verification
         if($this->isCsrfTokenValid('alert'.$comment->getId(), $data['_token'])){
 
-                //on vérifie que l'utilisateur n'a pas déjà signalé l'article            
+                //on vérifie que l'utilisateur n'a pas déjà signalé l'article - check if already alerted          
                 $isAlreadyAlerted = $alertCommentRepo->getAlertByUserAndComment($user, $comment);
-                    //si il y a déjà un signalement
+
+                    //si il y a déjà un signalement - if already alerted
                     if($isAlreadyAlerted){
-                        //on l'enlève
+                        //on l'enlève - we remove it
                         $manager->remove($isAlreadyAlerted);
                     } else {
-                        //sinon on crée un nouveau signalement
+                        //sinon on crée un nouveau signalement - else we create a new instance of AlertComment
                         $alertComment = new AlertComment();
                         $alertComment->setUser($user)
                                 ->setComment($comment);
@@ -555,10 +567,11 @@ class BlogController extends AbstractController
                     }
 
                     $manager->flush();
+                    //success response 
                     return new JsonResponse(["success" => 200]);     
            
        }  else {
-            //si le token n'est pas valide
+            //si le token n'est pas valide - token invalid
             return new JsonResponse(['error'=>'Token invalide'], 400);   
        }
 
