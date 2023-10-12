@@ -49,7 +49,6 @@ class CounterRepository extends ServiceEntityRepository
         ->getQuery()
         ->getSingleScalarResult();
     }
-  
 
     //    /**
     //     * @return Counter[] Returns an array of Counter objects

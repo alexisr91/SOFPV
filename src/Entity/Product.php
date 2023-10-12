@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\PositiveOrZero;
@@ -32,7 +34,6 @@ class Product
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    
     #[ORM\Column]
     #[PositiveOrZero]
     private int $stock;
@@ -66,7 +67,7 @@ class Product
     private ?bool $active = null;
 
     public function __construct()
-    {   
+    {
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->stock = 0;
         $this->price_TTC = number_format($this->price_HT + ($this->price_HT * $this->tva), 2);

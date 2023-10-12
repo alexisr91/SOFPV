@@ -64,43 +64,29 @@ class ShopController extends AbstractController
             //if there is temporary stock data and it is at 0, we set variable stock at 0. It means database stock less temporary stock equal to 0
             else if (isset($tempStock[$productId]) && $tempStock[$productId] === 0) { 
                 $stock = 0;
-               
-            } else {    
-            //sinon on se base sur le stock de la bdd
-            //if there's no temporary data, we get product stock on database
+            } else {
+                // sinon on se base sur le stock de la bdd
+                // if there's no temporary data, we get product stock on database
                 $stock = $product->getStock();
             }
 
-            
-            if($form->isSubmitted() && $form->isValid()){
+            if ($form->isSubmitted() && $form->isValid()) {
+                // on récupère la quantité souhaitée par l'utilisateur - get quantity wanted by user
+                $quantity = (int) $form->get('quantity')->getData();
 
-                //on récupère la quantité souhaitée par l'utilisateur - get quantity wanted by user
-                $quantity = (int)$form->get('quantity')->getData();  
+                // récupération du panier actuel - get current cart
+                // On récupère les données de session du panier, la valeur par défaut sera un tableau vide
+                // get session data for cart, by default it's an empty array
+                $cart = $session->get('cart', []);
 
-                //récupération du panier actuel - get current cart
-                //On récupère les données de session du panier, la valeur par défaut sera un tableau vide 
-                //get session data for cart, by default it's an empty array
-                $cart = $session->get("cart", []); 
-
-                if(empty($cart[$productId])){
-                    //si le panier est vide on met la quantité récupérée par le form
-                    //if cart is empty, we get quantity got by the form
-                    $cart[$productId] = $quantity; 
-                } else { 
-                    //si il est déjà présent on l'ajoute à la quantité dejà présente   
-                    //if there is already the product, we add that quantity 
-                    $cart[$productId]+= $quantity ;
-            
-                }   
-
-                //si il n'y a pas encore de produits ajoutés au panier, on créé la data "produit" => "stock restant" en se basant sur le stock réel du produit en bdd
-                //if there are no products in cart, we create stock left "produit"=>"stock restant" by product stock data from database
-                if(empty($tempStock[$productId])){      
-                    $tempStock[$productId] = $product->getStock() - $quantity ;
-                } else { 
-                    //sinon on déduit la quantité ajoutée 
-                    //else we remove quantity added
-                    $tempStock[$productId] -=  $quantity;
+                if (empty($cart[$productId])) {
+                    // si le panier est vide on met la quantité récupérée par le form
+                    // if cart is empty, we get quantity got by the form
+                    $cart[$productId] = $quantity;
+                } else {
+                    // si il est déjà présent on l'ajoute à la quantité dejà présente
+                    // if there is already the product, we add that quantity
+                    $cart[$productId] += $quantity;
                 }
 
             if ($form->isSubmitted() && $form->isValid()) {

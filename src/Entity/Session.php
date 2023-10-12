@@ -2,13 +2,11 @@
 
 namespace App\Entity;
 
-use DateTime;
+use App\Repository\SessionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\SessionRepository;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
-
 
 #[ORM\Entity(repositoryClass: SessionRepository::class)]
 class Session
@@ -21,7 +19,7 @@ class Session
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     private ?MapSpot $mapSpot = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]    
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255)]
@@ -147,5 +145,4 @@ class Session
 
         return $this;
     }
-
 }

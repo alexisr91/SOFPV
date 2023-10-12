@@ -44,9 +44,9 @@ class RegisterType extends AbstractType
                 'mapped' => false,
             ])
             ->add('cgu', CheckboxType::class, [
-                'label'=>'Je confirme avoir lu et accepté les CGU et les CGV.',
-                'required'=>true,
-                'mapped'=>false
+                'label' => 'Je confirme avoir lu et accepté les CGU et les CGV.',
+                'required' => true,
+                'mapped' => false,
             ])
         ;
     }

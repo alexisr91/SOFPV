@@ -79,7 +79,6 @@ class OrderController extends AbstractController
             }
         }
 
-
         $deliveryChoice = $form->get('deliveryAddress')->getData();
 
         if ('user_address' == $deliveryChoice && (null == $user->getAddress() || null == $user->getZip() || null == $user->getCity())) {
@@ -138,7 +137,6 @@ class OrderController extends AbstractController
                 // On set l'adresse entière pour la commande
                 $order->setDeliveryAddress($firstname." ".$lastname." <br>". $fullAddress);
             }
-            
 
             $order->setTransporter($transporter)
                 ->setPrice($totalAmountForOrder)

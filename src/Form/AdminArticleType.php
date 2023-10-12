@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-
 use App\Entity\Article;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

@@ -6,16 +6,17 @@ use Stripe\Stripe;
 use App\Entity\User;
 use Stripe\Checkout\Session;
 use App\Repository\OrderRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OrderStatusRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGenerator;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StripeController extends AbstractController
 {
@@ -98,7 +99,6 @@ class StripeController extends AbstractController
         ]);
 
         return new RedirectResponse($checkout_session->url);
-  
     }
 
     #[Route('/order/stripe/success/{reference}', name: 'payment_success')]
