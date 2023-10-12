@@ -32,7 +32,6 @@ class AdminBlogController extends AbstractController
                     ->setLimit(8)
                     ->setOrder('DESC');
 
-
         return $this->render('admin/blog/index.html.twig', [
             'title' => 'Gestion des articles',
             'pagination' => $pagination,

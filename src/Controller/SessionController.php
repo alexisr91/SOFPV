@@ -5,17 +5,15 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Session;
 use App\Form\SessionType;
-use App\Repository\UserRepository;
 use App\Repository\MapSpotRepository;
 use App\Repository\SessionRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class SessionController extends AbstractController
 {
@@ -44,7 +42,6 @@ class SessionController extends AbstractController
             'title' => 'Carte des sessions',
             'spots' => $spots,
         ]);
-
     }
 
     // add a flight session
@@ -139,5 +136,37 @@ class SessionController extends AbstractController
         }
     }
 
+    // subscription to a session
+    // inscription à une session existante
+    #[IsGranted('ROLE_USER')]
+    #[Route('/session/entry/{id}', name: 'session_entry')]
+    public function subUserToASession(UserRepository $userRepository, Session $session, EntityManagerInterface $manager)
+    {
+        $user = $this->getUser();
 
+        // check if user is already subscribed to the flight session by list subscribed users
+        // vérifie si l'user est déjà inscrit en récupérant la liste des inscrits
+        $checkUserOnSession = $userRepository->findIfAlreadyRegisteredOnSession($session);
+
+        // dd($checkUserOnSession);
+
+        if (!in_array($user, $checkUserOnSession)) {
+            // if the user is not in the list, we add him on flight session
+            // si l'user n'est pas dans la liste, on l'ajoute à la session
+            $session->addUser($user);
+            $manager->persist($session);
+            $manager->flush();
+
+            $this->addFlash('success', 'Votre inscription à la session est bien enregistrée !');
+
+            return $this->redirectToRoute('session_map');
+
+            // sinon on lui envoie un flash pour le prévenir qu'il est déja inscrit
+            // else we send a toast with a flash message to inform him he's already subscribed to it
+        } else {
+            $this->addFlash('danger', 'Vous êtes déjà inscrit à cette session.');
+
+            return $this->redirectToRoute('session_map');
+        }
+    }
 }

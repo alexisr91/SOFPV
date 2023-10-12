@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\Repository\ArticleRepository;
 use App\Repository\CounterRepository;
 use App\Repository\MapSpotRepository;
@@ -12,7 +11,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -62,41 +60,40 @@ class HomeController extends AbstractController
         // map spot added by admin where flight sessions can be added by users
         $mapSpots = $mapSpotRepository->findAll();
 
-        //le dernier article à la une coché par l'admin - last "A la Une" admin publication
+        // le dernier article à la une coché par l'admin - last "A la Une" admin publication
         $isAdminNews = true;
         $adminNews = $articleRepo->findAdminNewsArticle($isAdminNews);
 
-        //le compte de lipo, d'esc et de frames brisés pour l'animation de la page d'accueil
-        //counter for lipo, esc and frame broken for home page animation
-        $lipo = "Lipo";
-        $esc = "ESC";
-        $frame = "Frame";
+        // le compte de lipo, d'esc et de frames brisés pour l'animation de la page d'accueil
+        // counter for lipo, esc and frame broken for home page animation
+        $lipo = 'Lipo';
+        $esc = 'ESC';
+        $frame = 'Frame';
 
         $counterLipo = $counterRepo->count($lipo);
         $counterESC = $counterRepo->count($esc);
         $counterFrame = $counterRepo->count($frame);
 
-        //les 4 produits les plus récents - last 4 newer products
+        // les 4 produits les plus récents - last 4 newer products
         $products = $productRepo->findLastFourProducts($active);
-        
-        //les 6 dernières sessions ajoutées encore actives - 6 lasts active sessions
+
+        // les 6 dernières sessions ajoutées encore actives - 6 lasts active sessions
         $sessions = $sessionRepository->findLastSessions();
 
-        //on met à jour les sessions pour voir si elles sont dejà passées ou non 
-        //update for flight sessions
+        // on met à jour les sessions pour voir si elles sont dejà passées ou non
+        // update for flight sessions
 
-        foreach($sessions as $session){
-            //si certaines le sont, on envoie past  = true a la bdd pour qu'elles n'apparaissent plus
-            //if there are past session, update on database
-            if($session->isAlreadyPast()){
+        foreach ($sessions as $session) {
+            // si certaines le sont, on envoie past  = true a la bdd pour qu'elles n'apparaissent plus
+            // if there are past session, update on database
+            if ($session->isAlreadyPast()) {
                 $session->setPast(true);
                 $manager->persist($session);
                 $manager->flush();
             }
         }
 
-      
-        //les spots(points) ajoutés par l'admin sur lesquels des sessions peuvent etre ajoutées
+        // les spots(points) ajoutés par l'admin sur lesquels des sessions peuvent etre ajoutées
         // map spot added by admin where flight sessions can be added by users
         $mapSpots = $mapSpotRepository->findAll();
 
@@ -112,6 +109,4 @@ class HomeController extends AbstractController
             'mapSpots' => $mapSpots,
         ]);
     }
-    
-    
 }

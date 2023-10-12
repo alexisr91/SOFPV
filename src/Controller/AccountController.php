@@ -11,17 +11,15 @@ use App\Entity\Counter;
 use App\Form\DroneType;
 use App\Services\Media;
 use App\Form\ArticleType;
+use App\Form\DroneType;
+use App\Form\PasswordUpdateType;
 use App\Form\ProfileType;
 use App\Form\RegisterType;
-use App\Services\Pagination;
-use App\Entity\PasswordUpdate;
-use App\Form\AdminArticleType;
-use App\Form\PasswordUpdateType;
+use App\Repository\ArticleRepository;
 use App\Repository\ImageRepository;
 use App\Repository\OrderRepository;
-use App\Repository\ArticleRepository;
 use App\Repository\SessionRepository;
-use Symfony\Component\Form\FormError;
+use App\Services\Pagination;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -31,8 +29,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AccountController extends AbstractController
 {
@@ -189,6 +189,9 @@ class AccountController extends AbstractController
                 $user->setBanner($bannerName);
             }
 
+                $user->setBanner($newName);
+            }
+
             $manager->persist($user);
             $manager->flush();
 
@@ -309,6 +312,7 @@ class AccountController extends AbstractController
             // envoi en bdd du nouveau drone / de la modification du drone
             $manager->flush();
             $this->addFlash('success', 'Votre drone a été mis à jour !');
+
             return $this->redirectToRoute('account_myprofile');
         }
 
@@ -482,37 +486,34 @@ class AccountController extends AbstractController
                 //Keep lineBreak 
                 $articleContent = nl2br($article->getContent());
 
-                //On set le contenu modifié avec nl2br avant le persist et l'envoi en bdd
+                // On set le contenu modifié avec nl2br avant le persist et l'envoi en bdd
                 $article->setContent($articleContent);
 
-                //on verifie si il y a des nouvelles images
+                // on verifie si il y a des nouvelles images
                 $newImages = $form->get('images')->getData();
 
-                //boucle sur chaque nouvelle image
-                //loop on each new image
-                if(!empty($newImages)){
-                    foreach($newImages as $image){
-
+                // boucle sur chaque nouvelle image
+                // loop on each new image
+                if (!empty($newImages)) {
+                    foreach ($newImages as $image) {
                         $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
                         $sluggedName = $slugger->slug($originalName);
                         $newName = $sluggedName.'-'.uniqid().'.'.$image->guessExtension();
-     
-                            try {
-                                $image->move($this->getParameter('upload_image'), $newName); // ok
-     
-                            } catch(FileException $e) {
-                                dd($e->getMessage());                    
-                            }
-     
-                                $newImage = new Image();
-                                $newImage->setSource($newName)
-                                     ->setArticle($article); 
-                                $article->addImage($newImage);
-                                $manager->persist($newImage); 
-                          
-                            }      
-                }  
-                
+
+                        try {
+                            $image->move($this->getParameter('upload_image'), $newName); // ok
+                        } catch (FileException $e) {
+                            dd($e->getMessage());
+                        }
+
+                            $newImage = new Image();
+                        $newImage->setSource($newName)
+                             ->setArticle($article);
+                        $article->addImage($newImage);
+                        $manager->persist($newImage);
+                    }
+                }
+
                 $manager->persist($article);
                 $manager->flush();
 
@@ -584,7 +585,6 @@ class AccountController extends AbstractController
             throw new BadRequestHttpException();
         }
     }
-
 
     // user's orders
     // Commandes passées par l'utilisateur

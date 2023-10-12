@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use Exception;
-use App\Form\SpotType;
 use App\Entity\MapSpot;
 use App\Form\SpotType;
 use App\Repository\MapSpotRepository;
@@ -17,6 +15,7 @@ use Symfony\Component\VarExporter\Internal\Exporter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
 class AdminMapSpotsController extends AbstractController
 {

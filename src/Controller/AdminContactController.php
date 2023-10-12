@@ -122,53 +122,51 @@ class AdminContactController extends AbstractController
     #[Route('/admin/contact/response/{id}', name:'admin_contact_response')]
     public function response(Request $request, EntityManagerInterface $manager, ContactRepository $contactRepository, MailerInterface $mailer, $id){
 
-        $contact = $contactRepository->findOneBy(['id'=>$id]);
-       
-        if($contact){
-
-            //create a new instance of adminResponseContact 
+        if ($contact) {
+            // create a new instance of adminResponseContact
             $contactResponse = new AdminResponseContact();
-        
+
             $form = $this->createForm(ResponseContactType::class, $contactResponse);
             $form->handleRequest($request);
 
-            if($form->isSubmitted() && $form->isValid()){
-                //keep breaklines
+            if ($form->isSubmitted() && $form->isValid()) {
+                // keep breaklines
                 $contactResponse->setMessage(nl2br($form->get('message')->getData()))
                                 ->setContact($contact);
-                
+
                 $manager->persist($contactResponse);
                 $manager->flush();
 
-                //mailer preparation : we use TemplatedEmail with htmlTemplate to have a personnalised template for responses
-                //préparation du mail via le mailer
+                // mailer preparation : we use TemplatedEmail with htmlTemplate to have a personnalised template for responses
+                // préparation du mail via le mailer
                 $email = (new TemplatedEmail())
                 ->from('admin@sofpv.fr')
                 ->to($contact->getEmail())
                 ->subject($contactResponse->getSubject())
-                
-                //template twig pour structure css du mail
+
+                // template twig pour structure css du mail
                 ->htmlTemplate('contact/emailsResponse.html.twig')
 
                 ->context([
-                    'contact' => $contactResponse
+                    'contact' => $contactResponse,
                 ]);
 
-            $mailer->send($email);
+                $mailer->send($email);
 
                 $this->addFlash('success', 'Votre réponse a été envoyée avec succès.');
+
                 return $this->redirectToRoute('admin_contact');
             }
-
         } else {
             $this->addFlash('danger', 'Le message est introuvable');
+
             return $this->redirectToRoute('admin_contact');
         }
 
         return $this->render('admin/contact/response.html.twig', [
             'title' => 'Répondre à un mail',
-            'form'=>$form->createView(),
-            'contact'=>$contact
+            'form' => $form->createView(),
+            'contact' => $contact,
         ]);
     }
 }

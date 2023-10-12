@@ -2,10 +2,9 @@
 
 namespace App\Entity;
 
+use App\Repository\VideoRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\VideoRepository;
-
 
 #[ORM\Entity(repositoryClass: VideoRepository::class)]
 class Video
@@ -102,15 +101,16 @@ class Video
         return $convertedURL;
     }
 
-    //Conversion de l'URL fourni par l'user en URL lisible avec Youtube (embed)
-    public function convertYT($videoURL){
-            // "https://www.youtube.com/watch?v=Ojs5cERnQqg"
-            // 'https://www.youtube.com/embed/Ojs5cERnQqg';
-            // Difference entre  watch?v= et embed/ 
-        $convertedURL = str_replace("watch?v=","embed/",$videoURL);
-        //suppression de la partie concernant le channel Youtube (https://www.youtube.com/xxxxxxxxxxxx&ab_channel=LofiGirl)
-        $convertedURL = strtok($convertedURL, "&");
-        
+    // Conversion de l'URL fourni par l'user en URL lisible avec Youtube (embed)
+    public function convertYT($videoURL)
+    {
+        // "https://www.youtube.com/watch?v=Ojs5cERnQqg"
+        // 'https://www.youtube.com/embed/Ojs5cERnQqg';
+        // Difference entre  watch?v= et embed/
+        $convertedURL = str_replace('watch?v=', 'embed/', $videoURL);
+        // suppression de la partie concernant le channel Youtube (https://www.youtube.com/xxxxxxxxxxxx&ab_channel=LofiGirl)
+        $convertedURL = strtok($convertedURL, '&');
+
         return $convertedURL;
     }
 

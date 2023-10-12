@@ -43,11 +43,11 @@ class VideoType extends AbstractType
             ])
             ->add('link', UrlType::class, [
                 'label' => 'Insérez une URL',
-                'mapped'=> false,
-                'trim'=>true,
-                'required'=>false,
-                'attr'=>['placeholder'=>'Ex: https://www.youtube.com/watch?v=xxxxxxxxxxxx ...']
-            ])    
+                'mapped' => false,
+                'trim' => true,
+                'required' => false,
+                'attr' => ['placeholder' => 'Ex: https://www.youtube.com/watch?v=xxxxxxxxxxxx ...'],
+            ])
         ;
     }
 

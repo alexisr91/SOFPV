@@ -36,7 +36,6 @@ class AppFixtures extends Fixture
         // Création de l'admin
         $admin = new User();
         $adminDrone = new Drone();
-       
 
         $admin->setEmail('naerys.404@gmail.com')
         ->setPassword($this->hasher->hashPassword($admin, 'testtest'))
@@ -50,8 +49,8 @@ class AppFixtures extends Fixture
         ;
 
         $manager->persist($admin);
-        
-        //Drone (config) de l'admin pour tests
+
+        // Drone (config) de l'admin pour tests
         $adminDrone->setFrame('Sloop V3 - Pirat Frame')
                    ->setMotors('Lumenier JohnnyFPV Cinematic - 1750Kv')
                    ->setFc('Hobbywing F7')
@@ -59,10 +58,10 @@ class AppFixtures extends Fixture
                    ->setCam('Cam DJI')
                    ->setReception('Crossfire')
                    ->setLipoCells(6)
-                   ->setUser($admin)      
+                   ->setUser($admin)
         ;
 
-        $manager->persist($adminDrone);        
+        $manager->persist($adminDrone);
 
         // Drone (config) de l'admin pour tests
         $adminDrone->setFrame('Sloop V3 - Pirat Frame')
@@ -347,26 +346,26 @@ class AppFixtures extends Fixture
 
         $spot[] = $spot4;
         $manager->persist($spot4);
-    
-        //Château de Bram ( public)
+
+        // Château de Bram ( public)
         $spot5 = new MapSpot();
-        $spot5->setName("Château de Bram")
-        ->setAuthorization("Public")
-        ->setAddress("Valgros, 11150 Bram")
-        ->setLatitude("43.237722")
-        ->setLongitude("2.130921")
+        $spot5->setName('Château de Bram')
+        ->setAuthorization('Public')
+        ->setAddress('Valgros, 11150 Bram')
+        ->setLatitude('43.237722')
+        ->setLongitude('2.130921')
         ->setAdminMapSpot(false);
 
         $spot[] = $spot5;
         $manager->persist($spot5);
 
-        //Parc des quinze Sols ( public)
+        // Parc des quinze Sols ( public)
         $spot6 = new MapSpot();
-        $spot6->setName("Parc des Quinze Sols")
-        ->setAuthorization("Public")
-        ->setAddress("Chemin du Tiers État, 31700 Blagnac")
-        ->setLatitude("43.664566")
-        ->setLongitude("1.390432")
+        $spot6->setName('Parc des Quinze Sols')
+        ->setAuthorization('Public')
+        ->setAddress('Chemin du Tiers État, 31700 Blagnac')
+        ->setLatitude('43.664566')
+        ->setLongitude('1.390432')
         ->setAdminMapSpot(false);
 
         $spot[] = $spot6;
@@ -411,21 +410,19 @@ class AppFixtures extends Fixture
         $manager->persist($spot7);
 
         $manager->flush();
-    
-        //Foret de Bouconne ( public)
+
+        // Foret de Bouconne ( public)
         $spot7 = new MapSpot();
-        $spot7->setName("Forêt de Bouconne")
-        ->setAuthorization("Public")
-        ->setAddress("Chem. du Ratelier, 31530 Montaigut-sur-Save")
-        ->setLatitude("43.635499837933")
-        ->setLongitude("1.2286994043916")
+        $spot7->setName('Forêt de Bouconne')
+        ->setAuthorization('Public')
+        ->setAddress('Chem. du Ratelier, 31530 Montaigut-sur-Save')
+        ->setLatitude('43.635499837933')
+        ->setLongitude('1.2286994043916')
         ->setAdminMapSpot(false);
 
         $spot[] = $spot7;
         $manager->persist($spot7);
 
         $manager->flush();
-    
-
-   }
+    }
 }
