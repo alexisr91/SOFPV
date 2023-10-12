@@ -103,7 +103,7 @@ class Article
     // création du slug et mise à jour si le titre est modifié par l'auteur
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
-    public function initSlug()
+    public function initSlug():void
     {
         if (empty($this->slug) || $this->slug != $this->title) {
             $slugger = new Slugify();
