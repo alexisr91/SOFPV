@@ -415,6 +415,9 @@ class BlogController extends AbstractController
             $title = $article->getTitle();
             $video = $article->getVideo();
 
+             /** @var User $user */
+            $user = $this->getUser();
+
             // gestion des signalements
             $alert = new Alert();
             $formAlertArticle = $this->createForm(AlertArticleType::class, $alert);
@@ -444,7 +447,7 @@ class BlogController extends AbstractController
                 // On récupère le commentaire et on applique la méthode php nl2br() pour conserver les sauts de ligne //keep breaklines
                 $nlbrContent = nl2br($comment->getContent());
 
-                $comment->setAuthor($this->getUser())
+                $comment->setAuthor($user)
                         ->setArticle($article)
                         ->setContent($nlbrContent);
 
