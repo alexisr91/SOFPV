@@ -556,47 +556,47 @@ section#home {
       animation: glitch-effect 2s infinite linear alternate-reverse; }
 @keyframes glitch-effect {
   0% {
-    clip: rect(15px, 9999px, 42px, 0); }
+    clip: rect(91px, 9999px, 7px, 0); }
   5% {
-    clip: rect(8px, 9999px, 100px, 0); }
+    clip: rect(43px, 9999px, 85px, 0); }
   10% {
-    clip: rect(11px, 9999px, 100px, 0); }
+    clip: rect(97px, 9999px, 16px, 0); }
   15% {
-    clip: rect(35px, 9999px, 26px, 0); }
+    clip: rect(35px, 9999px, 78px, 0); }
   20% {
-    clip: rect(58px, 9999px, 11px, 0); }
+    clip: rect(100px, 9999px, 83px, 0); }
   25% {
-    clip: rect(89px, 9999px, 38px, 0); }
+    clip: rect(39px, 9999px, 23px, 0); }
   30% {
-    clip: rect(62px, 9999px, 41px, 0); }
+    clip: rect(2px, 9999px, 7px, 0); }
   35% {
-    clip: rect(11px, 9999px, 55px, 0); }
+    clip: rect(67px, 9999px, 27px, 0); }
   40% {
-    clip: rect(47px, 9999px, 78px, 0); }
+    clip: rect(52px, 9999px, 54px, 0); }
   45% {
-    clip: rect(42px, 9999px, 15px, 0); }
+    clip: rect(75px, 9999px, 33px, 0); }
   50% {
-    clip: rect(26px, 9999px, 46px, 0); }
+    clip: rect(92px, 9999px, 12px, 0); }
   55% {
-    clip: rect(47px, 9999px, 96px, 0); }
+    clip: rect(62px, 9999px, 50px, 0); }
   60% {
-    clip: rect(25px, 9999px, 8px, 0); }
+    clip: rect(57px, 9999px, 66px, 0); }
   65% {
-    clip: rect(69px, 9999px, 35px, 0); }
+    clip: rect(60px, 9999px, 50px, 0); }
   70% {
-    clip: rect(24px, 9999px, 66px, 0); }
+    clip: rect(57px, 9999px, 15px, 0); }
   75% {
-    clip: rect(9px, 9999px, 15px, 0); }
+    clip: rect(83px, 9999px, 93px, 0); }
   80% {
-    clip: rect(92px, 9999px, 39px, 0); }
+    clip: rect(20px, 9999px, 41px, 0); }
   85% {
-    clip: rect(21px, 9999px, 19px, 0); }
+    clip: rect(45px, 9999px, 100px, 0); }
   90% {
-    clip: rect(70px, 9999px, 13px, 0); }
+    clip: rect(59px, 9999px, 97px, 0); }
   95% {
-    clip: rect(55px, 9999px, 40px, 0); }
+    clip: rect(39px, 9999px, 25px, 0); }
   100% {
-    clip: rect(41px, 9999px, 15px, 0); } }
+    clip: rect(32px, 9999px, 13px, 0); } }
 /* ACCUEIL : div #counter (compteur lipo, ESC et frame) */
 section#counter {
   height: 15em;
@@ -2849,7 +2849,7 @@ section#counter {
     section#counter div.img-wrapper {
       width: 3.5em;
       height: 3.5em; } }
-  @media screen and (min-width: 768px) and (max-width: 1200px) {
+  @media screen and (min-width: 768px) and (max-width: 1800px) {
     section#counter h4 {
       font-size: 2.5em;
       margin-top: 0.5em; }
@@ -2897,15 +2897,35 @@ section#blogHome {
 
 section#newOnShop {
   /*xs*/
-  /*md to xxl*/ }
+  /*md to lg*/
+  /*lg + */ }
   @media screen and (max-width: 450px) {
     section#newOnShop {
       padding: 2em auto; }
       section#newOnShop .wrapCard {
-        width: 100%; } }
-  @media screen and (min-width: 450px) and (min-width: 1700px) {
+        width: 85%;
+        font-size: 0.9em; } }
+  @media screen and (min-width: 450px) and (max-width: 576px) {
     section#newOnShop .wrapCard {
-      width: 60%; } }
+      width: 85%;
+      font-size: 0.9em; } }
+  @media screen and (min-width: 576px) and (max-width: 992px) {
+    section#newOnShop .wrapCard {
+      width: 65%;
+      font-size: 0.9em; } }
+  @media screen and (min-width: 992px) and (max-width: 1400px) {
+    section#newOnShop .wrapCard {
+      width: 90%;
+      font-size: 1em; } }
+  @media screen and (min-width: 1400px) and (max-width: 1600px) {
+    section#newOnShop .wrapCard {
+      width: 85%; } }
+  @media screen and (min-width: 1600px) and (max-width: 1900px) {
+    section#newOnShop .wrapCard {
+      width: 80%; } }
+  @media screen and (min-width: 1900px) {
+    section#newOnShop .wrapCard {
+      width: 65%; } }
 
 @media screen and (max-width: 576px) {
   section#sessions #map {
@@ -3309,6 +3329,9 @@ section#shop {
       width: 80vw !important; }
       section#shop .wrap .card {
         max-width: 20em; } }
+  @media screen and (max-width: 1400px) {
+    section#shop .wrap .card {
+      font-size: 0.9em; } }
   @media screen and (min-width: 992px) and (max-width: 1200px) {
     section#shop .wrap {
       width: 90vw; } }
