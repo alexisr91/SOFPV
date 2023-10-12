@@ -407,7 +407,7 @@ class BlogController extends AbstractController
     // Show an article by his slug and show others publications by the same author, only for connected users + compare author with user to add or not a view
     #[Route('/blog/show/{slug}', name: 'article_show')]
     #[IsGranted('ROLE_USER')]
-    public function show(Article $article, ArticleRepository $articleRepo, EntityManagerInterface $manager, Request $request)
+    public function show(Article $article, ArticleRepository $articleRepo, EntityManagerInterface $manager, Request $request): Response
     {
         // if the publication is active or current user has an admin role
         if (true == $article->isActive() || $this->isGranted('ROLE_ADMIN')) {
@@ -432,7 +432,7 @@ class BlogController extends AbstractController
                 $alert->setArticle($article)
                     ->setDescription($nblrAlert);
                 $manager->persist($alert);
-                $manager->flush($alert);
+                $manager->flush();
 
                 $this->addFlash('success', 'Votre signalement a bien été pris en compte.');
 
@@ -449,7 +449,7 @@ class BlogController extends AbstractController
                         ->setContent($nlbrContent);
 
                 $manager->persist($comment);
-                $manager->flush($comment);
+                $manager->flush();
 
                 $this->addFlash('success', 'Commentaire ajouté avec succès.');
 
@@ -467,7 +467,7 @@ class BlogController extends AbstractController
             $active = true;
 
             // articles associés à l'auteur - find other publications for the same author (without current publication for avoid duplication )
-            $articles = $articleRepo->findOtherArticlesByAuthor($author->getId(), $article, $active);
+            $articles = $articleRepo->findOtherArticlesByAuthor($author->getId(), $article->getId(), $active);
 
             // si l'article est desactivé - if publication isn't active
         } elseif (false == $article->isActive()) {
@@ -487,10 +487,11 @@ class BlogController extends AbstractController
 
     // ajout d'un like / add a like
     #[Route('/blog/{id}/like', options: ['expose' => true], name: 'article_like')]
-    public function like(Article $article, EntityManagerInterface $manager, LikesRepository $likesRepository)
+    public function like(Article $article, EntityManagerInterface $manager, LikesRepository $likesRepository): Response
     {
         // si on récupère un user connecté (connexion nécessaire pour l'accès à la visualisation)
         if ($this->getUser()) {
+            /** @var User $user */
             $user = $this->getUser();
 
             // if user is not the author
@@ -532,12 +533,13 @@ class BlogController extends AbstractController
     // ajout d'un signalement sur un commentaire - add an alert on a comment
     #[Route('/blog/comment/{id}/alert', options: ['expose' => true], name: 'comment_alert')]
     #[IsGranted('ROLE_USER')]
-    public function AlertComment(Comment $comment, AlertCommentRepository $alertCommentRepo, EntityManagerInterface $manager, Request $request)
+    public function AlertComment(Comment $comment, AlertCommentRepository $alertCommentRepo, EntityManagerInterface $manager, Request $request): Response
     {
         // get json data
         // récupération des données json
         $data = json_decode($request->getContent(), true);
 
+        /** @var User $user */
         $user = $this->getUser();
 
         // vérification du token - token verification
