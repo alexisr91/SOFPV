@@ -148,8 +148,7 @@ class SessionController extends AbstractController
         // vérifie si l'user est déjà inscrit en récupérant la liste des inscrits
         $checkUserOnSession = $userRepository->findIfAlreadyRegisteredOnSession($session);
 
-        // dd($checkUserOnSession);
-
+       // check if user is already subscribed to the flight session by list subscribed users
         if (!in_array($user, $checkUserOnSession)) {
             // if the user is not in the list, we add him on flight session
             // si l'user n'est pas dans la liste, on l'ajoute à la session

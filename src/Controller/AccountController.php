@@ -12,12 +12,17 @@ use App\Form\DroneType;
 use App\Services\Media;
 use App\Form\ArticleType;
 use App\Form\DroneType;
-use App\Form\PasswordUpdateType;
+use App\Services\Media;
+use App\Form\ArticleType;
 use App\Form\ProfileType;
 use App\Form\RegisterType;
-use App\Repository\ArticleRepository;
+use App\Services\Pagination;
+use App\Entity\PasswordUpdate;
+use App\Form\AdminArticleType;
+use App\Form\PasswordUpdateType;
 use App\Repository\ImageRepository;
 use App\Repository\OrderRepository;
+use App\Repository\ArticleRepository;
 use App\Repository\SessionRepository;
 use App\Services\Pagination;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,8 +36,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AccountController extends AbstractController
 {
@@ -500,15 +510,13 @@ class AccountController extends AbstractController
                         $sluggedName = $slugger->slug($originalName);
                         $newName = $sluggedName.'-'.uniqid().'.'.$image->guessExtension();
 
-                        try {
-                            $image->move($this->getParameter('upload_image'), $newName); // ok
-                        } catch (FileException $e) {
-                            dd($e->getMessage());
-                        }
+                        $imgPath = $this->getParameter('upload_image');
+                        //we go through media service to save image and get his new name  
+                        $imgName = $mediaService->saveImageAndGetName($image, $imgPath);
 
-                            $newImage = new Image();
-                        $newImage->setSource($newName)
-                             ->setArticle($article);
+                        $newImage = new Image();
+                        $newImage->setSource($imgName)
+                                ->setArticle($article);
                         $article->addImage($newImage);
                         $manager->persist($newImage);
                     }
