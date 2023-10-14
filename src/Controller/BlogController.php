@@ -546,7 +546,7 @@ class BlogController extends AbstractController
         $user = $this->getUser();
 
         // vérification du token - token verification
-        if ($this->isCsrfTokenValid('alert'.$comment->getId(), $data['_token'])) {
+        if ($this->isCsrfTokenValid('alert'.$comment->getId(), $data['token'])) {
             // on vérifie que l'utilisateur n'a pas déjà signalé l'article - check if already alerted
             $isAlreadyAlerted = $alertCommentRepo->getAlertByUserAndComment($user, $comment);
 
@@ -565,7 +565,7 @@ class BlogController extends AbstractController
             $manager->flush();
 
             // success response
-            return new JsonResponse(['success' => 200]);
+            return new JsonResponse(['success'=> 200]);
         } else {
             // si le token n'est pas valide - token invalid
             return new JsonResponse(['error' => 'Token invalide'], 400);
