@@ -86,6 +86,7 @@ class Media
     {
         // récupère le chemin vers la racine du projet - path to root of project
         $dir = $this->param->get('project_dir');
+        dd($dir);
 
         return $ffmpeg = FFMpeg::create([
             'ffmpeg.binaries' => $dir.'/ffmpeg/ffmpeg.exe',
