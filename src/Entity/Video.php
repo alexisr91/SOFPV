@@ -104,13 +104,37 @@ class Video
     // Conversion de l'URL fourni par l'user en URL lisible avec Youtube (embed)
     public function convertYT($videoURL)
     {
-        // "https://www.youtube.com/watch?v=Ojs5cERnQqg"
-        // 'https://www.youtube.com/embed/Ojs5cERnQqg';
-        // Difference entre  watch?v= et embed/
-        $convertedURL = str_replace('watch?v=', 'embed/', $videoURL);
-        // suppression de la partie concernant le channel Youtube (https://www.youtube.com/xxxxxxxxxxxx&ab_channel=LofiGirl)
-        $convertedURL = strtok($convertedURL, '&');
+        //  from "https://www.youtube.com/watch?v=Ojs5cERnQqg"
+        // or from "https://youtu.be/Ojs5cERnQqg?feature=shared"
+        // or from "https://m.youtube.com/watch?v=Ojs5cERnQqg"
 
+        // to 'https://www.youtube.com/embed/Ojs5cERnQqg';
+
+        //if url gotten by application
+        if(str_contains($videoURL, 'youtu.be')){
+            //convert
+            $convertedURL = str_replace('youtu.be', 'www.youtube.com', $videoURL);
+            $convertedURL +='embed/';
+
+            // delete all string after '?' 
+            $convertedURL = strtok($convertedURL, '?');
+
+        } else if(str_contains($videoURL, 'm.youtube')) {
+            //convert
+            $convertedURL = str_replace('m.youtube', 'www.youtube', $videoURL);
+            $convertedURL = str_replace('watch?v=', 'embed/', $videoURL);
+
+            // delete all string after '&'to avoid youtube channel error
+            $convertedURL = strtok($convertedURL, '&');
+
+        } else {
+             // Difference entre  watch?v= et embed/
+            $convertedURL = str_replace('watch?v=', 'embed/', $videoURL);
+            // suppression de la partie concernant le channel Youtube (https://www.youtube.com/xxxxxxxxxxxx&ab_channel=LofiGirl)
+            $convertedURL = strtok($convertedURL, '&');
+        }
+
+       
         return $convertedURL;
     }
 
