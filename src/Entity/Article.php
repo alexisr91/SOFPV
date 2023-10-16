@@ -86,7 +86,7 @@ class Article
     private ?bool $active = null;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Alert::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
-    private Collection $alerts;
+    private ?Collection $alerts = null;
 
     public function __construct()
     {
@@ -103,7 +103,7 @@ class Article
     // création du slug et mise à jour si le titre est modifié par l'auteur
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
-    public function initSlug():void
+    public function initSlug()
     {
         if (empty($this->slug) || $this->slug != $this->title) {
             $slugger = new Slugify();
