@@ -104,20 +104,31 @@ class Video
     // Conversion de l'URL fourni par l'user en URL lisible avec Youtube (embed)
     public function convertYT($videoURL)
     {
-        //  from "https://www.youtube.com/watch?v=Ojs5cERnQqg"
-        // or from "https://youtu.be/Ojs5cERnQqg?feature=shared"
-        // or from "https://m.youtube.com/watch?v=Ojs5cERnQqg"
+        //  from https://www.youtube.com/watch?v=Ojs5cERnQqg
+        // or from https://youtu.be/Ojs5cERnQqg?feature=shared
+        // or from https://m.youtube.com/watch?v=Ojs5cERnQqg
 
-        // to 'https://www.youtube.com/embed/Ojs5cERnQqg';
+        // to https://www.youtube.com/embed/Ojs5cERnQqg which is readable
 
         //if url gotten by application
         if(str_contains($videoURL, 'youtu.be')){
-            //convert
-            $convertedURL = str_replace('youtu.be', 'www.youtube.com', $videoURL);
-            $convertedURL +='embed/';
+            //convert first part of URL string
+            $firstConvert = str_replace('youtu.be', 'www.youtube.com', $videoURL);
 
-            // delete all string after '?' 
-            $convertedURL = strtok($convertedURL, '?');
+            //explode url
+            $explode = explode('/', $firstConvert);
+
+            //get parts of "https://www.youtube.com/" and recompose it
+            $baseOfURL = $explode[0].'//'.$explode[2].'/';
+
+            //get part of URL wich contain video reference ex:"Ojs5cERnQqg?feature=shared"
+            $videoRef = $explode[3]; 
+
+            //concatenate with embed to get valid format
+            $convertedURL = $baseOfURL."embed/".$videoRef;
+            
+            // delete all string after '?'  
+            $convertedURL = strtok($convertedURL, '?');    
 
         } else if(str_contains($videoURL, 'm.youtube')) {
             //convert
