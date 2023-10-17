@@ -110,7 +110,7 @@ class Video
 
         // to https://www.youtube.com/embed/Ojs5cERnQqg which is readable
 
-        //if url gotten by application
+        //if url gotten by option "share" of Youtube
         if(str_contains($videoURL, 'youtu.be')){
             //convert first part of URL string
             $firstConvert = str_replace('youtu.be', 'www.youtube.com', $videoURL);
@@ -124,18 +124,19 @@ class Video
             //get part of URL wich contain video reference ex:"Ojs5cERnQqg?feature=shared"
             $videoRef = $explode[3]; 
 
-            //concatenate with embed to get valid format
+            //concatenate with 'embed/' to get valid format
             $convertedURL = $baseOfURL."embed/".$videoRef;
             
             // delete all string after '?'  
             $convertedURL = strtok($convertedURL, '?');    
 
+        //if url is gotten through mobile browser
         } else if(str_contains($videoURL, 'm.youtube')) {
             //convert
             $convertedURL = str_replace('m.youtube', 'www.youtube', $videoURL);
             $convertedURL = str_replace('watch?v=', 'embed/', $videoURL);
 
-            // delete all string after '&'to avoid youtube channel error
+            // delete all string after '&' to avoid youtube channel error
             $convertedURL = strtok($convertedURL, '&');
 
         } else {
@@ -144,8 +145,6 @@ class Video
             // suppression de la partie concernant le channel Youtube (https://www.youtube.com/xxxxxxxxxxxx&ab_channel=LofiGirl)
             $convertedURL = strtok($convertedURL, '&');
         }
-
-       
         return $convertedURL;
     }
 
