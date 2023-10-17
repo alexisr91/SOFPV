@@ -88,3 +88,28 @@
                 map.classList.add('showMap'); 
             }
         });
+
+        //gestion reponsive de la map avec dépliant
+        //selection du bouton
+        let btnMap = document.querySelector('.btnMap');
+       
+       //on écoute le click
+        btnMap.addEventListener('click', function(e){ 
+          
+            let map = document.querySelector('#map');
+            //si la carte contient showMap on inverse le chevron et on remonte la carte
+            if(map.classList.contains('showMap')){
+                btnMap.innerHTML = 'Carte <i class="fa-solid fa-chevron-down"></i>';
+                map.classList.remove('showMap')
+                map.classList.add('hideMap'); 
+            //si elle contient hide on deplie la carte au click  
+            } else if (map.classList.contains('hideMap')){
+                btnMap.innerHTML = 'Carte <i class="fa-solid fa-chevron-up"></i>'; 
+                map.classList.add('showMap'); 
+                map.classList.remove('hideMap'); 
+            //si elle ne contient rien on la déplie
+            } else {
+                btnMap.innerHTML = 'Carte <i class="fa-solid fa-chevron-up"></i>'; 
+                map.classList.add('showMap'); 
+            }
+        });
