@@ -89,25 +89,25 @@
             }
         });
 
-        //gestion reponsive de la map avec dépliant
-        //selection du bouton
+        //responsive solution for map
+        //select button
         let btnMap = document.querySelector('.btnMap');
        
-       //on écoute le click
+       //listen click on it
         btnMap.addEventListener('click', function(e){ 
           
             let map = document.querySelector('#map');
-            //si la carte contient showMap on inverse le chevron et on remonte la carte
+            //if map contains "showMap" class, inverted chevron and fold map through CSS
             if(map.classList.contains('showMap')){
                 btnMap.innerHTML = 'Carte <i class="fa-solid fa-chevron-down"></i>';
                 map.classList.remove('showMap')
                 map.classList.add('hideMap'); 
-            //si elle contient hide on deplie la carte au click  
+            //if it contains classe "hideMap" , unfold map on click  
             } else if (map.classList.contains('hideMap')){
                 btnMap.innerHTML = 'Carte <i class="fa-solid fa-chevron-up"></i>'; 
                 map.classList.add('showMap'); 
                 map.classList.remove('hideMap'); 
-            //si elle ne contient rien on la déplie
+            //if it contains nothing, unfold it and add class "showMap"
             } else {
                 btnMap.innerHTML = 'Carte <i class="fa-solid fa-chevron-up"></i>'; 
                 map.classList.add('showMap'); 
