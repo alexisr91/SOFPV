@@ -27,6 +27,7 @@ class SearchController extends AbstractController
         $users = $userRepo->findByPseudo($q, $active);
         $category = $categoryRepo->findByName($q, $active);
 
+
         return $this->render('search/index.html.twig', [
             'articles' => $articles,
             'users' => $users,
