@@ -8,6 +8,7 @@
 /var/
 /vendor/
 /src/DataFixtures/
+.env
 ###< symfony/framework-bundle ###
 
 /public/videosImagesTest
