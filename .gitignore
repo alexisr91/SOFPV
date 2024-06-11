@@ -11,9 +11,9 @@
 ###< symfony/framework-bundle ###
 
 /public/videosImagesTest
-/ffmpeg/ffprobe.exe
-/ffmpeg/ffmpeg.exe
-/ffmpeg/ffplay.exe
+ffmpeg/ffprobe.exe
+ffmpeg/ffmpeg.exe
+ffmpeg/ffplay.exe
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
