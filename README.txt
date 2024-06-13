@@ -1,4 +1,4 @@
-# SO FPV 
+# SO FPV
 Version : 1.0
 
 ## Description: 
@@ -12,7 +12,7 @@ Others : Bootstrap, Stripe, Composer, MapLibre
 ## Features : 
 > Blog publications (text, videos and pictures) with comments, likes and report features (to help moderation)
 > Map with flight sessions organizer
-> Dummy e-shop with little catalog, stock gestion, cart and order features (Stripe payment on TEST only)
+> **Dummy** e-shop with little catalog, stock gestion, cart and order features **(Stripe payment on TEST only)**
 > "About" page, with some association's and hobby's infos
 > Contact page with contact form (send a message on admin mail and on admin's dashboard )
 > Register, Login and Logout
@@ -23,6 +23,7 @@ Others : Bootstrap, Stripe, Composer, MapLibre
 
 ## Developper:
 Laura Gaupin
+
 ## Licence
 Licence: GNU General Public License V3 or later
 Licence URI : https://www.gnu.org/licenses/gpl-3.0.html
