@@ -135,37 +135,4 @@ class SessionController extends AbstractController
             return $this->redirectToRoute('session_map');
         }
     }
-
-    // subscription to a session
-    // inscription à une session existante
-    #[IsGranted('ROLE_USER')]
-    #[Route('/session/entry/{id}', name: 'session_entry')]
-    public function subUserToASession(UserRepository $userRepository, Session $session, EntityManagerInterface $manager)
-    {
-        $user = $this->getUser();
-
-        // check if user is already subscribed to the flight session by list subscribed users
-        // vérifie si l'user est déjà inscrit en récupérant la liste des inscrits
-        $checkUserOnSession = $userRepository->findIfAlreadyRegisteredOnSession($session);
-
-       // check if user is already subscribed to the flight session by list subscribed users
-        if (!in_array($user, $checkUserOnSession)) {
-            // if the user is not in the list, we add him on flight session
-            // si l'user n'est pas dans la liste, on l'ajoute à la session
-            $session->addUser($user);
-            $manager->persist($session);
-            $manager->flush();
-
-            $this->addFlash('success', 'Votre inscription à la session est bien enregistrée !');
-
-            return $this->redirectToRoute('session_map');
-
-            // sinon on lui envoie un flash pour le prévenir qu'il est déja inscrit
-            // else we send a toast with a flash message to inform him he's already subscribed to it
-        } else {
-            $this->addFlash('danger', 'Vous êtes déjà inscrit à cette session.');
-
-            return $this->redirectToRoute('session_map');
-        }
-    }
 }

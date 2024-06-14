@@ -8,12 +8,10 @@ use App\Repository\ProductRepository;
 use App\Services\Media;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AdminShopController extends AbstractController
 {
@@ -134,30 +132,6 @@ class AdminShopController extends AbstractController
     // réactivation d'un produit
     #[Route('admin/shop/reactivate/{id}', name: 'admin_shop_reactivate')]
     public function reactivate(EntityManagerInterface $manager, ProductRepository $productRepository,int $id, Request $request): Response
-    {
-        $token = $request->request->get('token');
-
-        // vérification du token
-        if ($this->isCsrfTokenValid('reactivate', $token)) {
-            // on vérifie que le produit existe et a été trouvé dans la bdd
-            $product = $productRepository->findOneBy(['id' => $id]);
-            if ($product) {
-                $product->setActive(true);
-                $manager->flush();
-                $this->addFlash('success', 'Le produit a bien été activé. Il est désormais visible dans la boutique.');
-            } else {
-                $this->addFlash('danger', 'Le produit n\'existe pas.');
-            }
-
-            return $this->redirectToRoute('admin_shop');
-        } else {
-            throw new BadRequestHttpException();
-        }
-    }
-
-    // réactivation d'un produit
-    #[Route('admin/shop/reactivate/{id}', name: 'admin_shop_reactivate')]
-    public function reactivate(EntityManagerInterface $manager, ProductRepository $productRepository, $id, Request $request)
     {
         $token = $request->request->get('token');
 
