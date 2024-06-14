@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -45,27 +47,6 @@ class Article
     #[Valid()]
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Image::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     protected ?Collection $images = null;
-
-    #[ORM\Column]
-    private ?int $views = null;
-
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Likes::class, orphanRemoval: true)]
-    private ?Collection $likes = null;
-
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class, orphanRemoval: true)]
-    private ?Collection $comments = null;
-
-    #[ORM\ManyToOne(inversedBy: 'articles', cascade: ['persist'])]
-    private ?Category $category = null;
-
-    #[ORM\Column]
-    private ?bool $adminNews = null;
-
-    #[ORM\Column]
-    private ?bool $active = null;
-
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Alert::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
-    private ?Collection $alerts = null;
 
     #[ORM\Column]
     private ?int $views = null;

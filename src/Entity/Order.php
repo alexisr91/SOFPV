@@ -61,15 +61,6 @@ class Order
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $trackerID = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $stripe_customer_id = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $stripe_payment_intent = null;
-
-    #[ORM\ManyToOne(inversedBy: 'orders')]
-    private ?OrderStatus $delivery_status = null;
-
     public function __construct()
     {
         $this->carts = new ArrayCollection();

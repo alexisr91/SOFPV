@@ -52,20 +52,6 @@ class Product
     #[ORM\Column]
     private ?bool $active = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $slug = null;
-
-    #[ORM\Column]
-    private ?float $price_HT = null;
-
-    public $tva = 20/100;
-
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Cart::class)]
-    private Collection $carts;
-
-    #[ORM\Column]
-    private ?bool $active = null;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
