@@ -2,11 +2,6 @@
 
 namespace App\Services;
 
-use FFMpeg\FFMpeg;
-use FFMpeg\Format\Video\X264;
-use FFMpeg\Coordinate\TimeCode;
-use FFMpeg\Coordinate\Dimension;
-use FFMpeg\Filters\Video\ResizeFilter;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -23,45 +18,6 @@ class Media
     {
         $this->slugger = $slugger;
         $this->param = $param;
-    }
-
-    //Video processing and make a thumbnail 
-    public function VideoProcessingAndReturnDatas(mixed $videoSource) : array
-    {
-        // processing with FFMPEG
-        // traitement avec FFmpeg
-        $ffmpeg = $this->initFfmpeg();
-
-        $originalName = $videoSource->getClientOriginalName(); // récupère le nom  - get original name
-        $upVideo = $ffmpeg->open($videoSource->getRealPath()); // récupère le chemin pour traiter avec ffmpeg - get path
-
-        $sluggedName = $this->slugger->slug($originalName); // slug the name
-        $videoNewName = $sluggedName.'-'.uniqid().'.mp4'; // nouveau nom + extension voulue - new name + chosen extension
-        $thumbName = $sluggedName.'-'.uniqid().'.png'; // même principe pour la vignette générée - same process for thumbnail
-
-        // géneration de la video via ffmpeg, redimensionnement + synchro son
-        // generate video through ffmpeg , resizing and synchronize sound
-        $upVideo
-            ->filters()
-            ->resize(new Dimension(1920, 1080), ResizeFilter::RESIZEMODE_INSET)
-            ->synchronize();
-
-        // thumbnail created from 5 seconds from video starting
-        // vignette créée à partir de la vidéo, 5 secondes après le debut
-        $upVideo->frame(TimeCode::fromSeconds(5))
-                // sauvegarde et déplacement de la vignette - save and move of thumbnail
-                ->save($this->param->get('upload_thumb').'/'.$thumbName); 
-
-
-        // get video duration
-        // récupération du temps de la video
-        $duration = $this->transformTime($upVideo->getFormat()->get('duration'));
-
-        // save with x264 codec
-        // sauvegarde avec le codec X264
-        $upVideo->save(new X264('libmp3lame', 'libx264'), $this->param->get('upload_video').'/'.$videoNewName);
-
-        return compact('duration', 'videoNewName', 'thumbName');
     }
        
     // GESTION IMAGE (needs img source and path to save it)
@@ -80,33 +36,53 @@ class Media
         return $imgNewName;     
     }
 
-    // Initialisation de FFMPEG - FFMPEG init
-    private function initFfmpeg(): FFMpeg
+
+    // Convert URL provided by user to an embed Youtube URL
+    // Conversion de l'URL fourni par l'user en URL lisible avec Youtube (embed)
+    public function convertYT($videoURL): string
     {
-        // récupère le chemin vers la racine du projet - path to root of project
-        $dir = $this->param->get('project_dir');
+        //  from https://www.youtube.com/watch?v=Ojs5cERnQqg
+        // or from https://youtu.be/Ojs5cERnQqg?feature=shared
+        // or from https://m.youtube.com/watch?v=Ojs5cERnQqg
 
-        return $ffmpeg = FFMpeg::create([
-            'ffmpeg.binaries' => $dir.'/ffmpeg/ffmpeg.exe',
-            'ffprobe.binaries' => $dir.'/ffmpeg/ffprobe.exe',
-            'timeout' => 3600,
-            'ffmpeg.threads' => 12,
-        ]);
-    }
+        // to https://www.youtube.com/embed/Ojs5cERnQqg which is readable
 
-    // calcul de la durée de video - duration sum
-    private function transformTime(int $second): string
-    {
-        $hours = floor($second / 36000);
-        $mins = floor(($second - ($hours * 3600)) / 60);
-        $secs = floor($second % 60);
-        $hours = ($hours < 1) ? '' : $hours.'h';
-        $mins = ($mins < 10) ? '0'.$mins.':' : $mins.':';
-        $secs = ($secs < 10) ? '0'.$secs : $secs;
+        //if url gotten by option "share" of Youtube
+        if(str_contains($videoURL, 'youtu.be')){
+            //convert first part of URL string
+            $firstConvert = str_replace('youtu.be', 'www.youtube.com', $videoURL);
 
-        $duration = $hours.$mins.$secs;
+            //explode url
+            $explode = explode('/', $firstConvert);
 
-        return $duration;
+            //get parts of "https://www.youtube.com/" and recompose it
+            $baseOfURL = $explode[0].'//'.$explode[2].'/';
+
+            //get part of URL wich contain video reference ex:"Ojs5cERnQqg?feature=shared"
+            $videoRef = $explode[3]; 
+
+            //concatenate with 'embed/' to get valid format
+            $convertedURL = $baseOfURL."embed/".$videoRef;
+            
+            // delete all string after '?'  
+            $convertedURL = strtok($convertedURL, '?');    
+
+        //if url is gotten through mobile browser
+        } else if(str_contains($videoURL, 'm.youtube')) {
+            //convert
+            $convertedURL = str_replace('m.youtube', 'www.youtube', $videoURL);
+            $convertedURL = str_replace('watch?v=', 'embed/', $videoURL);
+
+            // delete all string after '&' to avoid youtube channel error
+            $convertedURL = strtok($convertedURL, '&');
+
+        } else {
+             // Difference entre  watch?v= et embed/
+            $convertedURL = str_replace('watch?v=', 'embed/', $videoURL);
+            // suppression de la partie concernant le channel Youtube (https://www.youtube.com/xxxxxxxxxxxx&ab_channel=LofiGirl)
+            $convertedURL = strtok($convertedURL, '&');
+        }
+        return $convertedURL;
     }
 
 }
