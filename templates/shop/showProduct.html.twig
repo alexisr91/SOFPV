@@ -25,7 +25,6 @@
                         {% endif %}
                     </div>
                     <hr>
-                      {# {{dump(app.session.get('tempStock'), app.session.get('cart'), product.id, stock)}} #}
                     <div class="priceAndQty">
                         <h4 class="price">{{product.priceTTC|number_format(2)}} &euro;</h4>
                         <div class="addToCartWrapper">
@@ -75,8 +74,6 @@
                 </div>
             </div>
 
-    
     </section>
-
 
 {% endblock %}
