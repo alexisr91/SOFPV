@@ -1,25 +1,25 @@
 /* KEYFRAMES */
 @keyframes neon {
-    0% {filter: drop-shadow(0 0 0.5rem #db2020)}
-    100% {filter: drop-shadow(0 0 1.5rem #db2020)};
+  0% {filter: drop-shadow(0 0 0.5rem #db2020)}
+  100% {filter: drop-shadow(0 0 1.5rem #db2020)};
 }
 @keyframes rotate {
-    0% {  transform: rotate(0)}
-    100% { transform: rotate(360deg)}
-  }
+  0% {  transform: rotate(0)}
+  100% { transform: rotate(360deg)}
+}
 
-  @keyframes flyingDelivery {
-    0% {  transform:translateY(10px) }
-    100% { transform:translateY(-10px) }
+@keyframes flyingDelivery {
+  0% {  transform:translateY(10px) }
+  100% { transform:translateY(-10px) }
 }
 
 @keyframes fadeIn {
-  0% {right:-25em}
-  100% {right: 1em}
+0% {right:-25em}
+100% {right: 1em}
 }
 
 @keyframes fadeOut {
-  0% {right: 1em;}
-  100% {right: -25em}
+0% {right: 1em;}
+100% {right: -25em}
 }
 

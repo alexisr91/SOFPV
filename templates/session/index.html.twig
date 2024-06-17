@@ -70,7 +70,7 @@
                                     </div>
                                     {# if there's no sessions with a valid date #}
                                     {# si il n'y a pas de session dont la date n'est pas passée #}
-                                    {% elseif not session.past|length == 0 %}
+                                    {% elseif loop.first %}
                                         <div class="alert alert-warning">Il n'y a pas encore de session prévue sur ce spot.</div>
                                     {% endif %}
                                 {% endfor %}

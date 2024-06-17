@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | {{ title }}{% endblock %}
+{% block title %}{{ parent() }} | {{ title|raw }}{% endblock %}
 
 {% block body %}
 
@@ -16,7 +16,7 @@
                     <div class="d-flex px-1 wrapInfos">
                         <div class="user">
                             <div class="avatar">
-                                    <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar de {{user.nickname}}" class="img-fluid"/>
+                                <img src="{{asset('/uploads/avatar/'~ user.avatar)}}" alt="avatar de {{user.nickname}}" class="img-fluid"/>
                             </div>
                                 <h3><a href="{{path('account_profile', {'nickname': user.nickname })}}">{{user.nickname}}</a> </h3>
                         </div>
@@ -65,9 +65,11 @@
                         {% for comment in article.comments %}
                         <div class="commentWrap">
                             <div class="commentAuthor">
-                                <div>
-                                    <img src="{{asset('uploads/avatar/'~ comment.author.avatar)}}" alt="avatar de {{comment.author.nickname}}">
-                                    <a href="{{path('account_profile', {'nickname': comment.author.nickname })}}">{{comment.author.nickname}}</a>
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar me-2">
+                                        <img src="{{asset('uploads/avatar/'~ comment.author.avatar)}}" alt="avatar de {{comment.author.nickname}}">
+                                    </div>
+                                    <a href="{{path('account_profile', {'nickname': comment.author.nickname })}}" class="me-2">{{comment.author.nickname}}</a>
                                     <span class="text-muted">
                                         • {{comment.createdAt|date('d-m-Y H:i')}}
                                     </span>
@@ -112,20 +114,29 @@
                              <div class="col-sm-6 col-md-12 col-xl-6">
                                 <div class="card">
                                 <div class="thumb-wrap">
-                                    {% if article.video %}
-                                        <img src="{{asset('uploads/article/video/thumb/'~ article.video.thumbnail)}}" class="card-img-top" alt="Vignette de l'article {{article.title}} de {{article.author}}">
-                                    {% elseif article.images is not empty %}
+                                   {% if article.video %}
+                                        {% set video = article.video %}
+                                            {% if video.isUploaded %}
+                                            <div class="ratio ratio-16x9">
+                                                <img class="figure-img rounded" src="{{asset('/uploads/article/video/thumb/'~ video.thumbnail )}}" alt="Vignette de la vidéo de {{article.author}}">
+                                            </div>
+                                            {% else %}
+                                                {% include('/partials/_video.html.twig') %} 
+                                            {% endif %}
+                                        {% elseif article.images is not empty %}
                                             {% for image in article.images %}
                                                 {% if loop.first %}
-                                                    <img class="figure-img rounded" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article {{article.title}}" >
+                                                <div class="ratio ratio-16x9">
+                                                    <img class="figure-img rounded" src="{{asset('/uploads/article/image/'~ image.source)}}" alt="Image d'illustration de l'article'{{article.title}}'" >
+                                                </div>
                                                 {% endif %}
                                             {% endfor %}
-                                    {% else %}
-                                            <img class="figure-img rounded img-fluid" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
-                                    {% endif %}
+                                        {% else %}
+                                            <img class="figure-img rounded" src="{{asset('/img/blogDefault.png')}}" alt="Image d'illustration par défaut" >
+                                        {% endif %}
                                 </div>
                                         <div class="card-body">
-                                            <h5 class="card-title">{{article.title}}</h5>
+                                            <h5 class="card-title">{{article.title|raw}}</h5>
                                             {% set articleContent = article.content|u.truncate(30, '...', false) %}
                                             <p class="card-text">{{articleContent|raw}}</p>
                                             <a href="{{path('article_show', {'slug':article.slug})}}" class="stretched-link"></a>

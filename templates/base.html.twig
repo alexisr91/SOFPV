@@ -25,13 +25,6 @@
         <script src="https://unpkg.com/maplibre-gl@3.0.1/dist/maplibre-gl.js"></script>
         <link href="https://unpkg.com/maplibre-gl@3.0.1/dist/maplibre-gl.css" rel="stylesheet" />
 
-        <!-- CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker3.min.css" integrity="sha512-aQb0/doxDGrw/OC7drNaJQkIKFu6eSWnVMAwPN64p6sZKeJ4QCDYL42Rumw2ZtL8DB9f66q4CnLIUnAw28dEbg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="{{asset('/css/style.css')}}">
-         <!-- MAP -->
-        <script src="https://unpkg.com/maplibre-gl@3.0.1/dist/maplibre-gl.js"></script>
-        <link href="https://unpkg.com/maplibre-gl@3.0.1/dist/maplibre-gl.css" rel="stylesheet" />
-
         <title>{% block title %}So FPV{% endblock %}</title>
         
         <!-- Bootstrap bundle -->
@@ -50,9 +43,9 @@
     <body>
         <main class="container-fluid">
             {% block body %}
-            {% endblock %}
+            {% endblock %}     
+          
         </main>
-
         {% block footer %}
             <footer>
                 <p class="m-0"><i class="fa fa-copyright" aria-hidden="true"></i> SO FPV 2023 - Tous droits réservés | Laura Gaupin 
@@ -66,5 +59,4 @@
 
     </body>
  
-
 </html>

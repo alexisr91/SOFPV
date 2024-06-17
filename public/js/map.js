@@ -1,5 +1,4 @@
 
-
         //initialize map with MapLibre and Jawg for map style
         const accessToken = 'Q9ah9vp2jsb80zff6WPhCh04KN53KZBOKSw417PFGIttmq5x0w5gYZMgItqFW2Kl';
         const map = new maplibregl.Map({
@@ -62,31 +61,6 @@
                     zoom:15
                 })
             })
-        });
-
-        //responsive solution for map
-        //select button
-        let btnMap = document.querySelector('.btnMap');
-       
-       //listen click on it
-        btnMap.addEventListener('click', function(e){ 
-          
-            let map = document.querySelector('#map');
-            //if map contains "showMap" class, inverted chevron and fold map through CSS
-            if(map.classList.contains('showMap')){
-                btnMap.innerHTML = 'Carte <i class="fa-solid fa-chevron-down"></i>';
-                map.classList.remove('showMap')
-                map.classList.add('hideMap'); 
-            //if it contains classe "hideMap" , unfold map on click  
-            } else if (map.classList.contains('hideMap')){
-                btnMap.innerHTML = 'Carte <i class="fa-solid fa-chevron-up"></i>'; 
-                map.classList.add('showMap'); 
-                map.classList.remove('hideMap'); 
-            //if it contains nothing, unfold it and add class "showMap"
-            } else {
-                btnMap.innerHTML = 'Carte <i class="fa-solid fa-chevron-up"></i>'; 
-                map.classList.add('showMap'); 
-            }
         });
 
         //responsive solution for map

@@ -102,18 +102,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {# <div class="col">
-                                <div class="card text-dark bg-light mb-3 p-2">
-                                    <div class="card-body">
-                                        <div>
-                                            <h5 class="my-2"><i class="fa-solid fa-envelope"></i> Messages <span class="badge bg-danger">0</span></h5>
-                                        </div>
-                                        <div> 
-                                            <a href="#" class="stretched-link"> <i class="fa-solid fa-chevron-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> #}
                             <div class="col">
                                 <div class="card text-dark bg-light mb-3 p-2">
                                     <div class="card-body">
@@ -139,31 +127,6 @@
                         
                         <div class="tablesWrap">
                             <div class="row mt-4">
-                                {# top 5 des utilisateurs qui postent le + d'articles, commentaires et participent aux sessions
-                                <div class="col">
-                                    <h5> <i class="fa-solid fa-arrow-trend-up"></i> Utilisateurs les + actifs</h5>
-                                    <table class="table table-striped">
-                                        <thead class="positive">
-                                            <tr>
-                                                <th>Utilisateur</th>
-                                                <th class="text-center">Articles</th>
-                                                <th class="text-center">Sessions</th>
-                                                <th class="text-center">Commentaires</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for user in mostActiveUsers %}
-                                            <tr>
-                                                <th><a href="{{path('account_profile', {'nickname': user.nickname})}}" target="_blank">{{user.nickname}}</a></th>
-                                                <td class="text-center">{{user.articles}}</td> 
-                                                <td class="text-center">{{user.sess}}</td>
-                                                <td class="text-center">{{user.comments}}</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div> #}
-                           
                                 {# top 5 articles les + appréciés #}
                                 <div class="col mostAppreciated">
                                     <h5><i class="fa-solid fa-arrow-trend-up"></i> Articles les + appréciés</h5>
@@ -187,8 +150,7 @@
                                             {% endfor %}
                                         </tbody>
                                     </table>
-                                </div>
-                                {# test #}
+                                </div>  
                                 <div class="col worstUsers">
                                     <h5><i class="fa-solid fa-person-circle-exclamation"></i> Utilisateurs les + signalés </h5>
                                     <table class="table table-striped">
@@ -210,7 +172,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                {# endtest #}
                             </div>  
                         </div>
                     </div>

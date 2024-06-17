@@ -159,13 +159,6 @@ section#adminUsers, section#adminShop {
                 }
             }
         }
-        .usersList, .productsList {
-            justify-content: space-between;
-            display: flex;
-            flex-direction: column;
-            min-height: 75vh;
-            padding: 0;
-        }
 
         .row-grey {background-color: $grey; }
         .row-white {background-color: $white;}
@@ -250,20 +243,6 @@ section#adminBlog, section#adminBlogAlerts {
         }
 
         
-        .wrapAlert {
-            margin: 1em auto;
-            padding:1em;
-            width: 100%;
-            border-radius: 4px;
-            box-shadow:rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-
-            i {margin-right: 0.5em;}
-            .text-muted {
-                margin: 0.5em;
-                line-height: normal; 
-                font-size: 1em;
-            }
-        }
         .wrapAlert {
             margin: 1em auto;
             padding:1em;

@@ -12,7 +12,6 @@ use App\Repository\TransporterRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -128,7 +127,7 @@ class OrderController extends AbstractController
                 $addressComplement = $form->get('addressComplement')->getData();
 
                 // on vérifie qu'il y a un complément d'adresse
-                // et on stocke un string de l'adresse complère
+                // et on stocke un string de l'adresse complète
                 if ($addressComplement) {
                     $fullAddress = $address.'<br/>'.$addressComplement.'<br/>'.$zip.' '.$city;
                 } else {

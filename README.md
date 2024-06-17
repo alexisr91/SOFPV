@@ -2,6 +2,8 @@
 Version : 1.0 <br>
 	:link: [SO FPV](https://www.sofpv.lauragaupin.fr/)
 
+ ![screenshot](home.jpg)
+
 ## :information_source: Description
 - FR: Site communautaire pour l'association SO FPV , qui regroupe les passionnés de **drones FPV** dans le sud-ouest de la France.
 - EN: Community website for the SO FPV association , which brings together FPV drone enthusiasts in southwestern France.

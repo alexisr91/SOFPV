@@ -16,31 +16,6 @@ class VideoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class, [
-                'label' => 'Titre de la vidéo',
-                'required' => false,
-                'sanitize_html' => true,
-                'attr' => ['placeholder' => 'Optionnel'],
-            ])
-            ->add('source', FileType::class, [
-                'label' => 'Téléversez une vidéo',
-                'mapped' => false,
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'mimeTypes' => 'video/*',
-                        'mimeTypesMessage' => 'Format invalide: Veuillez sélectionner un fichier vidéo.',
-                        'maxSize' => '30M',
-                    ]),
-                ],
-            ])
-            ->add('link', UrlType::class, [
-                'label' => 'Insérez une URL',
-                'mapped' => false,
-                'trim' => true,
-                'required' => false,
-                'attr' => ['placeholder' => 'Ex: https://www.youtube.com/watch?v=xxxxxxxxxxxx ...'],
-            ])
             ->add('link', UrlType::class, [
                 'label' => 'Insérez une URL',
                 'mapped' => false,

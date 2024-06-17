@@ -11,9 +11,6 @@ use App\Entity\Counter;
 use App\Form\DroneType;
 use App\Services\Media;
 use App\Form\ArticleType;
-use App\Form\DroneType;
-use App\Services\Media;
-use App\Form\ArticleType;
 use App\Form\ProfileType;
 use App\Form\RegisterType;
 use App\Services\Pagination;
@@ -24,19 +21,12 @@ use App\Repository\ImageRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\SessionRepository;
-use App\Services\Pagination;
+use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -159,6 +149,7 @@ class AccountController extends AbstractController
 
         $manager->persist($counter);
         $manager->flush();
+
         return $this->redirectToRoute('account_myprofile');
     }
 
@@ -196,9 +187,6 @@ class AccountController extends AbstractController
                 $bannerName = $mediaService->saveImageAndGetName($banner,$bannerPath);
 
                 $user->setBanner($bannerName);
-            }
-
-                $user->setBanner($newName);
             }
 
             $manager->persist($user);
@@ -386,8 +374,8 @@ class AccountController extends AbstractController
 
             $form->handleRequest($request);
 
-            // Récupération du champ source pour la vidéo
-            $videoSource = $form->get('video')->get('source')->getData();
+            // // Récupération du champ source pour la vidéo
+            // $videoSource = $form->get('video')->get('source')->getData();
 
             // Récupération du lien Youtube ou Vimeo
             $videoLink = $form->get('video')->get('link')->getData();
@@ -398,41 +386,17 @@ class AccountController extends AbstractController
                 $form->get('video')->get('link')->addError(new FormError('Vous ne pouvez pas ajouter plusieurs vidéos à votre article : choisissez le téléversement OU l\'ajout de lien.'));
             }
 
-            if ($videoSource) {
-
-                $video = new Video();
-           
-                $title = $form->get('video')->get('title')->getData();
-
-                //we go through mediaService for video processing and get datas from it
-                $videoDatas = $mediaService->VideoProcessingAndReturnDatas($videoSource);
-
-                //set datas to video
-                $video->setThumbnail($videoDatas['thumbName'])
-                        ->setDuration($videoDatas['duration'])
-                        ->setSource($videoDatas['videoNewName']);
-
-                // si il y a un titre - if there's a title
-                if ($title) {
-                    $video->setTitle($title);
-                }
-                $video->setUser($user);
-                $video->setIsUploaded(true);
-
-                $manager->persist($video);
-
-                // association de la vidéo avec l'article - set video to the article data
-                $article->setVideo($video);
 
                 // ...Ou est-ce que la vidéo est un lien vers Youtube ? - ... Or the video is a Youtube integration ?
-            } elseif ($videoLink) {
-                $video = new Video();
+          if ($videoLink) {
+
+                $video = $article->getVideo();
            
                 // convert URL set by user on a embed Youtube URL for direct playing video
                 // On convertit l'URL Youtube fourni par l'user et on le convertit en URL "embed"
-                $convertedURL = $video->convertYT($videoLink);
-                $video->setSource($convertedURL);
+                $convertedURL = $mediaService->convertYT($videoLink);
 
+                $video->setSource($convertedURL);
                 $video->setUser($user);
                 $video->setIsUploaded(false);
 
@@ -478,36 +442,6 @@ class AccountController extends AbstractController
                 // loop on each new image
                 if (!empty($newImages)) {
                     foreach ($newImages as $image) {
-
-                        $imgPath = $this->getParameter('upload_image');
-                        //we go through media service to save image and get his new name  
-                        $imgName = $mediaService->saveImageAndGetName($image, $imgPath);
-
-                        $newImage = new Image();
-                        $newImage->setSource($imgName)
-                                ->setArticle($article);
-                        $article->addImage($newImage);
-                        $manager->persist($newImage);
-                    }
-                }
-
-                //On garde la mise en place des sauts de ligne avec nl2br()
-                //Keep lineBreak 
-                $articleContent = nl2br($article->getContent());
-
-                // On set le contenu modifié avec nl2br avant le persist et l'envoi en bdd
-                $article->setContent($articleContent);
-
-                // on verifie si il y a des nouvelles images
-                $newImages = $form->get('images')->getData();
-
-                // boucle sur chaque nouvelle image
-                // loop on each new image
-                if (!empty($newImages)) {
-                    foreach ($newImages as $image) {
-                        $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                        $sluggedName = $slugger->slug($originalName);
-                        $newName = $sluggedName.'-'.uniqid().'.'.$image->guessExtension();
 
                         $imgPath = $this->getParameter('upload_image');
                         //we go through media service to save image and get his new name  

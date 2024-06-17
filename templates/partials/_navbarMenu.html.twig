@@ -23,10 +23,12 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{path('contact')}}">Contact</a>
-                            </li>
-                            
+                            </li>         
                         </ul>
                         <ul class="navbar-nav connect">
+                            <li class="nav-item mx-4">
+                                <a href="https://m.facebook.com/groups/2750836911872324/?ref=share" target="_blank" class="nav-link"><i class="fa-brands fa-facebook fa-2x"></i> </a>
+                            </li>
                             <li class="nav-item me-2">
                                     {# on active la fonction du searchController pour valider le formulaire et trier les résultats (articles, users ou catégories) #}
                                     <form class="searchForm input-group" action="{{path('search')}}" method="GET"> 
@@ -53,15 +55,13 @@
                             {% if app.user %} 
                                 
                                 <li><a class="nav-link" href="{{path('account_myprofile')}}"><i class="fa-solid fa-circle-user"></i> Mon compte</a></li>
-                                
-                                <li><a class="nav-link" href="{{path('account_myprofile')}}"><i class="fa-solid fa-circle-user"></i> Mon compte</a></li>
                                 <li><a class="nav-link " href="{{path('account_logout')}}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a></li>
                             {% else %}
                             
                                 <li><a class="nav-link " href="{{path('account_login')}}"><i class="fa-solid fa-arrow-right-to-bracket"></i> Connexion</a></li>
                                 <li><a class="nav-link" href="{{path('account_register')}}"> S'inscrire</a></li>
                             {% endif %}
-                           
+
                         </ul>
                              
                 </div>
